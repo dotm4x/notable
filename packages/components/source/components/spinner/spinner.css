@@ -1,0 +1,37 @@
+.bodypop-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: currentColor;
+}
+
+.bodypop-spinner__icon {
+  width: 1em;
+  height: 1em;
+  animation: bodypop-spinner-rotate 800ms linear infinite;
+}
+
+.bodypop-spinner--sm {
+  font-size: 0.875rem;
+}
+
+.bodypop-spinner--md {
+  font-size: 1.125rem;
+}
+
+.bodypop-spinner--lg {
+  font-size: 1.5rem;
+}
+
+@keyframes bodypop-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bodypop-spinner__icon {
+    animation-duration: 1.5s;
+  }
+}
