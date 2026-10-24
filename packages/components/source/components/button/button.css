@@ -1,0 +1,200 @@
+.bodypop-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bodypop-spacing-2);
+
+  min-height: 2.5rem;
+  padding: var(--bodypop-spacing-2) var(--bodypop-spacing-4);
+
+  border: 1px solid transparent;
+  border-radius: var(--bodypop-radius-lg);
+
+  font-family: var(--bodypop-font-family);
+  font-size: var(--bodypop-font-size-sm);
+  font-weight: var(--bodypop-font-weight-bold);
+  line-height: var(--bodypop-line-height-normal);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background-color 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.bodypop-button:focus-visible {
+  outline: 3px solid var(--bodypop-color-focus);
+  outline-offset: 3px;
+}
+
+.bodypop-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.bodypop-button__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+}
+
+.bodypop-button--loading {
+  cursor: progress;
+}
+
+.bodypop-button__spinner {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+
+  animation: bodypop-button-spin 650ms linear infinite;
+}
+
+/* Variants */
+
+/* Primary */
+.bodypop-button--primary {
+  background: var(--bodypop-color-primary);
+  color: var(--bodypop-color-on-primary);
+}
+
+.bodypop-button--primary:hover:not(:disabled) {
+  background: var(--bodypop-color-primary-hover);
+}
+
+.bodypop-button--primary:active:not(:disabled) {
+  background: var(--bodypop-color-primary-active);
+}
+
+/* Secondary */
+.bodypop-button--secondary {
+  background: var(--bodypop-color-secondary);
+  color: var(--bodypop-color-on-secondary);
+}
+
+.bodypop-button--secondary:hover:not(:disabled) {
+  background: var(--bodypop-color-secondary-hover);
+}
+
+.bodypop-button--secondary:active:not(:disabled) {
+  background: var(--bodypop-color-secondary-active);
+}
+
+/* Outline */
+.bodypop-button--outline {
+  border-width: 2px;
+  border-color: var(--bodypop-color-border-strong);
+  background: var(--bodypop-color-surface);
+  color: var(--bodypop-color-text);
+}
+
+.bodypop-button--outline:hover:not(:disabled) {
+  border-color: var(--bodypop-color-border-strong);
+  background: var(--bodypop-color-surface-hover);
+}
+
+.bodypop-button--outline:active:not(:disabled) {
+  background: var(--bodypop-color-surface-active);
+}
+
+/* Ghost */
+.bodypop-button--ghost {
+  background: transparent;
+  color: var(--bodypop-color-text);
+}
+
+.bodypop-button--ghost:hover:not(:disabled) {
+  background: var(--bodypop-color-surface-hover);
+}
+
+.bodypop-button--ghost:active:not(:disabled) {
+  background: var(--bodypop-color-surface-active);
+}
+
+/* Danger */
+.bodypop-button--danger {
+  background: var(--bodypop-color-danger);
+  color: var(--bodypop-color-on-danger);
+}
+
+.bodypop-button--danger:hover:not(:disabled) {
+  background: var(--bodypop-color-danger-hover);
+}
+
+.bodypop-button--danger:active:not(:disabled) {
+  background: var(--bodypop-color-danger-active);
+}
+
+/* Sizes */
+
+.bodypop-button--sm {
+  min-height: 2rem;
+  padding: var(--bodypop-spacing-1) var(--bodypop-spacing-3);
+  border-radius: var(--bodypop-radius-md);
+  font-size: var(--bodypop-font-size-xs);
+}
+
+.bodypop-button--md {
+  min-height: 2.5rem;
+  padding: var(--bodypop-spacing-2) var(--bodypop-spacing-4);
+}
+
+.bodypop-button--lg {
+  min-height: 3rem;
+  padding: var(--bodypop-spacing-3) var(--bodypop-spacing-6);
+  border-radius: var(--bodypop-radius-xl);
+  font-size: var(--bodypop-font-size-md);
+}
+
+/* Icon-only */
+
+.bodypop-button--icon-only {
+  width: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.bodypop-button--icon-only.bodypop-button--sm {
+  width: 2rem;
+  min-width: 2rem;
+  min-height: 2rem;
+}
+
+.bodypop-button--icon-only.bodypop-button--lg {
+  width: 3rem;
+  min-width: 3rem;
+  min-height: 3rem;
+}
+
+/* Loading */
+
+.bodypop-button--loading .bodypop-button__content {
+  opacity: 0.8;
+}
+
+/* Animations */
+
+@keyframes bodypop-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bodypop-button {
+    transition: none;
+  }
+}
