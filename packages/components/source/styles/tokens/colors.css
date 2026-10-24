@@ -1,0 +1,131 @@
+:root {
+  /* ========================================
+     Brand
+     ======================================== */
+
+  --bodypop-red: #e98b91;
+  --bodypop-yellow: #f2d477;
+  --bodypop-blue: #83b5e0;
+
+  /* ========================================
+     Neutral palette
+     ======================================== */
+
+  --bodypop-cream: #fff9f0;
+  --bodypop-sand: #f0e8dc;
+  --bodypop-stone: #b8aa9b;
+  --bodypop-ink: #38332f;
+
+  --bodypop-white: #ffffff;
+  --bodypop-black: #000000;
+
+  /* ========================================
+     Semantic colors
+     ======================================== */
+
+  /* Primary */
+  --bodypop-color-primary: var(--bodypop-blue);
+  --bodypop-color-on-primary: #203d59;
+  --bodypop-color-primary-hover: #6da2d2;
+  --bodypop-color-primary-active: #568fc3;
+  --bodypop-color-primary-subtle: #edf6fd;
+  --bodypop-color-primary-border: #b7d6ef;
+
+  /* Secondary */
+  --bodypop-color-secondary: var(--bodypop-sand);
+  --bodypop-color-on-secondary: var(--bodypop-ink);
+  --bodypop-color-secondary-hover: #e4d7c6;
+  --bodypop-color-secondary-active: #d6c5b0;
+  --bodypop-color-secondary-subtle: #faf6f0;
+  --bodypop-color-secondary-border: #e0d3c3;
+
+  /* Danger */
+  --bodypop-color-danger: var(--bodypop-red);
+  --bodypop-color-on-danger: #512a30;
+  --bodypop-color-danger-hover: #dc777f;
+  --bodypop-color-danger-active: #ca626c;
+  --bodypop-color-danger-subtle: #fff0f0;
+  --bodypop-color-danger-border: #f0b8bc;
+
+  /* Warning */
+  --bodypop-color-warning: var(--bodypop-yellow);
+  --bodypop-color-on-warning: #51431c;
+  --bodypop-color-warning-hover: #e8c65f;
+  --bodypop-color-warning-active: #d9b64d;
+  --bodypop-color-warning-subtle: #fff9e7;
+  --bodypop-color-warning-border: #e9d99a;
+
+  /* Success */
+  --bodypop-color-success: #a9cba8;
+  --bodypop-color-on-success: #25452b;
+  --bodypop-color-success-hover: #91b991;
+  --bodypop-color-success-active: #7da77e;
+  --bodypop-color-success-subtle: #eff7ed;
+  --bodypop-color-success-border: #c7dfc3;
+
+  /* Info */
+  --bodypop-color-info: #a8cbdc;
+  --bodypop-color-on-info: #244553;
+  --bodypop-color-info-hover: #8db9cf;
+  --bodypop-color-info-active: #76a7bf;
+  --bodypop-color-info-subtle: #edf7fb;
+  --bodypop-color-info-border: #c4e0eb;
+
+  /* ========================================
+     Surfaces
+     ======================================== */
+
+  --bodypop-color-background: var(--bodypop-cream);
+  --bodypop-color-surface: var(--bodypop-white);
+  --bodypop-color-surface-raised: #ffffff;
+  --bodypop-color-surface-sunken: #f5eee5;
+  --bodypop-color-surface-hover: #faf5ee;
+  --bodypop-color-surface-active: #f0e7db;
+  --bodypop-color-overlay: rgb(56 51 47 / 40%);
+
+  /* ========================================
+     Text
+     ======================================== */
+
+  --bodypop-color-text: var(--bodypop-ink);
+  --bodypop-color-text-muted: #766b60;
+  --bodypop-color-text-subtle: #948679;
+  --bodypop-color-text-disabled: #b8aa9b;
+  --bodypop-color-text-inverse: #fff9f0;
+
+  --bodypop-color-link: #386d9c;
+  --bodypop-color-link-hover: #28577f;
+  --bodypop-color-link-active: #1f4566;
+
+  /* ========================================
+     Borders
+     ======================================== */
+
+  --bodypop-color-border: #e8dfd3;
+  --bodypop-color-border-strong: #cfc0af;
+  --bodypop-color-border-subtle: #f2ebe2;
+  --bodypop-color-border-disabled: #e8dfd3;
+
+  /* ========================================
+     Interaction
+     ======================================== */
+
+  --bodypop-color-focus: #6550c8;
+  --bodypop-color-focus-ring: rgb(101 80 200 / 25%);
+  --bodypop-color-selection: #d8e9fa;
+  --bodypop-color-selection-text: #203d59;
+
+  /* ========================================
+     Disabled states
+     ======================================== */
+
+  --bodypop-color-disabled: #eee8df;
+  --bodypop-color-on-disabled: #948679;
+
+  /* ========================================
+     Shadows
+     ======================================== */
+
+  --bodypop-color-shadow: rgb(56 51 47 / 8%);
+  --bodypop-color-shadow-strong: rgb(56 51 47 / 16%);
+}

@@ -1,0 +1,24 @@
+:root {
+  /* Font family */
+  --bodypop-font-family: 'Nunito Variable', sans-serif;
+
+  /* Font sizes */
+  --bodypop-font-size-xs: 0.75rem;
+  --bodypop-font-size-sm: 0.875rem;
+  --bodypop-font-size-md: 1rem;
+  --bodypop-font-size-lg: 1.125rem;
+  --bodypop-font-size-xl: 1.25rem;
+  --bodypop-font-size-2xl: 1.5rem;
+  --bodypop-font-size-3xl: 2rem;
+
+  /* Font weights */
+  --bodypop-font-weight-regular: 400;
+  --bodypop-font-weight-medium: 500;
+  --bodypop-font-weight-semibold: 600;
+  --bodypop-font-weight-bold: 700;
+
+  /* Line heights */
+  --bodypop-line-height-tight: 1.2;
+  --bodypop-line-height-normal: 1.5;
+  --bodypop-line-height-relaxed: 1.7;
+}

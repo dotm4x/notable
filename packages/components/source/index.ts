@@ -1,2 +1,2 @@
-export { Button } from './components/button/button.js';
-export type { ButtonProps } from './components/button/button.js';
+export * from './components/button/button.js';
+export * from './components/spinner/spinner.js';
