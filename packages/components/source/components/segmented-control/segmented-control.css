@@ -164,7 +164,6 @@
 .notable-segmented-control__item[data-selected]
   .notable-segmented-control__content {
   color: var(--notable-color-text);
-  font-weight: var(--notable-font-weight-bold);
 }
 
 .notable-segmented-control__item:not([data-disabled]):not([data-selected]):hover
