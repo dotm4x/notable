@@ -1,5 +1,7 @@
+import { CircleEllipsis, Plus, Search } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './button.js';
+import { Spinner } from '../spinner/spinner.js';
 
 const meta = {
   title: 'Components/Button',
@@ -8,9 +10,7 @@ const meta = {
   args: {
     children: 'Button',
     variant: 'primary',
-    size: 'md',
-    loading: false,
-    iconOnly: false,
+    size: 'medium',
     disabled: false,
   },
   argTypes: {
@@ -20,7 +20,7 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['small', 'medium', 'large', 'icon', 'icon-small', 'icon-large'],
     },
   },
 } satisfies Meta<typeof Button>;
@@ -46,44 +46,38 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
+      <Button size="small">Small</Button>
+      <Button size="medium">Medium</Button>
+      <Button size="large">Large</Button>
     </div>
   ),
-};
-
-export const IconOnly: Story = {
-  args: {
-    iconOnly: true,
-    children: <span aria-hidden="true">＋</span>,
-    'aria-label': 'Add item',
-  },
 };
 
 export const IconButtons: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-      <Button variant="ghost" iconOnly aria-label="Add item">
-        <span aria-hidden="true">＋</span>
+      <Button variant="ghost" size="icon" aria-label="Add item">
+        <Plus aria-hidden="true" />
       </Button>
 
-      <Button variant="outline" iconOnly aria-label="Search">
-        <span aria-hidden="true">⌕</span>
+      <Button variant="outline" size="icon-small" aria-label="Search">
+        <Search aria-hidden="true" />
       </Button>
 
-      <Button variant="secondary" iconOnly aria-label="More options">
-        <span aria-hidden="true">···</span>
+      <Button variant="secondary" size="icon-large" aria-label="More options">
+        <CircleEllipsis aria-hidden="true" />
       </Button>
     </div>
   ),
 };
 
-export const Loading: Story = {
-  args: {
-    loading: true,
-    children: 'Saving...',
-  },
+export const WithSpinner: Story = {
+  render: () => (
+    <Button disabled aria-busy="true">
+      <Spinner size="small" />
+      Saving...
+    </Button>
+  ),
 };
 
 export const Disabled: Story = {
@@ -92,17 +86,23 @@ export const Disabled: Story = {
   },
 };
 
-export const LoadingVariants: Story = {
+export const SpinnerVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-      <Button loading>Primary</Button>
-      <Button variant="secondary" loading>
+      <Button disabled aria-busy="true">
+        <Spinner size="small" />
+        Primary
+      </Button>
+      <Button variant="secondary" disabled aria-busy="true">
+        <Spinner size="small" />
         Secondary
       </Button>
-      <Button variant="outline" loading>
+      <Button variant="outline" disabled aria-busy="true">
+        <Spinner size="small" />
         Loading
       </Button>
-      <Button variant="danger" loading>
+      <Button variant="danger" disabled aria-busy="true">
+        <Spinner size="small" />
         Deleting...
       </Button>
     </div>

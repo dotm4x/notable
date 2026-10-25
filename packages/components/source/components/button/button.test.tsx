@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { Button } from './button.js';
+import { Spinner } from '../spinner/spinner.js';
 
 describe('Button', () => {
   it('renders its label and handles clicks', async () => {
@@ -46,44 +47,48 @@ describe('Button', () => {
   });
 
   it('supports sizes', () => {
-    render(<Button size="lg">Continue</Button>);
+    render(<Button size="large">Continue</Button>);
 
     expect(screen.getByRole('button', { name: 'Continue' })).toHaveClass(
-      'bodypop-button--lg',
+      'bodypop-button--large',
     );
   });
 
-  it('supports icon-only buttons with accessible labels', () => {
-    render(
-      <Button iconOnly aria-label="Search">
-        <span aria-hidden="true">⌕</span>
-      </Button>,
-    );
+  it.each(['icon', 'icon-small', 'icon-large'] as const)(
+    'supports the %s icon size',
+    (size) => {
+      render(
+        <Button size={size} aria-label="Search">
+          <span aria-hidden="true">Search icon</span>
+        </Button>,
+      );
 
-    expect(screen.getByRole('button', { name: 'Search' })).toHaveClass(
-      'bodypop-button--icon-only',
-    );
-  });
+      expect(screen.getByRole('button', { name: 'Search' })).toHaveClass(
+        `bodypop-button--${size}`,
+      );
+    },
+  );
 
-  it('disables interaction when loading', async () => {
+  it('composes a spinner without coupling it to disabled or busy state', async () => {
     const user = userEvent.setup();
     const onClick = vi.fn();
 
     render(
-      <Button loading onClick={onClick}>
-        Saving...
+      <Button onClick={onClick}>
+        <Spinner size="small" />
+        <span>Save</span>
       </Button>,
     );
 
-    const button = screen.getByRole('button', { name: /Saving\.\.\./ });
+    const button = screen.getByRole('button');
 
-    expect(button).toBeDisabled();
-    expect(button).toHaveAttribute('aria-busy', 'true');
-    expect(button.querySelector('.bodypop-spinner')).not.toBeNull();
+    expect(button).toBeEnabled();
+    expect(button).not.toHaveAttribute('aria-busy');
+    expect(screen.getByRole('status', { name: 'Loading' })).toBeInTheDocument();
 
     await user.click(button);
 
-    expect(onClick).not.toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalledOnce();
   });
 
   it('does not handle clicks when disabled', async () => {

@@ -6,13 +6,13 @@ const meta = {
   component: Spinner,
   tags: ['autodocs'],
   args: {
-    size: 'md',
+    size: 'medium',
     label: 'Loading',
   },
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['small', 'medium', 'large'],
     },
     label: {
       control: 'text',
@@ -32,12 +32,12 @@ export const Sizes: Story = {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '24px',
+        gap: 'var(--bodypop-spacing-6)',
       }}
     >
-      <Spinner size="sm" />
-      <Spinner size="md" />
-      <Spinner size="lg" />
+      <Spinner size="small" />
+      <Spinner size="medium" />
+      <Spinner size="large" />
     </div>
   ),
 };
@@ -48,22 +48,22 @@ export const Colors: Story = {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '24px',
+        gap: 'var(--bodypop-spacing-6)',
       }}
     >
-      <span style={{ color: '#83b5e0' }}>
+      <span style={{ color: 'var(--bodypop-color-info)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: '#e98b91' }}>
+      <span style={{ color: 'var(--bodypop-color-danger)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: '#a9cba8' }}>
+      <span style={{ color: 'var(--bodypop-color-success)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: '#38332f' }}>
+      <span style={{ color: 'var(--bodypop-color-text)' }}>
         <Spinner />
       </span>
     </div>
@@ -76,12 +76,12 @@ export const WithText: Story = {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '8px',
-        color: '#38332f',
+        gap: 'var(--bodypop-spacing-2)',
+        color: 'var(--bodypop-color-text)',
         fontFamily: 'var(--bodypop-font-family)',
       }}
     >
-      <Spinner size="sm" />
+      <Spinner size="small" />
       <span>Loading your projects...</span>
     </div>
   ),
@@ -89,7 +89,7 @@ export const WithText: Story = {
 
 export const Large: Story = {
   args: {
-    size: 'lg',
+    size: 'large',
     label: 'Loading content',
   },
 };
