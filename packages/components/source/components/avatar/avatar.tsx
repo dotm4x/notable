@@ -12,23 +12,23 @@ import {
 } from 'react';
 import './avatar.css';
 
-/** Tamaños disponibles para el avatar. */
+/** Available avatar sizes. */
 export type AvatarSize = 'small' | 'medium' | 'large' | 'extra-large';
 
-/** Propiedades del componente raíz {@link Avatar}. */
+/** Props for the {@link Avatar} root component. */
 export type AvatarProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Tamaño heredado por la imagen y el contenido alternativo. */
+  /** Size inherited by the image and fallback content. */
   size?: AvatarSize;
-  /** Permite componer aquí `Avatar.Image` o `Avatar.Fallback`, o ambos. */
+  /** Compose `Avatar.Image`, `Avatar.Fallback`, or both as children. */
   children?: ReactNode;
 };
 
-/** Atributos nativos de imagen aceptados por `Avatar.Image`. */
+/** Native image attributes accepted by `Avatar.Image`. */
 export type AvatarImageProps = ImgHTMLAttributes<HTMLImageElement>;
 
-/** Propiedades de `Avatar.Fallback`. */
+/** Props for `Avatar.Fallback`. */
 export type AvatarFallbackProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Texto, icono u otro contenido alternativo. */
+  /** Text, an icon, or other fallback content. */
   children?: ReactNode;
 };
 
@@ -53,9 +53,8 @@ function useAvatarContext() {
 }
 
 /**
- * Componente raíz para combinar una imagen y contenido alternativo. Muestra
- * un icono de usuario integrado si no se proporciona un contenido alternativo
- * personalizado o si la imagen no está disponible.
+ * Root component for composing an image and fallback content. Shows a built-in
+ * user icon when no custom fallback is provided or the image is unavailable.
  */
 function AvatarRoot({
   children,
@@ -115,8 +114,8 @@ function AvatarRoot({
 }
 
 /**
- * Muestra la imagen del avatar cuando termina de cargar y acepta atributos
- * nativos de imagen. No renderiza una imagen si faltan `src` y `srcSet`.
+ * Shows the avatar image after it loads and accepts native image attributes.
+ * Renders no image when both `src` and `srcSet` are omitted.
  */
 function AvatarImage({
   alt,
@@ -161,7 +160,7 @@ function AvatarImage({
   );
 }
 
-/** Muestra el contenido alternativo hasta que carga la imagen actual. */
+/** Shows fallback content until the current image has loaded. */
 function AvatarFallback({
   children,
   className,
@@ -183,8 +182,8 @@ function AvatarFallback({
 }
 
 /**
- * Componente compuesto de avatar. Combina `Avatar.Image` y `Avatar.Fallback`
- * como elementos secundarios del componente raíz.
+ * Compound avatar component. Compose `Avatar.Image` and `Avatar.Fallback` as
+ * children of the root component.
  */
 export const Avatar = Object.assign(AvatarRoot, {
   Image: AvatarImage,

@@ -6,29 +6,29 @@ import {
 } from 'react';
 import './input.css';
 
-/** Propiedades del campo de entrada con etiqueta, descripción, error y adornos opcionales. */
+/** Props for an input with an optional label, description, error, and adornments. */
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  /** Texto de ayuda asociado al campo para tecnologías de asistencia. */
+  /** Helper text associated with the input for assistive technologies. */
   description?: ReactNode;
-  /** Mensaje de error asociado al campo que también lo marca como no válido. */
+  /** Error message associated with the input; also marks it as invalid. */
   error?: ReactNode;
-  /** Marca el campo como no válido aunque no se muestre un error. */
+  /** Marks the input as invalid even when no error is displayed. */
   invalid?: boolean;
-  /** Etiqueta visible asociada al campo nativo. */
+  /** Visible label associated with the native input. */
   label?: ReactNode;
-  /** Contenido decorativo o interactivo antes del valor. */
+  /** Decorative or interactive content displayed before the value. */
   leadingIcon?: ReactNode;
-  /** Evita ocultar el adorno inicial a las tecnologías de asistencia. */
+  /** Prevents assistive technologies from hiding the leading adornment. */
   leadingIconInteractive?: boolean;
-  /** Contenido decorativo o interactivo después del valor. */
+  /** Decorative or interactive content displayed after the value. */
   trailingIcon?: ReactNode;
-  /** Evita ocultar el adorno final a las tecnologías de asistencia. */
+  /** Prevents assistive technologies from hiding the trailing adornment. */
   trailingIconInteractive?: boolean;
 };
 
 /**
- * Renderiza un campo nativo con etiqueta, descripción, error y contenido
- * inicial o final opcionales. Reenvía la referencia al campo nativo.
+ * Renders a native input with optional label, description, error, and leading
+ * or trailing content. Forwards its ref to the native input.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {

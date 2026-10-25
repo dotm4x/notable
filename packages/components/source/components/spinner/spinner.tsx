@@ -2,20 +2,20 @@ import { LoaderCircle } from 'lucide-react';
 import type { HTMLAttributes } from 'react';
 import './spinner.css';
 
-/** Tamaños disponibles para el indicador de carga. */
+/** Available loading indicator sizes. */
 export type SpinnerSize = 'small' | 'medium' | 'large';
 
-/** Propiedades de {@link Spinner}, además de los atributos nativos de `span`. */
+/** Props for {@link Spinner}, in addition to native `span` attributes. */
 export type SpinnerProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Clase CSS adicional del elemento de estado. */
+  /** Additional CSS class for the status element. */
   className?: string;
-  /** Nombre accesible del estado. Por defecto, `Loading`; `aria-label` tiene prioridad. */
+  /** Accessible status name. Defaults to `Loading`; `aria-label` takes precedence. */
   label?: string;
-  /** Tamaño del indicador. Por defecto, `medium`. */
+  /** Indicator size. Defaults to `medium`. */
   size?: SpinnerSize;
 };
 
-/** Renderiza un icono de carga decorativo dentro de un elemento de estado accesible. */
+/** Renders a decorative loading icon inside an accessible status element. */
 export function Spinner({
   className,
   label = 'Loading',

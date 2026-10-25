@@ -6,24 +6,24 @@ import {
 } from 'react';
 import './switch.css';
 
-/** Propiedades de una casilla presentada con semántica de interruptor. */
+/** Props for a checkbox exposed with switch semantics. */
 export type SwitchProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type'
 > & {
-  /** Texto de ayuda asociado al interruptor para tecnologías de asistencia. */
+  /** Helper text associated with the switch for assistive technologies. */
   description?: ReactNode;
-  /** Mensaje de error asociado al interruptor y anunciado de forma no intrusiva. */
+  /** Error message associated with the switch and announced politely. */
   error?: ReactNode;
-  /** Marca el interruptor como no válido aunque no se muestre un error. */
+  /** Marks the switch as invalid even when no error is displayed. */
   invalid?: boolean;
-  /** Etiqueta visible asociada al interruptor. */
+  /** Visible label associated with the switch. */
   label?: ReactNode;
 };
 
 /**
- * Renderiza una casilla nativa con `role="switch"` y etiqueta, descripción
- * y error opcionales. Reenvía la referencia al campo nativo.
+ * Renders a native checkbox with `role="switch"` and optional label,
+ * description, and error. Forwards its ref to the native input.
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   {
