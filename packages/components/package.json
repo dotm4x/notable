@@ -1,6 +1,25 @@
 {
-  "name": "@bodypop/components",
+  "name": "@dotm4x/notable",
   "version": "0.1.0",
+  "description": "A collection of thoughtfully crafted, expressive components for the web.",
+  "license": "MIT",
+  "author": "dotm4x",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotm4x/notable.git",
+    "directory": "packages/components"
+  },
+  "homepage": "https://github.com/dotm4x/notable#readme",
+  "bugs": {
+    "url": "https://github.com/dotm4x/notable/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "design-system",
+    "ui",
+    "typescript"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

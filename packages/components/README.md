@@ -1,11 +1,12 @@
-# @bodypop/components
+# Notable
 
-React components for Bodypop. Components are exported from the package root,
-and the stylesheet is available as a separate package subpath.
+A collection of thoughtfully crafted, expressive components for the web.
+Components are exported from the package root, and the stylesheet is available
+as a separate package subpath.
 
 ```tsx
-import { Avatar, AvatarGroup, Button, Tooltip } from '@bodypop/components';
-import '@bodypop/components/styles.css';
+import { Avatar, AvatarGroup, Button, Tooltip } from '@dotm4x/notable';
+import '@dotm4x/notable/styles.css';
 ```
 
 The package requires React and React DOM 18 or 19 as peer dependencies.
@@ -163,6 +164,6 @@ avoid clipping by ancestors. The child should be an element that can receive
 
 ## Styling and themes
 
-Import `@bodypop/components/styles.css` once in the application entry point.
+Import `@dotm4x/notable/styles.css` once in the application entry point.
 Tokens are defined under `:root` and can be themed by setting
 `data-theme="light"` or `data-theme="dark"` on a root element.
