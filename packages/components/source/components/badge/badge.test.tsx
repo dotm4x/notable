@@ -9,9 +9,9 @@ describe('Badge', () => {
     render(<Badge>New</Badge>);
 
     expect(screen.getByText('New')).toHaveClass(
-      'bodypop-badge',
-      'bodypop-badge--default',
-      'bodypop-badge--medium',
+      'notable-badge',
+      'notable-badge--default',
+      'notable-badge--medium',
     );
   });
 
@@ -26,13 +26,13 @@ describe('Badge', () => {
   ] as const)('supports the %s variant', (variant) => {
     render(<Badge variant={variant}>{variant}</Badge>);
 
-    expect(screen.getByText(variant)).toHaveClass(`bodypop-badge--${variant}`);
+    expect(screen.getByText(variant)).toHaveClass(`notable-badge--${variant}`);
   });
 
   it.each(['small', 'medium'] as const)('supports the %s size', (size) => {
     render(<Badge size={size}>Label</Badge>);
 
-    expect(screen.getByText('Label')).toHaveClass(`bodypop-badge--${size}`);
+    expect(screen.getByText('Label')).toHaveClass(`notable-badge--${size}`);
   });
 
   it('forwards custom classes, HTML attributes, and accessibility attributes', () => {

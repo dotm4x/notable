@@ -9,15 +9,23 @@ import {
 } from 'react';
 import './checkbox.css';
 
+/** Propiedades de una casilla nativa con etiqueta y descripción opcionales. */
 export type CheckboxProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type'
 > & {
+  /** Texto de ayuda asociado a la casilla para tecnologías de asistencia. */
   description?: ReactNode;
+  /** Activa el estado indeterminado nativo. Por defecto, `false`. */
   indeterminate?: boolean;
+  /** Etiqueta visible asociada a la casilla. */
   label?: ReactNode;
 };
 
+/**
+ * Renderiza una casilla nativa con etiqueta y descripción opcionales.
+ * Reenvía la referencia al campo nativo.
+ */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
     {
@@ -59,23 +67,23 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div
-        className="bodypop-checkbox-field"
+        className="notable-checkbox-field"
         data-disabled={props.disabled || undefined}
       >
-        <label className="bodypop-checkbox" htmlFor={checkboxId}>
-          <span className="bodypop-checkbox__control">
+        <label className="notable-checkbox" htmlFor={checkboxId}>
+          <span className="notable-checkbox__control">
             <input
               {...props}
               ref={setInputRef}
               id={checkboxId}
               type="checkbox"
               aria-checked={checkedState}
-              className={['bodypop-checkbox__input', className]
+              className={['notable-checkbox__input', className]
                 .filter(Boolean)
                 .join(' ')}
               aria-describedby={describedBy}
             />
-            <span className="bodypop-checkbox__indicator" aria-hidden="true">
+            <span className="notable-checkbox__indicator" aria-hidden="true">
               <svg viewBox="0 0 16 16" fill="none">
                 <path
                   d="m3.5 8.5 3 3 6-7"
@@ -93,10 +101,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               </svg>
             </span>
           </span>
-          {label && <span className="bodypop-checkbox__label">{label}</span>}
+          {label && <span className="notable-checkbox__label">{label}</span>}
         </label>
         {description && (
-          <span className="bodypop-checkbox__description" id={descriptionId}>
+          <span className="notable-checkbox__description" id={descriptionId}>
             {description}
           </span>
         )}

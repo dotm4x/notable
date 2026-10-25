@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import './badge.css';
 
+/** Apariencia visual de la insignia. */
 export type BadgeVariant =
   | 'default'
   | 'secondary'
@@ -10,14 +11,20 @@ export type BadgeVariant =
   | 'danger'
   | 'info';
 
+/** Tamaños disponibles para la insignia. */
 export type BadgeSize = 'small' | 'medium';
 
+/** Propiedades de {@link Badge}, además de los atributos nativos de `span`. */
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
+  /** Texto, iconos u otro contenido en línea. */
   children?: ReactNode;
+  /** Apariencia visual. Por defecto, `default`. */
   variant?: BadgeVariant;
+  /** Tamaño. Por defecto, `medium`. */
   size?: BadgeSize;
 };
 
+/** Renderiza una etiqueta en línea no interactiva. */
 export function Badge({
   children,
   className,
@@ -26,9 +33,9 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const classes = [
-    'bodypop-badge',
-    `bodypop-badge--${variant}`,
-    `bodypop-badge--${size}`,
+    'notable-badge',
+    `notable-badge--${variant}`,
+    `notable-badge--${size}`,
     className,
   ]
     .filter(Boolean)

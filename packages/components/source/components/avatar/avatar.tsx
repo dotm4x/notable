@@ -12,16 +12,23 @@ import {
 } from 'react';
 import './avatar.css';
 
+/** Tamaños disponibles para el avatar. */
 export type AvatarSize = 'small' | 'medium' | 'large' | 'extra-large';
 
+/** Propiedades del componente raíz {@link Avatar}. */
 export type AvatarProps = HTMLAttributes<HTMLSpanElement> & {
+  /** Tamaño heredado por la imagen y el contenido alternativo. */
   size?: AvatarSize;
+  /** Permite componer aquí `Avatar.Image` o `Avatar.Fallback`, o ambos. */
   children?: ReactNode;
 };
 
+/** Atributos nativos de imagen aceptados por `Avatar.Image`. */
 export type AvatarImageProps = ImgHTMLAttributes<HTMLImageElement>;
 
+/** Propiedades de `Avatar.Fallback`. */
 export type AvatarFallbackProps = HTMLAttributes<HTMLSpanElement> & {
+  /** Texto, icono u otro contenido alternativo. */
   children?: ReactNode;
 };
 
@@ -45,6 +52,11 @@ function useAvatarContext() {
   return context;
 }
 
+/**
+ * Componente raíz para combinar una imagen y contenido alternativo. Muestra
+ * un icono de usuario integrado si no se proporciona un contenido alternativo
+ * personalizado o si la imagen no está disponible.
+ */
 function AvatarRoot({
   children,
   className,
@@ -68,7 +80,7 @@ function AvatarRoot({
   const hasCustomFallback = childItems.some(
     (child) => isValidElement(child) && child.type === Avatar.Fallback,
   );
-  const classes = ['bodypop-avatar', `bodypop-avatar--${size}`, className]
+  const classes = ['notable-avatar', `notable-avatar--${size}`, className]
     .filter(Boolean)
     .join(' ');
 
@@ -79,7 +91,7 @@ function AvatarRoot({
       <span {...props} className={classes}>
         {!hasCustomFallback && (
           <span
-            className="bodypop-avatar__fallback bodypop-avatar__fallback--default"
+            className="notable-avatar__fallback notable-avatar__fallback--default"
             aria-hidden="true"
             hidden={activeSource !== null && loadedSource === activeSource}
           >
@@ -102,6 +114,10 @@ function AvatarRoot({
   );
 }
 
+/**
+ * Muestra la imagen del avatar cuando termina de cargar y acepta atributos
+ * nativos de imagen. No renderiza una imagen si faltan `src` y `srcSet`.
+ */
 function AvatarImage({
   alt,
   className,
@@ -134,7 +150,7 @@ function AvatarImage({
     <img
       {...props}
       alt={alt}
-      className={['bodypop-avatar__image', className].filter(Boolean).join(' ')}
+      className={['notable-avatar__image', className].filter(Boolean).join(' ')}
       hidden={!isLoaded}
       onError={handleError}
       onLoad={handleLoad}
@@ -145,6 +161,7 @@ function AvatarImage({
   );
 }
 
+/** Muestra el contenido alternativo hasta que carga la imagen actual. */
 function AvatarFallback({
   children,
   className,
@@ -155,7 +172,7 @@ function AvatarFallback({
   return (
     <span
       {...props}
-      className={['bodypop-avatar__fallback', className]
+      className={['notable-avatar__fallback', className]
         .filter(Boolean)
         .join(' ')}
       hidden={activeSource !== null && loadedSource === activeSource}
@@ -165,6 +182,10 @@ function AvatarFallback({
   );
 }
 
+/**
+ * Componente compuesto de avatar. Combina `Avatar.Image` y `Avatar.Fallback`
+ * como elementos secundarios del componente raíz.
+ */
 export const Avatar = Object.assign(AvatarRoot, {
   Image: AvatarImage,
   Fallback: AvatarFallback,

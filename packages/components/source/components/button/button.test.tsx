@@ -26,7 +26,7 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: 'Save' });
 
     expect(button).toHaveAttribute('type', 'submit');
-    expect(button).toHaveClass('bodypop-button', 'custom-button');
+    expect(button).toHaveClass('notable-button', 'custom-button');
   });
 
   it('defaults to type button', () => {
@@ -42,7 +42,7 @@ describe('Button', () => {
     render(<Button variant="secondary">Cancel</Button>);
 
     expect(screen.getByRole('button', { name: 'Cancel' })).toHaveClass(
-      'bodypop-button--secondary',
+      'notable-button--secondary',
     );
   });
 
@@ -50,7 +50,7 @@ describe('Button', () => {
     render(<Button size="large">Continue</Button>);
 
     expect(screen.getByRole('button', { name: 'Continue' })).toHaveClass(
-      'bodypop-button--large',
+      'notable-button--large',
     );
   });
 
@@ -64,7 +64,7 @@ describe('Button', () => {
       );
 
       expect(screen.getByRole('button', { name: 'Search' })).toHaveClass(
-        `bodypop-button--${size}`,
+        `notable-button--${size}`,
       );
     },
   );

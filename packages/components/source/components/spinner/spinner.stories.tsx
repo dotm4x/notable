@@ -32,7 +32,7 @@ export const Sizes: Story = {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--bodypop-spacing-6)',
+        gap: 'var(--notable-spacing-6)',
       }}
     >
       <Spinner size="small" />
@@ -48,22 +48,22 @@ export const Colors: Story = {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--bodypop-spacing-6)',
+        gap: 'var(--notable-spacing-6)',
       }}
     >
-      <span style={{ color: 'var(--bodypop-color-info)' }}>
+      <span style={{ color: 'var(--notable-color-info)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: 'var(--bodypop-color-danger)' }}>
+      <span style={{ color: 'var(--notable-color-danger)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: 'var(--bodypop-color-success)' }}>
+      <span style={{ color: 'var(--notable-color-success)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: 'var(--bodypop-color-text)' }}>
+      <span style={{ color: 'var(--notable-color-text)' }}>
         <Spinner />
       </span>
     </div>
@@ -76,9 +76,9 @@ export const WithText: Story = {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 'var(--bodypop-spacing-2)',
-        color: 'var(--bodypop-color-text)',
-        fontFamily: 'var(--bodypop-font-family)',
+        gap: 'var(--notable-spacing-2)',
+        color: 'var(--notable-color-text)',
+        fontFamily: 'var(--notable-font-family)',
       }}
     >
       <Spinner size="small" />

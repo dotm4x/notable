@@ -132,7 +132,7 @@ function ControlledDemo() {
       <span
         style={{
           fontSize: '14px',
-          color: 'var(--bodypop-color-text-muted)',
+          color: 'var(--notable-color-text-muted)',
         }}
       >
         Selected value: {period}
@@ -247,10 +247,10 @@ function InteractivePeriodDemo() {
       <div
         style={{
           padding: '16px',
-          borderRadius: 'var(--bodypop-radius-lg)',
-          backgroundColor: 'var(--bodypop-color-surface-sunken)',
+          borderRadius: 'var(--notable-radius-lg)',
+          backgroundColor: 'var(--notable-color-surface-sunken)',
           border:
-            'var(--bodypop-border-width) solid var(--bodypop-color-border-subtle)',
+            'var(--notable-border-width) solid var(--notable-color-border-subtle)',
           fontSize: '14px',
         }}
       >

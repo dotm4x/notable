@@ -124,9 +124,9 @@ export const LightAndDark: Story = {
             flexWrap: 'wrap',
             gap: '8px',
             padding: '16px',
-            borderRadius: 'var(--bodypop-radius-lg)',
-            background: 'var(--bodypop-color-background)',
-            color: 'var(--bodypop-color-text)',
+            borderRadius: 'var(--notable-radius-lg)',
+            background: 'var(--notable-color-background)',
+            color: 'var(--notable-color-text)',
           }}
         >
           {variants.map((variant) => (
