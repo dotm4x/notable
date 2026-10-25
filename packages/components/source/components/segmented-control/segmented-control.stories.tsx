@@ -3,7 +3,9 @@ import {
   Calendar,
   CalendarDays,
   CalendarRange,
+  Clock,
   Laptop,
+  LayoutGrid,
   Moon,
   Sun,
 } from 'lucide-react';
@@ -262,4 +264,77 @@ function InteractivePeriodDemo() {
 
 export const InteractivePeriodSelector: Story = {
   render: () => <InteractivePeriodDemo />,
+};
+
+function DraggableDemo() {
+  const [period, setPeriod] = useState('week');
+
+  return (
+    <div style={{ display: 'grid', gap: '16px', maxWidth: '520px' }}>
+      <SegmentedControl
+        value={period}
+        onChange={setPeriod}
+        aria-label="Draggable timeframe"
+        options={[
+          { label: 'Day', value: 'day' },
+          { label: 'Week', value: 'week' },
+          { label: 'Month', value: 'month' },
+          { label: 'Year', value: 'year', disabled: true },
+        ]}
+      />
+      <span
+        style={{
+          fontSize: '14px',
+          color: 'var(--notable-color-text-muted)',
+        }}
+      >
+        Selected timeframe: <strong>{period}</strong>
+      </span>
+      <span
+        style={{
+          fontSize: '12px',
+          color: 'var(--notable-color-text-muted)',
+        }}
+      >
+        Drag the selected indicator horizontally, or click an option.
+      </span>
+    </div>
+  );
+}
+
+export const Draggable: Story = {
+  render: () => <DraggableDemo />,
+};
+
+export const DifferentWidths: Story = {
+  args: {
+    defaultValue: 'week',
+    options: [
+      {
+        value: 'day',
+        label: 'Día',
+        icon: <Sun size={16} />,
+      },
+      {
+        value: 'week',
+        label: 'Esta semana',
+        icon: <CalendarDays size={16} />,
+      },
+      {
+        value: 'month',
+        label: 'Mes',
+        icon: <CalendarRange size={16} />,
+      },
+      {
+        value: 'year',
+        label: 'Todo el año',
+        icon: <Clock size={16} />,
+      },
+      {
+        value: 'all',
+        label: 'Historial completo',
+        icon: <LayoutGrid size={16} />,
+      },
+    ],
+  },
 };

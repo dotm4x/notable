@@ -44,6 +44,10 @@
     border-color var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
+.notable-segmented-control[data-dragging] {
+  cursor: grabbing;
+}
+
 /* Sizes */
 
 .notable-segmented-control--small {
@@ -107,13 +111,16 @@
 
 .notable-segmented-control__indicator {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   z-index: 1;
-  border-radius: inherit;
+  height: 100%;
+  border-radius: calc(var(--notable-radius-full) - 2px);
   background-color: var(--notable-color-surface-raised);
   box-sizing: border-box;
   box-shadow: var(--notable-shadow-md);
   pointer-events: none;
+  will-change: left, width;
 }
 
 .notable-segmented-control__indicator[data-disabled] {
