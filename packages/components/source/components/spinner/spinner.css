@@ -4,6 +4,7 @@
   justify-content: center;
   flex: 0 0 auto;
   color: currentColor;
+  font-family: var(--bodypop-font-family);
 }
 
 .bodypop-spinner__icon {
@@ -12,16 +13,16 @@
   animation: bodypop-spinner-rotate 800ms linear infinite;
 }
 
-.bodypop-spinner--sm {
-  font-size: 0.875rem;
+.bodypop-spinner--small {
+  font-size: var(--bodypop-font-size-sm);
 }
 
-.bodypop-spinner--md {
-  font-size: 1.125rem;
+.bodypop-spinner--medium {
+  font-size: var(--bodypop-font-size-lg);
 }
 
-.bodypop-spinner--lg {
-  font-size: 1.5rem;
+.bodypop-spinner--large {
+  font-size: var(--bodypop-font-size-2xl);
 }
 
 @keyframes bodypop-spinner-rotate {
@@ -32,6 +33,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bodypop-spinner__icon {
-    animation-duration: 1.5s;
+    animation: none;
   }
 }

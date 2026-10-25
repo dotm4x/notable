@@ -1,12 +1,12 @@
 import { motion, useReducedMotion, type HTMLMotionProps } from 'motion/react';
 import type { ReactNode } from 'react';
-import { Spinner } from '../spinner/spinner.js';
 import './button.css';
 
 export type ButtonVariant =
   'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize =
+  'small' | 'medium' | 'large' | 'icon' | 'icon-small' | 'icon-large';
 
 export type ButtonProps = Omit<
   HTMLMotionProps<'button'>,
@@ -15,16 +15,12 @@ export type ButtonProps = Omit<
   children?: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  loading?: boolean;
-  iconOnly?: boolean;
   disabled?: boolean;
 };
 
 export function Button({
   variant = 'primary',
-  size = 'md',
-  loading = false,
-  iconOnly = false,
+  size = 'medium',
   disabled = false,
   className,
   children,
@@ -35,15 +31,12 @@ export function Button({
   ...props
 }: ButtonProps) {
   const shouldReduceMotion = useReducedMotion();
-  const isDisabled = disabled || loading;
-  const isMotionDisabled = isDisabled || shouldReduceMotion;
+  const isMotionDisabled = disabled || shouldReduceMotion;
 
   const classes = [
     'bodypop-button',
     `bodypop-button--${variant}`,
     `bodypop-button--${size}`,
-    iconOnly && 'bodypop-button--icon-only',
-    loading && 'bodypop-button--loading',
     className,
   ]
     .filter(Boolean)
@@ -53,8 +46,7 @@ export function Button({
     <motion.button
       {...props}
       type={type}
-      disabled={isDisabled}
-      aria-busy={loading || undefined}
+      disabled={disabled}
       className={classes}
       whileHover={
         isMotionDisabled ? undefined : (whileHover ?? { scale: 1.03 })
@@ -68,7 +60,6 @@ export function Button({
         }
       }
     >
-      {loading && <Spinner size="sm" />}
       <span className="bodypop-button__content">{children}</span>
     </motion.button>
   );

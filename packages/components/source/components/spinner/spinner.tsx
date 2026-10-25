@@ -1,23 +1,33 @@
 import { LoaderCircle } from 'lucide-react';
+import type { HTMLAttributes } from 'react';
 import './spinner.css';
 
-export type SpinnerProps = {
+export type SpinnerSize = 'small' | 'medium' | 'large';
+
+export type SpinnerProps = HTMLAttributes<HTMLSpanElement> & {
   className?: string;
   label?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: SpinnerSize;
 };
 
 export function Spinner({
   className,
   label = 'Loading',
-  size = 'md',
+  size = 'medium',
+  'aria-label': ariaLabel,
+  ...props
 }: SpinnerProps) {
   const classes = ['bodypop-spinner', `bodypop-spinner--${size}`, className]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <span className={classes} role="status" aria-label={label}>
+    <span
+      {...props}
+      className={classes}
+      role="status"
+      aria-label={ariaLabel ?? label}
+    >
       <LoaderCircle className="bodypop-spinner__icon" aria-hidden="true" />
     </span>
   );
