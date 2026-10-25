@@ -12,7 +12,7 @@ import {
 import { createPortal } from 'react-dom';
 import './tooltip.css';
 
-/** Lado preferido del elemento activador donde se muestra la ayuda. */
+/** Preferred side of the trigger where the tooltip is displayed. */
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 
 type TooltipPosition = {
@@ -25,26 +25,25 @@ type TooltipContentStyle = CSSProperties & {
   '--notable-tooltip-delay': string;
 };
 
-/** Propiedades de {@link Tooltip}. */
+/** Props for {@link Tooltip}. */
 export type TooltipProps = {
-  /** Único elemento activador; debe aceptar el atributo `aria-describedby`. */
+  /** Single trigger element; must accept the `aria-describedby` attribute. */
   children: ReactElement<{ 'aria-describedby'?: string }>;
-  /** Clase CSS adicional del contenedor del elemento activador. */
+  /** Additional CSS class for the trigger wrapper. */
   className?: string;
-  /** Texto que se muestra como ayuda emergente. */
+  /** Text displayed in the tooltip. */
   content: string;
-  /** Retraso antes de mostrar la ayuda, en milisegundos. Por defecto, `350`. */
+  /** Delay before showing the tooltip, in milliseconds. Defaults to `350`. */
   delay?: number;
-  /** Impide que se muestre la ayuda. Por defecto, `false`. */
+  /** Prevents the tooltip from being shown. Defaults to `false`. */
   disabled?: boolean;
-  /** Posición preferida; se ajusta para caber en la ventana visible. */
+  /** Preferred position; adjusts to fit within the viewport. */
   placement?: TooltipPlacement;
 };
 
 /**
- * Añade una ayuda emergente que aparece al pasar el cursor o recibir el foco.
- * La renderiza en un portal y la vincula al elemento activador con
- * `aria-describedby`.
+ * Adds a tooltip that appears on hover or focus. Renders it in a portal and
+ * associates it with the trigger using `aria-describedby`.
  */
 export function Tooltip({
   children,
