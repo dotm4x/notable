@@ -128,7 +128,7 @@
   aspect-ratio: 1;
   box-sizing: border-box;
   /* A 1px ring keeps the control light at this size; the shared 2px border token is too heavy here. */
-  border: 1px solid var(--notable-color-border-strong);
+  border: 1px solid var(--notable-color-border);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-surface);
   transition:
@@ -159,6 +159,13 @@
 .notable-radio-group__item:not([data-disabled])
   .notable-radio-group__option:hover
   .notable-radio-group__indicator {
+  border-color: var(--notable-color-border-strong);
+}
+
+.notable-radio-group__item:not([data-disabled])
+  .notable-radio-group__option:hover
+  .notable-radio-group__input:checked
+  + .notable-radio-group__indicator {
   border-color: var(--notable-color-primary);
 }
 
