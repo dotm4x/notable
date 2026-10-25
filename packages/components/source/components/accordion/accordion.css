@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Accordion
+   ========================================================================== */
+
+.notable-accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+}
+
+.notable-accordion__item {
+  border-bottom: var(--notable-border-width) solid var(--notable-color-border);
+}
+
+.notable-accordion__heading {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Trigger */
+
+.notable-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--notable-spacing-3);
+  width: 100%;
+  margin: 0;
+  padding: var(--notable-spacing-3) 0;
+  border: 0;
+  border-radius: var(--notable-radius-xs);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--notable-font-size-sm);
+  font-weight: var(--notable-font-weight-medium);
+  line-height: var(--notable-line-height-normal);
+  text-align: start;
+  cursor: pointer;
+  transition: color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-accordion__trigger:hover:not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.notable-accordion__trigger:active:not(:disabled) {
+  color: var(--notable-color-text-muted);
+}
+
+.notable-accordion__trigger:focus-visible {
+  outline: 2px solid var(--notable-color-focus);
+  outline-offset: 2px;
+}
+
+.notable-accordion__trigger:disabled {
+  color: var(--notable-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.notable-accordion__title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.notable-accordion__chevron {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  color: var(--notable-color-text-muted);
+  transition: transform var(--notable-duration-base)
+    var(--notable-easing-standard);
+}
+
+.notable-accordion__trigger:disabled .notable-accordion__chevron {
+  color: var(--notable-color-text-disabled);
+}
+
+.notable-accordion__item[data-state='open'] .notable-accordion__chevron {
+  transform: rotate(180deg);
+}
+
+/* Panel
+   Animates between 0fr and 1fr grid rows so the height follows the content
+   without measuring it or animating `height: auto`. */
+
+.notable-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--notable-duration-base)
+    var(--notable-easing-standard);
+}
+
+.notable-accordion__item[data-state='open'] > .notable-accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+.notable-accordion__content {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.notable-accordion__content-inner {
+  padding-bottom: var(--notable-spacing-3);
+  font-size: var(--notable-font-size-sm);
+  line-height: var(--notable-line-height-relaxed);
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-accordion__trigger,
+  .notable-accordion__chevron,
+  .notable-accordion__panel {
+    transition: none;
+  }
+}

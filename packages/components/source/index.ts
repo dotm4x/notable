@@ -1,3 +1,4 @@
+export * from './components/accordion/accordion.js';
 export * from './components/button/button.js';
 export * from './components/avatar/avatar.js';
 export * from './components/avatar/avatar-group.js';
