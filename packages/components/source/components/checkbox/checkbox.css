@@ -51,9 +51,9 @@
   background: var(--notable-color-surface);
   color: var(--notable-color-on-primary);
   transition:
-    border-color 140ms ease,
-    background-color 140ms ease,
-    box-shadow 140ms ease;
+    border-color var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard),
+    box-shadow var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 .notable-checkbox__indicator svg {
@@ -63,7 +63,8 @@
 
 .notable-checkbox__indicator path {
   opacity: 0;
-  transition: opacity 140ms ease;
+  transition: opacity var(--notable-duration-fast)
+    var(--notable-easing-standard);
 }
 
 .notable-checkbox__input:checked + .notable-checkbox__indicator {

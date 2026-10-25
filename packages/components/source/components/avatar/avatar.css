@@ -47,7 +47,8 @@
 .notable-avatar__image {
   object-fit: cover;
   opacity: 0;
-  transition: opacity 160ms ease;
+  transition: opacity var(--notable-duration-base)
+    var(--notable-easing-standard);
 }
 
 .notable-avatar__image:not([hidden]) {
@@ -113,8 +114,8 @@
   display: inline-flex;
   flex: 0 0 auto;
   transition:
-    transform 150ms ease,
-    filter 150ms ease;
+    transform 150ms var(--notable-easing-standard),
+    filter 150ms var(--notable-easing-standard);
 }
 
 .notable-avatar-group__item + .notable-avatar-group__item {

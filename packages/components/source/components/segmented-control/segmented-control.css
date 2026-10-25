@@ -40,8 +40,8 @@
   isolation: isolate;
   -webkit-tap-highlight-color: transparent;
   transition:
-    background-color 140ms ease,
-    border-color 140ms ease;
+    background-color var(--notable-duration-fast) var(--notable-easing-standard),
+    border-color var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 /* Sizes */
@@ -140,8 +140,8 @@
   border-radius: inherit;
   pointer-events: none;
   transition:
-    color 140ms ease,
-    transform 140ms ease;
+    color var(--notable-duration-fast) var(--notable-easing-standard),
+    transform var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 .notable-segmented-control--small .notable-segmented-control__content {

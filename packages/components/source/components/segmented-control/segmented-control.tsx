@@ -8,6 +8,7 @@ import {
   type Ref,
 } from 'react';
 import { LayoutGroup, motion, useReducedMotion } from 'motion/react';
+import { SPRING_LAYOUT } from '../../styles/motion.js';
 import './segmented-control.css';
 
 /** Available segmented control sizes. */
@@ -164,13 +165,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
                     className="notable-segmented-control__indicator"
                     data-disabled={isOptionDisabled || undefined}
                     transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : {
-                            type: 'spring',
-                            stiffness: 450,
-                            damping: 35,
-                          }
+                      shouldReduceMotion ? { duration: 0 } : SPRING_LAYOUT
                     }
                     aria-hidden="true"
                   />
