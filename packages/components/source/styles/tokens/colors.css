@@ -113,7 +113,7 @@
   --notable-color-info-subtle: #172554;
   --notable-color-info-border: #1e40af;
 
-  --notable-color-background: var(--notable-gray-950);
+  --notable-color-background: var(--notable-black);
   --notable-color-surface: var(--notable-gray-900);
   --notable-color-surface-raised: var(--notable-gray-800);
   --notable-color-surface-sunken: var(--notable-gray-950);
