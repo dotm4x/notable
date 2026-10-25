@@ -1,0 +1,555 @@
+import { createRef, useState } from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+import { SegmentedControl } from './segmented-control.js';
+
+const sampleOptions = [
+  { label: 'Day', value: 'day' },
+  { label: 'Week', value: 'week' },
+  { label: 'Month', value: 'month' },
+] as const;
+
+describe('SegmentedControl', () => {
+  describe('Rendering', () => {
+    it('renders every option and exposes accessible radiogroup and radio roles', () => {
+      render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+        />,
+      );
+
+      const group = screen.getByRole('radiogroup', { name: 'Timeframe' });
+      expect(group).toBeInTheDocument();
+
+      const radios = screen.getAllByRole('radio');
+      expect(radios).toHaveLength(3);
+      expect(screen.getByRole('radio', { name: 'Day' })).toBeChecked();
+      expect(screen.getByRole('radio', { name: 'Week' })).not.toBeChecked();
+      expect(screen.getByRole('radio', { name: 'Month' })).not.toBeChecked();
+    });
+
+    it('applies the selected state correctly to the initial option', () => {
+      render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          defaultValue="month"
+        />,
+      );
+
+      expect(screen.getByRole('radio', { name: 'Month' })).toBeChecked();
+      expect(screen.getByRole('radio', { name: 'Day' })).not.toBeChecked();
+    });
+
+    it.each(['small', 'medium', 'large'] as const)(
+      'supports the %s size',
+      (size) => {
+        render(
+          <SegmentedControl
+            size={size}
+            aria-label={`Timeframe ${size}`}
+            options={sampleOptions}
+            defaultValue="day"
+          />,
+        );
+
+        const group = screen.getByRole('radiogroup', {
+          name: `Timeframe ${size}`,
+        });
+        expect(group).toHaveClass(`bodypop-segmented-control--${size}`);
+      },
+    );
+
+    it('renders optional icons with aria-hidden', () => {
+      render(
+        <SegmentedControl
+          aria-label="View format"
+          options={[
+            {
+              label: 'List',
+              value: 'list',
+              icon: <span data-testid="list-icon">Icon</span>,
+            },
+            { label: 'Grid', value: 'grid' },
+          ]}
+          defaultValue="list"
+        />,
+      );
+
+      const icon = screen.getByTestId('list-icon').parentElement;
+      expect(icon).toHaveAttribute('aria-hidden', 'true');
+      expect(screen.getByRole('radio', { name: 'List' })).toBeInTheDocument();
+    });
+
+    it('handles empty options list gracefully without crashing', () => {
+      render(<SegmentedControl aria-label="Empty control" options={[]} />);
+
+      const group = screen.getByRole('radiogroup', { name: 'Empty control' });
+      expect(group).toBeInTheDocument();
+      expect(screen.queryAllByRole('radio')).toHaveLength(0);
+    });
+
+    it('handles a single option correctly', () => {
+      render(
+        <SegmentedControl
+          aria-label="Single option control"
+          options={[{ label: 'Only', value: 'only' }]}
+          defaultValue="only"
+        />,
+      );
+
+      const radio = screen.getByRole('radio', { name: 'Only' });
+      expect(radio).toBeChecked();
+    });
+  });
+
+  describe('Selection', () => {
+    it('supports uncontrolled usage and updates selection on user click', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+          onChange={onChange}
+        />,
+      );
+
+      const weekRadio = screen.getByRole('radio', { name: 'Week' });
+      await user.click(weekRadio);
+
+      expect(weekRadio).toBeChecked();
+      expect(screen.getByRole('radio', { name: 'Day' })).not.toBeChecked();
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith('week');
+    });
+
+    it('supports controlled usage with value and onChange', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      function ControlledTestComponent() {
+        const [value, setValue] = useState('day');
+        return (
+          <SegmentedControl
+            aria-label="Controlled timeframe"
+            options={sampleOptions}
+            value={value}
+            onChange={(val) => {
+              setValue(val);
+              onChange(val);
+            }}
+          />
+        );
+      }
+
+      render(<ControlledTestComponent />);
+
+      const monthRadio = screen.getByRole('radio', { name: 'Month' });
+      await user.click(monthRadio);
+
+      expect(monthRadio).toBeChecked();
+      expect(onChange).toHaveBeenCalledWith('month');
+    });
+
+    it('does not call onChange when clicking an already selected option', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+          onChange={onChange}
+        />,
+      );
+
+      const dayRadio = screen.getByRole('radio', { name: 'Day' });
+      await user.click(dayRadio);
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('updates correctly when parent changes the controlled value', () => {
+      const { rerender } = render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          value="day"
+        />,
+      );
+
+      expect(screen.getByRole('radio', { name: 'Day' })).toBeChecked();
+
+      rerender(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          value="month"
+        />,
+      );
+
+      expect(screen.getByRole('radio', { name: 'Month' })).toBeChecked();
+      expect(screen.getByRole('radio', { name: 'Day' })).not.toBeChecked();
+    });
+
+    it('supports form integration and sets FormData with name prop', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <form aria-label="Preferences form">
+          <SegmentedControl
+            name="period"
+            aria-label="Period"
+            options={sampleOptions}
+            defaultValue="day"
+          />
+        </form>,
+      );
+
+      const form = document.querySelector('form');
+      if (!form) {
+        throw new Error('Expected form to be present');
+      }
+
+      expect(new FormData(form).get('period')).toBe('day');
+
+      await user.click(screen.getByRole('radio', { name: 'Month' }));
+      expect(new FormData(form).get('period')).toBe('month');
+    });
+  });
+
+  describe('Disabled states', () => {
+    it('does not allow selection of disabled options', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          aria-label="Delivery tier"
+          options={[
+            { label: 'Standard', value: 'standard' },
+            { label: 'Express', value: 'express', disabled: true },
+            { label: 'Overnight', value: 'overnight' },
+          ]}
+          defaultValue="standard"
+          onChange={onChange}
+        />,
+      );
+
+      const expressRadio = screen.getByRole('radio', { name: 'Express' });
+      expect(expressRadio).toBeDisabled();
+
+      await user.click(expressRadio);
+
+      expect(expressRadio).not.toBeChecked();
+      expect(screen.getByRole('radio', { name: 'Standard' })).toBeChecked();
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('disables the entire control when requested', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          disabled
+          aria-label="Disabled timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+          onChange={onChange}
+        />,
+      );
+
+      const group = screen.getByRole('radiogroup', {
+        name: 'Disabled timeframe',
+      });
+      expect(group).toHaveAttribute('aria-disabled', 'true');
+      expect(group).toHaveAttribute('data-disabled');
+
+      const allRadios = screen.getAllByRole('radio');
+      for (const radio of allRadios) {
+        expect(radio).toBeDisabled();
+      }
+
+      await user.click(screen.getByRole('radio', { name: 'Week' }));
+      expect(onChange).not.toHaveBeenCalled();
+      expect(screen.getByRole('radio', { name: 'Day' })).toBeChecked();
+    });
+
+    it('handles all-disabled options correctly', () => {
+      render(
+        <SegmentedControl
+          aria-label="All disabled"
+          options={[
+            { label: 'A', value: 'a', disabled: true },
+            { label: 'B', value: 'b', disabled: true },
+          ]}
+          defaultValue="a"
+        />,
+      );
+
+      const radios = screen.getAllByRole('radio');
+      expect(radios[0]).toBeDisabled();
+      expect(radios[1]).toBeDisabled();
+      expect(radios[0]).toBeChecked();
+    });
+
+    it('does not move selection to an unrelated option when the current selection is absent', () => {
+      render(
+        <SegmentedControl
+          aria-label="Missing selection"
+          options={sampleOptions}
+          value={'nonexistent' as unknown as string}
+        />,
+      );
+
+      const radios = screen.getAllByRole('radio');
+      for (const radio of radios) {
+        expect(radio).not.toBeChecked();
+      }
+    });
+  });
+
+  describe('Keyboard and accessibility', () => {
+    it('supports visible group label via label prop and links via aria-labelledby', () => {
+      render(
+        <SegmentedControl
+          label="Reporting Interval"
+          options={sampleOptions}
+          defaultValue="day"
+        />,
+      );
+
+      const group = screen.getByRole('radiogroup', {
+        name: 'Reporting Interval',
+      });
+      expect(group).toBeInTheDocument();
+      expect(screen.getByText('Reporting Interval')).toBeInTheDocument();
+    });
+
+    it('supports aria-labelledby pointing to an external element', () => {
+      render(
+        <>
+          <h2 id="external-heading">External Filter</h2>
+          <SegmentedControl
+            aria-labelledby="external-heading"
+            options={sampleOptions}
+            defaultValue="day"
+          />
+        </>,
+      );
+
+      const group = screen.getByRole('radiogroup', { name: 'External Filter' });
+      expect(group).toHaveAttribute('aria-labelledby', 'external-heading');
+    });
+
+    it('supports arrow-key navigation according to radio group behavior', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+          onChange={onChange}
+        />,
+      );
+
+      const dayRadio = screen.getByRole('radio', { name: 'Day' });
+      const weekRadio = screen.getByRole('radio', { name: 'Week' });
+      const monthRadio = screen.getByRole('radio', { name: 'Month' });
+
+      dayRadio.focus();
+      expect(dayRadio).toHaveFocus();
+
+      await user.keyboard('{ArrowRight}');
+      expect(weekRadio).toHaveFocus();
+      expect(weekRadio).toBeChecked();
+      expect(onChange).toHaveBeenCalledWith('week');
+
+      await user.keyboard('{ArrowRight}');
+      expect(monthRadio).toHaveFocus();
+      expect(monthRadio).toBeChecked();
+      expect(onChange).toHaveBeenCalledWith('month');
+
+      await user.keyboard('{ArrowLeft}');
+      expect(weekRadio).toHaveFocus();
+      expect(weekRadio).toBeChecked();
+    });
+
+    it('skips disabled options during arrow key navigation', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          aria-label="Delivery tiers"
+          options={[
+            { label: 'Standard', value: 'standard' },
+            { label: 'Express', value: 'express', disabled: true },
+            { label: 'Overnight', value: 'overnight' },
+          ]}
+          defaultValue="standard"
+          onChange={onChange}
+        />,
+      );
+
+      const standardRadio = screen.getByRole('radio', { name: 'Standard' });
+      const overnightRadio = screen.getByRole('radio', { name: 'Overnight' });
+
+      standardRadio.focus();
+      await user.keyboard('{ArrowRight}');
+
+      expect(overnightRadio).toHaveFocus();
+      expect(overnightRadio).toBeChecked();
+      expect(onChange).toHaveBeenCalledWith('overnight');
+    });
+
+    it('selects an unchecked option using Spacebar', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      render(
+        <SegmentedControl
+          aria-label="Unset timeframe"
+          options={sampleOptions}
+          onChange={onChange}
+        />,
+      );
+
+      const dayRadio = screen.getByRole('radio', { name: 'Day' });
+      expect(dayRadio).not.toBeChecked();
+
+      dayRadio.focus();
+      await user.keyboard(' ');
+
+      expect(dayRadio).toBeChecked();
+      expect(onChange).toHaveBeenCalledWith('day');
+    });
+
+    it('supports tab navigation into the active radio option', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <div>
+          <button type="button">Before</button>
+          <SegmentedControl
+            aria-label="Timeframe"
+            options={sampleOptions}
+            defaultValue="week"
+          />
+          <button type="button">After</button>
+        </div>,
+      );
+
+      const beforeButton = screen.getByRole('button', { name: 'Before' });
+      const weekRadio = screen.getByRole('radio', { name: 'Week' });
+      const afterButton = screen.getByRole('button', { name: 'After' });
+
+      beforeButton.focus();
+      expect(beforeButton).toHaveFocus();
+
+      await user.tab();
+      expect(weekRadio).toHaveFocus();
+
+      await user.tab();
+      expect(afterButton).toHaveFocus();
+    });
+  });
+
+  describe('Motion and edge cases', () => {
+    it('renders the animated selection indicator on the selected option', () => {
+      const { container } = render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          options={sampleOptions}
+          defaultValue="week"
+        />,
+      );
+
+      const indicators = container.querySelectorAll(
+        '.bodypop-segmented-control__indicator',
+      );
+      expect(indicators).toHaveLength(1);
+
+      const weekItem = screen
+        .getByRole('radio', { name: 'Week' })
+        .closest('.bodypop-segmented-control__item');
+      expect(weekItem).toHaveAttribute('data-selected');
+      expect(
+        weekItem?.querySelector('.bodypop-segmented-control__indicator'),
+      ).toBeInTheDocument();
+    });
+
+    it('does not render an indicator when no option is selected', () => {
+      const { container } = render(
+        <SegmentedControl aria-label="Unselected" options={sampleOptions} />,
+      );
+
+      const indicators = container.querySelectorAll(
+        '.bodypop-segmented-control__indicator',
+      );
+      expect(indicators).toHaveLength(0);
+    });
+
+    it('handles reduced-motion preference without affecting selection', async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+
+      const originalMatchMedia = window.matchMedia;
+      window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+        matches: query.includes('prefers-reduced-motion: reduce'),
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      }));
+
+      try {
+        render(
+          <SegmentedControl
+            aria-label="Reduced motion timeframe"
+            options={sampleOptions}
+            defaultValue="day"
+            onChange={onChange}
+          />,
+        );
+
+        const monthRadio = screen.getByRole('radio', { name: 'Month' });
+        await user.click(monthRadio);
+
+        expect(monthRadio).toBeChecked();
+        expect(onChange).toHaveBeenCalledWith('month');
+      } finally {
+        window.matchMedia = originalMatchMedia;
+      }
+    });
+
+    it('forwards container ref properly', () => {
+      const ref = createRef<HTMLDivElement>();
+
+      render(
+        <SegmentedControl
+          ref={ref}
+          aria-label="Ref timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+        />,
+      );
+
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+      expect(ref.current).toHaveAttribute('role', 'radiogroup');
+    });
+  });
+});
