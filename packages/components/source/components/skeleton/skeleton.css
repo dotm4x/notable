@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Skeleton
+   ========================================================================== */
+
+.notable-skeleton {
+  --notable-skeleton-highlight: color-mix(
+    in srgb,
+    var(--notable-color-surface) 70%,
+    transparent
+  );
+
+  position: relative;
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--notable-color-surface-active);
+  border-radius: var(--notable-radius-sm);
+  isolation: isolate;
+}
+
+[data-theme='dark'] .notable-skeleton {
+  --notable-skeleton-highlight: color-mix(
+    in srgb,
+    var(--notable-color-text) 10%,
+    transparent
+  );
+}
+
+/* Variants */
+
+.notable-skeleton--text {
+  width: 100%;
+  height: 1em;
+  border-radius: var(--notable-radius-xs);
+}
+
+.notable-skeleton--rectangular {
+  height: 2.5rem;
+}
+
+.notable-skeleton--circular {
+  width: 2.5rem;
+  max-width: none;
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: var(--notable-radius-full);
+}
+
+/* Shimmer: a soft highlight that sweeps across the placeholder */
+
+.notable-skeleton--shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--notable-skeleton-highlight) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: notable-skeleton-shimmer calc(var(--notable-duration-slow) * 2)
+    var(--notable-easing-standard) infinite;
+}
+
+/* Pulse: a gentle opacity breathing effect that never fully disappears */
+
+.notable-skeleton--pulse {
+  animation: notable-skeleton-pulse calc(var(--notable-duration-slow) * 2)
+    var(--notable-easing-standard) infinite alternate;
+}
+
+@keyframes notable-skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes notable-skeleton-pulse {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-skeleton--shimmer::after {
+    display: none;
+    animation: none;
+  }
+
+  .notable-skeleton--pulse {
+    animation: none;
+  }
+}
