@@ -40,15 +40,15 @@
 /* Sizes */
 
 .notable-radio-group--small {
-  --notable-radio-group-control-size: 1rem;
+  --notable-radio-group-control-size: 0.875rem;
 }
 
 .notable-radio-group--medium {
-  --notable-radio-group-control-size: 1.25rem;
+  --notable-radio-group-control-size: 1rem;
 }
 
 .notable-radio-group--large {
-  --notable-radio-group-control-size: 1.5rem;
+  --notable-radio-group-control-size: 1.25rem;
 }
 
 .notable-radio-group--small .notable-radio-group__text {
@@ -61,11 +61,6 @@
 
 .notable-radio-group--large .notable-radio-group__text {
   font-size: var(--notable-font-size-md);
-}
-
-.notable-radio-group__control {
-  width: var(--notable-radio-group-control-size);
-  height: var(--notable-radio-group-control-size);
 }
 
 /* Layout */
@@ -105,6 +100,8 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
+  width: var(--notable-radio-group-control-size);
+  height: var(--notable-radio-group-control-size);
   aspect-ratio: 1;
   box-sizing: border-box;
 }
@@ -130,7 +127,8 @@
   height: 100%;
   aspect-ratio: 1;
   box-sizing: border-box;
-  border: var(--notable-border-width) solid var(--notable-color-border-strong);
+  /* A 1px ring keeps the control light at this size; the shared 2px border token is too heavy here. */
+  border: 1px solid var(--notable-color-border-strong);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-surface);
   transition:
@@ -141,8 +139,8 @@
 
 .notable-radio-group__indicator::after {
   content: '';
-  width: 50%;
-  height: 50%;
+  width: calc(var(--notable-radio-group-control-size) * 0.5);
+  height: calc(var(--notable-radio-group-control-size) * 0.5);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-primary);
   transform: scale(0);
