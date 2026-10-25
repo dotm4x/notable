@@ -146,9 +146,7 @@
   color: var(--notable-color-text-muted);
   border-radius: inherit;
   pointer-events: none;
-  transition:
-    color var(--notable-duration-fast) var(--notable-easing-standard),
-    transform var(--notable-duration-fast) var(--notable-easing-standard);
+  transition: color var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 .notable-segmented-control--small .notable-segmented-control__content {
