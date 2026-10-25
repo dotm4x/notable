@@ -10,7 +10,7 @@
 .notable-spinner__icon {
   width: 1em;
   height: 1em;
-  animation: notable-spinner-rotate 800ms linear infinite;
+  animation: notable-spinner-rotate var(--notable-duration-slow) linear infinite;
 }
 
 .notable-spinner--small {
