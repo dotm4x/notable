@@ -2,32 +2,32 @@ import { motion, useReducedMotion, type HTMLMotionProps } from 'motion/react';
 import type { ReactNode } from 'react';
 import './button.css';
 
-/** Apariencia visual del botón. */
+/** Visual appearance of the button. */
 export type ButtonVariant =
   'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 
-/** Tamaños disponibles para el botón, incluidos los tamaños para iconos. */
+/** Available button sizes, including icon-only sizes. */
 export type ButtonSize =
   'small' | 'medium' | 'large' | 'icon' | 'icon-small' | 'icon-large';
 
-/** Propiedades de {@link Button}, incluidas las propiedades de Motion. */
+/** Props for {@link Button}, including Motion props. */
 export type ButtonProps = Omit<
   HTMLMotionProps<'button'>,
   'disabled' | 'children'
 > & {
-  /** Contenido del botón. Los botones de solo icono necesitan un nombre accesible. */
+  /** Button content. Icon-only buttons need an accessible name. */
   children?: ReactNode;
-  /** Apariencia visual. Por defecto, `primary`. */
+  /** Visual appearance. Defaults to `primary`. */
   variant?: ButtonVariant;
-  /** Tamaño del botón. Por defecto, `medium`. */
+  /** Button size. Defaults to `medium`. */
   size?: ButtonSize;
-  /** Desactiva el botón y sus animaciones de interacción. Por defecto, `false`. */
+  /** Disables the button and its interaction animations. Defaults to `false`. */
   disabled?: boolean;
 };
 
 /**
- * Renderiza un botón nativo con animaciones opcionales al pasar el cursor o pulsarlo.
- * Respeta la preferencia de movimiento reducido y usa `button` como `type` predeterminado.
+ * Renders a native button with optional hover and press animations. Respects
+ * reduced-motion preferences and defaults `type` to `button`.
  */
 export function Button({
   variant = 'primary',

@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import './badge.css';
 
-/** Apariencia visual de la insignia. */
+/** Visual appearance of the badge. */
 export type BadgeVariant =
   | 'default'
   | 'secondary'
@@ -11,20 +11,20 @@ export type BadgeVariant =
   | 'danger'
   | 'info';
 
-/** Tamaños disponibles para la insignia. */
+/** Available badge sizes. */
 export type BadgeSize = 'small' | 'medium';
 
-/** Propiedades de {@link Badge}, además de los atributos nativos de `span`. */
+/** Props for {@link Badge}, in addition to native `span` attributes. */
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Texto, iconos u otro contenido en línea. */
+  /** Text, icons, or other inline content. */
   children?: ReactNode;
-  /** Apariencia visual. Por defecto, `default`. */
+  /** Visual appearance. Defaults to `default`. */
   variant?: BadgeVariant;
-  /** Tamaño. Por defecto, `medium`. */
+  /** Size. Defaults to `medium`. */
   size?: BadgeSize;
 };
 
-/** Renderiza una etiqueta en línea no interactiva. */
+/** Renders a non-interactive inline label. */
 export function Badge({
   children,
   className,

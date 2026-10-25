@@ -9,15 +9,15 @@ import type { AvatarSize } from './avatar.js';
 export type AvatarGroupProps = HTMLAttributes<HTMLDivElement> & {
   /** Avatares u otro contenido que se organiza en un grupo superpuesto. */
   children?: ReactNode;
-  /** Tamaño heredado por los avatares secundarios. Por defecto, `medium`. */
+  /** Size inherited by child avatars. Defaults to `medium`. */
   size?: AvatarSize;
-  /** Máximo de avatares visibles. Los valores no positivos los ocultan todos. */
+  /** Maximum number of visible avatars. Non-positive values hide all avatars. */
   max?: number;
-  /** Solapamiento entre elementos adyacentes, en píxeles. Por defecto, `8`. */
+  /** Overlap between adjacent items, in pixels. Defaults to `8`. */
   spacing?: number;
-  /** Dirección del solapamiento. Por defecto, `horizontal`. */
+  /** Overlap direction. Defaults to `horizontal`. */
   orientation?: 'horizontal' | 'vertical';
-  /** Contenido visual que sustituye al indicador de elementos ocultos `+N`. */
+  /** Visual content that replaces the hidden-items `+N` indicator. */
   overflow?: ReactNode;
 };
 
@@ -26,8 +26,8 @@ type AvatarGroupStyle = CSSProperties & {
 };
 
 /**
- * Organiza los elementos con solapamiento y permite limitar cuántos se muestran.
- * El indicador de elementos ocultos no se incluye en el límite `max`.
+ * Arranges items with overlap and optionally limits how many are shown.
+ * The hidden-items indicator is not included in the `max` limit.
  */
 export function AvatarGroup({
   children,

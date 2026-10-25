@@ -10,43 +10,43 @@ import {
 import { LayoutGroup, motion, useReducedMotion } from 'motion/react';
 import './segmented-control.css';
 
-/** Tamaños disponibles para el control segmentado. */
+/** Available segmented control sizes. */
 export type SegmentedControlSize = 'small' | 'medium' | 'large';
 
-/** Opción seleccionable de un {@link SegmentedControl}. */
+/** A selectable option in a {@link SegmentedControl}. */
 export type SegmentedControlOption<TValue extends string = string> = {
-  /** Contenido de la etiqueta visible. */
+  /** Visible label content. */
   label: ReactNode;
-  /** Valor único de la opción. */
+  /** Unique value for this option. */
   value: TValue;
-  /** Indica si esta opción está desactivada. */
+  /** Whether this option is disabled. */
   disabled?: boolean;
-  /** Icono opcional que se muestra junto a la etiqueta. */
+  /** Optional icon displayed alongside the label. */
   icon?: ReactNode;
-  /** Nombre accesible explícito opcional para la opción. */
+  /** Optional explicit accessible name for the option. */
   'aria-label'?: string;
 };
 
-/** Propiedades de un grupo de opciones de selección única. */
+/** Props for a single-selection options group. */
 export type SegmentedControlProps<TValue extends string = string> = Omit<
   HTMLAttributes<HTMLDivElement>,
   'onChange' | 'defaultValue'
 > & {
-  /** Opciones que se muestran en el grupo. */
+  /** Options displayed in the group. */
   options: readonly SegmentedControlOption<TValue>[];
-  /** Valor seleccionado en el modo controlado. */
+  /** Selected value in controlled mode. */
   value?: TValue;
-  /** Valor inicial en el modo no controlado. */
+  /** Initial value in uncontrolled mode. */
   defaultValue?: TValue;
-  /** Se invoca con el valor seleccionado cuando cambia la selección. */
+  /** Called with the selected value when the selection changes. */
   onChange?: (value: TValue) => void;
-  /** Desactiva todas las opciones. */
+  /** Disables all options. */
   disabled?: boolean;
-  /** Tamaño visual. Por defecto, `medium`. */
+  /** Visual size. Defaults to `medium`. */
   size?: SegmentedControlSize;
-  /** Nombre compartido por los botones de opción nativos al enviar el formulario. */
+  /** Name shared by native radio inputs for form submission. */
   name?: string;
-  /** Etiqueta visible opcional que se muestra sobre el grupo. */
+  /** Optional visible group label rendered above the control. */
   label?: ReactNode;
 };
 
@@ -55,8 +55,8 @@ type SegmentedControlComponent = <TValue extends string = string>(
 ) => ReactNode;
 
 /**
- * Renderiza un grupo de opciones excluyentes en modo controlado o no controlado.
- * No permite seleccionar opciones desactivadas y notifica cambios mediante `onChange`.
+ * Renders a single-selection radio group with controlled and uncontrolled modes.
+ * Disabled options cannot be selected, and selection changes call `onChange`.
  */
 export const SegmentedControl: SegmentedControlComponent = forwardRef(
   function SegmentedControl<TValue extends string = string>(

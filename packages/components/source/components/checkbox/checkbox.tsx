@@ -9,22 +9,22 @@ import {
 } from 'react';
 import './checkbox.css';
 
-/** Propiedades de una casilla nativa con etiqueta y descripción opcionales. */
+/** Props for a native checkbox with an optional label and description. */
 export type CheckboxProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type'
 > & {
-  /** Texto de ayuda asociado a la casilla para tecnologías de asistencia. */
+  /** Helper text associated with the checkbox for assistive technologies. */
   description?: ReactNode;
-  /** Activa el estado indeterminado nativo. Por defecto, `false`. */
+  /** Enables the native indeterminate state. Defaults to `false`. */
   indeterminate?: boolean;
-  /** Etiqueta visible asociada a la casilla. */
+  /** Visible label associated with the checkbox. */
   label?: ReactNode;
 };
 
 /**
- * Renderiza una casilla nativa con etiqueta y descripción opcionales.
- * Reenvía la referencia al campo nativo.
+ * Renders a native checkbox with an optional label and description.
+ * Forwards its ref to the native input.
  */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
