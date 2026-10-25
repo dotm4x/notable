@@ -1,5 +1,6 @@
 import { motion, useReducedMotion, type HTMLMotionProps } from 'motion/react';
 import type { ReactNode } from 'react';
+import { SPRING_INTERACTIVE } from '../../styles/motion.js';
 import './button.css';
 
 /** Visual appearance of the button. */
@@ -63,13 +64,7 @@ export function Button({
         isMotionDisabled ? undefined : (whileHover ?? { scale: 1.03 })
       }
       whileTap={isMotionDisabled ? undefined : (whileTap ?? { scale: 0.97 })}
-      transition={
-        transition ?? {
-          type: 'spring',
-          stiffness: 400,
-          damping: 25,
-        }
-      }
+      transition={transition ?? SPRING_INTERACTIVE}
     >
       <span className="notable-button__content">{children}</span>
     </motion.button>

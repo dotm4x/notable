@@ -24,9 +24,9 @@
   background: var(--notable-color-surface);
   box-shadow: var(--notable-shadow-sm);
   transition:
-    border-color 140ms ease,
-    box-shadow 140ms ease,
-    background-color 140ms ease;
+    border-color var(--notable-duration-fast) var(--notable-easing-standard),
+    box-shadow var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 .notable-input__control:focus-within {

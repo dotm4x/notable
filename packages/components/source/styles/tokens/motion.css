@@ -1,0 +1,22 @@
+:root {
+  /* ========================================
+     Motion — Durations
+     ========================================
+     fast: 140ms — button, checkbox, input, segmented-control
+     base: 160ms — switch, tooltip, avatar
+     slow: 800ms — spinner (continuous rotation)
+     ======================================== */
+  --notable-duration-fast: 140ms;
+  --notable-duration-base: 160ms;
+  --notable-duration-slow: 800ms;
+
+  /* ========================================
+     Motion — Easing
+     ========================================
+     standard: CSS `ease` — the majority of property transitions
+     spring:   cubic-bezier(0.2, 0.8, 0.2, 1) — tooltip entry; slightly
+               overshoots for a lively, elastic feel
+     ======================================== */
+  --notable-easing-standard: ease;
+  --notable-easing-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+}

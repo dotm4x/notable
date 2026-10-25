@@ -24,17 +24,18 @@
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity 160ms ease,
-    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    visibility 0s linear 160ms;
+    opacity var(--notable-duration-base) var(--notable-easing-standard),
+    transform var(--notable-duration-base) var(--notable-easing-spring),
+    visibility 0s linear var(--notable-duration-base);
 }
 
 .notable-tooltip__content[data-open='true'] {
   opacity: 1;
   visibility: visible;
   transition:
-    opacity 160ms ease var(--notable-tooltip-delay, 350ms),
-    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1)
+    opacity var(--notable-duration-base) var(--notable-easing-standard)
+      var(--notable-tooltip-delay, 350ms),
+    transform var(--notable-duration-base) var(--notable-easing-spring)
       var(--notable-tooltip-delay, 350ms),
     visibility 0s linear var(--notable-tooltip-delay, 350ms);
 }
