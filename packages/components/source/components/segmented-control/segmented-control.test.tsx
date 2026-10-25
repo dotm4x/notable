@@ -551,5 +551,92 @@ describe('SegmentedControl', () => {
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
       expect(ref.current).toHaveAttribute('role', 'radiogroup');
     });
+
+    it('selects an option when the indicator is dragged', () => {
+      const onChange = vi.fn();
+
+      const { container } = render(
+        <SegmentedControl
+          aria-label="Draggable timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+          onChange={onChange}
+        />,
+      );
+
+      const group = screen.getByRole('radiogroup', {
+        name: 'Draggable timeframe',
+      });
+      const indicator = container.querySelector(
+        '.notable-segmented-control__indicator',
+      );
+
+      expect(indicator).toBeInTheDocument();
+
+      const dayItem = screen
+        .getByRole('radio', { name: 'Day' })
+        .closest('.notable-segmented-control__item');
+
+      const monthItem = screen
+        .getByRole('radio', { name: 'Month' })
+        .closest('.notable-segmented-control__item');
+
+      if (!dayItem || !monthItem) {
+        throw new Error('Expected option elements to exist');
+      }
+
+      vi.spyOn(group, 'getBoundingClientRect').mockReturnValue({
+        x: 0,
+        y: 0,
+        left: 0,
+        top: 0,
+        right: 300,
+        bottom: 40,
+        width: 300,
+        height: 40,
+        toJSON: () => ({}),
+      });
+
+      vi.spyOn(dayItem, 'getBoundingClientRect').mockReturnValue({
+        x: 0,
+        y: 0,
+        left: 0,
+        top: 0,
+        right: 100,
+        bottom: 40,
+        width: 100,
+        height: 40,
+        toJSON: () => ({}),
+      });
+
+      vi.spyOn(monthItem, 'getBoundingClientRect').mockReturnValue({
+        x: 200,
+        y: 0,
+        left: 200,
+        top: 0,
+        right: 300,
+        bottom: 40,
+        width: 100,
+        height: 40,
+        toJSON: () => ({}),
+      });
+
+      const pointerEvent = (type: string, clientX: number, pointerId = 1) => {
+        const event = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperties(event, {
+          clientX: { value: clientX },
+          clientY: { value: 20 },
+          pointerId: { value: pointerId },
+          button: { value: 0 },
+        });
+        group.dispatchEvent(event);
+      };
+
+      pointerEvent('pointerdown', 40);
+      pointerEvent('pointermove', 240);
+      pointerEvent('pointerup', 240);
+
+      expect(onChange).toHaveBeenCalledWith('month');
+    });
   });
 });
