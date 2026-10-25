@@ -39,9 +39,9 @@
   min-width: 0;
   padding: var(--notable-spacing-2) 0;
   border: 0;
-  outline: 0;
+  outline: none;
   background: transparent;
-  color: var(--notable-color-text);
+  color: inherit;
   font: inherit;
   font-size: var(--notable-font-size-md);
   line-height: var(--notable-line-height-normal);
@@ -68,7 +68,6 @@
   width: 1.125em;
   height: 1.125em;
 }
-
 .notable-input-field[data-invalid] .notable-input__control {
   border-color: var(--notable-color-danger);
 }
