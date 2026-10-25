@@ -362,8 +362,8 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
         }
       }
 
-      if (container?.hasPointerCapture(event.pointerId)) {
-        container.releasePointerCapture(event.pointerId);
+      if (container?.hasPointerCapture?.(event.pointerId)) {
+        container.releasePointerCapture?.(event.pointerId);
       }
 
       measureIndicator();
