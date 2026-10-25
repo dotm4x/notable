@@ -1,5 +1,22 @@
 @import './fonts.css';
+@import './tokens/borders.css';
 @import './tokens/colors.css';
 @import './tokens/radii.css';
 @import './tokens/spacing.css';
 @import './tokens/typography.css';
+
+:root {
+  font-family: var(--bodypop-font-family);
+}
+
+body {
+  margin: 0;
+  font-family: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
