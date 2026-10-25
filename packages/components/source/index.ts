@@ -4,6 +4,7 @@ export * from './components/avatar/avatar-group.js';
 export * from './components/badge/badge.js';
 export * from './components/checkbox/checkbox.js';
 export * from './components/input/input.js';
+export * from './components/radio-group/radio-group.js';
 export * from './components/segmented-control/segmented-control.js';
 export * from './components/spinner/spinner.js';
 export * from './components/switch/switch.js';
