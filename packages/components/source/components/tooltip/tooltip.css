@@ -1,23 +1,23 @@
-.bodypop-tooltip {
+.notable-tooltip {
   display: inline-flex;
   vertical-align: middle;
 }
 
-.bodypop-tooltip__content {
+.notable-tooltip__content {
   position: fixed;
   z-index: 1000;
   width: max-content;
   max-width: min(16rem, calc(100vw - 2rem));
   max-height: calc(100vh - 1rem);
   overflow: auto;
-  padding: var(--bodypop-spacing-2) var(--bodypop-spacing-3);
-  border-radius: var(--bodypop-radius-xl);
-  background: var(--bodypop-color-text);
-  box-shadow: 0 2px 8px var(--bodypop-color-shadow-strong);
-  color: var(--bodypop-color-text-inverse);
-  font-family: var(--bodypop-font-family);
-  font-size: var(--bodypop-font-size-xs);
-  line-height: var(--bodypop-line-height-normal);
+  padding: var(--notable-spacing-2) var(--notable-spacing-3);
+  border-radius: var(--notable-radius-xl);
+  background: var(--notable-color-text);
+  box-shadow: var(--notable-shadow-lg);
+  color: var(--notable-color-text-inverse);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-xs);
+  line-height: var(--notable-line-height-normal);
   text-align: center;
   white-space: normal;
   pointer-events: none;
@@ -29,32 +29,32 @@
     visibility 0s linear 160ms;
 }
 
-.bodypop-tooltip__content[data-open='true'] {
+.notable-tooltip__content[data-open='true'] {
   opacity: 1;
   visibility: visible;
   transition:
-    opacity 160ms ease var(--bodypop-tooltip-delay, 350ms),
+    opacity 160ms ease var(--notable-tooltip-delay, 350ms),
     transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1)
-      var(--bodypop-tooltip-delay, 350ms),
-    visibility 0s linear var(--bodypop-tooltip-delay, 350ms);
+      var(--notable-tooltip-delay, 350ms),
+    visibility 0s linear var(--notable-tooltip-delay, 350ms);
 }
 
-.bodypop-tooltip__content[data-placement='top'],
-.bodypop-tooltip__content[data-placement='bottom'] {
+.notable-tooltip__content[data-placement='top'],
+.notable-tooltip__content[data-placement='bottom'] {
   transform: translateY(4px) scale(0.96);
 }
 
-.bodypop-tooltip__content[data-placement='right'],
-.bodypop-tooltip__content[data-placement='left'] {
+.notable-tooltip__content[data-placement='right'],
+.notable-tooltip__content[data-placement='left'] {
   transform: translateX(4px) scale(0.96);
 }
 
-.bodypop-tooltip__content[data-open='true'] {
+.notable-tooltip__content[data-open='true'] {
   transform: translate(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bodypop-tooltip__content {
+  .notable-tooltip__content {
     transition: none;
   }
 }

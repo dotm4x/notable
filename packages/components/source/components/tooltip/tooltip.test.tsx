@@ -32,7 +32,7 @@ describe('Tooltip', () => {
     expect(
       screen
         .getByRole('tooltip')
-        .style.getPropertyValue('--bodypop-tooltip-delay'),
+        .style.getPropertyValue('--notable-tooltip-delay'),
     ).toBe('350ms');
 
     rerender(
@@ -44,7 +44,7 @@ describe('Tooltip', () => {
     expect(
       screen
         .getByRole('tooltip')
-        .style.getPropertyValue('--bodypop-tooltip-delay'),
+        .style.getPropertyValue('--notable-tooltip-delay'),
     ).toBe('500ms');
   });
 
@@ -107,7 +107,7 @@ describe('Tooltip', () => {
   it('flips to the opposite side when the preferred placement does not fit', () => {
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
       function (this: HTMLElement) {
-        if (this.classList.contains('bodypop-tooltip__content')) {
+        if (this.classList.contains('notable-tooltip__content')) {
           return new DOMRect(0, 0, 120, 40);
         }
 
@@ -131,7 +131,7 @@ describe('Tooltip', () => {
     let triggerRect = new DOMRect(970, 100, 40, 24);
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
       function (this: HTMLElement) {
-        return this.classList.contains('bodypop-tooltip__content')
+        return this.classList.contains('notable-tooltip__content')
           ? new DOMRect(0, 0, 120, 40)
           : triggerRect;
       },
@@ -156,7 +156,7 @@ describe('Tooltip', () => {
   it('positions against the trigger element and portals outside transformed ancestors', () => {
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
       function (this: HTMLElement) {
-        if (this.classList.contains('bodypop-tooltip__content')) {
+        if (this.classList.contains('notable-tooltip__content')) {
           return new DOMRect(0, 0, 120, 40);
         }
 
@@ -186,7 +186,7 @@ describe('Tooltip', () => {
     const user = userEvent.setup();
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
       function (this: HTMLElement) {
-        if (this.classList.contains('bodypop-tooltip__content')) {
+        if (this.classList.contains('notable-tooltip__content')) {
           return new DOMRect(0, 0, 100, 40);
         }
 

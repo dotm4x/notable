@@ -59,7 +59,7 @@ describe('SegmentedControl', () => {
         const group = screen.getByRole('radiogroup', {
           name: `Timeframe ${size}`,
         });
-        expect(group).toHaveClass(`bodypop-segmented-control--${size}`);
+        expect(group).toHaveClass(`notable-segmented-control--${size}`);
       },
     );
 
@@ -476,16 +476,16 @@ describe('SegmentedControl', () => {
       );
 
       const indicators = container.querySelectorAll(
-        '.bodypop-segmented-control__indicator',
+        '.notable-segmented-control__indicator',
       );
       expect(indicators).toHaveLength(1);
 
       const weekItem = screen
         .getByRole('radio', { name: 'Week' })
-        .closest('.bodypop-segmented-control__item');
+        .closest('.notable-segmented-control__item');
       expect(weekItem).toHaveAttribute('data-selected');
       expect(
-        weekItem?.querySelector('.bodypop-segmented-control__indicator'),
+        weekItem?.querySelector('.notable-segmented-control__indicator'),
       ).toBeInTheDocument();
     });
 
@@ -495,7 +495,7 @@ describe('SegmentedControl', () => {
       );
 
       const indicators = container.querySelectorAll(
-        '.bodypop-segmented-control__indicator',
+        '.notable-segmented-control__indicator',
       );
       expect(indicators).toHaveLength(0);
     });

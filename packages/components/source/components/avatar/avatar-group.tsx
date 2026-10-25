@@ -7,22 +7,28 @@ import {
 import type { AvatarSize } from './avatar.js';
 
 export type AvatarGroupProps = HTMLAttributes<HTMLDivElement> & {
+  /** Avatares u otro contenido que se organiza en un grupo superpuesto. */
   children?: ReactNode;
+  /** Tamaño heredado por los avatares secundarios. Por defecto, `medium`. */
   size?: AvatarSize;
-  /** Maximum visible avatars. Non-positive values hide all avatars. */
+  /** Máximo de avatares visibles. Los valores no positivos los ocultan todos. */
   max?: number;
-  /** Overlap between adjacent items, in pixels. Defaults to 8px. */
+  /** Solapamiento entre elementos adyacentes, en píxeles. Por defecto, `8`. */
   spacing?: number;
-  /** Direction in which avatars overlap. Defaults to horizontal. */
+  /** Dirección del solapamiento. Por defecto, `horizontal`. */
   orientation?: 'horizontal' | 'vertical';
-  /** Visual-only content replacing the default +N indicator. */
+  /** Contenido visual que sustituye al indicador de elementos ocultos `+N`. */
   overflow?: ReactNode;
 };
 
 type AvatarGroupStyle = CSSProperties & {
-  '--bodypop-avatar-group-overlap': string;
+  '--notable-avatar-group-overlap': string;
 };
 
+/**
+ * Organiza los elementos con solapamiento y permite limitar cuántos se muestran.
+ * El indicador de elementos ocultos no se incluye en el límite `max`.
+ */
 export function AvatarGroup({
   children,
   className,
@@ -43,12 +49,12 @@ export function AvatarGroup({
   const overlap = Number.isFinite(spacing) ? Math.max(0, spacing) : 8;
   const style: AvatarGroupStyle = {
     ...props.style,
-    '--bodypop-avatar-group-overlap': `${overlap}px`,
+    '--notable-avatar-group-overlap': `${overlap}px`,
   };
   const classes = [
-    'bodypop-avatar-group',
-    `bodypop-avatar-group--${size}`,
-    `bodypop-avatar-group--${orientation}`,
+    'notable-avatar-group',
+    `notable-avatar-group--${size}`,
+    `notable-avatar-group--${orientation}`,
     className,
   ]
     .filter(Boolean)
@@ -57,14 +63,14 @@ export function AvatarGroup({
   return (
     <div {...props} className={classes} style={style}>
       {visibleItems.map((item, index) => (
-        <div className="bodypop-avatar-group__item" key={itemKey(item, index)}>
+        <div className="notable-avatar-group__item" key={itemKey(item, index)}>
           {item}
         </div>
       ))}
       {hiddenCount > 0 && (
-        <div className="bodypop-avatar-group__item">
+        <div className="notable-avatar-group__item">
           <span
-            className="bodypop-avatar-group__overflow"
+            className="notable-avatar-group__overflow"
             role="img"
             aria-label={`${hiddenCount} more ${hiddenCount === 1 ? 'avatar' : 'avatars'}`}
           >

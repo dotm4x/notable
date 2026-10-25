@@ -10,40 +10,43 @@ import {
 import { LayoutGroup, motion, useReducedMotion } from 'motion/react';
 import './segmented-control.css';
 
+/** Tamaños disponibles para el control segmentado. */
 export type SegmentedControlSize = 'small' | 'medium' | 'large';
 
+/** Opción seleccionable de un {@link SegmentedControl}. */
 export type SegmentedControlOption<TValue extends string = string> = {
-  /** The visible label content. */
+  /** Contenido de la etiqueta visible. */
   label: ReactNode;
-  /** The unique value for this option. */
+  /** Valor único de la opción. */
   value: TValue;
-  /** Whether this individual option is disabled. */
+  /** Indica si esta opción está desactivada. */
   disabled?: boolean;
-  /** An optional icon displayed alongside the label. */
+  /** Icono opcional que se muestra junto a la etiqueta. */
   icon?: ReactNode;
-  /** Optional explicit accessible label for this option. */
+  /** Nombre accesible explícito opcional para la opción. */
   'aria-label'?: string;
 };
 
+/** Propiedades de un grupo de opciones de selección única. */
 export type SegmentedControlProps<TValue extends string = string> = Omit<
   HTMLAttributes<HTMLDivElement>,
   'onChange' | 'defaultValue'
 > & {
-  /** The available options to display. */
+  /** Opciones que se muestran en el grupo. */
   options: readonly SegmentedControlOption<TValue>[];
-  /** The selected value for controlled usage. */
+  /** Valor seleccionado en el modo controlado. */
   value?: TValue;
-  /** The initial selected value for uncontrolled usage. */
+  /** Valor inicial en el modo no controlado. */
   defaultValue?: TValue;
-  /** Callback invoked when the selected value changes. */
+  /** Se invoca con el valor seleccionado cuando cambia la selección. */
   onChange?: (value: TValue) => void;
-  /** Disables the entire control. */
+  /** Desactiva todas las opciones. */
   disabled?: boolean;
-  /** The visual size of the control. Defaults to 'medium'. */
+  /** Tamaño visual. Por defecto, `medium`. */
   size?: SegmentedControlSize;
-  /** Form field name for native radio inputs. */
+  /** Nombre compartido por los botones de opción nativos al enviar el formulario. */
   name?: string;
-  /** Optional visible group label rendered above the control. */
+  /** Etiqueta visible opcional que se muestra sobre el grupo. */
   label?: ReactNode;
 };
 
@@ -51,6 +54,10 @@ type SegmentedControlComponent = <TValue extends string = string>(
   props: SegmentedControlProps<TValue> & { ref?: Ref<HTMLDivElement> },
 ) => ReactNode;
 
+/**
+ * Renderiza un grupo de opciones excluyentes en modo controlado o no controlado.
+ * No permite seleccionar opciones desactivadas y notifica cambios mediante `onChange`.
+ */
 export const SegmentedControl: SegmentedControlComponent = forwardRef(
   function SegmentedControl<TValue extends string = string>(
     {
@@ -106,8 +113,8 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
     };
 
     const classes = [
-      'bodypop-segmented-control',
-      `bodypop-segmented-control--${size}`,
+      'notable-segmented-control',
+      `notable-segmented-control--${size}`,
       className,
     ]
       .filter(Boolean)
@@ -136,14 +143,14 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
               <label
                 key={`${option.value}-${index}`}
                 htmlFor={optionId}
-                className="bodypop-segmented-control__item"
+                className="notable-segmented-control__item"
                 data-selected={isSelected || undefined}
                 data-disabled={isOptionDisabled || undefined}
               >
                 <input
                   id={optionId}
                   type="radio"
-                  className="bodypop-segmented-control__input"
+                  className="notable-segmented-control__input"
                   name={groupName}
                   value={option.value}
                   checked={isSelected}
@@ -153,8 +160,8 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
                 />
                 {isSelected && (
                   <motion.span
-                    layoutId={`bodypop-segmented-control-indicator-${controlId}`}
-                    className="bodypop-segmented-control__indicator"
+                    layoutId={`notable-segmented-control-indicator-${controlId}`}
+                    className="notable-segmented-control__indicator"
                     data-disabled={isOptionDisabled || undefined}
                     transition={
                       shouldReduceMotion
@@ -168,16 +175,16 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
                     aria-hidden="true"
                   />
                 )}
-                <span className="bodypop-segmented-control__content">
+                <span className="notable-segmented-control__content">
                   {option.icon && (
                     <span
-                      className="bodypop-segmented-control__icon"
+                      className="notable-segmented-control__icon"
                       aria-hidden="true"
                     >
                       {option.icon}
                     </span>
                   )}
-                  <span className="bodypop-segmented-control__label">
+                  <span className="notable-segmented-control__label">
                     {option.label}
                   </span>
                 </span>
@@ -191,10 +198,10 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
     if (label) {
       return (
         <div
-          className="bodypop-segmented-control-field"
+          className="notable-segmented-control-field"
           data-disabled={disabled || undefined}
         >
-          <span id={labelId} className="bodypop-segmented-control__group-label">
+          <span id={labelId} className="notable-segmented-control__group-label">
             {label}
           </span>
           {controlContent}

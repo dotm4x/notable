@@ -26,13 +26,13 @@ describe('AvatarGroup', () => {
     );
 
     expect(screen.getByTestId('group')).toHaveClass(
-      'bodypop-avatar-group--large',
+      'notable-avatar-group--large',
     );
     expect(screen.getByTestId('group')).toHaveStyle({
-      '--bodypop-avatar-group-overlap': '12px',
+      '--notable-avatar-group-overlap': '12px',
     });
     expect(screen.getByTestId('avatar-Max')).toHaveClass(
-      'bodypop-avatar--medium',
+      'notable-avatar--medium',
     );
   });
 
@@ -44,7 +44,7 @@ describe('AvatarGroup', () => {
     );
 
     expect(screen.getByTestId('group')).toHaveStyle({
-      '--bodypop-avatar-group-overlap': '0px',
+      '--notable-avatar-group-overlap': '0px',
     });
   });
 
@@ -58,13 +58,13 @@ describe('AvatarGroup', () => {
       );
 
       expect(screen.getByTestId('group')).toHaveClass(
-        `bodypop-avatar-group--${orientation}`,
+        `notable-avatar-group--${orientation}`,
       );
       expect(screen.getByTestId('avatar-Max').parentElement).toHaveClass(
-        'bodypop-avatar-group__item',
+        'notable-avatar-group__item',
       );
       expect(screen.getByTestId('group')).toHaveStyle({
-        '--bodypop-avatar-group-overlap': '10px',
+        '--notable-avatar-group-overlap': '10px',
       });
     },
   );

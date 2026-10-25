@@ -8,7 +8,7 @@ describe('Spinner', () => {
     render(<Spinner />);
 
     expect(screen.getByRole('status', { name: 'Loading' })).toHaveClass(
-      'bodypop-spinner--medium',
+      'notable-spinner--medium',
     );
   });
 
@@ -19,7 +19,7 @@ describe('Spinner', () => {
 
       expect(
         screen.getByRole('status', { name: `${size} loading` }),
-      ).toHaveClass(`bodypop-spinner--${size}`);
+      ).toHaveClass(`notable-spinner--${size}`);
     },
   );
 

@@ -1,10 +1,10 @@
 :root {
   /* Radii */
-  --bodypop-radius-xs: 0.25rem;
-  --bodypop-radius-sm: 0.5rem;
-  --bodypop-radius-md: 0.75rem;
-  --bodypop-radius-lg: 1rem;
-  --bodypop-radius-xl: 1.5rem;
-  --bodypop-radius-2xl: 2rem;
-  --bodypop-radius-full: 9999px;
+  --notable-radius-xs: 0.25rem;
+  --notable-radius-sm: 0.5rem;
+  --notable-radius-md: 0.75rem;
+  --notable-radius-lg: 1rem;
+  --notable-radius-xl: 1.5rem;
+  --notable-radius-2xl: 2rem;
+  --notable-radius-full: 9999px;
 }

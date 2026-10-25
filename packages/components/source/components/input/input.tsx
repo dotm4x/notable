@@ -6,17 +6,30 @@ import {
 } from 'react';
 import './input.css';
 
+/** Propiedades del campo de entrada con etiqueta, descripción, error y adornos opcionales. */
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  /** Texto de ayuda asociado al campo para tecnologías de asistencia. */
   description?: ReactNode;
+  /** Mensaje de error asociado al campo que también lo marca como no válido. */
   error?: ReactNode;
+  /** Marca el campo como no válido aunque no se muestre un error. */
   invalid?: boolean;
+  /** Etiqueta visible asociada al campo nativo. */
   label?: ReactNode;
+  /** Contenido decorativo o interactivo antes del valor. */
   leadingIcon?: ReactNode;
+  /** Evita ocultar el adorno inicial a las tecnologías de asistencia. */
   leadingIconInteractive?: boolean;
+  /** Contenido decorativo o interactivo después del valor. */
   trailingIcon?: ReactNode;
+  /** Evita ocultar el adorno final a las tecnologías de asistencia. */
   trailingIconInteractive?: boolean;
 };
 
+/**
+ * Renderiza un campo nativo con etiqueta, descripción, error y contenido
+ * inicial o final opcionales. Reenvía la referencia al campo nativo.
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
     className,
@@ -54,20 +67,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
   return (
     <div
-      className="bodypop-input-field"
+      className="notable-input-field"
       data-disabled={props.disabled || undefined}
       data-invalid={isInvalid || undefined}
       data-readonly={props.readOnly || undefined}
     >
       {label && (
-        <label className="bodypop-input__label" htmlFor={inputId}>
+        <label className="notable-input__label" htmlFor={inputId}>
           {label}
         </label>
       )}
-      <span className="bodypop-input__control">
+      <span className="notable-input__control">
         {leadingIcon && (
           <span
-            className="bodypop-input__icon"
+            className="notable-input__icon"
             aria-hidden={leadingIconInteractive ? undefined : true}
           >
             {leadingIcon}
@@ -77,14 +90,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {...props}
           ref={ref}
           id={inputId}
-          className={['bodypop-input', className].filter(Boolean).join(' ')}
+          className={['notable-input', className].filter(Boolean).join(' ')}
           aria-describedby={describedBy}
           aria-invalid={invalidAttribute}
           aria-errormessage={errorMessage}
         />
         {trailingIcon && (
           <span
-            className="bodypop-input__icon"
+            className="notable-input__icon"
             aria-hidden={trailingIconInteractive ? undefined : true}
           >
             {trailingIcon}
@@ -92,12 +105,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         )}
       </span>
       {description && (
-        <span className="bodypop-input__description" id={descriptionId}>
+        <span className="notable-input__description" id={descriptionId}>
           {description}
         </span>
       )}
       {error && (
-        <span className="bodypop-input__error" id={errorId} aria-live="polite">
+        <span className="notable-input__error" id={errorId} aria-live="polite">
           {error}
         </span>
       )}

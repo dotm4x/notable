@@ -6,16 +6,25 @@ import {
 } from 'react';
 import './switch.css';
 
+/** Propiedades de una casilla presentada con semántica de interruptor. */
 export type SwitchProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type'
 > & {
+  /** Texto de ayuda asociado al interruptor para tecnologías de asistencia. */
   description?: ReactNode;
+  /** Mensaje de error asociado al interruptor y anunciado de forma no intrusiva. */
   error?: ReactNode;
+  /** Marca el interruptor como no válido aunque no se muestre un error. */
   invalid?: boolean;
+  /** Etiqueta visible asociada al interruptor. */
   label?: ReactNode;
 };
 
+/**
+ * Renderiza una casilla nativa con `role="switch"` y etiqueta, descripción
+ * y error opcionales. Reenvía la referencia al campo nativo.
+ */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   {
     'aria-describedby': ariaDescribedBy,
@@ -49,38 +58,38 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
   return (
     <div
-      className="bodypop-switch-field"
+      className="notable-switch-field"
       data-disabled={props.disabled || undefined}
       data-invalid={isInvalid || undefined}
     >
-      <label className="bodypop-switch" htmlFor={switchId}>
-        <span className="bodypop-switch__control">
+      <label className="notable-switch" htmlFor={switchId}>
+        <span className="notable-switch__control">
           <input
             {...props}
             ref={ref}
             id={switchId}
             type="checkbox"
             role="switch"
-            className={['bodypop-switch__input', className]
+            className={['notable-switch__input', className]
               .filter(Boolean)
               .join(' ')}
             aria-describedby={describedBy}
             aria-invalid={invalid || Boolean(error) ? true : ariaInvalid}
             aria-errormessage={errorMessage}
           />
-          <span className="bodypop-switch__track" aria-hidden="true">
-            <span className="bodypop-switch__thumb" />
+          <span className="notable-switch__track" aria-hidden="true">
+            <span className="notable-switch__thumb" />
           </span>
         </span>
-        {label && <span className="bodypop-switch__label">{label}</span>}
+        {label && <span className="notable-switch__label">{label}</span>}
       </label>
       {description && (
-        <span className="bodypop-switch__description" id={descriptionId}>
+        <span className="notable-switch__description" id={descriptionId}>
           {description}
         </span>
       )}
       {error && (
-        <span className="bodypop-switch__error" id={errorId} aria-live="polite">
+        <span className="notable-switch__error" id={errorId} aria-live="polite">
           {error}
         </span>
       )}

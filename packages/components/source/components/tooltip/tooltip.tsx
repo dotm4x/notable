@@ -12,6 +12,7 @@ import {
 import { createPortal } from 'react-dom';
 import './tooltip.css';
 
+/** Lado preferido del elemento activador donde se muestra la ayuda. */
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 
 type TooltipPosition = {
@@ -21,18 +22,30 @@ type TooltipPosition = {
 };
 
 type TooltipContentStyle = CSSProperties & {
-  '--bodypop-tooltip-delay': string;
+  '--notable-tooltip-delay': string;
 };
 
+/** Propiedades de {@link Tooltip}. */
 export type TooltipProps = {
+  /** Único elemento activador; debe aceptar el atributo `aria-describedby`. */
   children: ReactElement<{ 'aria-describedby'?: string }>;
+  /** Clase CSS adicional del contenedor del elemento activador. */
   className?: string;
+  /** Texto que se muestra como ayuda emergente. */
   content: string;
+  /** Retraso antes de mostrar la ayuda, en milisegundos. Por defecto, `350`. */
   delay?: number;
+  /** Impide que se muestre la ayuda. Por defecto, `false`. */
   disabled?: boolean;
+  /** Posición preferida; se ajusta para caber en la ventana visible. */
   placement?: TooltipPlacement;
 };
 
+/**
+ * Añade una ayuda emergente que aparece al pasar el cursor o recibir el foco.
+ * La renderiza en un portal y la vincula al elemento activador con
+ * `aria-describedby`.
+ */
 export function Tooltip({
   children,
   className,
@@ -182,14 +195,14 @@ export function Tooltip({
   const tooltipContentStyle: TooltipContentStyle = {
     left: position?.x ?? 0,
     top: position?.y ?? 0,
-    '--bodypop-tooltip-delay': `${Math.max(0, delay)}ms`,
+    '--notable-tooltip-delay': `${Math.max(0, delay)}ms`,
   };
 
   return (
     <>
       <span
         ref={wrapperRef}
-        className={['bodypop-tooltip', className].filter(Boolean).join(' ')}
+        className={['notable-tooltip', className].filter(Boolean).join(' ')}
         data-placement={position?.placement ?? placement}
         data-disabled={disabled || undefined}
         onMouseEnter={() => setIsHovered(true)}
@@ -203,7 +216,7 @@ export function Tooltip({
         createPortal(
           <span
             ref={tooltipRef}
-            className="bodypop-tooltip__content"
+            className="notable-tooltip__content"
             id={tooltipId}
             role="tooltip"
             data-placement={position?.placement ?? placement}

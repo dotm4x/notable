@@ -8,9 +8,9 @@ describe('Avatar', () => {
   it('renders a default fallback icon', () => {
     const { container } = render(<Avatar data-testid="avatar" />);
 
-    expect(screen.getByTestId('avatar')).toHaveClass('bodypop-avatar--medium');
+    expect(screen.getByTestId('avatar')).toHaveClass('notable-avatar--medium');
     expect(
-      container.querySelector('.bodypop-avatar__fallback--default'),
+      container.querySelector('.notable-avatar__fallback--default'),
     ).toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe('Avatar', () => {
       </Avatar>,
     );
     const defaultFallback = container.querySelector(
-      '.bodypop-avatar__fallback--default',
+      '.notable-avatar__fallback--default',
     );
 
     expect(defaultFallback).toBeVisible();
@@ -88,7 +88,7 @@ describe('Avatar', () => {
     fireEvent.error(screen.getByAltText('Sam'));
 
     expect(
-      container.querySelector('.bodypop-avatar__fallback--default'),
+      container.querySelector('.notable-avatar__fallback--default'),
     ).toBeVisible();
   });
 
@@ -141,7 +141,7 @@ describe('Avatar', () => {
       render(<Avatar size={size} data-testid="avatar" />);
 
       expect(screen.getByTestId('avatar')).toHaveClass(
-        `bodypop-avatar--${size}`,
+        `notable-avatar--${size}`,
       );
     },
   );
