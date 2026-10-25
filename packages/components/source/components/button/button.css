@@ -84,14 +84,12 @@
 
 .notable-button--outline {
   border-color: var(--notable-color-border);
-  border-width: var(--notable-border-width);
-  background: var(--notable-color-background);
+  background: transparent;
   color: var(--notable-color-text);
 }
 
 .notable-button--outline:hover:not(:disabled) {
   background: var(--notable-color-surface-hover);
-  color: var(--notable-color-text);
 }
 
 .notable-button--outline:active:not(:disabled) {
@@ -117,8 +115,7 @@
 
 .notable-button--danger {
   border-color: var(--notable-color-danger-border);
-  border-width: var(--notable-border-width);
-  background: var(--notable-color-background);
+  background: transparent;
   color: var(--notable-color-danger);
 }
 
