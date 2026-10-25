@@ -36,9 +36,10 @@ part of the component's design rather than an afterthought.
 | Package           | Description                                                                                                            |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `@dotm4x/notable` | React component library, including reusable components, shared styles and design tokens, tests, and Storybook stories. |
+| `apps/sandbox`    | Vite and React app for trying the component library against its live source.                                           |
 
 The repository root contains the pnpm workspace configuration and shared
-development scripts. More packages may be added as Notable grows.
+development scripts. Run `pnpm dev` to start the sandbox.
 
 ## Development
 
