@@ -8,7 +8,7 @@
   height: var(--notable-avatar-group-size, var(--notable-avatar-size));
   overflow: hidden;
   box-sizing: border-box;
-  border: 2px solid var(--notable-color-surface);
+  border: var(--notable-border-width) solid var(--notable-color-surface);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-surface-sunken);
   color: var(--notable-color-text-muted);
@@ -114,8 +114,8 @@
   display: inline-flex;
   flex: 0 0 auto;
   transition:
-    transform 150ms var(--notable-easing-standard),
-    filter 150ms var(--notable-easing-standard);
+    transform var(--notable-duration-base) var(--notable-easing-standard),
+    filter var(--notable-duration-base) var(--notable-easing-standard);
 }
 
 .notable-avatar-group__item + .notable-avatar-group__item {
@@ -155,7 +155,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  border: 2px solid var(--notable-color-surface);
+  border: var(--notable-border-width) solid var(--notable-color-surface);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-secondary);
   color: var(--notable-color-on-secondary);

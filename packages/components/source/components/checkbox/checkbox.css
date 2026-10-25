@@ -47,7 +47,7 @@
   aspect-ratio: 1;
   box-sizing: border-box;
   border: var(--notable-border-width) solid var(--notable-color-border-strong);
-  border-radius: 50%;
+  border-radius: var(--notable-radius-full);
   background: var(--notable-color-surface);
   color: var(--notable-color-on-primary);
   transition:
