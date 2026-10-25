@@ -480,13 +480,13 @@ describe('SegmentedControl', () => {
       );
       expect(indicators).toHaveLength(1);
 
+      const group = screen.getByRole('radiogroup', { name: 'Timeframe' });
       const weekItem = screen
         .getByRole('radio', { name: 'Week' })
         .closest('.notable-segmented-control__item');
       expect(weekItem).toHaveAttribute('data-selected');
-      expect(
-        weekItem?.querySelector('.notable-segmented-control__indicator'),
-      ).toBeInTheDocument();
+      expect(indicators[0]?.parentElement).toBe(group);
+      expect(indicators[0]).toHaveAttribute('aria-hidden', 'true');
     });
 
     it('does not render an indicator when no option is selected', () => {
@@ -621,7 +621,12 @@ describe('SegmentedControl', () => {
         toJSON: () => ({}),
       });
 
-      const pointerEvent = (type: string, clientX: number, pointerId = 1) => {
+      const pointerEvent = (
+        target: Element,
+        type: string,
+        clientX: number,
+        pointerId = 1,
+      ) => {
         const event = new Event(type, { bubbles: true, cancelable: true });
         Object.defineProperties(event, {
           clientX: { value: clientX },
@@ -629,12 +634,12 @@ describe('SegmentedControl', () => {
           pointerId: { value: pointerId },
           button: { value: 0 },
         });
-        group.dispatchEvent(event);
+        target.dispatchEvent(event);
       };
 
-      pointerEvent('pointerdown', 40);
-      pointerEvent('pointermove', 240);
-      pointerEvent('pointerup', 240);
+      pointerEvent(dayItem, 'pointerdown', 40);
+      pointerEvent(group, 'pointermove', 240);
+      pointerEvent(group, 'pointerup', 240);
 
       expect(onChange).toHaveBeenCalledWith('month');
     });
