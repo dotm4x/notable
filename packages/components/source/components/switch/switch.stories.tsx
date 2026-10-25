@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { Switch } from './switch.js';
 
 const meta = {
@@ -67,4 +68,31 @@ export const Settings: Story = {
       />
     </div>
   ),
+};
+
+function DraggableSwitches() {
+  const [wifi, setWifi] = useState(true);
+  const [bluetooth, setBluetooth] = useState(false);
+
+  return (
+    <div style={{ display: 'grid', gap: '20px' }}>
+      <Switch
+        label="Wi-Fi"
+        description="Drag the thumb or click to toggle."
+        checked={wifi}
+        onChange={(event) => setWifi(event.target.checked)}
+      />
+      <Switch
+        label="Bluetooth"
+        description="Connect to nearby devices."
+        checked={bluetooth}
+        onChange={(event) => setBluetooth(event.target.checked)}
+      />
+      <Switch label="Airplane mode" description="Uncontrolled and draggable." />
+    </div>
+  );
+}
+
+export const Draggable: Story = {
+  render: () => <DraggableSwitches />,
 };
