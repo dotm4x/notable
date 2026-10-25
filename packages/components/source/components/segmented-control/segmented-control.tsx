@@ -16,6 +16,8 @@ import { motion, useReducedMotion } from 'motion/react';
 import { SPRING_LAYOUT } from '../../styles/motion.js';
 import './segmented-control.css';
 
+const DRAG_THRESHOLD = 3;
+
 /** Available segmented control sizes. */
 export type SegmentedControlSize = 'small' | 'medium' | 'large';
 
@@ -290,7 +292,10 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
         return;
       }
 
-      if (!drag.moved && Math.abs(event.clientX - drag.startX) < 3) {
+      if (
+        !drag.moved &&
+        Math.abs(event.clientX - drag.startX) < DRAG_THRESHOLD
+      ) {
         return;
       }
 
@@ -418,11 +423,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
                 : isDragging
                   ? {
                       left: { duration: 0 },
-                      width: {
-                        type: 'spring',
-                        stiffness: 350,
-                        damping: 30,
-                      },
+                      width: SPRING_LAYOUT,
                     }
                   : SPRING_LAYOUT
             }
