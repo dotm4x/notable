@@ -51,9 +51,11 @@
   --notable-color-background: var(--notable-white);
   --notable-color-surface: var(--notable-white);
   --notable-color-surface-raised: var(--notable-white);
+  --notable-color-surface-floating: var(--notable-white);
   --notable-color-surface-sunken: var(--notable-gray-50);
   --notable-color-surface-hover: var(--notable-gray-100);
   --notable-color-surface-active: var(--notable-gray-200);
+  --notable-color-surface-highlight: var(--notable-color-surface-hover);
   --notable-color-overlay: rgb(0 0 0 / 50%);
 
   --notable-color-text: var(--notable-gray-900);
@@ -110,9 +112,12 @@
   --notable-color-background: var(--notable-black);
   --notable-color-surface: var(--notable-gray-900);
   --notable-color-surface-raised: var(--notable-gray-800);
+  --notable-color-surface-floating: var(--notable-gray-900);
   --notable-color-surface-sunken: var(--notable-gray-950);
   --notable-color-surface-hover: var(--notable-gray-800);
   --notable-color-surface-active: var(--notable-gray-700);
+  /* Must differ from surface-floating, which popups use as their background. */
+  --notable-color-surface-highlight: var(--notable-gray-800);
   --notable-color-overlay: rgb(0 0 0 / 70%);
 
   --notable-color-text: var(--notable-gray-100);

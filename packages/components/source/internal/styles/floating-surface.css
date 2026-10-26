@@ -7,7 +7,7 @@
  * `--notable-floating-surface-easing` to change the opening easing.
  */
 .notable-floating-surface {
-  background: var(--notable-color-surface-raised);
+  background: var(--notable-color-surface-floating);
   color: var(--notable-color-text);
   border-radius: var(--notable-radius-lg);
   box-shadow: var(--notable-shadow-md);

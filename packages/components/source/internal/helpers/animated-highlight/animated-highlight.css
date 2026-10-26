@@ -1,0 +1,15 @@
+/*
+ * Shared hover highlight surface. The element glides between highlighted
+ * items; its position and size are driven by animated-highlight.tsx.
+ * It sits behind item content, so items must be positioned to paint above it.
+ */
+.notable-animated-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: var(--notable-radius-md);
+  background: var(--notable-color-surface-highlight);
+  pointer-events: none;
+  will-change: transform;
+}

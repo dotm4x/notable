@@ -67,3 +67,14 @@ export const SPRING_LAYOUT = {
   stiffness: 450,
   damping: 35,
 } as const;
+
+/**
+ * Travel spring for the shared hover highlight (Select, Combobox).
+ * stiffness: 500, damping: 46. Slightly over-damped, so the highlight
+ * settles without overshooting between options.
+ */
+export const SPRING_HIGHLIGHT = {
+  type: 'spring',
+  stiffness: 500,
+  damping: 46,
+} as const;
