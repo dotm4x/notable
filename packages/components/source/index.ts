@@ -3,6 +3,7 @@ export * from './components/button/button.js';
 export * from './components/avatar/avatar.js';
 export * from './components/avatar/avatar-group.js';
 export * from './components/badge/badge.js';
+export * from './components/card/card.js';
 export * from './components/checkbox/checkbox.js';
 export * from './components/dialog/dialog.js';
 export * from './components/input/input.js';
