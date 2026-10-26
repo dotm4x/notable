@@ -19,6 +19,7 @@
 }
 
 [data-theme='dark'] .notable-skeleton {
+  background: var(--notable-color-surface-hover);
   --notable-skeleton-highlight: color-mix(
     in srgb,
     var(--notable-color-text) 10%,
@@ -63,6 +64,35 @@
     var(--notable-easing-standard) infinite;
 }
 
+/* Spotlight: on hover, the shimmer highlight grows from the cursor and follows it */
+
+.notable-skeleton--spotlight::before {
+  content: '';
+  position: absolute;
+  left: var(--notable-skeleton-pointer-x, 50%);
+  top: var(--notable-skeleton-pointer-y, 50%);
+  width: 12rem;
+  aspect-ratio: 1;
+  border-radius: var(--notable-radius-full);
+  background: radial-gradient(
+    closest-side,
+    var(--notable-skeleton-highlight),
+    transparent
+  );
+  translate: -50% -50%;
+  scale: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    scale var(--notable-duration-slow) var(--notable-easing-standard),
+    opacity var(--notable-duration-slow) var(--notable-easing-standard);
+}
+
+.notable-skeleton--spotlight:hover::before {
+  scale: 1;
+  opacity: 1;
+}
+
 /* Pulse: a gentle opacity breathing effect that never fully disappears */
 
 .notable-skeleton--pulse {
@@ -90,6 +120,10 @@
   .notable-skeleton--shimmer::after {
     display: none;
     animation: none;
+  }
+
+  .notable-skeleton--spotlight::before {
+    display: none;
   }
 
   .notable-skeleton--pulse {

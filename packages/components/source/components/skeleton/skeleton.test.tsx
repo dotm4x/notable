@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { fireEvent, render } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import { Skeleton } from './skeleton.js';
 import { Skeleton as PublicSkeleton } from '../../index.js';
 
@@ -170,6 +170,43 @@ describe('Skeleton', () => {
     const skeleton = renderSkeleton({ 'aria-hidden': false });
 
     expect(skeleton).not.toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it.each(['shimmer', 'pulse'] as const)(
+    'adds the hover spotlight for the %s animation',
+    (animation) => {
+      const skeleton = renderSkeleton({ animation });
+
+      expect(skeleton).toHaveClass('notable-skeleton--spotlight');
+    },
+  );
+
+  it('omits the hover spotlight when animation is none', () => {
+    const skeleton = renderSkeleton({ animation: 'none' });
+
+    expect(skeleton).not.toHaveClass('notable-skeleton--spotlight');
+  });
+
+  it('publishes the pointer position as CSS variables on move', () => {
+    const skeleton = renderSkeleton();
+
+    fireEvent.pointerMove(skeleton, { clientX: 30, clientY: 12 });
+
+    expect(
+      skeleton.style.getPropertyValue('--notable-skeleton-pointer-x'),
+    ).not.toBe('');
+    expect(
+      skeleton.style.getPropertyValue('--notable-skeleton-pointer-y'),
+    ).not.toBe('');
+  });
+
+  it('calls a consumer onPointerMove handler alongside the spotlight update', () => {
+    const onPointerMove = vi.fn();
+    const skeleton = renderSkeleton({ onPointerMove });
+
+    fireEvent.pointerMove(skeleton, { clientX: 5, clientY: 5 });
+
+    expect(onPointerMove).toHaveBeenCalledTimes(1);
   });
 
   it('is available from the public package entry point', () => {
