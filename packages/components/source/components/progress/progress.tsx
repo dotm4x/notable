@@ -2,7 +2,7 @@ import type { CSSProperties, HTMLAttributes } from 'react';
 import {
   resolveRadius,
   type NotableRadiusToken,
-} from '../../internal/radius/resolve-radius.js';
+} from '../../internal/helpers/resolve-radius.js';
 import './progress.css';
 
 /** Track thickness preset. */

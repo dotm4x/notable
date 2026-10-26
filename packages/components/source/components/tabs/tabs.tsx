@@ -23,7 +23,7 @@ import {
   useSelectorDrag,
   type SelectorBounds,
   type SelectorDragItem,
-} from '../../internal/selector-drag/use-selector-drag.js';
+} from '../../internal/helpers/use-selector-drag.js';
 import './tabs.css';
 
 /** Orientation of the tab list. */
