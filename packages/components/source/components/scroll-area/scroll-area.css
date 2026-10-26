@@ -1,0 +1,124 @@
+.notable-scroll-area {
+  --notable-scroll-area-fade-size: var(--notable-spacing-6);
+  --notable-scroll-area-thickness: var(--notable-spacing-2);
+  --notable-scroll-area-thumb-color: var(--notable-color-border-strong);
+  --notable-scroll-area-thumb-color-active: var(--notable-color-text-subtle);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+
+  /* Fade distances are set per edge from the overflow state. Zero means no fade. */
+  --_fade-top: 0px;
+  --_fade-bottom: 0px;
+  --_fade-start: 0px;
+  --_fade-end: 0px;
+}
+
+.notable-scroll-area[data-overflow-y-start] {
+  --_fade-top: var(--notable-scroll-area-fade-size);
+}
+
+.notable-scroll-area[data-overflow-y-end] {
+  --_fade-bottom: var(--notable-scroll-area-fade-size);
+}
+
+.notable-scroll-area[data-overflow-x-start] {
+  --_fade-start: var(--notable-scroll-area-fade-size);
+}
+
+.notable-scroll-area[data-overflow-x-end] {
+  --_fade-end: var(--notable-scroll-area-fade-size);
+}
+
+.notable-scroll-area__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+
+.notable-scroll-area__viewport:focus-visible {
+  outline: 2px solid var(--notable-color-focus);
+  outline-offset: -2px;
+}
+
+/*
+ * Edge fades are built from alpha-only gradients. The opaque stop is a mask value, not a visible color,
+ * so it does not need a theme token.
+ */
+.notable-scroll-area--fade .notable-scroll-area__viewport {
+  --_mask-vertical: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--_fade-top),
+    #000 calc(100% - var(--_fade-bottom)),
+    transparent 100%
+  );
+  --_mask-horizontal: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--_fade-start),
+    #000 calc(100% - var(--_fade-end)),
+    transparent 100%
+  );
+
+  mask-image: var(--_mask-vertical), var(--_mask-horizontal);
+  mask-composite: intersect;
+  -webkit-mask-image: var(--_mask-vertical), var(--_mask-horizontal);
+  -webkit-mask-composite: source-in;
+}
+
+.notable-scroll-area__content {
+  min-width: 100%;
+}
+
+.notable-scroll-area__scrollbar {
+  transition: opacity var(--notable-duration-fast)
+    var(--notable-easing-standard);
+}
+
+.notable-scroll-area__scrollbar--vertical {
+  width: var(--notable-scroll-area-thickness);
+}
+
+.notable-scroll-area__scrollbar--horizontal {
+  height: var(--notable-scroll-area-thickness);
+}
+
+.notable-scroll-area--auto-scrollbar .notable-scroll-area__scrollbar {
+  opacity: 0;
+}
+
+.notable-scroll-area--auto-scrollbar:hover .notable-scroll-area__scrollbar,
+.notable-scroll-area--auto-scrollbar
+  .notable-scroll-area__scrollbar[data-hovering],
+.notable-scroll-area--auto-scrollbar
+  .notable-scroll-area__scrollbar[data-scrolling] {
+  opacity: 1;
+}
+
+.notable-scroll-area__thumb {
+  border-radius: var(--notable-radius-full);
+  background-color: var(--notable-scroll-area-thumb-color);
+  transition: background-color var(--notable-duration-fast)
+    var(--notable-easing-standard);
+}
+
+.notable-scroll-area__thumb:hover,
+.notable-scroll-area__thumb[data-scrolling] {
+  background-color: var(--notable-scroll-area-thumb-color-active);
+}
+
+.notable-scroll-area__corner {
+  background-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-scroll-area__scrollbar,
+  .notable-scroll-area__thumb {
+    transition: none;
+  }
+}
