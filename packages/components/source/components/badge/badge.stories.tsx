@@ -92,9 +92,13 @@ export const WithIcons: Story = {
 
 export const IconOnly: Story = {
   args: {
-    children: <CircleHelp aria-hidden="true" />,
+    children: (
+      <>
+        <CircleHelp aria-hidden="true" />
+        <span className="notable-badge__sr-only">More information</span>
+      </>
+    ),
     variant: 'info',
-    'aria-label': 'More information',
   },
 };
 

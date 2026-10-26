@@ -68,14 +68,18 @@ describe('Badge', () => {
     expect(screen.getByText('Ready')).toBeInTheDocument();
   });
 
-  it('supports icon-only content with an accessible label', () => {
+  it('supports icon-only content with visually hidden text', () => {
     render(
-      <Badge aria-label="More information">
+      <Badge>
         <CircleHelp aria-hidden="true" />
+        <span className="notable-badge__sr-only">More information</span>
       </Badge>,
     );
 
-    expect(screen.getByLabelText('More information')).toBeInTheDocument();
+    expect(screen.getByText('More information')).toBeInTheDocument();
+    expect(screen.getByText('More information')).toHaveClass(
+      'notable-badge__sr-only',
+    );
   });
 
   it('is available from the public package entry point', () => {
