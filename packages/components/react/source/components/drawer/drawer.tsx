@@ -7,8 +7,10 @@ import {
   createContext,
   forwardRef,
   isValidElement,
+  useCallback,
   useContext,
   useLayoutEffect,
+  useMemo,
   useRef,
   type HTMLAttributes,
   type MouseEvent,
@@ -73,10 +75,114 @@ export type DrawerFooterProps = HTMLAttributes<HTMLDivElement>;
 /** Props for `Drawer.Close`. Always renders with `type="button"`. */
 export type DrawerCloseProps = ButtonProps;
 
+/** One mounted drawer in the stack, used to close it and the drawers in front of it. */
+type DrawerStackEntry = {
+  popupRef: RefObject<HTMLElement | null>;
+  close: () => void;
+  closeOnBackdropClickRef: RefObject<boolean>;
+};
+
 type DrawerContextValue = {
   closeOnBackdropClickRef: RefObject<boolean>;
   side: DrawerSide;
+  stackEntry: DrawerStackEntry;
 };
+
+/** Pointer movement above this many pixels is a swipe, not a click. */
+const clickTolerancePx = 4;
+
+/** Mounted drawers, ordered from the back-most to the front-most. */
+const openDrawerStack: DrawerStackEntry[] = [];
+let pressOrigin: { x: number; y: number } | null = null;
+/** How many drawers were mounted before the current press, so drawers it opens are ignored. */
+let pressStackLength = 0;
+
+function handleDocumentPointerDown(event: globalThis.PointerEvent) {
+  pressOrigin = { x: event.clientX, y: event.clientY };
+  pressStackLength = openDrawerStack.length;
+}
+
+/**
+ * Base UI dismisses only the front-most drawer on an outside click, and it
+ * ignores clicks on a lower drawer when that drawer is nested. Clicking a lower
+ * drawer, or the page behind the stack, closes the drawers in front of it.
+ */
+function handleDocumentClick(event: globalThis.MouseEvent) {
+  const origin = pressOrigin;
+  pressOrigin = null;
+
+  if (
+    !origin ||
+    Math.hypot(event.clientX - origin.x, event.clientY - origin.y) >
+      clickTolerancePx
+  ) {
+    return;
+  }
+
+  // Drawers that this press opened are not dismissed by it.
+  const stack = openDrawerStack.slice(0, pressStackLength);
+  const frontIndex = stack.length - 1;
+  let clickedIndex = -1;
+
+  for (let index = frontIndex; index >= 0; index -= 1) {
+    const entry = stack[index];
+
+    if (
+      isPointInsideElement(entry.popupRef.current, event.clientX, event.clientY)
+    ) {
+      clickedIndex = index;
+      break;
+    }
+  }
+
+  if (clickedIndex === frontIndex) {
+    return;
+  }
+
+  // An outside click on a single drawer is Base UI's job.
+  if (clickedIndex === -1 && frontIndex === 0) {
+    return;
+  }
+
+  const firstIndexToClose = clickedIndex === -1 ? frontIndex : clickedIndex + 1;
+
+  for (let index = frontIndex; index >= firstIndexToClose; index -= 1) {
+    const entry = stack[index];
+
+    if (!entry.closeOnBackdropClickRef.current) {
+      return;
+    }
+
+    entry.close();
+  }
+}
+
+function addOpenDrawer(entry: DrawerStackEntry) {
+  if (openDrawerStack.length === 0) {
+    document.addEventListener('pointerdown', handleDocumentPointerDown, true);
+    document.addEventListener('click', handleDocumentClick);
+  }
+
+  openDrawerStack.push(entry);
+}
+
+function removeOpenDrawer(entry: DrawerStackEntry) {
+  const index = openDrawerStack.indexOf(entry);
+
+  if (index !== -1) {
+    openDrawerStack.splice(index, 1);
+  }
+
+  if (openDrawerStack.length === 0) {
+    document.removeEventListener(
+      'pointerdown',
+      handleDocumentPointerDown,
+      true,
+    );
+    document.removeEventListener('click', handleDocumentClick);
+    pressOrigin = null;
+  }
+}
 
 type ConsumerClickEvent = MouseEvent<HTMLElement> &
   Partial<Pick<BaseUIEvent<MouseEvent<HTMLElement>>, 'preventBaseUIHandler'>>;
@@ -129,6 +235,16 @@ function DrawerRoot({
   children,
 }: DrawerProps) {
   const closeOnBackdropClickRef = useRef(true);
+  const actionsRef = useRef<BaseDrawer.Root.Actions | null>(null);
+  const popupRef = useRef<HTMLElement | null>(null);
+  const stackEntry = useMemo<DrawerStackEntry>(
+    () => ({
+      popupRef,
+      close: () => actionsRef.current?.close(),
+      closeOnBackdropClickRef,
+    }),
+    [],
+  );
 
   const handleOpenChange = (
     nextOpen: boolean,
@@ -148,10 +264,13 @@ function DrawerRoot({
   };
 
   return (
-    <DrawerContext.Provider value={{ closeOnBackdropClickRef, side }}>
+    <DrawerContext.Provider
+      value={{ closeOnBackdropClickRef, side, stackEntry }}
+    >
       <BaseDrawer.Root
         open={open}
         defaultOpen={defaultOpen}
+        actionsRef={actionsRef}
         onOpenChange={handleOpenChange}
         swipeDirection={swipeDirectionBySide[side]}
       >
@@ -226,14 +345,34 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
     },
     ref,
   ) {
-    const { closeOnBackdropClickRef, side } =
+    const { closeOnBackdropClickRef, side, stackEntry } =
       useDrawerContext('Drawer.Content');
-
     // Base UI reads this ref when a press lands outside the drawer, so it is
     // updated before the next pointer event rather than during render.
     useLayoutEffect(() => {
       closeOnBackdropClickRef.current = closeOnBackdropClick;
     }, [closeOnBackdropClick, closeOnBackdropClickRef]);
+
+    const setPopupElement = useCallback(
+      (element: HTMLDivElement | null) => {
+        const previousElement = stackEntry.popupRef.current;
+        stackEntry.popupRef.current = element;
+
+        // Only a mounted popup is an open drawer, so registration follows the popup.
+        if (previousElement && !element) {
+          removeOpenDrawer(stackEntry);
+        } else if (element && !previousElement) {
+          addOpenDrawer(stackEntry);
+        }
+
+        if (typeof ref === 'function') {
+          ref(element);
+        } else if (ref) {
+          ref.current = element;
+        }
+      },
+      [ref, stackEntry],
+    );
 
     const classes = [
       'notable-drawer',
@@ -268,7 +407,11 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
       <BaseDrawer.Portal>
         <BaseDrawer.Backdrop className="notable-drawer__backdrop" />
         <BaseDrawer.Viewport className="notable-drawer__viewport">
-          <BaseDrawer.Popup {...props} ref={ref} className={classes}>
+          <BaseDrawer.Popup
+            {...props}
+            ref={setPopupElement}
+            className={classes}
+          >
             {headers}
             <BaseDrawer.Content className="notable-drawer__body">
               {body}
@@ -285,6 +428,20 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
     );
   },
 );
+
+function isPointInsideElement(
+  element: HTMLElement | null,
+  x: number,
+  y: number,
+) {
+  if (!element) {
+    return false;
+  }
+
+  const rect = element.getBoundingClientRect();
+
+  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+}
 
 /** Lays out the title and description at the top of the drawer. Stays pinned while the body scrolls. */
 function DrawerHeader({ className, ...props }: DrawerHeaderProps) {
