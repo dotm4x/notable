@@ -84,12 +84,20 @@
     var(--notable-easing-standard);
 }
 
+/*
+ * Base UI positions scrollbars absolutely against the root edges. Margins inset them so the track
+ * does not sit on the container border, and clears the rounded corners of the surrounding surface.
+ */
 .notable-scroll-area__scrollbar--vertical {
   width: var(--notable-scroll-area-thickness);
+  margin-block: var(--notable-spacing-2);
+  margin-inline-end: var(--notable-spacing-1);
 }
 
 .notable-scroll-area__scrollbar--horizontal {
   height: var(--notable-scroll-area-thickness);
+  margin-inline: var(--notable-spacing-2);
+  margin-block-end: var(--notable-spacing-1);
 }
 
 .notable-scroll-area--auto-scrollbar .notable-scroll-area__scrollbar {
