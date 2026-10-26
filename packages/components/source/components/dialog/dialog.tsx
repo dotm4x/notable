@@ -7,6 +7,7 @@ import {
   useContext,
   useEffect,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
   type DialogHTMLAttributes,
@@ -134,7 +135,7 @@ function DialogRoot({
     [isControlled, isOpen, onOpenChange],
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const dialog = dialogRef.current;
 
     if (!dialog) {
