@@ -68,8 +68,7 @@
   box-sizing: border-box;
   width: 100%;
   height: var(--toast-height, auto);
-  max-height: min(40dvh, 20rem);
-  overflow: auto;
+  overflow: visible;
   pointer-events: auto;
   border: 1px solid var(--notable-color-border);
   border-radius: var(--notable-radius-md);
@@ -85,8 +84,13 @@
     scale(var(--notable-toast-scale));
   transition:
     transform var(--notable-duration-toast) var(--notable-easing-standard),
+    height var(--notable-duration-toast) var(--notable-easing-standard),
     opacity var(--notable-duration-toast) var(--notable-easing-standard),
     box-shadow var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-toast-viewport:not([data-expanded]) .notable-toast {
+  height: var(--toast-frontmost-height, var(--toast-height, auto));
 }
 
 .notable-toast[data-starting-style] {
@@ -116,6 +120,26 @@
 .notable-toast[data-limited] {
   opacity: 0;
   pointer-events: none;
+}
+
+.notable-toast::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 100%;
+  height: var(--notable-spacing-2);
+  pointer-events: none;
+}
+
+.notable-toast-viewport--top-left .notable-toast::after,
+.notable-toast-viewport--top-center .notable-toast::after,
+.notable-toast-viewport--top-right .notable-toast::after {
+  bottom: auto;
+  top: 100%;
+}
+
+.notable-toast-viewport[data-expanded] .notable-toast::after {
+  pointer-events: auto;
 }
 
 .notable-toast-viewport[data-expanded]
@@ -203,9 +227,12 @@
 
 .notable-toast__content {
   display: flex;
+  box-sizing: border-box;
+  max-height: min(40dvh, 20rem);
   align-items: flex-start;
   gap: var(--notable-spacing-3);
   padding: var(--notable-spacing-4);
+  overflow: auto;
 }
 
 .notable-toast__icon {
@@ -242,12 +269,15 @@
 
 .notable-toast__content[data-behind] {
   opacity: 0;
-  transition: opacity var(--notable-duration-fast)
-    var(--notable-easing-standard);
+  visibility: hidden;
+  transition:
+    opacity var(--notable-duration-fast) var(--notable-easing-standard),
+    visibility var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 .notable-toast-viewport[data-expanded] .notable-toast__content[data-behind] {
   opacity: 1;
+  visibility: visible;
 }
 
 .notable-toast__body {
