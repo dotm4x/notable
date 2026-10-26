@@ -1,4 +1,8 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
+import {
+  resolveRadius,
+  type NotableRadiusToken,
+} from '../../internal/radius/resolve-radius.js';
 import './progress.css';
 
 /** Track thickness preset. */
@@ -11,8 +15,7 @@ export type ProgressColor = 'primary' | 'success' | 'danger';
 export type ProgressTrackColor = 'subtle' | 'default' | 'strong';
 
 /** Notable radius token names. */
-export type ProgressRadiusToken =
-  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+export type ProgressRadiusToken = NotableRadiusToken;
 
 /**
  * `smooth` animates determinate changes and indeterminate movement. `none`
@@ -111,16 +114,6 @@ const trackColorTokens: Readonly<Record<ProgressTrackColor, string>> = {
   strong: 'var(--notable-color-border-strong)',
 };
 
-const radiusTokens: ReadonlySet<string> = new Set([
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  '2xl',
-  'full',
-]);
-
 function resolveMax(max: number | undefined): number {
   return max !== undefined && Number.isFinite(max) && max > 0
     ? max
@@ -170,19 +163,6 @@ function resolveThickness(
     return undefined;
   }
   return typeof thickness === 'number' ? `${thickness}px` : thickness;
-}
-
-function resolveRadius(radius: ProgressProps['radius']): string | undefined {
-  if (radius === undefined) {
-    return undefined;
-  }
-  if (typeof radius === 'number') {
-    return `${radius}px`;
-  }
-  if (radiusTokens.has(radius)) {
-    return `var(--notable-radius-${radius})`;
-  }
-  return radius;
 }
 
 function isProgressSize(size: unknown): size is ProgressSize {
