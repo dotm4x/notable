@@ -42,9 +42,7 @@
   white-space: nowrap;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition:
-    color var(--notable-duration-fast) var(--notable-easing-standard),
-    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+  transition: color var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
 .notable-tabs__trigger[aria-selected='true'] {
@@ -53,7 +51,10 @@
 
 .notable-tabs__trigger:hover:not(:disabled) {
   color: var(--notable-color-text);
-  background-color: var(--notable-color-surface-hover);
+}
+
+.notable-tabs__list > .notable-tabs__highlight {
+  border-radius: var(--notable-radius-sm) var(--notable-radius-sm) 0 0;
 }
 
 .notable-tabs__trigger:focus-visible {

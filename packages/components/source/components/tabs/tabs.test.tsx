@@ -756,3 +756,100 @@ describe('Tabs transition lifecycle', () => {
     expect(exit?.stop).toHaveBeenCalled();
   });
 });
+
+describe('Tabs animated highlight', () => {
+  function getHighlightedTabs(tablist: HTMLElement) {
+    return Array.from(
+      tablist.querySelectorAll<HTMLElement>('[data-highlighted]'),
+    );
+  }
+
+  it('renders one shared highlight as the first child of the tab list', () => {
+    // Arrange
+    render(<BasicTabs />);
+
+    // Act
+    const tablist = screen.getByRole('tablist', { name: 'Example' });
+
+    // Assert
+    const highlights = tablist.querySelectorAll('.notable-animated-highlight');
+    expect(highlights).toHaveLength(1);
+    expect(tablist.firstElementChild).toBe(highlights[0]);
+    expect(highlights[0]).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('moves the highlight to the pointer-hovered tab and clears it on leave', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<BasicTabs />);
+    const tablist = screen.getByRole('tablist', { name: 'Example' });
+    const code = screen.getByRole('tab', { name: 'Code' });
+
+    // Act
+    await user.hover(code);
+
+    // Assert
+    expect(getHighlightedTabs(tablist)).toEqual([code]);
+
+    // Act
+    await user.unhover(code);
+
+    // Assert
+    expect(getHighlightedTabs(tablist)).toEqual([]);
+  });
+
+  it('keeps a single highlight target while the pointer moves between tabs', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<BasicTabs />);
+    const tablist = screen.getByRole('tablist', { name: 'Example' });
+    const preview = screen.getByRole('tab', { name: 'Preview' });
+    const code = screen.getByRole('tab', { name: 'Code' });
+
+    // Act
+    await user.hover(preview);
+    await user.hover(code);
+
+    // Assert
+    expect(getHighlightedTabs(tablist)).toEqual([code]);
+  });
+
+  it('never highlights a disabled tab', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<BasicTabs />);
+    const tablist = screen.getByRole('tablist', { name: 'Example' });
+    const disabled = screen.getByRole('tab', { name: 'Disabled' });
+
+    // Act
+    await user.hover(disabled);
+
+    // Assert
+    expect(getHighlightedTabs(tablist)).toEqual([]);
+  });
+
+  it('highlights the keyboard-focused tab when it matches :focus-visible', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    const originalMatches = Element.prototype.matches;
+    vi.spyOn(Element.prototype, 'matches').mockImplementation(function (
+      this: Element,
+      selector: string,
+    ) {
+      if (selector === ':focus-visible') {
+        return this === document.activeElement;
+      }
+      return originalMatches.call(this, selector);
+    });
+    render(<BasicTabs />);
+    const tablist = screen.getByRole('tablist', { name: 'Example' });
+    const preview = screen.getByRole('tab', { name: 'Preview' });
+
+    // Act
+    await user.tab();
+
+    // Assert
+    expect(document.activeElement).toBe(preview);
+    expect(getHighlightedTabs(tablist)).toEqual([preview]);
+  });
+});
