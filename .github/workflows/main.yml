@@ -36,4 +36,4 @@ jobs:
         run: pnpm lint
 
       - name: Run tests
-        run: pnpm --filter @dotm4x/notable test
+        run: pnpm --filter @dotm4x/notable test:all
