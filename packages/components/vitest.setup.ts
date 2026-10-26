@@ -11,4 +11,9 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   };
 }
 
+// jsdom does not implement the Web Animations API. Base UI calls it after mount.
+if (typeof Element.prototype.getAnimations === 'undefined') {
+  Element.prototype.getAnimations = () => [];
+}
+
 afterEach(cleanup);

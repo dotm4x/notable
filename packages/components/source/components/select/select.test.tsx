@@ -1,4 +1,4 @@
-import { cleanup, render, screen, within } from '@testing-library/react';
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef, useState } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -235,7 +235,9 @@ describe('Select', () => {
     await user.keyboard('{Escape}');
 
     // Assert
-    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    });
     expect(trigger).toHaveFocus();
   });
 
