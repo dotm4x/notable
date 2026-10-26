@@ -19,7 +19,10 @@ export default defineConfig({
       {
         find: /^@dotm4x\/notable$/,
         replacement: fileURLToPath(
-          new URL('../../packages/components/react/source/index.ts', import.meta.url),
+          new URL(
+            '../../packages/components/react/source/index.ts',
+            import.meta.url,
+          ),
         ),
       },
     ],
