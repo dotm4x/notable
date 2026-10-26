@@ -155,5 +155,6 @@ describe('AvatarGroup', () => {
 
   it('is available from the public package entry point', () => {
     expect(PublicAvatarGroup).toBe(AvatarGroup);
+    expect(Avatar.Group).toBe(AvatarGroup);
   });
 });

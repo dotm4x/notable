@@ -71,7 +71,7 @@ export type RadioGroupItemProps = Omit<
  * Renders a native radio group inside a fieldset. Arrow-key navigation, focus
  * management, and form submission are handled by the browser's native radios.
  */
-export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
+const RadioGroupRoot = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   function RadioGroup(
     {
       className,
@@ -227,3 +227,8 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
     );
   },
 );
+
+/** Compound radio group: `RadioGroup` is the root and `RadioGroup.Item` its options. */
+export const RadioGroup = Object.assign(RadioGroupRoot, {
+  Item: RadioGroupItem,
+});

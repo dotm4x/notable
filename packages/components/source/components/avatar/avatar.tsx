@@ -11,6 +11,7 @@ import {
   type SyntheticEvent,
 } from 'react';
 import './avatar.css';
+import { AvatarGroup } from './avatar-group.js';
 
 /** Available avatar sizes. */
 export type AvatarSize = 'small' | 'medium' | 'large' | 'extra-large';
@@ -188,4 +189,5 @@ function AvatarFallback({
 export const Avatar = Object.assign(AvatarRoot, {
   Image: AvatarImage,
   Fallback: AvatarFallback,
+  Group: AvatarGroup,
 });

@@ -109,7 +109,7 @@ function getNextExpandedValues(
  * Groups collapsible sections. In single mode, expanding an item collapses
  * the previously expanded one, and activating the expanded item collapses it.
  */
-export function Accordion(props: AccordionProps) {
+function AccordionRoot(props: AccordionProps) {
   const { children, className, disabled = false } = props;
   const rootRef = useRef<HTMLDivElement>(null);
   const isControlled = props.value !== undefined;
@@ -259,3 +259,8 @@ export function AccordionItem({
     </div>
   );
 }
+
+/** Compound accordion: `Accordion` is the root and `Accordion.Item` its items. */
+export const Accordion = Object.assign(AccordionRoot, {
+  Item: AccordionItem,
+});

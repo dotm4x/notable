@@ -343,4 +343,8 @@ describe('RadioGroup', () => {
     expect(group).toHaveClass('notable-radio-group--horizontal');
     expect(group).toHaveClass('notable-radio-group--large');
   });
+
+  it('exposes RadioGroup.Item as the same component as RadioGroupItem', () => {
+    expect(RadioGroup.Item).toBe(RadioGroupItem);
+  });
 });
