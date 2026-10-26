@@ -288,6 +288,153 @@ describe('Dialog', () => {
     });
   });
 
+  describe('exit animation', () => {
+    // jsdom does not run CSS animations, so the computed animation name is
+    // mocked for dialog elements. `none` mirrors reduced-motion styles.
+    function mockAnimationName(animationName: string) {
+      const originalGetComputedStyle = window.getComputedStyle.bind(window);
+
+      vi.stubGlobal(
+        'getComputedStyle',
+        (element: Element, pseudoElement?: string | null) =>
+          element instanceof HTMLDialogElement
+            ? ({ animationName } as CSSStyleDeclaration)
+            : originalGetComputedStyle(element, pseudoElement),
+      );
+    }
+
+    function dispatchAnimationEvent(
+      element: Element,
+      type: 'animationend' | 'animationcancel',
+      animationName: string,
+    ) {
+      const event = new Event(type, { bubbles: true });
+
+      Object.defineProperty(event, 'animationName', { value: animationName });
+      fireEvent(element, event);
+    }
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+      vi.restoreAllMocks();
+    });
+
+    it('keeps the dialog open until its exit animation ends', async () => {
+      // Arrange
+      const onOpenChange = vi.fn();
+      mockAnimationName('notable-dialog-in');
+      renderDialog({ onOpenChange });
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Open dialog' }),
+      );
+      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
+      onOpenChange.mockClear();
+
+      // Act
+      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+
+      // Assert
+      expect(onOpenChange).toHaveBeenCalledTimes(1);
+      expect(onOpenChange).toHaveBeenCalledWith(false);
+      expect(dialog).toHaveAttribute('data-closing');
+      expect(dialog.open).toBe(true);
+
+      // Act
+      dispatchAnimationEvent(dialog, 'animationend', 'notable-dialog-out');
+
+      // Assert
+      expect(dialog.open).toBe(false);
+      expect(onOpenChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('ignores animation events from the backdrop, descendants, and other animations', async () => {
+      // Arrange
+      mockAnimationName('notable-dialog-in');
+      renderDialog();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Open dialog' }),
+      );
+      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
+      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+
+      // Act
+      dispatchAnimationEvent(
+        dialog,
+        'animationend',
+        'notable-dialog-backdrop-out',
+      );
+      dispatchAnimationEvent(
+        screen.getByRole('button', { name: 'Delete' }),
+        'animationend',
+        'notable-dialog-out',
+      );
+
+      // Assert
+      expect(dialog.open).toBe(true);
+      expect(dialog).toHaveAttribute('data-closing');
+    });
+
+    it('finishes closing when the exit animation is cancelled', async () => {
+      // Arrange
+      mockAnimationName('notable-dialog-in');
+      renderDialog();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Open dialog' }),
+      );
+      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
+      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+
+      // Act
+      dispatchAnimationEvent(dialog, 'animationcancel', 'notable-dialog-out');
+
+      // Assert
+      expect(dialog.open).toBe(false);
+    });
+
+    it('cancels the pending close when the dialog is reopened during the exit', () => {
+      // Arrange
+      mockAnimationName('notable-dialog-in');
+      const content = (
+        <Dialog.Content>
+          <Dialog.Title>Controlled</Dialog.Title>
+        </Dialog.Content>
+      );
+      const { rerender } = render(<Dialog open>{content}</Dialog>);
+      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
+      rerender(<Dialog open={false}>{content}</Dialog>);
+      expect(dialog).toHaveAttribute('data-closing');
+
+      // Act
+      rerender(<Dialog open>{content}</Dialog>);
+      dispatchAnimationEvent(dialog, 'animationend', 'notable-dialog-out');
+
+      // Assert
+      expect(dialog).not.toHaveAttribute('data-closing');
+      expect(dialog.open).toBe(true);
+    });
+
+    it('closes immediately when no animation runs, such as under reduced motion', async () => {
+      // Arrange
+      const onOpenChange = vi.fn();
+      mockAnimationName('none');
+      renderDialog({ onOpenChange });
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Open dialog' }),
+      );
+      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
+      onOpenChange.mockClear();
+
+      // Act
+      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+
+      // Assert
+      expect(dialog.open).toBe(false);
+      expect(dialog).not.toHaveAttribute('data-closing');
+      expect(onOpenChange).toHaveBeenCalledTimes(1);
+      expect(onOpenChange).toHaveBeenCalledWith(false);
+    });
+  });
+
   describe('Dialog.Trigger', () => {
     it('wraps non-element children in a Button and exposes dialog ARIA state', async () => {
       // Arrange
