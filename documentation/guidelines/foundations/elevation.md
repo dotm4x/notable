@@ -1,0 +1,34 @@
+# Elevation
+
+Elevation describes which content sits above other content. Notable uses depth sparingly. Most of the interface is flat, and only content that temporarily floats above the page gains a shadow and a distinct surface.
+
+## Layers
+
+From lowest to highest, the layers are:
+
+1. The page.
+2. Containers, such as cards and panels, which are part of the page.
+3. Floating content, such as menus, popups, and tooltips, which appears above the page for a moment.
+4. Modal content and transient messages, such as dialogs and notifications, which overlay the rest of the interface. Modal content interrupts; a notification does not necessarily do so.
+
+Each layer should be distinguishable from the one below it, in both themes.
+
+## Shadow
+
+A shadow signals that something floats. Reserve it for floating content. Containers that sit on the page should be separated by surface and border, not by shadow. Shadows applied everywhere make the interface look busy and dilute their meaning.
+
+## Stacking
+
+Floating content must appear above the content it belongs to, regardless of where it sits in the document. Users should never have to work out which of two overlapping items is on top.
+
+## Temporary content
+
+Floating content is temporary. It appears in response to an action and goes away when the user completes or cancels that action. Its entrance and exit should match its temporary role. See [Popups](../patterns/popups.md).
+
+## Principle
+
+Depth should tell the user what is temporary and what is permanent. Only content that truly floats should look like it does.
+
+## Open question
+
+Whether dialogs and drawers should use the same floating surface as menus and popups, or a distinct treatment that reflects their greater interruption.
