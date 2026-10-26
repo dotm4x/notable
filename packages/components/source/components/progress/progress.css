@@ -13,6 +13,8 @@
   background: var(--notable-progress-track-color, var(--notable-color-border));
 }
 
+/* Linear sizes */
+
 .notable-progress--linear.notable-progress--small {
   --notable-progress-thickness: var(--notable-spacing-1);
 }
@@ -24,6 +26,8 @@
 .notable-progress--linear.notable-progress--large {
   --notable-progress-thickness: var(--notable-spacing-3);
 }
+
+/* Linear indicator */
 
 .notable-progress__indicator {
   position: absolute;
@@ -37,21 +41,23 @@
     var(--notable-easing-standard);
 }
 
-/* Indeterminate: a fixed-width bar that sits centered when it isn't moving. */
-.notable-progress--indeterminate .notable-progress__indicator {
+/* Indeterminate linear progress */
+
+.notable-progress--linear.notable-progress--indeterminate
+  .notable-progress__indicator {
   inline-size: 40%;
   transform: translateX(75%);
   transition: none;
 }
 
-.notable-progress--smooth.notable-progress--indeterminate
+.notable-progress--linear.notable-progress--smooth.notable-progress--indeterminate
   .notable-progress__indicator {
   animation: notable-progress-indeterminate
     calc(var(--notable-duration-slow) * 2) var(--notable-easing-standard)
     infinite;
 }
 
-.notable-progress--none .notable-progress__indicator {
+.notable-progress--linear.notable-progress--none .notable-progress__indicator {
   transition: none;
 }
 
@@ -70,64 +76,93 @@
    ========================================================================== */
 
 .notable-progress--circular {
-  --notable-progress-thickness: var(--notable-spacing-1);
-  --notable-progress-stroke: min(
-    var(--notable-progress-thickness),
-    calc(var(--notable-progress-diameter) / 2)
+  --notable-progress-diameter: 24px;
+  --notable-progress-thickness: 4px;
+  --notable-progress-radius: calc(
+    (var(--notable-progress-diameter) - var(--notable-progress-thickness)) / 2
   );
 
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   inline-size: var(--notable-progress-diameter);
+  block-size: var(--notable-progress-diameter);
   max-inline-size: 100%;
-  block-size: auto;
-  aspect-ratio: 1;
   flex-shrink: 0;
+  overflow: visible;
+  border: 0;
   border-radius: 0;
+  padding: 0;
   background: none;
 }
 
+/* Circular sizes */
+
 .notable-progress--circular.notable-progress--small {
-  --notable-progress-diameter: var(--notable-spacing-8);
+  --notable-progress-diameter: 16px;
+  --notable-progress-thickness: 3px;
 }
 
 .notable-progress--circular.notable-progress--medium {
-  --notable-progress-diameter: var(--notable-spacing-12);
+  --notable-progress-diameter: 24px;
+  --notable-progress-thickness: 4px;
 }
 
 .notable-progress--circular.notable-progress--large {
-  --notable-progress-diameter: var(--notable-spacing-16);
+  --notable-progress-diameter: 32px;
+  --notable-progress-thickness: 4px;
 }
+
+/* Circular SVG */
 
 .notable-progress__svg {
   position: absolute;
   inset: 0;
+  display: block;
   inline-size: 100%;
   block-size: 100%;
-  transform: rotate(-90deg);
+  overflow: visible;
 }
 
 .notable-progress__track,
 .notable-progress__arc {
-  r: calc(50% - var(--notable-progress-stroke) / 2);
+  cx: calc(var(--notable-progress-diameter) / 2);
+  cy: calc(var(--notable-progress-diameter) / 2);
+  r: var(--notable-progress-radius);
   fill: none;
-  stroke-width: var(--notable-progress-stroke);
+  stroke-width: var(--notable-progress-thickness);
 }
 
 .notable-progress__track {
   stroke: var(--notable-progress-track-color, var(--notable-color-border));
 }
 
+/* Determinate circular progress */
+
 .notable-progress__arc {
   stroke: var(--notable-progress-color, var(--notable-color-primary));
   stroke-linecap: round;
   stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--notable-progress-percent, 0));
+  transform: rotate(-90deg);
+  transform-origin: center;
   transition: stroke-dashoffset var(--notable-duration-slow)
     var(--notable-easing-standard);
 }
 
-/* Indeterminate: a quarter arc centered on the top, spun by the svg. */
-.notable-progress--indeterminate .notable-progress__arc {
-  stroke-dasharray: 25 75;
-  stroke-dashoffset: 12.5;
+/* Prevent rounded caps from appearing as dots at small sizes */
+
+.notable-progress--circular.notable-progress--small .notable-progress__arc {
+  stroke-linecap: butt;
+}
+
+/* Indeterminate circular progress */
+
+.notable-progress--circular.notable-progress--indeterminate
+  .notable-progress__arc {
+  stroke-dasharray: 30 70;
+  stroke-dashoffset: 0;
   transition: none;
 }
 
@@ -137,19 +172,23 @@
     infinite;
 }
 
-.notable-progress--none .notable-progress__arc {
+.notable-progress--circular.notable-progress--none .notable-progress__arc {
   transition: none;
 }
 
 @keyframes notable-progress-spin {
   from {
-    transform: rotate(-90deg);
+    transform: rotate(0deg);
   }
 
   to {
-    transform: rotate(270deg);
+    transform: rotate(360deg);
   }
 }
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .notable-progress__indicator,
@@ -157,7 +196,7 @@
     transition: none;
   }
 
-  .notable-progress--smooth.notable-progress--indeterminate
+  .notable-progress--linear.notable-progress--smooth.notable-progress--indeterminate
     .notable-progress__indicator,
   .notable-progress--circular.notable-progress--smooth.notable-progress--indeterminate
     .notable-progress__svg {
