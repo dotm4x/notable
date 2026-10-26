@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import {
   cloneElement,
   createContext,
+  forwardRef,
   isValidElement,
   useContext,
   useLayoutEffect,
@@ -169,51 +170,56 @@ function DialogTrigger({ children }: DialogTriggerProps) {
  * scroll locking, and focus restoration are handled by Base UI. Pass `className`
  * and HTML attributes to style or extend the popup element.
  */
-function DialogContent({
-  size = 'medium',
-  showCloseButton = true,
-  closeOnBackdropClick = true,
-  className,
-  children,
-  ...props
-}: DialogContentProps) {
-  const { closeOnBackdropClickRef } = useDialogContext('Dialog.Content');
+const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
+  function DialogContent(
+    {
+      size = 'medium',
+      showCloseButton = true,
+      closeOnBackdropClick = true,
+      className,
+      children,
+      ...props
+    },
+    ref,
+  ) {
+    const { closeOnBackdropClickRef } = useDialogContext('Dialog.Content');
 
-  // Base UI reads this ref when a press lands outside the popup, so it is
-  // updated before the next pointer event rather than during render.
-  useLayoutEffect(() => {
-    closeOnBackdropClickRef.current = closeOnBackdropClick;
-  }, [closeOnBackdropClick, closeOnBackdropClickRef]);
+    // Base UI reads this ref when a press lands outside the popup, so it is
+    // updated before the next pointer event rather than during render.
+    useLayoutEffect(() => {
+      closeOnBackdropClickRef.current = closeOnBackdropClick;
+    }, [closeOnBackdropClick, closeOnBackdropClickRef]);
 
-  const classes = ['notable-dialog', `notable-dialog--${size}`, className]
-    .filter(Boolean)
-    .join(' ');
+    const classes = ['notable-dialog', `notable-dialog--${size}`, className]
+      .filter(Boolean)
+      .join(' ');
 
-  return (
-    <BaseDialog.Portal>
-      <BaseDialog.Backdrop className="notable-dialog__backdrop" />
-      <BaseDialog.Popup {...props} className={classes}>
-        <div className="notable-dialog__body">
-          {children}
-          {showCloseButton && (
-            <BaseDialog.Close
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="notable-dialog__close-button"
-                  aria-label="Close dialog"
-                />
-              }
-            >
-              <X aria-hidden="true" />
-            </BaseDialog.Close>
-          )}
-        </div>
-      </BaseDialog.Popup>
-    </BaseDialog.Portal>
-  );
-}
+    return (
+      <BaseDialog.Portal>
+        <BaseDialog.Backdrop className="notable-dialog__backdrop" />
+        <BaseDialog.Popup {...props} ref={ref} className={classes}>
+          <div className="notable-dialog__body">
+            {children}
+            {showCloseButton && (
+              <BaseDialog.Close
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="notable-dialog__close-button"
+                    aria-label="Close dialog"
+                  />
+                }
+              >
+                <X aria-hidden="true" />
+              </BaseDialog.Close>
+            )}
+          </div>
+        </BaseDialog.Popup>
+      </BaseDialog.Portal>
+    );
+  },
+);
 
 /** Lays out the title and description at the top of the dialog. */
 function DialogHeader({ className, ...props }: DialogHeaderProps) {
