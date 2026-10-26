@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Progress
+   ========================================================================== */
+
+.notable-progress {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  block-size: var(--notable-progress-thickness);
+  overflow: hidden;
+  border-radius: var(--notable-radius-full);
+  background: var(--notable-progress-track-color, var(--notable-color-border));
+}
+
+.notable-progress--small {
+  --notable-progress-thickness: var(--notable-spacing-1);
+}
+
+.notable-progress--medium {
+  --notable-progress-thickness: var(--notable-spacing-2);
+}
+
+.notable-progress--large {
+  --notable-progress-thickness: var(--notable-spacing-3);
+}
+
+.notable-progress__indicator {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  border-radius: inherit;
+  background: var(--notable-progress-color, var(--notable-color-primary));
+  transform: translateX(calc(var(--notable-progress-value, 0%) - 100%));
+  transition: transform var(--notable-duration-slow)
+    var(--notable-easing-standard);
+}
+
+/* Indeterminate: a fixed-width bar that sits centered when it isn't moving. */
+.notable-progress--indeterminate .notable-progress__indicator {
+  inline-size: 40%;
+  transform: translateX(75%);
+  transition: none;
+}
+
+.notable-progress--smooth.notable-progress--indeterminate
+  .notable-progress__indicator {
+  animation: notable-progress-indeterminate
+    calc(var(--notable-duration-slow) * 2) var(--notable-easing-standard)
+    infinite;
+}
+
+.notable-progress--none .notable-progress__indicator {
+  transition: none;
+}
+
+@keyframes notable-progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-progress__indicator {
+    transition: none;
+  }
+
+  .notable-progress--smooth.notable-progress--indeterminate
+    .notable-progress__indicator {
+    animation: none;
+  }
+}
