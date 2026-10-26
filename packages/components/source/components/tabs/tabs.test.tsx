@@ -456,6 +456,69 @@ describe('Tabs', () => {
       });
     },
   );
+
+  it('keeps the previous tab selected when the indicator is released over a disabled tab', async () => {
+    // Arrange
+    const onValueChange = vi.fn();
+    render(
+      <Tabs defaultValue="preview" onValueChange={onValueChange}>
+        <Tabs.List aria-label="Draggable tabs with disabled end">
+          <Tabs.Trigger value="preview">Preview</Tabs.Trigger>
+          <Tabs.Trigger value="code">Code</Tabs.Trigger>
+          <Tabs.Trigger value="disabled" disabled>
+            Disabled
+          </Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="preview">Preview panel</Tabs.Content>
+        <Tabs.Content value="code">Code panel</Tabs.Content>
+        <Tabs.Content value="disabled">Disabled panel</Tabs.Content>
+      </Tabs>,
+    );
+
+    const list = screen.getByRole('tablist');
+    const previewTab = screen.getByRole('tab', { name: 'Preview' });
+    const codeTab = screen.getByRole('tab', { name: 'Code' });
+    const disabledTab = screen.getByRole('tab', { name: 'Disabled' });
+    const rect = (left: number, width: number) => ({
+      x: left,
+      y: 0,
+      left,
+      top: 0,
+      right: left + width,
+      bottom: 40,
+      width,
+      height: 40,
+      toJSON: () => ({}),
+    });
+    vi.spyOn(list, 'getBoundingClientRect').mockReturnValue(rect(0, 300));
+    vi.spyOn(previewTab, 'getBoundingClientRect').mockReturnValue(rect(0, 100));
+    vi.spyOn(codeTab, 'getBoundingClientRect').mockReturnValue(rect(100, 100));
+    vi.spyOn(disabledTab, 'getBoundingClientRect').mockReturnValue(
+      rect(200, 100),
+    );
+
+    const pointerEvent = (target: Element, type: string, clientX: number) => {
+      const event = new Event(type, { bubbles: true, cancelable: true });
+      Object.defineProperties(event, {
+        clientX: { value: clientX },
+        clientY: { value: 20 },
+        pointerId: { value: 1 },
+        button: { value: 0 },
+      });
+      target.dispatchEvent(event);
+    };
+
+    // Act
+    pointerEvent(previewTab, 'pointerdown', 40);
+    pointerEvent(list, 'pointermove', 240);
+    pointerEvent(list, 'pointerup', 240);
+
+    // Assert
+    expect(onValueChange).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect(previewTab).toHaveAttribute('aria-selected', 'true');
+    });
+  });
 });
 
 function ControlledTabs() {

@@ -64,10 +64,6 @@ export function useSelectorDrag<TValue extends string>({
       let closestDistance = Number.POSITIVE_INFINITY;
 
       for (const item of getItems()) {
-        if (disabled || item.disabled) {
-          continue;
-        }
-
         const element = getItemElement(item.value);
         if (!element) {
           continue;
@@ -87,7 +83,7 @@ export function useSelectorDrag<TValue extends string>({
 
       return closestItem;
     },
-    [disabled, getItemElement, getItems, orientation],
+    [getItemElement, getItems, orientation],
   );
 
   const onPointerDown = useCallback(
@@ -164,7 +160,7 @@ export function useSelectorDrag<TValue extends string>({
       const clientPosition = isVertical ? event.clientY : event.clientX;
       const item = getItemAtPosition(clientPosition);
       const itemBounds = item ? getItemBounds(item.value) : null;
-      const items = getItems().filter((candidate) => !candidate.disabled);
+      const items = getItems();
       const first = items[0];
       const last = items.at(-1);
       const firstBounds = first ? getItemBounds(first.value) : null;
@@ -234,7 +230,9 @@ export function useSelectorDrag<TValue extends string>({
         const clientPosition =
           orientation === 'vertical' ? event.clientY : event.clientX;
         const item = cancelled ? undefined : getItemAtPosition(clientPosition);
-        if (item) {
+        // Releasing over a disabled option keeps the previous selection; the
+        // indicator then animates back to it via measureIndicator below.
+        if (item && !item.disabled) {
           onSelect(item.value);
         }
       }

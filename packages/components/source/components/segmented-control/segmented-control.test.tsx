@@ -644,5 +644,79 @@ describe('SegmentedControl', () => {
 
       expect(onChange).toHaveBeenCalledWith('month');
     });
+
+    it('keeps the previous selection when the indicator is released over a disabled option', () => {
+      // Arrange
+      const onChange = vi.fn();
+      const rect = (left: number, width: number) => ({
+        x: left,
+        y: 0,
+        left,
+        top: 0,
+        right: left + width,
+        bottom: 40,
+        width,
+        height: 40,
+        toJSON: () => ({}),
+      });
+      render(
+        <SegmentedControl
+          aria-label="Draggable timeframe with disabled end"
+          options={[
+            { label: 'Day', value: 'day' },
+            { label: 'Week', value: 'week' },
+            { label: 'Month', value: 'month', disabled: true },
+          ]}
+          defaultValue="day"
+          onChange={onChange}
+        />,
+      );
+
+      const group = screen.getByRole('radiogroup', {
+        name: 'Draggable timeframe with disabled end',
+      });
+      const dayItem = screen
+        .getByRole('radio', { name: 'Day' })
+        .closest('.notable-segmented-control__item');
+      const weekItem = screen
+        .getByRole('radio', { name: 'Week' })
+        .closest('.notable-segmented-control__item');
+      const monthItem = screen
+        .getByRole('radio', { name: 'Month' })
+        .closest('.notable-segmented-control__item');
+
+      if (!dayItem || !weekItem || !monthItem) {
+        throw new Error('Expected option elements to exist');
+      }
+
+      vi.spyOn(group, 'getBoundingClientRect').mockReturnValue(rect(0, 300));
+      vi.spyOn(dayItem, 'getBoundingClientRect').mockReturnValue(rect(0, 100));
+      vi.spyOn(weekItem, 'getBoundingClientRect').mockReturnValue(
+        rect(100, 100),
+      );
+      vi.spyOn(monthItem, 'getBoundingClientRect').mockReturnValue(
+        rect(200, 100),
+      );
+
+      const pointerEvent = (target: Element, type: string, clientX: number) => {
+        const event = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperties(event, {
+          clientX: { value: clientX },
+          clientY: { value: 20 },
+          pointerId: { value: 1 },
+          button: { value: 0 },
+        });
+        target.dispatchEvent(event);
+      };
+
+      // Act
+      pointerEvent(dayItem, 'pointerdown', 40);
+      pointerEvent(group, 'pointermove', 240);
+      pointerEvent(group, 'pointerup', 240);
+
+      // Assert
+      expect(onChange).not.toHaveBeenCalled();
+      expect(screen.getByRole('radio', { name: 'Day' })).toBeChecked();
+    });
   });
 });
