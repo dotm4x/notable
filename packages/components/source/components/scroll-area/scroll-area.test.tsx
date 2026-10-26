@@ -126,6 +126,32 @@ describe('ScrollArea', () => {
       expect(viewport.style.overflowX).toBe('');
     });
 
+    it('constrains the content to the viewport width for a vertical scroll area', () => {
+      // Arrange & Act
+      const { container } = render(
+        <ScrollArea aria-label="Vertical">Content</ScrollArea>,
+      );
+
+      // Assert
+      const content = container.querySelector('.notable-scroll-area__content');
+      expect(content).toHaveClass('notable-scroll-area__content--vertical');
+      expect(content).toHaveStyle({ minWidth: '100%' });
+    });
+
+    it('does not constrain the content width when horizontal scrolling is enabled', () => {
+      // Arrange & Act
+      const { container } = render(
+        <ScrollArea aria-label="Horizontal" orientation="horizontal">
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      const content = container.querySelector('.notable-scroll-area__content');
+      expect(content).not.toHaveClass('notable-scroll-area__content--vertical');
+      expect(content).not.toHaveStyle({ minWidth: '100%' });
+    });
+
     it('does not clip either axis when both directions scroll', () => {
       // Arrange & Act
       render(
