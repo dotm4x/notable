@@ -48,7 +48,8 @@
       var(--notable-tooltip-delay, var(--notable-duration-delay)),
     transform var(--notable-duration-base) var(--notable-easing-spring)
       var(--notable-tooltip-delay, var(--notable-duration-delay)),
-    visibility 0s linear var(--notable-tooltip-delay, var(--notable-duration-delay));
+    visibility 0s linear
+      var(--notable-tooltip-delay, var(--notable-duration-delay));
 }
 
 @media (prefers-reduced-motion: reduce) {

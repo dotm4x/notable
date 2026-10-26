@@ -81,7 +81,9 @@ export const FlushPadding: Story = {
     <Card {...args}>
       <Card.Header style={{ padding: 'var(--notable-spacing-6)' }}>
         <Card.Title>Recent activity</Card.Title>
-        <Card.Description>Content below sits flush with the edge.</Card.Description>
+        <Card.Description>
+          Content below sits flush with the edge.
+        </Card.Description>
       </Card.Header>
       <Card.Content>
         <div

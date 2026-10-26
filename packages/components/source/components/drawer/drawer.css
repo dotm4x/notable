@@ -160,9 +160,7 @@
     var(--notable-duration-exit),
     max(
       var(--notable-duration-minimum),
-      calc(
-        var(--notable-duration-exit) / var(--drawer-swipe-strength, 1)
-      )
+      calc(var(--notable-duration-exit) / var(--drawer-swipe-strength, 1))
     )
   );
 }
@@ -171,7 +169,8 @@
   transition:
     transform var(--notable-drawer-exit-duration)
       var(--notable-easing-emphasized-accelerate),
-    scale var(--notable-duration-exit) var(--notable-easing-emphasized-accelerate);
+    scale var(--notable-duration-exit)
+      var(--notable-easing-emphasized-accelerate);
   pointer-events: none;
 }
 
