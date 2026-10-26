@@ -88,7 +88,15 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
           style={viewportStyle}
           {...viewportProps}
         >
-          <BaseScrollArea.Content className="notable-scroll-area__content">
+          <BaseScrollArea.Content
+            className={
+              hasHorizontalAxis
+                ? 'notable-scroll-area__content'
+                : 'notable-scroll-area__content notable-scroll-area__content--vertical'
+            }
+            // Overrides Base UI's inline `min-width: fit-content`, which would let content widen past the viewport.
+            style={hasHorizontalAxis ? undefined : { minWidth: '100%' }}
+          >
             {children}
           </BaseScrollArea.Content>
         </BaseScrollArea.Viewport>
