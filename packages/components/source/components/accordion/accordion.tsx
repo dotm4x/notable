@@ -247,8 +247,6 @@ export function AccordionItem({
       </h3>
       <div
         id={panelId}
-        role="region"
-        aria-labelledby={triggerId}
         className="notable-accordion__panel"
         inert={!isExpanded}
       >

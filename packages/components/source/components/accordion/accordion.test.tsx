@@ -288,20 +288,22 @@ describe('Accordion', () => {
     expect(getTrigger('Shipping')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('links each trigger to its panel and labels the panel with the trigger', async () => {
+  it('links each trigger to its panel', async () => {
     const user = userEvent.setup();
     renderSingle();
 
     await user.click(getTrigger('Shipping'));
 
     const trigger = getTrigger('Shipping');
-    const panel = screen.getByRole('region', { name: 'Shipping' });
+    const panel = document.getElementById(
+      trigger.getAttribute('aria-controls') ?? '',
+    );
 
-    expect(trigger).toHaveAttribute('aria-controls', panel.id);
-    expect(panel).toHaveAttribute('aria-labelledby', trigger.id);
+    expect(panel).not.toBeNull();
     expect(
-      within(panel).getByText('Ships within two business days.'),
+      within(panel as HTMLElement).getByText('Ships within two business days.'),
     ).toBeVisible();
+    expect(screen.queryByRole('region')).toBeNull();
   });
 
   it('exposes each title as a level 3 heading that wraps its trigger', () => {
