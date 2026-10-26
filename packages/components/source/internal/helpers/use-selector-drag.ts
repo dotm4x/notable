@@ -159,6 +159,11 @@ export function useSelectorDrag<TValue extends string>({
       const isVertical = orientation === 'vertical';
       const clientPosition = isVertical ? event.clientY : event.clientX;
       const item = getItemAtPosition(clientPosition);
+      // Disabled options cannot receive a drag, so the indicator stays at its last valid position.
+      if (!item || item.disabled) {
+        return;
+      }
+
       const itemBounds = item ? getItemBounds(item.value) : null;
       const items = getItems();
       const first = items[0];
