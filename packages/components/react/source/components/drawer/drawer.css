@@ -32,9 +32,18 @@
   max-width: 100%;
   max-height: 100%;
   margin: 0;
-  /* Background fills the safe-area insets; content is kept clear of them. */
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /*
+   * Background fills the safe-area insets; content is kept clear of them.
+   * The inline gutter sits outside Drawer.Content, which Base UI does not use
+   * for mouse drags, so it is the area that swipes the drawer with a mouse.
+   */
+  padding-block: env(safe-area-inset-top) env(safe-area-inset-bottom);
+  padding-inline-start: calc(
+    env(safe-area-inset-left) + var(--notable-spacing-3)
+  );
+  padding-inline-end: calc(
+    env(safe-area-inset-right) + var(--notable-spacing-3)
+  );
   border: 0;
   overflow: hidden;
   overscroll-behavior: contain;
@@ -231,7 +240,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--notable-spacing-1);
-  padding: var(--notable-spacing-6) var(--notable-spacing-6) 0;
+  padding: var(--notable-spacing-6) var(--notable-spacing-3) 0;
 }
 
 .notable-drawer:has(> .notable-drawer__close-button) > .notable-drawer__header {
@@ -249,13 +258,20 @@
   flex-direction: column;
   gap: var(--notable-spacing-4);
   min-height: 0;
-  padding: var(--notable-spacing-6);
+  padding-block: var(--notable-spacing-6);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
-.notable-drawer__body > * {
+/*
+ * The side inset lives on the children, not the scroll container, so hover
+ * effects that scale past an element's edge stay inside the body and do not
+ * create a horizontal scrollbar or get clipped.
+ */
+.notable-drawer .notable-drawer__body > * {
   flex-shrink: 0;
+  width: auto;
+  margin-inline: var(--notable-spacing-3);
 }
 
 .notable-drawer__footer {
@@ -264,7 +280,7 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: var(--notable-spacing-2);
-  padding: 0 var(--notable-spacing-6) var(--notable-spacing-6);
+  padding: 0 var(--notable-spacing-3) var(--notable-spacing-6);
 }
 
 /*
@@ -276,7 +292,7 @@
   order: -1;
   display: flex;
   justify-content: flex-end;
-  padding: var(--notable-spacing-3) var(--notable-spacing-3) 0;
+  padding: var(--notable-spacing-3) 0 0;
 }
 
 .notable-drawer__title {
