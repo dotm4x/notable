@@ -376,3 +376,41 @@ describe('Combobox groups', () => {
     expect(screen.getByRole('option', { name: 'Go' })).toBeInTheDocument();
   });
 });
+
+describe('Combobox animated highlight', () => {
+  it('renders a single hidden highlight surface inside the popup', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    renderCombobox();
+
+    // Act
+    await user.click(screen.getByRole('combobox', { name: 'Fruit' }));
+
+    // Assert
+    const listbox = await screen.findByRole('listbox');
+    const popup = listbox.closest<HTMLElement>('.notable-combobox__popup');
+    const surfaces = popup?.querySelectorAll('.notable-animated-highlight');
+    expect(surfaces).toHaveLength(1);
+    expect(surfaces?.[0]).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('keeps one highlight surface when the filtered options change', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    renderCombobox();
+    const input = screen.getByRole('combobox', { name: 'Fruit' });
+
+    // Act
+    await user.type(input, 'ber');
+
+    // Assert
+    const listbox = await screen.findByRole('listbox');
+    const popup = listbox.closest<HTMLElement>('.notable-combobox__popup');
+    expect(popup?.querySelectorAll('.notable-animated-highlight')).toHaveLength(
+      1,
+    );
+    expect(
+      screen.queryByRole('option', { name: 'Apple' }),
+    ).not.toBeInTheDocument();
+  });
+});

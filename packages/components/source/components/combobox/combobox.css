@@ -31,6 +31,7 @@
   --notable-floating-surface-easing: var(--notable-easing-spring);
 
   box-sizing: border-box;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: var(--anchor-width);
@@ -46,6 +47,7 @@
 }
 
 .notable-combobox__list {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -71,6 +73,7 @@
 }
 
 .notable-combobox__item {
+  position: relative;
   display: flex;
   align-items: center;
   min-height: 2.25rem;
@@ -81,10 +84,6 @@
   cursor: pointer;
   user-select: none;
   overflow-wrap: anywhere;
-}
-
-.notable-combobox__item[data-highlighted] {
-  background: var(--notable-color-surface-hover);
 }
 
 .notable-combobox__item[data-selected] {
