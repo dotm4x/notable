@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type MouseEvent } from 'react';
+import { createRef, useState, type FormEvent, type MouseEvent } from 'react';
 import {
   cleanup,
   fireEvent,
@@ -75,6 +75,26 @@ function getBackdrop(): HTMLElement {
 }
 
 describe('Dialog', () => {
+  it('forwards its ref to the dialog popup element', async () => {
+    const user = userEvent.setup();
+    const contentRef = createRef<HTMLDivElement>();
+
+    render(
+      <Dialog>
+        <Dialog.Trigger>
+          <Button>Open dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Content ref={contentRef}>
+          <Dialog.Title>Ref check</Dialog.Title>
+        </Dialog.Content>
+      </Dialog>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Open dialog' }));
+
+    expect(await screen.findByRole('dialog')).toBe(contentRef.current);
+  });
+
   describe('state', () => {
     it('opens from the trigger and closes from Close in uncontrolled mode', async () => {
       // Arrange
