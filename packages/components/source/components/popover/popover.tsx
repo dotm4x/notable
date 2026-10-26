@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Button, type ButtonProps } from '../button/button.js';
+import '../../internal/styles/floating-surface.css';
 import './popover.css';
 
 /** Side of the trigger where the popover is placed. */
@@ -105,7 +106,9 @@ const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
     },
     ref,
   ) {
-    const classes = ['notable-popover', className].filter(Boolean).join(' ');
+    const classes = ['notable-popover', 'notable-floating-surface', className]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <BasePopover.Portal>

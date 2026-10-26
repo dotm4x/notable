@@ -1,0 +1,37 @@
+/*
+ * Shared visual base for floating surfaces such as popovers and comboboxes.
+ * Base UI keeps the popup mounted until its transitions finish. The popup
+ * starts and ends scaled down, based on `data-starting-style` and
+ * `data-ending-style`, so it appears to grow out of its anchor. Components
+ * add their own border, padding, width, and side offsets. A component can set
+ * `--notable-floating-surface-easing` to change the opening easing.
+ */
+.notable-floating-surface {
+  background: var(--notable-color-surface-raised);
+  color: var(--notable-color-text);
+  border-radius: var(--notable-radius-lg);
+  box-shadow: var(--notable-shadow-md);
+  transform-origin: var(--transform-origin);
+  font-family: var(--notable-font-family);
+  transition:
+    opacity var(--notable-duration-base)
+      var(--notable-floating-surface-easing, var(--notable-easing-standard)),
+    transform var(--notable-duration-base)
+      var(--notable-floating-surface-easing, var(--notable-easing-standard));
+}
+
+.notable-floating-surface[data-starting-style],
+.notable-floating-surface[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+/*
+ * With no transition, Base UI sees the end state immediately and unmounts the
+ * popup without waiting for an animation to finish.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .notable-floating-surface {
+    transition: none;
+  }
+}
