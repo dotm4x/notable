@@ -1,0 +1,23 @@
+.notable-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--notable-spacing-1);
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding-inline: var(--notable-spacing-1);
+  border: none;
+  border-radius: var(--notable-radius-xs);
+  background: var(--notable-color-surface-hover);
+  color: var(--notable-color-text-muted);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-xs);
+  font-weight: var(--notable-font-weight-medium);
+  line-height: 1;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  box-shadow: none;
+  user-select: none;
+  pointer-events: none;
+}

@@ -6,7 +6,7 @@ export * from './components/badge/badge.js';
 export * from './components/checkbox/checkbox.js';
 export * from './components/dialog/dialog.js';
 export * from './components/input/input.js';
-export * from './components/keyboard-shortcut/keyboard-shortcut.js';
+export * from './components/shortcut/shortcut.js';
 export * from './components/popover/popover.js';
 export * from './components/progress/progress.js';
 export * from './components/radio-group/radio-group.js';
