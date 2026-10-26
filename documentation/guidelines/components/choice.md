@@ -31,7 +31,7 @@ A chosen option must be recognizable without color. In a list the user scans, ty
 
 ## Disabled options
 
-A disabled option is visible and readable, but it cannot be chosen or committed. Ordinary keyboard and pointer navigation should skip it and not highlight it. Drag targeting has a documented implementation discrepancy; see [States](../patterns/states.md) and [Drag](../patterns/drag.md).
+A disabled option is visible and readable, but it cannot be chosen or committed. Ordinary keyboard and pointer navigation should skip it and not highlight it. During a drag, the indicator must not move onto a disabled option, and releasing over one keeps the previous value. See [States](../patterns/states.md) and [Drag](../patterns/drag.md).
 
 ## Keyboard
 
