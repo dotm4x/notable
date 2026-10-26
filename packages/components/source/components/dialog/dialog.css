@@ -44,13 +44,16 @@
   inset: 0;
   z-index: 50;
   background-color: var(--notable-color-overlay);
-  transition: opacity var(--notable-duration-base)
-    var(--notable-easing-standard);
+  backdrop-filter: blur(var(--notable-blur-medium));
+  transition:
+    opacity var(--notable-duration-base) var(--notable-easing-standard),
+    backdrop-filter var(--notable-duration-base) var(--notable-easing-standard);
 }
 
 .notable-dialog__backdrop[data-starting-style],
 .notable-dialog__backdrop[data-ending-style] {
   opacity: 0;
+  backdrop-filter: blur(var(--notable-blur-none));
 }
 
 .notable-dialog--small {
