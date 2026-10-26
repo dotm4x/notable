@@ -442,4 +442,8 @@ describe('Accordion', () => {
 
     consoleError.mockRestore();
   });
+
+  it('exposes Accordion.Item as the same component as AccordionItem', () => {
+    expect(Accordion.Item).toBe(AccordionItem);
+  });
 });
