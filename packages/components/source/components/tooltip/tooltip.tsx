@@ -60,6 +60,8 @@ export function Tooltip({
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
+  const isOpen = !disabled && !isDismissed && (isHovered || isFocused);
   const existingDescription = children.props['aria-describedby'];
   const describedBy = disabled
     ? existingDescription
@@ -71,6 +73,22 @@ export function Tooltip({
   useEffect(() => {
     setPortalTarget(document.body);
   }, []);
+
+  // Escape dismisses the open tooltip without moving focus or hover (WCAG 1.4.13).
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsDismissed(true);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
 
   useLayoutEffect(() => {
     if (disabled) {
@@ -185,10 +203,13 @@ export function Tooltip({
   }, [content, disabled, isFocused, isHovered, placement, portalTarget]);
 
   const handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
-    setIsFocused(
+    const isFocusWithin =
       event.relatedTarget instanceof Node &&
-        event.currentTarget.contains(event.relatedTarget),
-    );
+      event.currentTarget.contains(event.relatedTarget);
+    setIsFocused(isFocusWithin);
+    if (!isFocusWithin) {
+      setIsDismissed(false);
+    }
   };
 
   const tooltipContentStyle: TooltipContentStyle = {
@@ -204,8 +225,14 @@ export function Tooltip({
         className={['notable-tooltip', className].filter(Boolean).join(' ')}
         data-placement={position?.placement ?? placement}
         data-disabled={disabled || undefined}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => {
+          setIsHovered(true);
+          setIsDismissed(false);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          setIsDismissed(false);
+        }}
         onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
       >
@@ -219,7 +246,7 @@ export function Tooltip({
             id={tooltipId}
             role="tooltip"
             data-placement={position?.placement ?? placement}
-            data-open={(!disabled && (isHovered || isFocused)) || undefined}
+            data-open={isOpen || undefined}
             hidden={disabled}
             style={tooltipContentStyle}
           >

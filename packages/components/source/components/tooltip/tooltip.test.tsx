@@ -241,4 +241,80 @@ describe('Tooltip', () => {
     expect(maxTrigger).toHaveFocus();
     expect(maxTooltip).toHaveAttribute('data-open', 'true');
   });
+
+  it('dismisses on Escape and shows again when focus returns', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <Tooltip content="More information">
+        <button type="button">Help</button>
+      </Tooltip>,
+    );
+    const tooltip = screen.getByRole('tooltip');
+
+    await user.tab();
+    expect(tooltip).toHaveAttribute('data-open', 'true');
+
+    await user.keyboard('{Escape}');
+    expect(tooltip).not.toHaveAttribute('data-open');
+
+    await user.tab({ shift: true });
+    await user.tab();
+    expect(tooltip).toHaveAttribute('data-open', 'true');
+  });
+
+  it('dismisses on Escape while hovered and reopens after the pointer re-enters', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <Tooltip content="More information">
+        <button type="button">Help</button>
+      </Tooltip>,
+    );
+    const trigger = screen.getByRole('button', { name: 'Help' });
+    const tooltip = screen.getByRole('tooltip');
+
+    await user.hover(trigger);
+    expect(tooltip).toHaveAttribute('data-open', 'true');
+
+    await user.keyboard('{Escape}');
+    expect(tooltip).not.toHaveAttribute('data-open');
+
+    await user.unhover(trigger);
+    await user.hover(trigger);
+    expect(tooltip).toHaveAttribute('data-open', 'true');
+  });
+
+  it('lets Escape reach other document listeners and keeps disabled tooltips closed', async () => {
+    const user = userEvent.setup();
+    const onDocumentKeyDown = vi.fn();
+    document.addEventListener('keydown', onDocumentKeyDown);
+
+    render(
+      <>
+        <Tooltip content="Enabled help">
+          <button type="button">Enabled</button>
+        </Tooltip>
+        <Tooltip content="Disabled help" disabled>
+          <button type="button">Disabled</button>
+        </Tooltip>
+      </>,
+    );
+
+    try {
+      await user.hover(screen.getByRole('button', { name: 'Enabled' }));
+      await user.keyboard('{Escape}');
+      expect(onDocumentKeyDown).toHaveBeenCalledWith(
+        expect.objectContaining({ key: 'Escape' }),
+      );
+
+      await user.hover(screen.getByRole('button', { name: 'Disabled' }));
+      expect(screen.getAllByRole('tooltip')).toHaveLength(1);
+      expect(
+        screen.getByRole('button', { name: 'Disabled' }),
+      ).not.toHaveAttribute('aria-describedby');
+    } finally {
+      document.removeEventListener('keydown', onDocumentKeyDown);
+    }
+  });
 });
