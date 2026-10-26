@@ -321,7 +321,7 @@ export function ToastProvider({
       <BaseToast.Portal>
         <BaseToast.Viewport
           className={`notable-toast-viewport notable-toast-viewport--${position}`}
-          aria-label="Notifications"
+          aria-label={`Notifications ${position.replace(/-/g, ' ')}`}
         >
           <ToastList />
         </BaseToast.Viewport>
