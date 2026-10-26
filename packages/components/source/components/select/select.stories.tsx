@@ -125,6 +125,29 @@ export const WithGroups: Story = {
   ),
 };
 
+export const LongList: Story = {
+  render: () => (
+    <div style={{ width: '16rem' }}>
+      <Select.Root>
+        <Select.Label>Number</Select.Label>
+        <Select.Trigger>
+          <Select.Value placeholder="Pick a number" />
+          <Select.Icon />
+        </Select.Trigger>
+        <Select.Content>
+          <Select.List>
+            {Array.from({ length: 30 }, (_, index) => (
+              <Select.Item key={index} value={`item-${index + 1}`}>
+                Option {index + 1}
+              </Select.Item>
+            ))}
+          </Select.List>
+        </Select.Content>
+      </Select.Root>
+    </div>
+  ),
+};
+
 export const Disabled: Story = {
   render: () => (
     <div style={{ width: '16rem' }}>
