@@ -1,0 +1,123 @@
+.notable-dialog {
+  --notable-dialog-width: 32rem;
+
+  box-sizing: border-box;
+  width: min(
+    var(--notable-dialog-width),
+    calc(100vw - var(--notable-spacing-8))
+  );
+  max-height: calc(100dvh - var(--notable-spacing-8));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--notable-radius-xl);
+  background: var(--notable-color-surface-raised);
+  color: var(--notable-color-text);
+  box-shadow: var(--notable-shadow-lg);
+  overflow: auto;
+  overscroll-behavior: contain;
+  font-family: var(--notable-font-family);
+  opacity: 0;
+  transform: translateY(var(--notable-spacing-2)) scale(0.98);
+  transition:
+    opacity var(--notable-duration-base) var(--notable-easing-standard),
+    transform var(--notable-duration-base) var(--notable-easing-standard),
+    overlay var(--notable-duration-base) allow-discrete,
+    display var(--notable-duration-base) allow-discrete;
+}
+
+.notable-dialog[open] {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .notable-dialog[open] {
+    opacity: 0;
+    transform: translateY(var(--notable-spacing-2)) scale(0.98);
+  }
+}
+
+.notable-dialog::backdrop {
+  background-color: transparent;
+  transition:
+    background-color var(--notable-duration-base) var(--notable-easing-standard),
+    overlay var(--notable-duration-base) allow-discrete,
+    display var(--notable-duration-base) allow-discrete;
+}
+
+.notable-dialog[open]::backdrop {
+  background-color: var(--notable-color-overlay);
+}
+
+@starting-style {
+  .notable-dialog[open]::backdrop {
+    background-color: transparent;
+  }
+}
+
+.notable-dialog--small {
+  --notable-dialog-width: 24rem;
+}
+
+.notable-dialog--medium {
+  --notable-dialog-width: 32rem;
+}
+
+.notable-dialog--large {
+  --notable-dialog-width: 48rem;
+}
+
+.notable-dialog__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--notable-spacing-4);
+  padding: var(--notable-spacing-6);
+}
+
+.notable-dialog__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--notable-spacing-1);
+}
+
+.notable-dialog__body:has(.notable-dialog__close-button)
+  > .notable-dialog__header {
+  padding-inline-end: var(--notable-spacing-8);
+}
+
+.notable-dialog__title {
+  margin: 0;
+  color: var(--notable-color-text);
+  font-size: var(--notable-font-size-lg);
+  font-weight: var(--notable-font-weight-semibold);
+  line-height: var(--notable-line-height-tight);
+}
+
+.notable-dialog__description {
+  margin: 0;
+  color: var(--notable-color-text-muted);
+  font-size: var(--notable-font-size-sm);
+  line-height: var(--notable-line-height-relaxed);
+}
+
+.notable-dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--notable-spacing-2);
+}
+
+.notable-dialog__close-button {
+  position: absolute;
+  inset-block-start: var(--notable-spacing-3);
+  inset-inline-end: var(--notable-spacing-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-dialog,
+  .notable-dialog::backdrop {
+    transition: none;
+  }
+}
