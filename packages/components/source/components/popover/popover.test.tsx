@@ -236,9 +236,8 @@ describe('Popover', () => {
     expect(popup).toHaveClass('notable-popover', 'custom-popover');
   });
 
-  it('keeps focus inside a popover with interactive content', async () => {
+  it('moves focus into a popover with interactive content on open', async () => {
     // Arrange
-    const user = userEvent.setup();
     render(
       <Popover defaultOpen>
         <Popover.Content>
@@ -246,12 +245,15 @@ describe('Popover', () => {
         </Popover.Content>
       </Popover>,
     );
+    const search = screen.getByRole('textbox', { name: 'Search' });
 
     // Act
-    await user.tab();
+    await waitFor(() => {
+      expect(search).toHaveFocus();
+    });
 
     // Assert
-    expect(screen.getByRole('textbox', { name: 'Search' })).toHaveFocus();
+    expect(search).toHaveFocus();
   });
 
   it('follows the open prop in controlled mode', async () => {
