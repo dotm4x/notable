@@ -74,6 +74,16 @@
   background: var(--notable-color-primary);
 }
 
+.notable-switch__control[data-dragging] .notable-switch__track {
+  background: color-mix(
+    in srgb,
+    var(--notable-color-border-strong)
+      calc(100% - var(--notable-switch-drag-progress)),
+    var(--notable-color-primary) var(--notable-switch-drag-progress)
+  );
+  transition: none;
+}
+
 .notable-switch__input:checked + .notable-switch__track .notable-switch__thumb {
   transform: translateX(var(--notable-switch-travel));
 }

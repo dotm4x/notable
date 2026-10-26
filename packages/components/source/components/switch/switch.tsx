@@ -154,6 +154,10 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       '--notable-switch-drag-offset',
       `${drag.offset}px`,
     );
+    control.style.setProperty(
+      '--notable-switch-drag-progress',
+      `${drag.travel ? (drag.offset / drag.travel) * 100 : 0}%`,
+    );
     setIsDragging(true);
   };
 
@@ -172,6 +176,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     dragRef.current = null;
     setIsDragging(false);
     control?.style.removeProperty('--notable-switch-drag-offset');
+    control?.style.removeProperty('--notable-switch-drag-progress');
 
     if (control?.hasPointerCapture?.(event.pointerId)) {
       control.releasePointerCapture(event.pointerId);
