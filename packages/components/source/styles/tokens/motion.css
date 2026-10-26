@@ -8,6 +8,7 @@
      ======================================== */
   --notable-duration-fast: 140ms;
   --notable-duration-base: 160ms;
+  --notable-duration-toast: 200ms;
   --notable-duration-slow: 800ms;
 
   /* ========================================

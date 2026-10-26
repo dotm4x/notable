@@ -17,4 +17,5 @@ export * from './components/skeleton/skeleton.js';
 export * from './components/spinner/spinner.js';
 export * from './components/switch/switch.js';
 export * from './components/tabs/tabs.js';
+export * from './components/toast/toast.js';
 export * from './components/tooltip/tooltip.js';
