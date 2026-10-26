@@ -1,6 +1,4 @@
-/* ========================================
-   Neutral palette
-   ======================================== */
+/* Neutral palette */
 
 :root {
   --notable-gray-50: #fafafa;
@@ -19,9 +17,7 @@
   --notable-black: #000000;
 }
 
-/* ========================================
-   Light theme
-   ======================================== */
+/* Light theme */
 
 :root,
 [data-theme='light'] {
@@ -81,9 +77,7 @@
   --notable-color-shadow-strong: rgb(0 0 0 / 10%);
 }
 
-/* ========================================
-   Dark theme
-   ======================================== */
+/* Dark theme */
 
 [data-theme='dark'] {
   color-scheme: dark;

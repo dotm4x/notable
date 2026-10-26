@@ -1,10 +1,13 @@
 /**
  * Motion tokens for use with Motion's JavaScript/TypeScript API.
  *
+ * Internal module: it is not exported from the package entry point.
+ *
  * These values mirror the CSS custom properties defined in
  * `tokens/motion.css`. Because CSS custom properties cannot be passed
  * directly into Motion's `Transition` option, they are maintained here as
- * typed constants that must be kept in sync with the CSS file.
+ * typed constants that must be kept in sync with the CSS file. CSS-only
+ * tokens, such as `--notable-duration-toast`, are not mirrored here.
  *
  * Durations are expressed in seconds, as required by Motion.
  * The corresponding CSS properties use milliseconds.
@@ -14,13 +17,13 @@
 // Durations (seconds)
 // ---------------------------------------------------------------------------
 
-/** 0.14 s — fast interactions: button, checkbox, input, segmented-control. */
+/** 0.14 s. Equivalent to `--notable-duration-fast`. */
 export const DURATION_FAST = 0.14 as const;
 
-/** 0.16 s — base interactions: switch, tooltip, avatar. */
+/** 0.16 s. Equivalent to `--notable-duration-base`. */
 export const DURATION_BASE = 0.16 as const;
 
-/** 0.8 s — continuous animations: spinner rotation. */
+/** 0.8 s. Equivalent to `--notable-duration-slow`. */
 export const DURATION_SLOW = 0.8 as const;
 
 // ---------------------------------------------------------------------------
@@ -34,17 +37,15 @@ export const DURATION_SLOW = 0.8 as const;
 export const EASING_STANDARD = [0.25, 0.1, 0.25, 1] as const;
 
 /**
- * Spring-like cubic-bezier used for element entry (e.g. tooltip).
- * Equivalent to `--notable-easing-spring`.
+ * Ease-out cubic-bezier. Equivalent to `--notable-easing-spring`.
  */
 export const EASING_SPRING = [0.2, 0.8, 0.2, 1] as const;
 
 // ---------------------------------------------------------------------------
-// Reusable Motion spring configs
+// Motion spring configs
 //
-// These are genuinely shared across components that use Motion's spring type.
-// Spring configs are intentionally not represented as CSS variables because
-// Motion's spring physics engine does not map to CSS timing functions.
+// Motion's spring physics does not map to CSS timing functions, so these
+// configs are defined here rather than as CSS variables.
 // ---------------------------------------------------------------------------
 
 /**
@@ -58,7 +59,7 @@ export const SPRING_INTERACTIVE = {
 } as const;
 
 /**
- * Layout transition spring for sliding indicators (SegmentedControl).
+ * Layout transition spring for sliding indicators (SegmentedControl and Tabs).
  * stiffness: 450, damping: 35.
  */
 export const SPRING_LAYOUT = {
