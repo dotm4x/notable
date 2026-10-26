@@ -34,4 +34,10 @@ A design must not depend on hover to reveal essential information or make an act
 
 ## Disabled
 
-A disabled element should communicate
+A disabled element should communicate unavailability without becoming unreadable. It must not appear to accept an action that it cannot perform.
+
+Whether an unavailable element remains focusable depends on its semantics and interaction model. See [Accessibility](../foundations/accessibility.md).
+
+## Principle
+
+Each state has a distinct meaning. When states coexist, users must still be able to tell what is focused, what is highlighted, what is selected, and what is unavailable.

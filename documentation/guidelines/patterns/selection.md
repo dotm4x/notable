@@ -27,3 +27,17 @@ The visual treatment of a selected value must communicate its persistent meaning
 A highlight follows the temporary interaction target. A selection indicator represents the committed value. Neither should obscure focus or any other meaningful state.
 
 The same item may be highlighted and selected simultaneously. When the highlight moves elsewhere, the selected value must remain clear.
+
+## Communicating selection
+
+Selection must not rely on color alone. Typography, an icon, an indicator, or a change in shape may reinforce the selected state. In a list that users scan, font weight alone is too subtle to serve as the only indication.
+
+See [Colors](../foundations/colors.md) and [Choice](../components/choice.md).
+
+## Current and highlighted can coexist
+
+The current item and the highlighted item may be the same or different. When they coincide, both meanings must remain discernible. The highlight must not hide the visual treatment that communicates the current position.
+
+## Principle
+
+Highlighted, selected, and current each answer a different question. Their visual treatments must preserve those distinctions, even when the same item has more than one state.
