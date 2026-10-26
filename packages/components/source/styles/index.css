@@ -1,4 +1,5 @@
 @import './fonts.css';
+@import './tokens/blur.css';
 @import './tokens/borders.css';
 @import './tokens/motion.css';
 @import './tokens/colors.css';
