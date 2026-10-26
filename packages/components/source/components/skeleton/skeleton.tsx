@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
+import type { CSSProperties, HTMLAttributes, PointerEvent } from 'react';
 import {
   resolveRadius,
   type NotableRadiusToken,
@@ -53,12 +53,26 @@ export function Skeleton({
   className,
   animation = 'shimmer',
   height,
+  onPointerMove,
   radius,
   style,
   variant = 'rectangular',
   width,
   ...props
 }: SkeletonProps) {
+  const handlePointerMove = (event: PointerEvent<HTMLSpanElement>) => {
+    onPointerMove?.(event);
+    // The spotlight is positioned with CSS variables so pointer moves never re-render.
+    event.currentTarget.style.setProperty(
+      '--notable-skeleton-pointer-x',
+      `${event.nativeEvent.offsetX}px`,
+    );
+    event.currentTarget.style.setProperty(
+      '--notable-skeleton-pointer-y',
+      `${event.nativeEvent.offsetY}px`,
+    );
+  };
+
   // A circle needs equal sides, so a height-only circle reuses the height as its width.
   const resolvedWidth =
     variant === 'circular' && width === undefined ? height : width;
@@ -79,6 +93,7 @@ export function Skeleton({
     'notable-skeleton',
     `notable-skeleton--${variant}`,
     `notable-skeleton--${animation}`,
+    animation !== 'none' && 'notable-skeleton--spotlight',
     className,
   ]
     .filter(Boolean)
@@ -90,6 +105,7 @@ export function Skeleton({
       {...props}
       className={classes}
       style={inlineStyle}
+      onPointerMove={handlePointerMove}
     />
   );
 }
