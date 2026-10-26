@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
 import { useState } from 'react';
 import { Button } from '../button/button.js';
+import { Card } from '../card/card.js';
 import { Dialog } from '../dialog/dialog.js';
 import { Input } from '../input/input.js';
 import { Separator } from '../separator/separator.js';
@@ -20,13 +21,6 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
-const frame: CSSProperties = {
-  border: '1px solid var(--notable-color-border)',
-  borderRadius: 'var(--notable-radius-lg)',
-  background: 'var(--notable-color-surface)',
-  color: 'var(--notable-color-text)',
-};
 
 const listStyle: CSSProperties = {
   display: 'grid',
@@ -113,11 +107,11 @@ function ContactList() {
 
 export const Default: Story = {
   render: (args) => (
-    <div style={frame}>
+    <Card padding="none">
       <ScrollArea {...args}>
         <ContactList />
       </ScrollArea>
-    </div>
+    </Card>
   ),
 };
 
@@ -127,7 +121,7 @@ export const Horizontal: Story = {
     style: { width: '24rem' },
   },
   render: (args) => (
-    <div style={frame}>
+    <Card padding="none">
       <ScrollArea {...args}>
         <div
           style={{
@@ -164,7 +158,7 @@ export const Horizontal: Story = {
           ))}
         </div>
       </ScrollArea>
-    </div>
+    </Card>
   ),
 };
 
@@ -174,7 +168,7 @@ export const Bidirectional: Story = {
     style: { height: '16rem', width: '24rem' },
   },
   render: (args) => (
-    <div style={frame}>
+    <Card padding="none">
       <ScrollArea {...args}>
         <table
           style={{
@@ -308,19 +302,19 @@ export const Bidirectional: Story = {
           </tbody>
         </table>
       </ScrollArea>
-    </div>
+    </Card>
   ),
 };
 
 export const LongListAndText: Story = {
   render: (args) => (
     <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
-      <div style={frame}>
+      <Card padding="none">
         <ScrollArea {...args}>
           <ContactList />
         </ScrollArea>
-      </div>
-      <div style={frame}>
+      </Card>
+      <Card padding="none">
         <ScrollArea {...args} style={{ height: '12rem', width: '20rem' }}>
           <div
             style={{
@@ -339,14 +333,14 @@ export const LongListAndText: Story = {
             ))}
           </div>
         </ScrollArea>
-      </div>
+      </Card>
     </div>
   ),
 };
 
 export const NestedInteractiveContent: Story = {
   render: (args) => (
-    <div style={frame}>
+    <Card padding="none">
       <ScrollArea {...args} style={{ height: '18rem', width: '22rem' }}>
         <ul style={listStyle}>
           {projectFiles.map((file) => (
@@ -361,7 +355,7 @@ export const NestedInteractiveContent: Story = {
           ))}
         </ul>
       </ScrollArea>
-    </div>
+    </Card>
   ),
 };
 
@@ -380,14 +374,14 @@ export const ScrollbarVisibility: Story = {
           style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
         >
           <span style={mutedTextStyle}>scrollbar=&quot;{scrollbar}&quot;</span>
-          <div style={frame}>
+          <Card padding="none">
             <ScrollArea
               scrollbar={scrollbar}
               style={{ height: '12rem', width: '14rem' }}
             >
               <ContactList />
             </ScrollArea>
-          </div>
+          </Card>
         </div>
       ))}
     </div>
@@ -411,14 +405,14 @@ export const EdgeFadeEnabledAndDisabled: Story = {
           <span style={mutedTextStyle}>
             {fadeEdges ? 'fadeEdges' : 'No fade'}
           </span>
-          <div style={frame}>
+          <Card padding="none">
             <ScrollArea
               fadeEdges={fadeEdges}
               style={{ height: '12rem', width: '16rem' }}
             >
               <ContactList />
             </ScrollArea>
-          </div>
+          </Card>
         </div>
       ))}
     </div>
@@ -427,10 +421,9 @@ export const EdgeFadeEnabledAndDisabled: Story = {
 
 function ThemedScrollArea({ theme }: { theme: 'light' | 'dark' }) {
   return (
-    <div
+    <Card
       data-theme={theme}
       style={{
-        ...frame,
         background: 'var(--notable-color-background)',
         padding: 'var(--notable-spacing-3)',
       }}
@@ -438,7 +431,7 @@ function ThemedScrollArea({ theme }: { theme: 'light' | 'dark' }) {
       <ScrollArea fadeEdges style={{ height: '12rem', width: '16rem' }}>
         <ContactList />
       </ScrollArea>
-    </div>
+    </Card>
   );
 }
 
@@ -459,7 +452,7 @@ export const LightAndDark: Story = {
 
 export const ShortContent: Story = {
   render: (args) => (
-    <div style={frame}>
+    <Card padding="none">
       <ScrollArea
         {...args}
         fadeEdges
@@ -472,7 +465,7 @@ export const ShortContent: Story = {
           </p>
         </div>
       </ScrollArea>
-    </div>
+    </Card>
   ),
 };
 
@@ -501,7 +494,7 @@ function DynamicNotifications() {
       >
         Add notification
       </Button>
-      <div style={frame}>
+      <Card padding="none">
         <ScrollArea fadeEdges style={{ height: '12rem', width: '20rem' }}>
           <ul style={listStyle}>
             {notifications.map((notification, index) => (
@@ -514,7 +507,7 @@ function DynamicNotifications() {
             ))}
           </ul>
         </ScrollArea>
-      </div>
+      </Card>
     </div>
   );
 }
@@ -525,7 +518,7 @@ export const DynamicContent: Story = {
 
 export const SettingsPanel: Story = {
   render: (args) => (
-    <div style={frame}>
+    <Card padding="none">
       <ScrollArea {...args} style={{ height: '20rem', width: '22rem' }}>
         <div
           style={{
@@ -559,7 +552,7 @@ export const SettingsPanel: Story = {
           </section>
         </div>
       </ScrollArea>
-    </div>
+    </Card>
   ),
 };
 
@@ -611,7 +604,7 @@ export const FadeVisualization: Story = {
           style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
         >
           <span style={mutedTextStyle}>fadeSize=&quot;{fadeSize}&quot;</span>
-          <div style={frame}>
+          <Card padding="none">
             <ScrollArea
               orientation="horizontal"
               fadeEdges
@@ -639,7 +632,7 @@ export const FadeVisualization: Story = {
                 ))}
               </div>
             </ScrollArea>
-          </div>
+          </Card>
         </div>
       ))}
     </div>
@@ -649,16 +642,16 @@ export const FadeVisualization: Story = {
 export const NarrowAndWideContainers: Story = {
   render: (args) => (
     <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
-      <div style={{ ...frame, width: '12rem' }}>
+      <Card padding="none" style={{ width: '12rem' }}>
         <ScrollArea {...args} style={{ height: '10rem' }}>
           <ContactList />
         </ScrollArea>
-      </div>
-      <div style={{ ...frame, width: '100%' }}>
+      </Card>
+      <Card padding="none" style={{ width: '100%' }}>
         <ScrollArea {...args} style={{ height: '10rem' }}>
           <ContactList />
         </ScrollArea>
-      </div>
+      </Card>
     </div>
   ),
 };
