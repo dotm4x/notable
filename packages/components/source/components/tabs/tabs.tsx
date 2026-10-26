@@ -10,6 +10,7 @@ import {
   useState,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
+  type FocusEvent as ReactFocusEvent,
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
@@ -19,6 +20,7 @@ import {
   EASING_STANDARD,
   SPRING_LAYOUT,
 } from '../../styles/motion.js';
+import { AnimatedHighlight } from '../../internal/helpers/animated-highlight/animated-highlight.js';
 import {
   useSelectorDrag,
   type SelectorBounds,
@@ -70,6 +72,9 @@ type TabsPanelContextValue = {
 
 const TabsPanelContext = createContext<TabsPanelContextValue | null>(null);
 
+// Value of the tab currently showing the shared animated highlight.
+const TabsHighlightContext = createContext<string | null>(null);
+
 // Distance panels travel while fading; small enough to need no viewport clipping.
 const PANEL_TRAVEL = 24;
 
@@ -120,10 +125,14 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(function TabsList(
   {
     children,
     className,
+    onBlur,
     onClickCapture,
+    onFocus,
     onPointerCancel,
     onPointerDown,
+    onPointerLeave,
     onPointerMove,
+    onPointerOver,
     onPointerUp,
     ...props
   },
@@ -134,7 +143,29 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(function TabsList(
     null,
   );
   const [isVertical, setIsVertical] = useState(false);
+  const [hoveredValue, setHoveredValue] = useState<string | null>(null);
+  const [focusedValue, setFocusedValue] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  // The pointer takes precedence over keyboard focus, which keeps its highlight once the pointer leaves.
+  const highlightedValue = hoveredValue ?? focusedValue;
+
+  const getHighlightableValue = useCallback((target: EventTarget | null) => {
+    const list = listRef.current;
+    const tab =
+      target instanceof Element
+        ? target.closest<HTMLElement>('[role="tab"][data-selector-value]')
+        : null;
+    if (
+      !list ||
+      !tab ||
+      !list.contains(tab) ||
+      tab.hasAttribute('data-disabled')
+    ) {
+      return null;
+    }
+
+    return tab.dataset.selectorValue ?? null;
+  }, []);
 
   const getItems = useCallback(() => {
     const list = listRef.current;
@@ -300,8 +331,35 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(function TabsList(
         onClickCapture?.(event);
         drag.onClickCapture(event);
       }}
+      onFocus={(event: ReactFocusEvent<HTMLDivElement>) => {
+        onFocus?.(event);
+        const isKeyboardFocus =
+          event.target instanceof Element &&
+          event.target.matches(':focus-visible');
+        setFocusedValue(
+          isKeyboardFocus ? getHighlightableValue(event.target) : null,
+        );
+      }}
+      onBlur={(event: ReactFocusEvent<HTMLDivElement>) => {
+        onBlur?.(event);
+        setFocusedValue(null);
+      }}
+      onPointerOver={(event: ReactPointerEvent<HTMLDivElement>) => {
+        onPointerOver?.(event);
+        if (event.pointerType === 'touch') {
+          return;
+        }
+        setHoveredValue(getHighlightableValue(event.target));
+      }}
+      onPointerLeave={(event: ReactPointerEvent<HTMLDivElement>) => {
+        onPointerLeave?.(event);
+        setHoveredValue(null);
+      }}
     >
-      {children}
+      <TabsHighlightContext.Provider value={highlightedValue}>
+        <AnimatedHighlight className="notable-tabs__highlight" />
+        {children}
+      </TabsHighlightContext.Provider>
       {indicatorBounds && (
         <motion.span
           className="notable-tabs__indicator"
@@ -342,12 +400,16 @@ const TabsTrigger = forwardRef<HTMLElement, TabsTriggerProps>(
     { children, className, type = 'button', ...props },
     ref,
   ) {
+    const highlightedValue = useContext(TabsHighlightContext);
+    const isHighlighted = !props.disabled && highlightedValue === props.value;
+
     return (
       <BaseTabs.Tab
         {...props}
         ref={ref}
         type={type}
         data-selector-value={props.value}
+        data-highlighted={isHighlighted || undefined}
         data-selector-item
         className={['notable-tabs__trigger', className]
           .filter(Boolean)
