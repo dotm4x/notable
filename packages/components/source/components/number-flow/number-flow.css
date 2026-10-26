@@ -1,0 +1,60 @@
+/* ==========================================================================
+   NumberFlow
+   ========================================================================== */
+
+.notable-number-flow {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.notable-number-flow__visual {
+  display: inline;
+}
+
+/* Each digit is a clipped window one line tall. The strip holds glyphs 0-9
+   stacked vertically, so each digit moves the strip by one tenth of its height. */
+
+.notable-number-flow__digit {
+  display: inline-block;
+  height: 1lh;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.notable-number-flow__strip {
+  display: block;
+  text-align: center;
+  transform: translate3d(
+    0,
+    calc(var(--notable-number-flow-digit, 0) * -10%),
+    0
+  );
+  transition: transform
+    var(--notable-number-flow-duration, var(--notable-duration-base))
+    var(--notable-easing-spring);
+}
+
+.notable-number-flow__glyph {
+  display: block;
+}
+
+/* Visually hidden, but still available to assistive technology. */
+
+.notable-number-flow__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-number-flow__strip {
+    transition: none;
+  }
+}
