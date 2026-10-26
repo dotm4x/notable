@@ -80,7 +80,9 @@ const CardRoot = forwardRef<HTMLElement, CardProps>(function Card(
 /** Renders the header region of a card. */
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   function CardHeader({ children, className, ...props }, ref) {
-    const classes = ['notable-card__header', className].filter(Boolean).join(' ');
+    const classes = ['notable-card__header', className]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
@@ -107,7 +109,10 @@ const CardTitle = forwardRef<HTMLElement, CardTitleProps>(function CardTitle(
 
 /** Renders the muted description text of a card. */
 const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
-  function CardDescription({ as: Element = 'p', children, className, ...props }, ref) {
+  function CardDescription(
+    { as: Element = 'p', children, className, ...props },
+    ref,
+  ) {
     const Component = Element as ElementType;
     const classes = ['notable-card__description', className]
       .filter(Boolean)
@@ -124,7 +129,9 @@ const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
 /** Renders the main content region of a card. */
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   function CardContent({ children, className, ...props }, ref) {
-    const classes = ['notable-card__content', className].filter(Boolean).join(' ');
+    const classes = ['notable-card__content', className]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
@@ -137,7 +144,9 @@ const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
 /** Renders the footer region of a card, typically for actions. */
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   function CardFooter({ children, className, ...props }, ref) {
-    const classes = ['notable-card__footer', className].filter(Boolean).join(' ');
+    const classes = ['notable-card__footer', className]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
