@@ -183,14 +183,14 @@ export const InteractiveGroup: Story = {
   render: () => (
     <AvatarGroup size="large">
       <Tooltip content="Open Max's profile" placement="bottom">
-        <a href="#max-profile" aria-label="Max Perez profile">
+        <a href="#max-profile" aria-label="MX Max Perez profile">
           <Avatar>
             <Avatar.Fallback>MX</Avatar.Fallback>
           </Avatar>
         </a>
       </Tooltip>
       <Tooltip content="Open Alex's profile" placement="bottom">
-        <a href="#alex-profile" aria-label="Alex Lee profile">
+        <a href="#alex-profile" aria-label="AL Alex Lee profile">
           <Avatar>
             <Avatar.Fallback>AL</Avatar.Fallback>
           </Avatar>
