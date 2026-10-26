@@ -1,0 +1,349 @@
+/*
+ * Base UI keeps the popup mounted until its transitions finish and marks the
+ * entry and exit start states with `data-starting-style` and `data-ending-style`.
+ * During a swipe Base UI writes the raw offset into the inline `transform`. The
+ * popup overrides that and expresses the drag through `translate` (dismiss
+ * direction only) and size (opposite edge, stretched from the anchored edge),
+ * so the edge that stays anchored never lifts off the viewport.
+ * A CSS transition uses the timing of the style it animates toward. The enter
+ * timing therefore lives on the resting state, and the exit timing lives on
+ * `data-ending-style`. `z-index` has no shared layering token, so it is set locally.
+ */
+.notable-drawer__viewport {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  /* Lets clicks pass through to the backdrop. The popup opts back in. */
+  pointer-events: none;
+}
+
+.notable-drawer {
+  --notable-drawer-horizontal-size: 28rem;
+  --notable-drawer-vertical-size: 60dvh;
+  --notable-drawer-exit-duration: var(--notable-duration-exit);
+
+  position: fixed;
+  z-index: 50;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  /* Background fills the safe-area insets; content is kept clear of them. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  border: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+  background: var(--notable-color-surface-raised);
+  color: var(--notable-color-text);
+  box-shadow: var(--notable-shadow-lg);
+  font-family: var(--notable-font-family);
+  pointer-events: auto;
+  transition:
+    transform var(--notable-duration-enter)
+      var(--notable-easing-emphasized-decelerate),
+    translate var(--notable-duration-enter)
+      var(--notable-easing-emphasized-decelerate),
+    width var(--notable-duration-enter)
+      var(--notable-easing-emphasized-decelerate),
+    height var(--notable-duration-enter)
+      var(--notable-easing-emphasized-decelerate),
+    scale var(--notable-duration-enter)
+      var(--notable-easing-emphasized-decelerate);
+}
+
+/*
+ * Swipe offsets, from Base UI's movement variables. The dismiss direction moves
+ * the panel. The opposite direction stretches it from the edge it enters from,
+ * so the gap never shows. Both are zero when not swiping.
+ */
+.notable-drawer--right,
+.notable-drawer--left {
+  top: 0;
+  bottom: 0;
+  width: min(
+    calc(
+      var(--notable-drawer-horizontal-size) +
+        max(0px, var(--notable-drawer-stretch, 0px))
+    ),
+    100%
+  );
+}
+
+.notable-drawer--right {
+  right: 0;
+  translate: max(0px, var(--drawer-swipe-movement-x, 0px)) 0;
+  --notable-drawer-stretch: calc(-1 * var(--drawer-swipe-movement-x, 0px));
+  border-top-left-radius: var(--notable-radius-xl);
+  border-bottom-left-radius: var(--notable-radius-xl);
+}
+
+.notable-drawer--left {
+  left: 0;
+  translate: min(0px, var(--drawer-swipe-movement-x, 0px)) 0;
+  --notable-drawer-stretch: var(--drawer-swipe-movement-x, 0px);
+  border-top-right-radius: var(--notable-radius-xl);
+  border-bottom-right-radius: var(--notable-radius-xl);
+}
+
+.notable-drawer--top,
+.notable-drawer--bottom {
+  left: 0;
+  right: 0;
+  height: min(
+    calc(
+      var(--notable-drawer-vertical-size) +
+        max(0px, var(--notable-drawer-stretch, 0px))
+    ),
+    100%
+  );
+}
+
+.notable-drawer--top {
+  top: 0;
+  translate: 0 min(0px, var(--drawer-swipe-movement-y, 0px));
+  --notable-drawer-stretch: var(--drawer-swipe-movement-y, 0px);
+  border-bottom-left-radius: var(--notable-radius-xl);
+  border-bottom-right-radius: var(--notable-radius-xl);
+}
+
+.notable-drawer--bottom {
+  bottom: 0;
+  translate: 0 max(0px, var(--drawer-swipe-movement-y, 0px));
+  --notable-drawer-stretch: calc(-1 * var(--drawer-swipe-movement-y, 0px));
+  border-top-left-radius: var(--notable-radius-xl);
+  border-top-right-radius: var(--notable-radius-xl);
+}
+
+.notable-drawer--right[data-starting-style],
+.notable-drawer--right[data-ending-style] {
+  transform: translate(100%, 0);
+}
+
+.notable-drawer--left[data-starting-style],
+.notable-drawer--left[data-ending-style] {
+  transform: translate(-100%, 0);
+}
+
+.notable-drawer--top[data-starting-style],
+.notable-drawer--top[data-ending-style] {
+  transform: translate(0, -100%);
+}
+
+.notable-drawer--bottom[data-starting-style],
+.notable-drawer--bottom[data-ending-style] {
+  transform: translate(0, 100%);
+}
+
+/*
+ * Follows the finger or pointer during a swipe without easing. The inline
+ * transform Base UI writes is replaced by the translate and stretch above. The
+ * exit style keeps its own transform so a swipe dismissal still animates away.
+ */
+.notable-drawer[data-swiping]:not([data-ending-style]) {
+  transform: none !important;
+  transition: none;
+}
+
+/*
+ * A swipe dismissal keeps the speed of the flick. The duration is shortened by
+ * the swipe strength that Base UI reports, within a clamp so it never feels
+ * abrupt or sluggish.
+ */
+.notable-drawer[data-swipe-dismiss] {
+  --notable-drawer-exit-duration: min(
+    var(--notable-duration-exit),
+    max(
+      var(--notable-duration-minimum),
+      calc(
+        var(--notable-duration-exit) / var(--drawer-swipe-strength, 1)
+      )
+    )
+  );
+}
+
+.notable-drawer[data-ending-style] {
+  transition:
+    transform var(--notable-drawer-exit-duration)
+      var(--notable-easing-emphasized-accelerate),
+    scale var(--notable-duration-exit) var(--notable-easing-emphasized-accelerate);
+  pointer-events: none;
+}
+
+/* Stacked drawers recede slightly behind the newest one. */
+.notable-drawer[data-nested-drawer-open] {
+  scale: calc(1 - 0.03 * min(var(--nested-drawers, 1), 3));
+}
+
+.notable-drawer--small {
+  --notable-drawer-horizontal-size: 20rem;
+  --notable-drawer-vertical-size: 40dvh;
+}
+
+.notable-drawer--medium {
+  --notable-drawer-horizontal-size: 28rem;
+  --notable-drawer-vertical-size: 60dvh;
+}
+
+.notable-drawer--large {
+  --notable-drawer-horizontal-size: 40rem;
+  --notable-drawer-vertical-size: 80dvh;
+}
+
+.notable-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: var(--notable-color-overlay);
+  backdrop-filter: blur(var(--notable-blur-subtle));
+  /* Tracks the swipe progress Base UI reports, so the backdrop fades with the panel. */
+  opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  transition: opacity var(--notable-duration-enter)
+    var(--notable-easing-emphasized-decelerate);
+}
+
+.notable-drawer__backdrop[data-starting-style] {
+  opacity: 0;
+}
+
+.notable-drawer__backdrop[data-ending-style] {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--notable-duration-exit)
+    var(--notable-easing-emphasized-accelerate);
+}
+
+/* While the panel follows a drag, the backdrop must not ease behind it. */
+.notable-drawer__backdrop:has(
+  ~ .notable-drawer__viewport
+    .notable-drawer:not([data-ending-style])[data-swiping]
+) {
+  transition: none;
+}
+
+.notable-drawer__header {
+  position: relative;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--notable-spacing-1);
+  padding: var(--notable-spacing-6) var(--notable-spacing-6) 0;
+}
+
+.notable-drawer:has(> .notable-drawer__close-button) > .notable-drawer__header {
+  padding-inline-end: var(--notable-spacing-12);
+}
+
+/*
+ * The body is the only scroll container. Header and footer are siblings
+ * outside it, so they stay pinned while the content scrolls underneath.
+ */
+.notable-drawer__body {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--notable-spacing-4);
+  min-height: 0;
+  padding: var(--notable-spacing-6);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.notable-drawer__body > * {
+  flex-shrink: 0;
+}
+
+.notable-drawer__footer {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--notable-spacing-2);
+  padding: 0 var(--notable-spacing-6) var(--notable-spacing-6);
+}
+
+/*
+ * Without a header, the close button gets its own pinned row above the body,
+ * so scrolled content never passes underneath it.
+ */
+.notable-drawer__toolbar {
+  flex: none;
+  order: -1;
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--notable-spacing-3) var(--notable-spacing-3) 0;
+}
+
+.notable-drawer__title {
+  margin: 0;
+  color: var(--notable-color-text);
+  font-size: var(--notable-font-size-lg);
+  font-weight: var(--notable-font-weight-semibold);
+  line-height: var(--notable-line-height-tight);
+}
+
+.notable-drawer__description {
+  margin: 0;
+  color: var(--notable-color-text-muted);
+  font-size: var(--notable-font-size-sm);
+  line-height: var(--notable-line-height-relaxed);
+}
+
+/* Pinned over the header's top-right corner, inset clear of any safe-area notch. */
+.notable-drawer > .notable-drawer__close-button {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: calc(var(--notable-spacing-3) + env(safe-area-inset-top));
+  inset-inline-end: calc(var(--notable-spacing-3) + env(safe-area-inset-right));
+}
+
+/*
+ * Reduced motion keeps the same state changes but replaces the slide with a
+ * short fade. A swipe dismissal still follows the finger off-screen, and it
+ * settles quickly so the panel does not jump back to rest before fading.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .notable-drawer {
+    --notable-drawer-exit-duration: var(--notable-duration-fast);
+    transition:
+      opacity var(--notable-duration-fast) var(--notable-easing-standard),
+      transform var(--notable-duration-fast) var(--notable-easing-standard),
+      translate var(--notable-duration-fast) var(--notable-easing-standard),
+      width var(--notable-duration-fast) var(--notable-easing-standard),
+      height var(--notable-duration-fast) var(--notable-easing-standard),
+      scale var(--notable-duration-fast) var(--notable-easing-standard);
+  }
+
+  .notable-drawer[data-swipe-dismiss] {
+    --notable-drawer-exit-duration: var(--notable-duration-fast);
+  }
+
+  .notable-drawer[data-starting-style] {
+    transform: none;
+    opacity: 0;
+  }
+
+  .notable-drawer[data-ending-style] {
+    opacity: 0;
+    transition:
+      opacity var(--notable-duration-fast) var(--notable-easing-standard),
+      transform var(--notable-duration-fast) var(--notable-easing-standard),
+      scale var(--notable-duration-fast) var(--notable-easing-standard);
+  }
+
+  .notable-drawer[data-ending-style]:not([data-swipe-dismiss]) {
+    transform: none;
+  }
+
+  .notable-drawer__backdrop,
+  .notable-drawer__backdrop[data-ending-style] {
+    transition: opacity var(--notable-duration-fast)
+      var(--notable-easing-standard);
+  }
+}
