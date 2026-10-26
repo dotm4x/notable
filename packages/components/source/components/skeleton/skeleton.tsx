@@ -1,4 +1,8 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
+import {
+  resolveRadius,
+  type NotableRadiusToken,
+} from '../../internal/radius/resolve-radius.js';
 import './skeleton.css';
 
 /** Basic placeholder shapes. Dimensions can always be overridden. */
@@ -8,8 +12,7 @@ export type SkeletonVariant = 'text' | 'circular' | 'rectangular';
 export type SkeletonAnimation = 'shimmer' | 'pulse' | 'none';
 
 /** Notable radius token names. */
-export type SkeletonRadiusToken =
-  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+export type SkeletonRadiusToken = NotableRadiusToken;
 
 /** Props for {@link Skeleton}, in addition to native `span` attributes. */
 export type SkeletonProps = Omit<
@@ -40,29 +43,6 @@ export type SkeletonProps = Omit<
    */
   variant?: SkeletonVariant;
 };
-
-const radiusTokens: ReadonlySet<string> = new Set<SkeletonRadiusToken>([
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  '2xl',
-  'full',
-]);
-
-function resolveRadius(radius: SkeletonProps['radius']): string | undefined {
-  if (radius === undefined) {
-    return undefined;
-  }
-  if (typeof radius === 'number') {
-    return `${radius}px`;
-  }
-  if (radiusTokens.has(radius)) {
-    return `var(--notable-radius-${radius})`;
-  }
-  return radius;
-}
 
 /**
  * Renders a decorative loading placeholder. Compose several skeletons to build
