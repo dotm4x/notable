@@ -1,13 +1,24 @@
+/*
+ * Base UI keeps the popup mounted until its transitions finish. It marks the
+ * enter and exit start states with `data-starting-style` and `data-ending-style`,
+ * so the transitions below run in every browser without keyframes.
+ * `z-index` has no shared layering token, so it is set locally.
+ */
 .notable-dialog {
   --notable-dialog-width: 32rem;
 
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  z-index: 50;
   box-sizing: border-box;
   width: min(
     var(--notable-dialog-width),
     calc(100vw - var(--notable-spacing-8))
   );
   max-height: calc(100dvh - var(--notable-spacing-8));
-  margin: auto;
+  margin: 0;
   padding: 0;
   border: 0;
   border-radius: var(--notable-radius-xl);
@@ -17,53 +28,29 @@
   overflow: auto;
   overscroll-behavior: contain;
   font-family: var(--notable-font-family);
+  transition:
+    opacity var(--notable-duration-base) var(--notable-easing-standard),
+    transform var(--notable-duration-base) var(--notable-easing-standard);
 }
 
-.notable-dialog::backdrop {
+.notable-dialog[data-starting-style],
+.notable-dialog[data-ending-style] {
+  opacity: 0;
+  transform: translateY(var(--notable-spacing-2)) scale(0.98);
+}
+
+.notable-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
   background-color: var(--notable-color-overlay);
+  transition: opacity var(--notable-duration-base)
+    var(--notable-easing-standard);
 }
 
-/*
- * Entry and exit use keyframes instead of transitions. Keyframes start on the
- * first rendered frame, so the dialog never paints at full opacity before the
- * fade begins, and the exit runs from the open state without relying on
- * `@starting-style` or discrete transition support. The exit keyframes use
- * `forwards` so the dialog stays invisible until `close()` runs on `animationend`.
- */
-@keyframes notable-dialog-in {
-  from {
-    opacity: 0;
-    transform: translateY(var(--notable-spacing-2)) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes notable-dialog-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(var(--notable-spacing-2)) scale(0.98);
-  }
-}
-
-@keyframes notable-dialog-backdrop-in {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes notable-dialog-backdrop-out {
-  to {
-    opacity: 0;
-  }
+.notable-dialog__backdrop[data-starting-style],
+.notable-dialog__backdrop[data-ending-style] {
+  opacity: 0;
 }
 
 .notable-dialog--small {
@@ -126,27 +113,12 @@
 }
 
 /*
- * Without these rules there is no animation, so the component closes
- * immediately. Under reduced motion the dialog appears and disappears at once.
+ * With no transition, Base UI sees the end state immediately and unmounts the
+ * popup without waiting for an animation to finish.
  */
-@media (prefers-reduced-motion: no-preference) {
-  .notable-dialog[open] {
-    animation: notable-dialog-in var(--notable-duration-base)
-      var(--notable-easing-standard);
-  }
-
-  .notable-dialog[open]::backdrop {
-    animation: notable-dialog-backdrop-in var(--notable-duration-base)
-      var(--notable-easing-standard);
-  }
-
-  .notable-dialog[data-closing] {
-    animation: notable-dialog-out var(--notable-duration-fast)
-      var(--notable-easing-standard) forwards;
-  }
-
-  .notable-dialog[data-closing]::backdrop {
-    animation: notable-dialog-backdrop-out var(--notable-duration-fast)
-      var(--notable-easing-standard) forwards;
+@media (prefers-reduced-motion: reduce) {
+  .notable-dialog,
+  .notable-dialog__backdrop {
+    transition: none;
   }
 }

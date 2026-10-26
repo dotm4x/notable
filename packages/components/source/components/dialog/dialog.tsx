@@ -1,23 +1,18 @@
+import { Dialog as BaseDialog } from '@base-ui/react/dialog';
+import type { BaseUIEvent } from '@base-ui/react/types';
 import { X } from 'lucide-react';
 import {
   cloneElement,
   createContext,
   isValidElement,
-  useCallback,
   useContext,
-  useEffect,
-  useId,
   useLayoutEffect,
   useRef,
-  useState,
-  type DialogHTMLAttributes,
   type HTMLAttributes,
   type MouseEvent,
   type MouseEventHandler,
-  type PointerEvent,
   type ReactNode,
   type RefObject,
-  type SyntheticEvent,
 } from 'react';
 import { Button, type ButtonProps } from '../button/button.js';
 import './dialog.css';
@@ -43,19 +38,14 @@ export type DialogTriggerProps = {
   children: ReactNode;
 };
 
-/** Props for `Dialog.Content`, which renders the native `<dialog>` element. */
-export type DialogContentProps = Omit<
-  DialogHTMLAttributes<HTMLDialogElement>,
-  'open'
-> & {
+/** Props for `Dialog.Content`, which renders the modal popup. */
+export type DialogContentProps = HTMLAttributes<HTMLDivElement> & {
   /** Width of the dialog. Defaults to `medium`. */
   size?: DialogSize;
   /** Shows a close button in the top-right corner. Defaults to `true`. */
   showCloseButton?: boolean;
   /** Closes the dialog when the backdrop is clicked. Defaults to `true`. */
   closeOnBackdropClick?: boolean;
-  /** Dialog body content. */
-  children?: ReactNode;
 };
 
 /** Props for `Dialog.Header`. */
@@ -74,48 +64,13 @@ export type DialogFooterProps = HTMLAttributes<HTMLDivElement>;
 export type DialogCloseProps = ButtonProps;
 
 type DialogContextValue = {
-  isOpen: boolean;
-  setOpen: (open: boolean) => void;
-  dialogRef: RefObject<HTMLDialogElement | null>;
-  titleId: string;
-  descriptionId: string;
-  hasTitle: boolean;
-  hasDescription: boolean;
-  setHasTitle: (hasTitle: boolean) => void;
-  setHasDescription: (hasDescription: boolean) => void;
+  closeOnBackdropClickRef: RefObject<boolean>;
 };
 
-type TriggerChildProps = {
-  onClick?: MouseEventHandler<HTMLElement>;
-  'aria-haspopup'?: 'dialog';
-  'aria-expanded'?: boolean;
-};
+type ConsumerClickEvent = MouseEvent<HTMLElement> &
+  Partial<Pick<BaseUIEvent<MouseEvent<HTMLElement>>, 'preventBaseUIHandler'>>;
 
 const DialogContext = createContext<DialogContextValue | null>(null);
-
-const CLOSING_ATTRIBUTE = 'data-closing';
-const EXIT_ANIMATION_NAME = 'notable-dialog-out';
-
-/** True when the dialog runs a CSS animation, so closing must wait for it to end. */
-function hasAnimation(element: HTMLElement) {
-  const { animationName } = getComputedStyle(element);
-
-  return animationName !== '' && animationName !== 'none';
-}
-
-/** Finishes closing once the dialog's own exit animation has ended or been cancelled. */
-function completeExitAnimation(
-  dialog: HTMLDialogElement,
-  event: Pick<globalThis.AnimationEvent, 'target' | 'animationName'>,
-) {
-  if (
-    event.target === dialog &&
-    event.animationName === EXIT_ANIMATION_NAME &&
-    dialog.hasAttribute(CLOSING_ATTRIBUTE)
-  ) {
-    dialog.close();
-  }
-}
 
 function useDialogContext(componentName: string) {
   const context = useContext(DialogContext);
@@ -128,81 +83,59 @@ function useDialogContext(componentName: string) {
 }
 
 /**
+ * Wraps a consumer `onClick` so a call to `preventDefault` also skips Base UI's
+ * own click handling, matching the native `<dialog>` behavior.
+ */
+function withConsumerClick(
+  onClick: MouseEventHandler<HTMLElement> | undefined,
+): MouseEventHandler<HTMLElement> {
+  return (event: ConsumerClickEvent) => {
+    onClick?.(event);
+
+    if (event.defaultPrevented) {
+      event.preventBaseUIHandler?.();
+    }
+  };
+}
+
+/**
  * Root component that owns the open state of a modal dialog. Pass `open` and
  * `onOpenChange` for controlled use, or `defaultOpen` for uncontrolled use.
  */
 function DialogRoot({
-  open: openProp,
+  open,
   defaultOpen = false,
   onOpenChange,
   children,
 }: DialogProps) {
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
-  const isControlled = openProp !== undefined;
-  const isOpen = isControlled ? openProp : uncontrolledOpen;
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const titleId = useId();
-  const descriptionId = useId();
-  const [hasTitle, setHasTitle] = useState(false);
-  const [hasDescription, setHasDescription] = useState(false);
+  const closeOnBackdropClickRef = useRef(true);
 
-  const setOpen = useCallback(
-    (nextOpen: boolean) => {
-      if (!isControlled) {
-        setUncontrolledOpen(nextOpen);
-      }
-
-      if (nextOpen !== isOpen) {
-        onOpenChange?.(nextOpen);
-      }
-    },
-    [isControlled, isOpen, onOpenChange],
-  );
-
-  useLayoutEffect(() => {
-    const dialog = dialogRef.current;
-
-    if (!dialog) {
-      return;
-    }
-
-    if (isOpen) {
-      dialog.removeAttribute(CLOSING_ATTRIBUTE);
-
-      if (!dialog.open) {
-        dialog.showModal();
-      }
+  const handleOpenChange = (
+    nextOpen: boolean,
+    eventDetails: BaseDialog.Root.ChangeEventDetails,
+  ) => {
+    if (
+      !nextOpen &&
+      eventDetails.reason === 'outside-press' &&
+      !closeOnBackdropClickRef.current
+    ) {
+      eventDetails.cancel();
 
       return;
     }
 
-    if (!dialog.open) {
-      return;
-    }
-
-    // The exit animation finishes by calling `close()` from `Dialog.Content`.
-    if (hasAnimation(dialog)) {
-      dialog.setAttribute(CLOSING_ATTRIBUTE, '');
-    } else {
-      dialog.close();
-    }
-  }, [isOpen]);
+    onOpenChange?.(nextOpen);
+  };
 
   return (
-    <DialogContext.Provider
-      value={{
-        isOpen,
-        setOpen,
-        dialogRef,
-        titleId,
-        descriptionId,
-        hasTitle,
-        hasDescription,
-        setHasTitle,
-        setHasDescription,
-      }}
-    >
-      {children}
+    <DialogContext.Provider value={{ closeOnBackdropClickRef }}>
+      <BaseDialog.Root
+        open={open}
+        defaultOpen={defaultOpen}
+        onOpenChange={handleOpenChange}
+      >
+        {children}
+      </BaseDialog.Root>
     </DialogContext.Provider>
   );
 }
@@ -212,31 +145,29 @@ function DialogRoot({
  * element are preserved; calling `preventDefault` in `onClick` skips opening.
  */
 function DialogTrigger({ children }: DialogTriggerProps) {
-  const { isOpen, setOpen } = useDialogContext('Dialog.Trigger');
-  const trigger = isValidElement<TriggerChildProps>(children) ? (
+  useDialogContext('Dialog.Trigger');
+
+  const trigger = isValidElement<{ onClick?: MouseEventHandler<HTMLElement> }>(
+    children,
+  ) ? (
     children
   ) : (
     <Button>{children}</Button>
   );
-  const triggerOnClick = trigger.props.onClick;
 
-  return cloneElement(trigger, {
-    'aria-haspopup': 'dialog',
-    'aria-expanded': isOpen,
-    onClick: (event: MouseEvent<HTMLElement>) => {
-      triggerOnClick?.(event);
-
-      if (!event.defaultPrevented) {
-        setOpen(true);
-      }
-    },
-  });
+  return (
+    <BaseDialog.Trigger
+      render={cloneElement(trigger, {
+        onClick: withConsumerClick(trigger.props.onClick),
+      })}
+    />
+  );
 }
 
 /**
- * Renders the native modal `<dialog>` with its body. Escape and backdrop clicks
- * request closing through the root state. Pass `className` and HTML attributes
- * to style or extend the dialog element.
+ * Renders the modal popup with its backdrop and body. Escape, focus trapping,
+ * scroll locking, and focus restoration are handled by Base UI. Pass `className`
+ * and HTML attributes to style or extend the popup element.
  */
 function DialogContent({
   size = 'medium',
@@ -244,112 +175,43 @@ function DialogContent({
   closeOnBackdropClick = true,
   className,
   children,
-  onCancel,
-  onClose,
-  onClick,
-  onPointerDown,
   ...props
 }: DialogContentProps) {
-  const {
-    dialogRef,
-    setOpen,
-    titleId,
-    descriptionId,
-    hasDescription,
-    hasTitle,
-  } = useDialogContext('Dialog.Content');
-  const isPressOnBackdrop = useRef(false);
+  const { closeOnBackdropClickRef } = useDialogContext('Dialog.Content');
+
+  // Base UI reads this ref when a press lands outside the popup, so it is
+  // updated before the next pointer event rather than during render.
+  useLayoutEffect(() => {
+    closeOnBackdropClickRef.current = closeOnBackdropClick;
+  }, [closeOnBackdropClick, closeOnBackdropClickRef]);
 
   const classes = ['notable-dialog', `notable-dialog--${size}`, className]
     .filter(Boolean)
     .join(' ');
 
-  const handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
-    onCancel?.(event);
-
-    // Closing goes through state so a controlled parent that ignores
-    // `onOpenChange` keeps the dialog open.
-    if (!event.defaultPrevented) {
-      event.preventDefault();
-      setOpen(false);
-    }
-  };
-
-  const handleClose = (event: SyntheticEvent<HTMLDialogElement>) => {
-    onClose?.(event);
-    setOpen(false);
-  };
-
-  // Only the dialog's own exit animation completes the close. Animations on
-  // descendants and the backdrop bubble or run alongside it, so they are ignored.
-  // Both events are listened to natively: React's synthetic animation handlers
-  // do not fire reliably here, and a cancelled exit must still close the dialog.
-  useEffect(() => {
-    const dialog = dialogRef.current;
-
-    if (!dialog) {
-      return;
-    }
-
-    const handleNativeExitEnd = (event: globalThis.AnimationEvent) =>
-      completeExitAnimation(dialog, event);
-
-    dialog.addEventListener('animationend', handleNativeExitEnd);
-    dialog.addEventListener('animationcancel', handleNativeExitEnd);
-
-    return () => {
-      dialog.removeEventListener('animationend', handleNativeExitEnd);
-      dialog.removeEventListener('animationcancel', handleNativeExitEnd);
-    };
-  }, [dialogRef]);
-
-  // The backdrop is the `<dialog>` element itself. A click only counts as a
-  // backdrop click when the press also started there, so drag-selecting text
-  // that ends outside the dialog does not dismiss it.
-  const handlePointerDown = (event: PointerEvent<HTMLDialogElement>) => {
-    isPressOnBackdrop.current = event.target === event.currentTarget;
-    onPointerDown?.(event);
-  };
-
-  const handleClick = (event: MouseEvent<HTMLDialogElement>) => {
-    onClick?.(event);
-
-    const isBackdropClick =
-      isPressOnBackdrop.current && event.target === event.currentTarget;
-    isPressOnBackdrop.current = false;
-
-    if (closeOnBackdropClick && isBackdropClick) {
-      setOpen(false);
-    }
-  };
-
   return (
-    <dialog
-      {...props}
-      ref={dialogRef}
-      className={classes}
-      aria-labelledby={hasTitle ? titleId : undefined}
-      aria-describedby={hasDescription ? descriptionId : undefined}
-      onCancel={handleCancel}
-      onClose={handleClose}
-      onPointerDown={handlePointerDown}
-      onClick={handleClick}
-    >
-      <div className="notable-dialog__body">
-        {children}
-        {showCloseButton && (
-          <Button
-            variant="ghost"
-            size="icon"
-            className="notable-dialog__close-button"
-            aria-label="Close dialog"
-            onClick={() => setOpen(false)}
-          >
-            <X aria-hidden="true" />
-          </Button>
-        )}
-      </div>
-    </dialog>
+    <BaseDialog.Portal>
+      <BaseDialog.Backdrop className="notable-dialog__backdrop" />
+      <BaseDialog.Popup {...props} className={classes}>
+        <div className="notable-dialog__body">
+          {children}
+          {showCloseButton && (
+            <BaseDialog.Close
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="notable-dialog__close-button"
+                  aria-label="Close dialog"
+                />
+              }
+            >
+              <X aria-hidden="true" />
+            </BaseDialog.Close>
+          )}
+        </div>
+      </BaseDialog.Popup>
+    </BaseDialog.Portal>
   );
 }
 
@@ -365,40 +227,25 @@ function DialogHeader({ className, ...props }: DialogHeaderProps) {
   );
 }
 
-/** Accessible name of the dialog. Renders an `h2` with a generated id. */
+/** Accessible name of the dialog. Renders an `h2` linked to the popup. */
 function DialogTitle({ className, ...props }: DialogTitleProps) {
-  const { titleId, setHasTitle } = useDialogContext('Dialog.Title');
-
-  useEffect(() => {
-    setHasTitle(true);
-
-    return () => setHasTitle(false);
-  }, [setHasTitle]);
+  useDialogContext('Dialog.Title');
 
   return (
-    <h2
+    <BaseDialog.Title
       {...props}
-      id={titleId}
       className={['notable-dialog__title', className].filter(Boolean).join(' ')}
     />
   );
 }
 
-/** Accessible description of the dialog. */
+/** Accessible description of the dialog. Linked to the popup automatically. */
 function DialogDescription({ className, ...props }: DialogDescriptionProps) {
-  const { descriptionId, setHasDescription } =
-    useDialogContext('Dialog.Description');
-
-  useEffect(() => {
-    setHasDescription(true);
-
-    return () => setHasDescription(false);
-  }, [setHasDescription]);
+  useDialogContext('Dialog.Description');
 
   return (
-    <p
+    <BaseDialog.Description
       {...props}
-      id={descriptionId}
       className={['notable-dialog__description', className]
         .filter(Boolean)
         .join(' ')}
@@ -423,28 +270,26 @@ function DialogFooter({ className, ...props }: DialogFooterProps) {
  * always uses `type="button"`, so it never submits a surrounding form.
  */
 function DialogClose({ onClick, ...props }: DialogCloseProps) {
-  const { setOpen } = useDialogContext('Dialog.Close');
+  useDialogContext('Dialog.Close');
 
   return (
-    <Button
-      variant="outline"
-      {...props}
-      type="button"
-      onClick={(event) => {
-        onClick?.(event);
-
-        if (!event.defaultPrevented) {
-          setOpen(false);
-        }
-      }}
+    <BaseDialog.Close
+      render={
+        <Button
+          variant="outline"
+          {...props}
+          type="button"
+          onClick={withConsumerClick(onClick)}
+        />
+      }
     />
   );
 }
 
 /**
- * Compound modal dialog built on the native `<dialog>` element. Compose
- * `Dialog.Trigger`, `Dialog.Content`, `Dialog.Header`, `Dialog.Title`,
- * `Dialog.Description`, `Dialog.Footer`, and `Dialog.Close` inside the root.
+ * Compound modal dialog built on Base UI. Compose `Dialog.Trigger`,
+ * `Dialog.Content`, `Dialog.Header`, `Dialog.Title`, `Dialog.Description`,
+ * `Dialog.Footer`, and `Dialog.Close` inside the root.
  */
 export const Dialog = Object.assign(DialogRoot, {
   Trigger: DialogTrigger,

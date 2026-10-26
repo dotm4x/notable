@@ -1,35 +1,18 @@
-import { useState, type FormEvent, type SyntheticEvent } from 'react';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { useState, type FormEvent, type MouseEvent } from 'react';
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Button } from '../button/button.js';
 import { Dialog, type DialogProps } from './dialog.js';
 
-const originalShowModal = HTMLDialogElement.prototype.showModal;
-const originalClose = HTMLDialogElement.prototype.close;
-
-// jsdom does not implement the modal dialog API. The mock mirrors the browser
-// behavior that matters here: `open` state and a `close` event on closing.
-beforeEach(() => {
-  HTMLDialogElement.prototype.showModal = vi.fn(function (
-    this: HTMLDialogElement,
-  ) {
-    this.open = true;
-  });
-  HTMLDialogElement.prototype.close = vi.fn(function (this: HTMLDialogElement) {
-    if (!this.open) {
-      return;
-    }
-
-    this.open = false;
-    this.dispatchEvent(new Event('close'));
-  });
-});
-
 afterEach(() => {
   cleanup();
-  HTMLDialogElement.prototype.showModal = originalShowModal;
-  HTMLDialogElement.prototype.close = originalClose;
 });
 
 function renderDialog(props: Partial<DialogProps> = {}) {
@@ -79,97 +62,127 @@ function ControlledDialog({
   );
 }
 
+function getBackdrop(): HTMLElement {
+  const backdrop = document.querySelector<HTMLElement>(
+    '.notable-dialog__backdrop',
+  );
+
+  if (!backdrop) {
+    throw new Error('Expected the dialog backdrop to be rendered.');
+  }
+
+  return backdrop;
+}
+
 describe('Dialog', () => {
   describe('state', () => {
     it('opens from the trigger and closes from Close in uncontrolled mode', async () => {
       // Arrange
       const user = userEvent.setup();
-      const onOpenChange = vi.fn();
-      renderDialog({ onOpenChange });
-      const dialog = screen.getByRole('dialog', { hidden: true });
+      renderDialog();
 
       // Act
       await user.click(screen.getByRole('button', { name: 'Open dialog' }));
 
       // Assert
-      expect(dialog).toHaveAttribute('open');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      // Act
+      await user.click(screen.getByRole('button', { name: 'Cancel' }));
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
+    });
+
+    it('renders open on mount when defaultOpen is set', () => {
+      // Arrange & Act
+      renderDialog({ defaultOpen: true });
+
+      // Assert
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('calls onOpenChange with the requested state in uncontrolled mode', async () => {
+      // Arrange
+      const user = userEvent.setup();
+      const onOpenChange = vi.fn();
+      renderDialog({ onOpenChange });
+
+      // Act
+      await user.click(screen.getByRole('button', { name: 'Open dialog' }));
+
+      // Assert
+      expect(onOpenChange).toHaveBeenCalledTimes(1);
       expect(onOpenChange).toHaveBeenLastCalledWith(true);
 
       // Act
       await user.click(screen.getByRole('button', { name: 'Cancel' }));
 
       // Assert
-      expect(dialog).not.toHaveAttribute('open');
-      expect(onOpenChange).toHaveBeenLastCalledWith(false);
       expect(onOpenChange).toHaveBeenCalledTimes(2);
-    });
-
-    it('opens on mount when defaultOpen is set', () => {
-      // Arrange & Act
-      renderDialog({ defaultOpen: true });
-
-      // Assert
-      expect(screen.getByRole('dialog')).toHaveAttribute('open');
-      expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(1);
+      expect(onOpenChange).toHaveBeenLastCalledWith(false);
     });
 
     it('keeps the dialog closed when a controlled parent ignores onOpenChange', async () => {
       // Arrange
       const user = userEvent.setup();
       const onOpenChange = vi.fn();
-      renderDialog({ open: false, onOpenChange });
-      const dialog = screen.getByRole('dialog', { hidden: true });
+      render(
+        <Dialog open={false} onOpenChange={onOpenChange}>
+          <Dialog.Trigger>
+            <Button>Open dialog</Button>
+          </Dialog.Trigger>
+          <Dialog.Content>
+            <Dialog.Title>Controlled</Dialog.Title>
+          </Dialog.Content>
+        </Dialog>,
+      );
 
       // Act
       await user.click(screen.getByRole('button', { name: 'Open dialog' }));
 
       // Assert
       expect(onOpenChange).toHaveBeenCalledWith(true);
-      expect(dialog).not.toHaveAttribute('open');
-      expect(HTMLDialogElement.prototype.showModal).not.toHaveBeenCalled();
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
 
-    it('follows the open prop when a controlled parent updates it', () => {
+    it('follows the open prop when a controlled parent updates it', async () => {
       // Arrange
-      const renderControlled = (open: boolean) => (
-        <Dialog open={open}>
+      const { rerender } = render(
+        <Dialog open={false}>
           <Dialog.Content>
-            <Dialog.Title>Delete project?</Dialog.Title>
+            <Dialog.Title>Controlled</Dialog.Title>
           </Dialog.Content>
-        </Dialog>
+        </Dialog>,
       );
-      const { rerender } = render(renderControlled(false));
-
-      // Act
-      rerender(renderControlled(true));
-
-      // Assert
-      expect(screen.getByRole('dialog')).toHaveAttribute('open');
-
-      // Act
-      rerender(renderControlled(false));
-
-      // Assert
-      expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute(
-        'open',
-      );
-    });
-
-    it('does not call showModal again when the dialog is already open', () => {
-      // Arrange
-      const { rerender } = renderDialog({ defaultOpen: true });
 
       // Act
       rerender(
-        <Dialog defaultOpen>
+        <Dialog open>
           <Dialog.Content>
-            <Dialog.Title>Delete project?</Dialog.Title>
+            <Dialog.Title>Controlled</Dialog.Title>
           </Dialog.Content>
         </Dialog>,
       );
 
       // Assert
-      expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(1);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      // Act
+      rerender(
+        <Dialog open={false}>
+          <Dialog.Content>
+            <Dialog.Title>Controlled</Dialog.Title>
+          </Dialog.Content>
+        </Dialog>,
+      );
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
     });
 
     it('works with controlled state managed by a parent component', async () => {
@@ -182,256 +195,77 @@ describe('Dialog', () => {
       await user.click(screen.getByRole('button', { name: 'Open dialog' }));
 
       // Assert
-      expect(screen.getByRole('dialog')).toHaveAttribute('open');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      expect(onOpenChange).toHaveBeenLastCalledWith(true);
 
       // Act
       await user.click(screen.getByRole('button', { name: 'Close' }));
 
       // Assert
-      expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute(
-        'open',
-      );
-      expect(onOpenChange.mock.calls).toEqual([[true], [false]]);
-    });
-  });
-
-  describe('keyboard and native close', () => {
-    it('closes on Escape, prevents the native close, and reports once', () => {
-      // Arrange
-      const onOpenChange = vi.fn();
-      renderDialog({ defaultOpen: true, onOpenChange });
-      const dialog = screen.getByRole('dialog');
-
-      // Act
-      const isNotCancelled = fireEvent(
-        dialog,
-        new Event('cancel', { cancelable: true }),
-      );
-
-      // Assert
-      expect(isNotCancelled).toBe(false);
-      expect(onOpenChange).toHaveBeenCalledTimes(1);
-      expect(onOpenChange).toHaveBeenCalledWith(false);
-      expect(dialog).not.toHaveAttribute('open');
-    });
-
-    it('keeps a controlled dialog open on Escape when the parent ignores the request', () => {
-      // Arrange
-      const onOpenChange = vi.fn();
-      renderDialog({ open: true, onOpenChange });
-      const dialog = screen.getByRole('dialog');
-
-      // Act
-      fireEvent(dialog, new Event('cancel', { cancelable: true }));
-
-      // Assert
-      expect(onOpenChange).toHaveBeenCalledWith(false);
-      expect(dialog).toHaveAttribute('open');
-    });
-
-    it('calls the consumer cancel handler and skips closing when it prevents default', () => {
-      // Arrange
-      const onOpenChange = vi.fn();
-      const onCancel = vi.fn((event: SyntheticEvent) => {
-        event.preventDefault();
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
       });
-      render(
-        <Dialog defaultOpen onOpenChange={onOpenChange}>
-          <Dialog.Content onCancel={onCancel}>
-            <Dialog.Title>Unsaved changes</Dialog.Title>
-          </Dialog.Content>
-        </Dialog>,
-      );
-
-      // Act
-      fireEvent(
-        screen.getByRole('dialog'),
-        new Event('cancel', { cancelable: true }),
-      );
-
-      // Assert
-      expect(onCancel).toHaveBeenCalledTimes(1);
-      expect(onOpenChange).not.toHaveBeenCalled();
-      expect(screen.getByRole('dialog')).toHaveAttribute('open');
-    });
-
-    it('syncs state when the native dialog closes without going through Close', () => {
-      // Arrange
-      const onOpenChange = vi.fn();
-      renderDialog({ defaultOpen: true, onOpenChange });
-      const dialog = screen.getByRole('dialog') as HTMLDialogElement;
-
-      // Act
-      dialog.close();
-
-      // Assert
-      expect(onOpenChange).toHaveBeenCalledTimes(1);
-      expect(onOpenChange).toHaveBeenCalledWith(false);
-    });
-
-    it('calls the consumer close handler when the native dialog closes', () => {
-      // Arrange
-      const onClose = vi.fn();
-      render(
-        <Dialog defaultOpen>
-          <Dialog.Content onClose={onClose}>
-            <Dialog.Title>Notice</Dialog.Title>
-          </Dialog.Content>
-        </Dialog>,
-      );
-
-      // Act
-      (screen.getByRole('dialog') as HTMLDialogElement).close();
-
-      // Assert
-      expect(onClose).toHaveBeenCalledTimes(1);
+      expect(onOpenChange).toHaveBeenLastCalledWith(false);
     });
   });
 
-  describe('exit animation', () => {
-    // jsdom does not run CSS animations, so the computed animation name is
-    // mocked for dialog elements. `none` mirrors reduced-motion styles.
-    function mockAnimationName(animationName: string) {
-      const originalGetComputedStyle = window.getComputedStyle.bind(window);
-
-      vi.stubGlobal(
-        'getComputedStyle',
-        (element: Element, pseudoElement?: string | null) =>
-          element instanceof HTMLDialogElement
-            ? ({ animationName } as CSSStyleDeclaration)
-            : originalGetComputedStyle(element, pseudoElement),
-      );
-    }
-
-    function dispatchAnimationEvent(
-      element: Element,
-      type: 'animationend' | 'animationcancel',
-      animationName: string,
-    ) {
-      const event = new Event(type, { bubbles: true });
-
-      Object.defineProperty(event, 'animationName', { value: animationName });
-      fireEvent(element, event);
-    }
-
-    afterEach(() => {
-      vi.unstubAllGlobals();
-      vi.restoreAllMocks();
-    });
-
-    it('keeps the dialog open until its exit animation ends', async () => {
+  describe('keyboard', () => {
+    it('closes on Escape and reports the close once', async () => {
       // Arrange
+      const user = userEvent.setup();
       const onOpenChange = vi.fn();
-      mockAnimationName('notable-dialog-in');
-      renderDialog({ onOpenChange });
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Open dialog' }),
-      );
-      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
-      onOpenChange.mockClear();
+      renderDialog({ defaultOpen: true, onOpenChange });
 
       // Act
-      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+      await user.keyboard('{Escape}');
 
       // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
       expect(onOpenChange).toHaveBeenCalledTimes(1);
       expect(onOpenChange).toHaveBeenCalledWith(false);
-      expect(dialog).toHaveAttribute('data-closing');
-      expect(dialog.open).toBe(true);
-
-      // Act
-      dispatchAnimationEvent(dialog, 'animationend', 'notable-dialog-out');
-
-      // Assert
-      expect(dialog.open).toBe(false);
-      expect(onOpenChange).toHaveBeenCalledTimes(1);
     });
 
-    it('ignores animation events from the backdrop, descendants, and other animations', async () => {
+    it('keeps a controlled dialog open on Escape when the parent ignores the request', async () => {
       // Arrange
-      mockAnimationName('notable-dialog-in');
+      const user = userEvent.setup();
+      render(
+        <Dialog open onOpenChange={vi.fn()}>
+          <Dialog.Content>
+            <Dialog.Title>Controlled</Dialog.Title>
+          </Dialog.Content>
+        </Dialog>,
+      );
+
+      // Act
+      await user.keyboard('{Escape}');
+
+      // Assert
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('moves focus into the dialog when it opens and restores it on close', async () => {
+      // Arrange
+      const user = userEvent.setup();
       renderDialog();
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Open dialog' }),
-      );
-      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
-      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+      const trigger = screen.getByRole('button', { name: 'Open dialog' });
 
       // Act
-      dispatchAnimationEvent(
-        dialog,
-        'animationend',
-        'notable-dialog-backdrop-out',
-      );
-      dispatchAnimationEvent(
-        screen.getByRole('button', { name: 'Delete' }),
-        'animationend',
-        'notable-dialog-out',
-      );
+      await user.click(trigger);
 
       // Assert
-      expect(dialog.open).toBe(true);
-      expect(dialog).toHaveAttribute('data-closing');
-    });
-
-    it('finishes closing when the exit animation is cancelled', async () => {
-      // Arrange
-      mockAnimationName('notable-dialog-in');
-      renderDialog();
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Open dialog' }),
+      expect(screen.getByRole('dialog')).toContainElement(
+        document.activeElement as HTMLElement,
       );
-      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
-      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
       // Act
-      dispatchAnimationEvent(dialog, 'animationcancel', 'notable-dialog-out');
+      await user.keyboard('{Escape}');
 
       // Assert
-      expect(dialog.open).toBe(false);
-    });
-
-    it('cancels the pending close when the dialog is reopened during the exit', () => {
-      // Arrange
-      mockAnimationName('notable-dialog-in');
-      const content = (
-        <Dialog.Content>
-          <Dialog.Title>Controlled</Dialog.Title>
-        </Dialog.Content>
-      );
-      const { rerender } = render(<Dialog open>{content}</Dialog>);
-      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
-      rerender(<Dialog open={false}>{content}</Dialog>);
-      expect(dialog).toHaveAttribute('data-closing');
-
-      // Act
-      rerender(<Dialog open>{content}</Dialog>);
-      dispatchAnimationEvent(dialog, 'animationend', 'notable-dialog-out');
-
-      // Assert
-      expect(dialog).not.toHaveAttribute('data-closing');
-      expect(dialog.open).toBe(true);
-    });
-
-    it('closes immediately when no animation runs, such as under reduced motion', async () => {
-      // Arrange
-      const onOpenChange = vi.fn();
-      mockAnimationName('none');
-      renderDialog({ onOpenChange });
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Open dialog' }),
-      );
-      const dialog = screen.getByRole<HTMLDialogElement>('dialog');
-      onOpenChange.mockClear();
-
-      // Act
-      await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
-
-      // Assert
-      expect(dialog.open).toBe(false);
-      expect(dialog).not.toHaveAttribute('data-closing');
-      expect(onOpenChange).toHaveBeenCalledTimes(1);
-      expect(onOpenChange).toHaveBeenCalledWith(false);
+      await waitFor(() => {
+        expect(trigger).toHaveFocus();
+      });
     });
   });
 
@@ -449,7 +283,7 @@ describe('Dialog', () => {
       );
       const trigger = screen.getByRole('button', { name: 'Open text' });
 
-      // Assert
+      // Act & Assert
       expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
       expect(trigger).toHaveAttribute('aria-expanded', 'false');
 
@@ -467,7 +301,7 @@ describe('Dialog', () => {
       render(
         <Dialog>
           <Dialog.Trigger>
-            <Button id="open-button" onClick={onClick}>
+            <Button className="open-button" onClick={onClick}>
               Open
             </Button>
           </Dialog.Trigger>
@@ -476,17 +310,15 @@ describe('Dialog', () => {
           </Dialog.Content>
         </Dialog>,
       );
+      const trigger = screen.getByRole('button', { name: 'Open' });
 
       // Act
-      await user.click(screen.getByRole('button', { name: 'Open' }));
+      await user.click(trigger);
 
       // Assert
       expect(onClick).toHaveBeenCalledTimes(1);
-      expect(screen.getByRole('button', { name: 'Open' })).toHaveAttribute(
-        'id',
-        'open-button',
-      );
-      expect(screen.getByRole('dialog')).toHaveAttribute('open');
+      expect(trigger).toHaveClass('open-button');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
 
     it('does not open when the child onClick calls preventDefault', async () => {
@@ -496,11 +328,11 @@ describe('Dialog', () => {
         <Dialog>
           <Dialog.Trigger>
             <Button
-              onClick={(event) => {
+              onClick={(event: MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault();
               }}
             >
-              Open
+              Blocked
             </Button>
           </Dialog.Trigger>
           <Dialog.Content>
@@ -510,12 +342,10 @@ describe('Dialog', () => {
       );
 
       // Act
-      await user.click(screen.getByRole('button', { name: 'Open' }));
+      await user.click(screen.getByRole('button', { name: 'Blocked' }));
 
       // Assert
-      expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute(
-        'open',
-      );
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
   });
 
@@ -523,59 +353,59 @@ describe('Dialog', () => {
     it('renders as type="button" so it never submits a surrounding form', async () => {
       // Arrange
       const user = userEvent.setup();
-      const onSubmit = vi.fn((event: FormEvent) => {
+      const onSubmit = vi.fn((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
       });
-      const onOpenChange = vi.fn();
       render(
-        <Dialog defaultOpen onOpenChange={onOpenChange}>
-          <Dialog.Content>
-            <Dialog.Title>Form</Dialog.Title>
-            <form onSubmit={onSubmit}>
-              <Dialog.Close type="submit">Cancel</Dialog.Close>
-            </form>
-          </Dialog.Content>
-        </Dialog>,
+        <form onSubmit={onSubmit}>
+          <Dialog defaultOpen>
+            <Dialog.Content>
+              <Dialog.Title>Form</Dialog.Title>
+              <Dialog.Close>Dismiss</Dialog.Close>
+            </Dialog.Content>
+          </Dialog>
+        </form>,
       );
 
+      // Arrange
+      const dismiss = screen.getByRole('button', { name: 'Dismiss' });
+
+      // Assert
+      expect(dismiss).toHaveAttribute('type', 'button');
+
       // Act
-      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
-      expect(cancelButton).toHaveAttribute('type', 'button');
-      await user.click(cancelButton);
+      await user.click(dismiss);
 
       // Assert
       expect(onSubmit).not.toHaveBeenCalled();
-      expect(onOpenChange).toHaveBeenCalledWith(false);
     });
 
-    it('renders custom children and forwards the outline variant by default', () => {
+    it('renders custom children and uses the outline variant by default', () => {
       // Arrange & Act
       render(
         <Dialog defaultOpen>
           <Dialog.Content>
             <Dialog.Title>Notice</Dialog.Title>
-            <Dialog.Close>
-              <span>Dismiss</span>
-            </Dialog.Close>
+            <Dialog.Close>Not now</Dialog.Close>
           </Dialog.Content>
         </Dialog>,
       );
 
       // Assert
-      const closeButton = screen.getByRole('button', { name: 'Dismiss' });
-      expect(closeButton).toHaveClass('notable-button--outline');
+      expect(screen.getByRole('button', { name: 'Not now' })).toHaveClass(
+        'notable-button--outline',
+      );
     });
 
-    it('skips closing when its onClick calls preventDefault', async () => {
+    it('does not close when its onClick calls preventDefault', async () => {
       // Arrange
       const user = userEvent.setup();
-      const onOpenChange = vi.fn();
       render(
-        <Dialog defaultOpen onOpenChange={onOpenChange}>
+        <Dialog defaultOpen>
           <Dialog.Content>
             <Dialog.Title>Notice</Dialog.Title>
             <Dialog.Close
-              onClick={(event) => {
+              onClick={(event: MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault();
               }}
             >
@@ -589,8 +419,7 @@ describe('Dialog', () => {
       await user.click(screen.getByRole('button', { name: 'Stay' }));
 
       // Assert
-      expect(onOpenChange).not.toHaveBeenCalled();
-      expect(screen.getByRole('dialog')).toHaveAttribute('open');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
   });
 
@@ -604,9 +433,9 @@ describe('Dialog', () => {
       await user.click(screen.getByRole('button', { name: 'Close dialog' }));
 
       // Assert
-      expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute(
-        'open',
-      );
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
     });
 
     it('hides the close button when showCloseButton is false', () => {
@@ -627,47 +456,35 @@ describe('Dialog', () => {
   });
 
   describe('backdrop dismissal', () => {
-    it('closes when the backdrop is clicked', () => {
+    it('closes when the backdrop is clicked', async () => {
       // Arrange
+      const user = userEvent.setup();
       renderDialog({ defaultOpen: true });
-      const dialog = screen.getByRole('dialog');
 
       // Act
-      fireEvent.pointerDown(dialog);
-      fireEvent.click(dialog);
+      await user.click(getBackdrop());
 
       // Assert
-      expect(dialog).not.toHaveAttribute('open');
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
     });
 
-    it('does not close when clicking inside the content', () => {
+    it('does not close when clicking inside the content', async () => {
       // Arrange
+      const user = userEvent.setup();
       renderDialog({ defaultOpen: true });
-      const dialog = screen.getByRole('dialog');
 
       // Act
-      fireEvent.pointerDown(screen.getByText('Body text'));
-      fireEvent.click(screen.getByText('Body text'));
+      await user.click(screen.getByText('Body text'));
 
       // Assert
-      expect(dialog).toHaveAttribute('open');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
 
-    it('does not close when a text selection drag ends on the backdrop', () => {
+    it('does not close on backdrop click when closeOnBackdropClick is false', async () => {
       // Arrange
-      renderDialog({ defaultOpen: true });
-      const dialog = screen.getByRole('dialog');
-
-      // Act
-      fireEvent.pointerDown(screen.getByText('Body text'));
-      fireEvent.click(dialog);
-
-      // Assert
-      expect(dialog).toHaveAttribute('open');
-    });
-
-    it('does not close on backdrop click when closeOnBackdropClick is false', () => {
-      // Arrange
+      const user = userEvent.setup();
       render(
         <Dialog defaultOpen>
           <Dialog.Content closeOnBackdropClick={false}>
@@ -675,14 +492,46 @@ describe('Dialog', () => {
           </Dialog.Content>
         </Dialog>,
       );
-      const dialog = screen.getByRole('dialog');
 
       // Act
-      fireEvent.pointerDown(dialog);
-      fireEvent.click(dialog);
+      await user.click(getBackdrop());
 
       // Assert
-      expect(dialog).toHaveAttribute('open');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('still closes with Escape when closeOnBackdropClick is false', async () => {
+      // Arrange
+      const user = userEvent.setup();
+      render(
+        <Dialog defaultOpen>
+          <Dialog.Content closeOnBackdropClick={false}>
+            <Dialog.Title>Notice</Dialog.Title>
+          </Dialog.Content>
+        </Dialog>,
+      );
+
+      // Act
+      await user.keyboard('{Escape}');
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
+    });
+
+    it('does not close when a pointer press starts inside the content and ends on the backdrop', () => {
+      // Arrange
+      renderDialog({ defaultOpen: true });
+      const body = screen.getByText('Body text');
+
+      // Act
+      fireEvent.pointerDown(body);
+      fireEvent.pointerUp(getBackdrop());
+      fireEvent.click(getBackdrop());
+
+      // Assert
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
   });
 
@@ -692,15 +541,14 @@ describe('Dialog', () => {
       renderDialog({ defaultOpen: true });
 
       // Assert
-      const dialog = screen.getByRole('dialog', {
-        name: 'Delete project?',
-      });
+      const dialog = screen.getByRole('dialog');
+      expect(dialog).toHaveAccessibleName('Delete project?');
       expect(dialog).toHaveAccessibleDescription(
         'This action cannot be undone.',
       );
     });
 
-    it('omits aria-describedby when no Dialog.Description is rendered', () => {
+    it('omits the description reference when no Dialog.Description is rendered', () => {
       // Arrange & Act
       render(
         <Dialog defaultOpen>
@@ -709,30 +557,6 @@ describe('Dialog', () => {
           </Dialog.Content>
         </Dialog>,
       );
-
-      // Assert
-      expect(screen.getByRole('dialog')).not.toHaveAttribute(
-        'aria-describedby',
-      );
-    });
-
-    it('removes the description reference when Dialog.Description unmounts', () => {
-      // Arrange
-      const renderContent = (showDescription: boolean) => (
-        <Dialog defaultOpen>
-          <Dialog.Content>
-            <Dialog.Title>Notice</Dialog.Title>
-            {showDescription && (
-              <Dialog.Description>Details</Dialog.Description>
-            )}
-          </Dialog.Content>
-        </Dialog>
-      );
-      const { rerender } = render(renderContent(true));
-      expect(screen.getByRole('dialog')).toHaveAttribute('aria-describedby');
-
-      // Act
-      rerender(renderContent(false));
 
       // Assert
       expect(screen.getByRole('dialog')).not.toHaveAttribute(
@@ -783,7 +607,7 @@ describe('Dialog', () => {
       expect(screen.getByRole('dialog')).toHaveClass('notable-dialog--medium');
     });
 
-    it('merges className and forwards HTML attributes to the dialog element', () => {
+    it('merges className and forwards HTML attributes to the popup element', () => {
       // Arrange & Act
       render(
         <Dialog defaultOpen>
@@ -800,9 +624,9 @@ describe('Dialog', () => {
 
       // Assert
       const dialog = screen.getByTestId('delete-dialog');
-      expect(dialog.tagName).toBe('DIALOG');
       expect(dialog).toHaveClass('notable-dialog', 'custom-dialog');
       expect(dialog).toHaveAttribute('id', 'delete-dialog');
+      expect(dialog).toHaveAttribute('aria-label', 'Delete confirmation');
       expect(dialog).toHaveAccessibleName('Notice');
     });
   });
