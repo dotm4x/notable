@@ -1,0 +1,165 @@
+.notable-tabs {
+  min-width: 0;
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+}
+
+.notable-tabs__list {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 100%;
+  min-height: 2.5rem;
+  border-block-end: var(--notable-border-width) solid
+    var(--notable-color-border-subtle);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.notable-tabs__list[data-dragging] {
+  cursor: grabbing;
+}
+
+.notable-tabs__trigger {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: var(--notable-spacing-3) var(--notable-spacing-4);
+  border: 0;
+  border-radius: var(--notable-radius-sm) var(--notable-radius-sm) 0 0;
+  background: transparent;
+  color: var(--notable-color-text-muted);
+  font: inherit;
+  font-weight: var(--notable-font-weight-medium);
+  line-height: var(--notable-line-height-tight);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-tabs__trigger[aria-selected='true'] {
+  color: var(--notable-color-text);
+}
+
+.notable-tabs__trigger:hover:not(:disabled) {
+  color: var(--notable-color-text);
+  background-color: var(--notable-color-surface-hover);
+}
+
+.notable-tabs__trigger:focus-visible {
+  z-index: 2;
+  outline: 2px solid var(--notable-color-focus);
+  outline-offset: -2px;
+}
+
+.notable-tabs__trigger:disabled,
+.notable-tabs__trigger[aria-disabled='true'] {
+  color: var(--notable-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.notable-tabs__trigger-label {
+  pointer-events: none;
+}
+
+.notable-tabs__indicator {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: var(--notable-radius-full);
+  background-color: var(--notable-color-primary);
+  pointer-events: none;
+  will-change: left, top, width, height;
+}
+
+.notable-tabs__content {
+  min-width: 0;
+  padding-block-start: var(--notable-spacing-4);
+  color: var(--notable-color-text);
+}
+
+.notable-tabs__content[hidden] {
+  display: none;
+}
+
+/* Panels share one grid cell so the outgoing and incoming panel overlap
+   without shifting layout; the cell is as tall as the tallest visible panel. */
+.notable-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.notable-tabs > .notable-tabs__content {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.notable-tabs[data-orientation='vertical'] {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--notable-spacing-4);
+}
+
+.notable-tabs[data-orientation='vertical'] .notable-tabs__list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-height: 100%;
+  border-block-end: 0;
+  border-inline-end: var(--notable-border-width) solid
+    var(--notable-color-border-subtle);
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: pan-x;
+}
+
+.notable-tabs[data-orientation='vertical'] .notable-tabs__trigger {
+  justify-content: flex-start;
+  min-height: 2.5rem;
+  padding-inline: var(--notable-spacing-3) var(--notable-spacing-4);
+  border-radius: var(--notable-radius-sm) 0 0 var(--notable-radius-sm);
+  text-align: start;
+  white-space: normal;
+}
+
+.notable-tabs[data-orientation='vertical'] .notable-tabs__indicator {
+  top: 0;
+  bottom: auto;
+  left: auto;
+  width: 2px;
+  height: auto;
+  inset-inline-end: 0;
+}
+
+.notable-tabs[data-orientation='vertical'] > .notable-tabs__content {
+  grid-column: 2;
+  grid-row: 1;
+  padding-block-start: var(--notable-spacing-2);
+}
+
+@media (max-width: 40rem) {
+  .notable-tabs[data-orientation='vertical'] {
+    grid-template-columns: minmax(0, 36%) minmax(0, 1fr);
+    gap: var(--notable-spacing-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-tabs__trigger {
+    transition: none;
+  }
+}
