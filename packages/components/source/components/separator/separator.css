@@ -1,0 +1,18 @@
+/* ==========================================================================
+   Separator
+   ========================================================================== */
+
+.notable-separator {
+  flex: 0 0 auto;
+  align-self: stretch;
+  background: var(--notable-separator-color, var(--notable-color-border));
+}
+
+.notable-separator--horizontal {
+  block-size: var(--notable-separator-thickness, var(--notable-border-width));
+}
+
+.notable-separator--vertical {
+  block-size: 100%;
+  inline-size: var(--notable-separator-thickness, var(--notable-border-width));
+}
