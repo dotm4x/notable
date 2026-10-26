@@ -1,8 +1,8 @@
 /*
- * Base UI keeps the popup mounted until its transitions finish. The popup
- * starts and ends offset toward its trigger, based on `data-side`, so it
- * appears to grow out of the anchor. `z-index` has no shared layering token,
- * so it is set locally.
+ * The popup starts and ends offset toward its trigger, based on `data-side`,
+ * so it appears to grow out of the anchor. The shared surface styles, including
+ * the scale and fade, live in `internal/styles/floating-surface.css`.
+ * `z-index` has no shared layering token, so it is set locally.
  */
 .notable-popover {
   box-sizing: border-box;
@@ -11,23 +11,8 @@
   max-height: calc(100dvh - var(--notable-spacing-8));
   padding: var(--notable-spacing-4);
   border: var(--notable-border-width) solid var(--notable-color-border);
-  border-radius: var(--notable-radius-lg);
-  background: var(--notable-color-surface-raised);
-  color: var(--notable-color-text);
-  box-shadow: var(--notable-shadow-md);
   overflow: auto;
   overscroll-behavior: contain;
-  transform-origin: var(--transform-origin);
-  font-family: var(--notable-font-family);
-  transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard),
-    transform var(--notable-duration-base) var(--notable-easing-standard);
-}
-
-.notable-popover[data-starting-style],
-.notable-popover[data-ending-style] {
-  opacity: 0;
-  transform: scale(0.96);
 }
 
 .notable-popover[data-side='top'][data-starting-style],
@@ -69,14 +54,4 @@
   color: var(--notable-color-text-muted);
   font-size: var(--notable-font-size-sm);
   line-height: var(--notable-line-height-relaxed);
-}
-
-/*
- * With no transition, Base UI sees the end state immediately and unmounts the
- * popup without waiting for an animation to finish.
- */
-@media (prefers-reduced-motion: reduce) {
-  .notable-popover {
-    transition: none;
-  }
 }
