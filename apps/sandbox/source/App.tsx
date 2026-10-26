@@ -1,19 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
+  Accordion,
+  AccordionItem,
   Avatar,
   AvatarGroup,
   Badge,
   Button,
   Checkbox,
+  Dialog,
   Input,
+  Popover,
+  Progress,
+  RadioGroup,
+  RadioGroupItem,
+  ScrollArea,
   SegmentedControl,
+  Separator,
+  Shortcut,
+  Skeleton,
   Spinner,
   Switch,
+  Tabs,
   Tooltip,
+  toast,
 } from '@dotm4x/notable';
 
 type Theme = 'light' | 'dark';
 type Density = 'comfortable' | 'compact' | 'spacious';
+
+const recentMessages = [
+  'Maya commented on the onboarding copy.',
+  'Build #482 finished successfully.',
+  'Leo requested review on the billing module.',
+  'The weekly summary was delivered.',
+  'Two new members joined the workspace.',
+  'Design tokens were updated to version 2.4.',
+  'Ana resolved three accessibility notes.',
+  'Staging deploy is waiting for approval.',
+  'The changelog draft is ready to review.',
+  'Automated tests passed on main.',
+  'A new avatar set was uploaded.',
+  'Retention report generated for March.',
+];
 
 const densityOptions = [
   { label: 'Comfortable', value: 'comfortable' },
@@ -31,9 +59,19 @@ export function App() {
   const [weeklySummaryEnabled, setWeeklySummaryEnabled] = useState(false);
   const [name, setName] = useState('');
   const [saved, setSaved] = useState(false);
+  const [deliveryFrequency, setDeliveryFrequency] = useState('daily');
+  const [uploadProgress, setUploadProgress] = useState(25);
+  const [deleteStatus, setDeleteStatus] = useState('No draft deleted yet.');
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
+  // Portaled overlays (dialogs, popovers, toasts, tooltips) render under
+  // document.body, outside this component's tree, so the theme must be set on <html>.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   return (
-    <main className="sandbox" data-theme={theme}>
+    <main className="sandbox">
       <div className="sandbox__container">
         <header className="sandbox__header">
           <a aria-label="Notable home" className="brand" href="#">
@@ -144,6 +182,17 @@ export function App() {
               options={densityOptions}
               value={density}
             />
+            <RadioGroup
+              description="Choose how often summaries are sent."
+              label="Notification delivery"
+              onValueChange={setDeliveryFrequency}
+              orientation="horizontal"
+              value={deliveryFrequency}
+            >
+              <RadioGroupItem label="Instant" value="instant" />
+              <RadioGroupItem label="Daily digest" value="daily" />
+              <RadioGroupItem label="Weekly summary" value="weekly" />
+            </RadioGroup>
             <div className="form-options">
               <Checkbox
                 checked={weeklySummaryEnabled}
@@ -180,6 +229,41 @@ export function App() {
               </span>
               <span>Preparing your preview</span>
             </div>
+            <div className="progress-row">
+              <Progress
+                aria-label="Upload progress"
+                className="progress-row__bar"
+                value={uploadProgress}
+              />
+              <Progress
+                aria-label="Upload progress (circular)"
+                size="small"
+                value={uploadProgress}
+                variant="circular"
+              />
+              <Button
+                onClick={() =>
+                  setUploadProgress((current) =>
+                    current >= 100 ? 0 : current + 25,
+                  )
+                }
+                size="small"
+                variant="outline"
+              >
+                Advance upload
+              </Button>
+            </div>
+            <div
+              className="skeleton-row"
+              role="status"
+              aria-label="Loading content"
+            >
+              <Skeleton height={40} variant="circular" width={40} />
+              <div className="skeleton-row__lines">
+                <Skeleton variant="text" width="60%" />
+                <Skeleton variant="text" width="40%" />
+              </div>
+            </div>
             <div aria-live="polite" className="saved-note">
               {saved
                 ? 'Nice! You tried an interaction.'
@@ -187,6 +271,172 @@ export function App() {
             </div>
             <div className="density-note">
               Selected density: <strong>{density}</strong>
+            </div>
+          </section>
+
+          <section aria-labelledby="navigation-title" className="demo-card">
+            <div className="demo-card__heading">
+              <div>
+                <p className="eyebrow">04 · Navigation</p>
+                <h2 id="navigation-title">Tabs and accordion</h2>
+              </div>
+            </div>
+            <p className="demo-card__description">
+              Group related content so people can switch views or reveal details
+              on demand.
+            </p>
+            <Tabs defaultValue="overview">
+              <Tabs.List aria-label="Project sections">
+                <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+                <Tabs.Trigger value="activity">Activity</Tabs.Trigger>
+                <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+              </Tabs.List>
+              <Tabs.Content value="overview">
+                <p className="tab-panel">
+                  Notable is a shared component library for product teams.
+                </p>
+              </Tabs.Content>
+              <Tabs.Content value="activity">
+                <p className="tab-panel">Three changes were made today.</p>
+              </Tabs.Content>
+              <Tabs.Content value="settings">
+                <p className="tab-panel">
+                  Workspace settings are managed by admins.
+                </p>
+              </Tabs.Content>
+            </Tabs>
+            <Accordion defaultValue="delivery" type="single">
+              <AccordionItem title="Delivery options" value="delivery">
+                Choose instant, daily, or weekly delivery for notifications.
+              </AccordionItem>
+              <AccordionItem title="Privacy" value="privacy">
+                Summaries never include private message content.
+              </AccordionItem>
+            </Accordion>
+          </section>
+
+          <section aria-labelledby="overlays-title" className="demo-card">
+            <div className="demo-card__heading">
+              <div>
+                <p className="eyebrow">05 · Overlays</p>
+                <h2 id="overlays-title">Dialogs, popovers and toasts</h2>
+              </div>
+            </div>
+            <p className="demo-card__description">
+              Ask for confirmation, add context on demand, and report outcomes
+              without interrupting the flow.
+            </p>
+            <div className="button-row">
+              <Dialog
+                onOpenChange={setIsDeleteDialogOpen}
+                open={isDeleteDialogOpen}
+              >
+                <Dialog.Trigger>
+                  <Button variant="danger">Delete project</Button>
+                </Dialog.Trigger>
+                <Dialog.Content size="small">
+                  <Dialog.Header>
+                    <Dialog.Title>Delete project?</Dialog.Title>
+                    <Dialog.Description>
+                      This action cannot be undone. All files in the project
+                      will be removed.
+                    </Dialog.Description>
+                  </Dialog.Header>
+                  <Dialog.Footer>
+                    <Dialog.Close>Cancel</Dialog.Close>
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        setDeleteStatus('Project deleted.');
+                        setIsDeleteDialogOpen(false);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </Dialog.Footer>
+                </Dialog.Content>
+              </Dialog>
+              <Popover>
+                <Popover.Trigger>
+                  <Button variant="outline">Project details</Button>
+                </Popover.Trigger>
+                <Popover.Content>
+                  <Popover.Header>
+                    <Popover.Title>Notable workspace</Popover.Title>
+                    <Popover.Description>
+                      Shared by 12 members across 3 teams.
+                    </Popover.Description>
+                  </Popover.Header>
+                </Popover.Content>
+              </Popover>
+            </div>
+            <p className="overlay-note" aria-live="polite">
+              {deleteStatus}
+            </p>
+            <div className="button-row">
+              <Button onClick={() => toast.success('Changes saved.')}>
+                Success toast
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => toast.error('Could not save changes.')}
+              >
+                Error toast
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() =>
+                  toast.promise(
+                    new Promise((resolve) => setTimeout(resolve, 1200)),
+                    {
+                      loading: 'Publishing…',
+                      success: 'Published.',
+                      error: 'Publish failed.',
+                    },
+                  )
+                }
+              >
+                Promise toast
+              </Button>
+            </div>
+          </section>
+
+          <section aria-labelledby="layout-title" className="demo-card">
+            <div className="demo-card__heading">
+              <div>
+                <p className="eyebrow">06 · Layout</p>
+                <h2 id="layout-title">Separators, scrolling and shortcuts</h2>
+              </div>
+            </div>
+            <p className="demo-card__description">
+              Structure content with dividers, keep long lists scannable, and
+              surface keyboard shortcuts.
+            </p>
+            <div className="separator-row">
+              <span>Overview</span>
+              <Separator orientation="vertical" />
+              <span>Activity</span>
+              <Separator orientation="vertical" />
+              <span>Settings</span>
+            </div>
+            <Separator />
+            <ScrollArea
+              aria-label="Recent messages"
+              className="scroll-area-demo"
+            >
+              <ul className="scroll-area-demo__list">
+                {recentMessages.map((message) => (
+                  <li key={message}>{message}</li>
+                ))}
+              </ul>
+            </ScrollArea>
+            <div className="shortcut-row">
+              <span>Open command palette</span>
+              <span className="shortcut-row__keys">
+                <Shortcut>Ctrl</Shortcut>
+                <span aria-hidden="true">+</span>
+                <Shortcut>K</Shortcut>
+              </span>
             </div>
           </section>
         </div>
