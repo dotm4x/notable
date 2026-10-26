@@ -312,27 +312,27 @@ export const DifferentWidths: Story = {
     options: [
       {
         value: 'day',
-        label: 'Día',
+        label: 'Day',
         icon: <Sun size={16} />,
       },
       {
         value: 'week',
-        label: 'Esta semana',
+        label: 'This week',
         icon: <CalendarDays size={16} />,
       },
       {
         value: 'month',
-        label: 'Mes',
+        label: 'Month',
         icon: <CalendarRange size={16} />,
       },
       {
         value: 'year',
-        label: 'Todo el año',
+        label: 'All year',
         icon: <Clock size={16} />,
       },
       {
         value: 'all',
-        label: 'Historial completo',
+        label: 'Full history',
         icon: <LayoutGrid size={16} />,
       },
     ],
