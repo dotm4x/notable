@@ -10,6 +10,26 @@ import { createToastController, toast, ToastProvider } from './toast.js';
 import { toast as PublicToast } from '../../index.js';
 
 describe('Toast', () => {
+  it('names each viewport by its position so independent regions stay distinct', () => {
+    render(
+      <>
+        <ToastProvider position="bottom-right">
+          <span>First</span>
+        </ToastProvider>
+        <ToastProvider position="top-left" controller={createToastController()}>
+          <span>Second</span>
+        </ToastProvider>
+      </>,
+    );
+
+    expect(
+      screen.getByRole('region', { name: 'Notifications bottom right' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('region', { name: 'Notifications top left' }),
+    ).toBeInTheDocument();
+  });
+
   it('supports shorthand and object notifications with all variants', async () => {
     render(
       <ToastProvider defaultDuration={0}>
