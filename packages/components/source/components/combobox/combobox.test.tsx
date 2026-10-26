@@ -330,7 +330,6 @@ describe('Combobox controlled state', () => {
 describe('Combobox form integration', () => {
   it('submits the selected value under the provided name', async () => {
     // Arrange
-    const user = userEvent.setup();
     const { container } = render(
       <form>
         <Combobox items={fruits} name="fruit" defaultValue="banana">
