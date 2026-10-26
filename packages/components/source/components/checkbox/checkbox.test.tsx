@@ -58,7 +58,7 @@ describe('Checkbox', () => {
     expect(checkbox).not.toBeChecked();
   });
 
-  it('supports the native indeterminate state and mixed ARIA semantics', () => {
+  it('exposes the indeterminate state through the native checkbox', () => {
     const { rerender } = render(
       <Checkbox aria-label="Select all items" indeterminate />,
     );
@@ -67,12 +67,13 @@ describe('Checkbox', () => {
     });
 
     expect(checkbox).toHaveProperty('indeterminate', true);
-    expect(checkbox).toHaveAttribute('aria-checked', 'mixed');
+    expect(checkbox).toBePartiallyChecked();
+    expect(checkbox).not.toHaveAttribute('aria-checked');
 
     rerender(<Checkbox aria-label="Select all items" />);
 
     expect(checkbox).toHaveProperty('indeterminate', false);
-    expect(checkbox).not.toHaveAttribute('aria-checked');
+    expect(checkbox).not.toBePartiallyChecked();
   });
 
   it('supports disabled, required, and forwarded ref attributes', () => {
