@@ -200,12 +200,18 @@ describe('Switch', () => {
       expect(
         control.style.getPropertyValue('--notable-switch-drag-offset'),
       ).toBe('8px');
+      expect(
+        control.style.getPropertyValue('--notable-switch-drag-progress'),
+      ).toBe(`${(8 / TRAVEL) * 100}%`);
       expect(control).toHaveAttribute('data-dragging');
 
       fireEvent.pointerMove(toggle, { pointerId: 1, clientX: 400 });
       expect(
         control.style.getPropertyValue('--notable-switch-drag-offset'),
       ).toBe(`${TRAVEL}px`);
+      expect(
+        control.style.getPropertyValue('--notable-switch-drag-progress'),
+      ).toBe('100%');
     });
 
     it('cleans up and keeps its state when cancelled', () => {
@@ -221,6 +227,9 @@ describe('Switch', () => {
       expect(control).not.toHaveAttribute('data-dragging');
       expect(
         control.style.getPropertyValue('--notable-switch-drag-offset'),
+      ).toBe('');
+      expect(
+        control.style.getPropertyValue('--notable-switch-drag-progress'),
       ).toBe('');
     });
 
