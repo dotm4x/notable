@@ -345,3 +345,38 @@ describe('Select', () => {
     expect(trigger).toHaveClass('notable-select__trigger', 'custom-trigger');
   });
 });
+
+describe('Select animated highlight', () => {
+  it('renders a single hidden highlight surface inside the popup', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<BasicSelect />);
+
+    // Act
+    await user.click(screen.getByRole('combobox', { name: 'Fruit' }));
+
+    // Assert
+    const listbox = await screen.findByRole('listbox');
+    const popup = listbox.closest<HTMLElement>('.notable-select__popup');
+    const surfaces = popup?.querySelectorAll('.notable-animated-highlight');
+    expect(surfaces).toHaveLength(1);
+    expect(surfaces?.[0]).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('marks the pointer-hovered option as the highlight target', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<BasicSelect />);
+    await user.click(screen.getByRole('combobox', { name: 'Fruit' }));
+    const banana = await screen.findByRole('option', { name: 'Banana' });
+
+    // Act
+    await user.hover(banana);
+
+    // Assert
+    expect(banana).toHaveAttribute('data-highlighted');
+    expect(screen.getByRole('option', { name: 'Cherry' })).not.toHaveAttribute(
+      'data-highlighted',
+    );
+  });
+});

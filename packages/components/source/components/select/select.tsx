@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import '../../internal/styles/floating-surface.css';
+import { AnimatedHighlight } from '../../internal/helpers/animated-highlight/animated-highlight.js';
 import './select.css';
 
 /** Props for the select root. Options are declared as `Select.Item` children. */
@@ -219,6 +220,7 @@ const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
             )}
             {...props}
           >
+            <AnimatedHighlight />
             {children}
           </BaseSelect.Popup>
         </BaseSelect.Positioner>
