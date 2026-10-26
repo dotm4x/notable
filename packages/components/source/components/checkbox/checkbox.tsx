@@ -9,10 +9,15 @@ import {
 } from 'react';
 import './checkbox.css';
 
-/** Props for a native checkbox with an optional label and description. */
+/**
+ * Props for a native checkbox with an optional label and description. Use
+ * `indeterminate` for the mixed state; `aria-checked` is not supported on a
+ * native checkbox because the browser already exposes the checked and mixed
+ * states.
+ */
 export type CheckboxProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'type'
+  'type' | 'aria-checked'
 > & {
   /** Helper text associated with the checkbox for assistive technologies. */
   description?: ReactNode;
@@ -35,7 +40,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       label,
       'aria-describedby': ariaDescribedBy,
-      'aria-checked': ariaChecked,
       ...props
     },
     ref,
@@ -46,7 +50,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const descriptionId = description ? `${checkboxId}-description` : undefined;
     const describedBy =
       [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined;
-    const checkedState = indeterminate ? 'mixed' : ariaChecked;
     const setInputRef = useCallback(
       (node: HTMLInputElement | null) => {
         inputRef.current = node;
@@ -77,7 +80,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               ref={setInputRef}
               id={checkboxId}
               type="checkbox"
-              aria-checked={checkedState}
               className={['notable-checkbox__input', className]
                 .filter(Boolean)
                 .join(' ')}
