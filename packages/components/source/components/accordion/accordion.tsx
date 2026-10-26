@@ -11,7 +11,7 @@ import { ChevronDown } from 'lucide-react';
 import './accordion.css';
 
 type AccordionBaseProps = {
-  /** Accordion items, rendered with {@link AccordionItem}. */
+  /** Accordion items, rendered with `Accordion.Item`. */
   children: ReactNode;
   /** Additional CSS class for the root element. */
   className?: string;
@@ -47,7 +47,7 @@ export type AccordionMultipleProps = AccordionBaseProps & {
 /** Props for {@link Accordion}. */
 export type AccordionProps = AccordionSingleProps | AccordionMultipleProps;
 
-/** Props for {@link AccordionItem}. */
+/** Props for `Accordion.Item`. */
 export type AccordionItemProps = {
   /** Content shown when the item is expanded. */
   children: ReactNode;

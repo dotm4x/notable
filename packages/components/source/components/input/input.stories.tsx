@@ -5,7 +5,7 @@ import { Button } from '../button/button.js';
 import { Input } from './input.js';
 
 function ClearableSearchExample() {
-  const [value, setValue] = useState('Bodypop');
+  const [value, setValue] = useState('Notable');
 
   return (
     <Input
