@@ -13,15 +13,15 @@
   background: var(--notable-progress-track-color, var(--notable-color-border));
 }
 
-.notable-progress--small {
+.notable-progress--linear.notable-progress--small {
   --notable-progress-thickness: var(--notable-spacing-1);
 }
 
-.notable-progress--medium {
+.notable-progress--linear.notable-progress--medium {
   --notable-progress-thickness: var(--notable-spacing-2);
 }
 
-.notable-progress--large {
+.notable-progress--linear.notable-progress--large {
   --notable-progress-thickness: var(--notable-spacing-3);
 }
 
@@ -65,13 +65,102 @@
   }
 }
 
+/* ==========================================================================
+   Progress: circular
+   ========================================================================== */
+
+.notable-progress--circular {
+  --notable-progress-thickness: var(--notable-spacing-1);
+  --notable-progress-stroke: min(
+    var(--notable-progress-thickness),
+    calc(var(--notable-progress-diameter) / 2)
+  );
+
+  inline-size: var(--notable-progress-diameter);
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.notable-progress--circular.notable-progress--small {
+  --notable-progress-diameter: var(--notable-spacing-8);
+}
+
+.notable-progress--circular.notable-progress--medium {
+  --notable-progress-diameter: var(--notable-spacing-12);
+}
+
+.notable-progress--circular.notable-progress--large {
+  --notable-progress-diameter: var(--notable-spacing-16);
+}
+
+.notable-progress__svg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  transform: rotate(-90deg);
+}
+
+.notable-progress__track,
+.notable-progress__arc {
+  r: calc(50% - var(--notable-progress-stroke) / 2);
+  fill: none;
+  stroke-width: var(--notable-progress-stroke);
+}
+
+.notable-progress__track {
+  stroke: var(--notable-progress-track-color, var(--notable-color-border));
+}
+
+.notable-progress__arc {
+  stroke: var(--notable-progress-color, var(--notable-color-primary));
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  transition: stroke-dashoffset var(--notable-duration-slow)
+    var(--notable-easing-standard);
+}
+
+/* Indeterminate: a quarter arc centered on the top, spun by the svg. */
+.notable-progress--indeterminate .notable-progress__arc {
+  stroke-dasharray: 25 75;
+  stroke-dashoffset: 12.5;
+  transition: none;
+}
+
+.notable-progress--circular.notable-progress--smooth.notable-progress--indeterminate
+  .notable-progress__svg {
+  animation: notable-progress-spin calc(var(--notable-duration-slow) * 2) linear
+    infinite;
+}
+
+.notable-progress--none .notable-progress__arc {
+  transition: none;
+}
+
+@keyframes notable-progress-spin {
+  from {
+    transform: rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(270deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .notable-progress__indicator {
+  .notable-progress__indicator,
+  .notable-progress__arc {
     transition: none;
   }
 
   .notable-progress--smooth.notable-progress--indeterminate
-    .notable-progress__indicator {
+    .notable-progress__indicator,
+  .notable-progress--circular.notable-progress--smooth.notable-progress--indeterminate
+    .notable-progress__svg {
     animation: none;
   }
 }

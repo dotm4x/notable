@@ -20,8 +20,11 @@ export type ProgressRadiusToken =
  */
 export type ProgressAnimation = 'smooth' | 'none';
 
-/** Props for {@link Progress}, in addition to native `div` attributes. */
-export type ProgressProps = Omit<
+/** Visual shape of the progress indicator. */
+export type ProgressVariant = 'linear' | 'circular';
+
+/** Props shared by every {@link ProgressVariant}, in addition to native `div` attributes. */
+type ProgressBaseProps = Omit<
   HTMLAttributes<HTMLDivElement>,
   | 'children'
   | 'role'
@@ -42,9 +45,11 @@ export type ProgressProps = Omit<
    * non-finite values fall back to `100`.
    */
   max?: number;
-  /** Track thickness preset. Defaults to `medium`. */
-  size?: ProgressSize;
-  /** Track thickness. A number is treated as pixels, and any other string is used as CSS. */
+  /**
+   * Track thickness. For linear progress this is the bar height; for circular
+   * progress it is the ring's stroke width, capped at half the diameter. A
+   * number is treated as pixels, and any other string is used as CSS.
+   */
   thickness?: number | string;
   /**
    * Indicator color. A Notable token name maps to its color token, and any other
@@ -56,15 +61,39 @@ export type ProgressProps = Omit<
    * string is used as CSS as provided. Defaults to the standard border color.
    */
   trackColor?: ProgressTrackColor | string;
+  /** Animation for changes and indeterminate movement. Defaults to `smooth`. */
+  animation?: ProgressAnimation;
+};
+
+/** Props for a linear {@link Progress}, the default variant. */
+export type ProgressLinearProps = ProgressBaseProps & {
+  /** Visual shape. Defaults to `linear`. */
+  variant?: 'linear';
+  /** Track thickness preset. Defaults to `medium`. */
+  size?: ProgressSize;
   /**
    * Track corner radius. A Notable radius token name maps to its token, a
    * number is treated as pixels, and any other string is used as CSS. Defaults
    * to a pill shape.
    */
   radius?: ProgressRadiusToken | number | string;
-  /** Animation for changes and indeterminate movement. Defaults to `smooth`. */
-  animation?: ProgressAnimation;
 };
+
+/** Props for a circular {@link Progress}. */
+export type ProgressCircularProps = ProgressBaseProps & {
+  /** Visual shape. */
+  variant: 'circular';
+  /**
+   * Ring diameter. A preset maps to a Notable spacing size, a number is treated
+   * as pixels, and any other string is used as CSS. Defaults to `medium`.
+   */
+  size?: ProgressSize | number | string;
+  /** Not applicable to circular progress, which always renders a round ring. */
+  radius?: never;
+};
+
+/** Props for {@link Progress}, in addition to native `div` attributes. */
+export type ProgressProps = ProgressLinearProps | ProgressCircularProps;
 
 type CssCustomProperties = Record<`--${string}`, string>;
 
@@ -156,10 +185,49 @@ function resolveRadius(radius: ProgressProps['radius']): string | undefined {
   return radius;
 }
 
+function isProgressSize(size: unknown): size is ProgressSize {
+  return size === 'small' || size === 'medium' || size === 'large';
+}
+
+function resolveDiameter(
+  size: ProgressCircularProps['size'],
+): string | undefined {
+  if (size === undefined || isProgressSize(size)) {
+    return undefined;
+  }
+  return typeof size === 'number' ? `${size}px` : size;
+}
+
 /**
- * Renders a linear progress bar. Omit `value` for indeterminate progress, which
- * shows ongoing activity without exposing a completion value to assistive
- * technology. The bar stretches to its container's width.
+ * Round ring drawn with SVG. Both circles share the same geometry, and the
+ * stroke is kept inside the box so round caps are not clipped. The arc length
+ * is expressed with `pathLength={100}`, so the offset is a percentage.
+ */
+function CircularIndicator({ percentage }: { percentage: number | undefined }) {
+  const arcStyle: CSSProperties | undefined =
+    percentage === undefined
+      ? undefined
+      : { strokeDashoffset: 100 - percentage };
+
+  return (
+    <svg className="notable-progress__svg" aria-hidden="true" focusable="false">
+      <circle className="notable-progress__track" cx="50%" cy="50%" />
+      <circle
+        className="notable-progress__arc"
+        cx="50%"
+        cy="50%"
+        pathLength={100}
+        style={arcStyle}
+      />
+    </svg>
+  );
+}
+
+/**
+ * Renders a progress indicator as a linear bar (the default) or a circular
+ * ring. Omit `value` for indeterminate progress, which shows ongoing activity
+ * without exposing a completion value to assistive technology. Both variants
+ * share the same progress semantics and ARIA attributes.
  */
 export function Progress({
   animation = 'smooth',
@@ -172,16 +240,26 @@ export function Progress({
   thickness,
   trackColor,
   value,
+  variant = 'linear',
   ...props
 }: ProgressProps) {
   const effectiveMax = resolveMax(max);
   const effectiveValue = resolveValue(value, effectiveMax);
   const isIndeterminate = effectiveValue === undefined;
+  const isCircular = variant === 'circular';
+  const percentage =
+    effectiveValue === undefined
+      ? undefined
+      : (effectiveValue / effectiveMax) * 100;
 
   const inlineStyle: CSSProperties & CssCustomProperties = { ...style };
-  const resolvedRadius = resolveRadius(radius);
+  const resolvedRadius = isCircular ? undefined : resolveRadius(radius);
   if (resolvedRadius !== undefined) {
     inlineStyle.borderRadius = resolvedRadius;
+  }
+  const resolvedDiameter = isCircular ? resolveDiameter(size) : undefined;
+  if (resolvedDiameter !== undefined) {
+    inlineStyle['--notable-progress-diameter'] = resolvedDiameter;
   }
   const resolvedThickness = resolveThickness(thickness);
   if (resolvedThickness !== undefined) {
@@ -195,14 +273,14 @@ export function Progress({
   if (resolvedTrackColor !== undefined) {
     inlineStyle['--notable-progress-track-color'] = resolvedTrackColor;
   }
-  if (effectiveValue !== undefined) {
-    inlineStyle['--notable-progress-value'] =
-      `${(effectiveValue / effectiveMax) * 100}%`;
+  if (percentage !== undefined) {
+    inlineStyle['--notable-progress-value'] = `${percentage}%`;
   }
 
   const classes = [
     'notable-progress',
-    `notable-progress--${size}`,
+    isCircular ? 'notable-progress--circular' : 'notable-progress--linear',
+    isProgressSize(size) && `notable-progress--${size}`,
     `notable-progress--${animation}`,
     isIndeterminate && 'notable-progress--indeterminate',
     className,
@@ -220,7 +298,11 @@ export function Progress({
       aria-valuemax={effectiveMax}
       aria-valuenow={effectiveValue}
     >
-      <div className="notable-progress__indicator" />
+      {isCircular ? (
+        <CircularIndicator percentage={percentage} />
+      ) : (
+        <div className="notable-progress__indicator" />
+      )}
     </div>
   );
 }

@@ -279,3 +279,208 @@ describe('Progress', () => {
     expect(PublicProgress).toBe(Progress);
   });
 });
+
+function getArc(progress: HTMLElement): SVGElement {
+  const arc = progress.querySelector('.notable-progress__arc');
+
+  if (!(arc instanceof SVGElement)) {
+    throw new Error('Expected circular Progress to render an arc');
+  }
+
+  return arc;
+}
+
+describe('Progress circular variant', () => {
+  it('renders a decorative SVG ring with a track and an arc', () => {
+    const progress = renderProgress({ variant: 'circular', value: 40 });
+    const svg = progress.querySelector('svg');
+
+    expect(progress).toHaveClass('notable-progress--circular');
+    expect(progress.children).toHaveLength(1);
+    expect(svg).toHaveAttribute('aria-hidden', 'true');
+    expect(svg).toHaveAttribute('focusable', 'false');
+    expect(svg?.querySelector('.notable-progress__track')).not.toBeNull();
+    expect(svg?.querySelector('.notable-progress__arc')).not.toBeNull();
+    expect(progress).not.toHaveAttribute('tabindex');
+  });
+
+  it('does not render the SVG ring for the linear variant', () => {
+    const progress = renderProgress({ value: 40 });
+
+    expect(progress.querySelector('svg')).toBeNull();
+    expect(getIndicator(progress)).toHaveClass('notable-progress__indicator');
+  });
+
+  it.each([
+    { value: 0, offset: '100' },
+    { value: 25, offset: '75' },
+    { value: 50, offset: '50' },
+    { value: 100, offset: '0' },
+  ])(
+    'offsets the arc by the remaining share for value $value',
+    ({ value, offset }) => {
+      const progress = renderProgress({ variant: 'circular', value });
+
+      expect(getArc(progress).getAttribute('style')).toContain(
+        `stroke-dashoffset: ${offset}`,
+      );
+    },
+  );
+
+  it.each([
+    { value: -10, offset: '100' },
+    { value: 150, offset: '0' },
+  ])('clamps the ring for out-of-range value $value', ({ value, offset }) => {
+    const progress = renderProgress({ variant: 'circular', value });
+
+    expect(progress).toHaveAttribute(
+      'aria-valuenow',
+      String(value < 0 ? 0 : 100),
+    );
+    expect(getArc(progress).getAttribute('style')).toContain(
+      `stroke-dashoffset: ${offset}`,
+    );
+  });
+
+  it('measures the ring against a custom maximum', () => {
+    const progress = renderProgress({
+      variant: 'circular',
+      max: 4,
+      value: 3,
+    });
+
+    expect(progress).toHaveAttribute('aria-valuemax', '4');
+    expect(progress).toHaveAttribute('aria-valuenow', '3');
+    expect(getArc(progress).getAttribute('style')).toContain(
+      'stroke-dashoffset: 25',
+    );
+  });
+
+  it('renders an indeterminate ring without a completion value', () => {
+    const progress = renderProgress({ variant: 'circular' });
+    const arc = getArc(progress);
+
+    expect(progress).toHaveClass('notable-progress--indeterminate');
+    expect(progress).toHaveAttribute('role', 'progressbar');
+    expect(progress).not.toHaveAttribute('aria-valuenow');
+    expect(progress.style.getPropertyValue('--notable-progress-value')).toBe(
+      '',
+    );
+    expect(arc.getAttribute('style')).toBeNull();
+  });
+
+  it.each([{ max: 0 }, { max: Number.NaN }, { max: Number.POSITIVE_INFINITY }])(
+    'falls back to 100 for the invalid maximum $max on the ring',
+    ({ max }) => {
+      const progress = renderProgress({ variant: 'circular', value: 50, max });
+
+      expect(progress).toHaveAttribute('aria-valuemax', '100');
+      expect(getArc(progress).getAttribute('style')).toContain(
+        'stroke-dashoffset: 50',
+      );
+    },
+  );
+
+  it.each<ProgressSize>(['small', 'medium', 'large'])(
+    'applies the %s size class to the ring',
+    (size) => {
+      const progress = renderProgress({ variant: 'circular', size });
+
+      expect(progress).toHaveClass(`notable-progress--${size}`);
+      expect(
+        progress.style.getPropertyValue('--notable-progress-diameter'),
+      ).toBe('');
+    },
+  );
+
+  it('applies a numeric size as the ring diameter in pixels', () => {
+    const progress = renderProgress({ variant: 'circular', size: 64 });
+
+    expect(progress).not.toHaveClass('notable-progress--medium');
+    expect(progress.style.getPropertyValue('--notable-progress-diameter')).toBe(
+      '64px',
+    );
+  });
+
+  it('passes a string size through as the ring diameter', () => {
+    const progress = renderProgress({ variant: 'circular', size: '4rem' });
+
+    expect(progress.style.getPropertyValue('--notable-progress-diameter')).toBe(
+      '4rem',
+    );
+  });
+
+  it('applies a numeric thickness as the ring stroke width in pixels', () => {
+    const progress = renderProgress({ variant: 'circular', thickness: 8 });
+
+    expect(
+      progress.style.getPropertyValue('--notable-progress-thickness'),
+    ).toBe('8px');
+  });
+
+  it('maps color and track color to the ring', () => {
+    const progress = renderProgress({
+      variant: 'circular',
+      color: 'danger',
+      trackColor: 'strong',
+    });
+
+    expect(progress.style.getPropertyValue('--notable-progress-color')).toBe(
+      'var(--notable-color-danger)',
+    );
+    expect(
+      progress.style.getPropertyValue('--notable-progress-track-color'),
+    ).toBe('var(--notable-color-border-strong)');
+  });
+
+  it('applies the none animation class to the ring', () => {
+    const progress = renderProgress({
+      variant: 'circular',
+      animation: 'none',
+      value: 40,
+    });
+
+    expect(progress).toHaveClass('notable-progress--none');
+    expect(progress).not.toHaveClass('notable-progress--smooth');
+  });
+
+  it('keeps progress semantics identical when switching variants', () => {
+    const { container, rerender } = render(
+      <Progress aria-label="Upload" value={35} max={50} />,
+    );
+    const linear = container.firstElementChild;
+
+    rerender(
+      <Progress aria-label="Upload" value={35} max={50} variant="circular" />,
+    );
+    const circular = container.firstElementChild;
+
+    expect(linear).toHaveAttribute('role', 'progressbar');
+    expect(circular).toHaveAttribute('role', 'progressbar');
+    expect(circular).toHaveAttribute('aria-label', 'Upload');
+    expect(circular).toHaveAttribute('aria-valuemin', '0');
+    expect(circular).toHaveAttribute('aria-valuemax', '50');
+    expect(circular).toHaveAttribute('aria-valuenow', '35');
+    expect(linear).toHaveAttribute('aria-valuenow', '35');
+  });
+
+  it.each(['linear', 'circular'] as const)(
+    'exposes an accessible name through aria-labelledby for the %s variant',
+    (variant) => {
+      render(
+        <>
+          <span id="upload-label">Uploading report</span>
+          <Progress
+            aria-labelledby="upload-label"
+            variant={variant}
+            value={20}
+          />
+        </>,
+      );
+
+      expect(
+        screen.getByRole('progressbar', { name: 'Uploading report' }),
+      ).toHaveAttribute('aria-valuenow', '20');
+    },
+  );
+});
