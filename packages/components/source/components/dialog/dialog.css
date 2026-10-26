@@ -19,6 +19,7 @@
   font-family: var(--notable-font-family);
   opacity: 0;
   transform: translateY(var(--notable-spacing-2)) scale(0.98);
+  will-change: opacity, transform;
   transition:
     opacity var(--notable-duration-base) var(--notable-easing-standard),
     transform var(--notable-duration-base) var(--notable-easing-standard),
