@@ -8,6 +8,7 @@ export * from './components/dialog/dialog.js';
 export * from './components/input/input.js';
 export * from './components/progress/progress.js';
 export * from './components/radio-group/radio-group.js';
+export * from './components/scroll-area/scroll-area.js';
 export * from './components/segmented-control/segmented-control.js';
 export * from './components/separator/separator.js';
 export * from './components/skeleton/skeleton.js';
