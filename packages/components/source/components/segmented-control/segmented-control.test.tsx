@@ -485,6 +485,7 @@ describe('SegmentedControl', () => {
         .getByRole('radio', { name: 'Week' })
         .closest('.notable-segmented-control__item');
       expect(weekItem).toHaveAttribute('data-selected');
+      expect(weekItem).toHaveAttribute('data-selector-item');
       expect(indicators[0]?.parentElement).toBe(group);
       expect(indicators[0]).toHaveAttribute('aria-hidden', 'true');
     });

@@ -8,15 +8,16 @@ import {
   useState,
   type ForwardedRef,
   type HTMLAttributes,
-  type PointerEvent as ReactPointerEvent,
   type ReactNode,
   type Ref,
 } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { SPRING_LAYOUT } from '../../styles/motion.js';
+import {
+  useSelectorDrag,
+  type SelectorBounds,
+} from '../../internal/selector-drag/use-selector-drag.js';
 import './segmented-control.css';
-
-const DRAG_THRESHOLD = 3;
 
 /** Available segmented control sizes. */
 export type SegmentedControlSize = 'small' | 'medium' | 'large';
@@ -62,18 +63,6 @@ type SegmentedControlComponent = <TValue extends string = string>(
   props: SegmentedControlProps<TValue> & { ref?: Ref<HTMLDivElement> },
 ) => ReactNode;
 
-type IndicatorBounds = {
-  left: number;
-  width: number;
-};
-
-type DragState = {
-  pointerId: number;
-  startX: number;
-  offsetX: number;
-  moved: boolean;
-};
-
 /**
  * Renders a single-selection radio group with controlled and uncontrolled modes.
  * Supports dragging the selection indicator with a mouse or touch input.
@@ -103,19 +92,15 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
     const groupName = name ?? `notable-segmented-control-${controlId}`;
     const labelId = label ? `${controlId}-label` : undefined;
     const resolvedAriaLabelledBy = ariaLabelledBy ?? labelId;
-    const shouldReduceMotion = useReducedMotion();
-
     const containerRef = useRef<HTMLDivElement | null>(null);
     const itemRefs = useRef(new Map<TValue, HTMLLabelElement>());
-    const dragRef = useRef<DragState | null>(null);
-    const suppressClickRef = useRef(false);
+    const shouldReduceMotion = useReducedMotion();
 
     const [uncontrolledValue, setUncontrolledValue] = useState<
       TValue | undefined
     >(defaultValue);
     const [indicatorBounds, setIndicatorBounds] =
-      useState<IndicatorBounds | null>(null);
-    const [isDragging, setIsDragging] = useState(false);
+      useState<SelectorBounds | null>(null);
 
     const isControlled = value !== undefined;
     const selectedValue = isControlled ? value : uncontrolledValue;
@@ -170,6 +155,12 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
       };
     }, []);
 
+    const getItemElement = useCallback(
+      (optionValue: TValue) => itemRefs.current.get(optionValue),
+      [],
+    );
+    const getItems = useCallback(() => options, [options]);
+
     const measureIndicator = useCallback(() => {
       if (!selectedOption) {
         setIndicatorBounds(null);
@@ -184,9 +175,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
     }, [getItemBounds, selectedOption]);
 
     useLayoutEffect(() => {
-      if (!dragRef.current) {
-        measureIndicator();
-      }
+      measureIndicator();
     }, [measureIndicator]);
 
     useEffect(() => {
@@ -197,9 +186,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
       }
 
       const observer = new ResizeObserver(() => {
-        if (!dragRef.current) {
-          measureIndicator();
-        }
+        measureIndicator();
       });
 
       observer.observe(container);
@@ -211,168 +198,18 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
       return () => observer.disconnect();
     }, [measureIndicator]);
 
-    const getOptionAtPosition = (clientX: number) => {
-      let closestOption: (typeof options)[number] | undefined;
-      let closestDistance = Number.POSITIVE_INFINITY;
-
-      for (const option of options) {
-        if (disabled || option.disabled) {
-          continue;
-        }
-
-        const item = itemRefs.current.get(option.value);
-
-        if (!item) {
-          continue;
-        }
-
-        const rect = item.getBoundingClientRect();
-        const center = rect.left + rect.width / 2;
-        const distance = Math.abs(clientX - center);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestOption = option;
-        }
-      }
-
-      return closestOption;
-    };
-
-    const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-      suppressClickRef.current = false;
-
-      if (disabled || !selectedOption || event.button !== 0) {
-        return;
-      }
-
-      const target = event.target;
-
-      if (!(target instanceof Element)) {
-        return;
-      }
-
-      const item = target.closest<HTMLElement>(
-        '.notable-segmented-control__item',
-      );
-
-      if (!item || item.dataset.selected === undefined || !indicatorBounds) {
-        return;
-      }
-
-      const container = containerRef.current;
-
-      if (!container) {
-        return;
-      }
-
-      const containerRect = container.getBoundingClientRect();
-      const indicatorLeft =
-        containerRect.left + container.clientLeft + indicatorBounds.left;
-
-      dragRef.current = {
-        pointerId: event.pointerId,
-        startX: event.clientX,
-        offsetX: event.clientX - indicatorLeft,
-        moved: false,
-      };
-
-      try {
-        container.setPointerCapture(event.pointerId);
-      } catch {
-        // Pointer capture may be unavailable in some test environments.
-      }
-    };
-
-    const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-      const drag = dragRef.current;
-      const container = containerRef.current;
-
-      if (!drag || !container || drag.pointerId !== event.pointerId) {
-        return;
-      }
-
-      if (
-        !drag.moved &&
-        Math.abs(event.clientX - drag.startX) < DRAG_THRESHOLD
-      ) {
-        return;
-      }
-
-      drag.moved = true;
-      setIsDragging(true);
-
-      const containerRect = container.getBoundingClientRect();
-      const pointerLeft =
-        event.clientX -
-        containerRect.left -
-        container.clientLeft -
-        drag.offsetX;
-
-      const targetOption = getOptionAtPosition(event.clientX);
-
-      if (!targetOption) {
-        return;
-      }
-
-      const targetBounds = getItemBounds(targetOption.value);
-
-      if (!targetBounds) {
-        return;
-      }
-
-      const firstOption = options[0];
-      const lastOption = options.at(-1);
-
-      const firstBounds = firstOption ? getItemBounds(firstOption.value) : null;
-      const lastBounds = lastOption ? getItemBounds(lastOption.value) : null;
-
-      if (!firstBounds || !lastBounds) {
-        return;
-      }
-
-      const minimumLeft = firstBounds.left;
-      const maximumLeft =
-        lastBounds.left + lastBounds.width - targetBounds.width;
-
-      setIndicatorBounds({
-        left: Math.max(minimumLeft, Math.min(pointerLeft, maximumLeft)),
-        width: targetBounds.width,
-      });
-    };
-
-    const finishDrag = (
-      event: ReactPointerEvent<HTMLDivElement>,
-      cancelled: boolean,
-    ) => {
-      const drag = dragRef.current;
-      const container = containerRef.current;
-
-      if (!drag || drag.pointerId !== event.pointerId) {
-        return;
-      }
-
-      dragRef.current = null;
-      setIsDragging(false);
-
-      if (drag.moved) {
-        suppressClickRef.current = true;
-
-        if (!cancelled) {
-          const option = getOptionAtPosition(event.clientX);
-
-          if (option) {
-            handleSelect(option.value);
-          }
-        }
-      }
-
-      if (container?.hasPointerCapture?.(event.pointerId)) {
-        container.releasePointerCapture?.(event.pointerId);
-      }
-
-      measureIndicator();
-    };
+    const drag = useSelectorDrag({
+      containerRef,
+      disabled,
+      indicatorBounds,
+      getItems,
+      getItemElement,
+      getItemBounds,
+      onBoundsChange: setIndicatorBounds,
+      onSelect: handleSelect,
+      measureIndicator,
+      selectedValue,
+    });
 
     const classes = [
       'notable-segmented-control',
@@ -394,18 +231,12 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
         aria-describedby={ariaDescribedBy}
         aria-disabled={disabled || undefined}
         data-disabled={disabled || undefined}
-        data-dragging={isDragging || undefined}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={(event) => finishDrag(event, false)}
-        onPointerCancel={(event) => finishDrag(event, true)}
-        onClickCapture={(event) => {
-          if (suppressClickRef.current) {
-            suppressClickRef.current = false;
-            event.preventDefault();
-            event.stopPropagation();
-          }
-        }}
+        data-dragging={drag.isDragging || undefined}
+        onPointerDown={drag.onPointerDown}
+        onPointerMove={drag.onPointerMove}
+        onPointerUp={drag.onPointerUp}
+        onPointerCancel={drag.onPointerCancel}
+        onClickCapture={drag.onClickCapture}
       >
         {selectedOption && indicatorBounds && (
           <motion.span
@@ -420,11 +251,8 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
             transition={
               shouldReduceMotion
                 ? { duration: 0 }
-                : isDragging
-                  ? {
-                      left: { duration: 0 },
-                      width: SPRING_LAYOUT,
-                    }
+                : drag.isDragging
+                  ? { left: { duration: 0 }, width: SPRING_LAYOUT }
                   : SPRING_LAYOUT
             }
           />
@@ -447,6 +275,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
               }}
               htmlFor={optionId}
               className="notable-segmented-control__item"
+              data-selector-item
               data-selected={isSelected || undefined}
               data-disabled={isOptionDisabled || undefined}
             >
