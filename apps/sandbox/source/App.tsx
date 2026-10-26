@@ -23,7 +23,7 @@ import {
   Tabs,
   Tooltip,
   toast,
-} from '@dotm4x/notable';
+} from '@notable/react';
 
 type Theme = 'light' | 'dark';
 type Density = 'comfortable' | 'compact' | 'spacious';

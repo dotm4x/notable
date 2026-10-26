@@ -11,7 +11,7 @@ export default defineConfig({
         find: /^@dotm4x\/notable\/styles\.css$/,
         replacement: fileURLToPath(
           new URL(
-            '../../packages/components/source/styles/index.css',
+            '../../packages/components/react/source/styles/index.css',
             import.meta.url,
           ),
         ),
@@ -19,7 +19,7 @@ export default defineConfig({
       {
         find: /^@dotm4x\/notable$/,
         replacement: fileURLToPath(
-          new URL('../../packages/components/source/index.ts', import.meta.url),
+          new URL('../../packages/components/react/source/index.ts', import.meta.url),
         ),
       },
     ],

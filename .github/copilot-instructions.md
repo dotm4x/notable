@@ -83,7 +83,7 @@
 ## Project Structure
 
 - Preserve the existing monorepo and package structure.
-- Implement library components inside `packages/components/source/components/`.
+- Implement library components inside `packages/components/react/source/components/`.
 - Create a dedicated directory for each component, using its lowercase component name.
 - Use the component's name consistently for its implementation, stylesheet, tests, and stories.
 - Keep shared styles, design tokens, font definitions, and global CSS in their existing locations.
@@ -92,7 +92,7 @@
 A typical component directory looks like this:
 
 ```text
-packages/components/source/components/
+packages/components/react/source/components/
 └── badge/
     ├── badge.tsx
     ├── badge.css

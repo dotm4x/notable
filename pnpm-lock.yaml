@@ -187,9 +187,9 @@ importers:
 
   apps/sandbox:
     dependencies:
-      '@dotm4x/notable':
+      '@notable/react':
         specifier: workspace:*
-        version: link:../../packages/components
+        version: link:../../packages/components/react
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -213,7 +213,7 @@ importers:
         specifier: ^8.3.5
         version: 8.3.5(esbuild@0.27.7)
 
-  packages/components:
+  packages/components/react:
     dependencies:
       '@base-ui/react':
         specifier: ^1.9.0
