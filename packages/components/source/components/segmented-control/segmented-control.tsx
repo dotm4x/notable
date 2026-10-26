@@ -16,7 +16,7 @@ import { SPRING_LAYOUT } from '../../styles/motion.js';
 import {
   useSelectorDrag,
   type SelectorBounds,
-} from '../../internal/selector-drag/use-selector-drag.js';
+} from '../../internal/helpers/use-selector-drag.js';
 import './segmented-control.css';
 
 /** Available segmented control sizes. */
