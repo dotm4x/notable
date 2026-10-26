@@ -83,9 +83,9 @@
     )
     scale(var(--notable-toast-scale));
   transition:
-    transform var(--notable-duration-toast) var(--notable-easing-standard),
-    height var(--notable-duration-toast) var(--notable-easing-standard),
-    opacity var(--notable-duration-toast) var(--notable-easing-standard),
+    transform var(--notable-duration-medium) var(--notable-easing-standard),
+    height var(--notable-duration-medium) var(--notable-easing-standard),
+    opacity var(--notable-duration-medium) var(--notable-easing-standard),
     box-shadow var(--notable-duration-fast) var(--notable-easing-standard);
 }
 

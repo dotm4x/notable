@@ -1,14 +1,30 @@
 :root {
-  /* Durations: fast for quick control feedback (color, border, shadow, and
-     opacity); base for larger state changes (overlays, switch, accordion);
-     toast for toast transform and opacity; slow for progress, skeleton, and spinner. */
+  /* Durations: fast for quick feedback on small properties (color, border,
+     shadow, opacity); base for standard state changes; medium for mid-length
+     motion; slow for long or looping motion. */
   --notable-duration-fast: 140ms;
   --notable-duration-base: 160ms;
-  --notable-duration-toast: 200ms;
+  --notable-duration-medium: 200ms;
   --notable-duration-slow: 800ms;
 
+  /* Enter and exit durations for elements that travel a large distance.
+     Enter is slightly longer than exit, so content settles gently and leaves
+     decisively. */
+  --notable-duration-enter: 360ms;
+  --notable-duration-exit: 240ms;
+
+  /* Shortest duration allowed when a gesture scales another duration down. */
+  --notable-duration-minimum: 120ms;
+
+  /* Delay before a transition starts. */
+  --notable-duration-delay: 350ms;
+
   /* Easing: standard is CSS `ease`, used by most transitions. Spring is an
-     ease-out cubic-bezier, used for tooltip entry and RadioGroup thumb movement. */
+     ease-out cubic-bezier for responsive, settling motion. Emphasized
+     decelerate starts fast and settles softly when a surface enters; emphasized
+     accelerate starts slowly and speeds up when a surface leaves, without snapping. */
   --notable-easing-standard: ease;
   --notable-easing-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --notable-easing-emphasized-decelerate: cubic-bezier(0.32, 0.72, 0, 1);
+  --notable-easing-emphasized-accelerate: cubic-bezier(0.5, 0, 0.75, 0);
 }

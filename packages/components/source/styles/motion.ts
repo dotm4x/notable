@@ -7,7 +7,7 @@
  * `tokens/motion.css`. Because CSS custom properties cannot be passed
  * directly into Motion's `Transition` option, they are maintained here as
  * typed constants that must be kept in sync with the CSS file. CSS-only
- * tokens, such as `--notable-duration-toast`, are not mirrored here.
+ * tokens, such as `--notable-duration-medium`, are not mirrored here.
  *
  * Durations are expressed in seconds, as required by Motion.
  * The corresponding CSS properties use milliseconds.
