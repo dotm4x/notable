@@ -17,43 +17,52 @@
   overflow: auto;
   overscroll-behavior: contain;
   font-family: var(--notable-font-family);
-  opacity: 0;
-  transform: translateY(var(--notable-spacing-2)) scale(0.98);
-  will-change: opacity, transform;
-  transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard),
-    transform var(--notable-duration-base) var(--notable-easing-standard),
-    overlay var(--notable-duration-base) allow-discrete,
-    display var(--notable-duration-base) allow-discrete;
 }
 
-.notable-dialog[open] {
-  opacity: 1;
-  transform: none;
+.notable-dialog::backdrop {
+  background-color: var(--notable-color-overlay);
 }
 
-@starting-style {
-  .notable-dialog[open] {
+/*
+ * Entry and exit use keyframes instead of transitions. Keyframes start on the
+ * first rendered frame, so the dialog never paints at full opacity before the
+ * fade begins, and the exit runs from the open state without relying on
+ * `@starting-style` or discrete transition support. The exit keyframes use
+ * `forwards` so the dialog stays invisible until `close()` runs on `animationend`.
+ */
+@keyframes notable-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--notable-spacing-2)) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes notable-dialog-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
     opacity: 0;
     transform: translateY(var(--notable-spacing-2)) scale(0.98);
   }
 }
 
-.notable-dialog::backdrop {
-  background-color: transparent;
-  transition:
-    background-color var(--notable-duration-base) var(--notable-easing-standard),
-    overlay var(--notable-duration-base) allow-discrete,
-    display var(--notable-duration-base) allow-discrete;
+@keyframes notable-dialog-backdrop-in {
+  from {
+    opacity: 0;
+  }
 }
 
-.notable-dialog[open]::backdrop {
-  background-color: var(--notable-color-overlay);
-}
-
-@starting-style {
-  .notable-dialog[open]::backdrop {
-    background-color: transparent;
+@keyframes notable-dialog-backdrop-out {
+  to {
+    opacity: 0;
   }
 }
 
@@ -116,9 +125,28 @@
   inset-inline-end: var(--notable-spacing-3);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .notable-dialog,
-  .notable-dialog::backdrop {
-    transition: none;
+/*
+ * Without these rules there is no animation, so the component closes
+ * immediately. Under reduced motion the dialog appears and disappears at once.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .notable-dialog[open] {
+    animation: notable-dialog-in var(--notable-duration-base)
+      var(--notable-easing-standard);
+  }
+
+  .notable-dialog[open]::backdrop {
+    animation: notable-dialog-backdrop-in var(--notable-duration-base)
+      var(--notable-easing-standard);
+  }
+
+  .notable-dialog[data-closing] {
+    animation: notable-dialog-out var(--notable-duration-fast)
+      var(--notable-easing-standard) forwards;
+  }
+
+  .notable-dialog[data-closing]::backdrop {
+    animation: notable-dialog-backdrop-out var(--notable-duration-fast)
+      var(--notable-easing-standard) forwards;
   }
 }

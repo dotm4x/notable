@@ -93,6 +93,30 @@ type TriggerChildProps = {
 
 const DialogContext = createContext<DialogContextValue | null>(null);
 
+const CLOSING_ATTRIBUTE = 'data-closing';
+const EXIT_ANIMATION_NAME = 'notable-dialog-out';
+
+/** True when the dialog runs a CSS animation, so closing must wait for it to end. */
+function hasAnimation(element: HTMLElement) {
+  const { animationName } = getComputedStyle(element);
+
+  return animationName !== '' && animationName !== 'none';
+}
+
+/** Finishes closing once the dialog's own exit animation has ended or been cancelled. */
+function completeExitAnimation(
+  dialog: HTMLDialogElement,
+  event: Pick<globalThis.AnimationEvent, 'target' | 'animationName'>,
+) {
+  if (
+    event.target === dialog &&
+    event.animationName === EXIT_ANIMATION_NAME &&
+    dialog.hasAttribute(CLOSING_ATTRIBUTE)
+  ) {
+    dialog.close();
+  }
+}
+
 function useDialogContext(componentName: string) {
   const context = useContext(DialogContext);
 
@@ -142,9 +166,24 @@ function DialogRoot({
       return;
     }
 
-    if (isOpen && !dialog.open) {
-      dialog.showModal();
-    } else if (!isOpen && dialog.open) {
+    if (isOpen) {
+      dialog.removeAttribute(CLOSING_ATTRIBUTE);
+
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+
+      return;
+    }
+
+    if (!dialog.open) {
+      return;
+    }
+
+    // The exit animation finishes by calling `close()` from `Dialog.Content`.
+    if (hasAnimation(dialog)) {
+      dialog.setAttribute(CLOSING_ATTRIBUTE, '');
+    } else {
       dialog.close();
     }
   }, [isOpen]);
@@ -240,6 +279,29 @@ function DialogContent({
     onClose?.(event);
     setOpen(false);
   };
+
+  // Only the dialog's own exit animation completes the close. Animations on
+  // descendants and the backdrop bubble or run alongside it, so they are ignored.
+  // Both events are listened to natively: React's synthetic animation handlers
+  // do not fire reliably here, and a cancelled exit must still close the dialog.
+  useEffect(() => {
+    const dialog = dialogRef.current;
+
+    if (!dialog) {
+      return;
+    }
+
+    const handleNativeExitEnd = (event: globalThis.AnimationEvent) =>
+      completeExitAnimation(dialog, event);
+
+    dialog.addEventListener('animationend', handleNativeExitEnd);
+    dialog.addEventListener('animationcancel', handleNativeExitEnd);
+
+    return () => {
+      dialog.removeEventListener('animationend', handleNativeExitEnd);
+      dialog.removeEventListener('animationcancel', handleNativeExitEnd);
+    };
+  }, [dialogRef]);
 
   // The backdrop is the `<dialog>` element itself. A click only counts as a
   // backdrop click when the press also started there, so drag-selecting text
