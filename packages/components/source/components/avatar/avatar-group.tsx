@@ -7,7 +7,7 @@ import {
 import type { AvatarSize } from './avatar.js';
 
 export type AvatarGroupProps = HTMLAttributes<HTMLDivElement> & {
-  /** Avatares u otro contenido que se organiza en un grupo superpuesto. */
+  /** Avatars or other content arranged in an overlapping group. */
   children?: ReactNode;
   /** Size inherited by child avatars. Defaults to `medium`. */
   size?: AvatarSize;
