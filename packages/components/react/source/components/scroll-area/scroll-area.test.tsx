@@ -165,90 +165,181 @@ describe('ScrollArea', () => {
       expect(viewport.style.overflowX).toBe('');
       expect(viewport.style.overflowY).toBe('');
     });
+  });
 
-    it('renders only the vertical scrollbar for a vertical scroll area', () => {
-      // Arrange & Act
+  describe('scrollbars', () => {
+    it('hides both scrollbar orientations by default, even when content overflows', () => {
+      mockOverflow({
+        scrollHeight: 500,
+        clientHeight: 200,
+        scrollWidth: 500,
+        clientWidth: 200,
+      });
+
       const { container } = render(
-        <ScrollArea scrollbar="visible">Content</ScrollArea>,
+        <ScrollArea orientation="both">Content</ScrollArea>,
       );
 
-      // Assert
       expect(
-        container.querySelector('.notable-scroll-area__scrollbar--vertical'),
-      ).not.toBeNull();
-      expect(
-        container.querySelector('.notable-scroll-area__scrollbar--horizontal'),
-      ).toBeNull();
-      expect(
-        container.querySelector('.notable-scroll-area__corner'),
+        container.querySelector('.notable-scroll-area__scrollbar'),
       ).toBeNull();
     });
 
-    it('renders both scrollbars for a bidirectional scroll area', () => {
-      // Arrange & Act
+    it.each([
+      ['vertical', 'vertical'],
+      ['horizontal', 'horizontal'],
+    ] as const)(
+      'renders only the %s scrollbar when that axis overflows',
+      async (scrollbar, expectedOrientation) => {
+        mockOverflow({
+          scrollHeight: 500,
+          clientHeight: 200,
+          scrollWidth: 500,
+          clientWidth: 200,
+        });
+
+        const { container } = render(
+          <ScrollArea orientation="both" scrollbar={scrollbar}>
+            Content
+          </ScrollArea>,
+        );
+
+        await waitFor(() => {
+          expect(
+            container.querySelector(
+              `.notable-scroll-area__scrollbar--${expectedOrientation}`,
+            ),
+          ).not.toBeNull();
+        });
+        expect(
+          container.querySelector(
+            `.notable-scroll-area__scrollbar--${expectedOrientation === 'vertical' ? 'horizontal' : 'vertical'}`,
+          ),
+        ).toBeNull();
+      },
+    );
+
+    it('renders both scrollbars and their corner when both axes overflow', async () => {
+      mockOverflow({
+        scrollHeight: 500,
+        clientHeight: 200,
+        scrollWidth: 500,
+        clientWidth: 200,
+      });
+
       const { container } = render(
+        <ScrollArea orientation="both" scrollbar="both">
+          Content
+        </ScrollArea>,
+      );
+
+      await waitFor(() => {
+        expect(
+          container.querySelectorAll('.notable-scroll-area__scrollbar'),
+        ).toHaveLength(2);
+        expect(
+          container.querySelector('.notable-scroll-area__corner'),
+        ).not.toBeNull();
+      });
+    });
+
+    it('does not render a scrollbar when its orientation has no overflow', async () => {
+      mockOverflow({
+        scrollHeight: 200,
+        clientHeight: 200,
+        scrollWidth: 200,
+        clientWidth: 200,
+      });
+
+      const { container } = render(
+        <ScrollArea orientation="both" scrollbar="both">
+          Content
+        </ScrollArea>,
+      );
+
+      await waitFor(() => {
+        expect(
+          container.querySelector('.notable-scroll-area__scrollbar'),
+        ).toBeNull();
+      });
+    });
+
+    it('does not render a scrollbar for an axis that is not scrollable', async () => {
+      mockOverflow({
+        scrollHeight: 500,
+        clientHeight: 200,
+        scrollWidth: 500,
+        clientWidth: 200,
+      });
+
+      const { container } = render(
+        <ScrollArea orientation="horizontal" scrollbar="vertical">
+          Content
+        </ScrollArea>,
+      );
+
+      await waitFor(() => {
+        expect(
+          container.querySelector('.notable-scroll-area__scrollbar'),
+        ).toBeNull();
+      });
+    });
+
+    it('keeps legacy visibility values working', async () => {
+      mockOverflow({
+        scrollHeight: 500,
+        clientHeight: 200,
+        scrollWidth: 500,
+        clientWidth: 200,
+      });
+
+      const { container, rerender } = render(
         <ScrollArea orientation="both" scrollbar="visible">
           Content
         </ScrollArea>,
       );
 
-      // Assert
-      expect(
-        container.querySelector('.notable-scroll-area__scrollbar--vertical'),
-      ).not.toBeNull();
-      expect(
-        container.querySelector('.notable-scroll-area__scrollbar--horizontal'),
-      ).not.toBeNull();
-    });
-  });
+      await waitFor(() => {
+        expect(
+          container.querySelectorAll('.notable-scroll-area__scrollbar'),
+        ).toHaveLength(2);
+      });
 
-  describe('scrollbar modes', () => {
-    it('keeps the scrollbar mounted in visible mode', () => {
-      // Arrange & Act
-      const { container } = render(
-        <ScrollArea scrollbar="visible">Content</ScrollArea>,
-      );
-
-      // Assert
-      expect(
-        container.querySelector('.notable-scroll-area__thumb'),
-      ).not.toBeNull();
-    });
-
-    it('does not render any scrollbar in hidden mode while keeping the content scrollable', () => {
-      // Arrange & Act
-      const { container } = render(
-        <ScrollArea orientation="both" scrollbar="hidden" aria-label="Hidden">
+      rerender(
+        <ScrollArea orientation="both" scrollbar="auto">
           Content
         </ScrollArea>,
       );
 
-      // Assert
-      expect(
-        container.querySelector('.notable-scroll-area__scrollbar'),
-      ).toBeNull();
-      expect(
-        container.querySelector('.notable-scroll-area__corner'),
-      ).toBeNull();
-      expect(screen.getByLabelText('Hidden')).toHaveClass(
-        'notable-scroll-area__viewport',
-      );
-    });
-
-    it('marks the root for auto scrollbar visibility only in auto mode', () => {
-      // Arrange
-      const { container, rerender } = render(<ScrollArea>Content</ScrollArea>);
-
-      // Act & Assert
       expect(getRoot(container)).toHaveClass(
         'notable-scroll-area--auto-scrollbar',
       );
 
-      rerender(<ScrollArea scrollbar="visible">Content</ScrollArea>);
-
-      expect(getRoot(container)).not.toHaveClass(
-        'notable-scroll-area--auto-scrollbar',
+      rerender(
+        <ScrollArea orientation="both" scrollbar="hidden">
+          Content
+        </ScrollArea>,
       );
+
+      expect(
+        container.querySelector('.notable-scroll-area__scrollbar'),
+      ).toBeNull();
+    });
+
+    it('keeps viewport focus and programmatic scrolling available when bars are hidden', () => {
+      render(
+        <ScrollArea aria-label="Scrollable content" tabIndex={0}>
+          Content
+        </ScrollArea>,
+      );
+
+      const viewport = screen.getByLabelText('Scrollable content');
+      expect(viewport).toHaveClass('base-ui-disable-scrollbar');
+      expect(viewport).toHaveAttribute('tabindex', '0');
+      viewport.scrollTop = 40;
+      viewport.scrollLeft = 20;
+      expect(viewport.scrollTop).toBe(40);
+      expect(viewport.scrollLeft).toBe(20);
     });
   });
 
@@ -528,7 +619,7 @@ describe('ScrollArea', () => {
       expect(root).not.toHaveAttribute('data-overflow-y-start');
     });
 
-    it('renders the corner only when both axes overflow', async () => {
+    it('keeps overflow detection when no scrollbar orientation is requested', async () => {
       // Arrange
       mockOverflow({
         scrollHeight: 500,
@@ -539,18 +630,19 @@ describe('ScrollArea', () => {
 
       // Act
       const { container } = render(
-        <ScrollArea orientation="both" scrollbar="visible">
-          Content
-        </ScrollArea>,
+        <ScrollArea orientation="both">Content</ScrollArea>,
       );
 
-      // Assert
-      await waitFor(() =>
-        expect(getRoot(container)).toHaveAttribute('data-has-overflow-y'),
-      );
+      const root = getRoot(container);
+      await waitFor(() => {
+        expect(root).toHaveAttribute('data-has-overflow-y');
+        expect(root).toHaveAttribute('data-has-overflow-x');
+      });
       expect(
-        container.querySelector('.notable-scroll-area__corner'),
-      ).not.toBeNull();
+        container.querySelector(
+          '.notable-scroll-area__scrollbar, .notable-scroll-area__thumb, .notable-scroll-area__corner',
+        ),
+      ).toBeNull();
     });
   });
 

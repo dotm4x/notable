@@ -14,7 +14,22 @@ const meta = {
   component: ScrollArea,
   tags: ['autodocs'],
   args: {
+    scrollbar: 'none',
     style: { height: '16rem', width: '20rem' },
+  },
+  argTypes: {
+    scrollbar: {
+      control: 'select',
+      options: [
+        'none',
+        'vertical',
+        'horizontal',
+        'both',
+        'auto',
+        'visible',
+        'hidden',
+      ],
+    },
   },
 } satisfies Meta<typeof ScrollArea>;
 
@@ -86,9 +101,9 @@ const projectFiles = [
 
 const paragraphs = [
   'Scroll areas keep dense content contained inside a fixed region while preserving native keyboard scrolling. The viewport is the focusable element, so arrow keys, Page Up, and Page Down continue to work without extra handling.',
-  'Custom scrollbars are drawn by the component and sit outside the viewport. Their thumbs follow the native scroll position, so dragging the thumb, clicking the track, and using the mouse wheel all update the same content.',
-  'When the content is shorter than the region, nothing overflows and no scrollbar is rendered in automatic mode. Edge fades only appear on the sides that still have hidden content, which signals that more material exists without adding visual noise.',
-  'Long text wraps to the width of the container. Resizing the parent recalculates the overflow, so the scrollbar and the fade indicators stay correct as the layout changes.',
+  'The region uses native scrolling, while Notable hides scrollbar visuals. Trackpad, keyboard, touch, and wheel scrolling remain available.',
+  'When the content is shorter than the region, no edge indicator is shown. Edge fades only appear on sides that still have hidden content.',
+  'Long text wraps to the width of the container. Resizing the parent recalculates overflow and updates the edge indicators.',
   'Nested controls such as buttons, switches, and inputs remain fully interactive inside the scrolling region. Scrolling starts from pointer movement over the content, but focusing a control scrolls it into view automatically.',
 ];
 
@@ -115,9 +130,25 @@ export const Default: Story = {
   ),
 };
 
+export const VerticalScrollbar: Story = {
+  args: {
+    orientation: 'vertical',
+    scrollbar: 'vertical',
+    style: { height: '12rem', width: '16rem' },
+  },
+  render: (args) => (
+    <Card padding="none" data-theme="light">
+      <ScrollArea {...args}>
+        <ContactList />
+      </ScrollArea>
+    </Card>
+  ),
+};
+
 export const Horizontal: Story = {
   args: {
     orientation: 'horizontal',
+    scrollbar: 'horizontal',
     style: { width: '24rem' },
   },
   render: (args) => (
@@ -165,6 +196,7 @@ export const Horizontal: Story = {
 export const Bidirectional: Story = {
   args: {
     orientation: 'both',
+    scrollbar: 'both',
     style: { height: '16rem', width: '24rem' },
   },
   render: (args) => (
@@ -359,35 +391,6 @@ export const NestedInteractiveContent: Story = {
   ),
 };
 
-export const ScrollbarVisibility: Story = {
-  render: () => (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 'var(--notable-spacing-4)',
-      }}
-    >
-      {(['auto', 'visible', 'hidden'] as const).map((scrollbar) => (
-        <div
-          key={scrollbar}
-          style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
-        >
-          <span style={mutedTextStyle}>scrollbar=&quot;{scrollbar}&quot;</span>
-          <Card padding="none">
-            <ScrollArea
-              scrollbar={scrollbar}
-              style={{ height: '12rem', width: '14rem' }}
-            >
-              <ContactList />
-            </ScrollArea>
-          </Card>
-        </div>
-      ))}
-    </div>
-  ),
-};
-
 export const EdgeFadeEnabledAndDisabled: Story = {
   render: () => (
     <div
@@ -428,7 +431,11 @@ function ThemedScrollArea({ theme }: { theme: 'light' | 'dark' }) {
         padding: 'var(--notable-spacing-3)',
       }}
     >
-      <ScrollArea fadeEdges style={{ height: '12rem', width: '16rem' }}>
+      <ScrollArea
+        fadeEdges
+        scrollbar="vertical"
+        style={{ height: '12rem', width: '16rem' }}
+      >
         <ContactList />
       </ScrollArea>
     </Card>
@@ -455,12 +462,14 @@ export const ShortContent: Story = {
     <Card padding="none">
       <ScrollArea
         {...args}
+        orientation="both"
+        scrollbar="both"
         fadeEdges
         style={{ height: '12rem', width: '20rem' }}
       >
         <div style={{ padding: 'var(--notable-spacing-3)' }}>
           <p style={{ margin: 0 }}>
-            This content fits inside the region, so no scrollbar or fade
+            This content fits inside the region, so no overflow edge indicator
             appears.
           </p>
         </div>
@@ -495,7 +504,11 @@ function DynamicNotifications() {
         Add notification
       </Button>
       <Card padding="none">
-        <ScrollArea fadeEdges style={{ height: '12rem', width: '20rem' }}>
+        <ScrollArea
+          fadeEdges
+          scrollbar="vertical"
+          style={{ height: '12rem', width: '20rem' }}
+        >
           <ul style={listStyle}>
             {notifications.map((notification, index) => (
               <li
@@ -746,6 +759,7 @@ export const EdgeEffectThemes: Story = {
           <span style={mutedTextStyle}>{theme}</span>
           <ScrollArea
             edgeEffect="blur"
+            scrollbar="vertical"
             style={{ height: '12rem', width: '16rem' }}
           >
             <ContactList />
