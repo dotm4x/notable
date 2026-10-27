@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Input, type InputProps } from '../input/input.js';
-import { AnimatedHighlight } from '../../internal/helpers/animated-highlight/animated-highlight.js';
+import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import '../../internal/styles/floating-surface.css';
 import './combobox.css';
 
