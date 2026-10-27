@@ -142,8 +142,8 @@ describe('Input', () => {
       screen.getByRole('textbox', { name: 'Grammar field' }),
     ).toHaveAttribute('aria-invalid', 'grammar');
     expect(
-      screen.getByRole('textbox').parentElement?.parentElement,
-    ).toHaveAttribute('data-invalid', 'true');
+      screen.getByRole('textbox').closest('.notable-input-field'),
+    ).toHaveAttribute('data-invalid');
   });
 
   it('renders optional leading and trailing icons as decorative content', () => {

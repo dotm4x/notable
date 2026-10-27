@@ -4,7 +4,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import './input.css';
+import { Field } from '../field/field.js';
 
 /** Props for an input with an optional label, description, error, and adornments. */
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -66,54 +66,49 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const invalidAttribute = invalid || Boolean(error) ? true : ariaInvalid;
 
   return (
-    <div
+    <Field.Root
       className="notable-input-field"
-      data-disabled={props.disabled || undefined}
       data-invalid={isInvalid || undefined}
       data-readonly={props.readOnly || undefined}
+      disabled={props.disabled}
+      invalid={invalid || Boolean(error)}
     >
-      {label && (
-        <label className="notable-input__label" htmlFor={inputId}>
-          {label}
-        </label>
-      )}
-      <span className="notable-input__control">
+      {label && <Field.Label>{label}</Field.Label>}
+      <Field.Box>
         {leadingIcon && (
           <span
-            className="notable-input__icon"
+            className="notable-field__icon"
             aria-hidden={leadingIconInteractive ? undefined : true}
           >
             {leadingIcon}
           </span>
         )}
-        <input
+        <Field.Control
           {...props}
           ref={ref}
           id={inputId}
-          className={['notable-input', className].filter(Boolean).join(' ')}
+          className={className}
           aria-describedby={describedBy}
           aria-invalid={invalidAttribute}
           aria-errormessage={errorMessage}
         />
         {trailingIcon && (
           <span
-            className="notable-input__icon"
+            className="notable-field__icon"
             aria-hidden={trailingIconInteractive ? undefined : true}
           >
             {trailingIcon}
           </span>
         )}
-      </span>
+      </Field.Box>
       {description && (
-        <span className="notable-input__description" id={descriptionId}>
-          {description}
-        </span>
+        <Field.Description id={descriptionId}>{description}</Field.Description>
       )}
       {error && (
-        <span className="notable-input__error" id={errorId} aria-live="polite">
+        <Field.Error id={errorId} match aria-live="polite">
           {error}
-        </span>
+        </Field.Error>
       )}
-    </div>
+    </Field.Root>
   );
 });
