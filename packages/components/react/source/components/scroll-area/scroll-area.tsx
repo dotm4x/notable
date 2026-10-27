@@ -9,7 +9,9 @@ import './scroll-area.css';
 
 export type ScrollAreaOrientation = 'vertical' | 'horizontal' | 'both';
 
-export type ScrollAreaScrollbar = 'auto' | 'visible' | 'hidden';
+/** Controls which custom scrollbar orientations are displayed. */
+export type ScrollAreaScrollbar =
+  'none' | 'vertical' | 'horizontal' | 'both' | 'auto' | 'visible' | 'hidden';
 
 /**
  * `none` shows no edge indicator, `fade` fades the content at edges with hidden content,
@@ -25,8 +27,10 @@ export type ScrollAreaProps = Omit<
   /** Axes that can scroll. Overflow on the other axis is clipped. Defaults to `vertical`. */
   orientation?: ScrollAreaOrientation;
   /**
-   * `auto` shows the scrollbar on hover or while scrolling, `visible` always shows it when content overflows,
-   * and `hidden` removes the scrollbar while keeping the content scrollable.
+   * Which custom scrollbar orientations to show. Defaults to `none`.
+   * Orientation options are limited to the axes enabled by `orientation`.
+   * `auto` shows those bars on hover or while scrolling; legacy `visible` shows
+   * both enabled axes and `hidden` is equivalent to `none`.
    */
   scrollbar?: ScrollAreaScrollbar;
   /**
@@ -55,14 +59,16 @@ export type ScrollAreaProps = Omit<
 };
 
 /**
- * A scrollable region with custom scrollbars. `className` and `style` apply to the root wrapper.
- * All other HTML attributes, and the ref, apply to the scrollable viewport, which is the focusable element.
+ * A native scrollable region with optional custom scrollbars.
+ * `className` and `style` apply to the root wrapper.
+ * All other HTML attributes and the ref apply to the viewport, which becomes
+ * keyboard-focusable when content overflows.
  */
 export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
   function ScrollArea(
     {
       orientation = 'vertical',
-      scrollbar = 'auto',
+      scrollbar = 'none',
       edgeEffect,
       edgeEffectSize,
       fadeEdges = false,
@@ -76,13 +82,28 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
   ) {
     const hasVerticalAxis = orientation !== 'horizontal';
     const hasHorizontalAxis = orientation !== 'vertical';
-    const hasScrollbars = scrollbar !== 'hidden';
+    const scrollbarMode =
+      scrollbar === 'hidden'
+        ? 'none'
+        : scrollbar === 'visible'
+          ? 'both'
+          : scrollbar;
+    const showVerticalScrollbar =
+      hasVerticalAxis &&
+      (scrollbarMode === 'vertical' ||
+        scrollbarMode === 'both' ||
+        scrollbarMode === 'auto');
+    const showHorizontalScrollbar =
+      hasHorizontalAxis &&
+      (scrollbarMode === 'horizontal' ||
+        scrollbarMode === 'both' ||
+        scrollbarMode === 'auto');
     const resolvedEdgeEffect: ScrollAreaEdgeEffect =
       edgeEffect ?? (fadeEdges ? 'fade' : 'none');
 
     const rootClassName = [
       'notable-scroll-area',
-      scrollbar === 'auto' && 'notable-scroll-area--auto-scrollbar',
+      scrollbarMode === 'auto' && 'notable-scroll-area--auto-scrollbar',
       resolvedEdgeEffect !== 'none' &&
         `notable-scroll-area--${resolvedEdgeEffect}`,
       className,
@@ -107,8 +128,6 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       ...(hasHorizontalAxis ? {} : { overflowX: 'hidden' }),
     };
 
-    const keepScrollbarsMounted = scrollbar === 'visible';
-
     return (
       <BaseScrollArea.Root className={rootClassName} style={rootStyle}>
         <BaseScrollArea.Viewport
@@ -130,6 +149,28 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
           </BaseScrollArea.Content>
         </BaseScrollArea.Viewport>
 
+        {showVerticalScrollbar && (
+          <BaseScrollArea.Scrollbar
+            orientation="vertical"
+            className="notable-scroll-area__scrollbar notable-scroll-area__scrollbar--vertical"
+          >
+            <BaseScrollArea.Thumb className="notable-scroll-area__thumb" />
+          </BaseScrollArea.Scrollbar>
+        )}
+
+        {showHorizontalScrollbar && (
+          <BaseScrollArea.Scrollbar
+            orientation="horizontal"
+            className="notable-scroll-area__scrollbar notable-scroll-area__scrollbar--horizontal"
+          >
+            <BaseScrollArea.Thumb className="notable-scroll-area__thumb" />
+          </BaseScrollArea.Scrollbar>
+        )}
+
+        {showVerticalScrollbar && showHorizontalScrollbar && (
+          <BaseScrollArea.Corner className="notable-scroll-area__corner" />
+        )}
+
         {resolvedEdgeEffect === 'blur' && (
           <>
             {hasVerticalAxis && (
@@ -145,30 +186,6 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
               </>
             )}
           </>
-        )}
-
-        {hasScrollbars && hasVerticalAxis && (
-          <BaseScrollArea.Scrollbar
-            orientation="vertical"
-            keepMounted={keepScrollbarsMounted}
-            className="notable-scroll-area__scrollbar notable-scroll-area__scrollbar--vertical"
-          >
-            <BaseScrollArea.Thumb className="notable-scroll-area__thumb" />
-          </BaseScrollArea.Scrollbar>
-        )}
-
-        {hasScrollbars && hasHorizontalAxis && (
-          <BaseScrollArea.Scrollbar
-            orientation="horizontal"
-            keepMounted={keepScrollbarsMounted}
-            className="notable-scroll-area__scrollbar notable-scroll-area__scrollbar--horizontal"
-          >
-            <BaseScrollArea.Thumb className="notable-scroll-area__thumb" />
-          </BaseScrollArea.Scrollbar>
-        )}
-
-        {hasScrollbars && hasVerticalAxis && hasHorizontalAxis && (
-          <BaseScrollArea.Corner className="notable-scroll-area__corner" />
         )}
       </BaseScrollArea.Root>
     );

@@ -2,9 +2,6 @@
   --notable-scroll-area-fade-size: var(--notable-spacing-6);
   --notable-scroll-area-edge-size: var(--notable-scroll-area-fade-size);
   --notable-scroll-area-blur: var(--notable-blur-subtle);
-  --notable-scroll-area-thickness: var(--notable-spacing-2);
-  --notable-scroll-area-thumb-color: var(--notable-color-border-strong);
-  --notable-scroll-area-thumb-color-active: var(--notable-color-text-subtle);
 
   position: relative;
   display: flex;
@@ -144,28 +141,47 @@
 }
 
 .notable-scroll-area__scrollbar {
+  z-index: 1;
+  display: flex;
+  box-sizing: border-box;
+  padding: 2px;
   transition: opacity var(--notable-duration-fast)
     var(--notable-easing-standard);
 }
 
-/*
- * Base UI positions scrollbars absolutely against the root edges. Margins inset them so the track
- * does not sit on the container border, and clears the rounded corners of the surrounding surface.
- */
 .notable-scroll-area__scrollbar--vertical {
-  width: var(--notable-scroll-area-thickness);
-  margin-block: var(--notable-spacing-2);
+  width: 14px;
+  margin-block: var(--notable-spacing-1);
   margin-inline-end: var(--notable-spacing-1);
 }
 
 .notable-scroll-area__scrollbar--horizontal {
-  height: var(--notable-scroll-area-thickness);
-  margin-inline: var(--notable-spacing-2);
+  height: 14px;
+  margin-inline: var(--notable-spacing-1);
   margin-block-end: var(--notable-spacing-1);
+}
+
+.notable-scroll-area__thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--notable-radius-full);
+  background-color: var(--notable-color-text-subtle);
+  transition: background-color var(--notable-duration-fast)
+    var(--notable-easing-standard);
+}
+
+.notable-scroll-area__thumb:hover,
+.notable-scroll-area__thumb[data-scrolling] {
+  background-color: var(--notable-color-text-muted);
+}
+
+.notable-scroll-area__corner {
+  background: transparent;
 }
 
 .notable-scroll-area--auto-scrollbar .notable-scroll-area__scrollbar {
   opacity: 0;
+  pointer-events: none;
 }
 
 .notable-scroll-area--auto-scrollbar:hover .notable-scroll-area__scrollbar,
@@ -174,25 +190,7 @@
 .notable-scroll-area--auto-scrollbar
   .notable-scroll-area__scrollbar[data-scrolling] {
   opacity: 1;
-}
-
-.notable-scroll-area__thumb {
-  /* The main-axis size is set inline by Base UI, so these fill the track's cross axis. */
-  width: 100%;
-  height: 100%;
-  border-radius: var(--notable-radius-full);
-  background-color: var(--notable-scroll-area-thumb-color);
-  transition: background-color var(--notable-duration-fast)
-    var(--notable-easing-standard);
-}
-
-.notable-scroll-area__thumb:hover,
-.notable-scroll-area__thumb[data-scrolling] {
-  background-color: var(--notable-scroll-area-thumb-color-active);
-}
-
-.notable-scroll-area__corner {
-  background-color: transparent;
+  pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
