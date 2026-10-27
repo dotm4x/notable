@@ -7,7 +7,7 @@ import { Dialog } from '../dialog/dialog.js';
 import { Input } from '../input/input.js';
 import { Separator } from '../separator/separator.js';
 import { Switch } from '../switch/switch.js';
-import { ScrollArea } from './scroll-area.js';
+import { ScrollArea, type ScrollAreaEdgeEffect } from './scroll-area.js';
 
 const meta = {
   title: 'Components/ScrollArea',
@@ -634,6 +634,123 @@ export const FadeVisualization: Story = {
             </ScrollArea>
           </Card>
         </div>
+      ))}
+    </div>
+  ),
+};
+
+const edgeEffects: ScrollAreaEdgeEffect[] = ['none', 'fade', 'blur'];
+
+function EdgeEffectSample({
+  edgeEffect,
+  orientation,
+}: {
+  edgeEffect: ScrollAreaEdgeEffect;
+  orientation: 'vertical' | 'horizontal';
+}) {
+  return (
+    <Card padding="none">
+      <ScrollArea
+        orientation={orientation}
+        edgeEffect={edgeEffect}
+        style={
+          orientation === 'vertical'
+            ? { height: '12rem', width: '16rem' }
+            : { width: '20rem' }
+        }
+      >
+        {orientation === 'vertical' ? (
+          <ContactList />
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              gap: 'var(--notable-spacing-3)',
+              padding: 'var(--notable-spacing-3)',
+            }}
+          >
+            {Array.from({ length: 12 }, (_, index) => (
+              <div
+                key={index}
+                style={{
+                  width: '6rem',
+                  height: '4rem',
+                  flexShrink: 0,
+                  borderRadius: 'var(--notable-radius-md)',
+                  background: 'var(--notable-color-border-strong)',
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </ScrollArea>
+    </Card>
+  );
+}
+
+export const EdgeEffectComparison: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: 'var(--notable-spacing-6)' }}>
+      {(['vertical', 'horizontal'] as const).map((orientation) => (
+        <div
+          key={orientation}
+          style={{ display: 'grid', gap: 'var(--notable-spacing-3)' }}
+        >
+          <span style={mutedTextStyle}>{orientation} scrolling</span>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 'var(--notable-spacing-4)',
+            }}
+          >
+            {edgeEffects.map((edgeEffect) => (
+              <div
+                key={edgeEffect}
+                style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
+              >
+                <span style={mutedTextStyle}>
+                  edgeEffect=&quot;{edgeEffect}&quot;
+                </span>
+                <EdgeEffectSample
+                  edgeEffect={edgeEffect}
+                  orientation={orientation}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const EdgeEffectThemes: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 'var(--notable-spacing-4)',
+      }}
+    >
+      {(['light', 'dark'] as const).map((theme) => (
+        <Card
+          key={theme}
+          data-theme={theme}
+          style={{
+            background: 'var(--notable-color-background)',
+            padding: 'var(--notable-spacing-3)',
+          }}
+        >
+          <span style={mutedTextStyle}>{theme}</span>
+          <ScrollArea
+            edgeEffect="blur"
+            style={{ height: '12rem', width: '16rem' }}
+          >
+            <ContactList />
+          </ScrollArea>
+        </Card>
       ))}
     </div>
   ),
