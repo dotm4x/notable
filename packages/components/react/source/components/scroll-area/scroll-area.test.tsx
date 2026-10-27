@@ -302,6 +302,194 @@ describe('ScrollArea', () => {
     });
   });
 
+  describe('edge effects', () => {
+    function getEdgeOverlays(container: HTMLElement): string[] {
+      return Array.from(
+        container.querySelectorAll('.notable-scroll-area__edge'),
+        (overlay) =>
+          Array.from(overlay.classList).find((className) =>
+            className.startsWith('notable-scroll-area__edge--'),
+          ) ?? '',
+      );
+    }
+
+    it('applies no edge effect by default', () => {
+      // Arrange and Act
+      const { container } = render(<ScrollArea>Content</ScrollArea>);
+
+      // Assert
+      const root = getRoot(container);
+      expect(root).not.toHaveClass('notable-scroll-area--fade');
+      expect(root).not.toHaveClass('notable-scroll-area--blur');
+      expect(getEdgeOverlays(container)).toEqual([]);
+    });
+
+    it('applies the fade class without overlays for edgeEffect="fade"', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="fade">Content</ScrollArea>,
+      );
+
+      // Assert
+      expect(getRoot(container)).toHaveClass('notable-scroll-area--fade');
+      expect(getEdgeOverlays(container)).toEqual([]);
+    });
+
+    it('renders vertical overlays only for a vertical orientation', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur" orientation="vertical">
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      expect(getRoot(container)).toHaveClass('notable-scroll-area--blur');
+      expect(getEdgeOverlays(container)).toEqual([
+        'notable-scroll-area__edge--top',
+        'notable-scroll-area__edge--bottom',
+      ]);
+    });
+
+    it('renders horizontal overlays only for a horizontal orientation', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur" orientation="horizontal">
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      expect(getEdgeOverlays(container)).toEqual([
+        'notable-scroll-area__edge--start',
+        'notable-scroll-area__edge--end',
+      ]);
+    });
+
+    it('renders overlays on all four edges for a bidirectional orientation', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur" orientation="both">
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      expect(getEdgeOverlays(container)).toEqual([
+        'notable-scroll-area__edge--top',
+        'notable-scroll-area__edge--bottom',
+        'notable-scroll-area__edge--start',
+        'notable-scroll-area__edge--end',
+      ]);
+    });
+
+    it('renders empty overlays that are not focusable', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur" orientation="both">
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      const overlays = container.querySelectorAll('.notable-scroll-area__edge');
+      overlays.forEach((overlay) => {
+        expect(overlay).not.toHaveAttribute('tabindex');
+        expect(overlay).toBeEmptyDOMElement();
+      });
+    });
+
+    it('lets edgeEffect take precedence over the deprecated fadeEdges', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur" fadeEdges>
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      const root = getRoot(container);
+      expect(root).toHaveClass('notable-scroll-area--blur');
+      expect(root).not.toHaveClass('notable-scroll-area--fade');
+    });
+
+    it('sets the edge size from edgeEffectSize and prefers it over fadeSize', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur" edgeEffectSize="2rem" fadeSize="10px">
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      expect(
+        getRoot(container).style.getPropertyValue(
+          '--notable-scroll-area-edge-size',
+        ),
+      ).toBe('2rem');
+    });
+
+    it('keeps a custom style alongside the edge size variable', () => {
+      // Arrange and Act
+      const { container } = render(
+        <ScrollArea
+          edgeEffect="blur"
+          edgeEffectSize="16px"
+          style={{ maxHeight: 200 }}
+        >
+          Content
+        </ScrollArea>,
+      );
+
+      // Assert
+      const root = getRoot(container);
+      expect(root.style.maxHeight).toBe('200px');
+      expect(
+        root.style.getPropertyValue('--notable-scroll-area-edge-size'),
+      ).toBe('16px');
+    });
+
+    it('marks the overflowing edge for blur so overlays track overflow', async () => {
+      // Arrange
+      mockOverflow({
+        scrollHeight: 500,
+        clientHeight: 200,
+        scrollWidth: 100,
+        clientWidth: 100,
+      });
+
+      // Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur">Content</ScrollArea>,
+      );
+
+      // Assert
+      const root = getRoot(container);
+      await waitFor(() => expect(root).toHaveAttribute('data-overflow-y-end'));
+      expect(root).not.toHaveAttribute('data-overflow-y-start');
+    });
+
+    it('does not mark an edge when content fits the viewport', () => {
+      // Arrange
+      mockOverflow({
+        scrollHeight: 100,
+        clientHeight: 100,
+        scrollWidth: 100,
+        clientWidth: 100,
+      });
+
+      // Act
+      const { container } = render(
+        <ScrollArea edgeEffect="blur">Content</ScrollArea>,
+      );
+
+      // Assert
+      const root = getRoot(container);
+      expect(root).not.toHaveAttribute('data-overflow-y-end');
+      expect(root).not.toHaveAttribute('data-overflow-y-start');
+    });
+  });
+
   describe('overflow state', () => {
     it('reports no overflow when content fits the viewport', () => {
       // Arrange

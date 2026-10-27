@@ -1,5 +1,7 @@
 .notable-scroll-area {
   --notable-scroll-area-fade-size: var(--notable-spacing-6);
+  --notable-scroll-area-edge-size: var(--notable-scroll-area-fade-size);
+  --notable-scroll-area-blur: var(--notable-blur-subtle);
   --notable-scroll-area-thickness: var(--notable-spacing-2);
   --notable-scroll-area-thumb-color: var(--notable-color-border-strong);
   --notable-scroll-area-thumb-color-active: var(--notable-color-text-subtle);
@@ -10,7 +12,7 @@
   min-width: 0;
   min-height: 0;
 
-  /* Fade distances are set per edge from the overflow state. Zero means no fade. */
+  /* Edge distances are set per edge from the overflow state. Zero means no edge effect. */
   --_fade-top: 0px;
   --_fade-bottom: 0px;
   --_fade-start: 0px;
@@ -18,19 +20,19 @@
 }
 
 .notable-scroll-area[data-overflow-y-start] {
-  --_fade-top: var(--notable-scroll-area-fade-size);
+  --_fade-top: var(--notable-scroll-area-edge-size);
 }
 
 .notable-scroll-area[data-overflow-y-end] {
-  --_fade-bottom: var(--notable-scroll-area-fade-size);
+  --_fade-bottom: var(--notable-scroll-area-edge-size);
 }
 
 .notable-scroll-area[data-overflow-x-start] {
-  --_fade-start: var(--notable-scroll-area-fade-size);
+  --_fade-start: var(--notable-scroll-area-edge-size);
 }
 
 .notable-scroll-area[data-overflow-x-end] {
-  --_fade-end: var(--notable-scroll-area-fade-size);
+  --_fade-end: var(--notable-scroll-area-edge-size);
 }
 
 .notable-scroll-area__viewport {
@@ -47,9 +49,10 @@
 
 /*
  * Edge fades are built from alpha-only gradients. The opaque stop is a mask value, not a visible color,
- * so it does not need a theme token.
+ * so it does not need a theme token. Blur uses the same mask as its fallback when backdrop filters are unsupported.
  */
-.notable-scroll-area--fade .notable-scroll-area__viewport {
+.notable-scroll-area--fade .notable-scroll-area__viewport,
+.notable-scroll-area--blur .notable-scroll-area__viewport {
   --_mask-vertical: linear-gradient(
     to bottom,
     transparent 0,
@@ -69,6 +72,67 @@
   mask-composite: intersect;
   -webkit-mask-image: var(--_mask-vertical), var(--_mask-horizontal);
   -webkit-mask-composite: source-in;
+}
+
+/*
+ * The blur overlays take over the viewport's edges, so the viewport itself must stay opaque.
+ * Keeping the mask would fade the blurred content instead of only blurring it.
+ */
+@supports (backdrop-filter: blur(1px)) {
+  .notable-scroll-area--blur .notable-scroll-area__viewport {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+/*
+ * Each overlay sits over one edge and has a height or width equal to that edge's distance, so it is empty
+ * when nothing is hidden. Its mask makes the blur strongest at the edge and fades it out inward.
+ * Overlays ignore the pointer, so selection, clicks, drags, and scrolling pass through to the viewport.
+ * They are hidden while something inside has focus, so a focus ring is never blurred.
+ */
+.notable-scroll-area__edge {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  backdrop-filter: blur(var(--notable-scroll-area-blur));
+  -webkit-backdrop-filter: blur(var(--notable-scroll-area-blur));
+}
+
+.notable-scroll-area__edge--top {
+  inset-block: 0 auto;
+  inset-inline: 0;
+  height: var(--_fade-top);
+  mask-image: linear-gradient(to bottom, #000, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+.notable-scroll-area__edge--bottom {
+  inset-block: auto 0;
+  inset-inline: 0;
+  height: var(--_fade-bottom);
+  mask-image: linear-gradient(to top, #000, transparent);
+  -webkit-mask-image: linear-gradient(to top, #000, transparent);
+}
+
+.notable-scroll-area__edge--start {
+  inset-block: 0;
+  inset-inline: 0 auto;
+  width: var(--_fade-start);
+  mask-image: linear-gradient(to right, #000, transparent);
+  -webkit-mask-image: linear-gradient(to right, #000, transparent);
+}
+
+.notable-scroll-area__edge--end {
+  inset-block: 0;
+  inset-inline: auto 0;
+  width: var(--_fade-end);
+  mask-image: linear-gradient(to left, #000, transparent);
+  -webkit-mask-image: linear-gradient(to left, #000, transparent);
+}
+
+.notable-scroll-area--blur:has(:focus-visible) .notable-scroll-area__edge {
+  display: none;
 }
 
 /*

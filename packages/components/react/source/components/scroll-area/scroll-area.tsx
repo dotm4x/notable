@@ -11,6 +11,13 @@ export type ScrollAreaOrientation = 'vertical' | 'horizontal' | 'both';
 
 export type ScrollAreaScrollbar = 'auto' | 'visible' | 'hidden';
 
+/**
+ * `none` shows no edge indicator, `fade` fades the content at edges with hidden content,
+ * and `blur` blurs the content at those edges, gradually sharpening toward the middle.
+ * The blur needs `backdrop-filter` support. Without it, `blur` falls back to `fade`.
+ */
+export type ScrollAreaEdgeEffect = 'none' | 'fade' | 'blur';
+
 export type ScrollAreaProps = Omit<
   HTMLAttributes<HTMLDivElement>,
   'className' | 'style'
@@ -22,9 +29,23 @@ export type ScrollAreaProps = Omit<
    * and `hidden` removes the scrollbar while keeping the content scrollable.
    */
   scrollbar?: ScrollAreaScrollbar;
-  /** Fades the edges that have hidden content in the scroll direction. */
+  /**
+   * Edge indicator for the sides that have hidden content in the scroll direction. Defaults to `none`.
+   * Takes precedence over the deprecated `fadeEdges`.
+   */
+  edgeEffect?: ScrollAreaEdgeEffect;
+  /**
+   * Length of the edge effect, such as `"24px"`. Defaults to `--notable-scroll-area-fade-size`.
+   * Takes precedence over the deprecated `fadeSize`.
+   */
+  edgeEffectSize?: string;
+  /**
+   * @deprecated Use `edgeEffect="fade"` instead.
+   */
   fadeEdges?: boolean;
-  /** Length of the edge fade, such as `"24px"`. Defaults to `--notable-scroll-area-fade-size`. */
+  /**
+   * @deprecated Use `edgeEffectSize` instead.
+   */
   fadeSize?: string;
   /** Applied to the root wrapper. */
   className?: string;
@@ -42,6 +63,8 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
     {
       orientation = 'vertical',
       scrollbar = 'auto',
+      edgeEffect,
+      edgeEffectSize,
       fadeEdges = false,
       fadeSize,
       className,
@@ -54,23 +77,29 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
     const hasVerticalAxis = orientation !== 'horizontal';
     const hasHorizontalAxis = orientation !== 'vertical';
     const hasScrollbars = scrollbar !== 'hidden';
+    const resolvedEdgeEffect: ScrollAreaEdgeEffect =
+      edgeEffect ?? (fadeEdges ? 'fade' : 'none');
 
     const rootClassName = [
       'notable-scroll-area',
       scrollbar === 'auto' && 'notable-scroll-area--auto-scrollbar',
-      fadeEdges && 'notable-scroll-area--fade',
+      resolvedEdgeEffect !== 'none' &&
+        `notable-scroll-area--${resolvedEdgeEffect}`,
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
-    const rootStyle =
-      fadeSize === undefined
-        ? style
-        : ({
-            ...style,
-            '--notable-scroll-area-fade-size': fadeSize,
-          } as CSSProperties);
+    // `fadeSize` still sets the fade size that the edge size falls back to, so existing overrides keep working.
+    const rootStyle: CSSProperties = {
+      ...style,
+      ...(fadeSize === undefined
+        ? {}
+        : { '--notable-scroll-area-fade-size': fadeSize }),
+      ...(edgeEffectSize === undefined
+        ? {}
+        : { '--notable-scroll-area-edge-size': edgeEffectSize }),
+    } as CSSProperties;
 
     // Base UI sets `overflow: scroll` inline. Clip the unused axis so only the chosen directions scroll.
     const viewportStyle: CSSProperties = {
@@ -100,6 +129,23 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
             {children}
           </BaseScrollArea.Content>
         </BaseScrollArea.Viewport>
+
+        {resolvedEdgeEffect === 'blur' && (
+          <>
+            {hasVerticalAxis && (
+              <>
+                <div className="notable-scroll-area__edge notable-scroll-area__edge--top" />
+                <div className="notable-scroll-area__edge notable-scroll-area__edge--bottom" />
+              </>
+            )}
+            {hasHorizontalAxis && (
+              <>
+                <div className="notable-scroll-area__edge notable-scroll-area__edge--start" />
+                <div className="notable-scroll-area__edge notable-scroll-area__edge--end" />
+              </>
+            )}
+          </>
+        )}
 
         {hasScrollbars && hasVerticalAxis && (
           <BaseScrollArea.Scrollbar
