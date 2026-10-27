@@ -1,7 +1,3 @@
-/*
- * Shared menu styling for DropdownMenu. Mirrors the popup, item, and label
- * treatment of Select so that menus and selects look like one family.
- */
 .notable-menu__positioner {
   z-index: 50;
 }
@@ -44,6 +40,35 @@
 .notable-menu__item:focus-visible {
   outline: 2px solid var(--notable-color-focus);
   outline-offset: -2px;
+}
+
+.notable-menu__item--selectable {
+  padding-inline-start: calc(var(--notable-spacing-3) * 2 + 1rem);
+}
+
+.notable-menu__item-indicator {
+  position: absolute;
+  inset-inline-start: var(--notable-spacing-3);
+  top: 50%;
+  display: inline-flex;
+  translate: 0 -50%;
+  color: var(--notable-color-text);
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity var(--notable-duration-fast) var(--notable-easing-standard),
+    scale var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-menu__item-indicator[data-unchecked] {
+  opacity: 0;
+  scale: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-menu__item-indicator {
+    transition: none;
+  }
 }
 
 .notable-menu__item > .notable-shortcut {

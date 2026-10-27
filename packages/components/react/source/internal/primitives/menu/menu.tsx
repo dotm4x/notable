@@ -1,7 +1,10 @@
+import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu';
 import { Menu as BaseMenu } from '@base-ui/react/menu';
-import { ChevronRight } from 'lucide-react';
+import { Check, ChevronRight, Circle } from 'lucide-react';
 import {
+  createContext,
   forwardRef,
+  useContext,
   type ComponentPropsWithoutRef,
   type ReactElement,
   type ReactNode,
@@ -31,6 +34,10 @@ export type MenuTriggerProps = {
   render: ReactElement;
 };
 
+export type MenuContextTriggerProps = ComponentPropsWithoutRef<
+  typeof BaseContextMenu.Trigger
+>;
+
 export type MenuPopupProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.Popup>,
   'className'
@@ -44,6 +51,27 @@ export type MenuPopupProps = Omit<
 
 export type MenuItemProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.Item>,
+  'className'
+> & {
+  className?: string;
+};
+
+export type MenuCheckboxItemProps = Omit<
+  ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem>,
+  'className'
+> & {
+  className?: string;
+};
+
+export type MenuRadioGroupProps = Omit<
+  ComponentPropsWithoutRef<typeof BaseMenu.RadioGroup>,
+  'className'
+> & {
+  className?: string;
+};
+
+export type MenuRadioItemProps = Omit<
+  ComponentPropsWithoutRef<typeof BaseMenu.RadioItem>,
   'className'
 > & {
   className?: string;
@@ -121,44 +149,109 @@ export function MenuTrigger({ render }: MenuTriggerProps) {
  * Renders the popup in a portal beside the trigger. The highlight is the first
  * child so that it sits behind the items.
  */
+const MenuSubmenuContext = createContext(false);
+
+type MenuPopupSurfaceProps = Omit<
+  ComponentPropsWithoutRef<typeof BaseMenu.Popup>,
+  'className'
+> & {
+  className?: string;
+};
+
+/** The styled popup shared by root menus and context menus. */
+const MenuPopupSurface = forwardRef<HTMLDivElement, MenuPopupSurfaceProps>(
+  function MenuPopupSurface({ className, children, ...props }, ref) {
+    return (
+      <BaseMenu.Popup
+        ref={ref}
+        className={joinClassNames(
+          'notable-menu__popup notable-floating-surface',
+          className,
+        )}
+        {...props}
+      >
+        <AnimatedHighlight />
+        {children}
+      </BaseMenu.Popup>
+    );
+  },
+);
+
 export const MenuPopup = forwardRef<HTMLDivElement, MenuPopupProps>(
   function MenuPopup(
-    {
-      side = 'bottom',
-      align = 'start',
-      sideOffset = 4,
-      alignOffset,
-      className,
-      children,
-      ...props
-    },
+    { side, align, sideOffset = 4, alignOffset, className, children, ...props },
     ref,
   ) {
+    const isSubmenu = useContext(MenuSubmenuContext);
+    const resolvedSide = side ?? (isSubmenu ? undefined : 'bottom');
+    const resolvedAlign = align ?? (isSubmenu ? undefined : 'start');
+
     return (
       <BaseMenu.Portal>
         <BaseMenu.Positioner
-          side={side}
-          align={align}
+          side={resolvedSide}
+          align={resolvedAlign}
           sideOffset={sideOffset}
           alignOffset={alignOffset}
           className="notable-menu__positioner"
         >
-          <BaseMenu.Popup
-            ref={ref}
-            className={joinClassNames(
-              'notable-menu__popup notable-floating-surface',
-              className,
-            )}
-            {...props}
-          >
-            <AnimatedHighlight />
+          <MenuPopupSurface ref={ref} className={className} {...props}>
             {children}
-          </BaseMenu.Popup>
+          </MenuPopupSurface>
         </BaseMenu.Positioner>
       </BaseMenu.Portal>
     );
   },
 );
+
+/** Wraps a context menu's root. Its popup opens at the pointer. */
+export function MenuContextRoot({
+  open,
+  defaultOpen,
+  onOpenChange,
+  children,
+}: MenuRootProps) {
+  return (
+    <BaseContextMenu.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
+    >
+      {children}
+    </BaseContextMenu.Root>
+  );
+}
+
+/** Region that opens the context menu on right click or long press. */
+export const MenuContextTrigger = forwardRef<
+  HTMLDivElement,
+  MenuContextTriggerProps
+>(function MenuContextTrigger({ children, ...props }, ref) {
+  return (
+    <BaseContextMenu.Trigger ref={ref} {...props}>
+      {children}
+    </BaseContextMenu.Trigger>
+  );
+});
+
+/**
+ * Renders a context menu popup at the pointer. Base UI supplies the default
+ * offsets and places submenus beside their trigger.
+ */
+export const MenuContextPopup = forwardRef<
+  HTMLDivElement,
+  MenuPopupSurfaceProps
+>(function MenuContextPopup({ className, children, ...props }, ref) {
+  return (
+    <BaseContextMenu.Portal>
+      <BaseContextMenu.Positioner className="notable-menu__positioner">
+        <MenuPopupSurface ref={ref} className={className} {...props}>
+          {children}
+        </MenuPopupSurface>
+      </BaseContextMenu.Positioner>
+    </BaseContextMenu.Portal>
+  );
+});
 
 /**
  * Wraps a submenu's trigger and popup. Its popup is rendered with
@@ -176,7 +269,9 @@ export function MenuSubmenuRoot({
       defaultOpen={defaultOpen}
       onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
     >
-      {children}
+      <MenuSubmenuContext.Provider value={true}>
+        {children}
+      </MenuSubmenuContext.Provider>
     </BaseMenu.SubmenuRoot>
   );
 }
@@ -213,6 +308,68 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
         className={joinClassNames('notable-menu__item', className)}
         {...props}
       />
+    );
+  },
+);
+
+/** A menu item that toggles a checked state and shows a check mark when on. */
+export const MenuCheckboxItem = forwardRef<
+  HTMLDivElement,
+  MenuCheckboxItemProps
+>(function MenuCheckboxItem({ className, children, ...props }, ref) {
+  return (
+    <BaseMenu.CheckboxItem
+      ref={ref}
+      className={joinClassNames(
+        'notable-menu__item notable-menu__item--selectable',
+        className,
+      )}
+      {...props}
+    >
+      <BaseMenu.CheckboxItemIndicator
+        className="notable-menu__item-indicator"
+        keepMounted
+      >
+        <Check size={16} aria-hidden="true" />
+      </BaseMenu.CheckboxItemIndicator>
+      {children}
+    </BaseMenu.CheckboxItem>
+  );
+});
+
+/** Groups radio items so that exactly one of them is checked at a time. */
+export const MenuRadioGroup = forwardRef<HTMLDivElement, MenuRadioGroupProps>(
+  function MenuRadioGroup({ className, ...props }, ref) {
+    return (
+      <BaseMenu.RadioGroup
+        ref={ref}
+        className={joinClassNames('notable-menu__radio-group', className)}
+        {...props}
+      />
+    );
+  },
+);
+
+/** A menu item within a `MenuRadioGroup` that shows a dot when selected. */
+export const MenuRadioItem = forwardRef<HTMLDivElement, MenuRadioItemProps>(
+  function MenuRadioItem({ className, children, ...props }, ref) {
+    return (
+      <BaseMenu.RadioItem
+        ref={ref}
+        className={joinClassNames(
+          'notable-menu__item notable-menu__item--selectable',
+          className,
+        )}
+        {...props}
+      >
+        <BaseMenu.RadioItemIndicator
+          className="notable-menu__item-indicator"
+          keepMounted
+        >
+          <Circle size={8} fill="currentColor" aria-hidden="true" />
+        </BaseMenu.RadioItemIndicator>
+        {children}
+      </BaseMenu.RadioItem>
     );
   },
 );
