@@ -10,6 +10,7 @@ export * from './components/card/card.js';
 export * from './components/link/link.js';
 export * from './components/checkbox/checkbox.js';
 export * from './components/checkbox/checkbox-group.js';
+export * from './components/collapsible/collapsible.js';
 export * from './components/combobox/combobox.js';
 export * from './components/command/command.js';
 export * from './components/context-menu/context-menu.js';
