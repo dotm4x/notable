@@ -114,7 +114,9 @@
   background: var(--notable-color-disabled);
 }
 
-.notable-checkbox-field[data-disabled] .notable-checkbox {
+.notable-checkbox-field[data-disabled] .notable-checkbox,
+.notable-checkbox-field:has(.notable-checkbox__input:disabled)
+  .notable-checkbox {
   color: var(--notable-color-text-disabled);
   cursor: not-allowed;
 }
