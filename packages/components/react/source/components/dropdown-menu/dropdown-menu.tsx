@@ -12,6 +12,8 @@ import {
   MenuPopup,
   MenuRoot,
   MenuSeparator,
+  MenuSubmenuRoot,
+  MenuSubmenuTrigger,
   MenuTrigger,
   type MenuAlign,
   type MenuSide,
@@ -67,6 +69,31 @@ export type DropdownMenuGroupLabelProps = ComponentPropsWithoutRef<'div'>;
 
 /** Props for `DropdownMenu.Separator`. */
 export type DropdownMenuSeparatorProps = ComponentPropsWithoutRef<'div'>;
+
+/**
+ * Props for `DropdownMenu.Submenu`, a nested menu opened from a
+ * `DropdownMenu.SubmenuTrigger` inside another menu.
+ */
+export type DropdownMenuSubmenuProps = {
+  /** Controlled open state of the submenu. */
+  open?: boolean;
+  /** Initial open state when uncontrolled. Defaults to `false`. */
+  defaultOpen?: boolean;
+  /** Called with the requested open state when the submenu opens or closes. */
+  onOpenChange?: (open: boolean) => void;
+  /** A `DropdownMenu.SubmenuTrigger` and a `DropdownMenu.Content`. */
+  children?: ReactNode;
+};
+
+/**
+ * Props for `DropdownMenu.SubmenuTrigger`. It is styled as an item and shows
+ * a chevron. Hovering or pressing Right Arrow opens the submenu.
+ */
+export type DropdownMenuSubmenuTriggerProps =
+  ComponentPropsWithoutRef<'div'> & {
+    /** Disables the trigger so its submenu cannot be opened. */
+    disabled?: boolean;
+  };
 
 function DropdownMenuRoot({
   open,
@@ -148,11 +175,37 @@ const DropdownMenuSeparator = forwardRef<
   return <MenuSeparator ref={ref} {...props} />;
 });
 
+function DropdownMenuSubmenu({
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  children,
+}: DropdownMenuSubmenuProps) {
+  return (
+    <MenuSubmenuRoot
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={onOpenChange}
+    >
+      {children}
+    </MenuSubmenuRoot>
+  );
+}
+
+const DropdownMenuSubmenuTrigger = forwardRef<
+  HTMLDivElement,
+  DropdownMenuSubmenuTriggerProps
+>(function DropdownMenuSubmenuTrigger(props, ref) {
+  return <MenuSubmenuTrigger ref={ref} {...props} />;
+});
+
 /**
  * Action menu opened from a trigger. Compose it with `DropdownMenu.Trigger`,
  * `DropdownMenu.Content`, `DropdownMenu.Item`, and the optional group,
  * label, and separator parts. Use `Shortcut` inside an item to show a key
- * combination. Forwards refs to the DOM element each part renders.
+ * combination. Nest a `DropdownMenu.Submenu` for a submenu, and pass
+ * `side="right"` to its `DropdownMenu.Content`. Forwards refs to the DOM
+ * element each part renders.
  */
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Root: DropdownMenuRoot,
@@ -162,4 +215,6 @@ export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Group: DropdownMenuGroup,
   GroupLabel: DropdownMenuGroupLabel,
   Separator: DropdownMenuSeparator,
+  Submenu: DropdownMenuSubmenu,
+  SubmenuTrigger: DropdownMenuSubmenuTrigger,
 });

@@ -90,3 +90,87 @@ export const CustomTrigger: Story = {
     </DropdownMenu.Root>
   ),
 };
+
+export const WithSubmenu: Story = {
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>Note</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Item>Rename</DropdownMenu.Item>
+        <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Submenu>
+          <DropdownMenu.SubmenuTrigger>Move to</DropdownMenu.SubmenuTrigger>
+          <DropdownMenu.Content side="right">
+            <DropdownMenu.Item>Inbox</DropdownMenu.Item>
+            <DropdownMenu.Item>Projects</DropdownMenu.Item>
+            <DropdownMenu.Item>Archive</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Submenu>
+        <DropdownMenu.Submenu>
+          <DropdownMenu.SubmenuTrigger>
+            Export
+            <Shortcut>Ctrl</Shortcut>
+            <Shortcut>E</Shortcut>
+          </DropdownMenu.SubmenuTrigger>
+          <DropdownMenu.Content side="right">
+            <DropdownMenu.Item>Markdown</DropdownMenu.Item>
+            <DropdownMenu.Item>PDF</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Submenu>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Submenu>
+          <DropdownMenu.SubmenuTrigger disabled>
+            Share
+          </DropdownMenu.SubmenuTrigger>
+          <DropdownMenu.Content side="right">
+            <DropdownMenu.Item>Copy link</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Submenu>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+};
+
+export const NestedSubmenus: Story = {
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>Workspace</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Submenu>
+          <DropdownMenu.SubmenuTrigger>Move to</DropdownMenu.SubmenuTrigger>
+          <DropdownMenu.Content side="right">
+            <DropdownMenu.Submenu>
+              <DropdownMenu.SubmenuTrigger>
+                Notebooks
+              </DropdownMenu.SubmenuTrigger>
+              <DropdownMenu.Content side="right">
+                <DropdownMenu.Item>Personal</DropdownMenu.Item>
+                <DropdownMenu.Item>Work</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Submenu>
+            <DropdownMenu.Item>Trash</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Submenu>
+        <DropdownMenu.Item>Settings</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+};
+
+export const SubmenuOpeningToTheLeft: Story = {
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>Sort</DropdownMenu.Trigger>
+      <DropdownMenu.Content align="end">
+        <DropdownMenu.Submenu>
+          <DropdownMenu.SubmenuTrigger>By date</DropdownMenu.SubmenuTrigger>
+          <DropdownMenu.Content side="left" align="start">
+            <DropdownMenu.Item>Newest first</DropdownMenu.Item>
+            <DropdownMenu.Item>Oldest first</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Submenu>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+};

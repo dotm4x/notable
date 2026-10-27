@@ -50,6 +50,16 @@
   margin-inline-start: auto;
 }
 
+.notable-menu__submenu-chevron {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  color: var(--notable-color-text-muted);
+}
+
+:dir(rtl) .notable-menu__submenu-chevron {
+  transform: scaleX(-1);
+}
+
 .notable-menu__group {
   display: flex;
   flex-direction: column;
