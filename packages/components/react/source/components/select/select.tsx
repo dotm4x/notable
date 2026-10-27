@@ -5,6 +5,7 @@ import {
   forwardRef,
   isValidElement,
   type ComponentPropsWithoutRef,
+  type KeyboardEvent,
   type ReactNode,
 } from 'react';
 import '../../internal/styles/floating-surface.css';
@@ -189,6 +190,28 @@ const SelectIcon = forwardRef<HTMLSpanElement, SelectIconProps>(
   },
 );
 
+/**
+ * Base UI handles Home but not End for select options, so End moves the
+ * highlight to the last enabled option.
+ */
+function focusLastEnabledOptionOnEnd(event: KeyboardEvent<HTMLDivElement>) {
+  if (event.key !== 'End') {
+    return;
+  }
+
+  const enabledOptions = event.currentTarget.querySelectorAll<HTMLElement>(
+    '[role="option"]:not([aria-disabled="true"])',
+  );
+  const lastOption = enabledOptions.item(enabledOptions.length - 1);
+  if (!lastOption) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+  lastOption.focus();
+}
+
 const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
   function SelectContent(
     {
@@ -198,6 +221,7 @@ const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
       alignOffset,
       className,
       children,
+      onKeyDownCapture,
       ...props
     },
     ref,
@@ -218,6 +242,10 @@ const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
               'notable-select__popup notable-floating-surface',
               className,
             )}
+            onKeyDownCapture={(event) => {
+              focusLastEnabledOptionOnEnd(event);
+              onKeyDownCapture?.(event);
+            }}
             {...props}
           >
             <AnimatedHighlight />
