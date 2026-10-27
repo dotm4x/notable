@@ -10,5 +10,13 @@
     "typescript",
     "typescriptreact"
   ],
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "file": "AGENTS.md"
+    },
+    {
+      "text": "Inspect the staged diff. Follow the Commit Conventions section strictly. Output only one concise, accurate commit message. If the staged changes contain unrelated work, do not misrepresent them as one coherent change."
+    }
+  ]
 }
