@@ -8,6 +8,7 @@ export * from './components/checkbox/checkbox.js';
 export * from './components/combobox/combobox.js';
 export * from './components/dialog/dialog.js';
 export * from './components/drawer/drawer.js';
+export * from './components/dropdown-menu/dropdown-menu.js';
 export * from './components/input/input.js';
 export * from './components/number-flow/number-flow.js';
 export * from './components/shortcut/shortcut.js';
