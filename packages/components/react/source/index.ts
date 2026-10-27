@@ -24,6 +24,7 @@ export * from './components/segmented-control/segmented-control.js';
 export * from './components/select/select.js';
 export * from './components/separator/separator.js';
 export * from './components/skeleton/skeleton.js';
+export * from './components/slider/slider.js';
 export * from './components/spinner/spinner.js';
 export * from './components/switch/switch.js';
 export * from './components/tabs/tabs.js';
