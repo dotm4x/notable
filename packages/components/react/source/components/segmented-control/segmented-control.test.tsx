@@ -589,6 +589,60 @@ describe('SegmentedControl', () => {
       expect(ref.current).toHaveAttribute('role', 'radiogroup');
     });
 
+    it('extends the indicator to the container padding on the first option', () => {
+      // Arrange
+      const original = window.getComputedStyle.bind(window);
+      vi.spyOn(window, 'getComputedStyle').mockImplementation((element) =>
+        element.getAttribute('role') === 'radiogroup'
+          ? ({ paddingLeft: '3px', paddingRight: '3px' } as CSSStyleDeclaration)
+          : original(element),
+      );
+      vi.spyOn(
+        HTMLElement.prototype,
+        'getBoundingClientRect',
+      ).mockImplementation(function (this: HTMLElement) {
+        const rectAt = (left: number, width: number) => ({
+          x: left,
+          y: 0,
+          left,
+          top: 0,
+          right: left + width,
+          bottom: 40,
+          width,
+          height: 40,
+          toJSON: () => ({}),
+        });
+        if (this.getAttribute('role') === 'radiogroup') {
+          return rectAt(0, 306);
+        }
+        const items = Array.from(
+          this.parentElement?.querySelectorAll(
+            '.notable-segmented-control__item',
+          ) ?? [],
+        );
+        const index = items.indexOf(this);
+        return index === -1 ? rectAt(0, 0) : rectAt(3 + index * 100, 100);
+      });
+
+      // Act
+      const { container } = render(
+        <SegmentedControl
+          aria-label="Padded timeframe"
+          options={sampleOptions}
+          defaultValue="day"
+        />,
+      );
+
+      // Assert
+      const indicator = container.querySelector<HTMLElement>(
+        '.notable-segmented-control__indicator',
+      );
+      expect(indicator?.style.left).toBe('0px');
+      expect(indicator?.style.width).toBe('103px');
+
+      vi.restoreAllMocks();
+    });
+
     it('selects an option when the indicator is dragged', () => {
       const onChange = vi.fn();
 
