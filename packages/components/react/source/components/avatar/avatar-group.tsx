@@ -4,6 +4,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
+import './avatar-group.css';
 import type { AvatarSize } from './avatar.js';
 
 export type AvatarGroupProps = HTMLAttributes<HTMLDivElement> & {
