@@ -141,22 +141,39 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
       onChange?.(optionValue);
     };
 
-    const getItemBounds = useCallback((optionValue: TValue) => {
-      const container = containerRef.current;
-      const item = itemRefs.current.get(optionValue);
+    const getItemBounds = useCallback(
+      (optionValue: TValue) => {
+        const container = containerRef.current;
+        const item = itemRefs.current.get(optionValue);
 
-      if (!container || !item) {
-        return null;
-      }
+        if (!container || !item) {
+          return null;
+        }
 
-      const containerRect = container.getBoundingClientRect();
-      const itemRect = item.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+        const containerStyle = getComputedStyle(container);
+        const paddingLeft = Number.parseFloat(containerStyle.paddingLeft) || 0;
+        const paddingRight =
+          Number.parseFloat(containerStyle.paddingRight) || 0;
+        const isFirst = options[0]?.value === optionValue;
+        const isLast = options[options.length - 1]?.value === optionValue;
 
-      return {
-        left: itemRect.left - containerRect.left - container.clientLeft,
-        width: itemRect.width,
-      };
-    }, []);
+        // The indicator reaches the container padding at the ends so it sits flush with the border.
+        const extendLeft = isFirst ? paddingLeft : 0;
+        const extendRight = isLast ? paddingRight : 0;
+
+        return {
+          left:
+            itemRect.left -
+            containerRect.left -
+            container.clientLeft -
+            extendLeft,
+          width: itemRect.width + extendLeft + extendRight,
+        };
+      },
+      [options],
+    );
 
     const getItemElement = useCallback(
       (optionValue: TValue) => itemRefs.current.get(optionValue),
