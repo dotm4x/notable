@@ -2,6 +2,8 @@
 
 Spacing creates grouping and rhythm. It tells the user which elements belong together and which are separate, before they read a single word. Notable uses a consistent scale, so that the same relationship looks the same everywhere.
 
+See [Values](./values.md#spacing) for the spacing scale.
+
 ## Proximity groups content
 
 Space within a group must be smaller than space between groups. A label belongs closer to its control than to the next field. Items in a list belong closer to each other than to the list's heading. If two elements look equally related, the spacing has failed.

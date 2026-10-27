@@ -2,6 +2,8 @@
 
 Color in Notable communicates roles. It tells the user what a surface is for, what a piece of text means, and what status something carries. Decoration is secondary. The palette is restrained: mostly neutral surfaces, with a small set of accents and status colors used sparingly.
 
+See [Values](./values.md#colors) for the exact colors of each role.
+
 ## Roles
 
 Each color has a job. Designs should use the role, not a specific color value.

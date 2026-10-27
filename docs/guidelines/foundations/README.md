@@ -12,6 +12,7 @@ Foundations are the shared rules that every component builds on. They define how
 - [Motion](./motion.md): the character, timing, and reduction of movement.
 - [Focus](./focus.md): keyboard position and its visual treatment.
 - [Accessibility](./accessibility.md): the baseline every design must meet.
+- [Values](./values.md): the concrete values behind colors, spacing, shape, depth, motion, and type.
 
 ## Relationship to the other categories
 

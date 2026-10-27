@@ -2,6 +2,8 @@
 
 Motion is part of Notable's identity and one of its main ways of communicating change. It should feel fluid, responsive, and purposeful. Motion is never decoration for its own sake. It shows the user what changed, where it came from, and where it went.
 
+See [Values](./values.md#motion) for the durations and easing curves.
+
 ## Purpose
 
 Motion should do one of four things:

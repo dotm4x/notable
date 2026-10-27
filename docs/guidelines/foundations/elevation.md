@@ -2,6 +2,8 @@
 
 Elevation describes which content sits above other content. Notable uses depth sparingly. Most of the interface is flat, and only content that temporarily floats above the page gains a shadow and a distinct surface.
 
+See [Values](./values.md#shadows) for the shadow values.
+
 ## Layers
 
 From lowest to highest, the layers are:

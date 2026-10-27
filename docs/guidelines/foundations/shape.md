@@ -2,6 +2,8 @@
 
 Shape is one of the main ways Notable expresses its friendly character. Corners, borders, and curves signal approachability. A consistent shape language also tells the user which elements belong together.
 
+See [Values](./values.md#radius) for the radius scale and [Values](./values.md#borders) for border widths.
+
 ## Corners
 
 Corners follow a consistent scale. Larger containers and popups use a larger radius, and small controls use a smaller one. Corners scale with the size of the element, so a small control never looks like a miniature container.

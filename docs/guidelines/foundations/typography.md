@@ -2,7 +2,13 @@
 
 Typography carries most of Notable's content. It should be clear, calm, and friendly. The typeface is a clean, modern sans-serif. Type supports the warm tone of the interface without drawing attention to itself.
 
-## Typeface
+# Geist
+
+**Notable is set in Geist.** Use Geist Sans, including its variants, for all interface text. Every weight comes from the same variable family, so no other typeface is part of the system.
+
+See [Values](./values.md#typography) for the sizes, weights, and line heights.
+
+## Typeface rules
 
 One typeface family is used across the interface. Using a single family keeps the voice consistent, and it lets weight and size do the work of hierarchy.
 
