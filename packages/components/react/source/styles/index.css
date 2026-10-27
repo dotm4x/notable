@@ -17,6 +17,18 @@ body {
   font-family: inherit;
 }
 
+:where([class^='notable-'], [class*=' notable-']):not(
+  .notable-scroll-area__scrollbar
+) {
+  scrollbar-width: none;
+}
+
+:where([class^='notable-'], [class*=' notable-']):not(
+    .notable-scroll-area__scrollbar
+  )::-webkit-scrollbar {
+  display: none;
+}
+
 button,
 input,
 textarea,
