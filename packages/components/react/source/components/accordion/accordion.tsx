@@ -1,12 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useId,
-  useRef,
-  useState,
-  type KeyboardEvent,
-  type ReactNode,
-} from 'react';
+import { useRef, type KeyboardEvent, type ReactNode } from 'react';
+import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
 import { ChevronDown } from 'lucide-react';
 import './accordion.css';
 
@@ -61,24 +54,6 @@ export type AccordionItemProps = {
   value: string;
 };
 
-type AccordionContextValue = {
-  disabled: boolean;
-  expandedValues: readonly string[];
-  toggleItem: (value: string) => void;
-};
-
-const AccordionContext = createContext<AccordionContextValue | null>(null);
-
-function useAccordionContext(): AccordionContextValue {
-  const context = useContext(AccordionContext);
-
-  if (!context) {
-    throw new Error('Accordion.Item must be used within an Accordion.');
-  }
-
-  return context;
-}
-
 function toExpandedValues(
   value: string | readonly string[] | null | undefined,
 ): string[] {
@@ -89,22 +64,6 @@ function toExpandedValues(
   return typeof value === 'string' ? [value] : [...value];
 }
 
-function getNextExpandedValues(
-  type: AccordionProps['type'],
-  expandedValues: readonly string[],
-  itemValue: string,
-): string[] {
-  const isExpanded = expandedValues.includes(itemValue);
-
-  if (type === 'single') {
-    return isExpanded ? [] : [itemValue];
-  }
-
-  return isExpanded
-    ? expandedValues.filter((expandedValue) => expandedValue !== itemValue)
-    : [...expandedValues, itemValue];
-}
-
 /**
  * Groups collapsible sections. In single mode, expanding an item collapses
  * the previously expanded one, and activating the expanded item collapses it.
@@ -112,31 +71,7 @@ function getNextExpandedValues(
 function AccordionRoot(props: AccordionProps) {
   const { children, className, disabled = false } = props;
   const rootRef = useRef<HTMLDivElement>(null);
-  const isControlled = props.value !== undefined;
-  const [uncontrolledValues, setUncontrolledValues] = useState(() =>
-    toExpandedValues(props.defaultValue),
-  );
-  const expandedValues = isControlled
-    ? toExpandedValues(props.value)
-    : uncontrolledValues;
-
-  const toggleItem = (itemValue: string) => {
-    const nextValues = getNextExpandedValues(
-      props.type,
-      expandedValues,
-      itemValue,
-    );
-
-    if (!isControlled) {
-      setUncontrolledValues(nextValues);
-    }
-
-    if (props.type === 'single') {
-      props.onValueChange?.(nextValues[0] ?? null);
-    } else {
-      props.onValueChange?.(nextValues);
-    }
-  };
+  const classes = ['notable-accordion', className].filter(Boolean).join(' ');
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const root = rootRef.current;
@@ -182,19 +117,27 @@ function AccordionRoot(props: AccordionProps) {
     triggers[targetIndex]?.focus();
   };
 
-  const classes = ['notable-accordion', className].filter(Boolean).join(' ');
-
   return (
-    <AccordionContext.Provider value={{ disabled, expandedValues, toggleItem }}>
-      <div
-        ref={rootRef}
-        className={classes}
-        data-disabled={disabled || undefined}
-        onKeyDown={handleKeyDown}
-      >
-        {children}
-      </div>
-    </AccordionContext.Provider>
+    <BaseAccordion.Root
+      ref={rootRef}
+      className={classes}
+      disabled={disabled}
+      multiple={props.type === 'multiple'}
+      value={
+        props.value === undefined ? undefined : toExpandedValues(props.value)
+      }
+      defaultValue={toExpandedValues(props.defaultValue)}
+      onKeyDown={handleKeyDown}
+      onValueChange={(nextValues: string[]) => {
+        if (props.type === 'single') {
+          props.onValueChange?.(nextValues[0] ?? null);
+        } else {
+          props.onValueChange?.(nextValues);
+        }
+      }}
+    >
+      {children}
+    </BaseAccordion.Root>
   );
 }
 
@@ -206,55 +149,34 @@ function AccordionItem({
   title,
   value,
 }: AccordionItemProps) {
-  const {
-    disabled: accordionDisabled,
-    expandedValues,
-    toggleItem,
-  } = useAccordionContext();
-  const generatedId = useId();
-  const triggerId = `${generatedId}-trigger`;
-  const panelId = `${generatedId}-panel`;
-  const isDisabled = accordionDisabled || disabled;
-  const isExpanded = expandedValues.includes(value);
-  const state = isExpanded ? 'open' : 'closed';
   const classes = ['notable-accordion__item', className]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div
-      className={classes}
-      data-state={state}
-      data-disabled={isDisabled || undefined}
-    >
-      <h3 className="notable-accordion__heading">
-        <button
-          id={triggerId}
-          type="button"
+    <BaseAccordion.Item className={classes} disabled={disabled} value={value}>
+      <BaseAccordion.Header className="notable-accordion__heading">
+        <BaseAccordion.Trigger
           className="notable-accordion__trigger"
-          aria-expanded={isExpanded}
-          aria-controls={panelId}
-          disabled={isDisabled}
           data-accordion-trigger
-          onClick={() => toggleItem(value)}
         >
           <span className="notable-accordion__title">{title}</span>
           <ChevronDown
             className="notable-accordion__chevron"
             aria-hidden="true"
           />
-        </button>
-      </h3>
-      <div
-        id={panelId}
+        </BaseAccordion.Trigger>
+      </BaseAccordion.Header>
+      <BaseAccordion.Panel
         className="notable-accordion__panel"
-        inert={!isExpanded}
+        role="group"
+        keepMounted
       >
         <div className="notable-accordion__content">
           <div className="notable-accordion__content-inner">{children}</div>
         </div>
-      </div>
-    </div>
+      </BaseAccordion.Panel>
+    </BaseAccordion.Item>
   );
 }
 

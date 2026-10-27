@@ -48,17 +48,14 @@ function getTrigger(name: string) {
 }
 
 function getPanel(triggerName: string) {
+  // Base UI keeps closed panels mounted, so locate the panel through its item.
   const trigger = getTrigger(triggerName);
-  const panelId = trigger.getAttribute('aria-controls');
-
-  if (!panelId) {
-    throw new Error(`Trigger "${triggerName}" has no aria-controls value.`);
-  }
-
-  const panel = document.getElementById(panelId);
+  const panel = trigger
+    .closest('.notable-accordion__item')
+    ?.querySelector<HTMLElement>('.notable-accordion__panel');
 
   if (!panel) {
-    throw new Error(`Panel "${panelId}" was not found.`);
+    throw new Error(`Panel for trigger "${triggerName}" was not found.`);
   }
 
   return panel;
@@ -87,12 +84,12 @@ describe('Accordion', () => {
     await user.click(getTrigger('Shipping'));
 
     expect(getTrigger('Shipping')).toHaveAttribute('aria-expanded', 'true');
-    expect(getPanel('Shipping')).not.toHaveAttribute('inert');
+    expect(getPanel('Shipping')).not.toHaveAttribute('hidden');
 
     await user.click(getTrigger('Shipping'));
 
     expect(getTrigger('Shipping')).toHaveAttribute('aria-expanded', 'false');
-    expect(getPanel('Shipping')).toHaveAttribute('inert');
+    expect(getPanel('Shipping')).toHaveAttribute('hidden');
   });
 
   it('collapses the previously expanded item in single mode', async () => {
@@ -302,7 +299,7 @@ describe('Accordion', () => {
     expect(
       within(panel as HTMLElement).getByText('Ships within two business days.'),
     ).toBeVisible();
-    expect(screen.queryByRole('region')).toBeNull();
+    expect(panel).toHaveAccessibleName('Shipping');
   });
 
   it('exposes each title as a level 3 heading that wraps its trigger', () => {
@@ -439,7 +436,7 @@ describe('Accordion', () => {
           Content
         </Accordion.Item>,
       ),
-    ).toThrow('Accordion.Item must be used within an Accordion.');
+    ).toThrow('AccordionRootContext is missing');
 
     consoleError.mockRestore();
   });

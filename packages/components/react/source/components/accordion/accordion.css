@@ -82,7 +82,7 @@
   color: var(--notable-color-text-disabled);
 }
 
-.notable-accordion__item[data-state='open'] .notable-accordion__chevron {
+.notable-accordion__item[data-open] .notable-accordion__chevron {
   transform: rotate(180deg);
 }
 
@@ -97,8 +97,18 @@
     var(--notable-easing-standard);
 }
 
-.notable-accordion__item[data-state='open'] > .notable-accordion__panel {
+/* Base UI sets `hidden` on closed panels; keep it from being overridden by `display: grid`. */
+.notable-accordion__panel[hidden] {
+  display: none;
+}
+
+.notable-accordion__panel[data-open] {
   grid-template-rows: 1fr;
+}
+
+/* Starts an opening panel collapsed so it animates open when it mounts. */
+.notable-accordion__panel[data-starting-style] {
+  grid-template-rows: 0fr;
 }
 
 .notable-accordion__content {
