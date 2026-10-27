@@ -1,4 +1,5 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
+import type { TCssCustomProperties } from '../../internal/helpers/css-custom-properties.js';
 import {
   resolveRadius,
   type NotableRadiusToken,
@@ -97,8 +98,6 @@ export type ProgressCircularProps = ProgressBaseProps & {
 
 /** Props for {@link Progress}, in addition to native `div` attributes. */
 export type ProgressProps = ProgressLinearProps | ProgressCircularProps;
-
-type CssCustomProperties = Record<`--${string}`, string>;
 
 const DEFAULT_MAX = 100;
 
@@ -232,7 +231,7 @@ export function Progress({
       ? undefined
       : (effectiveValue / effectiveMax) * 100;
 
-  const inlineStyle: CSSProperties & CssCustomProperties = { ...style };
+  const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   const resolvedRadius = isCircular ? undefined : resolveRadius(radius);
   if (resolvedRadius !== undefined) {
     inlineStyle.borderRadius = resolvedRadius;
