@@ -71,7 +71,6 @@
 .notable-navigation-menu__link[aria-current='page'],
 .notable-navigation-menu__link[data-active] {
   color: var(--notable-color-text);
-  background: var(--notable-color-surface-active);
 }
 
 .notable-navigation-menu__trigger:focus-visible,
