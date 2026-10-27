@@ -229,6 +229,23 @@ describe('Select', () => {
     expect(onValueChange).toHaveBeenCalledWith('banana');
   });
 
+  it('moves the highlight back to the first enabled option with Home', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(<BasicSelect onValueChange={onValueChange} />);
+    await user.tab();
+    await user.keyboard('{ArrowDown}');
+    await user.keyboard('{ArrowDown}');
+
+    // Act
+    await user.keyboard('{Home}');
+    await user.keyboard('{Enter}');
+
+    // Assert
+    expect(onValueChange).toHaveBeenCalledExactlyOnceWith('apple');
+  });
+
   it('closes on Escape and restores focus to the trigger', async () => {
     // Arrange
     const user = userEvent.setup();
