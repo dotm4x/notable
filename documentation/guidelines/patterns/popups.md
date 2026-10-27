@@ -14,7 +14,7 @@ A popup uses the shared floating-surface role, with a clear edge and a shadow th
 
 A popup enters with a small, quick movement, such as a slight scale and a fade. Its exit should be shorter, because the user has already decided. Entrance and exit should be calm, not bouncy.
 
-The current shared floating surfaces use the same transition duration for entering and exiting, so they do not yet meet the shorter-exit guideline.
+The shared floating surfaces use a shorter transition for exit than for entrance.
 
 A popup must not appear in the wrong place and then move. Its first frame should be where it belongs.
 

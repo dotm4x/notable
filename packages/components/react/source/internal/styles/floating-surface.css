@@ -26,6 +26,11 @@
   transform: scale(0.96);
 }
 
+/* The user has already decided to leave, so the exit is quicker than the entrance. */
+.notable-floating-surface[data-ending-style] {
+  transition-duration: var(--notable-duration-fast);
+}
+
 /*
  * With no transition, Base UI sees the end state immediately and unmounts the
  * popup without waiting for an animation to finish.
