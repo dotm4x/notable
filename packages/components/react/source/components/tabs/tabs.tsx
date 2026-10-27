@@ -20,7 +20,7 @@ import {
   EASING_STANDARD,
   SPRING_LAYOUT,
 } from '../../styles/motion.js';
-import { AnimatedHighlight } from '../../internal/helpers/animated-highlight/animated-highlight.js';
+import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import {
   useSelectorDrag,
   type SelectorBounds,
