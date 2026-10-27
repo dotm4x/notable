@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Archive, FilePlus, Settings } from 'lucide-react';
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Button } from '../button/button.js';
 import { Command, type CommandGroup, type CommandItem } from './command.js';
 
@@ -62,23 +62,61 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+type PaletteTriggerProps = {
+  items: readonly CommandItem[] | readonly CommandGroup[];
+  shortcut?: string | null;
+  label?: string;
+  children?: ReactNode;
+};
+
+function PaletteTrigger({
+  items,
+  shortcut = null,
+  label,
+  children,
+}: PaletteTriggerProps) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open palette</Button>
+      <Command.Dialog
+        items={items}
+        open={open}
+        onOpenChange={setOpen}
+        shortcut={shortcut}
+        label={label}
+      >
+        {children}
+      </Command.Dialog>
+    </>
+  );
+}
+
+export const Default: Story = {
+  render: (args) => <PaletteTrigger items={args.items} />,
+};
 
 export const Grouped: Story = {
   args: {
     items: groupedItems,
   },
+  render: (args) => <PaletteTrigger items={args.items} />,
 };
 
 export const DialogWithShortcut: Story = {
   render: (args) => (
-    <Command.Dialog items={args.items} label="Command palette" />
+    <PaletteTrigger
+      items={args.items}
+      shortcut="Mod+K"
+      label="Command palette"
+    />
   ),
 };
 
 export const CustomShortcut: Story = {
   render: (args) => (
-    <Command.Dialog items={args.items} shortcut="Alt+P" label="Quick actions" />
+    <PaletteTrigger items={args.items} shortcut="Alt+P" label="Quick actions" />
   ),
 };
 
@@ -106,13 +144,17 @@ export const ControlledDialog: Story = {
   render: () => <ControlledDialogDemo />,
 };
 
+export const ResizingResults: Story = {
+  render: (args) => <PaletteTrigger items={args.items} />,
+};
+
 export const EmptyResults: Story = {
   render: (args) => (
-    <Command items={args.items}>
+    <PaletteTrigger items={args.items}>
       <Command.Input />
       <Command.List />
       <Command.Empty>Nothing matches. Try a different word.</Command.Empty>
-    </Command>
+    </PaletteTrigger>
   ),
 };
 
@@ -121,12 +163,12 @@ export const Composed: Story = {
     items: groupedItems,
   },
   render: (args) => (
-    <Command items={args.items}>
+    <PaletteTrigger items={args.items}>
       <Command.Input placeholder="Type a command" />
       <Command.List>
         {(item: CommandItem) => <Command.Item item={item} />}
       </Command.List>
       <Command.Empty />
-    </Command>
+    </PaletteTrigger>
   ),
 };

@@ -230,6 +230,19 @@ describe('Command filtering and navigation', () => {
     expect(await screen.findByText('No results found')).toBeTruthy();
   });
 
+  it('keeps focus in the input while the results resize to the empty state', async () => {
+    // Arrange
+    render(<Command items={createItems()} />);
+    const input = screen.getByRole('combobox');
+
+    // Act
+    await userEvent.type(input, 'zzzz');
+
+    // Assert
+    expect(await screen.findByText('No results found')).toBeTruthy();
+    expect(input).toHaveFocus();
+  });
+
   it('does not select disabled items', async () => {
     // Arrange
     const onSelect = vi.fn();

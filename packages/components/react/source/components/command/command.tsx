@@ -17,6 +17,7 @@ import { Dialog, type DialogSize } from '../dialog/dialog.js';
 import { Input, type InputProps } from '../input/input.js';
 import { Shortcut } from '../shortcut/shortcut.js';
 import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
+import { AutoSize } from '../../internal/primitives/auto-size/auto-size.js';
 import './command.css';
 
 /** A runnable command. `value` identifies it; `label` is shown and matched against the query. */
@@ -299,12 +300,16 @@ function CommandRoot({
   // Base UI types its `items` as either a flat or a grouped array, not a union, so
   // each shape gets its own root.
   // Without explicit children, the data-driven default is input, list, and empty state.
-  const content = children ?? (
-    <>
-      <CommandInput />
-      <CommandList />
-      <CommandEmpty />
-    </>
+  const content = (
+    <AutoSize>
+      {children ?? (
+        <>
+          <CommandInput />
+          <CommandList />
+          <CommandEmpty />
+        </>
+      )}
+    </AutoSize>
   );
 
   const root = isGroupedCommandList(items) ? (
