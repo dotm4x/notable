@@ -29,6 +29,6 @@ Floating content is temporary. It appears in response to an action and goes away
 
 Depth should tell the user what is temporary and what is permanent. Only content that truly floats should look like it does.
 
-## Open question
+## Modal and floating surfaces
 
-Whether dialogs and drawers should use the same floating surface as menus and popups, or a distinct treatment that reflects their greater interruption.
+Dialogs and drawers are modal content. They use a distinct treatment: the raised surface, the stronger shadow, and an overlay that interrupts the page. Menus, popups, and tooltips stay in the floating layer with their own surface. The two stay distinguishable in both themes.

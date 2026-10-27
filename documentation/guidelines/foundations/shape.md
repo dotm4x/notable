@@ -24,6 +24,6 @@ Components of the same kind share a shape language. A component may vary in size
 
 Shape should feel warm and approachable without sacrificing structure. The user should always be able to tell where one element ends and another begins.
 
-## Open question
+## One radius family
 
-Whether a single radius family should apply to every size, or whether dense controls such as those in popups should use a tighter curve.
+Notable uses a single radius family. Each size takes its step on that scale. Dense controls, such as those in popups, take the step their size and nesting call for, not a separate and tighter curve.

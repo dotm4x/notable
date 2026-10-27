@@ -37,6 +37,6 @@ Following the pointer during a direct manipulation gesture is not decorative mov
 
 Motion should explain change. It should feel alive without distracting, and it should always be possible to use the interface without it.
 
-## Open question
+## Press response
 
-Whether the press response should be the same for every kind of action, or whether a value change and a navigation should feel different.
+Every action uses the same press response, so the user learns one physical feedback. A value change and a navigation differ in the change that follows, not in how the press feels.

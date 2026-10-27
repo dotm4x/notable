@@ -37,7 +37,7 @@ A disabled option is visible and readable, but it cannot be chosen or committed.
 
 Arrow keys move through enabled options in the direction of the group. Home and End should move to the first and last enabled options. In a popup, arrow keys move the highlight without changing the value; a confirming key commits it, and Escape dismisses the list without changing the value.
 
-Keyboard commitment currently varies by presentation. Some grouped choices commit as focus moves; popup choices move the highlight and wait for confirmation. This difference is not yet a system-wide decision; see the open question below.
+Keyboard commitment depends on presentation. A grouped choice shown together commits as focus moves, so the value follows the arrow keys. A popup choice moves the highlight only, and a confirming key commits it. Views switched by a grouped choice update as focus moves.
 
 Focus follows [Focus](../foundations/focus.md).
 
@@ -50,7 +50,3 @@ A chosen option must be communicated to assistive technology, not only shown vis
 ## Principle
 
 A choice should make the chosen value obvious, make the options easy to compare, and never change the value without a deliberate commitment.
-
-## Open question
-
-Whether moving focus with arrow keys should commit the option, or only move the highlight until a confirming key is pressed. Committing on focus is quicker and suits a group shown together. Confirming is more deliberate and avoids changing content while the user is still browsing. The answer also determines how [Views](./views.md) switch.

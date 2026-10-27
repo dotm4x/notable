@@ -24,12 +24,12 @@ Focus must not be clipped by the container that holds the element. When a focuse
 
 ## Dragging
 
-Focus does not follow pointer movement during a drag, and focus alone does not start a drag. Whether a pointer press or a committed drag moves focus depends on the control and remains an open question in [Drag](../patterns/drag.md).
+Focus does not follow pointer movement during a drag, and focus alone does not start a drag. A committed drag moves focus to the resulting target. See [Drag](../patterns/drag.md).
 
 ## Principle
 
 A keyboard user should always know where they are, and that knowledge should look the same everywhere.
 
-## Open question
+## Tight containers
 
-Whether a single focus treatment should apply to every control, or whether tight containers require an inset treatment. Today the answer varies by component, and no rule yet settles which variant is correct.
+Every control uses the same focus treatment. When a control sits at the edge of a container that would clip an outside outline, the outline is drawn inside the element with a negative offset. The treatment stays the same; only its placement changes.

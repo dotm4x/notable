@@ -12,9 +12,7 @@ The placeholder should show activity with a calm, continuous motion, such as a s
 
 ## Pointer response
 
-A pointer-following light may be used as a purely decorative response, but it must not suggest that a placeholder is interactive. Since loading placeholders are not actionable, omit the effect wherever it could be mistaken for an interaction cue.
-
-The current Skeleton behavior differs from this guidance: a pointer-following spotlight appears on hover whenever its animation is `shimmer` or `pulse`, and is absent only when animation is `none`. Skeleton is non-focusable and hidden from assistive technology. The spotlight is removed under reduced motion, but it is not separately opt-in or gated by pointer capability, so it can appear on a non-interactive placeholder and its touch behavior depends on the platform.
+Loading placeholders are not interactive, so a pointer-following light is not part of the loading language. It must not appear on a placeholder, because the light would suggest an action that does not exist. A pointer light belongs only to interactive surfaces, where it signals a real affordance.
 
 ## Reduced motion
 

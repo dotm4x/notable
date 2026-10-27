@@ -62,9 +62,9 @@ See [Motion](../foundations/motion.md).
 - [Selection](./selection.md) distinguishes a committed value from a temporary target.
 - [States](./states.md) defines how interaction states remain distinguishable.
 
-## Open question
+## Focus on completion
 
-Should completing a drag move keyboard focus to the resulting target? The system-wide behavior has not yet been established.
+A completed drag moves keyboard focus to the resulting target, so the user can continue from where the action landed. A cancelled drag leaves focus where it was.
 
 ## Principle
 
