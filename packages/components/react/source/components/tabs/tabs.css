@@ -15,7 +15,6 @@
   border-block-end: var(--notable-border-width) solid
     var(--notable-color-border-subtle);
   overflow-x: auto;
-  scrollbar-width: thin;
   touch-action: pan-y;
   user-select: none;
 }
