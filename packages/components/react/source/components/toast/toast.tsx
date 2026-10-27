@@ -31,12 +31,12 @@ export interface ToastOptions {
 
 export type ToastInput = string | ToastOptions;
 
-export type ToastPromiseMessage<Value> =
-  string | ToastOptions | ((value: Value) => string | ToastOptions);
+export type ToastPromiseMessage<TValue> =
+  string | ToastOptions | ((value: TValue) => string | ToastOptions);
 
-export interface ToastPromiseMessages<Value> {
+export interface ToastPromiseMessages<TValue> {
   loading: string | ToastOptions;
-  success: ToastPromiseMessage<Value>;
+  success: ToastPromiseMessage<TValue>;
   error: string | ToastOptions | ((error: unknown) => string | ToastOptions);
 }
 
@@ -51,10 +51,10 @@ export interface ToastApi {
     render: (id: string) => ReactNode,
     options?: Omit<ToastOptions, 'title' | 'description'>,
   ): string;
-  promise<Value>(
-    promise: Promise<Value>,
-    messages: ToastPromiseMessages<Value>,
-  ): Promise<Value>;
+  promise<TValue>(
+    promise: Promise<TValue>,
+    messages: ToastPromiseMessages<TValue>,
+  ): Promise<TValue>;
   update(id: string, options: Partial<ToastOptions>): void;
   dismiss(id?: string): void;
 }
