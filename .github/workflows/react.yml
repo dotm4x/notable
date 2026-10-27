@@ -7,7 +7,7 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
-      - '.github/workflows/components-react.yml'
+      - '.github/workflows/react.yml'
   pull_request:
     paths:
       - 'packages/components/react/**'
