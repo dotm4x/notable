@@ -221,6 +221,37 @@ describe('RadioGroup', () => {
     expect(onValueChange).toHaveBeenCalledExactlyOnceWith('pro');
   });
 
+  it('moves selection to the first and last enabled options with Home and End', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(
+      <RadioGroup label="Plan" defaultValue="pro" onValueChange={onValueChange}>
+        <RadioGroupItem value="free" label="Free" disabled />
+        <RadioGroupItem value="pro" label="Pro" />
+        <RadioGroupItem value="team" label="Team" />
+        <RadioGroupItem value="legacy" label="Legacy" disabled />
+      </RadioGroup>,
+    );
+    await user.tab();
+
+    // Act
+    await user.keyboard('{End}');
+
+    // Assert
+    expect(screen.getByRole('radio', { name: 'Team' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'Team' })).toHaveFocus();
+
+    // Act
+    await user.keyboard('{Home}');
+
+    // Assert
+    expect(screen.getByRole('radio', { name: 'Pro' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'Pro' })).toHaveFocus();
+    expect(onValueChange).toHaveBeenNthCalledWith(1, 'team');
+    expect(onValueChange).toHaveBeenNthCalledWith(2, 'pro');
+  });
+
   it('exposes the selected option as the only Tab stop', async () => {
     const user = userEvent.setup();
 
