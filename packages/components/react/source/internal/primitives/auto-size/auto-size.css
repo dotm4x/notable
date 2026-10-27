@@ -1,0 +1,13 @@
+.notable-auto-size {
+  overflow: visible;
+}
+
+.notable-auto-size[data-animating] {
+  overflow: hidden;
+}
+
+.notable-auto-size[data-axis='horizontal'] > .notable-auto-size__content,
+.notable-auto-size[data-axis='both'] > .notable-auto-size__content {
+  width: max-content;
+  max-width: none;
+}
