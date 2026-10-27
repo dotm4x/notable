@@ -1,33 +1,13 @@
-import {
-  cloneElement,
-  useEffect,
-  useId,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type FocusEvent,
-  type ReactElement,
-} from 'react';
-import { createPortal } from 'react-dom';
+import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
+import { cloneElement, useId, type ReactElement } from 'react';
 import './tooltip.css';
 
 /** Preferred side of the trigger where the tooltip is displayed. */
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 
-type TooltipPosition = {
-  x: number;
-  y: number;
-  placement: TooltipPlacement;
-};
-
-type TooltipContentStyle = CSSProperties & {
-  '--notable-tooltip-delay': string;
-};
-
 /** Props for {@link Tooltip}. */
 export type TooltipProps = {
-  /** Single trigger element; must accept the `aria-describedby` attribute. */
+  /** Single trigger element. Receives the tooltip's `aria-describedby` automatically. */
   children: ReactElement<{ 'aria-describedby'?: string }>;
   /** Additional CSS class for the trigger wrapper. */
   className?: string;
@@ -37,13 +17,13 @@ export type TooltipProps = {
   delay?: number;
   /** Prevents the tooltip from being shown. Defaults to `false`. */
   disabled?: boolean;
-  /** Preferred position; adjusts to fit within the viewport. */
+  /** Preferred position; Base UI flips and shifts it to fit within the viewport. */
   placement?: TooltipPlacement;
 };
 
 /**
- * Adds a tooltip that appears on hover or focus. Renders it in a portal and
- * associates it with the trigger using `aria-describedby`.
+ * Adds a tooltip that appears on hover or focus. The popup is rendered in a
+ * portal and associated with the trigger through `aria-describedby`.
  */
 export function Tooltip({
   children,
@@ -54,206 +34,35 @@ export function Tooltip({
   placement = 'top',
 }: TooltipProps) {
   const tooltipId = useId();
-  const wrapperRef = useRef<HTMLSpanElement>(null);
-  const tooltipRef = useRef<HTMLSpanElement>(null);
-  const [position, setPosition] = useState<TooltipPosition | null>(null);
-  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
-  const isOpen = !disabled && !isDismissed && (isHovered || isFocused);
-  const existingDescription = children.props['aria-describedby'];
+  const existingDescribedBy = children.props['aria-describedby'];
   const describedBy = disabled
-    ? existingDescription
-    : [existingDescription, tooltipId].filter(Boolean).join(' ');
-  const trigger = cloneElement(children, {
-    'aria-describedby': describedBy,
-  });
-
-  useEffect(() => {
-    setPortalTarget(document.body);
-  }, []);
-
-  // Escape dismisses the open tooltip without moving focus or hover (WCAG 1.4.13).
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsDismissed(true);
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
-
-  useLayoutEffect(() => {
-    if (disabled) {
-      return;
-    }
-
-    const wrapper = wrapperRef.current;
-    const tooltip = tooltipRef.current;
-    const triggerElement = wrapper?.firstElementChild;
-
-    if (!wrapper || !tooltip || !(triggerElement instanceof HTMLElement)) {
-      return;
-    }
-
-    const updatePosition = () => {
-      const triggerRect = triggerElement.getBoundingClientRect();
-      const tooltipRect = tooltip.getBoundingClientRect();
-      const viewport = window.visualViewport;
-      const viewportLeft = viewport?.offsetLeft ?? 0;
-      const viewportTop = viewport?.offsetTop ?? 0;
-      const viewportWidth = viewport?.width ?? window.innerWidth;
-      const viewportHeight = viewport?.height ?? window.innerHeight;
-      const gap = 8;
-      const margin = 8;
-      const space = {
-        top: triggerRect.top - viewportTop - margin,
-        right: viewportLeft + viewportWidth - triggerRect.right - margin,
-        bottom: viewportTop + viewportHeight - triggerRect.bottom - margin,
-        left: triggerRect.left - viewportLeft - margin,
-      };
-      const opposite: Record<TooltipPlacement, TooltipPlacement> = {
-        top: 'bottom',
-        right: 'left',
-        bottom: 'top',
-        left: 'right',
-      };
-      const candidates = [
-        placement,
-        opposite[placement],
-        ...(placement === 'top' || placement === 'bottom'
-          ? (['right', 'left'] as const)
-          : (['top', 'bottom'] as const)),
-      ];
-      const fits = (candidate: TooltipPlacement) =>
-        space[candidate] >=
-        (candidate === 'top' || candidate === 'bottom'
-          ? tooltipRect.height
-          : tooltipRect.width) +
-          gap;
-      const resolvedPlacement =
-        candidates.find(fits) ??
-        candidates.reduce((best, candidate) =>
-          space[candidate] > space[best] ? candidate : best,
-        );
-      const centeredX =
-        triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2;
-      const centeredY =
-        triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2;
-      const rawX =
-        resolvedPlacement === 'right'
-          ? triggerRect.right + gap
-          : resolvedPlacement === 'left'
-            ? triggerRect.left - tooltipRect.width - gap
-            : centeredX;
-      const rawY =
-        resolvedPlacement === 'bottom'
-          ? triggerRect.bottom + gap
-          : resolvedPlacement === 'top'
-            ? triggerRect.top - tooltipRect.height - gap
-            : centeredY;
-      const minX = viewportLeft + margin;
-      const minY = viewportTop + margin;
-
-      setPosition({
-        x: Math.max(
-          minX,
-          Math.min(
-            rawX,
-            viewportLeft + viewportWidth - tooltipRect.width - margin,
-          ),
-        ),
-        y: Math.max(
-          minY,
-          Math.min(
-            rawY,
-            viewportTop + viewportHeight - tooltipRect.height - margin,
-          ),
-        ),
-        placement: resolvedPlacement,
-      });
-    };
-
-    updatePosition();
-    window.addEventListener('resize', updatePosition);
-    window.addEventListener('scroll', updatePosition, true);
-    window.visualViewport?.addEventListener('resize', updatePosition);
-    window.visualViewport?.addEventListener('scroll', updatePosition);
-    const resizeObserver =
-      typeof ResizeObserver === 'undefined'
-        ? undefined
-        : new ResizeObserver(updatePosition);
-    resizeObserver?.observe(triggerElement);
-    resizeObserver?.observe(tooltip);
-
-    return () => {
-      window.removeEventListener('resize', updatePosition);
-      window.removeEventListener('scroll', updatePosition, true);
-      window.visualViewport?.removeEventListener('resize', updatePosition);
-      window.visualViewport?.removeEventListener('scroll', updatePosition);
-      resizeObserver?.disconnect();
-    };
-  }, [content, disabled, isFocused, isHovered, placement, portalTarget]);
-
-  const handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
-    const isFocusWithin =
-      event.relatedTarget instanceof Node &&
-      event.currentTarget.contains(event.relatedTarget);
-    setIsFocused(isFocusWithin);
-    if (!isFocusWithin) {
-      setIsDismissed(false);
-    }
-  };
-
-  const tooltipContentStyle: TooltipContentStyle = {
-    left: position?.x ?? 0,
-    top: position?.y ?? 0,
-    '--notable-tooltip-delay': `${Math.max(0, delay)}ms`,
-  };
+    ? existingDescribedBy
+    : [existingDescribedBy, tooltipId].filter(Boolean).join(' ') || undefined;
+  const wrapperClassName = ['notable-tooltip', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <>
-      <span
-        ref={wrapperRef}
-        className={['notable-tooltip', className].filter(Boolean).join(' ')}
-        data-placement={position?.placement ?? placement}
-        data-disabled={disabled || undefined}
-        onMouseEnter={() => {
-          setIsHovered(true);
-          setIsDismissed(false);
-        }}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setIsDismissed(false);
-        }}
-        onFocus={() => setIsFocused(true)}
-        onBlur={handleBlur}
-      >
-        {trigger}
+    <BaseTooltip.Root disabled={disabled}>
+      <span className={wrapperClassName}>
+        <BaseTooltip.Trigger
+          delay={delay}
+          render={cloneElement(children, { 'aria-describedby': describedBy })}
+        />
       </span>
-      {portalTarget &&
-        createPortal(
-          <span
-            ref={tooltipRef}
-            className="notable-tooltip__content"
-            id={tooltipId}
-            role="tooltip"
-            data-placement={position?.placement ?? placement}
-            data-open={isOpen || undefined}
-            hidden={disabled}
-            style={tooltipContentStyle}
-          >
-            {content}
-          </span>,
-          portalTarget,
-        )}
-    </>
+      {!disabled && (
+        <BaseTooltip.Portal keepMounted>
+          <BaseTooltip.Positioner side={placement} sideOffset={6}>
+            <BaseTooltip.Popup
+              id={tooltipId}
+              role="tooltip"
+              className="notable-tooltip__content"
+            >
+              {content}
+            </BaseTooltip.Popup>
+          </BaseTooltip.Positioner>
+        </BaseTooltip.Portal>
+      )}
+    </BaseTooltip.Root>
   );
 }

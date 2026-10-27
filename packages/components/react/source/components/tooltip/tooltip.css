@@ -4,7 +4,6 @@
 }
 
 .notable-tooltip__content {
-  position: fixed;
   z-index: 1000;
   width: max-content;
   max-width: min(16rem, calc(100vw - 2rem));
@@ -23,33 +22,28 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
+  transform: scale(0.96);
   transition:
     opacity var(--notable-duration-base) var(--notable-easing-standard),
     transform var(--notable-duration-base) var(--notable-easing-spring),
     visibility 0s linear var(--notable-duration-base);
 }
 
-.notable-tooltip__content[data-placement='top'],
-.notable-tooltip__content[data-placement='bottom'] {
-  transform: translateY(4px) scale(0.96);
-}
-
-.notable-tooltip__content[data-placement='right'],
-.notable-tooltip__content[data-placement='left'] {
-  transform: translateX(4px) scale(0.96);
-}
-
-.notable-tooltip__content[data-open='true'] {
+.notable-tooltip__content[data-open] {
   opacity: 1;
   visibility: visible;
-  transform: translate(0) scale(1);
+  transform: scale(1);
   transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard)
-      var(--notable-tooltip-delay, var(--notable-duration-delay)),
-    transform var(--notable-duration-base) var(--notable-easing-spring)
-      var(--notable-tooltip-delay, var(--notable-duration-delay)),
-    visibility 0s linear
-      var(--notable-tooltip-delay, var(--notable-duration-delay));
+    opacity var(--notable-duration-base) var(--notable-easing-standard),
+    transform var(--notable-duration-base) var(--notable-easing-spring),
+    visibility 0s linear 0s;
+}
+
+/* Base UI disables transitions while this attribute is set, so the first
+   frame is painted hidden and the open state then animates from it. */
+.notable-tooltip__content[data-starting-style] {
+  opacity: 0;
+  transform: scale(0.96);
 }
 
 @media (prefers-reduced-motion: reduce) {
