@@ -395,7 +395,85 @@ Do not assume that a change is safe simply because the local module still compil
 
 ---
 
-## 12. Dependency and Security Hygiene
+## 12. Commit Conventions
+
+Notable follows the Conventional Commits specification. Commit messages must be concise, precise, and supported by the actual changes.
+
+### Format
+
+`type(scope): description`
+
+The scope is optional.
+
+Use lowercase types and scopes. Keep descriptions concise, use imperative mood, and omit trailing punctuation. Aim for fewer than 60 characters for the complete subject when practical.
+
+### Types
+
+- `feat`: introduce genuinely new functionality or capabilities.
+- `fix`: correct bugs, unintended behavior, or visual defects.
+- `refactor`: restructure implementation without intentionally changing observable behavior.
+- `perf`: improve performance.
+- `style`: make formatting-only changes without affecting behavior or intended appearance.
+- `test`: change tests without changing production behavior.
+- `docs`: change documentation without changing implementation.
+- `build`: change dependencies, package configuration, or build behavior.
+- `ci`: change CI workflows or automation.
+- `chore`: maintenance that does not fit a more specific type.
+- `revert`: revert a previous commit.
+
+Choose the type according to the actual purpose of the change. Never use `feat` as a generic label for production-code changes or `refactor` for changes that intentionally fix or alter behavior.
+
+### Scope and Description
+
+- Prefer a short, meaningful scope identifying the affected component or subsystem.
+- Use established repository terminology.
+- Describe the specific change, not the activity performed.
+- Prefer concrete verbs such as `add`, `fix`, `remove`, `prevent`, `preserve`, `align`, `simplify`, `extract`, and `document`.
+- Avoid vague descriptions such as `enhance functionality`, `update code`, `improve consistency`, and `various fixes` when a more precise description is possible.
+- Do not repeat information already conveyed by the type or scope.
+- Do not list modified files or implementation steps in the subject.
+
+Prefer:
+
+- `feat(button): add loading state`
+- `fix(button): correct secondary hover colors`
+- `fix(dialog): restore focus on close`
+- `refactor(tokens): remove duplicate color values`
+- `docs: clarify component composition guidelines`
+
+### Commit Granularity
+
+Every commit should represent one coherent, independently understandable change.
+
+- Keep commits focused and small enough to review meaningfully.
+- A commit may include implementation, styles, tests, and documentation when they belong to the same logical change.
+- Split independent features, unrelated fixes, separate refactors, and unrelated formatting changes when practical.
+- Do not combine unrelated changes merely because they were implemented in the same session.
+- Do not split a coherent change into artificial commits simply to reduce its size.
+- If staged changes contain unrelated work, prefer separating them before committing rather than hiding them behind a generic message.
+- Never discard or rewrite the user's existing staged changes without permission.
+
+### Accuracy
+
+- Base the message on the actual staged diff, not assumptions from filenames, branch names, task descriptions, or recent conversation.
+- Describe only changes supported by the diff.
+- Never claim a bug was fixed, a feature was added, or tests passed without evidence.
+- If a commit combines several changes that cannot reasonably be separated, describe their genuine shared purpose without misrepresenting the contents.
+- Use the breaking-change marker `!` when compatibility is intentionally broken, such as `feat(button)!: replace variant API`.
+
+### Message Body
+
+Prefer a single-line message. Add a body only when important reasoning, constraints, or consequences cannot be expressed clearly in the subject.
+
+Do not repeat the subject, summarize every modified file, or add generic introductory text.
+
+### Final Output
+
+When generating a commit message, output only the proposed message. Do not include explanations, quotation marks, emojis, Markdown formatting, or multiple alternatives unless explicitly requested.
+
+Prioritize accuracy, clarity, and coherent changes over verbosity or conventional-looking labels.
+
+## 13. Dependency and Security Hygiene
 
 - Inspect existing dependencies before adding new ones.
 - Prefer maintained dependencies that fit the module's actual requirements.
@@ -414,7 +492,7 @@ Security requirements apply to shared infrastructure and individual implementati
 
 ---
 
-## 13. Repository Hygiene
+## 14. Repository Hygiene
 
 Keep the repository intentional and easy to navigate.
 
@@ -432,7 +510,7 @@ When performing cleanup, verify that apparently unused files and exports are not
 
 ---
 
-## 14. Decision-Making
+## 15. Decision-Making
 
 When multiple solutions are possible, evaluate them in this order:
 
@@ -456,7 +534,7 @@ When a decision has significant architectural consequences, explain the rational
 
 ---
 
-## 15. Working Autonomously
+## 16. Working Autonomously
 
 When assigned a task:
 
@@ -481,7 +559,7 @@ Be proactive about correctness and maintenance, but do not expand the task witho
 
 ---
 
-## 16. Completion Criteria
+## 17. Completion Criteria
 
 A task is complete when:
 
