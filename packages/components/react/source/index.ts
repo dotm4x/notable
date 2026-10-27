@@ -6,6 +6,7 @@ export * from './components/avatar/avatar.js';
 export * from './components/avatar/avatar-group.js';
 export * from './components/badge/badge.js';
 export * from './components/card/card.js';
+export * from './components/breadcrumb/breadcrumb.js';
 export * from './components/checkbox/checkbox.js';
 export * from './components/combobox/combobox.js';
 export * from './components/command/command.js';

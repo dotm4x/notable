@@ -22,6 +22,7 @@ Finished components are described by the primitives they combine. The compositio
 - A segmented control is a [choice](./choice.md) with options shown together, which may be [dragged](../patterns/drag.md).
 - A switch is a [toggle](./toggle.md) with a sliding track, which may be [dragged](../patterns/drag.md).
 - A checkbox is a [toggle](./toggle.md) shown as a mark.
+- A breadcrumb is a trail of links ending in the current location, where a level may open a [popup](../patterns/popups.md) of sibling destinations.
 
 ## Relationship to the other categories
 
