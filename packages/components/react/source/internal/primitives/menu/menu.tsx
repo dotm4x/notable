@@ -1,4 +1,5 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu';
+import { ChevronRight } from 'lucide-react';
 import {
   forwardRef,
   type ComponentPropsWithoutRef,
@@ -43,6 +44,23 @@ export type MenuPopupProps = Omit<
 
 export type MenuItemProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.Item>,
+  'className'
+> & {
+  className?: string;
+};
+
+export type MenuSubmenuRootProps = {
+  /** Controlled open state of the submenu. */
+  open?: boolean;
+  /** Initial open state of the submenu when uncontrolled. */
+  defaultOpen?: boolean;
+  /** Called with the requested open state when the submenu opens or closes. */
+  onOpenChange?: (open: boolean) => void;
+  children?: ReactNode;
+};
+
+export type MenuSubmenuTriggerProps = Omit<
+  ComponentPropsWithoutRef<typeof BaseMenu.SubmenuTrigger>,
   'className'
 > & {
   className?: string;
@@ -141,6 +159,51 @@ export const MenuPopup = forwardRef<HTMLDivElement, MenuPopupProps>(
     );
   },
 );
+
+/**
+ * Wraps a submenu's trigger and popup. Its popup is rendered with
+ * `MenuPopup`, so it shares the same portal and styling as the root menu.
+ */
+export function MenuSubmenuRoot({
+  open,
+  defaultOpen,
+  onOpenChange,
+  children,
+}: MenuSubmenuRootProps) {
+  return (
+    <BaseMenu.SubmenuRoot
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
+    >
+      {children}
+    </BaseMenu.SubmenuRoot>
+  );
+}
+
+/** Styled like a menu item, with a trailing chevron that marks the submenu. */
+export const MenuSubmenuTrigger = forwardRef<
+  HTMLDivElement,
+  MenuSubmenuTriggerProps
+>(function MenuSubmenuTrigger({ className, children, ...props }, ref) {
+  return (
+    <BaseMenu.SubmenuTrigger
+      ref={ref}
+      className={joinClassNames(
+        'notable-menu__item notable-menu__submenu-trigger',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronRight
+        size={16}
+        aria-hidden="true"
+        className="notable-menu__submenu-chevron"
+      />
+    </BaseMenu.SubmenuTrigger>
+  );
+});
 
 export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
   function MenuItem({ className, ...props }, ref) {

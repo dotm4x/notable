@@ -223,4 +223,146 @@ describe('DropdownMenu', () => {
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(screen.getByTestId('custom-trigger').closest('button')).toBeNull();
   });
+
+  describe('submenus', () => {
+    function NestedDropdownMenu(props: { onSelect?: () => void }) {
+      return (
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Item>Rename</DropdownMenu.Item>
+            <DropdownMenu.Submenu>
+              <DropdownMenu.SubmenuTrigger>Move to</DropdownMenu.SubmenuTrigger>
+              <DropdownMenu.Content side="right">
+                <DropdownMenu.Item onClick={props.onSelect}>
+                  Archive
+                </DropdownMenu.Item>
+                <DropdownMenu.Item onClick={props.onSelect}>
+                  Trash
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Submenu>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
+      );
+    }
+
+    it('opens the submenu when its trigger is clicked', async () => {
+      // Arrange
+      render(<NestedDropdownMenu />);
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+
+      // Act
+      await userEvent.click(
+        await screen.findByRole('menuitem', { name: /Move to/ }),
+      );
+
+      // Assert
+      expect(
+        await screen.findByRole('menuitem', { name: 'Archive' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('menuitem', { name: 'Trash' }),
+      ).toBeInTheDocument();
+    });
+
+    it('opens the submenu with the keyboard and focuses its first item', async () => {
+      // Arrange
+      render(<NestedDropdownMenu />);
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+      const trigger = await screen.findByRole('menuitem', { name: /Move to/ });
+      trigger.focus();
+
+      // Act
+      await userEvent.keyboard('{ArrowRight}');
+
+      // Assert
+      expect(
+        await screen.findByRole('menuitem', { name: 'Archive' }),
+      ).toHaveFocus();
+    });
+
+    it('closes the whole menu when a submenu item is activated', async () => {
+      // Arrange
+      const onSelect = vi.fn();
+      render(<NestedDropdownMenu onSelect={onSelect} />);
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+      await userEvent.click(
+        await screen.findByRole('menuitem', { name: /Move to/ }),
+      );
+
+      // Act
+      await userEvent.click(
+        await screen.findByRole('menuitem', { name: 'Archive' }),
+      );
+
+      // Assert
+      expect(onSelect).toHaveBeenCalledTimes(1);
+      await waitFor(() => {
+        expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      });
+    });
+
+    it('does not open a disabled submenu', async () => {
+      // Arrange
+      render(
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Submenu>
+              <DropdownMenu.SubmenuTrigger disabled>
+                Move to
+              </DropdownMenu.SubmenuTrigger>
+              <DropdownMenu.Content side="right">
+                <DropdownMenu.Item>Archive</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Submenu>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>,
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+
+      // Act
+      await userEvent.click(
+        await screen.findByRole('menuitem', { name: /Move to/ }),
+      );
+
+      // Assert
+      expect(
+        screen.queryByRole('menuitem', { name: 'Archive' }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('reports submenu open changes through onOpenChange', async () => {
+      // Arrange
+      const onOpenChange = vi.fn();
+      render(
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Submenu onOpenChange={onOpenChange}>
+              <DropdownMenu.SubmenuTrigger>Move to</DropdownMenu.SubmenuTrigger>
+              <DropdownMenu.Content side="right">
+                <DropdownMenu.Item>Archive</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Submenu>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>,
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+
+      // Act
+      await userEvent.click(
+        await screen.findByRole('menuitem', { name: /Move to/ }),
+      );
+
+      // Assert
+      expect(
+        await screen.findByRole('menuitem', { name: 'Archive' }),
+      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(onOpenChange).toHaveBeenCalledWith(true);
+      });
+    });
+  });
 });
