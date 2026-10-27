@@ -300,6 +300,7 @@ Always inspect and reuse the existing tokens under `source/styles/tokens/` and t
 - `source/styles/tokens/`: shared design tokens, organized by category.
 - `source/styles/motion.ts`: shared motion helpers or definitions where appropriate.
 - `source/styles.d.ts`: existing style type declarations.
+- `source/internal/styles/`: shared styles that are not design tokens and are reused by several components, such as `floating-surface.css`. Components apply them through a shared class and import the stylesheet.
 
 Preserve the actual responsibilities of these files and follow the existing import structure.
 
@@ -309,6 +310,8 @@ Preserve the actual responsibilities of these files and follow the existing impo
 - Prefer semantic tokens over raw palette values.
 - Do not introduce arbitrary hardcoded design values when an appropriate token already exists.
 - Do not duplicate existing tokens under new names.
+- Keep tokens agnostic of components and of specific visual values. Do not add a token for one component's infrastructure (for example, a scrollbar color). Add a token only when it is generic and reusable, and never rename or reshape an existing token to fit one feature.
+- Reuse existing generic tokens inside shared styles instead of creating new ones.
 - Add tokens only when they represent meaningful, reusable design decisions.
 - Place new tokens in the appropriate existing category.
 - Keep naming semantic, consistent, and independent of individual components.
