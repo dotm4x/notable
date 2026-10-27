@@ -1,0 +1,9 @@
+.notable-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--notable-spacing-3);
+}
+
+.notable-form > .notable-button {
+  align-self: flex-start;
+}
