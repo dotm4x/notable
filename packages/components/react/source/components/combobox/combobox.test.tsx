@@ -108,14 +108,17 @@ describe('Combobox opening and filtering', () => {
     const user = userEvent.setup();
     renderCombobox();
     const input = screen.getByRole('combobox', { name: 'Fruit' });
+    await user.click(input);
+    await user.keyboard('{ArrowDown}');
+    expect(input).toHaveAttribute('aria-activedescendant');
 
     // Act
-    await user.click(input);
     await user.type(input, 'zzz');
 
     // Assert
     expect(await screen.findByText('No fruit found.')).toBeInTheDocument();
     expect(screen.queryByRole('option')).not.toBeInTheDocument();
+    expect(input).not.toHaveAttribute('aria-activedescendant');
   });
 
   it('keeps group headings when filtering grouped items', async () => {
