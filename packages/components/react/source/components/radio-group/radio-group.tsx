@@ -9,6 +9,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
+import { selectEdgeRadioOnKeyDown } from '../../internal/helpers/radio-edge-keys.js';
 import './radio-group.css';
 
 /** Available sizes for a radio group. */
@@ -87,6 +88,7 @@ const RadioGroupRoot = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       size = 'medium',
       value,
       'aria-describedby': ariaDescribedBy,
+      onKeyDown,
       ...props
     },
     ref,
@@ -129,6 +131,12 @@ const RadioGroupRoot = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
           aria-describedby={describedBy}
           disabled={disabled}
           data-disabled={disabled || undefined}
+          onKeyDown={(event) => {
+            onKeyDown?.(event);
+            if (!event.defaultPrevented) {
+              selectEdgeRadioOnKeyDown(event);
+            }
+          }}
         >
           {label && (
             <legend className="notable-radio-group__label">{label}</legend>
