@@ -37,7 +37,17 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "prettier": "^3.0.0",
     "typescript-eslint": "^8.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,yml,yaml,css,scss,html}": [
+      "prettier --write"
+    ]
   }
 }
