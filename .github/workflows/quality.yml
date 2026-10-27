@@ -1,4 +1,4 @@
-name: CI
+name: Quality
 
 on:
   push:
@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   validate:
+    name: Code quality
     runs-on: ubuntu-latest
 
     steps:
@@ -29,20 +30,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        run: pnpm --filter @notable/react exec playwright install --with-deps chromium
-
       - name: Check formatting
         run: pnpm format:check
 
       - name: Lint
         run: pnpm lint
-
-      - name: Build @notable/react
-        run: pnpm --filter @notable/react build
-
-      - name: Typecheck
-        run: pnpm typecheck
-
-      - name: Run tests
-        run: pnpm --filter @notable/react test:all
