@@ -2,3 +2,5 @@ node_modules
 dist
 storybook-static
 .DS_Store
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
