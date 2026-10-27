@@ -28,9 +28,9 @@ describe('AvatarGroup', () => {
     expect(screen.getByTestId('group')).toHaveClass(
       'notable-avatar-group--large',
     );
-    expect(screen.getByTestId('group')).toHaveStyle({
-      '--notable-avatar-group-overlap': '12px',
-    });
+    expect(screen.getByTestId('group')).toHaveStyle(
+      '--notable-avatar-group-overlap: 12px',
+    );
     expect(screen.getByTestId('avatar-Max')).toHaveClass(
       'notable-avatar--medium',
     );
@@ -43,9 +43,9 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     );
 
-    expect(screen.getByTestId('group')).toHaveStyle({
-      '--notable-avatar-group-overlap': '0px',
-    });
+    expect(screen.getByTestId('group')).toHaveStyle(
+      '--notable-avatar-group-overlap: 0px',
+    );
   });
 
   it.each(['horizontal', 'vertical'] as const)(
@@ -63,9 +63,9 @@ describe('AvatarGroup', () => {
       expect(screen.getByTestId('avatar-Max').parentElement).toHaveClass(
         'notable-avatar-group__item',
       );
-      expect(screen.getByTestId('group')).toHaveStyle({
-        '--notable-avatar-group-overlap': '10px',
-      });
+      expect(screen.getByTestId('group')).toHaveStyle(
+        '--notable-avatar-group-overlap: 10px',
+      );
     },
   );
 
