@@ -101,7 +101,7 @@ export const WithSubmenu: Story = {
         <DropdownMenu.Separator />
         <DropdownMenu.Submenu>
           <DropdownMenu.SubmenuTrigger>Move to</DropdownMenu.SubmenuTrigger>
-          <DropdownMenu.Content side="right">
+          <DropdownMenu.Content>
             <DropdownMenu.Item>Inbox</DropdownMenu.Item>
             <DropdownMenu.Item>Projects</DropdownMenu.Item>
             <DropdownMenu.Item>Archive</DropdownMenu.Item>
@@ -113,9 +113,10 @@ export const WithSubmenu: Story = {
             <Shortcut>Ctrl</Shortcut>
             <Shortcut>E</Shortcut>
           </DropdownMenu.SubmenuTrigger>
-          <DropdownMenu.Content side="right">
+          <DropdownMenu.Content>
             <DropdownMenu.Item>Markdown</DropdownMenu.Item>
             <DropdownMenu.Item>PDF</DropdownMenu.Item>
+            <DropdownMenu.Item disabled>Word (unavailable)</DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Submenu>
         <DropdownMenu.Separator />
@@ -123,7 +124,7 @@ export const WithSubmenu: Story = {
           <DropdownMenu.SubmenuTrigger disabled>
             Share
           </DropdownMenu.SubmenuTrigger>
-          <DropdownMenu.Content side="right">
+          <DropdownMenu.Content>
             <DropdownMenu.Item>Copy link</DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Submenu>
@@ -139,12 +140,12 @@ export const NestedSubmenus: Story = {
       <DropdownMenu.Content>
         <DropdownMenu.Submenu>
           <DropdownMenu.SubmenuTrigger>Move to</DropdownMenu.SubmenuTrigger>
-          <DropdownMenu.Content side="right">
+          <DropdownMenu.Content>
             <DropdownMenu.Submenu>
               <DropdownMenu.SubmenuTrigger>
                 Notebooks
               </DropdownMenu.SubmenuTrigger>
-              <DropdownMenu.Content side="right">
+              <DropdownMenu.Content>
                 <DropdownMenu.Item>Personal</DropdownMenu.Item>
                 <DropdownMenu.Item>Work</DropdownMenu.Item>
               </DropdownMenu.Content>
@@ -168,6 +169,91 @@ export const SubmenuOpeningToTheLeft: Story = {
           <DropdownMenu.Content side="left" align="start">
             <DropdownMenu.Item>Newest first</DropdownMenu.Item>
             <DropdownMenu.Item>Oldest first</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Submenu>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+};
+
+export const WithCheckboxItems: Story = {
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>View</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Group>
+          <DropdownMenu.GroupLabel>Show</DropdownMenu.GroupLabel>
+          <DropdownMenu.CheckboxItem defaultChecked>
+            Sidebar
+            <Shortcut>Ctrl</Shortcut>
+            <Shortcut>B</Shortcut>
+          </DropdownMenu.CheckboxItem>
+          <DropdownMenu.CheckboxItem>Status bar</DropdownMenu.CheckboxItem>
+          <DropdownMenu.CheckboxItem disabled>
+            Developer tools
+          </DropdownMenu.CheckboxItem>
+        </DropdownMenu.Group>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+};
+
+export const WithRadioItems: Story = {
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>Sort</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Group>
+          <DropdownMenu.GroupLabel>Sort by</DropdownMenu.GroupLabel>
+          <DropdownMenu.RadioGroup defaultValue="modified">
+            <DropdownMenu.RadioItem value="name">Name</DropdownMenu.RadioItem>
+            <DropdownMenu.RadioItem value="modified">
+              Last modified
+            </DropdownMenu.RadioItem>
+            <DropdownMenu.RadioItem value="created">
+              Date created
+            </DropdownMenu.RadioItem>
+          </DropdownMenu.RadioGroup>
+        </DropdownMenu.Group>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Group>
+          <DropdownMenu.GroupLabel>Order</DropdownMenu.GroupLabel>
+          <DropdownMenu.RadioGroup defaultValue="ascending">
+            <DropdownMenu.RadioItem value="ascending">
+              Ascending
+            </DropdownMenu.RadioItem>
+            <DropdownMenu.RadioItem value="descending">
+              Descending
+            </DropdownMenu.RadioItem>
+          </DropdownMenu.RadioGroup>
+        </DropdownMenu.Group>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  ),
+};
+
+export const MixedItemsWithSubmenu: Story = {
+  render: () => (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>Format</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.CheckboxItem defaultChecked>
+          Bold
+        </DropdownMenu.CheckboxItem>
+        <DropdownMenu.CheckboxItem>Italic</DropdownMenu.CheckboxItem>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Submenu>
+          <DropdownMenu.SubmenuTrigger>Alignment</DropdownMenu.SubmenuTrigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.RadioGroup defaultValue="start">
+              <DropdownMenu.RadioItem value="start">
+                Start
+              </DropdownMenu.RadioItem>
+              <DropdownMenu.RadioItem value="center">
+                Center
+              </DropdownMenu.RadioItem>
+              <DropdownMenu.RadioItem value="end">End</DropdownMenu.RadioItem>
+            </DropdownMenu.RadioGroup>
           </DropdownMenu.Content>
         </DropdownMenu.Submenu>
       </DropdownMenu.Content>
