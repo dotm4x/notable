@@ -145,14 +145,14 @@ describe('Toast', () => {
     const first = (await screen.findByText('First toast')).closest(
       '.notable-toast',
     );
-    expect(first).toHaveStyle({ '--toast-index': '0' });
+    expect(first).toHaveStyle('--toast-index: 0');
 
     fireEvent.click(screen.getByRole('button', { name: 'Add toast' }));
     const second = (await screen.findByText('Second toast')).closest(
       '.notable-toast',
     );
-    await waitFor(() => expect(first).toHaveStyle({ '--toast-index': '1' }));
-    expect(second).toHaveStyle({ '--toast-index': '0' });
+    await waitFor(() => expect(first).toHaveStyle('--toast-index: 1'));
+    expect(second).toHaveStyle('--toast-index: 0');
   });
 
   it('renders custom content and handles actions', async () => {
