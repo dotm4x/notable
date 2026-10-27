@@ -385,6 +385,42 @@ describe('SegmentedControl', () => {
       expect(weekRadio).toBeChecked();
     });
 
+    it('moves selection to the first and last enabled options with Home and End', async () => {
+      // Arrange
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(
+        <SegmentedControl
+          aria-label="Timeframe"
+          defaultValue="week"
+          onChange={onChange}
+          options={[
+            { label: 'Day', value: 'day', disabled: true },
+            { label: 'Week', value: 'week' },
+            { label: 'Month', value: 'month' },
+            { label: 'Year', value: 'year', disabled: true },
+          ]}
+        />,
+      );
+      screen.getByRole('radio', { name: 'Week' }).focus();
+
+      // Act
+      await user.keyboard('{End}');
+
+      // Assert
+      expect(screen.getByRole('radio', { name: 'Month' })).toHaveFocus();
+      expect(screen.getByRole('radio', { name: 'Month' })).toBeChecked();
+
+      // Act
+      await user.keyboard('{Home}');
+
+      // Assert
+      expect(screen.getByRole('radio', { name: 'Week' })).toHaveFocus();
+      expect(screen.getByRole('radio', { name: 'Week' })).toBeChecked();
+      expect(onChange).toHaveBeenNthCalledWith(1, 'month');
+      expect(onChange).toHaveBeenNthCalledWith(2, 'week');
+    });
+
     it('skips disabled options during arrow key navigation', async () => {
       const user = userEvent.setup();
       const onChange = vi.fn();

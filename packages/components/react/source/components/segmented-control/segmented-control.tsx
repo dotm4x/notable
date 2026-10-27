@@ -8,10 +8,12 @@ import {
   useState,
   type ForwardedRef,
   type HTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
   type Ref,
 } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { selectEdgeRadioOnKeyDown } from '../../internal/helpers/radio-edge-keys.js';
 import { SPRING_LAYOUT } from '../../styles/motion.js';
 import {
   useSelectorDrag,
@@ -80,6 +82,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
       label,
       name,
       onChange,
+      onKeyDown,
       options,
       size = 'medium',
       value,
@@ -237,6 +240,12 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
         onPointerUp={drag.onPointerUp}
         onPointerCancel={drag.onPointerCancel}
         onClickCapture={drag.onClickCapture}
+        onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
+          onKeyDown?.(event);
+          if (!event.defaultPrevented) {
+            selectEdgeRadioOnKeyDown(event);
+          }
+        }}
       >
         {selectedOption && indicatorBounds && (
           <motion.span
