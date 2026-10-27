@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
   Accordion,
-  AccordionItem,
   Avatar,
   AvatarGroup,
   Badge,
@@ -306,12 +305,12 @@ export function App() {
               </Tabs.Content>
             </Tabs>
             <Accordion defaultValue="delivery" type="single">
-              <AccordionItem title="Delivery options" value="delivery">
+              <Accordion.Item title="Delivery options" value="delivery">
                 Choose instant, daily, or weekly delivery for notifications.
-              </AccordionItem>
-              <AccordionItem title="Privacy" value="privacy">
+              </Accordion.Item>
+              <Accordion.Item title="Privacy" value="privacy">
                 Summaries never include private message content.
-              </AccordionItem>
+              </Accordion.Item>
             </Accordion>
           </section>
 

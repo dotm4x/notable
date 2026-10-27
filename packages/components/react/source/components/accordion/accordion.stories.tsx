@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Accordion, AccordionItem } from './accordion.js';
+import { Accordion } from './accordion.js';
 
 const meta = {
   title: 'Components/Accordion',
@@ -9,9 +9,9 @@ const meta = {
   args: {
     type: 'single',
     children: (
-      <AccordionItem value="shipping" title="Shipping">
+      <Accordion.Item value="shipping" title="Shipping">
         Orders ship within two business days.
-      </AccordionItem>
+      </Accordion.Item>
     ),
   },
 } satisfies Meta<typeof Accordion>;
@@ -23,15 +23,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Accordion type="single">
-      <AccordionItem value="shipping" title="Shipping">
+      <Accordion.Item value="shipping" title="Shipping">
         Orders ship within two business days and include tracking details.
-      </AccordionItem>
-      <AccordionItem value="returns" title="Returns">
+      </Accordion.Item>
+      <Accordion.Item value="returns" title="Returns">
         Unused items can be returned within thirty days of delivery.
-      </AccordionItem>
-      <AccordionItem value="warranty" title="Warranty">
+      </Accordion.Item>
+      <Accordion.Item value="warranty" title="Warranty">
         Every product is covered against manufacturing defects for one year.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   ),
 };
@@ -39,15 +39,15 @@ export const Default: Story = {
 export const Single: Story = {
   render: () => (
     <Accordion type="single">
-      <AccordionItem value="general" title="General">
+      <Accordion.Item value="general" title="General">
         Opening a new section closes the one that is currently expanded.
-      </AccordionItem>
-      <AccordionItem value="privacy" title="Privacy">
+      </Accordion.Item>
+      <Accordion.Item value="privacy" title="Privacy">
         Activating the expanded section again collapses it.
-      </AccordionItem>
-      <AccordionItem value="advanced" title="Advanced">
+      </Accordion.Item>
+      <Accordion.Item value="advanced" title="Advanced">
         Only one section is expanded at a time in single mode.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   ),
 };
@@ -55,15 +55,15 @@ export const Single: Story = {
 export const Multiple: Story = {
   render: () => (
     <Accordion type="multiple">
-      <AccordionItem value="notifications" title="Notifications">
+      <Accordion.Item value="notifications" title="Notifications">
         Choose how and when you receive updates about your workspace.
-      </AccordionItem>
-      <AccordionItem value="security" title="Security">
+      </Accordion.Item>
+      <Accordion.Item value="security" title="Security">
         Review active sessions and enable two-factor authentication.
-      </AccordionItem>
-      <AccordionItem value="billing" title="Billing">
+      </Accordion.Item>
+      <Accordion.Item value="billing" title="Billing">
         Update your payment method and download past invoices.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   ),
 };
@@ -72,20 +72,20 @@ export const InitiallyExpanded: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: '24px' }}>
       <Accordion type="single" defaultValue="returns">
-        <AccordionItem value="shipping" title="Shipping">
+        <Accordion.Item value="shipping" title="Shipping">
           Orders ship within two business days.
-        </AccordionItem>
-        <AccordionItem value="returns" title="Returns">
+        </Accordion.Item>
+        <Accordion.Item value="returns" title="Returns">
           Returns are accepted for thirty days after delivery.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>
       <Accordion type="multiple" defaultValue={['shipping', 'returns']}>
-        <AccordionItem value="shipping" title="Shipping">
+        <Accordion.Item value="shipping" title="Shipping">
           Orders ship within two business days.
-        </AccordionItem>
-        <AccordionItem value="returns" title="Returns">
+        </Accordion.Item>
+        <Accordion.Item value="returns" title="Returns">
           Returns are accepted for thirty days after delivery.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>
     </div>
   ),
@@ -94,15 +94,15 @@ export const InitiallyExpanded: Story = {
 export const DisabledItems: Story = {
   render: () => (
     <Accordion type="multiple">
-      <AccordionItem value="available" title="Available">
+      <Accordion.Item value="available" title="Available">
         This section can be opened and closed.
-      </AccordionItem>
-      <AccordionItem value="coming-soon" title="Coming soon" disabled>
+      </Accordion.Item>
+      <Accordion.Item value="coming-soon" title="Coming soon" disabled>
         This content is not available yet.
-      </AccordionItem>
-      <AccordionItem value="archived" title="Archived" disabled>
+      </Accordion.Item>
+      <Accordion.Item value="archived" title="Archived" disabled>
         Archived content cannot be expanded.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   ),
 };
@@ -110,12 +110,12 @@ export const DisabledItems: Story = {
 export const DisabledAccordion: Story = {
   render: () => (
     <Accordion type="single" disabled defaultValue="general">
-      <AccordionItem value="general" title="General">
+      <Accordion.Item value="general" title="General">
         A disabled accordion keeps its current state but cannot change.
-      </AccordionItem>
-      <AccordionItem value="privacy" title="Privacy">
+      </Accordion.Item>
+      <Accordion.Item value="privacy" title="Privacy">
         Every trigger is disabled.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   ),
 };
@@ -123,7 +123,7 @@ export const DisabledAccordion: Story = {
 export const LongContent: Story = {
   render: () => (
     <Accordion type="multiple" defaultValue={['terms']}>
-      <AccordionItem
+      <Accordion.Item
         value="terms"
         title="Terms of service and acceptable use policy for workspace administrators"
       >
@@ -143,10 +143,10 @@ export const LongContent: Story = {
           revised version. Material changes are announced in advance through the
           workspace notification center and by email to administrators.
         </p>
-      </AccordionItem>
-      <AccordionItem value="short" title="Short section">
+      </Accordion.Item>
+      <Accordion.Item value="short" title="Short section">
         A brief answer that sits below the long section.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   ),
 };
@@ -183,13 +183,13 @@ function FaqAccordion() {
         onValueChange={setOpenQuestion}
       >
         {faqItems.map((item) => (
-          <AccordionItem
+          <Accordion.Item
             key={item.value}
             value={item.value}
             title={item.question}
           >
             {item.answer}
-          </AccordionItem>
+          </Accordion.Item>
         ))}
       </Accordion>
       <p style={{ margin: 0 }}>Open question: {openQuestion ?? 'none'}</p>
@@ -213,16 +213,16 @@ function SettingsAccordion() {
         value={expandedSections}
         onValueChange={setExpandedSections}
       >
-        <AccordionItem value="profile" title="Profile">
+        <Accordion.Item value="profile" title="Profile">
           Update your display name, avatar, and the email address used for
           sign-in notices.
-        </AccordionItem>
-        <AccordionItem value="appearance" title="Appearance">
+        </Accordion.Item>
+        <Accordion.Item value="appearance" title="Appearance">
           Pick a theme and choose how dense the note list should look.
-        </AccordionItem>
-        <AccordionItem value="keyboard" title="Keyboard shortcuts" disabled>
+        </Accordion.Item>
+        <Accordion.Item value="keyboard" title="Keyboard shortcuts" disabled>
           Shortcut customization is coming in a future update.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>
       <p style={{ margin: 0 }}>
         Expanded sections: {expandedSections.join(', ') || 'none'}
