@@ -1,4 +1,5 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
+import type { TCssCustomProperties } from '../../internal/helpers/css-custom-properties.js';
 import './separator.css';
 
 /** Direction of the dividing line. */
@@ -33,8 +34,6 @@ export type SeparatorProps = Omit<
    */
   thickness?: number | string;
 };
-
-type CssCustomProperties = Record<`--${string}`, string>;
 
 const colorTokens: Readonly<Record<SeparatorColor, string>> = {
   subtle: 'var(--notable-color-border-subtle)',
@@ -74,7 +73,7 @@ export function Separator({
   thickness,
   ...props
 }: SeparatorProps) {
-  const inlineStyle: CSSProperties & CssCustomProperties = { ...style };
+  const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   const resolvedThickness = resolveThickness(thickness);
   if (resolvedThickness !== undefined) {
     inlineStyle['--notable-separator-thickness'] = resolvedThickness;

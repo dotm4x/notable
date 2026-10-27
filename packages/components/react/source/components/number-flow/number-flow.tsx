@@ -1,7 +1,6 @@
 import { useMemo, type CSSProperties, type HTMLAttributes } from 'react';
+import type { TCssCustomProperties } from '../../internal/helpers/css-custom-properties.js';
 import './number-flow.css';
-
-type CssCustomProperties = Record<`--${string}`, string>;
 
 /** Props for {@link NumberFlow}, in addition to native `span` attributes. */
 export type NumberFlowProps = Omit<
@@ -123,7 +122,7 @@ function NumberFlowDigit({
   digit: number;
   glyphs: readonly string[];
 }) {
-  const style: CSSProperties & CssCustomProperties = {
+  const style: CSSProperties & TCssCustomProperties = {
     '--notable-number-flow-digit': String(digit),
   };
 
@@ -171,7 +170,7 @@ export function NumberFlow({
 
   const classes = ['notable-number-flow', className].filter(Boolean).join(' ');
 
-  const inlineStyle: CSSProperties & CssCustomProperties = { ...style };
+  const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   if (duration !== undefined) {
     inlineStyle['--notable-number-flow-duration'] = `${duration}ms`;
   }
