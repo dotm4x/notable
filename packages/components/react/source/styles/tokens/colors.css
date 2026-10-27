@@ -30,6 +30,7 @@
 
   --notable-color-secondary: var(--notable-gray-200);
   --notable-color-on-secondary: var(--notable-gray-900);
+  --notable-color-secondary-hover: var(--notable-gray-100);
   --notable-color-secondary-active: var(--notable-gray-300);
 
   --notable-color-danger: #b91c1c;
@@ -89,9 +90,10 @@
   --notable-color-primary-hover: var(--notable-gray-200);
   --notable-color-primary-active: var(--notable-gray-300);
 
-  --notable-color-secondary: var(--notable-gray-800);
+  --notable-color-secondary: var(--notable-gray-700);
   --notable-color-on-secondary: var(--notable-gray-100);
-  --notable-color-secondary-active: var(--notable-gray-700);
+  --notable-color-secondary-hover: var(--notable-gray-600);
+  --notable-color-secondary-active: var(--notable-gray-500);
 
   --notable-color-danger: #f87171;
   --notable-color-danger-subtle: #450a0a;

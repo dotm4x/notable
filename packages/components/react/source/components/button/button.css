@@ -69,11 +69,7 @@
 }
 
 .notable-button--secondary:hover:not(:disabled) {
-  background: color-mix(
-    in srgb,
-    var(--notable-color-secondary) 80%,
-    transparent
-  );
+  background: var(--notable-color-secondary-hover);
 }
 
 .notable-button--secondary:active:not(:disabled) {
@@ -83,7 +79,7 @@
 /* Outline */
 
 .notable-button--outline {
-  border-color: var(--notable-color-border);
+  border-color: var(--notable-color-border-strong);
   background: transparent;
   color: var(--notable-color-text);
 }
