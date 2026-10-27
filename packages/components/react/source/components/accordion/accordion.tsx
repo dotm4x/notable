@@ -73,7 +73,7 @@ function useAccordionContext(): AccordionContextValue {
   const context = useContext(AccordionContext);
 
   if (!context) {
-    throw new Error('AccordionItem must be used within an Accordion.');
+    throw new Error('Accordion.Item must be used within an Accordion.');
   }
 
   return context;
@@ -198,8 +198,8 @@ function AccordionRoot(props: AccordionProps) {
   );
 }
 
-/** A single expandable section of an {@link Accordion}. */
-export function AccordionItem({
+/** A single expandable section of an {@link Accordion}, rendered as `Accordion.Item`. */
+function AccordionItem({
   children,
   className,
   disabled = false,
@@ -260,5 +260,6 @@ export function AccordionItem({
 
 /** Compound accordion: `Accordion` is the root and `Accordion.Item` its items. */
 export const Accordion = Object.assign(AccordionRoot, {
+  Root: AccordionRoot,
   Item: AccordionItem,
 });

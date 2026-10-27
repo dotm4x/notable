@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import {
   Accordion,
-  AccordionItem,
   type AccordionMultipleProps,
   type AccordionSingleProps,
 } from './accordion.js';
@@ -15,15 +14,15 @@ type MultipleOptions = Omit<AccordionMultipleProps, 'type' | 'children'>;
 function renderSingle(options: SingleOptions = {}) {
   return render(
     <Accordion type="single" {...options}>
-      <AccordionItem value="shipping" title="Shipping">
+      <Accordion.Item value="shipping" title="Shipping">
         Ships within two business days.
-      </AccordionItem>
-      <AccordionItem value="returns" title="Returns">
+      </Accordion.Item>
+      <Accordion.Item value="returns" title="Returns">
         Returns accepted for thirty days.
-      </AccordionItem>
-      <AccordionItem value="warranty" title="Warranty" disabled>
+      </Accordion.Item>
+      <Accordion.Item value="warranty" title="Warranty" disabled>
         Covered for one year.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>,
   );
 }
@@ -31,15 +30,15 @@ function renderSingle(options: SingleOptions = {}) {
 function renderMultiple(options: MultipleOptions = {}) {
   return render(
     <Accordion type="multiple" {...options}>
-      <AccordionItem value="shipping" title="Shipping">
+      <Accordion.Item value="shipping" title="Shipping">
         Ships within two business days.
-      </AccordionItem>
-      <AccordionItem value="returns" title="Returns">
+      </Accordion.Item>
+      <Accordion.Item value="returns" title="Returns">
         Returns accepted for thirty days.
-      </AccordionItem>
-      <AccordionItem value="warranty" title="Warranty">
+      </Accordion.Item>
+      <Accordion.Item value="warranty" title="Warranty">
         Covered for one year.
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>,
   );
 }
@@ -160,12 +159,12 @@ describe('Accordion', () => {
     const onValueChange = vi.fn();
     const { rerender } = render(
       <Accordion type="single" value="shipping" onValueChange={onValueChange}>
-        <AccordionItem value="shipping" title="Shipping">
+        <Accordion.Item value="shipping" title="Shipping">
           Ships within two business days.
-        </AccordionItem>
-        <AccordionItem value="returns" title="Returns">
+        </Accordion.Item>
+        <Accordion.Item value="returns" title="Returns">
           Returns accepted for thirty days.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>,
     );
 
@@ -177,12 +176,12 @@ describe('Accordion', () => {
 
     rerender(
       <Accordion type="single" value="returns" onValueChange={onValueChange}>
-        <AccordionItem value="shipping" title="Shipping">
+        <Accordion.Item value="shipping" title="Shipping">
           Ships within two business days.
-        </AccordionItem>
-        <AccordionItem value="returns" title="Returns">
+        </Accordion.Item>
+        <Accordion.Item value="returns" title="Returns">
           Returns accepted for thirty days.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>,
     );
 
@@ -206,12 +205,12 @@ describe('Accordion', () => {
             setExpandedValues(nextValues);
           }}
         >
-          <AccordionItem value="shipping" title="Shipping">
+          <Accordion.Item value="shipping" title="Shipping">
             Ships within two business days.
-          </AccordionItem>
-          <AccordionItem value="returns" title="Returns">
+          </Accordion.Item>
+          <Accordion.Item value="returns" title="Returns">
             Returns accepted for thirty days.
-          </AccordionItem>
+          </Accordion.Item>
         </Accordion>
       );
     }
@@ -231,9 +230,9 @@ describe('Accordion', () => {
     const onValueChange = vi.fn();
     render(
       <Accordion type="multiple" value={[]} onValueChange={onValueChange}>
-        <AccordionItem value="shipping" title="Shipping">
+        <Accordion.Item value="shipping" title="Shipping">
           Ships within two business days.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>,
     );
 
@@ -320,14 +319,14 @@ describe('Accordion', () => {
     render(
       <>
         <Accordion type="single" defaultValue="shipping">
-          <AccordionItem value="shipping" title="Shipping">
+          <Accordion.Item value="shipping" title="Shipping">
             First content.
-          </AccordionItem>
+          </Accordion.Item>
         </Accordion>
         <Accordion type="single" defaultValue="shipping">
-          <AccordionItem value="shipping" title="Shipping">
+          <Accordion.Item value="shipping" title="Shipping">
             Second content.
-          </AccordionItem>
+          </Accordion.Item>
         </Accordion>
       </>,
     );
@@ -403,19 +402,19 @@ describe('Accordion', () => {
     const user = userEvent.setup();
     render(
       <Accordion type="multiple" defaultValue={['outer']}>
-        <AccordionItem value="outer" title="Outer">
+        <Accordion.Item value="outer" title="Outer">
           <Accordion type="single">
-            <AccordionItem value="inner-one" title="Inner one">
+            <Accordion.Item value="inner-one" title="Inner one">
               First nested content.
-            </AccordionItem>
-            <AccordionItem value="inner-two" title="Inner two">
+            </Accordion.Item>
+            <Accordion.Item value="inner-two" title="Inner two">
               Second nested content.
-            </AccordionItem>
+            </Accordion.Item>
           </Accordion>
-        </AccordionItem>
-        <AccordionItem value="other" title="Other">
+        </Accordion.Item>
+        <Accordion.Item value="other" title="Other">
           Other content.
-        </AccordionItem>
+        </Accordion.Item>
       </Accordion>,
     );
 
@@ -436,16 +435,16 @@ describe('Accordion', () => {
 
     expect(() =>
       render(
-        <AccordionItem value="loose" title="Loose">
+        <Accordion.Item value="loose" title="Loose">
           Content
-        </AccordionItem>,
+        </Accordion.Item>,
       ),
-    ).toThrow('AccordionItem must be used within an Accordion.');
+    ).toThrow('Accordion.Item must be used within an Accordion.');
 
     consoleError.mockRestore();
   });
 
-  it('exposes Accordion.Item as the same component as AccordionItem', () => {
-    expect(Accordion.Item).toBe(AccordionItem);
+  it('exposes Accordion.Root as the root component', () => {
+    expect(Accordion.Root).toBe(Accordion);
   });
 });
