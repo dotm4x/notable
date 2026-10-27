@@ -6,10 +6,13 @@ import {
 } from 'react';
 import { Button } from '../button/button.js';
 import {
+  MenuCheckboxItem,
   MenuGroup,
   MenuGroupLabel,
   MenuItem,
   MenuPopup,
+  MenuRadioGroup,
+  MenuRadioItem,
   MenuRoot,
   MenuSeparator,
   MenuSubmenuRoot,
@@ -42,7 +45,7 @@ export type DropdownMenuTriggerProps = {
 
 /** Props for `DropdownMenu.Content`, which renders the menu popup. */
 export type DropdownMenuContentProps = ComponentPropsWithoutRef<'div'> & {
-  /** Side of the trigger where the menu appears. Defaults to `bottom`. */
+  /** Side of the trigger where the menu appears. Defaults to `bottom`, or the inline end for submenus. */
   side?: MenuSide;
   /** Alignment along the chosen side. Defaults to `start`. */
   align?: MenuAlign;
@@ -63,6 +66,46 @@ export type DropdownMenuItemProps = ComponentPropsWithoutRef<'div'> & {
 
 /** Props for `DropdownMenu.Group`. */
 export type DropdownMenuGroupProps = ComponentPropsWithoutRef<'div'>;
+
+/**
+ * Props for `DropdownMenu.CheckboxItem`, a menu item that toggles a checked
+ * state. It shows a check mark when on. Unlike `DropdownMenu.Item`, activating
+ * it keeps the menu open so several options can be toggled in a row.
+ */
+export type DropdownMenuCheckboxItemProps = ComponentPropsWithoutRef<'div'> & {
+  /** Controlled checked state. Omit to let the item manage its own state. */
+  checked?: boolean;
+  /** Initial checked state when uncontrolled. Defaults to `false`. */
+  defaultChecked?: boolean;
+  /** Called with the new checked state when the item is activated. */
+  onCheckedChange?: (checked: boolean) => void;
+  /** Disables the item. Disabled items are skipped by keyboard navigation. */
+  disabled?: boolean;
+};
+
+/**
+ * Props for `DropdownMenu.RadioGroup`, which groups `DropdownMenu.RadioItem`
+ * parts so that exactly one of them is selected.
+ */
+export type DropdownMenuRadioGroupProps = ComponentPropsWithoutRef<'div'> & {
+  /** Controlled value of the selected radio item. */
+  value?: string;
+  /** Initial value when uncontrolled. */
+  defaultValue?: string;
+  /** Called with the newly selected value. */
+  onValueChange?: (value: string) => void;
+};
+
+/**
+ * Props for `DropdownMenu.RadioItem`. Selecting it keeps the menu open and
+ * shows a dot. Its `value` identifies it within the enclosing radio group.
+ */
+export type DropdownMenuRadioItemProps = ComponentPropsWithoutRef<'div'> & {
+  /** Value this item represents within its `DropdownMenu.RadioGroup`. */
+  value: string;
+  /** Disables the item. Disabled items are skipped by keyboard navigation. */
+  disabled?: boolean;
+};
 
 /** Props for `DropdownMenu.GroupLabel`. */
 export type DropdownMenuGroupLabelProps = ComponentPropsWithoutRef<'div'>;
@@ -161,6 +204,42 @@ const DropdownMenuGroup = forwardRef<HTMLDivElement, DropdownMenuGroupProps>(
   },
 );
 
+/** A menu item that toggles a checked state. */
+const DropdownMenuCheckboxItem = forwardRef<
+  HTMLDivElement,
+  DropdownMenuCheckboxItemProps
+>(function DropdownMenuCheckboxItem({ onCheckedChange, ...props }, ref) {
+  return (
+    <MenuCheckboxItem
+      ref={ref}
+      onCheckedChange={(checked) => onCheckedChange?.(checked)}
+      {...props}
+    />
+  );
+});
+
+/** Groups radio items so that exactly one is selected. */
+const DropdownMenuRadioGroup = forwardRef<
+  HTMLDivElement,
+  DropdownMenuRadioGroupProps
+>(function DropdownMenuRadioGroup({ onValueChange, ...props }, ref) {
+  return (
+    <MenuRadioGroup
+      ref={ref}
+      onValueChange={(value) => onValueChange?.(value)}
+      {...props}
+    />
+  );
+});
+
+/** A menu item within a `DropdownMenu.RadioGroup`. */
+const DropdownMenuRadioItem = forwardRef<
+  HTMLDivElement,
+  DropdownMenuRadioItemProps
+>(function DropdownMenuRadioItem({ className, ...props }, ref) {
+  return <MenuRadioItem ref={ref} className={className} {...props} />;
+});
+
 const DropdownMenuGroupLabel = forwardRef<
   HTMLDivElement,
   DropdownMenuGroupLabelProps
@@ -203,15 +282,18 @@ const DropdownMenuSubmenuTrigger = forwardRef<
  * Action menu opened from a trigger. Compose it with `DropdownMenu.Trigger`,
  * `DropdownMenu.Content`, `DropdownMenu.Item`, and the optional group,
  * label, and separator parts. Use `Shortcut` inside an item to show a key
- * combination. Nest a `DropdownMenu.Submenu` for a submenu, and pass
- * `side="right"` to its `DropdownMenu.Content`. Forwards refs to the DOM
- * element each part renders.
+ * combination. Nest a `DropdownMenu.Submenu` for a submenu. Submenus open to the
+ * inline end by default and flip to the other side when there is no room.
+ * Forwards refs to the DOM element each part renders.
  */
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Root: DropdownMenuRoot,
   Trigger: DropdownMenuTrigger,
   Content: DropdownMenuContent,
   Item: DropdownMenuItem,
+  CheckboxItem: DropdownMenuCheckboxItem,
+  RadioGroup: DropdownMenuRadioGroup,
+  RadioItem: DropdownMenuRadioItem,
   Group: DropdownMenuGroup,
   GroupLabel: DropdownMenuGroupLabel,
   Separator: DropdownMenuSeparator,

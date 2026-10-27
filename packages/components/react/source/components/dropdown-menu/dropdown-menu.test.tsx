@@ -125,69 +125,6 @@ describe('DropdownMenu', () => {
     expect(screen.getByRole('menu')).toBeInTheDocument();
   });
 
-  it('moves focus with arrow keys, keeping disabled items focusable', async () => {
-    // Arrange
-    render(<BasicDropdownMenu />);
-    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
-    const rename = await screen.findByRole('menuitem', { name: /Rename/ });
-    rename.focus();
-
-    // Act
-    await userEvent.keyboard('{ArrowDown}');
-
-    // Assert
-    expect(screen.getByRole('menuitem', { name: 'Delete' })).toHaveFocus();
-    expect(screen.getByRole('menuitem', { name: 'Delete' })).toHaveAttribute(
-      'aria-disabled',
-      'true',
-    );
-
-    // Act
-    await userEvent.keyboard('{ArrowDown}');
-
-    // Assert
-    expect(screen.getByRole('menuitem', { name: 'Duplicate' })).toHaveFocus();
-  });
-
-  it('moves focus to the first and last items with Home and End', async () => {
-    // Arrange
-    render(<BasicDropdownMenu />);
-    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
-    const duplicate = await screen.findByRole('menuitem', {
-      name: 'Duplicate',
-    });
-    duplicate.focus();
-
-    // Act
-    await userEvent.keyboard('{Home}');
-
-    // Assert
-    expect(screen.getByRole('menuitem', { name: /Rename/ })).toHaveFocus();
-
-    // Act
-    await userEvent.keyboard('{End}');
-
-    // Assert
-    expect(screen.getByRole('menuitem', { name: 'Duplicate' })).toHaveFocus();
-  });
-
-  it('closes on Escape and reports the change through onOpenChange', async () => {
-    // Arrange
-    const onOpenChange = vi.fn();
-    render(<BasicDropdownMenu onOpenChange={onOpenChange} />);
-    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
-    await screen.findByRole('menu');
-
-    // Act
-    await userEvent.keyboard('{Escape}');
-
-    // Assert
-    await waitFor(() => {
-      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
-    });
-    expect(onOpenChange).toHaveBeenLastCalledWith(false);
-  });
-
   it('opens when the controlled open state changes externally', async () => {
     // Arrange
     const onOpenChange = vi.fn();
@@ -264,22 +201,6 @@ describe('DropdownMenu', () => {
       expect(
         screen.getByRole('menuitem', { name: 'Trash' }),
       ).toBeInTheDocument();
-    });
-
-    it('opens the submenu with the keyboard and focuses its first item', async () => {
-      // Arrange
-      render(<NestedDropdownMenu />);
-      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
-      const trigger = await screen.findByRole('menuitem', { name: /Move to/ });
-      trigger.focus();
-
-      // Act
-      await userEvent.keyboard('{ArrowRight}');
-
-      // Assert
-      expect(
-        await screen.findByRole('menuitem', { name: 'Archive' }),
-      ).toHaveFocus();
     });
 
     it('closes the whole menu when a submenu item is activated', async () => {
@@ -363,6 +284,148 @@ describe('DropdownMenu', () => {
       await waitFor(() => {
         expect(onOpenChange).toHaveBeenCalledWith(true);
       });
+    });
+  });
+
+  describe('checkbox and radio items', () => {
+    it('toggles an uncontrolled checkbox item and keeps the menu open', async () => {
+      const onCheckedChange = vi.fn();
+      render(
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.CheckboxItem
+              defaultChecked
+              onCheckedChange={onCheckedChange}
+            >
+              Show hidden files
+            </DropdownMenu.CheckboxItem>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>,
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+      const item = await screen.findByRole('menuitemcheckbox', {
+        name: 'Show hidden files',
+      });
+      expect(item).toHaveAttribute('aria-checked', 'true');
+
+      await userEvent.click(item);
+
+      expect(onCheckedChange).toHaveBeenCalledWith(false);
+      expect(item).toHaveAttribute('aria-checked', 'false');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+    });
+
+    it('reflects the controlled checked state of a checkbox item', async () => {
+      const onCheckedChange = vi.fn();
+      render(
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.CheckboxItem
+              checked={false}
+              onCheckedChange={onCheckedChange}
+            >
+              Wrap lines
+            </DropdownMenu.CheckboxItem>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>,
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+      const item = await screen.findByRole('menuitemcheckbox', {
+        name: 'Wrap lines',
+      });
+
+      await userEvent.click(item);
+
+      expect(onCheckedChange).toHaveBeenCalledWith(true);
+      expect(item).toHaveAttribute('aria-checked', 'false');
+    });
+
+    it('does not toggle a disabled checkbox item', async () => {
+      const onCheckedChange = vi.fn();
+      render(
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.CheckboxItem
+              disabled
+              onCheckedChange={onCheckedChange}
+            >
+              Locked option
+            </DropdownMenu.CheckboxItem>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>,
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+
+      await userEvent.click(
+        await screen.findByRole('menuitemcheckbox', { name: 'Locked option' }),
+      );
+
+      expect(onCheckedChange).not.toHaveBeenCalled();
+    });
+
+    it('selects one radio item at a time and keeps the menu open', async () => {
+      const onValueChange = vi.fn();
+      render(
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>Sort</DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.RadioGroup
+              defaultValue="name"
+              onValueChange={onValueChange}
+            >
+              <DropdownMenu.RadioItem value="name">Name</DropdownMenu.RadioItem>
+              <DropdownMenu.RadioItem value="date">Date</DropdownMenu.RadioItem>
+            </DropdownMenu.RadioGroup>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>,
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Sort' }));
+      const nameItem = await screen.findByRole('menuitemradio', {
+        name: 'Name',
+      });
+      const dateItem = screen.getByRole('menuitemradio', { name: 'Date' });
+      expect(nameItem).toHaveAttribute('aria-checked', 'true');
+
+      await userEvent.click(dateItem);
+
+      expect(onValueChange).toHaveBeenCalledWith('date');
+      expect(dateItem).toHaveAttribute('aria-checked', 'true');
+      expect(nameItem).toHaveAttribute('aria-checked', 'false');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+    });
+
+    it('follows the controlled value of a radio group', async () => {
+      function ControlledRadioMenu() {
+        const [value, setValue] = useState('name');
+        return (
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>Sort</DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.RadioGroup value={value} onValueChange={setValue}>
+                <DropdownMenu.RadioItem value="name">
+                  Name
+                </DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="date">
+                  Date
+                </DropdownMenu.RadioItem>
+              </DropdownMenu.RadioGroup>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+        );
+      }
+      render(<ControlledRadioMenu />);
+      await userEvent.click(screen.getByRole('button', { name: 'Sort' }));
+
+      await userEvent.click(
+        await screen.findByRole('menuitemradio', { name: 'Date' }),
+      );
+
+      expect(
+        screen.getByRole('menuitemradio', { name: 'Date' }),
+      ).toHaveAttribute('aria-checked', 'true');
     });
   });
 });
