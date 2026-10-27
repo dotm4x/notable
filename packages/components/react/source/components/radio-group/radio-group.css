@@ -216,7 +216,9 @@
 }
 
 .notable-radio-group__item[data-disabled] .notable-radio-group__text,
-.notable-radio-group[data-disabled] .notable-radio-group__text {
+.notable-radio-group[data-disabled] .notable-radio-group__text,
+.notable-radio-group__option:has(> .notable-radio-group__input:disabled)
+  .notable-radio-group__text {
   color: var(--notable-color-text-disabled);
 }
 
