@@ -42,12 +42,12 @@ Notable is built around four dimensions:
 
 ## Guidelines
 
-Explore the [design guidelines](./documentation/guidelines/README.md) for the foundations, patterns, principles, and conventions that define Notable.
+Explore the [design guidelines](./docs/guidelines/README.md) for the foundations, patterns, principles, and conventions that define Notable.
 
-- [Foundations](./documentation/guidelines/foundations/README.md)
-- [Components](./documentation/guidelines/components/README.md)
-- [Patterns](./documentation/guidelines/patterns/README.md)
-- [Principles](./documentation/guidelines/principles/README.md)
+- [Foundations](./docs/guidelines/foundations/README.md)
+- [Components](./docs/guidelines/components/README.md)
+- [Patterns](./docs/guidelines/patterns/README.md)
+- [Principles](./docs/guidelines/principles/README.md)
 
 ## Components
 

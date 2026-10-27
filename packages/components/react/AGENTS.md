@@ -2,7 +2,7 @@
 
 This package is the React implementation of Notable, a technology-independent design language for expressive, coherent, accessible, and thoughtfully crafted digital experiences.
 
-Notable's design language is defined in `documentation/guidelines/`. This package translates those guidelines into reusable React components, styles, interaction behavior, and public APIs.
+Notable's design language is defined in `docs/guidelines/`. This package translates those guidelines into reusable React components, styles, interaction behavior, and public APIs.
 
 Follow the root `AGENTS.md` and all applicable instructions. These instructions establish the implementation-specific conventions for this package.
 
@@ -14,7 +14,7 @@ The objectives are to preserve Notable's design intent, deliver an excellent dev
 
 Before implementing or modifying a component:
 
-1. Read the relevant design guidelines under `documentation/guidelines/`.
+1. Read the relevant design guidelines under `docs/guidelines/`.
 2. Inspect the existing component implementation, related components, shared helpers, tokens, tests, and stories.
 3. Check the public exports and package configuration.
 4. Identify existing patterns that should be reused before creating new ones.
@@ -543,7 +543,7 @@ Add tests for underlying primitive behavior when the wrapper changes that behavi
 
 Accessibility is a fundamental requirement, not an optional enhancement.
 
-Every user-facing component must follow the relevant guidelines in `documentation/guidelines/foundations/accessibility.md`, `focus.md`, and any applicable interaction-pattern documentation.
+Every user-facing component must follow the relevant guidelines in `docs/guidelines/foundations/accessibility.md`, `focus.md`, and any applicable interaction-pattern documentation.
 
 ### Semantics and naming
 
@@ -914,7 +914,7 @@ Stories must reflect the actual behavior of the exported component, not a simpli
 
 Motion is part of Notable's design language and must be implemented consistently.
 
-- Follow `documentation/guidelines/foundations/motion.md` and relevant interaction-pattern guidelines.
+- Follow `docs/guidelines/foundations/motion.md` and relevant interaction-pattern guidelines.
 - Reuse the shared motion tokens and helpers.
 - Use CSS transitions and animations for straightforward visual effects.
 - Use the existing `motion` dependency when its capabilities are appropriate.

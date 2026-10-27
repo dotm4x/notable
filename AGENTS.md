@@ -17,7 +17,7 @@ The goal is to make Notable recognizable, adaptable, maintainable, and technical
 ### Design language first
 
 - Treat Notable as a cohesive design language, not merely a collection of components.
-- Use `documentation/guidelines/` as the authoritative source for design principles, foundations, patterns, and component guidance.
+- Use `docs/guidelines/` as the authoritative source for design principles, foundations, patterns, and component guidance.
 - Consult the relevant guidelines before designing, implementing, or changing behavior that affects the user experience.
 - Preserve the distinction between the design language and its individual implementations.
 - Do not define a design decision solely around the limitations, conventions, or capabilities of one implementation.
@@ -66,10 +66,10 @@ The Notable design language is the shared source of truth for product-facing des
 
 The guidelines are organized into distinct areas:
 
-- `documentation/guidelines/principles/` defines the foundational principles of Notable.
-- `documentation/guidelines/foundations/` defines shared design foundations such as colors, typography, spacing, shape, elevation, focus, motion, and accessibility.
-- `documentation/guidelines/patterns/` defines reusable interaction and behavioral patterns.
-- `documentation/guidelines/components/` defines component-level design and behavioral expectations.
+- `docs/guidelines/principles/` defines the foundational principles of Notable.
+- `docs/guidelines/foundations/` defines shared design foundations such as colors, typography, spacing, shape, elevation, focus, motion, and accessibility.
+- `docs/guidelines/patterns/` defines reusable interaction and behavioral patterns.
+- `docs/guidelines/components/` defines component-level design and behavioral expectations.
 
 Use the most relevant documents for the task. Read their indexes and follow references to related guidelines when necessary.
 
@@ -118,7 +118,7 @@ Use the existing repository organization and package manifests to establish the 
 
 Broadly:
 
-- `documentation/guidelines/` defines the design language.
+- `docs/guidelines/` defines the design language.
 - `packages/` contains reusable implementations and their supporting code.
 - `apps/` contains applications used to exercise, demonstrate, or develop the system.
 - Root-level configuration defines shared repository tooling and workspace behavior.
@@ -264,7 +264,7 @@ Avoid both uncontrolled divergence and artificial uniformity.
 
 Accessibility and usability are cross-cutting requirements for every user-facing implementation.
 
-- Follow the applicable accessibility guidelines in `documentation/guidelines/foundations/accessibility.md`.
+- Follow the applicable accessibility guidelines in `docs/guidelines/foundations/accessibility.md`.
 - Consult the focus, motion, and relevant interaction-pattern guidelines when making user-facing changes.
 - Prefer native platform semantics and behavior when appropriate.
 - Ensure interactive experiences can be operated through the relevant supported input methods.
