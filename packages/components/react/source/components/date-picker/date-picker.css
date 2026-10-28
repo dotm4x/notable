@@ -1,0 +1,89 @@
+/* ==========================================================================
+   DatePicker
+   The trigger mirrors the Field box so a date reads like other form inputs.
+   The calendar popup is styled by Popover and the calendar by Calendar.
+   ========================================================================== */
+
+.notable-date-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--notable-spacing-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0 var(--notable-spacing-3);
+  border: var(--notable-border-width) solid var(--notable-color-border-strong);
+  border-radius: var(--notable-radius-lg);
+  background: var(--notable-color-surface);
+  box-shadow: var(--notable-shadow-sm);
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-md);
+  line-height: var(--notable-line-height-normal);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--notable-duration-fast) var(--notable-easing-standard),
+    box-shadow var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-date-picker__trigger:hover {
+  background: var(--notable-color-surface-hover);
+}
+
+.notable-date-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--notable-color-focus);
+  box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
+}
+
+/* Matches the open calendar so the trigger reads as the active control. */
+.notable-date-picker__trigger[aria-expanded='true'] {
+  border-color: var(--notable-color-focus);
+}
+
+.notable-date-picker__trigger[data-readonly] {
+  cursor: default;
+  background: var(--notable-color-surface-sunken);
+}
+
+.notable-date-picker__trigger:disabled {
+  border-color: var(--notable-color-border-disabled);
+  background: var(--notable-color-disabled);
+  color: var(--notable-color-on-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.notable-date-picker__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--notable-color-text-muted);
+}
+
+.notable-date-picker__icon > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.notable-date-picker__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notable-date-picker__value[data-placeholder] {
+  color: var(--notable-color-text-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-date-picker__trigger {
+    transition: none;
+  }
+}

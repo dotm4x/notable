@@ -1,0 +1,257 @@
+/* ==========================================================================
+   Calendar
+   ========================================================================== */
+
+.notable-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--notable-spacing-3);
+  min-width: 0;
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-sm);
+}
+
+/* Header */
+
+.notable-calendar__header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--notable-spacing-2);
+}
+
+.notable-calendar__title-container {
+  min-width: 0;
+  justify-self: center;
+}
+
+.notable-calendar__title {
+  display: inline-block;
+  font-weight: var(--notable-font-weight-semibold);
+  white-space: nowrap;
+}
+
+.notable-calendar__nav-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Icons point in the reading direction, so mirror them in right-to-left text. */
+.notable-calendar:dir(rtl) .notable-calendar__nav-icon {
+  transform: scaleX(-1);
+}
+
+/* Viewport
+   Padding keeps focus rings from being clipped while months slide. */
+
+.notable-calendar__viewport {
+  position: relative;
+  overflow: hidden;
+  padding: var(--notable-spacing-1);
+}
+
+.notable-calendar__month {
+  width: 100%;
+}
+
+/* Grid
+   Fixed layout keeps every column the same width across months. */
+
+.notable-calendar__grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+/* Exiting months must not receive pointer input while they animate out. */
+.notable-calendar__month:not([data-active]) {
+  pointer-events: none;
+}
+
+.notable-calendar__weekday {
+  padding: 0 0 var(--notable-spacing-1);
+  color: var(--notable-color-text-muted);
+  font-size: var(--notable-font-size-xs);
+  font-weight: var(--notable-font-weight-medium);
+  text-align: center;
+}
+
+.notable-calendar__weekday abbr {
+  text-decoration: none;
+  cursor: default;
+}
+
+.notable-calendar__cell {
+  padding: 0;
+  text-align: center;
+}
+
+/* Day
+   Native buttons. Disabled days stay focusable (aria-disabled) so arrow-key
+   navigation can pass over them. */
+
+.notable-calendar__day {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 2.5rem;
+  aspect-ratio: 1;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--notable-radius-full);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color var(--notable-duration-fast) var(--notable-easing-standard),
+    color var(--notable-duration-fast) var(--notable-easing-standard),
+    transform var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+/* Hover is drawn by the shared highlight so it can glide between days. */
+.notable-calendar__day:active {
+  background: var(--notable-color-surface-active);
+  transform: scale(0.94);
+}
+
+.notable-calendar__day:focus-visible {
+  outline: 2px solid var(--notable-color-focus);
+  outline-offset: 1px;
+}
+
+.notable-calendar__day[data-outside] {
+  color: var(--notable-color-text-subtle);
+}
+
+.notable-calendar__day[data-today] {
+  border-color: var(--notable-color-border-strong);
+  font-weight: var(--notable-font-weight-semibold);
+}
+
+.notable-calendar__day[data-selected] {
+  border-color: transparent;
+  background: var(--notable-color-primary);
+  color: var(--notable-color-on-primary);
+}
+
+.notable-calendar__day[data-selected]:hover {
+  background: var(--notable-color-primary);
+  opacity: 0.9;
+}
+
+/* Range band. Each cell draws a pill-height strip behind its day. Endpoints
+   start or stop at the day's center, and the strips at the start and end of
+   each week are rounded on their outer side, so the band reads as one shape
+   that wraps per row. Logical properties keep it correct in RTL. */
+.notable-calendar__cell {
+  position: relative;
+}
+
+.notable-calendar__cell[data-in-range] {
+  --notable-calendar-range-color: color-mix(
+    in srgb,
+    var(--notable-color-primary) 14%,
+    transparent
+  );
+}
+
+.notable-calendar__cell[data-in-range][data-preview] {
+  --notable-calendar-range-color: color-mix(
+    in srgb,
+    var(--notable-color-primary) 7%,
+    transparent
+  );
+}
+
+.notable-calendar__cell::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: 2.5rem;
+  translate: 0 -50%;
+  background: var(--notable-calendar-range-color, transparent);
+  opacity: 0;
+  scale: 0.85 1;
+  pointer-events: none;
+  transition:
+    opacity var(--notable-duration-fast) var(--notable-easing-standard),
+    scale var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-calendar__cell[data-in-range]::before {
+  opacity: 1;
+  scale: 1 1;
+}
+
+.notable-calendar__cell[data-range-start]::before {
+  inset-inline-start: 50%;
+}
+
+.notable-calendar__cell[data-range-end]::before {
+  inset-inline-end: 50%;
+}
+
+.notable-calendar__cell[data-range-start][data-range-end]::before {
+  opacity: 0;
+}
+
+tr > .notable-calendar__cell:first-child[data-in-range]::before {
+  border-start-start-radius: var(--notable-radius-full);
+  border-end-start-radius: var(--notable-radius-full);
+}
+
+tr > .notable-calendar__cell:last-child[data-in-range]::before {
+  border-start-end-radius: var(--notable-radius-full);
+  border-end-end-radius: var(--notable-radius-full);
+}
+
+/* Preview endpoints are dimmed so the range looks provisional until committed. */
+.notable-calendar__day[data-selected][data-preview] {
+  opacity: 0.6;
+}
+
+/* Disabled dates use strikethrough and dimmed text, so the state does not rely on color alone. */
+.notable-calendar__day[aria-disabled='true'] {
+  color: var(--notable-color-text-disabled);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.notable-calendar__day[aria-disabled='true']:hover,
+.notable-calendar__day[aria-disabled='true']:active {
+  background: transparent;
+  transform: none;
+}
+
+/* Dim only the days so headers and the title keep their contrast. */
+.notable-calendar--disabled .notable-calendar__day {
+  opacity: 0.6;
+}
+
+.notable-calendar__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-calendar__day,
+  .notable-calendar__cell::before {
+    transition: none;
+  }
+}

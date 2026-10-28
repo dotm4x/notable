@@ -154,13 +154,14 @@ describe('AnimatedHighlight', () => {
 
     // Assert
     await waitFor(() => {
-      expect(readHighlight(highlight)).toMatchObject({
+      const style = readHighlight(highlight);
+      expect(style).toMatchObject({
         width: '140px',
         height: '48px',
         opacity: '1',
       });
+      expect(style.transform).toContain('60px');
     });
-    expect(readHighlight(highlight).transform).toContain('60px');
   });
 
   it('never targets disabled items', async () => {
