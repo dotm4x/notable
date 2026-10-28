@@ -132,16 +132,3 @@ function ListFooterExample() {
 export const InListFooter: Story = {
   render: () => <ListFooterExample />,
 };
-
-export const RightToLeft: Story = {
-  args: {
-    page: 6,
-    pageCount: 20,
-    showFirstLast: true,
-  },
-  render: (args) => (
-    <div dir="rtl">
-      <ControlledPagination {...args} />
-    </div>
-  ),
-};

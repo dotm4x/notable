@@ -37,11 +37,6 @@
   height: 1rem;
 }
 
-/* Icons point in the reading direction, so mirror them in right-to-left text. */
-.notable-calendar:dir(rtl) .notable-calendar__nav-icon {
-  transform: scaleX(-1);
-}
-
 /* Viewport
    Padding keeps focus rings from being clipped while months slide. */
 
@@ -149,7 +144,7 @@
 /* Range band. Each cell draws a pill-height strip behind its day. Endpoints
    start or stop at the day's center, and the strips at the start and end of
    each week are rounded on their outer side, so the band reads as one shape
-   that wraps per row. Logical properties keep it correct in RTL. */
+   that wraps per row. */
 .notable-calendar__cell {
   position: relative;
 }

@@ -630,18 +630,15 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       event: KeyboardEvent<HTMLButtonElement>,
       date: Date,
     ) => {
-      const isRightToLeft =
-        getComputedStyle(event.currentTarget).direction === 'rtl';
-      const horizontalStep = isRightToLeft ? -1 : 1;
       const weekOffset = getWeekOffset(date, weekStartsOn);
       let target: Date;
 
       switch (event.key) {
         case 'ArrowLeft':
-          target = addDays(date, -horizontalStep);
+          target = addDays(date, -1);
           break;
         case 'ArrowRight':
-          target = addDays(date, horizontalStep);
+          target = addDays(date, 1);
           break;
         case 'ArrowUp':
           target = addDays(date, -DAYS_PER_WEEK);

@@ -123,10 +123,6 @@
   height: 1rem;
 }
 
-.notable-pagination:dir(rtl) .notable-pagination__icon {
-  transform: scaleX(-1);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .notable-pagination__control,
   .notable-pagination__page {
