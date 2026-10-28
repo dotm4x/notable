@@ -16,6 +16,7 @@ export * from './components/combobox/combobox.js';
 export * from './components/command/command.js';
 export * from './components/context-menu/context-menu.js';
 export * from './components/date-picker/date-picker.js';
+export * from './components/date-range-picker/date-range-picker.js';
 export * from './components/dialog/dialog.js';
 export * from './components/drawer/drawer.js';
 export * from './components/dropdown-menu/dropdown-menu.js';

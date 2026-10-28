@@ -1,0 +1,147 @@
+/* ==========================================================================
+   DateRangePicker
+   The trigger mirrors the DatePicker box so a range reads like other date
+   fields. The calendar popup is styled by Popover and the calendar by Calendar.
+   ========================================================================== */
+
+.notable-date-range-picker {
+  display: flex;
+  align-items: center;
+  gap: var(--notable-spacing-2);
+  width: 100%;
+  min-width: 0;
+}
+
+.notable-date-range-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--notable-spacing-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0 var(--notable-spacing-3);
+  border: var(--notable-border-width) solid var(--notable-color-border-strong);
+  border-radius: var(--notable-radius-lg);
+  background: var(--notable-color-surface);
+  box-shadow: var(--notable-shadow-sm);
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-md);
+  line-height: var(--notable-line-height-normal);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--notable-duration-fast) var(--notable-easing-standard),
+    box-shadow var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-date-range-picker__trigger:hover {
+  background: var(--notable-color-surface-hover);
+}
+
+.notable-date-range-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--notable-color-focus);
+  box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
+}
+
+/* Matches the open calendar so the trigger reads as the active control. */
+.notable-date-range-picker__trigger[aria-expanded='true'] {
+  border-color: var(--notable-color-focus);
+}
+
+.notable-date-range-picker__trigger[data-readonly] {
+  cursor: default;
+  background: var(--notable-color-surface-sunken);
+}
+
+.notable-date-range-picker__trigger:disabled {
+  border-color: var(--notable-color-border-disabled);
+  background: var(--notable-color-disabled);
+  color: var(--notable-color-on-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.notable-date-range-picker__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--notable-color-text-muted);
+}
+
+.notable-date-range-picker__icon > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.notable-date-range-picker__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notable-date-range-picker__value[data-placeholder] {
+  color: var(--notable-color-text-subtle);
+}
+
+.notable-date-range-picker__value {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--notable-font-weight-medium);
+}
+
+.notable-date-range-picker__value[data-placeholder] {
+  font-weight: var(--notable-font-weight-regular);
+}
+
+.notable-date-range-picker__separator {
+  color: var(--notable-color-text-muted);
+}
+
+.notable-date-range-picker__clear {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--notable-radius-lg);
+  background: transparent;
+  color: var(--notable-color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--notable-duration-fast) var(--notable-easing-standard),
+    color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-date-range-picker__clear:hover {
+  background: var(--notable-color-surface-hover);
+  color: var(--notable-color-text);
+}
+
+.notable-date-range-picker__clear:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
+}
+
+.notable-date-range-picker__clear > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-date-range-picker__trigger,
+  .notable-date-range-picker__clear {
+    transition: none;
+  }
+}
