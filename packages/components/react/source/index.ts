@@ -24,6 +24,7 @@ export * from './components/dropdown-menu/dropdown-menu.js';
 export * from './components/footer/footer.js';
 export * from './components/header/header.js';
 export * from './components/field/field.js';
+export * from './components/file-upload/file-upload.js';
 export * from './components/fieldset/fieldset.js';
 export * from './components/form/form.js';
 export * from './components/input/input.js';
