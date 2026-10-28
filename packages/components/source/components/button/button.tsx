@@ -33,23 +33,23 @@ export type ButtonProps = Omit<
   disabled?: boolean;
   /** When true, renders the child element with button styles and interactions instead of a button element. */
   asChild?: boolean;
+  [key: string]: unknown;
 };
 
-const customMotionCache = new WeakMap<
-  object,
+const customMotionCache = new Map<
+  ElementType,
   ReturnType<typeof motion.create>
 >();
 
-function getMotionComponent(type: ElementType) {
+function getMotionComponent(type: ElementType): ElementType {
   if (typeof type === 'string') {
     if (type in motion) {
-      return (motion as Record<string, unknown>)[type];
+      return (motion as unknown as Record<string, ElementType>)[type];
     }
-    return motion.create(type);
   }
   let comp = customMotionCache.get(type);
   if (!comp) {
-    comp = motion.create(type);
+    comp = motion.create(type as Parameters<typeof motion.create>[0]);
     customMotionCache.set(type, comp);
   }
   return comp;
@@ -88,7 +88,7 @@ export function Button({
     const child = Children.only(children) as ReactElement<
       Record<string, unknown>
     >;
-    const MotionComponent = getMotionComponent(child.type);
+    const MotionComponent = getMotionComponent(child.type as ElementType);
     const childProps = child.props;
 
     const mergedClassName = [
@@ -104,11 +104,24 @@ export function Button({
       props as { onClick?: (event: MouseEvent) => void }
     ).onClick;
 
+    const motionAndHtmlProps = { ...props };
+    delete motionAndHtmlProps.variant;
+    delete motionAndHtmlProps.size;
+    delete motionAndHtmlProps.asChild;
+    delete motionAndHtmlProps.disabled;
+    delete motionAndHtmlProps.type;
+    delete motionAndHtmlProps.children;
+    delete motionAndHtmlProps.className;
+
+    const Component = MotionComponent;
+
     return (
-      <MotionComponent
-        {...props}
+      <Component
+        {...motionAndHtmlProps}
         {...childProps}
-        aria-disabled={disabled ? true : childProps['aria-disabled']}
+        aria-disabled={
+          disabled ? true : (childProps['aria-disabled'] as boolean | undefined)
+        }
         className={mergedClassName}
         whileHover={
           isMotionDisabled ? undefined : (whileHover ?? { scale: 1.03 })
@@ -123,7 +136,7 @@ export function Button({
         <span className="notable-button__content">
           {childProps.children as ReactNode}
         </span>
-      </MotionComponent>
+      </Component>
     );
   }
 
