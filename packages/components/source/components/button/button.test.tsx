@@ -117,4 +117,17 @@ describe('Button', () => {
       screen.getByRole('button', { name: 'Continue to checkout' }),
     ).toBeInTheDocument();
   });
+
+  it('supports asChild to render custom elements like links', () => {
+    render(
+      <Button asChild variant="outline">
+        <a href="https://github.com">GitHub</a>
+      </Button>,
+    );
+
+    const link = screen.getByRole('link', { name: 'GitHub' });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', 'https://github.com');
+    expect(link).toHaveClass('notable-button', 'notable-button--outline');
+  });
 });

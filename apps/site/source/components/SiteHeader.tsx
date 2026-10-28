@@ -1,4 +1,4 @@
-import { Header, NavigationMenu } from '@notable/components';
+import { Button, Header, NavigationMenu } from '@notable/components';
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import ThemeToggle from './ThemeToggle';
 
@@ -30,16 +30,17 @@ export default function SiteHeader() {
           </NavigationMenu.List>
         </NavigationMenu>
         <div className="site-nav__actions">
-          <a
-            className="site-nav__github"
-            href="https://github.com/dotm4x/notable"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Notable on GitHub (opens in a new tab)"
-          >
-            <SiGithub aria-hidden="true" size={18} />
-            <span>GitHub</span>
-          </a>
+          <Button variant="ghost" asChild>
+            <a
+              href="https://github.com/dotm4x/notable"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Notable on GitHub (opens in a new tab)"
+            >
+              <SiGithub aria-hidden="true" size={18} />
+              <span>GitHub</span>
+            </a>
+          </Button>
           <ThemeToggle />
         </div>
       </div>

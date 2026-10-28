@@ -1,5 +1,12 @@
 import { motion, useReducedMotion, type HTMLMotionProps } from 'motion/react';
-import type { ReactNode } from 'react';
+import {
+  Children,
+  isValidElement,
+  type ReactNode,
+  type ElementType,
+  type MouseEvent,
+  type ReactElement,
+} from 'react';
 import { SPRING_INTERACTIVE } from '../../styles/motion.js';
 import './button.css';
 
@@ -24,7 +31,29 @@ export type ButtonProps = Omit<
   size?: ButtonSize;
   /** Disables the button and its interaction animations. Defaults to `false`. */
   disabled?: boolean;
+  /** When true, renders the child element with button styles and interactions instead of a button element. */
+  asChild?: boolean;
 };
+
+const customMotionCache = new WeakMap<
+  object,
+  ReturnType<typeof motion.create>
+>();
+
+function getMotionComponent(type: ElementType) {
+  if (typeof type === 'string') {
+    if (type in motion) {
+      return (motion as Record<string, unknown>)[type];
+    }
+    return motion.create(type);
+  }
+  let comp = customMotionCache.get(type);
+  if (!comp) {
+    comp = motion.create(type);
+    customMotionCache.set(type, comp);
+  }
+  return comp;
+}
 
 /**
  * Renders a native button with optional hover and press animations. Respects
@@ -34,6 +63,7 @@ export function Button({
   variant = 'primary',
   size = 'medium',
   disabled = false,
+  asChild = false,
   className,
   children,
   whileHover,
@@ -53,6 +83,49 @@ export function Button({
   ]
     .filter(Boolean)
     .join(' ');
+
+  if (asChild && isValidElement(children)) {
+    const child = Children.only(children) as ReactElement<
+      Record<string, unknown>
+    >;
+    const MotionComponent = getMotionComponent(child.type);
+    const childProps = child.props;
+
+    const mergedClassName = [
+      classes,
+      childProps.className as string | undefined,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    const handleChildClick = childProps.onClick as
+      ((event: MouseEvent) => void) | undefined;
+    const handlePropsClick = (
+      props as { onClick?: (event: MouseEvent) => void }
+    ).onClick;
+
+    return (
+      <MotionComponent
+        {...props}
+        {...childProps}
+        aria-disabled={disabled ? true : childProps['aria-disabled']}
+        className={mergedClassName}
+        whileHover={
+          isMotionDisabled ? undefined : (whileHover ?? { scale: 1.03 })
+        }
+        whileTap={isMotionDisabled ? undefined : (whileTap ?? { scale: 0.97 })}
+        transition={transition ?? SPRING_INTERACTIVE}
+        onClick={(event: MouseEvent) => {
+          handleChildClick?.(event);
+          handlePropsClick?.(event);
+        }}
+      >
+        <span className="notable-button__content">
+          {childProps.children as ReactNode}
+        </span>
+      </MotionComponent>
+    );
+  }
 
   return (
     <motion.button
