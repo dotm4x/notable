@@ -62,7 +62,7 @@ export function AnimatedHighlight({
       apply(radius, bounds?.radius ?? 0);
 
       const targetOpacity = hasTarget ? 1 : 0;
-      if (prefersReducedMotion) {
+      if (instant) {
         opacity.jump(targetOpacity);
       } else {
         animate(opacity, targetOpacity, { duration: DURATION_FAST });
