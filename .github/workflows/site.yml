@@ -1,0 +1,51 @@
+name: Site
+
+on:
+  push:
+    paths:
+      - 'apps/site/**'
+      - 'packages/components/react/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/site.yml'
+  pull_request:
+    paths:
+      - 'apps/site/**'
+      - 'packages/components/react/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/site.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.9.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build components
+        run: pnpm --filter @notable/react build
+
+      - name: Typecheck
+        run: pnpm --filter @notable/site typecheck
