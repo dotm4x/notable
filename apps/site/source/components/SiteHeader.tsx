@@ -30,7 +30,7 @@ export default function SiteHeader() {
           </NavigationMenu.List>
         </NavigationMenu>
         <div className="site-nav__actions">
-          <Button variant="ghost" asChild>
+          <Button variant="ghost" size="icon" asChild>
             <a
               href="https://github.com/dotm4x/notable"
               target="_blank"
@@ -38,7 +38,6 @@ export default function SiteHeader() {
               aria-label="Notable on GitHub (opens in a new tab)"
             >
               <SiGithub aria-hidden="true" size={18} />
-              <span>GitHub</span>
             </a>
           </Button>
           <ThemeToggle />
