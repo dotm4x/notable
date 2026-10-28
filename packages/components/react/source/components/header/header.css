@@ -30,6 +30,11 @@
   transition-timing-function: var(--notable-easing-emphasized-decelerate);
 }
 
+.notable-header--attached {
+  background: transparent;
+  border-block-end-color: transparent;
+}
+
 .notable-header--floating,
 .notable-header--hidden {
   --notable-header-gutter: clamp(

@@ -1,4 +1,10 @@
 ---
+import '@notable/react/styles.css';
+import '../styles/site.css';
+import ExampleBlocks from '../components/ExampleBlocks';
+import LinkButton from '../components/LinkButton';
+import SiteFooter from '../components/SiteFooter';
+import SiteHeader from '../components/SiteHeader';
 ---
 
 <html lang="en">
@@ -6,11 +12,54 @@
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="Thoughtfully designed, accessible React components with a distinctive design language. Build interfaces with cohesive styles, expressive motion, and the freedom to make them your own."
+		/>
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Notable — A design language for expressive interfaces</title>
+		<script is:inline>
+			(() => {
+				let theme = 'dark';
+				try {
+					const stored = localStorage.getItem('notable-theme');
+					if (stored === 'light' || stored === 'dark') {
+						theme = stored;
+					} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+						theme = 'light';
+					}
+				} catch {
+					theme = 'dark';
+				}
+				document.documentElement.dataset.theme = theme;
+			})();
+		</script>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<a class="site-skip-link" href="#main">Skip to content</a>
+		<SiteHeader client:load />
+		<main id="main">
+			<section class="site-hero">
+				<a class="site-pill" href="#blocks">Design language · React components →</a>
+				<h1>A More Expressive Foundation for the Web</h1>
+				<p class="site-lead">
+					Expressive, accessible components with thoughtful details and a cohesive design language. Bring clarity, consistency, and a little playfulness to every interface.
+				</p>
+				<div class="site-actions">
+					<LinkButton client:load label="Get Started" href="/docs/installation" />
+					<LinkButton
+						client:load
+						variant="outline"
+						label="Explore Catalog"
+						href="/docs/catalog"
+					/>
+				</div>
+			</section>
+			<ExampleBlocks client:visible />
+		</main>
+
+		<SiteFooter />
+
 	</body>
 </html>
