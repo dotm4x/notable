@@ -1,4 +1,4 @@
-import { Footer, Link } from '@notable/react';
+import { Footer, Link } from '@notable/components';
 
 export default function SiteFooter() {
   return (

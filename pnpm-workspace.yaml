@@ -1,6 +1,6 @@
 packages:
   - apps/*
-  - packages/components/*
+  - packages/components
 
 allowBuilds:
   esbuild: true

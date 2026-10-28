@@ -1,4 +1,4 @@
-import { Header, NavigationMenu } from '@notable/react';
+import { Header, NavigationMenu } from '@notable/components';
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import ThemeToggle from './ThemeToggle';
 

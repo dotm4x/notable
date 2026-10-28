@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'apps/site/**'
-      - 'packages/components/react/**'
+      - 'packages/components/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
@@ -12,7 +12,7 @@ on:
   pull_request:
     paths:
       - 'apps/site/**'
-      - 'packages/components/react/**'
+      - 'packages/components/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
@@ -45,7 +45,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build components
-        run: pnpm --filter @notable/react build
+        run: pnpm --filter @notable/components build
 
       - name: Typecheck
         run: pnpm --filter @notable/site typecheck

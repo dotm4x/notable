@@ -30,7 +30,7 @@ import {
   Switch,
   Tabs,
   Tooltip,
-} from '@notable/react';
+} from '@notable/components';
 
 function LoginBlock() {
   return (

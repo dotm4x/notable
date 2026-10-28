@@ -1,4 +1,4 @@
-import { Button } from '@notable/react';
+import { Button } from '@notable/components';
 import { Star } from 'lucide-react';
 
 type LinkButtonProps = {

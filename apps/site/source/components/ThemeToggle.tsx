@@ -1,4 +1,4 @@
-import { Button } from '@notable/react';
+import { Button } from '@notable/components';
 import { Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 

@@ -3,14 +3,14 @@ name: React Components
 on:
   push:
     paths:
-      - 'packages/components/react/**'
+      - 'packages/components/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - '.github/workflows/react.yml'
   pull_request:
     paths:
-      - 'packages/components/react/**'
+      - 'packages/components/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
@@ -43,13 +43,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: pnpm --filter @notable/react exec playwright install --with-deps chromium
+        run: pnpm --filter @notable/components exec playwright install --with-deps chromium
 
       - name: Build components
-        run: pnpm --filter @notable/react build
+        run: pnpm --filter @notable/components build
 
       - name: Typecheck
         run: pnpm typecheck
 
       - name: Run tests
-        run: pnpm --filter @notable/react test:all
+        run: pnpm --filter @notable/components test:all

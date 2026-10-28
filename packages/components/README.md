@@ -1,11 +1,26 @@
-# Notable Components
+# @notable/components
 
-Reusable components built around the Notable design language.
+A collection of expressive, thoughtfully crafted React components built around the Notable design language.
 
-Each implementation brings Notable's visual foundations, interaction patterns, and design principles to its target technology.
+## Installation
 
-## Components
+```sh
+npm install @notable/components
+```
 
-### [React](./react/README.md) — `@notable/react`
+React and React DOM 18 or 19 are required as peer dependencies.
 
-A React component library featuring reusable UI components, shared design tokens, animations, and accessible interaction patterns.
+## Usage
+
+```tsx
+import { Button } from '@notable/components';
+import '@notable/components/styles.css';
+
+export function Example() {
+  return <Button>Get started</Button>;
+}
+```
+
+## License
+
+This project is licensed under the MIT License, see the [LICENSE](LICENSE) for more information.

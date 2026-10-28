@@ -205,9 +205,9 @@ importers:
       '@icons-pack/react-simple-icons':
         specifier: ^13.15.1
         version: 13.15.1(react@19.3.1)
-      '@notable/react':
+      '@notable/components':
         specifier: workspace:*
-        version: link:../../packages/components/react
+        version: link:../../packages/components
       '@types/react':
         specifier: ^19.3.0
         version: 19.3.0
@@ -227,7 +227,7 @@ importers:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
 
-  packages/components/react:
+  packages/components:
     dependencies:
       '@base-ui/react':
         specifier: ^1.9.0
