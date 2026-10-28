@@ -1,0 +1,203 @@
+/* ==========================================================================
+   TimePicker
+   The trigger mirrors the Field box so a time reads like other form inputs.
+   The popup uses native radio inputs inside labelled columns. Transitions
+   use the shared motion tokens and are removed for reduced motion.
+   ========================================================================== */
+
+.notable-time-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--notable-spacing-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0 var(--notable-spacing-3);
+  border: var(--notable-border-width) solid var(--notable-color-border-strong);
+  border-radius: var(--notable-radius-lg);
+  background: var(--notable-color-surface);
+  box-shadow: var(--notable-shadow-sm);
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-md);
+  line-height: var(--notable-line-height-normal);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--notable-duration-fast) var(--notable-easing-standard),
+    box-shadow var(--notable-duration-fast) var(--notable-easing-standard),
+    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+}
+
+.notable-time-picker__trigger:hover {
+  background: var(--notable-color-surface-hover);
+}
+
+.notable-time-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--notable-color-focus);
+  box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
+}
+
+/* Matches the open popup so the trigger reads as the active control. */
+.notable-time-picker__trigger[aria-expanded='true'] {
+  border-color: var(--notable-color-focus);
+}
+
+.notable-time-picker__trigger[data-readonly] {
+  cursor: default;
+  background: var(--notable-color-surface-sunken);
+}
+
+.notable-time-picker__trigger:disabled {
+  border-color: var(--notable-color-border-disabled);
+  background: var(--notable-color-disabled);
+  color: var(--notable-color-on-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.notable-time-picker__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--notable-color-text-muted);
+}
+
+.notable-time-picker__icon > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.notable-time-picker__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--notable-font-weight-medium);
+}
+
+.notable-time-picker__value[data-placeholder] {
+  color: var(--notable-color-text-subtle);
+  font-weight: var(--notable-font-weight-regular);
+}
+
+/*
+ * The shared popover is a fixed 20rem wide, which leaves empty space when the
+ * columns are narrower (24-hour) and crowds them when wider (12-hour). Size the
+ * popup to its columns, and keep the panel as the only inset to avoid double
+ * padding.
+ */
+.notable-popover.notable-time-picker__popup {
+  width: max-content;
+  max-width: calc(100vw - var(--notable-spacing-8));
+  padding: 0;
+}
+
+.notable-time-picker__panel {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  padding: var(--notable-spacing-2);
+}
+
+/* Columns share one surface and are separated by hairlines, not separate boxes. */
+.notable-time-picker__column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 0 var(--notable-spacing-2);
+  border: 0;
+}
+
+.notable-time-picker__column + .notable-time-picker__column {
+  border-inline-start: var(--notable-border-width) solid
+    var(--notable-color-border-subtle);
+}
+
+.notable-time-picker__legend {
+  padding: 0 0 var(--notable-spacing-2);
+  color: var(--notable-color-text-subtle);
+  font-size: var(--notable-font-size-xs);
+  font-weight: var(--notable-font-weight-semibold);
+  text-align: center;
+}
+
+.notable-time-picker__list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--notable-spacing-0);
+  max-height: 14rem;
+  overflow-y: auto;
+  padding: var(--notable-spacing-0);
+}
+
+.notable-time-picker__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  min-height: 2.25rem;
+  padding: 0 var(--notable-spacing-3);
+  border-radius: var(--notable-radius-md);
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-md);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+/* Hover is drawn by the shared highlight so it can glide between options. */
+.notable-time-picker__option[data-selected] {
+  color: var(--notable-color-primary);
+  font-weight: var(--notable-font-weight-semibold);
+}
+
+.notable-time-picker__option[data-selected]::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  width: 3px;
+  height: 1.25rem;
+  border-radius: var(--notable-radius-full);
+  background: var(--notable-color-primary);
+  transform: translateY(-50%);
+}
+
+.notable-time-picker__option:has(.notable-time-picker__input:focus-visible) {
+  box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
+}
+
+.notable-time-picker__option[data-disabled] {
+  color: var(--notable-color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Visually hidden but still focusable and announced as radio buttons. */
+.notable-time-picker__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notable-time-picker__trigger,
+  .notable-time-picker__option {
+    transition: none;
+  }
+}
