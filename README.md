@@ -1,8 +1,8 @@
 # Notable
 
-**Expressive, accessible components with thoughtful details and a cohesive design language. Bring clarity, consistency, and a little playfulness to every interface.**
+**Expressive, accessible components with thoughtful details and a cohesive design language.**
 
-Notable is a React UI component library built around a cohesive, expressive design language. It brings together thoughtful visual foundations, design principles, interaction patterns, and production-ready React components.
+Notable is a component library built for React, designed around a cohesive and expressive design language. It brings together thoughtful visual foundations, design principles, interaction patterns, and production-ready components.
 
 Notable balances personality with precision, combining expressive visuals, purposeful motion, and robust accessibility to create experiences that feel natural and consistent.
 
@@ -26,7 +26,7 @@ Notable aims to make everyday interactions clearer, more natural, and more expre
 Notable is built around four dimensions:
 
 - **Foundations** — Color, typography, spacing, shape, elevation, focus, and motion.
-- **Components** — Accessible React components with consistent visuals and behavior.
+- **Components** — Accessible components built for React, with consistent visuals and behavior.
 - **Patterns** — Shared approaches to interaction, selection, loading, and interface states.
 - **Principles** — The ideas that guide design decisions and preserve the system's identity.
 
@@ -47,7 +47,7 @@ Explore the [design guidelines](./docs/guidelines/README.md) for the foundations
 
 ## Components
 
-Notable's React component library is located in [`packages/components`](./packages/components).
+The component library is located in [`packages/components`](./packages/components).
 
 ## License
 

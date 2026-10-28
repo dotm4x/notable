@@ -1,6 +1,6 @@
 # @notable/components
 
-A collection of expressive, thoughtfully crafted React components built around the Notable design language.
+A collection of expressive, thoughtfully crafted components built for React around the Notable design language.
 
 ## Installation
 
