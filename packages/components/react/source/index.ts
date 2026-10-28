@@ -28,6 +28,7 @@ export * from './components/form/form.js';
 export * from './components/input/input.js';
 export * from './components/navigation-menu/navigation-menu.js';
 export * from './components/number-flow/number-flow.js';
+export * from './components/pagination/pagination.js';
 export * from './components/shortcut/shortcut.js';
 export * from './components/popover/popover.js';
 export * from './components/progress/progress.js';
