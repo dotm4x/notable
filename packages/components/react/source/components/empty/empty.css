@@ -1,0 +1,95 @@
+.notable-empty {
+  --notable-empty-padding: var(--notable-spacing-8);
+  --notable-empty-gap: var(--notable-spacing-5);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--notable-empty-gap);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--notable-empty-padding);
+  color: var(--notable-color-text);
+  font-family: var(--notable-font-family);
+  text-align: center;
+}
+
+.notable-empty--variant-outline {
+  border: var(--notable-border-width) solid var(--notable-color-border-subtle);
+  border-radius: var(--notable-radius-lg);
+}
+
+.notable-empty--variant-surface {
+  border-radius: var(--notable-radius-lg);
+  background-color: var(--notable-color-surface-sunken);
+}
+
+.notable-empty--size-compact {
+  --notable-empty-padding: var(--notable-spacing-4);
+  --notable-empty-gap: var(--notable-spacing-3);
+}
+
+.notable-empty--size-spacious {
+  --notable-empty-padding: var(--notable-spacing-16);
+  --notable-empty-gap: var(--notable-spacing-6);
+}
+
+.notable-empty__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--notable-spacing-2);
+  max-width: 100%;
+}
+
+.notable-empty__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.notable-empty__media--variant-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  box-sizing: border-box;
+  border: var(--notable-border-width) solid var(--notable-color-border-subtle);
+  border-radius: var(--notable-radius-md);
+  background-color: var(--notable-color-surface-raised);
+  color: var(--notable-color-text-muted);
+}
+
+.notable-empty__media--variant-icon > svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.notable-empty__title {
+  margin: 0;
+  color: var(--notable-color-text);
+  font-size: var(--notable-font-size-lg);
+  font-weight: var(--notable-font-weight-semibold);
+  line-height: var(--notable-line-height-tight);
+  text-wrap: balance;
+}
+
+.notable-empty__description {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--notable-color-text-muted);
+  font-size: var(--notable-font-size-sm);
+  line-height: var(--notable-line-height-relaxed);
+  text-wrap: balance;
+}
+
+.notable-empty__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--notable-spacing-2);
+  max-width: 100%;
+}
