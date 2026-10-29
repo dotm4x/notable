@@ -45,6 +45,10 @@ Explore the [design guidelines](./docs/guidelines/README.md) for the foundations
 - [Patterns](./docs/guidelines/patterns/README.md)
 - [Principles](./docs/guidelines/principles/README.md)
 
+## Preview
+
+![Notable preview](./assets/preview.png)
+
 ## Components
 
 The component library is located in [`packages/components`](./packages/components).
