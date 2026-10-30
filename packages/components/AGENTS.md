@@ -138,6 +138,14 @@ Rules:
 
 Implement namespace exports using an approach compatible with React, TypeScript, tree-shaking, and the existing build configuration.
 
+### Compound component typing and JSDoc documentation
+
+When implementing compound components using `Object.assign`:
+
+- Define an explicit compound component interface (e.g., `AvatarComponent`) extending `React.FC<Props>` or `React.ForwardRefExoticComponent<...>`.
+- Document all public subcomponents (e.g., `Avatar.Fallback`, `Dialog.Content`) **exclusively on the properties of the compound component interface**, rather than on individual subcomponent functions.
+- Do not add JSDoc comments to internal helper functions or subcomponent function declarations.
+
 ---
 
 ## 3. Repository Structure
