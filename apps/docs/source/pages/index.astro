@@ -1,0 +1,85 @@
+---
+import '@notable/components/styles.css';
+import '../styles/docs.css';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="Documentation for Notable — Expressive, accessible components and design language."
+		/>
+		<meta name="generator" content={Astro.generator} />
+		<title>Documentation — Notable</title>
+		<script is:inline>
+			(() => {
+				let theme = 'dark';
+				try {
+					const stored = localStorage.getItem('notable-theme');
+					if (stored === 'light' || stored === 'dark') {
+						theme = stored;
+					} else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+						theme = 'light';
+					}
+				} catch {
+					theme = 'dark';
+				}
+				document.documentElement.dataset.theme = theme;
+			})();
+		</script>
+	</head>
+	<body>
+		<a class="docs-skip-link" href="#main">Skip to content</a>
+		<header class="docs-header">
+			<nav class="docs-nav">
+				<a href="/" class="docs-brand">Notable <span>Docs</span></a>
+				<div style="display: flex; gap: 1rem; align-items: center;">
+					<a href="https://github.com/dotm4x/notable" target="_blank" rel="noreferrer" style="font-size: 0.875rem; text-decoration: none; color: var(--notable-color-text-muted);">GitHub</a>
+				</div>
+			</nav>
+		</header>
+
+		<div class="docs-container">
+			<aside class="docs-sidebar">
+				<h3>Getting Started</h3>
+				<ul>
+					<li><a href="#introduction" class="active">Introduction</a></li>
+					<li><a href="#installation">Installation</a></li>
+					<li><a href="#design-system">Design System</a></li>
+				</ul>
+				<h3>Foundations</h3>
+				<ul>
+					<li><a href="#colors">Colors & Tokens</a></li>
+					<li><a href="#typography">Typography</a></li>
+					<li><a href="#accessibility">Accessibility</a></li>
+				</ul>
+			</aside>
+
+			<main id="main" class="docs-main">
+				<h id="introduction">Introduction</h>
+				<p>
+					Notable is a design language for creating expressive, coherent, accessible, and thoughtfully crafted digital experiences across multiple implementations.
+				</p>
+
+				<div class="docs-card">
+					<h3>Design Language First</h3>
+					<p>Treat Notable as a cohesive design language, not merely a collection of components. Follow guidelines for foundations, patterns, and component expectations.</p>
+				</div>
+
+				<div class="docs-card">
+					<h3>Modular Architecture</h3>
+					<p>Every module, package, and implementation has a clear responsibility with explicit contracts and minimal unnecessary dependencies.</p>
+				</div>
+
+				<h2 id="installation" style="margin-top: 3rem;">Installation</h2>
+				<p>
+					Add `@notable/components` to your project and import the core stylesheet to get started with tokens and design foundations.
+				</p>
+			</main>
+		</div>
+	</body>
+</html>
