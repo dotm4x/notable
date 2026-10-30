@@ -3,3 +3,6 @@
 **/storybook-static/**
 pnpm-lock.yaml
 .agents
+**/.next/**
+**/.astro/**
+
