@@ -467,6 +467,8 @@ Prefer a single-line message. Add a body only when important reasoning, constrai
 
 Do not repeat the subject, summarize every modified file, or add generic introductory text.
 
+Do not leave blank lines in commit messages. Never include "Co-authored-by" trailers or co-author attribution signatures.
+
 ### Final Output
 
 When generating a commit message, output only the proposed message. Do not include explanations, quotation marks, emojis, Markdown formatting, or multiple alternatives unless explicitly requested.
