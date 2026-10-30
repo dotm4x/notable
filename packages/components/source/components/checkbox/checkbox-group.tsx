@@ -152,7 +152,17 @@ const CheckboxGroupItem = forwardRef<HTMLInputElement, CheckboxGroupItemProps>(
   },
 );
 
+export interface CheckboxGroupComponent extends React.ForwardRefExoticComponent<
+  CheckboxGroupProps & React.RefAttributes<HTMLFieldSetElement>
+> {
+  /** Renders an individual checkbox option within the group. */
+  Item: typeof CheckboxGroupItem;
+}
+
 /** Compound checkbox group: `CheckboxGroup` is the root and `CheckboxGroup.Item` its options. */
-export const CheckboxGroup = Object.assign(CheckboxGroupRoot, {
-  Item: CheckboxGroupItem,
-});
+export const CheckboxGroup: CheckboxGroupComponent = Object.assign(
+  CheckboxGroupRoot,
+  {
+    Item: CheckboxGroupItem,
+  },
+);

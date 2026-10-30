@@ -77,7 +77,6 @@ const CardRoot = forwardRef<HTMLElement, CardProps>(function Card(
   );
 });
 
-/** Renders the header region of a card. */
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   function CardHeader({ children, className, ...props }, ref) {
     const classes = ['notable-card__header', className]
@@ -92,7 +91,6 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   },
 );
 
-/** Renders the title of a card. Defaults to an `h3` heading. */
 const CardTitle = forwardRef<HTMLElement, CardTitleProps>(function CardTitle(
   { as: Element = 'h3', children, className, ...props },
   ref,
@@ -107,7 +105,6 @@ const CardTitle = forwardRef<HTMLElement, CardTitleProps>(function CardTitle(
   );
 });
 
-/** Renders the muted description text of a card. */
 const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
   function CardDescription(
     { as: Element = 'p', children, className, ...props },
@@ -126,7 +123,6 @@ const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
   },
 );
 
-/** Renders the main content region of a card. */
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   function CardContent({ children, className, ...props }, ref) {
     const classes = ['notable-card__content', className]
@@ -141,7 +137,6 @@ const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   },
 );
 
-/** Renders the footer region of a card, typically for actions. */
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   function CardFooter({ children, className, ...props }, ref) {
     const classes = ['notable-card__footer', className]
@@ -156,12 +151,27 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   },
 );
 
+export interface CardComponent extends React.ForwardRefExoticComponent<
+  CardProps & React.RefAttributes<HTMLElement>
+> {
+  /** Renders the header region of a card. */
+  Header: typeof CardHeader;
+  /** Renders the title of a card. Defaults to an `h3` heading. */
+  Title: typeof CardTitle;
+  /** Renders the muted description text of a card. */
+  Description: typeof CardDescription;
+  /** Renders the main content region of a card. */
+  Content: typeof CardContent;
+  /** Renders the footer region of a card, typically for actions. */
+  Footer: typeof CardFooter;
+}
+
 /**
  * Renders a non-interactive surface that groups related content. Compose it
  * with `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, and
  * `Card.Footer`.
  */
-export const Card = Object.assign(CardRoot, {
+export const Card: CardComponent = Object.assign(CardRoot, {
   Header: CardHeader,
   Title: CardTitle,
   Description: CardDescription,

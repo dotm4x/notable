@@ -113,10 +113,6 @@ function AvatarRoot({
   );
 }
 
-/**
- * Shows the avatar image after it loads and accepts native image attributes.
- * Renders no image when both `src` and `srcSet` are omitted.
- */
 function AvatarImage({
   alt,
   className,
@@ -160,7 +156,6 @@ function AvatarImage({
   );
 }
 
-/** Shows fallback content until the current image has loaded. */
 function AvatarFallback({
   children,
   className,
@@ -181,11 +176,21 @@ function AvatarFallback({
   );
 }
 
+export interface AvatarComponent extends React.FC<AvatarProps> {
+  /**
+   * Shows the avatar image after it loads and accepts native image attributes.
+   * Renders no image when both `src` and `srcSet` are omitted.
+   */
+  Image: typeof AvatarImage;
+  /** Shows fallback content until the current image has loaded. */
+  Fallback: typeof AvatarFallback;
+}
+
 /**
  * Compound avatar component. Compose `Avatar.Image` and `Avatar.Fallback` as
  * children of the root component.
  */
-export const Avatar = Object.assign(AvatarRoot, {
+export const Avatar: AvatarComponent = Object.assign(AvatarRoot, {
   Image: AvatarImage,
   Fallback: AvatarFallback,
 });

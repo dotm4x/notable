@@ -307,7 +307,26 @@ function PaginationItems({ className, ...props }: TPaginationItemsProps) {
   );
 }
 
-export const Pagination = Object.assign(PaginationRoot, {
+export interface PaginationComponent extends React.ForwardRefExoticComponent<
+  TPaginationProps & React.RefAttributes<HTMLElement>
+> {
+  /** Renders the button that jumps directly to the first page. */
+  First: typeof PaginationFirst;
+  /** Renders the button that moves to the previous page. */
+  Previous: typeof PaginationPrevious;
+  /**
+   * The numbered pages around the current page, with ellipses for omitted
+   * pages. The current page is marked with `aria-current` and tracked by a
+   * single animated indicator.
+   */
+  Items: typeof PaginationItems;
+  /** Renders the button that moves to the next page. */
+  Next: typeof PaginationNext;
+  /** Renders the button that jumps directly to the last page. */
+  Last: typeof PaginationLast;
+}
+
+export const Pagination: PaginationComponent = Object.assign(PaginationRoot, {
   First: PaginationFirst,
   Previous: PaginationPrevious,
   Items: PaginationItems,

@@ -79,10 +79,6 @@ function BreadcrumbItem({ href, current, children }: BreadcrumbItemProps) {
   );
 }
 
-/**
- * A menu item that navigates. Rendering the item as the anchor keeps the
- * menu's keyboard handling on a real link.
- */
 function BreadcrumbMenuLink({
   href,
   children,
@@ -252,6 +248,15 @@ const BreadcrumbRoot = forwardRef<HTMLElement, BreadcrumbProps>(
   },
 );
 
+export interface BreadcrumbComponent extends React.ForwardRefExoticComponent<
+  BreadcrumbProps & React.RefAttributes<HTMLElement>
+> {
+  /** A single entry in the breadcrumb trail. Renders as a link or text. */
+  Item: typeof BreadcrumbItem;
+  /** A dropdown menu entry that expands to list hidden or nested items. */
+  Dropdown: typeof BreadcrumbDropdown;
+}
+
 /**
  * Shows the location of the current page as an ordered trail from the root.
  * A plain trail needs only `Breadcrumb.Item`. Enable `maxVisibleItems` to
@@ -259,7 +264,7 @@ const BreadcrumbRoot = forwardRef<HTMLElement, BreadcrumbProps>(
  * destinations for a level. Both features are optional and independent.
  * Forwards refs to the navigation element.
  */
-export const Breadcrumb = Object.assign(BreadcrumbRoot, {
+export const Breadcrumb: BreadcrumbComponent = Object.assign(BreadcrumbRoot, {
   Item: BreadcrumbItem,
   Dropdown: BreadcrumbDropdown,
 });

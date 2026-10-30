@@ -166,12 +166,30 @@ const EmptyContent = forwardRef<HTMLDivElement, TEmptyContentProps>(
   },
 );
 
+export interface EmptyComponent extends React.ForwardRefExoticComponent<
+  TEmptyRootProps & React.RefAttributes<HTMLDivElement>
+> {
+  /** Renders the region that groups media, title, and description. */
+  Header: typeof EmptyHeader;
+  /**
+   * Renders the visual anchor of an empty state, such as an icon or
+   * illustration.
+   */
+  Media: typeof EmptyMedia;
+  /** Renders the title of an empty state. Defaults to an `h3` heading. */
+  Title: typeof EmptyTitle;
+  /** Renders the muted description of an empty state. */
+  Description: typeof EmptyDescription;
+  /** Renders the actions and supplementary content of an empty state. */
+  Content: typeof EmptyContent;
+}
+
 /**
  * Renders a placeholder for a region without content. Compose it with
  * `Empty.Header`, `Empty.Media`, `Empty.Title`, `Empty.Description`, and
  * `Empty.Content`.
  */
-export const Empty = Object.assign(EmptyRoot, {
+export const Empty: EmptyComponent = Object.assign(EmptyRoot, {
   Header: EmptyHeader,
   Media: EmptyMedia,
   Title: EmptyTitle,

@@ -64,7 +64,6 @@ const FooterRoot = forwardRef<HTMLElement, FooterProps>(function Footer(
   );
 });
 
-/** Renders the grid that holds the brand and navigation sections. */
 const FooterContent = forwardRef<HTMLDivElement, FooterContentProps>(
   function FooterContent({ children, className, ...props }, ref) {
     const classes = ['notable-footer__content', className]
@@ -79,7 +78,6 @@ const FooterContent = forwardRef<HTMLDivElement, FooterContentProps>(
   },
 );
 
-/** Renders the brand region, which spans the full width of the footer. */
 const FooterBrand = forwardRef<HTMLDivElement, FooterBrandProps>(
   function FooterBrand({ children, className, ...props }, ref) {
     const classes = ['notable-footer__brand', className]
@@ -94,7 +92,6 @@ const FooterBrand = forwardRef<HTMLDivElement, FooterBrandProps>(
   },
 );
 
-/** Renders a navigation group. Place a `Footer.Heading` and links inside. */
 const FooterSection = forwardRef<HTMLDivElement, FooterSectionProps>(
   function FooterSection({ children, className, ...props }, ref) {
     const classes = ['notable-footer__section', className]
@@ -109,7 +106,6 @@ const FooterSection = forwardRef<HTMLDivElement, FooterSectionProps>(
   },
 );
 
-/** Renders the title of a footer section. Defaults to an `h2` heading. */
 const FooterHeading = forwardRef<HTMLElement, FooterHeadingProps>(
   function FooterHeading(
     { as: Element = 'h2', children, className, ...props },
@@ -128,7 +124,6 @@ const FooterHeading = forwardRef<HTMLElement, FooterHeadingProps>(
   },
 );
 
-/** Renders the closing row, such as copyright text and legal links. */
 const FooterBottom = forwardRef<HTMLDivElement, FooterBottomProps>(
   function FooterBottom({ children, className, ...props }, ref) {
     const classes = ['notable-footer__bottom', className]
@@ -143,12 +138,27 @@ const FooterBottom = forwardRef<HTMLDivElement, FooterBottomProps>(
   },
 );
 
+export interface FooterComponent extends React.ForwardRefExoticComponent<
+  FooterProps & React.RefAttributes<HTMLElement>
+> {
+  /** Renders the grid holding brand and navigation sections. */
+  Content: typeof FooterContent;
+  /** Renders the brand region spanning the full width of the footer. */
+  Brand: typeof FooterBrand;
+  /** Renders a navigation group section. */
+  Section: typeof FooterSection;
+  /** Renders the title of a footer section. */
+  Heading: typeof FooterHeading;
+  /** Renders the closing row (copyright, legal links). */
+  Bottom: typeof FooterBottom;
+}
+
 /**
  * Renders a page footer. Layout and content come entirely from children, so
  * no brand, links, or column count are assumed. Use `Link` for links inside
  * the footer.
  */
-export const Footer = Object.assign(FooterRoot, {
+export const Footer: FooterComponent = Object.assign(FooterRoot, {
   Content: FooterContent,
   Brand: FooterBrand,
   Section: FooterSection,

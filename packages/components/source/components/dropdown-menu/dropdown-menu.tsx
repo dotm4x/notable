@@ -191,7 +191,6 @@ const DropdownMenuContent = forwardRef<
   );
 });
 
-/** A selectable action in the menu. */
 const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
   function DropdownMenuItem({ className, ...props }, ref) {
     return <MenuItem ref={ref} className={className} {...props} />;
@@ -204,7 +203,6 @@ const DropdownMenuGroup = forwardRef<HTMLDivElement, DropdownMenuGroupProps>(
   },
 );
 
-/** A menu item that toggles a checked state. */
 const DropdownMenuCheckboxItem = forwardRef<
   HTMLDivElement,
   DropdownMenuCheckboxItemProps
@@ -218,7 +216,6 @@ const DropdownMenuCheckboxItem = forwardRef<
   );
 });
 
-/** Groups radio items so that exactly one is selected. */
 const DropdownMenuRadioGroup = forwardRef<
   HTMLDivElement,
   DropdownMenuRadioGroupProps
@@ -232,7 +229,6 @@ const DropdownMenuRadioGroup = forwardRef<
   );
 });
 
-/** A menu item within a `DropdownMenu.RadioGroup`. */
 const DropdownMenuRadioItem = forwardRef<
   HTMLDivElement,
   DropdownMenuRadioItemProps
@@ -278,6 +274,32 @@ const DropdownMenuSubmenuTrigger = forwardRef<
   return <MenuSubmenuTrigger ref={ref} {...props} />;
 });
 
+export interface DropdownMenuComponent extends React.FC<DropdownMenuProps> {
+  Root: typeof DropdownMenuRoot;
+  /** Renders the trigger element that opens the dropdown menu. */
+  Trigger: typeof DropdownMenuTrigger;
+  /** Renders the menu popup container. */
+  Content: typeof DropdownMenuContent;
+  /** Renders a selectable menu item. */
+  Item: typeof DropdownMenuItem;
+  /** Renders a menu item that toggles a checked state. */
+  CheckboxItem: typeof DropdownMenuCheckboxItem;
+  /** Groups radio menu items so that exactly one is selected. */
+  RadioGroup: typeof DropdownMenuRadioGroup;
+  /** Renders a radio menu item within a radio group. */
+  RadioItem: typeof DropdownMenuRadioItem;
+  /** Groups related menu items. */
+  Group: typeof DropdownMenuGroup;
+  /** Renders the label of a menu group. */
+  GroupLabel: typeof DropdownMenuGroupLabel;
+  /** Renders a line separator between menu items or groups. */
+  Separator: typeof DropdownMenuSeparator;
+  /** Renders a nested submenu. */
+  Submenu: typeof DropdownMenuSubmenu;
+  /** Renders the trigger for a nested submenu. */
+  SubmenuTrigger: typeof DropdownMenuSubmenuTrigger;
+}
+
 /**
  * Action menu opened from a trigger. Compose it with `DropdownMenu.Trigger`,
  * `DropdownMenu.Content`, `DropdownMenu.Item`, and the optional group,
@@ -286,17 +308,20 @@ const DropdownMenuSubmenuTrigger = forwardRef<
  * inline end by default and flip to the other side when there is no room.
  * Forwards refs to the DOM element each part renders.
  */
-export const DropdownMenu = Object.assign(DropdownMenuRoot, {
-  Root: DropdownMenuRoot,
-  Trigger: DropdownMenuTrigger,
-  Content: DropdownMenuContent,
-  Item: DropdownMenuItem,
-  CheckboxItem: DropdownMenuCheckboxItem,
-  RadioGroup: DropdownMenuRadioGroup,
-  RadioItem: DropdownMenuRadioItem,
-  Group: DropdownMenuGroup,
-  GroupLabel: DropdownMenuGroupLabel,
-  Separator: DropdownMenuSeparator,
-  Submenu: DropdownMenuSubmenu,
-  SubmenuTrigger: DropdownMenuSubmenuTrigger,
-});
+export const DropdownMenu: DropdownMenuComponent = Object.assign(
+  DropdownMenuRoot,
+  {
+    Root: DropdownMenuRoot,
+    Trigger: DropdownMenuTrigger,
+    Content: DropdownMenuContent,
+    Item: DropdownMenuItem,
+    CheckboxItem: DropdownMenuCheckboxItem,
+    RadioGroup: DropdownMenuRadioGroup,
+    RadioItem: DropdownMenuRadioItem,
+    Group: DropdownMenuGroup,
+    GroupLabel: DropdownMenuGroupLabel,
+    Separator: DropdownMenuSeparator,
+    Submenu: DropdownMenuSubmenu,
+    SubmenuTrigger: DropdownMenuSubmenuTrigger,
+  },
+);

@@ -481,7 +481,6 @@ function DrawerDescription({ className, ...props }: DrawerDescriptionProps) {
   );
 }
 
-/** Lays out action buttons at the bottom of the drawer. Stays pinned while the body scrolls. */
 function DrawerFooter({ className, ...props }: DrawerFooterProps) {
   return (
     <div
@@ -493,10 +492,6 @@ function DrawerFooter({ className, ...props }: DrawerFooterProps) {
   );
 }
 
-/**
- * Closes the drawer when activated. Renders an outline `Button` by default and
- * always uses `type="button"`, so it never submits a surrounding form.
- */
 function DrawerClose({ onClick, ...props }: DrawerCloseProps) {
   useDrawerContext('Drawer.Close');
 
@@ -514,12 +509,29 @@ function DrawerClose({ onClick, ...props }: DrawerCloseProps) {
   );
 }
 
+export interface DrawerComponent extends React.FC<DrawerProps> {
+  /** Renders the trigger element that opens the drawer. */
+  Trigger: typeof DrawerTrigger;
+  /** Renders the modal drawer surface and backdrop. */
+  Content: typeof DrawerContent;
+  /** Lays out header content at the top of the drawer. */
+  Header: typeof DrawerHeader;
+  /** Renders the drawer title. */
+  Title: typeof DrawerTitle;
+  /** Renders the drawer description. */
+  Description: typeof DrawerDescription;
+  /** Lays out footer action buttons at the bottom of the drawer. */
+  Footer: typeof DrawerFooter;
+  /** Renders a button that closes the drawer. */
+  Close: typeof DrawerClose;
+}
+
 /**
  * Compound modal drawer built on Base UI. Compose `Drawer.Trigger`,
  * `Drawer.Content`, `Drawer.Header`, `Drawer.Title`, `Drawer.Description`,
  * `Drawer.Footer`, and `Drawer.Close` inside the root.
  */
-export const Drawer = Object.assign(DrawerRoot, {
+export const Drawer: DrawerComponent = Object.assign(DrawerRoot, {
   Trigger: DrawerTrigger,
   Content: DrawerContent,
   Header: DrawerHeader,

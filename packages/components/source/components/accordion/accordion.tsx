@@ -64,10 +64,6 @@ function toExpandedValues(
   return typeof value === 'string' ? [value] : [...value];
 }
 
-/**
- * Groups collapsible sections. In single mode, expanding an item collapses
- * the previously expanded one, and activating the expanded item collapses it.
- */
 function AccordionRoot(props: AccordionProps) {
   const { children, className, disabled = false } = props;
   const rootRef = useRef<HTMLDivElement>(null);
@@ -180,8 +176,20 @@ function AccordionItem({
   );
 }
 
+export interface AccordionComponent extends React.FC<AccordionProps> {
+  /**
+   * Root component that manages the expansion state. Use `type="single"` for
+   * a single open item or `type="multiple"` for multiple.
+   */
+  Root: typeof AccordionRoot;
+  /**
+   * A single expandable section of an {@link Accordion}.
+   */
+  Item: typeof AccordionItem;
+}
+
 /** Compound accordion: `Accordion` is the root and `Accordion.Item` its items. */
-export const Accordion = Object.assign(AccordionRoot, {
+export const Accordion: AccordionComponent = Object.assign(AccordionRoot, {
   Root: AccordionRoot,
   Item: AccordionItem,
 });

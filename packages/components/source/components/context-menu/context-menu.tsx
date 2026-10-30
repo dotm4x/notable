@@ -184,7 +184,6 @@ const ContextMenuCheckboxItem = forwardRef<
   );
 });
 
-/** Groups radio items so that exactly one is selected. */
 const ContextMenuRadioGroup = forwardRef<
   HTMLDivElement,
   ContextMenuRadioGroupProps
@@ -198,7 +197,6 @@ const ContextMenuRadioGroup = forwardRef<
   );
 });
 
-/** A menu item within a `ContextMenu.RadioGroup`. */
 const ContextMenuRadioItem = forwardRef<
   HTMLDivElement,
   ContextMenuRadioItemProps
@@ -244,6 +242,32 @@ const ContextMenuSubmenuTrigger = forwardRef<
   return <MenuSubmenuTrigger ref={ref} {...props} />;
 });
 
+export interface ContextMenuComponent extends React.FC<ContextMenuProps> {
+  Root: typeof ContextMenuRoot;
+  /** Renders the trigger region that opens the menu on right click or long press. */
+  Trigger: typeof ContextMenuTrigger;
+  /** Renders the popup container for menu items. */
+  Content: typeof ContextMenuContent;
+  /** Renders a selectable menu action item. */
+  Item: typeof ContextMenuItem;
+  /** Renders a menu item that toggles a checked state. */
+  CheckboxItem: typeof ContextMenuCheckboxItem;
+  /** Groups radio items so that exactly one is selected. */
+  RadioGroup: typeof ContextMenuRadioGroup;
+  /** Renders a menu item within a radio group. */
+  RadioItem: typeof ContextMenuRadioItem;
+  /** Groups related menu items. */
+  Group: typeof ContextMenuGroup;
+  /** Renders the label of a menu group. */
+  GroupLabel: typeof ContextMenuGroupLabel;
+  /** Renders a line separator between menu items or groups. */
+  Separator: typeof ContextMenuSeparator;
+  /** Renders a nested submenu. */
+  Submenu: typeof ContextMenuSubmenu;
+  /** Renders the trigger for a nested submenu. */
+  SubmenuTrigger: typeof ContextMenuSubmenuTrigger;
+}
+
 /**
  * Action menu opened by right clicking or long pressing its trigger region.
  * Compose it with `ContextMenu.Trigger`, `ContextMenu.Content`, and
@@ -251,17 +275,20 @@ const ContextMenuSubmenuTrigger = forwardRef<
  * radio, and submenu parts. The menu opens at the pointer, and submenus open
  * beside their trigger. Forwards refs to the DOM element each part renders.
  */
-export const ContextMenu = Object.assign(ContextMenuRoot, {
-  Root: ContextMenuRoot,
-  Trigger: ContextMenuTrigger,
-  Content: ContextMenuContent,
-  Item: ContextMenuItem,
-  CheckboxItem: ContextMenuCheckboxItem,
-  RadioGroup: ContextMenuRadioGroup,
-  RadioItem: ContextMenuRadioItem,
-  Group: ContextMenuGroup,
-  GroupLabel: ContextMenuGroupLabel,
-  Separator: ContextMenuSeparator,
-  Submenu: ContextMenuSubmenu,
-  SubmenuTrigger: ContextMenuSubmenuTrigger,
-});
+export const ContextMenu: ContextMenuComponent = Object.assign(
+  ContextMenuRoot,
+  {
+    Root: ContextMenuRoot,
+    Trigger: ContextMenuTrigger,
+    Content: ContextMenuContent,
+    Item: ContextMenuItem,
+    CheckboxItem: ContextMenuCheckboxItem,
+    RadioGroup: ContextMenuRadioGroup,
+    RadioItem: ContextMenuRadioItem,
+    Group: ContextMenuGroup,
+    GroupLabel: ContextMenuGroupLabel,
+    Separator: ContextMenuSeparator,
+    Submenu: ContextMenuSubmenu,
+    SubmenuTrigger: ContextMenuSubmenuTrigger,
+  },
+);

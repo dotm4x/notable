@@ -156,10 +156,6 @@ const RadioGroupRoot = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   },
 );
 
-/**
- * Renders a native radio option. Must be placed inside a `RadioGroup`.
- * Forwards its ref to the native input.
- */
 export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
   function RadioGroupItem(
     {
@@ -236,7 +232,14 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
   },
 );
 
+export interface RadioGroupComponent extends React.ForwardRefExoticComponent<
+  RadioGroupProps & React.RefAttributes<HTMLFieldSetElement>
+> {
+  /** Renders a native radio option within the group. */
+  Item: typeof RadioGroupItem;
+}
+
 /** Compound radio group: `RadioGroup` is the root and `RadioGroup.Item` its options. */
-export const RadioGroup = Object.assign(RadioGroupRoot, {
+export const RadioGroup: RadioGroupComponent = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
 });

@@ -50,7 +50,6 @@ const CollapsibleRoot = forwardRef<HTMLDivElement, CollapsibleProps>(
   },
 );
 
-/** Button that toggles the content of its {@link Collapsible}. */
 const CollapsibleTrigger = forwardRef<
   HTMLButtonElement,
   CollapsibleTriggerProps
@@ -69,11 +68,6 @@ const CollapsibleTrigger = forwardRef<
   );
 });
 
-/**
- * Region revealed by the {@link Collapsible}. It stays mounted while closed
- * so the closing animation can run, and is hidden from view and assistive
- * technology until it opens.
- */
 const CollapsibleContent = forwardRef<HTMLDivElement, CollapsibleContentProps>(
   function CollapsibleContent({ className, children, ...props }, ref) {
     const classes = ['notable-collapsible__content-inner', className]
@@ -93,9 +87,22 @@ const CollapsibleContent = forwardRef<HTMLDivElement, CollapsibleContentProps>(
   },
 );
 
+export interface CollapsibleComponent extends React.ForwardRefExoticComponent<
+  CollapsibleProps & React.RefAttributes<HTMLDivElement>
+> {
+  Root: typeof CollapsibleRoot;
+  /** Button that toggles the content of its collapsible section. */
+  Trigger: typeof CollapsibleTrigger;
+  /** Region revealed by the collapsible trigger. */
+  Content: typeof CollapsibleContent;
+}
+
 /** Shows and hides a section of content. Compound: `Collapsible.Trigger` toggles `Collapsible.Content`. */
-export const Collapsible = Object.assign(CollapsibleRoot, {
-  Root: CollapsibleRoot,
-  Trigger: CollapsibleTrigger,
-  Content: CollapsibleContent,
-});
+export const Collapsible: CollapsibleComponent = Object.assign(
+  CollapsibleRoot,
+  {
+    Root: CollapsibleRoot,
+    Trigger: CollapsibleTrigger,
+    Content: CollapsibleContent,
+  },
+);

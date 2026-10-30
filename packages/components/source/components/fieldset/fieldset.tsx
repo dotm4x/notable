@@ -11,11 +11,6 @@ export type TFieldsetRootProps = Omit<
 
 export type TFieldsetLegendProps = ComponentProps<'legend'>;
 
-/**
- * Groups related controls under a shared name. Renders a native `fieldset`
- * so assistive technologies announce the group, and disables its contents
- * when `disabled` is set.
- */
 const FieldsetRoot = forwardRef<HTMLFieldSetElement, TFieldsetRootProps>(
   function FieldsetRoot({ className, ...props }, ref) {
     return (
@@ -28,10 +23,6 @@ const FieldsetRoot = forwardRef<HTMLFieldSetElement, TFieldsetRootProps>(
   },
 );
 
-/**
- * Accessible name for the enclosing fieldset. Uses a native `legend` so the
- * group is named without extra ARIA wiring.
- */
 const FieldsetLegend = forwardRef<HTMLLegendElement, TFieldsetLegendProps>(
   function FieldsetLegend({ className, ...props }, ref) {
     return (
@@ -44,7 +35,16 @@ const FieldsetLegend = forwardRef<HTMLLegendElement, TFieldsetLegendProps>(
   },
 );
 
-export const Fieldset = Object.assign(FieldsetRoot, {
+export interface FieldsetComponent extends React.ForwardRefExoticComponent<
+  TFieldsetRootProps & React.RefAttributes<HTMLFieldSetElement>
+> {
+  /** Root fieldset container grouping related controls. */
+  Root: typeof FieldsetRoot;
+  /** Accessible name/legend for the enclosing fieldset. */
+  Legend: typeof FieldsetLegend;
+}
+
+export const Fieldset: FieldsetComponent = Object.assign(FieldsetRoot, {
   Root: FieldsetRoot,
   Legend: FieldsetLegend,
 });

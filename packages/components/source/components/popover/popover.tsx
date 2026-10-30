@@ -151,7 +151,6 @@ function PopoverTitle({ className, ...props }: PopoverTitleProps) {
   );
 }
 
-/** Accessible description of the popover. Linked to the popup automatically. */
 function PopoverDescription({ className, ...props }: PopoverDescriptionProps) {
   return (
     <BasePopover.Description
@@ -163,10 +162,6 @@ function PopoverDescription({ className, ...props }: PopoverDescriptionProps) {
   );
 }
 
-/**
- * Closes the popover when activated. Renders an outline `Button` by default and
- * always uses `type="button"`, so it never submits a surrounding form.
- */
 function PopoverClose(props: PopoverCloseProps) {
   return (
     <BasePopover.Close
@@ -175,12 +170,27 @@ function PopoverClose(props: PopoverCloseProps) {
   );
 }
 
+export interface PopoverComponent extends React.FC<PopoverProps> {
+  /** Renders the trigger element that opens the popover. */
+  Trigger: typeof PopoverTrigger;
+  /** Renders the popover popup container and backdrop/positioner. */
+  Content: typeof PopoverContent;
+  /** Lays out header content at the top of the popover. */
+  Header: typeof PopoverHeader;
+  /** Renders the popover title. */
+  Title: typeof PopoverTitle;
+  /** Renders the popover description. */
+  Description: typeof PopoverDescription;
+  /** Renders a button that closes the popover. */
+  Close: typeof PopoverClose;
+}
+
 /**
  * Compound non-modal popover built on Base UI. Compose `Popover.Trigger`,
  * `Popover.Content`, `Popover.Header`, `Popover.Title`, `Popover.Description`,
  * and `Popover.Close` inside the root.
  */
-export const Popover = Object.assign(PopoverRoot, {
+export const Popover: PopoverComponent = Object.assign(PopoverRoot, {
   Trigger: PopoverTrigger,
   Content: PopoverContent,
   Header: PopoverHeader,

@@ -530,7 +530,18 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
  * Compound tabs with automatic keyboard activation. Inactive content panels
  * remain mounted but hidden, preserving their state between tab changes.
  */
-export const Tabs = Object.assign(TabsRoot, {
+export interface TabsComponent extends React.ForwardRefExoticComponent<
+  TabsProps & React.RefAttributes<HTMLDivElement>
+> {
+  /** Renders the list of tab triggers. */
+  List: typeof TabsList;
+  /** Renders a button that activates its corresponding tab panel. */
+  Trigger: typeof TabsTrigger;
+  /** Renders the content panel associated with a tab. */
+  Content: typeof TabsContent;
+}
+
+export const Tabs: TabsComponent = Object.assign(TabsRoot, {
   List: TabsList,
   Trigger: TabsTrigger,
   Content: TabsContent,

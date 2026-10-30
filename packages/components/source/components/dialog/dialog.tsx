@@ -259,7 +259,6 @@ function DialogDescription({ className, ...props }: DialogDescriptionProps) {
   );
 }
 
-/** Lays out action buttons at the bottom of the dialog. */
 function DialogFooter({ className, ...props }: DialogFooterProps) {
   return (
     <div
@@ -271,10 +270,6 @@ function DialogFooter({ className, ...props }: DialogFooterProps) {
   );
 }
 
-/**
- * Closes the dialog when activated. Renders an outline `Button` by default and
- * always uses `type="button"`, so it never submits a surrounding form.
- */
 function DialogClose({ onClick, ...props }: DialogCloseProps) {
   useDialogContext('Dialog.Close');
 
@@ -292,12 +287,29 @@ function DialogClose({ onClick, ...props }: DialogCloseProps) {
   );
 }
 
+export interface DialogComponent extends React.FC<DialogProps> {
+  /** Renders the trigger element that opens the dialog. */
+  Trigger: typeof DialogTrigger;
+  /** Renders the modal dialog popup container and backdrop. */
+  Content: typeof DialogContent;
+  /** Contains the header structure of the dialog. */
+  Header: typeof DialogHeader;
+  /** Renders the accessible dialog title. */
+  Title: typeof DialogTitle;
+  /** Renders the accessible dialog description. */
+  Description: typeof DialogDescription;
+  /** Lays out action buttons at the bottom of the dialog. */
+  Footer: typeof DialogFooter;
+  /** Renders a button that closes the dialog when activated. */
+  Close: typeof DialogClose;
+}
+
 /**
  * Compound modal dialog built on Base UI. Compose `Dialog.Trigger`,
  * `Dialog.Content`, `Dialog.Header`, `Dialog.Title`, `Dialog.Description`,
  * `Dialog.Footer`, and `Dialog.Close` inside the root.
  */
-export const Dialog = Object.assign(DialogRoot, {
+export const Dialog: DialogComponent = Object.assign(DialogRoot, {
   Trigger: DialogTrigger,
   Content: DialogContent,
   Header: DialogHeader,
