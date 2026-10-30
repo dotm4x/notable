@@ -11,6 +11,8 @@ export default tseslint.config(
       '**/storybook-static/**',
       '**/.astro/**',
       '**/.agents/**',
+      '**/.next/**',
+      '**/next-env.d.ts',
     ],
   },
   eslint.configs.recommended,
