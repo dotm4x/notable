@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Info } from 'lucide-react';
 import { Button } from '../button/button.js';
+import { Select } from '../select/select.js';
 import {
   createToastController,
   toast,
@@ -24,133 +24,96 @@ type Story = StoryObj<typeof meta>;
 
 function ToastExamples() {
   const [position, setPosition] = useState<ToastPosition>('bottom-right');
+  const [variant, setVariant] = useState<string>('default');
+
+  const handleSendToast = () => {
+    switch (variant) {
+      case 'success':
+        toast.success('Changes saved successfully.');
+        break;
+      case 'error':
+        toast.error('Could not save changes.');
+        break;
+      case 'warning':
+        toast.warning('Your session is about to expire.');
+        break;
+      case 'info':
+        toast.info('A new software update is available.');
+        break;
+      default:
+        toast('This is a default notification message.');
+        break;
+    }
+  };
 
   return (
     <ToastProvider position={position}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-        <Button onClick={() => toast('This is a default notification.')}>
-          Default
-        </Button>
-        <Button onClick={() => toast.success('Changes saved.')}>Success</Button>
-        <Button onClick={() => toast.error('Could not save changes.')}>
-          Error
-        </Button>
-        <Button onClick={() => toast.warning('Your session is expiring.')}>
-          Warning
-        </Button>
-        <Button onClick={() => toast.info('A new version is available.')}>
-          Info
-        </Button>
-        <Button
-          onClick={() =>
-            toast({
-              title: 'Deployment complete',
-              description: 'Your application is now available.',
-              variant: 'success',
-              duration: 0,
-              action: {
-                label: 'View',
-                onClick: () => toast('Opening deployment details.'),
-              },
-            })
-          }
-        >
-          Title, description & action
-        </Button>
-        <Button
-          onClick={() =>
-            toast({
-              title: 'No icon',
-              description: 'Icons can be hidden when they are not needed.',
-              icon: null,
-            })
-          }
-        >
-          Hidden icon
-        </Button>
-        <Button
-          onClick={() =>
-            toast({
-              title: 'Custom icon',
-              description: 'The icon can be replaced with a React node.',
-              icon: <Info aria-hidden="true" />,
-            })
-          }
-        >
-          Custom icon
-        </Button>
-        <Button
-          onClick={() =>
-            toast.custom((id) => (
-              <div>
-                <strong>Custom notification</strong>
-                <p style={{ margin: '8px 0' }}>
-                  Arbitrary React content can be rendered here.
-                </p>
-                <Button onClick={() => toast.dismiss(id)}>Dismiss</Button>
-              </div>
-            ))
-          }
-        >
-          Custom content
-        </Button>
-        <Button
-          onClick={() =>
-            toast.promise(new Promise((resolve) => setTimeout(resolve, 1200)), {
-              loading: 'Publishing...',
-              success: 'Project published.',
-              error: 'Could not publish the project.',
-            })
-          }
-        >
-          Promise transition
-        </Button>
-        <Button onClick={() => toast.loading('This stays until dismissed.')}>
-          Persistent loading
-        </Button>
-        <Button
-          onClick={() =>
-            toast({
-              title: 'A long description',
-              description:
-                'This notification demonstrates wrapping for a detailed message that should remain readable at narrow viewport widths without overflowing the page.',
-            })
-          }
-        >
-          Long description
-        </Button>
-        <label>
-          Position{' '}
-          <select
+      <div
+        style={{
+          display: 'grid',
+          gap: '1.5rem',
+          width: '20rem',
+          justifyItems: 'center',
+        }}
+      >
+        <div style={{ width: '100%', display: 'grid', gap: '1rem' }}>
+          <Select.Root
             value={position}
-            onChange={(event) =>
-              setPosition(event.currentTarget.value as ToastPosition)
-            }
+            onValueChange={(val) => val && setPosition(val as ToastPosition)}
           >
-            {[
-              'top-left',
-              'top-center',
-              'top-right',
-              'bottom-left',
-              'bottom-center',
-              'bottom-right',
-            ].map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </label>
-        <Button onClick={() => toast.dismiss()}>Dismiss all</Button>
-        <Button
-          onClick={() => {
-            for (let index = 1; index <= 4; index += 1) {
-              toast(`Stacked notification ${index}`);
-            }
+            <Select.Label>Position</Select.Label>
+            <Select.Trigger>
+              <Select.Value placeholder="Select position" />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.List>
+                <Select.Item value="top-left">Top Left</Select.Item>
+                <Select.Item value="top-center">Top Center</Select.Item>
+                <Select.Item value="top-right">Top Right</Select.Item>
+                <Select.Item value="bottom-left">Bottom Left</Select.Item>
+                <Select.Item value="bottom-center">Bottom Center</Select.Item>
+                <Select.Item value="bottom-right">Bottom Right</Select.Item>
+              </Select.List>
+            </Select.Content>
+          </Select.Root>
+
+          <Select.Root
+            value={variant}
+            onValueChange={(val) => val && setVariant(val)}
+          >
+            <Select.Label>Message type</Select.Label>
+            <Select.Trigger>
+              <Select.Value placeholder="Select message type" />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.List>
+                <Select.Item value="default">Default</Select.Item>
+                <Select.Item value="success">Success</Select.Item>
+                <Select.Item value="error">Error</Select.Item>
+                <Select.Item value="warning">Warning</Select.Item>
+                <Select.Item value="info">Info</Select.Item>
+              </Select.List>
+            </Select.Content>
+          </Select.Root>
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
           }}
         >
-          Stack notifications
-        </Button>
+          <Button variant="primary" onClick={handleSendToast}>
+            Send toast
+          </Button>
+          <Button variant="outline" onClick={() => toast.dismiss()}>
+            Dismiss all
+          </Button>
+        </div>
       </div>
     </ToastProvider>
   );
