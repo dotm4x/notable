@@ -5,6 +5,9 @@ import { Button } from '../button/button.js';
 import { NumberFlow } from './number-flow.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/NumberFlow',
   component: NumberFlow,
   tags: ['autodocs'],
@@ -28,9 +31,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default animated numeric display.',
+      },
+    },
+  },
+};
 
 export const Interactive: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive number flow updating with increment and decrement buttons.',
+      },
+    },
+  },
   render: function InteractiveRender() {
     const [value, setValue] = useState(42);
 
@@ -58,7 +77,14 @@ export const Interactive: Story = {
   },
 };
 
-export const IncreasingAndDecreasing: Story = {
+export const Transitions: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Smooth transitions between increasing and decreasing values.',
+      },
+    },
+  },
   render: function IncreasingAndDecreasingRender() {
     const [value, setValue] = useState(100);
 
@@ -92,19 +118,40 @@ export const IncreasingAndDecreasing: Story = {
 };
 
 export const Negative: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow handling negative values.',
+      },
+    },
+  },
   args: {
     value: -248,
   },
 };
 
 export const Decimal: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow formatting decimal numbers.',
+      },
+    },
+  },
   args: {
     value: 3.14159,
     format: { maximumFractionDigits: 3 },
   },
 };
 
-export const FixedFractionDigits: Story = {
+export const Decimals: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow supporting fixed fraction digits.',
+      },
+    },
+  },
   args: {
     value: 12,
     format: { minimumFractionDigits: 2, maximumFractionDigits: 2 },
@@ -112,6 +159,13 @@ export const FixedFractionDigits: Story = {
 };
 
 export const Currency: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow formatting currency values.',
+      },
+    },
+  },
   args: {
     value: 1249.5,
     locale: 'en-US',
@@ -120,6 +174,13 @@ export const Currency: Story = {
 };
 
 export const Percentage: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow formatting percentage values.',
+      },
+    },
+  },
   args: {
     value: 0.426,
     format: { style: 'percent' },
@@ -127,6 +188,13 @@ export const Percentage: Story = {
 };
 
 export const Compact: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow formatting large numbers with compact notation.',
+      },
+    },
+  },
   args: {
     value: 1_250_000,
     format: { notation: 'compact', maximumFractionDigits: 1 },
@@ -134,6 +202,14 @@ export const Compact: Story = {
 };
 
 export const Locales: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Number flow supporting internationalized number formatting across locales.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       <NumberFlow value={1234567.89} locale="en-US" />
@@ -145,7 +221,14 @@ export const Locales: Story = {
   ),
 };
 
-export const LocaleCurrency: Story = {
+export const CurrencyLocale: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Currency formatting across different regional locales.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       <NumberFlow
@@ -162,7 +245,15 @@ export const LocaleCurrency: Story = {
   ),
 };
 
-export const RapidUpdates: Story = {
+export const Live: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Number flow reacting smoothly to rapid real-time value updates.',
+      },
+    },
+  },
   render: function RapidUpdatesRender() {
     const [value, setValue] = useState(0);
 
@@ -180,13 +271,27 @@ export const RapidUpdates: Story = {
   },
 };
 
-export const LargeValues: Story = {
+export const Large: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow handling large integer numbers.',
+      },
+    },
+  },
   args: {
     value: 9_876_543_210,
   },
 };
 
-export const CustomDuration: Story = {
+export const Duration: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Number flow with customized animation duration.',
+      },
+    },
+  },
   args: {
     value: 5000,
     duration: 600,
@@ -198,7 +303,7 @@ export const ReducedMotion: Story = {
     docs: {
       description: {
         story:
-          'When the operating system requests reduced motion, digits change immediately without rolling. Enable "Reduce motion" in your system settings and change the value in the Interactive story to compare.',
+          'When the operating system requests reduced motion, digits change immediately without rolling.',
       },
     },
   },

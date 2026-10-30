@@ -10,6 +10,9 @@ import { Switch } from '../switch/switch.js';
 import { ScrollArea, type ScrollAreaEdgeEffect } from './scroll-area.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/ScrollArea',
   component: ScrollArea,
   tags: ['autodocs'],

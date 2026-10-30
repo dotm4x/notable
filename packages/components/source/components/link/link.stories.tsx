@@ -5,6 +5,9 @@ const meta = {
   title: 'Components/Link',
   component: Link,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     children: 'Read the documentation',
     href: '#',
@@ -22,15 +25,37 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default hyperlink style.',
+      },
+    },
+  },
+};
 
-export const WithArrow: Story = {
+export const Arrow: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Links can include a trailing arrow indicator.',
+      },
+    },
+  },
   args: {
     arrow: true,
   },
 };
 
-export const InText: Story = {
+export const Inline: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Links can be embedded inline within body text paragraphs.',
+      },
+    },
+  },
   render: (args) => (
     <p>
       Notable is a design language. <Link {...args}>Read the guidelines</Link>{' '}
@@ -40,6 +65,13 @@ export const InText: Story = {
 };
 
 export const External: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'External links opening in a new tab with rel attributes.',
+      },
+    },
+  },
   args: {
     children: 'Open the repository',
     href: 'https://github.com',

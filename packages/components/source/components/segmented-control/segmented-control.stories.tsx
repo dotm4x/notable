@@ -13,6 +13,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SegmentedControl } from './segmented-control.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/SegmentedControl',
   component: SegmentedControl,
   tags: ['autodocs'],
@@ -42,9 +45,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default segmented control with multiple options.',
+      },
+    },
+  },
+};
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Segmented controls support small, medium, and large sizing.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <SegmentedControl

@@ -6,6 +6,9 @@ const meta = {
   title: 'Components/CheckboxGroup',
   component: CheckboxGroup,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     label: 'Notifications',
   },
@@ -22,38 +25,50 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-function ControlledCheckboxGroup() {
-  const [selected, setSelected] = useState<string[]>(['email']);
-
-  return (
-    <div style={{ display: 'grid', gap: '20px' }}>
-      <CheckboxGroup
-        label="Notifications"
-        value={selected}
-        onValueChange={setSelected}
-      >
-        <CheckboxGroup.Item value="email" label="Email notifications" />
-        <CheckboxGroup.Item value="push" label="Push notifications" />
-        <CheckboxGroup.Item value="marketing" label="Marketing updates" />
-      </CheckboxGroup>
-      <p style={{ margin: 0 }}>Selected: {selected.join(', ') || 'none'}</p>
-    </div>
-  );
-}
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default checkbox group with multiple options.',
+      },
+    },
+  },
+};
 
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Checkbox groups can be controlled via `value` and `onValueChange`.',
+      },
+    },
+  },
   render: () => <ControlledCheckboxGroup />,
 };
 
 export const Uncontrolled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Checkbox groups can manage their state uncontrolled using `defaultValue`.',
+      },
+    },
+  },
   args: {
     defaultValue: ['push', 'marketing'],
   },
 };
 
-export const WithLabelAndDescription: Story = {
+export const Description: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checkbox groups can include a group-level description.',
+      },
+    },
+  },
   args: {
     label: 'Notifications',
     description: 'Choose which notifications you want to receive.',
@@ -61,7 +76,14 @@ export const WithLabelAndDescription: Story = {
   },
 };
 
-export const DisabledOptions: Story = {
+export const DisabledItem: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual checkbox items within a group can be disabled.',
+      },
+    },
+  },
   args: {
     label: 'Data sharing',
     defaultValue: ['analytics'],
@@ -75,7 +97,14 @@ export const DisabledOptions: Story = {
   ),
 };
 
-export const DisabledGroup: Story = {
+export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'An entire checkbox group can be disabled.',
+      },
+    },
+  },
   args: {
     label: 'Managed by your organization',
     disabled: true,
@@ -89,7 +118,14 @@ export const DisabledGroup: Story = {
   ),
 };
 
-export const WithItemDescriptions: Story = {
+export const ItemDescription: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual options can include supplementary descriptions.',
+      },
+    },
+  },
   args: {
     label: 'Visibility',
     description: 'Choose what other members can see.',
@@ -111,7 +147,14 @@ export const WithItemDescriptions: Story = {
   ),
 };
 
-export const EmptySelection: Story = {
+export const Empty: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A checkbox group with no initial selection.',
+      },
+    },
+  },
   args: {
     label: 'Newsletters',
   },
@@ -122,3 +165,22 @@ export const EmptySelection: Story = {
     </CheckboxGroup>
   ),
 };
+
+function ControlledCheckboxGroup() {
+  const [selected, setSelected] = useState<string[]>(['email']);
+
+  return (
+    <div style={{ display: 'grid', gap: '20px' }}>
+      <CheckboxGroup
+        label="Notifications"
+        value={selected}
+        onValueChange={setSelected}
+      >
+        <CheckboxGroup.Item value="email" label="Email notifications" />
+        <CheckboxGroup.Item value="push" label="Push notifications" />
+        <CheckboxGroup.Item value="marketing" label="Marketing updates" />
+      </CheckboxGroup>
+      <p style={{ margin: 0 }}>Selected: {selected.join(', ') || 'none'}</p>
+    </div>
+  );
+}

@@ -12,6 +12,9 @@ import {
 } from './popover.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Popover',
   component: Popover,
   tags: ['autodocs'],
@@ -61,6 +64,13 @@ function ControlledPopover() {
 }
 
 export const Default: StoryObj<PopoverContentProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default popover anchored to a trigger button.',
+      },
+    },
+  },
   args: {
     side: 'bottom',
     align: 'center',
@@ -101,6 +111,14 @@ export const Default: StoryObj<PopoverContentProps> = {
 };
 
 export const Sides: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Popovers can be placed on top, right, bottom, or left of the trigger.',
+      },
+    },
+  },
   render: () => (
     <div
       style={{

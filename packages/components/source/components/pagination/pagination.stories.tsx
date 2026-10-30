@@ -11,6 +11,9 @@ function ControlledPagination({
 }
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Pagination',
   component: Pagination,
   tags: ['autodocs'],
@@ -50,22 +53,53 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The default pagination view with previous, items, and next controls.',
+      },
+    },
+  },
+};
 
-export const FewPages: Story = {
+export const Short: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pagination when total page count is small.',
+      },
+    },
+  },
   args: {
     pageCount: 4,
   },
 };
 
-export const ManyPages: Story = {
+export const Long: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Pagination when total page count is large, showing ellipsis ranges.',
+      },
+    },
+  },
   args: {
     page: 10,
     pageCount: 42,
   },
 };
 
-export const FirstAndLastControls: Story = {
+export const Edges: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pagination with explicit first and last page jump controls.',
+      },
+    },
+  },
   args: {
     page: 6,
     pageCount: 20,
@@ -74,6 +108,13 @@ export const FirstAndLastControls: Story = {
 };
 
 export const Small: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pagination controls in a compact small size.',
+      },
+    },
+  },
   args: {
     page: 6,
     pageCount: 20,
@@ -82,12 +123,41 @@ export const Small: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pagination disabled to prevent navigation.',
+      },
+    },
+  },
   args: {
     page: 6,
     pageCount: 20,
     showFirstLast: true,
     disabled: true,
   },
+};
+
+export const Composed: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pagination composed manually with custom button labels.',
+      },
+    },
+  },
+  render: () => <ComposedPagination />,
+};
+
+export const Footer: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Pagination rendered inside a list footer pattern.',
+      },
+    },
+  },
+  render: () => <ListFooterExample />,
 };
 
 function ComposedPagination() {
@@ -100,10 +170,6 @@ function ComposedPagination() {
     </Pagination>
   );
 }
-
-export const Composed: Story = {
-  render: () => <ComposedPagination />,
-};
 
 const LIST_PAGE_SIZE = 5;
 
@@ -128,7 +194,3 @@ function ListFooterExample() {
     </div>
   );
 }
-
-export const InListFooter: Story = {
-  render: () => <ListFooterExample />,
-};

@@ -3,6 +3,9 @@ import { Button } from '../button/button.js';
 import { Tooltip } from './tooltip.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
@@ -31,9 +34,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default tooltip appearing on hover or focus.',
+      },
+    },
+  },
+};
 
-export const Placements: Story = {
+export const Placement: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Tooltips can be positioned on top, right, bottom, or left of the trigger.',
+      },
+    },
+  },
   render: () => (
     <div
       style={{

@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TimePicker } from './time-picker.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/TimePicker',
   component: TimePicker,
   tags: ['autodocs'],
@@ -16,15 +19,37 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default time picker input.',
+      },
+    },
+  },
+};
 
-export const WithSelection: Story = {
+export const Selection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers support initialized default values.',
+      },
+    },
+  },
   args: {
     defaultValue: '09:30',
   },
 };
 
-export const CustomPlaceholder: Story = {
+export const Placeholder: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers support custom placeholder text.',
+      },
+    },
+  },
   args: {
     placeholder: 'Choose a start time',
     'aria-label': 'Meeting start',
@@ -32,6 +57,14 @@ export const CustomPlaceholder: Story = {
 };
 
 export const TwelveHour: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Time pickers supporting 12-hour clock format with AM/PM selection.',
+      },
+    },
+  },
   args: {
     format: '12h',
     defaultValue: '15:45',
@@ -39,13 +72,28 @@ export const TwelveHour: Story = {
 };
 
 export const TwentyFourHour: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers supporting 24-hour clock format.',
+      },
+    },
+  },
   args: {
     format: '24h',
     defaultValue: '21:05',
   },
 };
 
-export const CustomMinuteStep: Story = {
+export const Step: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Time pickers support custom minute step intervals such as 15-minute increments.',
+      },
+    },
+  },
   args: {
     minuteStep: 15,
     defaultValue: '10:30',
@@ -54,6 +102,13 @@ export const CustomMinuteStep: Story = {
 };
 
 export const Constrained: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers support minimum and maximum time constraints.',
+      },
+    },
+  },
   args: {
     format: '12h',
     minTime: '09:00',
@@ -64,7 +119,15 @@ export const Constrained: Story = {
   },
 };
 
-export const MisalignedValue: Story = {
+export const Misaligned: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Time pickers handling initial values that do not align with the minute step interval.',
+      },
+    },
+  },
   args: {
     minuteStep: 15,
     defaultValue: '09:07',
@@ -73,6 +136,13 @@ export const MisalignedValue: Story = {
 };
 
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers support controlled value state management.',
+      },
+    },
+  },
   render: function ControlledTimePicker(args) {
     const [time, setTime] = useState<string | null>('14:00');
 
@@ -89,6 +159,13 @@ export const Controlled: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers can be disabled to prevent interaction.',
+      },
+    },
+  },
   args: {
     defaultValue: '09:30',
     disabled: true,
@@ -96,13 +173,28 @@ export const Disabled: Story = {
 };
 
 export const ReadOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers support read-only mode.',
+      },
+    },
+  },
   args: {
     defaultValue: '09:30',
     readOnly: true,
   },
 };
 
-export const AppointmentForm: Story = {
+export const Form: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multiple time pickers composed in an appointment form layout with dependent constraints.',
+      },
+    },
+  },
   render: function AppointmentTimePicker(args) {
     const [start, setStart] = useState<string | null>('09:00');
     const [end, setEnd] = useState<string | null>('10:00');
@@ -132,7 +224,14 @@ export const AppointmentForm: Story = {
   },
 };
 
-export const NarrowContainer: Story = {
+export const Narrow: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Time pickers inside narrow container widths.',
+      },
+    },
+  },
   render: function NarrowTimePicker(args) {
     return (
       <div style={{ width: '12rem' }}>

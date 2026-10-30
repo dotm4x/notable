@@ -10,6 +10,9 @@ import {
 } from './toast.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Toast',
   component: ToastProvider,
   tags: ['autodocs'],
@@ -176,7 +179,7 @@ function ProviderConfiguration() {
   );
 }
 
-function MultipleRoots() {
+function MultipleRootsExample() {
   const [left] = useState(createToastController);
   const [right] = useState(createToastController);
 
@@ -196,14 +199,38 @@ function MultipleRoots() {
   );
 }
 
-export const Interactive: Story = {
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive toast notifications demonstrating success, error, warning, info, and actions.',
+      },
+    },
+  },
   render: () => <ToastExamples />,
 };
 
-export const MultipleIndependentRoots: Story = {
-  render: () => <MultipleRoots />,
+export const MultipleRoots: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Multiple independent toast provider roots operating simultaneously.',
+      },
+    },
+  },
+  render: () => <MultipleRootsExample />,
 };
 
-export const ProviderConfigurationStory: Story = {
+export const Configuration: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Toast provider customized with default duration and maximum toast limits.',
+      },
+    },
+  },
   render: () => <ProviderConfiguration />,
 };

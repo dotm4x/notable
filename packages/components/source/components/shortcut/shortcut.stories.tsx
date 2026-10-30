@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Shortcut } from './shortcut.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Shortcut',
   component: Shortcut,
   tags: ['autodocs'],
@@ -14,9 +17,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const SingleCharacter: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default keyboard shortcut key badge.',
+      },
+    },
+  },
+};
 
-export const CommonKeys: Story = {
+export const Keys: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Keyboard shortcuts representing common navigation keys.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
       {['Enter', 'Escape', 'Tab', 'Backspace'].map((key) => (
@@ -26,7 +44,14 @@ export const CommonKeys: Story = {
   ),
 };
 
-export const ModifierKeys: Story = {
+export const Modifiers: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Keyboard shortcuts representing modifier keys.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
       {['Ctrl', 'Shift', 'Alt', '⌘'].map((key) => (
@@ -36,7 +61,14 @@ export const ModifierKeys: Story = {
   ),
 };
 
-export const ComposedShortcuts: Story = {
+export const Combination: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Combining multiple keys to display shortcut combinations.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '12px' }}>
       <div
@@ -68,6 +100,13 @@ export const ComposedShortcuts: Story = {
 };
 
 export const LongLabels: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shortcuts with longer descriptive key names.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
       {['Backspace', 'Page Down', 'Caps Lock'].map((key) => (
@@ -77,7 +116,14 @@ export const LongLabels: Story = {
   ),
 };
 
-export const InlineUsage: Story = {
+export const Inline: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shortcuts embedded inline within body text instructions.',
+      },
+    },
+  },
   render: () => (
     <p>
       Press <Shortcut>Enter</Shortcut> to submit, or use{' '}
@@ -86,7 +132,14 @@ export const InlineUsage: Story = {
   ),
 };
 
-export const LightAndDarkThemes: Story = {
+export const Themes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shortcuts adapting correctly across light and dark themes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '12px' }}>
       {(['light', 'dark'] as const).map((theme) => (

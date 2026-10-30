@@ -4,6 +4,9 @@ import { Button } from '../button/button.js';
 import { Tabs } from './tabs.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],
@@ -16,7 +19,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default tabs component with animated active indicator.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="preview">
       <Tabs.List aria-label="Example">
@@ -35,7 +45,14 @@ export const Basic: Story = {
   ),
 };
 
-export const DocumentationExample: Story = {
+export const Documentation: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tabs used for code and preview documentation examples.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="preview">
       <Tabs.List aria-label="Component example">
@@ -54,7 +71,15 @@ export const DocumentationExample: Story = {
   ),
 };
 
-export const PanelDirection: Story = {
+export const Direction: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Active indicator transition direction following tab navigation order.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="overview">
       <Tabs.List aria-label="Directional panel example">
@@ -72,7 +97,15 @@ export const PanelDirection: Story = {
   ),
 };
 
-export const DifferentLabelLengths: Story = {
+export const Lengths: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Tabs with varying label lengths; the active indicator smoothly resizes to fit each tab.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="overview">
       <Tabs.List aria-label="Project sections">
@@ -85,6 +118,17 @@ export const DifferentLabelLengths: Story = {
       <Tabs.Content value="settings">Settings for this project.</Tabs.Content>
     </Tabs>
   ),
+};
+
+export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tabs support controlled active value state management.',
+      },
+    },
+  },
+  render: () => <ControlledTabsExample />,
 };
 
 function ControlledTabsExample() {
@@ -107,11 +151,14 @@ function ControlledTabsExample() {
   );
 }
 
-export const Controlled: Story = {
-  render: () => <ControlledTabsExample />,
-};
-
-export const DisabledTab: Story = {
+export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual tab triggers can be disabled.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="overview">
       <Tabs.List aria-label="Sections">
@@ -128,7 +175,15 @@ export const DisabledTab: Story = {
   ),
 };
 
-export const LongPanelContent: Story = {
+export const Scrollable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Tabs with longer panel content where inactive panels preserve local state.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="details">
       <Tabs.List aria-label="Article">
@@ -154,7 +209,14 @@ export const LongPanelContent: Story = {
   ),
 };
 
-export const LightAndDarkThemes: Story = {
+export const Themes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tabs adapt correctly across light and dark themes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
       {(['light', 'dark'] as const).map((theme) => (
@@ -185,6 +247,13 @@ export const LightAndDarkThemes: Story = {
 };
 
 export const Vertical: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tabs support vertical orientation layouts.',
+      },
+    },
+  },
   render: () => (
     <Tabs defaultValue="account" orientation="vertical">
       <Tabs.List aria-label="Settings sections">
@@ -201,7 +270,15 @@ export const Vertical: Story = {
   ),
 };
 
-export const KeyboardNavigation: Story = {
+export const Keyboard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Full keyboard navigation support using arrow keys, Home, and End.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '8px' }}>
       <Tabs defaultValue="one">

@@ -5,6 +5,9 @@ const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     label: 'Accept the terms and conditions',
   },
@@ -14,56 +17,53 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const Checked: Story = {
-  args: {
-    defaultChecked: true,
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default checkbox state.',
+      },
+    },
   },
 };
 
-export const Indeterminate: Story = {
-  args: {
-    label: 'Select all items',
-    indeterminate: true,
+export const States: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checkboxes can be checked, indeterminate, or disabled.',
+      },
+    },
   },
-};
-
-export const WithDescription: Story = {
-  args: {
-    label: 'Email updates',
-    description: 'Receive occasional updates about your account.',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    label: 'Unavailable option',
-    disabled: true,
-  },
-};
-
-export const DisabledChecked: Story = {
-  args: {
-    label: 'Already selected',
-    disabled: true,
-    defaultChecked: true,
-  },
-};
-
-export const Preferences: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
+      <Checkbox label="Checked" defaultChecked />
+      <Checkbox label="Indeterminate" indeterminate />
+      <Checkbox label="Disabled" disabled />
+      <Checkbox label="Disabled checked" disabled defaultChecked />
+    </div>
+  ),
+};
+
+export const Description: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checkboxes can include a description to provide context.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'grid', gap: '16px' }}>
+      <Checkbox
+        label="Email updates"
+        description="Receive occasional updates about your account."
+      />
       <Checkbox
         label="Product updates"
         description="News about features and improvements."
         defaultChecked
       />
-      <Checkbox
-        label="Community events"
-        description="Invitations to meetups and online events."
-      />
-      <Checkbox label="Terms and conditions" required />
     </div>
   ),
 };

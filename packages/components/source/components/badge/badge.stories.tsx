@@ -23,6 +23,9 @@ const meta = {
   title: 'Components/Badge',
   component: Badge,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     children: 'Badge',
     variant: 'default',
@@ -32,10 +35,12 @@ const meta = {
     variant: {
       control: 'select',
       options: variants,
+      description: 'The visual style of the badge.',
     },
     size: {
       control: 'select',
       options: ['small', 'medium'],
+      description: 'The size of the badge.',
     },
   },
 } satisfies Meta<typeof Badge>;
@@ -44,9 +49,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default badge style.',
+      },
+    },
+  },
+};
 
 export const Variants: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Badges are available in multiple variants for different statuses and categories.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
       {variants.map((variant) => (
@@ -59,6 +80,13 @@ export const Variants: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Badges come in small and medium sizes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
       <Badge size="small">Small</Badge>
@@ -67,7 +95,15 @@ export const Sizes: Story = {
   ),
 };
 
-export const WithIcons: Story = {
+export const Icons: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Badges can include leading icons to reinforce status or meaning.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
       <Badge variant="success">
@@ -90,7 +126,14 @@ export const WithIcons: Story = {
   ),
 };
 
-export const IconOnly: Story = {
+export const Icon: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Badges can render solely with an icon for compact indicators.',
+      },
+    },
+  },
   args: {
     children: (
       <>
@@ -103,6 +146,13 @@ export const IconOnly: Story = {
 };
 
 export const Collection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Badges can be grouped together to display tags or metadata.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
       <Badge variant="secondary">Design</Badge>
@@ -116,7 +166,14 @@ export const Collection: Story = {
   ),
 };
 
-export const LightAndDark: Story = {
+export const Themes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Badges adapt correctly across light and dark themes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
       {(['light', 'dark'] as const).map((theme) => (

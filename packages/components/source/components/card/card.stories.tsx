@@ -6,14 +6,19 @@ const meta = {
   title: 'Components/Card',
   component: Card,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     as: {
       control: 'select',
       options: ['div', 'section', 'article'],
+      description: 'The semantic HTML element to render.',
     },
     padding: {
       control: 'inline-radio',
       options: ['default', 'none'],
+      description: 'Inner padding size.',
     },
   },
   args: {
@@ -52,9 +57,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default card layout with header, content, and footer.',
+      },
+    },
+  },
+};
 
 export const Minimal: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A simplified card containing only content.',
+      },
+    },
+  },
   render: (args) => (
     <Card {...args}>
       <Card.Content>A card with only content.</Card.Content>
@@ -63,6 +83,13 @@ export const Minimal: Story = {
 };
 
 export const HeaderOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A card composed with only a header section.',
+      },
+    },
+  },
   render: (args) => (
     <Card {...args}>
       <Card.Header>
@@ -73,7 +100,15 @@ export const HeaderOnly: Story = {
   ),
 };
 
-export const FlushPadding: Story = {
+export const Flush: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Cards can remove default padding so inner content sits flush with the edges.',
+      },
+    },
+  },
   args: {
     padding: 'none',
   },
@@ -100,7 +135,15 @@ export const FlushPadding: Story = {
   ),
 };
 
-export const SemanticElements: Story = {
+export const Semantic: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Cards support semantic HTML elements such as section and article.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Card as="section" aria-labelledby="section-card-title">
@@ -123,7 +166,14 @@ export const SemanticElements: Story = {
   ),
 };
 
-export const LightAndDarkThemes: Story = {
+export const Themes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Cards adapt correctly across light and dark themes.',
+      },
+    },
+  },
   render: (args) => (
     <div style={{ display: 'grid', gap: 16 }}>
       {(['light', 'dark'] as const).map((theme) => (
@@ -150,7 +200,15 @@ export const LightAndDarkThemes: Story = {
   ),
 };
 
-export const NarrowContainer: Story = {
+export const Narrow: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Cards wrap their text content cleanly inside narrow containers.',
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ width: 220 }}>

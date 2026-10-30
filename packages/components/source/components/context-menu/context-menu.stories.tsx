@@ -8,7 +8,7 @@ const meta = {
   component: ContextMenu,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
 } satisfies Meta<typeof ContextMenu>;
 
@@ -17,6 +17,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default context menu triggered by right-clicking.',
+      },
+    },
+  },
   render: () => (
     <ContextMenu.Root>
       <ContextMenu.Trigger>
@@ -32,7 +39,15 @@ export const Default: Story = {
   ),
 };
 
-export const WithGroupsAndShortcuts: Story = {
+export const Groups: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Context menus support groups with labels and keyboard shortcuts.',
+      },
+    },
+  },
   render: () => (
     <ContextMenu.Root>
       <ContextMenu.Trigger>
@@ -57,6 +72,46 @@ export const WithGroupsAndShortcuts: Story = {
           <ContextMenu.GroupLabel>Danger zone</ContextMenu.GroupLabel>
           <ContextMenu.Item disabled>Delete permanently</ContextMenu.Item>
         </ContextMenu.Group>
+      </ContextMenu.Content>
+    </ContextMenu.Root>
+  ),
+};
+
+export const CheckboxAndRadio: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Context menus support checkbox and radio items for options and settings.',
+      },
+    },
+  },
+  render: () => <CheckboxAndRadioExample />,
+};
+
+export const Submenu: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Context menus support nested submenus.',
+      },
+    },
+  },
+  render: () => (
+    <ContextMenu.Root>
+      <ContextMenu.Trigger>
+        <p>Right click to export</p>
+      </ContextMenu.Trigger>
+      <ContextMenu.Content>
+        <ContextMenu.Item>Copy link</ContextMenu.Item>
+        <ContextMenu.Submenu>
+          <ContextMenu.SubmenuTrigger>Export as</ContextMenu.SubmenuTrigger>
+          <ContextMenu.Content>
+            <ContextMenu.Item>Markdown</ContextMenu.Item>
+            <ContextMenu.Item>PDF</ContextMenu.Item>
+            <ContextMenu.Item>HTML</ContextMenu.Item>
+          </ContextMenu.Content>
+        </ContextMenu.Submenu>
       </ContextMenu.Content>
     </ContextMenu.Root>
   ),
@@ -96,28 +151,3 @@ function CheckboxAndRadioExample() {
     </ContextMenu.Root>
   );
 }
-
-export const WithCheckboxAndRadioItems: Story = {
-  render: () => <CheckboxAndRadioExample />,
-};
-
-export const WithSubmenu: Story = {
-  render: () => (
-    <ContextMenu.Root>
-      <ContextMenu.Trigger>
-        <p>Right click to export</p>
-      </ContextMenu.Trigger>
-      <ContextMenu.Content>
-        <ContextMenu.Item>Copy link</ContextMenu.Item>
-        <ContextMenu.Submenu>
-          <ContextMenu.SubmenuTrigger>Export as</ContextMenu.SubmenuTrigger>
-          <ContextMenu.Content>
-            <ContextMenu.Item>Markdown</ContextMenu.Item>
-            <ContextMenu.Item>PDF</ContextMenu.Item>
-            <ContextMenu.Item>HTML</ContextMenu.Item>
-          </ContextMenu.Content>
-        </ContextMenu.Submenu>
-      </ContextMenu.Content>
-    </ContextMenu.Root>
-  ),
-};

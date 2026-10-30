@@ -9,6 +9,9 @@ import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';
 import { Form } from './form.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Form',
   component: Form,
   tags: ['autodocs'],
@@ -24,9 +27,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The default form layout wrapping form controls and submission buttons.',
+      },
+    },
+  },
+};
 
-export const WithSubmitHandler: Story = {
+export const Submit: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Forms support handling submission events and collecting form data.',
+      },
+    },
+  },
   render: () => (
     <Form
       onSubmit={(event: FormEvent<HTMLFormElement>) => {
@@ -42,7 +62,14 @@ export const WithSubmitHandler: Story = {
   ),
 };
 
-export const WithGroups: Story = {
+export const Groups: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Forms can organize fields using fieldsets and input groups.',
+      },
+    },
+  },
   render: () => (
     <Form
       onSubmit={(event: FormEvent<HTMLFormElement>) => {
@@ -69,7 +96,14 @@ export const WithGroups: Story = {
   ),
 };
 
-export const WithReset: Story = {
+export const Reset: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Forms support native reset controls to restore initial values.',
+      },
+    },
+  },
   render: () => (
     <Form>
       <Input label="Email" name="email" defaultValue="ana@example.com" />

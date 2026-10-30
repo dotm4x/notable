@@ -7,6 +7,9 @@ const meta = {
   title: 'Components/Collapsible',
   component: Collapsible,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof Collapsible>;
 
 export default meta;
@@ -14,6 +17,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default collapsible disclosure view.',
+      },
+    },
+  },
   render: () => (
     <Collapsible>
       <Collapsible.Trigger>Show details</Collapsible.Trigger>
@@ -24,7 +34,14 @@ export const Default: Story = {
   ),
 };
 
-export const DefaultOpen: Story = {
+export const Expanded: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsibles can be rendered pre-expanded using `defaultOpen`.',
+      },
+    },
+  },
   render: () => (
     <Collapsible defaultOpen>
       <Collapsible.Trigger>Hide details</Collapsible.Trigger>
@@ -35,7 +52,14 @@ export const DefaultOpen: Story = {
   ),
 };
 
-export const TextDisclosure: Story = {
+export const Text: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A text disclosure pattern for inline details.',
+      },
+    },
+  },
   render: () => (
     <Collapsible>
       <Collapsible.Trigger>Shipping details</Collapsible.Trigger>
@@ -46,7 +70,14 @@ export const TextDisclosure: Story = {
   ),
 };
 
-export const CustomTriggerWithIcon: Story = {
+export const CustomTrigger: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsible triggers can include custom icons and elements.',
+      },
+    },
+  },
   render: () => (
     <Collapsible>
       <Collapsible.Trigger>
@@ -60,7 +91,15 @@ export const CustomTriggerWithIcon: Story = {
   ),
 };
 
-export const ControlledWithStateIcon: Story = {
+export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Collapsibles support controlled open state and dynamic icon toggling.',
+      },
+    },
+  },
   render: function Render() {
     const [open, setOpen] = useState(false);
 
@@ -78,7 +117,14 @@ export const ControlledWithStateIcon: Story = {
   },
 };
 
-export const LongContent: Story = {
+export const LongText: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsibles adapt smoothly to long content sections.',
+      },
+    },
+  },
   render: () => (
     <Collapsible>
       <Collapsible.Trigger>Read the full description</Collapsible.Trigger>
@@ -106,7 +152,14 @@ export const LongContent: Story = {
   ),
 };
 
-export const MultipleInstances: Story = {
+export const Multiple: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Multiple independent collapsible sections stacked together.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '8px' }}>
       <Collapsible>
@@ -131,7 +184,14 @@ export const MultipleInstances: Story = {
   ),
 };
 
-export const NestedInstances: Story = {
+export const Nested: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsibles can be nested inside one another.',
+      },
+    },
+  },
   render: () => (
     <Collapsible defaultOpen>
       <Collapsible.Trigger>Project</Collapsible.Trigger>
@@ -156,6 +216,13 @@ export const NestedInstances: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsibles can be disabled in either closed or open states.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '8px' }}>
       <Collapsible disabled>

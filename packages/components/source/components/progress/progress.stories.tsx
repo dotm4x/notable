@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { Progress, type ProgressProps } from './progress.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Progress',
   component: Progress,
   tags: ['autodocs'],
@@ -23,9 +26,25 @@ export default meta;
 
 type Story = StoryObj<ProgressProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default linear progress bar.',
+      },
+    },
+  },
+};
 
 export const Indeterminate: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Indeterminate progress bar indicating loading without a known completion value.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Loading',
     value: undefined,
@@ -111,6 +130,13 @@ export const AnimationDisabled: Story = {
 };
 
 export const Circular: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Circular progress spinner indicator variant.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Task progress',
     variant: 'circular',
@@ -119,6 +145,13 @@ export const Circular: Story = {
 };
 
 export const CircularIndeterminate: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Indeterminate circular spinner indicator.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Loading',
     variant: 'circular',
@@ -313,8 +346,15 @@ function UploadExample({ fileName, totalBytes }: UploadExampleProps) {
   );
 }
 
-export const UploadExampleStory: Story = {
-  name: 'Upload example',
+export const Upload: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A realistic file upload progress pattern combining circular and linear indicators.',
+      },
+    },
+  },
   render: () => (
     <UploadExample fileName="quarterly-report.pdf" totalBytes={10} />
   ),

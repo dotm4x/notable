@@ -7,7 +7,7 @@ const meta = {
   component: DropdownMenu,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
 } satisfies Meta<typeof DropdownMenu>;
 
@@ -16,6 +16,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default dropdown menu triggered by click.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
@@ -29,7 +36,15 @@ export const Default: Story = {
   ),
 };
 
-export const WithGroupsAndShortcuts: Story = {
+export const Groups: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dropdown menus support item groups with labels and keyboard shortcuts.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>File</DropdownMenu.Trigger>
@@ -91,7 +106,14 @@ export const CustomTrigger: Story = {
   ),
 };
 
-export const WithSubmenu: Story = {
+export const Submenu: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dropdown menus support nested submenus.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>Note</DropdownMenu.Trigger>
@@ -133,7 +155,14 @@ export const WithSubmenu: Story = {
   ),
 };
 
-export const NestedSubmenus: Story = {
+export const Nested: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dropdown menus support multiple levels of nested submenus.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>Workspace</DropdownMenu.Trigger>
@@ -159,7 +188,14 @@ export const NestedSubmenus: Story = {
   ),
 };
 
-export const SubmenuOpeningToTheLeft: Story = {
+export const LeftSubmenu: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Submenus can be configured to open on the left side.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>Sort</DropdownMenu.Trigger>
@@ -176,7 +212,14 @@ export const SubmenuOpeningToTheLeft: Story = {
   ),
 };
 
-export const WithCheckboxItems: Story = {
+export const Checkbox: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dropdown menus support checkbox items for toggleable options.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>View</DropdownMenu.Trigger>
@@ -198,7 +241,15 @@ export const WithCheckboxItems: Story = {
   ),
 };
 
-export const WithRadioItems: Story = {
+export const Radio: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dropdown menus support radio groups for single selection among options.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>Sort</DropdownMenu.Trigger>
@@ -232,7 +283,15 @@ export const WithRadioItems: Story = {
   ),
 };
 
-export const MixedItemsWithSubmenu: Story = {
+export const Mixed: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dropdown menus can combine checkboxes, radio groups, and submenus.',
+      },
+    },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>Format</DropdownMenu.Trigger>

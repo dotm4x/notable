@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Field } from './field.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Field',
   component: Field.Root,
   tags: ['autodocs'],
@@ -25,9 +28,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The default field structure with label, control, and description.',
+      },
+    },
+  },
+};
 
 export const Invalid: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fields support invalid state and error message presentation.',
+      },
+    },
+  },
   args: {
     invalid: true,
   },
@@ -43,12 +62,27 @@ export const Invalid: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fields can be disabled to prevent interaction.',
+      },
+    },
+  },
   args: {
     disabled: true,
   },
 };
 
-export const WithCustomControl: Story = {
+export const CustomControl: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Fields can wrap custom controls such as textareas via the `render` prop.',
+      },
+    },
+  },
   render: (args) => (
     <Field.Root {...args}>
       <Field.Label>Notes</Field.Label>

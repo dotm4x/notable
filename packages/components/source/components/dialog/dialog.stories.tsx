@@ -6,6 +6,9 @@ import { Input } from '../input/input.js';
 import { Dialog, type DialogSize } from './dialog.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Dialog',
   component: Dialog,
   tags: ['autodocs'],
@@ -135,6 +138,13 @@ function FormDialog() {
 const sizes: DialogSize[] = ['small', 'medium', 'large'];
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default modal dialog with header, content, and footer.',
+      },
+    },
+  },
   render: () => (
     <Dialog>
       <Dialog.Trigger>
@@ -157,14 +167,35 @@ export const Default: Story = {
 };
 
 export const Confirmation: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A confirmation dialog pattern for destructive actions.',
+      },
+    },
+  },
   render: () => <ConfirmationDialog />,
 };
 
 export const Form: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A form dialog pattern for collecting user input.',
+      },
+    },
+  },
   render: () => <FormDialog />,
 };
 
-export const LargeScrollable: Story = {
+export const Scrollable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs with lengthy scrollable content areas.',
+      },
+    },
+  },
   render: () => (
     <Dialog>
       <Dialog.Trigger>
@@ -195,6 +226,13 @@ export const LargeScrollable: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs support small, medium, and large sizing.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
       {sizes.map((size) => (
@@ -220,6 +258,14 @@ export const Sizes: Story = {
 };
 
 export const CustomStyling: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dialogs can be customized using CSS custom properties and styles.',
+      },
+    },
+  },
   render: () => (
     <Dialog>
       <Dialog.Trigger>
@@ -249,5 +295,12 @@ export const CustomStyling: Story = {
 };
 
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs support controlled open state management.',
+      },
+    },
+  },
   render: () => <ControlledDialog />,
 };

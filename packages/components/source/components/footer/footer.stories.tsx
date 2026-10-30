@@ -80,6 +80,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A minimal footer containing only the bottom copyright bar.',
+      },
+    },
+  },
   render: () => (
     <Footer>
       <Footer.Bottom>
@@ -89,9 +96,26 @@ export const Default: Story = {
   ),
 };
 
-export const Complete: Story = {};
+export const Full: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A complete footer with brand description, navigation sections, and legal links.',
+      },
+    },
+  },
+};
 
-export const SocialAndActions: Story = {
+export const Social: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Footers can include newsletter subscription actions and social links.',
+      },
+    },
+  },
   render: () => (
     <Footer>
       <Footer.Content>
@@ -129,7 +153,15 @@ export const SocialAndActions: Story = {
   ),
 };
 
-export const CustomComposition: Story = {
+export const Custom: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Footers support custom semantic headings and long text wrapping.',
+      },
+    },
+  },
   render: () => (
     <Footer aria-label="Site footer">
       <Footer.Content>

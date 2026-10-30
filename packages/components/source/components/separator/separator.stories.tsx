@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Separator } from './separator.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Separator',
   component: Separator,
   tags: ['autodocs'],
@@ -15,6 +18,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default horizontal separator line.',
+      },
+    },
+  },
   render: (args) => (
     <div style={{ width: 320 }}>
       <p>Content above the separator.</p>
@@ -25,6 +35,13 @@ export const Default: Story = {
 };
 
 export const Vertical: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Separators support vertical orientation between inline items.',
+      },
+    },
+  },
   args: {
     orientation: 'vertical',
   },
@@ -39,7 +56,15 @@ export const Vertical: Story = {
   ),
 };
 
-export const CustomThicknessAndColor: Story = {
+export const Custom: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Separators support custom thickness, semantic colors, and custom CSS color values.',
+      },
+    },
+  },
   render: (args) => (
     <div style={{ display: 'grid', gap: 24, width: 320 }}>
       <Separator {...args} thickness={4} color="strong" />
@@ -66,7 +91,15 @@ export const CustomThicknessAndColor: Story = {
   ),
 };
 
-export const DecorativeVsSemantic: Story = {
+export const Semantic: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Separators can be decorative (hidden from screen readers) or semantic (exposed to assistive technology).',
+      },
+    },
+  },
   render: (args) => (
     <div style={{ display: 'grid', gap: 24, width: 320 }}>
       <div>
@@ -82,6 +115,14 @@ export const DecorativeVsSemantic: Story = {
 };
 
 export const Composition: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Separators used to structure content sections in articles and cards.',
+      },
+    },
+  },
   render: (args) => (
     <article style={{ display: 'grid', gap: 16, width: 360 }}>
       <header>

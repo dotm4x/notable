@@ -8,7 +8,7 @@ const meta = {
   component: NavigationMenu,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
 } satisfies Meta<typeof NavigationMenu>;
 
@@ -17,6 +17,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default navigation menu with direct links.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -39,7 +46,15 @@ export const Default: Story = {
   ),
 };
 
-export const WithDropdowns: Story = {
+export const Dropdowns: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Navigation menus support trigger buttons and dropdown content panels.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -82,7 +97,15 @@ export const WithDropdowns: Story = {
   ),
 };
 
-export const RichContent: Story = {
+export const Rich: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Navigation menus support multi-column layouts inside dropdown content.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },

@@ -15,6 +15,9 @@ import { Input } from '../input/input.js';
 import { Empty } from './empty.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Empty',
   component: Empty,
   tags: ['autodocs'],
@@ -58,9 +61,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default empty state with a centered header and icon.',
+      },
+    },
+  },
+};
 
-export const PrimaryAction: Story = {
+export const Action: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty states can include a primary call-to-action button.',
+      },
+    },
+  },
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
@@ -82,7 +100,14 @@ export const PrimaryAction: Story = {
   ),
 };
 
-export const MultipleActions: Story = {
+export const Actions: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty states support multiple secondary actions.',
+      },
+    },
+  },
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
@@ -106,7 +131,15 @@ export const MultipleActions: Story = {
   ),
 };
 
-export const SearchNoResults: Story = {
+export const Search: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Empty states can integrate search inputs or filter clearing controls.',
+      },
+    },
+  },
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
@@ -130,7 +163,15 @@ export const SearchNoResults: Story = {
   ),
 };
 
-export const CustomMedia: Story = {
+export const Illustration: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Empty states support custom SVG illustrations or graphics in the media slot.',
+      },
+    },
+  },
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
@@ -180,7 +221,15 @@ export const CustomMedia: Story = {
   ),
 };
 
-export const TeamWithAvatarGroup: Story = {
+export const Team: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Empty states can display avatar groups to highlight collaboration.',
+      },
+    },
+  },
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
@@ -215,7 +264,14 @@ export const TeamWithAvatarGroup: Story = {
   ),
 };
 
-export const OutlineVariant: Story = {
+export const Outline: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty states support an outline border variant.',
+      },
+    },
+  },
   args: {
     variant: 'outline',
   },
@@ -235,7 +291,14 @@ export const OutlineVariant: Story = {
   ),
 };
 
-export const SurfaceVariant: Story = {
+export const Surface: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty states support a subtle filled surface variant.',
+      },
+    },
+  },
   args: {
     variant: 'surface',
   },
@@ -253,6 +316,14 @@ export const SurfaceVariant: Story = {
 };
 
 export const Compact: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Empty states support a compact sizing variant for restricted spaces.',
+      },
+    },
+  },
   args: {
     size: 'compact',
     variant: 'outline',
@@ -276,6 +347,14 @@ export const Compact: Story = {
 };
 
 export const Spacious: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Empty states support a spacious padding variant for large feature sections.',
+      },
+    },
+  },
   args: {
     size: 'spacious',
   },

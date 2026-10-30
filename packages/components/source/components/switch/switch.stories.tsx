@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Switch } from './switch.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Switch',
   component: Switch,
   tags: ['autodocs'],
@@ -15,16 +18,38 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default toggle switch state.',
+      },
+    },
+  },
+};
 
 export const Checked: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches can be initialized in a checked state.',
+      },
+    },
+  },
   args: {
     defaultChecked: true,
     label: 'Dark mode',
   },
 };
 
-export const WithDescription: Story = {
+export const Description: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches can include supplementary description text.',
+      },
+    },
+  },
   args: {
     label: 'Automatic updates',
     description: 'Install updates when they are available.',
@@ -32,6 +57,13 @@ export const WithDescription: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches can be disabled to prevent toggling.',
+      },
+    },
+  },
   args: {
     label: 'Unavailable setting',
     disabled: true,
@@ -39,6 +71,14 @@ export const Disabled: Story = {
 };
 
 export const DisabledChecked: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Disabled switches in a checked state representing locked settings.',
+      },
+    },
+  },
   args: {
     label: 'Managed by your organization',
     disabled: true,
@@ -47,6 +87,13 @@ export const DisabledChecked: Story = {
 };
 
 export const Invalid: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches support invalid error states and error messages.',
+      },
+    },
+  },
   args: {
     label: 'Required consent',
     invalid: true,
@@ -55,6 +102,13 @@ export const Invalid: Story = {
 };
 
 export const Settings: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches grouped together in a settings list layout.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '20px' }}>
       <Switch
@@ -94,5 +148,13 @@ function DraggableSwitches() {
 }
 
 export const Draggable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Switches support dragging the thumb horizontally in addition to clicking.',
+      },
+    },
+  },
   render: () => <DraggableSwitches />,
 };

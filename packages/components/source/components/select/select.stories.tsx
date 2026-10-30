@@ -14,7 +14,7 @@ const meta = {
   component: Select,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
 } satisfies Meta<typeof Select>;
 
@@ -23,6 +23,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default single-selection select dropdown.',
+      },
+    },
+  },
   render: () => (
     <div style={{ width: '16rem' }}>
       <Select.Root>
@@ -45,7 +52,14 @@ export const Default: Story = {
   ),
 };
 
-export const WithDefaultValue: Story = {
+export const DefaultValue: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Selects can be initialized with a default selected value.',
+      },
+    },
+  },
   render: () => (
     <div style={{ width: '16rem' }}>
       <Select.Root defaultValue="banana">
@@ -69,6 +83,13 @@ export const WithDefaultValue: Story = {
 };
 
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Selects support controlled value state management.',
+      },
+    },
+  },
   render: function ControlledStory() {
     const [value, setValue] = useState<string | null>('cherry');
 
@@ -96,7 +117,15 @@ export const Controlled: Story = {
   },
 };
 
-export const WithGroups: Story = {
+export const Groups: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Select options can be organized into labeled groups with separators.',
+      },
+    },
+  },
   render: () => (
     <div style={{ width: '16rem' }}>
       <Select.Root>
@@ -126,6 +155,14 @@ export const WithGroups: Story = {
 };
 
 export const LongList: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Select popups scroll internally when they contain many options.',
+      },
+    },
+  },
   render: () => (
     <div style={{ width: '16rem' }}>
       <Select.Root>
@@ -149,6 +186,13 @@ export const LongList: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Selects can be disabled to prevent interaction.',
+      },
+    },
+  },
   render: () => (
     <div style={{ width: '16rem' }}>
       <Select.Root defaultValue="apple" disabled>

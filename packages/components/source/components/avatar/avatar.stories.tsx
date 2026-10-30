@@ -8,6 +8,9 @@ const meta = {
   title: 'Components/Avatar',
   component: Avatar,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     size: 'medium',
   },
@@ -15,6 +18,7 @@ const meta = {
     size: {
       control: 'select',
       options: avatarSizes,
+      description: 'The size of the avatar.',
     },
   },
 } satisfies Meta<typeof Avatar>;
@@ -23,9 +27,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The default avatar displays a built-in icon when no image or fallback is provided.',
+      },
+    },
+  },
+};
 
-export const CustomImage: Story = {
+export const Image: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Avatars can display a user-supplied image.',
+      },
+    },
+  },
   render: () => (
     <Avatar>
       <Avatar.Image src="https://i.pravatar.cc/120?img=12" alt="Max Perez" />
@@ -34,7 +54,14 @@ export const CustomImage: Story = {
   ),
 };
 
-export const InitialsFallback: Story = {
+export const Initials: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Text fallback can be used when an image is unavailable.',
+      },
+    },
+  },
   render: () => (
     <Avatar>
       <Avatar.Fallback>AP</Avatar.Fallback>
@@ -42,7 +69,14 @@ export const InitialsFallback: Story = {
   ),
 };
 
-export const IconFallback: Story = {
+export const Icon: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Icons can be used as fallback content.',
+      },
+    },
+  },
   render: () => (
     <Avatar>
       <Avatar.Fallback>
@@ -52,7 +86,14 @@ export const IconFallback: Story = {
   ),
 };
 
-export const CustomFallbackContent: Story = {
+export const CustomFallback: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Avatars support custom fallback content and sizes.',
+      },
+    },
+  },
   render: () => (
     <Avatar size="large">
       <Avatar.Fallback>
@@ -64,6 +105,13 @@ export const CustomFallbackContent: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Avatars are available in several sizes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
       {avatarSizes.map((size) => (
@@ -77,7 +125,14 @@ export const Sizes: Story = {
   ),
 };
 
-export const MissingImage: Story = {
+export const BrokenLink: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The fallback is displayed when the image source is missing.',
+      },
+    },
+  },
   render: () => (
     <Avatar>
       <Avatar.Image alt="Jamie Chen" />
@@ -86,7 +141,14 @@ export const MissingImage: Story = {
   ),
 };
 
-export const FailedImage: Story = {
+export const Error: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The fallback is displayed when the image fails to load.',
+      },
+    },
+  },
   render: () => (
     <Avatar>
       <Avatar.Image src="/missing-avatar.png" alt="Riley Smith" />

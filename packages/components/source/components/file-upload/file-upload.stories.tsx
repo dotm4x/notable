@@ -4,6 +4,9 @@ import { Button } from '../button/button.js';
 import { FileUpload } from './file-upload.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/FileUpload',
   component: FileUpload,
   tags: ['autodocs'],
@@ -88,6 +91,14 @@ function DefaultFileUpload({
 }
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The default dropzone file upload supporting multiple files and rejections.',
+      },
+    },
+  },
   render: () => (
     <DefaultFileUpload
       mode="dropzone"
@@ -99,6 +110,14 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'File upload supports dropzone, compact, inline, and media presentation modes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 32 }}>
       <DefaultFileUpload mode="dropzone" multiple />
@@ -109,25 +128,64 @@ export const Variants: Story = {
   ),
 };
 
-export const SingleFile: Story = {
+export const Single: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'File uploads can be restricted to a single file and specific file types.',
+      },
+    },
+  },
   render: () => <DefaultFileUpload mode="dropzone" accept=".pdf" />,
 };
 
 export const SizeLimit: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'File uploads enforce maximum file size constraints with rejection feedback.',
+      },
+    },
+  },
   render: () => (
     <DefaultFileUpload mode="dropzone" multiple maxFileSize={1024 * 1024} />
   ),
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'File uploads can be disabled to prevent adding or removing files.',
+      },
+    },
+  },
   render: () => <DefaultFileUpload mode="dropzone" disabled />,
 };
 
 export const ReadOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'File uploads support read-only mode where existing files can be viewed but not modified.',
+      },
+    },
+  },
   render: () => <DefaultFileUpload mode="dropzone" readOnly />,
 };
 
 export const Invalid: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'File uploads support invalid error states.',
+      },
+    },
+  },
   render: () => <DefaultFileUpload mode="dropzone" invalid required />,
 };
 
@@ -153,6 +211,14 @@ function CustomContentFileUpload() {
 }
 
 export const CustomContent: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dropzone content can be customized with titles, descriptions, and custom triggers.',
+      },
+    },
+  },
   render: () => <CustomContentFileUpload />,
 };
 
@@ -181,5 +247,12 @@ function ClearActionFileUpload() {
 }
 
 export const ClearAction: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'File uploads support clearing all selected files at once.',
+      },
+    },
+  },
   render: () => <ClearActionFileUpload />,
 };

@@ -6,6 +6,9 @@ const meta = {
   title: 'Components/Accordion',
   component: Accordion,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     type: 'single',
     children: (
@@ -21,6 +24,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default accordion displays collapsible sections.',
+      },
+    },
+  },
   render: () => (
     <Accordion type="single">
       <Accordion.Item value="shipping" title="Shipping">
@@ -37,6 +47,14 @@ export const Default: Story = {
 };
 
 export const Single: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'In single mode, expanding an item collapses the previously expanded section.',
+      },
+    },
+  },
   render: () => (
     <Accordion type="single">
       <Accordion.Item value="general" title="General">
@@ -53,6 +71,14 @@ export const Single: Story = {
 };
 
 export const Multiple: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'In multiple mode, any number of sections can remain expanded simultaneously.',
+      },
+    },
+  },
   render: () => (
     <Accordion type="multiple">
       <Accordion.Item value="notifications" title="Notifications">
@@ -68,7 +94,15 @@ export const Multiple: Story = {
   ),
 };
 
-export const InitiallyExpanded: Story = {
+export const Expanded: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Accordions can be initialized with sections pre-expanded using `defaultValue`.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '24px' }}>
       <Accordion type="single" defaultValue="returns">
@@ -91,7 +125,14 @@ export const InitiallyExpanded: Story = {
   ),
 };
 
-export const DisabledItems: Story = {
+export const DisabledItem: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual accordion items can be disabled.',
+      },
+    },
+  },
   render: () => (
     <Accordion type="multiple">
       <Accordion.Item value="available" title="Available">
@@ -107,7 +148,14 @@ export const DisabledItems: Story = {
   ),
 };
 
-export const DisabledAccordion: Story = {
+export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'An entire accordion can be disabled.',
+      },
+    },
+  },
   render: () => (
     <Accordion type="single" disabled defaultValue="general">
       <Accordion.Item value="general" title="General">
@@ -120,7 +168,14 @@ export const DisabledAccordion: Story = {
   ),
 };
 
-export const LongContent: Story = {
+export const LongText: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Accordions adapt smoothly to lengthy content and headings.',
+      },
+    },
+  },
   render: () => (
     <Accordion type="multiple" defaultValue={['terms']}>
       <Accordion.Item
@@ -149,6 +204,28 @@ export const LongContent: Story = {
       </Accordion.Item>
     </Accordion>
   ),
+};
+
+export const Faq: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A common FAQ pattern using controlled state.',
+      },
+    },
+  },
+  render: () => <FaqAccordion />,
+};
+
+export const Settings: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A settings panel pattern using multiple selection mode.',
+      },
+    },
+  },
+  render: () => <SettingsAccordion />,
 };
 
 const faqItems = [
@@ -197,10 +274,6 @@ function FaqAccordion() {
   );
 }
 
-export const Faq: Story = {
-  render: () => <FaqAccordion />,
-};
-
 function SettingsAccordion() {
   const [expandedSections, setExpandedSections] = useState<string[]>([
     'profile',
@@ -230,7 +303,3 @@ function SettingsAccordion() {
     </div>
   );
 }
-
-export const SettingsPanel: Story = {
-  render: () => <SettingsAccordion />,
-};

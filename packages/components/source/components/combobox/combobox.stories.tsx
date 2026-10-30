@@ -10,6 +10,9 @@ import {
 } from './combobox.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Combobox',
   component: Combobox,
   tags: ['autodocs'],
@@ -176,8 +179,14 @@ function RealisticFormExample() {
   );
 }
 
-/** Single-select combobox with a searchable list of options. */
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Single-select combobox with a searchable list of options.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptions}>
@@ -191,8 +200,15 @@ export const Default: Story = {
   ),
 };
 
-/** Typing filters the list. Press Arrow keys to move through the matches. */
 export const Searchable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Typing filters the list. Press Arrow keys to move through the matches.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptions}>
@@ -206,8 +222,14 @@ export const Searchable: Story = {
   ),
 };
 
-/** The combobox starts with a selected value shown in the input. */
 export const Preselected: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The combobox starts with a selected value shown in the input.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptions} defaultValue="mango">
@@ -220,8 +242,15 @@ export const Preselected: Story = {
   ),
 };
 
-/** A clear button removes the selection and returns focus to the input. */
 export const Clearable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A clear button removes the selection and returns focus to the input.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptions} defaultValue="kiwi">
@@ -238,8 +267,15 @@ export const Clearable: Story = {
   ),
 };
 
-/** The whole combobox is disabled and cannot be focused or opened. */
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The whole combobox is disabled and cannot be focused or opened.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptions} disabled defaultValue="lemon">
@@ -253,8 +289,15 @@ export const Disabled: Story = {
   ),
 };
 
-/** Individual options can be disabled. They can be highlighted but cannot be selected. */
 export const DisabledOptions: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Individual options can be disabled. They can be highlighted but cannot be selected.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptionsWithDisabled}>
@@ -267,8 +310,15 @@ export const DisabledOptions: Story = {
   ),
 };
 
-/** Options grouped under labeled headings. Filtering keeps the groups intact. */
 export const Grouped: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Options grouped under labeled headings. Filtering keeps the groups intact.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={groupedOptions}>
@@ -282,8 +332,15 @@ export const Grouped: Story = {
   ),
 };
 
-/** A custom option renderer that adds a secondary line to each item. */
 export const CustomContent: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A custom option renderer that adds a secondary line to each item.',
+      },
+    },
+  },
   render: () => {
     const people: readonly ComboboxOption[] = [
       { value: 'ada', label: 'Ada Lovelace' },
@@ -315,8 +372,14 @@ export const CustomContent: Story = {
   },
 };
 
-/** The empty state appears when no option matches the query. */
-export const EmptyResults: Story = {
+export const Empty: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The empty state appears when no option matches the query.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={fruitOptions}>
@@ -330,8 +393,15 @@ export const EmptyResults: Story = {
   ),
 };
 
-/** A long list scrolls inside the popup while the popup height stays bounded. */
 export const LongList: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A long list scrolls inside the popup while the popup height stays bounded.',
+      },
+    },
+  },
   render: () => (
     <div style={stackStyle}>
       <Combobox items={longOptions}>
@@ -345,18 +415,37 @@ export const LongList: Story = {
   ),
 };
 
-/** Controlled value and open state managed by the consumer. */
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Controlled value and open state managed by the consumer.',
+      },
+    },
+  },
   render: () => <ControlledCombobox />,
 };
 
-/** A required combobox submitted inside a native form. */
 export const RequiredForm: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A required combobox submitted inside a native form.',
+      },
+    },
+  },
   render: () => <RequiredFormCombobox />,
 };
 
-/** A narrow container. The popup matches the input width and flips when there is no space. */
-export const NarrowContainerAndPlacement: Story = {
+export const Narrow: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A narrow container. The popup matches the input width and flips when there is no space.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem', justifyItems: 'start' }}>
       <div style={narrowStyle}>
@@ -380,7 +469,14 @@ export const NarrowContainerAndPlacement: Story = {
   ),
 };
 
-/** Several comboboxes in a realistic form with groups and a submit action. */
 export const RealisticForm: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Several comboboxes in a realistic form with groups and a submit action.',
+      },
+    },
+  },
   render: () => <RealisticFormExample />,
 };

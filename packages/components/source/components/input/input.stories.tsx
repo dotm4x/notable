@@ -32,6 +32,9 @@ const meta = {
   title: 'Components/Input',
   component: Input,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     label: 'Email address',
     placeholder: 'you@example.com',
@@ -62,9 +65,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default text input field with label and description.',
+      },
+    },
+  },
+};
 
-export const WithIcons: Story = {
+export const Icons: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support leading and trailing decorative icons.',
+      },
+    },
+  },
   args: {
     label: 'Search',
     placeholder: 'Search your projects',
@@ -74,11 +92,26 @@ export const WithIcons: Story = {
   },
 };
 
-export const ClearableSearch: Story = {
+export const Clearable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Inputs support interactive trailing controls such as clear buttons.',
+      },
+    },
+  },
   render: () => <ClearableSearchExample />,
 };
 
 export const Invalid: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support invalid error states and inline error messages.',
+      },
+    },
+  },
   args: {
     label: 'Email address',
     defaultValue: 'not-an-email',
@@ -89,6 +122,13 @@ export const Invalid: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs can be disabled to prevent user interaction.',
+      },
+    },
+  },
   args: {
     label: 'Email address',
     defaultValue: 'alex@example.com',
@@ -97,6 +137,13 @@ export const Disabled: Story = {
 };
 
 export const ReadOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support read-only mode for fixed values.',
+      },
+    },
+  },
   args: {
     label: 'Account ID',
     value: 'usr_12345',
@@ -105,7 +152,15 @@ export const ReadOnly: Story = {
   },
 };
 
-export const NativeTypes: Story = {
+export const Types: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Inputs support various native HTML types such as email, password, search, number, and date.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '24px', maxWidth: '24rem' }}>
       <Input label="Email" type="email" placeholder="you@example.com" />
@@ -117,7 +172,14 @@ export const NativeTypes: Story = {
   ),
 };
 
-export const FileUpload: Story = {
+export const File: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support file selection mode.',
+      },
+    },
+  },
   args: {
     label: 'Profile photo',
     type: 'file',
@@ -127,6 +189,14 @@ export const FileUpload: Story = {
 };
 
 export const States: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A comparison view of default, disabled, read-only, and invalid input states.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '24px', maxWidth: '24rem' }}>
       <Input label="Default" placeholder="Enter a value" />

@@ -6,6 +6,9 @@ import { Tooltip } from '../tooltip/tooltip.js';
 const avatarSizes = ['small', 'medium', 'large', 'extra-large'] as const;
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/AvatarGroup',
   component: AvatarGroup,
   tags: ['autodocs'],
@@ -25,6 +28,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default avatar group stacking avatars together.',
+      },
+    },
+  },
   render: (args) => (
     <AvatarGroup {...args}>
       <Avatar>
@@ -47,6 +57,14 @@ export const Default: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Avatar groups support small, medium, large, and extra-large sizes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
       {avatarSizes.map((size) => (
@@ -66,7 +84,14 @@ export const Sizes: Story = {
   ),
 };
 
-export const CustomOverlap: Story = {
+export const Spacing: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Avatar groups support custom overlap spacing between avatars.',
+      },
+    },
+  },
   render: () => (
     <AvatarGroup spacing={16}>
       <Avatar>
@@ -82,7 +107,14 @@ export const CustomOverlap: Story = {
   ),
 };
 
-export const VerticalGroup: Story = {
+export const Vertical: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Avatar groups support vertical orientation.',
+      },
+    },
+  },
   render: () => (
     <AvatarGroup orientation="vertical" spacing={12}>
       {['MX', 'AL', 'SR'].map((initials) => (
@@ -94,7 +126,14 @@ export const VerticalGroup: Story = {
   ),
 };
 
-export const CustomOverflow: Story = {
+export const Overflow: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Avatar groups support custom overflow indicator content.',
+      },
+    },
+  },
   render: () => (
     <AvatarGroup max={2} overflow={<span>more</span>}>
       {['MX', 'AL', 'SR', 'TC'].map((initials) => (
@@ -106,7 +145,15 @@ export const CustomOverflow: Story = {
   ),
 };
 
-export const InteractiveGroup: Story = {
+export const Interactive: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Avatars within a group can wrap interactive links and tooltips.',
+      },
+    },
+  },
   render: () => (
     <AvatarGroup size="large">
       <Tooltip content="Open Max's profile" placement="bottom">
@@ -130,7 +177,15 @@ export const InteractiveGroup: Story = {
   ),
 };
 
-export const LimitedGroup: Story = {
+export const Limited: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Avatar groups can limit the maximum number of visible avatars with `max`.',
+      },
+    },
+  },
   render: () => (
     <AvatarGroup max={3}>
       <Avatar>
@@ -155,7 +210,14 @@ export const LimitedGroup: Story = {
   ),
 };
 
-export const LargeGroup: Story = {
+export const Large: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Large avatar groups containing many collaborators.',
+      },
+    },
+  },
   render: () => (
     <AvatarGroup max={6} size="large">
       {['MX', 'AL', 'SR', 'TC', 'JW', 'KP', 'ND', 'EO', 'BM'].map(

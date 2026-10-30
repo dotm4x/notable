@@ -7,6 +7,9 @@ const meta = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     children: 'Button',
     variant: 'primary',
@@ -17,11 +20,18 @@ const meta = {
     variant: {
       control: 'select',
       options: ['primary', 'secondary', 'outline', 'ghost', 'danger'],
+      description: 'The visual style of the button.',
     },
     size: {
       control: 'select',
       options: ['small', 'medium', 'large', 'icon', 'icon-small', 'icon-large'],
+      description: 'The size of the button.',
     },
+    disabled: {
+      control: 'boolean',
+      description: 'Whether the button is non-interactive.',
+    },
+    onClick: { action: 'clicked' },
   },
 } satisfies Meta<typeof Button>;
 
@@ -29,9 +39,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default button style used for primary actions.',
+      },
+    },
+  },
+};
 
 export const Variants: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Buttons are available in several visual variants to communicate importance and intent.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
       <Button variant="primary">Primary</Button>
@@ -44,6 +70,13 @@ export const Variants: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Buttons come in multiple sizes to fit different contexts.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
       <Button size="small">Small</Button>
@@ -53,7 +86,14 @@ export const Sizes: Story = {
   ),
 };
 
-export const IconButtons: Story = {
+export const Icons: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Buttons can be rendered as icons for compact actions.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
       <Button variant="ghost" size="icon" aria-label="Add item">
@@ -71,27 +111,20 @@ export const IconButtons: Story = {
   ),
 };
 
-export const WithSpinner: Story = {
-  render: () => (
-    <Button disabled aria-busy="true">
-      <Spinner size="small" />
-      Saving...
-    </Button>
-  ),
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
+export const Loading: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Buttons can show a loading state while an action is in progress.',
+      },
+    },
   },
-};
-
-export const SpinnerVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
       <Button disabled aria-busy="true">
         <Spinner size="small" />
-        Primary
+        Saving...
       </Button>
       <Button variant="secondary" disabled aria-busy="true">
         <Spinner size="small" />
@@ -109,7 +142,27 @@ export const SpinnerVariants: Story = {
   ),
 };
 
-export const LongLabel: Story = {
+export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled buttons prevent user interaction.',
+      },
+    },
+  },
+  args: {
+    disabled: true,
+  },
+};
+
+export const LongText: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Buttons automatically adjust their width to fit longer labels.',
+      },
+    },
+  },
   args: {
     children: 'Continue to checkout',
   },

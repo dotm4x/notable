@@ -6,6 +6,9 @@ import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';
 import { Fieldset } from './fieldset.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Fieldset',
   component: Fieldset.Root,
   tags: ['autodocs'],
@@ -32,9 +35,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The default fieldset grouping related fields under a shared legend.',
+      },
+    },
+  },
+};
 
-export const WithFields: Story = {
+export const Fields: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fieldsets can group multiple form fields together.',
+      },
+    },
+  },
   render: () => (
     <Fieldset.Root>
       <Fieldset.Legend>Shipping address</Fieldset.Legend>
@@ -54,7 +73,14 @@ export const WithFields: Story = {
   ),
 };
 
-export const WithCheckboxGroup: Story = {
+export const Checkboxes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fieldsets can combine fields with checkbox groups.',
+      },
+    },
+  },
   render: () => (
     <Fieldset.Root>
       <Fieldset.Legend>Account</Fieldset.Legend>
@@ -71,7 +97,15 @@ export const WithCheckboxGroup: Story = {
     </Fieldset.Root>
   ),
 };
-export const WithRadioGroup: Story = {
+
+export const Radios: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fieldsets can combine fields with radio groups.',
+      },
+    },
+  },
   render: () => (
     <Fieldset.Root>
       <Fieldset.Legend>Account</Fieldset.Legend>
@@ -89,7 +123,15 @@ export const WithRadioGroup: Story = {
     </Fieldset.Root>
   ),
 };
+
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabling a fieldset disables all controls inside it.',
+      },
+    },
+  },
   render: () => (
     <Fieldset.Root disabled>
       <Fieldset.Legend>Billing</Fieldset.Legend>
@@ -104,7 +146,14 @@ export const Disabled: Story = {
   ),
 };
 
-export const RealisticForm: Story = {
+export const Form: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Multiple fieldsets combined into a complete form layout.',
+      },
+    },
+  },
   render: () => (
     <form
       onSubmit={(event) => event.preventDefault()}

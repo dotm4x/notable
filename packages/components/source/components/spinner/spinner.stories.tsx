@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Spinner } from './spinner.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Spinner',
   component: Spinner,
   tags: ['autodocs'],
@@ -24,9 +27,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default loading spinner indicator.',
+      },
+    },
+  },
+};
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Spinners support small, medium, and large sizing.',
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -43,6 +61,13 @@ export const Sizes: Story = {
 };
 
 export const Colors: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Spinners inherit color from text color or parent styles.',
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -70,7 +95,14 @@ export const Colors: Story = {
   ),
 };
 
-export const WithText: Story = {
+export const Text: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Spinners paired with loading label text.',
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -88,6 +120,13 @@ export const WithText: Story = {
 };
 
 export const Large: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Large spinner for prominent loading states.',
+      },
+    },
+  },
   args: {
     size: 'large',
     label: 'Loading content',

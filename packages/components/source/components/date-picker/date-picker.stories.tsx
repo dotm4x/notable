@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DatePicker } from './date-picker.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/DatePicker',
   component: DatePicker,
   tags: ['autodocs'],
@@ -16,15 +19,37 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default date picker input and popup calendar.',
+      },
+    },
+  },
+};
 
-export const WithSelection: Story = {
+export const Selection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support initialized selected values.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
   },
 };
 
-export const CustomPlaceholder: Story = {
+export const Placeholder: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support custom placeholder text.',
+      },
+    },
+  },
   args: {
     placeholder: 'Choose a delivery date',
     'aria-label': 'Delivery date',
@@ -32,6 +57,13 @@ export const CustomPlaceholder: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers can be disabled to prevent interaction.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
     disabled: true,
@@ -39,13 +71,27 @@ export const Disabled: Story = {
 };
 
 export const ReadOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support read-only mode.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
     readOnly: true,
   },
 };
 
-export const WithConstraints: Story = {
+export const Constraints: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support minimum and maximum date constraints.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
     minDate: new Date(2025, 2, 10),
@@ -55,6 +101,14 @@ export const WithConstraints: Story = {
 };
 
 export const DisabledDates: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Specific dates can be disabled via a custom predicate function.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
     isDateDisabled: (date) => date.getDay() === 0 || date.getDay() === 6,
@@ -62,7 +116,14 @@ export const DisabledDates: Story = {
   },
 };
 
-export const SpanishLocale: Story = {
+export const Spanish: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support localized date formatting and day names.',
+      },
+    },
+  },
   args: {
     locale: 'es-ES',
     defaultValue: new Date(2025, 2, 14),
@@ -71,7 +132,14 @@ export const SpanishLocale: Story = {
   },
 };
 
-export const CustomFormatting: Story = {
+export const Formatting: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support custom date formatting functions.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
     formatDate: (date) =>
@@ -84,6 +152,13 @@ export const CustomFormatting: Story = {
 };
 
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers support controlled value state management.',
+      },
+    },
+  },
   render: function ControlledDatePicker() {
     const [value, setValue] = useState<Date | null>(new Date(2025, 2, 14));
 
@@ -104,7 +179,15 @@ export const Controlled: Story = {
   },
 };
 
-export const BookingForm: Story = {
+export const Booking: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Check-in and check-out booking form pattern with dependent date constraints.',
+      },
+    },
+  },
   render: function BookingFormStory() {
     const [checkIn, setCheckIn] = useState<Date | null>(null);
     const [checkOut, setCheckOut] = useState<Date | null>(null);
@@ -135,7 +218,14 @@ export const BookingForm: Story = {
   },
 };
 
-export const NarrowContainer: Story = {
+export const Narrow: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Date pickers inside narrow container widths.',
+      },
+    },
+  },
   args: {
     defaultValue: new Date(2025, 2, 14),
   },

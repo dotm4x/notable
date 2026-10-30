@@ -6,6 +6,9 @@ import { Input } from '../input/input.js';
 import { Drawer, type DrawerSide, type DrawerSize } from './drawer.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Drawer',
   component: Drawer,
   tags: ['autodocs'],
@@ -255,6 +258,13 @@ function NestedDrawers() {
 }
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default modal drawer sliding in from the right.',
+      },
+    },
+  },
   render: () => (
     <Drawer>
       <Drawer.Trigger>
@@ -277,6 +287,14 @@ export const Default: Story = {
 };
 
 export const Sides: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Drawers can slide in from the right, left, top, or bottom edges.',
+      },
+    },
+  },
   render: () => (
     <div style={rowStyle}>
       {sides.map((side) => (
@@ -287,6 +305,13 @@ export const Sides: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Drawers support small, medium, and large sizing.',
+      },
+    },
+  },
   render: () => (
     <div style={rowStyle}>
       {sizes.map((size) => (
@@ -297,6 +322,14 @@ export const Sizes: Story = {
 };
 
 export const Scrollable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Drawers with pinned header and footer areas around scrollable body content.',
+      },
+    },
+  },
   render: () => (
     <Drawer>
       <Drawer.Trigger>
@@ -327,18 +360,48 @@ export const Scrollable: Story = {
 };
 
 export const Form: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Drawers can contain form inputs and actions.',
+      },
+    },
+  },
   render: () => <FormDrawer />,
 };
 
 export const Nested: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Drawers can be nested within each other to handle multi-level flows.',
+      },
+    },
+  },
   render: () => <NestedDrawers />,
 };
 
 export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Drawers support controlled open state management.',
+      },
+    },
+  },
   render: () => <ControlledDrawer />,
 };
 
-export const CustomContent: Story = {
+export const Custom: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Drawers support custom behavior such as disabling backdrop click dismissal.',
+      },
+    },
+  },
   render: () => (
     <Drawer side="left">
       <Drawer.Trigger>

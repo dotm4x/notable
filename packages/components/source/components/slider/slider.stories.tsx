@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Slider, type TSliderProps } from './slider.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Slider',
   component: Slider,
   tags: ['autodocs'],
@@ -23,9 +26,27 @@ export default meta;
 type Story = StoryObj<TSliderProps>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default single-thumb slider.',
+      },
+    },
+  },
   args: {
     defaultValue: 45,
   },
+};
+
+export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders support controlled value state management.',
+      },
+    },
+  },
+  render: () => <ControlledSlider />,
 };
 
 function ControlledSlider() {
@@ -48,11 +69,14 @@ function ControlledSlider() {
   );
 }
 
-export const Controlled: Story = {
-  render: () => <ControlledSlider />,
-};
-
 export const CustomRange: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders support custom minimum, maximum, and step intervals.',
+      },
+    },
+  },
   args: {
     label: 'Temperature',
     min: 10,
@@ -65,6 +89,13 @@ export const CustomRange: Story = {
 };
 
 export const RangeSelection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders support dual thumbs for range selection.',
+      },
+    },
+  },
   args: {
     label: 'Price range',
     defaultValue: [25, 75],
@@ -75,6 +106,13 @@ export const RangeSelection: Story = {
 };
 
 export const Marked: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders support step marks and custom mark labels.',
+      },
+    },
+  },
   args: {
     label: 'Distance',
     min: 0,
@@ -88,6 +126,13 @@ export const Marked: Story = {
 };
 
 export const Vertical: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders support vertical orientation layout.',
+      },
+    },
+  },
   args: {
     label: 'Vertical volume',
     orientation: 'vertical',
@@ -98,6 +143,13 @@ export const Vertical: Story = {
 };
 
 export const ReadOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders support read-only mode.',
+      },
+    },
+  },
   args: {
     label: 'Fixed playback speed',
     defaultValue: 1,
@@ -110,6 +162,13 @@ export const ReadOnly: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders can be disabled to prevent interaction.',
+      },
+    },
+  },
   args: {
     label: 'Managed volume',
     defaultValue: 60,
@@ -119,6 +178,13 @@ export const Disabled: Story = {
 };
 
 export const FixedRange: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sliders where minimum and maximum bounds are equal.',
+      },
+    },
+  },
   args: {
     label: 'Fixed value',
     min: 5,

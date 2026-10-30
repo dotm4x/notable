@@ -49,13 +49,27 @@ function LongPage({ children }: { children: ReactNode }) {
   );
 }
 
-export const Normal: Story = {
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default header layout with standard positioning.',
+      },
+    },
+  },
   args: {
     mode: 'normal',
   },
 };
 
 export const Fixed: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Headers can be fixed at the top of the viewport.',
+      },
+    },
+  },
   args: {
     mode: 'fixed',
   },
@@ -70,6 +84,13 @@ export const Fixed: Story = {
 };
 
 export const Dynamic: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dynamic headers hide on scroll down and reveal on scroll up.',
+      },
+    },
+  },
   args: {
     mode: 'dynamic',
   },
@@ -83,7 +104,15 @@ export const Dynamic: Story = {
   ),
 };
 
-export const CustomContent: Story = {
+export const Custom: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Headers support rich navigation menus and custom brand elements.',
+      },
+    },
+  },
   args: {
     mode: 'dynamic',
   },

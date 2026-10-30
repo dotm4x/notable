@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from './skeleton.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Skeleton',
   component: Skeleton,
   tags: ['autodocs'],
@@ -16,13 +19,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default skeleton placeholder.',
+      },
+    },
+  },
   args: {
     width: 280,
     height: 48,
   },
 };
 
-export const CustomDimensions: Story = {
+export const Dimensions: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons supporting custom widths, heights, and corner radii.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem', width: 360 }}>
       <Skeleton width="100%" height="2rem" />
@@ -34,6 +51,13 @@ export const CustomDimensions: Story = {
 };
 
 export const Text: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons styled for loading text line placeholders.',
+      },
+    },
+  },
   args: {
     variant: 'text',
   },
@@ -48,6 +72,13 @@ export const Text: Story = {
 };
 
 export const Circular: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons styled for circular avatar or icon placeholders.',
+      },
+    },
+  },
   args: {
     variant: 'circular',
     width: 48,
@@ -63,6 +94,13 @@ export const Circular: Story = {
 };
 
 export const Rectangular: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons styled for rectangular image or card placeholders.',
+      },
+    },
+  },
   args: {
     variant: 'rectangular',
   },
@@ -76,6 +114,13 @@ export const Rectangular: Story = {
 };
 
 export const Pulse: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons supporting pulse animation style.',
+      },
+    },
+  },
   args: {
     animation: 'pulse',
   },
@@ -88,7 +133,14 @@ export const Pulse: Story = {
   ),
 };
 
-export const NoAnimation: Story = {
+export const Static: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons with animations disabled.',
+      },
+    },
+  },
   args: {
     animation: 'none',
   },
@@ -102,6 +154,13 @@ export const NoAnimation: Story = {
 };
 
 export const Composition: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Skeletons combined to represent a loading profile card.',
+      },
+    },
+  },
   render: () => (
     <div
       role="status"

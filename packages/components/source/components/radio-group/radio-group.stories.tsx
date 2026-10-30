@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { RadioGroup, RadioGroupItem } from './radio-group.js';
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/RadioGroup',
   component: RadioGroup,
   tags: ['autodocs'],
@@ -23,12 +26,26 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default vertical radio group.',
+      },
+    },
+  },
   args: {
     defaultValue: 'daily',
   },
 };
 
 export const Horizontal: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups support horizontal orientation.',
+      },
+    },
+  },
   args: {
     label: 'Display density',
     orientation: 'horizontal',
@@ -44,6 +61,13 @@ export const Horizontal: Story = {
 };
 
 export const Vertical: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups in standard vertical layout.',
+      },
+    },
+  },
   args: {
     label: 'Theme',
     orientation: 'vertical',
@@ -56,6 +80,17 @@ export const Vertical: Story = {
       <RadioGroupItem value="system" label="Match system" />
     </RadioGroup>
   ),
+};
+
+export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups support controlled value state management.',
+      },
+    },
+  },
+  render: () => <ControlledRadioGroup />,
 };
 
 function ControlledRadioGroup() {
@@ -73,11 +108,15 @@ function ControlledRadioGroup() {
   );
 }
 
-export const Controlled: Story = {
-  render: () => <ControlledRadioGroup />,
-};
-
-export const DefaultSelection: Story = {
+export const Selection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Radio groups can be initialized with a preselected default value.',
+      },
+    },
+  },
   args: {
     label: 'Shipping speed',
     defaultValue: 'standard',
@@ -90,7 +129,14 @@ export const DefaultSelection: Story = {
   ),
 };
 
-export const DisabledOptions: Story = {
+export const DisabledOption: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual radio items within a group can be disabled.',
+      },
+    },
+  },
   args: {
     label: 'Export format',
     defaultValue: 'pdf',
@@ -104,7 +150,14 @@ export const DisabledOptions: Story = {
   ),
 };
 
-export const DisabledGroup: Story = {
+export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'An entire radio group can be disabled.',
+      },
+    },
+  },
   args: {
     label: 'Managed by your organization',
     disabled: true,
@@ -118,7 +171,14 @@ export const DisabledGroup: Story = {
   ),
 };
 
-export const WithDescriptions: Story = {
+export const Descriptions: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual radio items can include supplementary descriptions.',
+      },
+    },
+  },
   args: {
     label: 'Visibility',
     description: 'Choose who can find your profile.',
@@ -146,6 +206,13 @@ export const WithDescriptions: Story = {
 };
 
 export const Required: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups support required validation inside native forms.',
+      },
+    },
+  },
   args: {
     label: 'Preferred contact method',
     required: true,
@@ -167,6 +234,13 @@ export const Required: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups support small, medium, and large sizing.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '24px' }}>
       <RadioGroup label="Small" size="small" defaultValue="a">

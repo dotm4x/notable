@@ -51,7 +51,7 @@ const meta = {
   component: Command,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
   args: {
     items: flatItems,
@@ -94,17 +94,39 @@ function PaletteTrigger({
 }
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default command palette with flat items.',
+      },
+    },
+  },
   render: (args) => <PaletteTrigger items={args.items} />,
 };
 
-export const Grouped: Story = {
+export const Groups: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Commands can be organized into labeled groups.',
+      },
+    },
+  },
   args: {
     items: groupedItems,
   },
   render: (args) => <PaletteTrigger items={args.items} />,
 };
 
-export const DialogWithShortcut: Story = {
+export const Shortcut: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Command dialogs can be opened using keyboard shortcuts such as `Mod+K`.',
+      },
+    },
+  },
   render: (args) => (
     <PaletteTrigger
       items={args.items}
@@ -115,9 +137,28 @@ export const DialogWithShortcut: Story = {
 };
 
 export const CustomShortcut: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Custom keyboard shortcuts can be bound to open the dialog.',
+      },
+    },
+  },
   render: (args) => (
     <PaletteTrigger items={args.items} shortcut="Alt+P" label="Quick actions" />
   ),
+};
+
+export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Command dialogs support controlled open state and item selection tracking.',
+      },
+    },
+  },
+  render: () => <ControlledDialogDemo />,
 };
 
 function ControlledDialogDemo() {
@@ -140,15 +181,27 @@ function ControlledDialogDemo() {
   );
 }
 
-export const ControlledDialog: Story = {
-  render: () => <ControlledDialogDemo />,
-};
-
-export const ResizingResults: Story = {
+export const Resizing: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Command dialogs automatically animate their height as search results change.',
+      },
+    },
+  },
   render: (args) => <PaletteTrigger items={args.items} />,
 };
 
-export const EmptyResults: Story = {
+export const Empty: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Custom empty states are displayed when no commands match the search query.',
+      },
+    },
+  },
   render: (args) => (
     <PaletteTrigger items={args.items}>
       <Command.Input />
@@ -159,6 +212,13 @@ export const EmptyResults: Story = {
 };
 
 export const Composed: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Commands can be composed manually with subcomponents.',
+      },
+    },
+  },
   args: {
     items: groupedItems,
   },
