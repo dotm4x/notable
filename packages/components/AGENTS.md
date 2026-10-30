@@ -891,6 +891,21 @@ Choose stories that demonstrate the public contract clearly and reveal meaningfu
 - Reuse existing Notable components, design tokens, and Lucide icons.
 - Avoid emoji and arbitrary placeholder glyphs when an appropriate icon is available.
 
+### Story naming and documentation standards
+
+- **Story Naming:** Use concise, descriptive names in Title Case. Prefer 1-2 words (maximum 3 words). Use `Default` as the first story. Avoid redundant or vague prefixes/terms such as `With`, `Has`, `Using`, `Example`, `Basic`, or `Demo`.
+- **Mandatory Story Descriptions:** Every exported story must include a concise, one-sentence description in English using native Storybook documentation parameters:
+  ```tsx
+  parameters: {
+    docs: {
+      description: {
+        story: 'Explains what this specific story demonstrates.',
+      },
+    },
+  },
+  ```
+- **Meta Configuration and Layout:** Normalize meta objects using `satisfies Meta<typeof Component>` and `tags: ['autodocs']`. Use `parameters: { layout: 'centered' }` by default for isolated controls and compact/medium components, reserving `fullscreen` or `padded` only for page-level structural components (such as headers or footers).
+
 ### Compound components
 
 - Demonstrate the intended namespace API.
