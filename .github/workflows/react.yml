@@ -14,7 +14,7 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
-      - '.github/workflows/components-react.yml'
+      - '.github/workflows/react.yml'
 
 permissions:
   contents: read
