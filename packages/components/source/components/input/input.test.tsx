@@ -142,7 +142,7 @@ describe('Input', () => {
       screen.getByRole('textbox', { name: 'Grammar field' }),
     ).toHaveAttribute('aria-invalid', 'grammar');
     expect(
-      screen.getByRole('textbox').closest('.notable-input-field'),
+      screen.getByRole('textbox').closest('.notable-field'),
     ).toHaveAttribute('data-invalid');
   });
 

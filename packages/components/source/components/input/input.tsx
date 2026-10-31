@@ -67,7 +67,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
   return (
     <Field.Root
-      className="notable-input-field"
       data-invalid={isInvalid || undefined}
       data-readonly={props.readOnly || undefined}
       disabled={props.disabled}
