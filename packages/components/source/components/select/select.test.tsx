@@ -73,6 +73,14 @@ function ControlledSelect({
   );
 }
 
+async function openWithKeyboard(user: ReturnType<typeof userEvent.setup>) {
+  await user.tab();
+  await user.keyboard('{ArrowDown}');
+  await waitFor(() =>
+    expect(screen.getByRole('option', { name: 'Apple' })).toHaveFocus(),
+  );
+}
+
 describe('Select', () => {
   afterEach(() => {
     cleanup();
@@ -220,8 +228,7 @@ describe('Select', () => {
     render(<BasicSelect onValueChange={onValueChange} />);
 
     // Act
-    await user.tab();
-    await user.keyboard('{ArrowDown}');
+    await openWithKeyboard(user);
     await user.keyboard('{ArrowDown}');
     await user.keyboard('{Enter}');
 
@@ -234,8 +241,7 @@ describe('Select', () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
     render(<BasicSelect onValueChange={onValueChange} />);
-    await user.tab();
-    await user.keyboard('{ArrowDown}');
+    await openWithKeyboard(user);
     await user.keyboard('{ArrowDown}');
 
     // Act
@@ -251,8 +257,7 @@ describe('Select', () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
     render(<BasicSelect onValueChange={onValueChange} />);
-    await user.tab();
-    await user.keyboard('{ArrowDown}');
+    await openWithKeyboard(user);
 
     // Act
     await user.keyboard('{End}');
