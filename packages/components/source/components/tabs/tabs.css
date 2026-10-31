@@ -136,6 +136,12 @@
   white-space: normal;
 }
 
+.notable-tabs[data-orientation='vertical']
+  .notable-tabs__list
+  > .notable-tabs__highlight {
+  border-radius: var(--notable-radius-sm) 0 0 var(--notable-radius-sm);
+}
+
 .notable-tabs[data-orientation='vertical'] .notable-tabs__indicator {
   top: 0;
   bottom: auto;
