@@ -10,8 +10,6 @@
 
 .notable-table-of-contents__highlight {
   border-radius: var(--notable-radius-xs);
-  background-color: var(--notable-color-surface-hover);
-  pointer-events: none;
 }
 
 .notable-table-of-contents__header {
@@ -56,7 +54,6 @@
 }
 
 .notable-table-of-contents__link:hover {
-  background-color: var(--notable-color-surface-hover);
   color: var(--notable-color-text);
 }
 

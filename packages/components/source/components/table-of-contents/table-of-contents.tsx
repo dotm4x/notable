@@ -267,7 +267,10 @@ const TableOfContentsRoot = forwardRef<HTMLElement, TableOfContentsRootProps>(
               .filter(Boolean)
               .join(' ')}
           >
-            <AnimatedHighlight className="notable-table-of-contents__highlight" />
+            <AnimatedHighlight
+              className="notable-table-of-contents__highlight"
+              followTargetShape
+            />
             {children}
           </nav>
         </LayoutGroup>
