@@ -42,4 +42,6 @@ export * from './switch/index.js';
 export * from './tabs/index.js';
 export * from './time-picker/index.js';
 export * from './toast/index.js';
+export * from './toggle/index.js';
+export * from './toggle-group/index.js';
 export * from './tooltip/index.js';
