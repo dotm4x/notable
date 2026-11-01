@@ -41,7 +41,7 @@
   box-sizing: border-box;
   min-height: 44px;
   padding: var(--notable-spacing-2) var(--notable-spacing-3);
-  border-radius: var(--notable-radius-xs);
+  border-radius: var(--notable-radius-sm);
   color: var(--notable-color-text-muted);
   font-size: var(--notable-font-size-sm);
   line-height: var(--notable-line-height-normal);
