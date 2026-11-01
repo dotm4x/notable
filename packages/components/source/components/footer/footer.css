@@ -62,10 +62,12 @@
 }
 
 .notable-footer .notable-link {
-  color: var(--notable-color-text-muted);
+  color: var(--notable-color-text);
   font-size: var(--notable-font-size-sm);
 }
 
-.notable-footer .notable-link:hover {
+.notable-footer .notable-link__text {
   color: var(--notable-color-text);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
