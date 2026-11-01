@@ -1,0 +1,7 @@
+.site-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--notable-spacing-3);
+  margin-block-start: var(--notable-spacing-8);
+}

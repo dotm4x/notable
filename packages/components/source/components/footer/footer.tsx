@@ -8,6 +8,8 @@ import './footer.css';
 
 /** Props for {@link Footer}, in addition to native `footer` attributes. */
 export type FooterProps = HTMLAttributes<HTMLElement> & {
+  /** Renders the footer without a background. Defaults to `false`. */
+  transparent?: boolean;
   /** Footer content, usually `Footer.Content` and `Footer.Bottom`. */
   children?: ReactNode;
 };
@@ -52,10 +54,16 @@ export type FooterBottomProps = HTMLAttributes<HTMLDivElement> & {
  * `Footer.Bottom`.
  */
 const FooterRoot = forwardRef<HTMLElement, FooterProps>(function Footer(
-  { children, className, ...props },
+  { children, className, transparent = false, ...props },
   ref,
 ) {
-  const classes = ['notable-footer', className].filter(Boolean).join(' ');
+  const classes = [
+    'notable-footer',
+    transparent && 'notable-footer--transparent',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <footer ref={ref} className={classes} {...props}>

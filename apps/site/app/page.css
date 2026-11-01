@@ -1,0 +1,33 @@
+.site-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.site-main {
+  display: grid;
+  flex: 1;
+  place-items: center;
+}
+
+.site-hero {
+  width: 100%;
+  padding-block: clamp(5rem, 16vh, 10rem);
+  text-align: center;
+  transform: translateY(-4vh);
+}
+
+.site-hero h1 {
+  max-width: 16ch;
+  margin: 0 auto;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.site-hero p {
+  max-width: 56ch;
+  margin: var(--notable-spacing-4) auto 0;
+  color: var(--notable-color-text-muted);
+  font-size: clamp(1.125rem, 2vw, var(--notable-font-size-xl));
+}

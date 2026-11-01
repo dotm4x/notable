@@ -34,6 +34,7 @@ export * from './radio-group/index.js';
 export * from './scroll-area/index.js';
 export * from './segmented-control/index.js';
 export * from './select/index.js';
+export * from './sidebar/index.js';
 export * from './separator/index.js';
 export * from './shortcut/index.js';
 export * from './skeleton/index.js';

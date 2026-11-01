@@ -12,6 +12,11 @@
   overflow-wrap: anywhere;
 }
 
+.notable-footer--transparent {
+  background: transparent;
+  border-block-start: 0;
+}
+
 .notable-footer__content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));

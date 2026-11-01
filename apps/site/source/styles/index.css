@@ -8,6 +8,14 @@ body {
   line-height: var(--notable-line-height-relaxed);
 }
 
+main {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 72ch;
+  margin-inline: auto;
+  padding-inline: var(--notable-spacing-4);
+}
+
 a {
   color: inherit;
 }
