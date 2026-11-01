@@ -111,6 +111,28 @@ describe('Select', () => {
     expect(trigger.querySelector('.notable-select__icon')).not.toBeNull();
   });
 
+  it('animates the selected value width when its label changes', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<BasicSelect defaultValue="apple" />);
+    const trigger = screen.getByRole('combobox', { name: 'Fruit' });
+    const animatedValue = trigger.querySelector(
+      '.notable-auto-size[data-axis="horizontal"]',
+    );
+
+    expect(animatedValue).not.toBeNull();
+
+    // Act
+    await user.click(trigger);
+    await user.click(await screen.findByRole('option', { name: 'Banana' }));
+
+    // Assert
+    expect(trigger).toHaveTextContent('Banana');
+    expect(
+      trigger.querySelector('.notable-auto-size[data-axis="horizontal"]'),
+    ).toBe(animatedValue);
+  });
+
   it('opens the popup when the trigger is clicked', async () => {
     // Arrange
     const user = userEvent.setup();

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 import { Select } from './select.js';
 
@@ -80,6 +81,18 @@ export const DefaultValue: Story = {
       </Select.Root>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Fruit' }));
+
+    const popup = within(document.body);
+    const selectedOption = await popup.findByRole('option', { name: 'Banana' });
+    const unselectedOption = popup.getByRole('option', { name: 'Apple' });
+
+    expect(getComputedStyle(selectedOption).fontWeight).toBe(
+      getComputedStyle(unselectedOption).fontWeight,
+    );
+  },
 };
 
 export const Controlled: Story = {

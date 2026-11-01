@@ -47,11 +47,29 @@
 }
 
 .notable-select__value {
-  flex: 1 1 auto;
+  display: block;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.notable-select__value-container {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.notable-select__value-container[data-axis='horizontal']
+  > .notable-auto-size__content {
+  max-width: 100%;
+}
+
+.notable-control-group
+  > .notable-select__trigger
+  > .notable-select__value-container[data-axis='horizontal']
+  > .notable-auto-size__content {
+  max-width: none;
 }
 
 .notable-select__value[data-placeholder] {
@@ -115,10 +133,6 @@
   cursor: pointer;
   user-select: none;
   overflow-wrap: anywhere;
-}
-
-.notable-select__item[data-selected] {
-  font-weight: var(--notable-font-weight-semibold);
 }
 
 .notable-select__item[data-disabled] {

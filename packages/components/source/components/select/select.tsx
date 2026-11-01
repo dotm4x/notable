@@ -1,5 +1,6 @@
 import { Select as BaseSelect } from '@base-ui/react/select';
 import { Check, ChevronDown } from 'lucide-react';
+import { AutoSize } from '../../internal/primitives/auto-size/auto-size.js';
 import {
   Children,
   forwardRef,
@@ -167,11 +168,13 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
 const SelectValue = forwardRef<HTMLSpanElement, SelectValueProps>(
   function SelectValue({ className, ...props }, ref) {
     return (
-      <BaseSelect.Value
-        ref={ref}
-        className={joinClassNames('notable-select__value', className)}
-        {...props}
-      />
+      <AutoSize axis="horizontal" className="notable-select__value-container">
+        <BaseSelect.Value
+          ref={ref}
+          className={joinClassNames('notable-select__value', className)}
+          {...props}
+        />
+      </AutoSize>
     );
   },
 );
