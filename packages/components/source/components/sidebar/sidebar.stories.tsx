@@ -10,6 +10,7 @@ import {
   UserRound,
 } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { Avatar } from '../avatar/avatar.js';
 import { Sidebar } from './sidebar.js';
 
@@ -154,6 +155,130 @@ export const Default: Story = {
 
 export const Collapsed: Story = {
   render: () => <SidebarExample defaultOpen={false} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const sidebar = canvas.getByRole('navigation', { name: 'Sidebar' });
+    const brand = canvasElement.querySelector<HTMLElement>(
+      '.notable-sidebar__brand',
+    );
+    const brandIcon = brand?.querySelector<HTMLElement>(
+      '.notable-sidebar__brand-icon',
+    );
+    const items = [
+      canvas.getByRole('link', { name: 'Overview' }),
+      canvas.getByRole('button', { name: 'Design system' }),
+    ];
+
+    if (!brand || !brandIcon) {
+      throw new Error('Expected the collapsed sidebar brand to have an icon.');
+    }
+
+    const brandBounds = brand.getBoundingClientRect();
+    const brandIconBounds = brandIcon.getBoundingClientRect();
+    expect(
+      Math.abs(
+        brandBounds.left +
+          brandBounds.width / 2 -
+          (brandIconBounds.left + brandIconBounds.width / 2),
+      ),
+      'brand icon horizontal alignment',
+    ).toBeLessThan(2);
+
+    const itemIcons = items.map((item) => {
+      const icon = item.querySelector<HTMLElement>(
+        '.notable-sidebar__item-icon',
+      );
+
+      if (!icon) {
+        throw new Error(
+          'Expected each collapsed sidebar option to have an icon.',
+        );
+      }
+
+      return { item, icon };
+    });
+    const activeWidthTransition = () =>
+      sidebar
+        .getAnimations()
+        .find(
+          (animation): animation is CSSTransition =>
+            animation instanceof CSSTransition &&
+            animation.transitionProperty === 'width' &&
+            animation.playState === 'running',
+        );
+
+    for (const { item, icon } of itemIcons) {
+      const { height, width, left, top } = item.getBoundingClientRect();
+      const iconBounds = icon.getBoundingClientRect();
+
+      expect(width).toBeGreaterThanOrEqual(38);
+      expect(
+        Math.abs(width - height),
+        `option size: ${width}x${height}`,
+      ).toBeLessThan(1);
+      expect(
+        Math.abs(left + width / 2 - (iconBounds.left + iconBounds.width / 2)),
+        'icon horizontal alignment',
+      ).toBeLessThan(2);
+      expect(
+        Math.abs(top + height / 2 - (iconBounds.top + iconBounds.height / 2)),
+        'icon vertical alignment',
+      ).toBeLessThan(1);
+      expect(getComputedStyle(item).aspectRatio).not.toBe('auto');
+    }
+
+    await userEvent.click(
+      within(sidebar).getByRole('button', { name: 'Expand sidebar' }),
+    );
+    await activeWidthTransition()?.finished;
+    const brandOffsetBeforeClose =
+      brandIcon.getBoundingClientRect().left +
+      brandIcon.getBoundingClientRect().width / 2 -
+      sidebar.getBoundingClientRect().left;
+    const iconOffsetsBeforeClose = itemIcons.map(({ item, icon }) => {
+      const itemLeft = item.getBoundingClientRect().left;
+      const iconBounds = icon.getBoundingClientRect();
+      return iconBounds.left + iconBounds.width / 2 - itemLeft;
+    });
+    await userEvent.click(
+      within(sidebar).getByRole('button', { name: 'Collapse sidebar' }),
+    );
+    const brandOffsetAfterClose =
+      brandIcon.getBoundingClientRect().left +
+      brandIcon.getBoundingClientRect().width / 2 -
+      sidebar.getBoundingClientRect().left;
+    expect(
+      Math.abs(brandOffsetAfterClose - brandOffsetBeforeClose),
+      'brand icon should move smoothly when the sidebar closes',
+    ).toBeLessThan(2);
+    for (const [index, { item, icon }] of itemIcons.entries()) {
+      const itemLeft = item.getBoundingClientRect().left;
+      const iconBounds = icon.getBoundingClientRect();
+      const currentOffset = iconBounds.left + iconBounds.width / 2 - itemLeft;
+      expect(
+        Math.abs(currentOffset - iconOffsetsBeforeClose[index]!),
+      ).toBeLessThan(10);
+    }
+
+    const closeTransition = activeWidthTransition();
+    if (closeTransition) {
+      const maxItemHeight = () =>
+        Math.max(...items.map((item) => item.getBoundingClientRect().height));
+      const heights = [maxItemHeight()];
+
+      while (closeTransition.playState === 'running') {
+        await new Promise<void>((resolve) => {
+          requestAnimationFrame(() => resolve());
+        });
+        heights.push(maxItemHeight());
+      }
+
+      expect(Math.max(...heights)).toBeLessThanOrEqual(40);
+    }
+
+    expect(sidebar).toHaveAttribute('data-state', 'collapsed');
+    expect(getComputedStyle(sidebar).transition).toContain('width');
+  },
   parameters: {
     docs: {
       description: {
