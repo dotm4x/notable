@@ -343,7 +343,11 @@ describe('NavigationMenu', () => {
           <NavigationMenu.Item value="products">
             <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
             <NavigationMenu.Content>
-              <NavigationMenu.Link href="/editor" closeOnClick>
+              <NavigationMenu.Link
+                href="/editor"
+                closeOnClick
+                onClick={(event) => event.preventDefault()}
+              >
                 Editor
               </NavigationMenu.Link>
             </NavigationMenu.Content>
