@@ -9,7 +9,7 @@
 }
 
 .notable-table-of-contents__highlight {
-  border-radius: var(--notable-radius-xs);
+  border-radius: var(--notable-radius-sm);
 }
 
 .notable-table-of-contents__header {
