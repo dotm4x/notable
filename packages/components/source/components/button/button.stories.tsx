@@ -101,7 +101,7 @@ export const Icons: Story = {
       </Button>
 
       <Button variant="outline" size="icon-small" aria-label="Search">
-        <Search aria-hidden="true" />
+        <Search aria-hidden="true" size={20} />
       </Button>
 
       <Button variant="secondary" size="icon-large" aria-label="More options">
