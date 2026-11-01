@@ -62,8 +62,8 @@
 }
 
 .notable-empty__media--variant-icon > svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: var(--notable-spacing-5);
+  height: var(--notable-spacing-5);
   flex-shrink: 0;
 }
 

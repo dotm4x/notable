@@ -40,7 +40,7 @@
 }
 
 .notable-scroll-area__viewport:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: -2px;
 }
 
@@ -53,15 +53,15 @@
   --_mask-vertical: linear-gradient(
     to bottom,
     transparent 0,
-    #000 var(--_fade-top),
-    #000 calc(100% - var(--_fade-bottom)),
+    var(--notable-black) var(--_fade-top),
+    var(--notable-black) calc(100% - var(--_fade-bottom)),
     transparent 100%
   );
   --_mask-horizontal: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--_fade-start),
-    #000 calc(100% - var(--_fade-end)),
+    var(--notable-black) var(--_fade-start),
+    var(--notable-black) calc(100% - var(--_fade-end)),
     transparent 100%
   );
 
@@ -100,32 +100,48 @@
   inset-block: 0 auto;
   inset-inline: 0;
   height: var(--_fade-top);
-  mask-image: linear-gradient(to bottom, #000, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+  mask-image: linear-gradient(to bottom, var(--notable-black), transparent);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    var(--notable-black),
+    transparent
+  );
 }
 
 .notable-scroll-area__edge--bottom {
   inset-block: auto 0;
   inset-inline: 0;
   height: var(--_fade-bottom);
-  mask-image: linear-gradient(to top, #000, transparent);
-  -webkit-mask-image: linear-gradient(to top, #000, transparent);
+  mask-image: linear-gradient(to top, var(--notable-black), transparent);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    var(--notable-black),
+    transparent
+  );
 }
 
 .notable-scroll-area__edge--start {
   inset-block: 0;
   inset-inline: 0 auto;
   width: var(--_fade-start);
-  mask-image: linear-gradient(to right, #000, transparent);
-  -webkit-mask-image: linear-gradient(to right, #000, transparent);
+  mask-image: linear-gradient(to right, var(--notable-black), transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    var(--notable-black),
+    transparent
+  );
 }
 
 .notable-scroll-area__edge--end {
   inset-block: 0;
   inset-inline: auto 0;
   width: var(--_fade-end);
-  mask-image: linear-gradient(to left, #000, transparent);
-  -webkit-mask-image: linear-gradient(to left, #000, transparent);
+  mask-image: linear-gradient(to left, var(--notable-black), transparent);
+  -webkit-mask-image: linear-gradient(
+    to left,
+    var(--notable-black),
+    transparent
+  );
 }
 
 .notable-scroll-area--blur:has(:focus-visible) .notable-scroll-area__edge {

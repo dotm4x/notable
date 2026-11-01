@@ -1,6 +1,6 @@
 .notable-switch-field {
-  --notable-switch-width: 2.5rem;
-  --notable-switch-height: 1.5rem;
+  --notable-switch-width: var(--notable-spacing-10);
+  --notable-switch-height: var(--notable-spacing-6);
   --notable-switch-padding: 3px;
   --notable-switch-thumb-size: 0.875rem;
   --notable-switch-travel: calc(
@@ -96,7 +96,7 @@
 }
 
 .notable-switch__input:focus-visible + .notable-switch__track {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
 }

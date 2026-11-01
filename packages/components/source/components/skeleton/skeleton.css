@@ -36,11 +36,11 @@
 }
 
 .notable-skeleton--rectangular {
-  height: 2.5rem;
+  height: var(--notable-spacing-10);
 }
 
 .notable-skeleton--circular {
-  width: 2.5rem;
+  width: var(--notable-spacing-10);
   max-width: none;
   aspect-ratio: 1;
   height: auto;

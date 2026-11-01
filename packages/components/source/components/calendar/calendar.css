@@ -33,8 +33,8 @@
 }
 
 .notable-calendar__nav-icon {
-  width: 1rem;
-  height: 1rem;
+  width: var(--notable-spacing-4);
+  height: var(--notable-spacing-4);
 }
 
 /* Viewport
@@ -93,7 +93,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 2.5rem;
+  max-width: var(--notable-spacing-10);
   aspect-ratio: 1;
   margin: 0 auto;
   padding: 0;
@@ -117,7 +117,7 @@
 }
 
 .notable-calendar__day:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 1px;
 }
 
@@ -170,7 +170,7 @@
   position: absolute;
   inset-inline: 0;
   inset-block-start: 50%;
-  block-size: 2.5rem;
+  block-size: var(--notable-spacing-10);
   translate: 0 -50%;
   background: var(--notable-calendar-range-color, transparent);
   opacity: 0;

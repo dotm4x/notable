@@ -13,7 +13,7 @@
 
 .notable-combobox__trigger:focus-visible,
 .notable-combobox__clear:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 

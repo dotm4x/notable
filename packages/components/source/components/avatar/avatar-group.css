@@ -1,5 +1,5 @@
 .notable-avatar-group {
-  --notable-avatar-group-size: 2.5rem;
+  --notable-avatar-group-size: var(--notable-spacing-10);
 
   position: relative;
   display: inline-flex;
@@ -15,15 +15,15 @@
 }
 
 .notable-avatar-group--small {
-  --notable-avatar-group-size: 2rem;
+  --notable-avatar-group-size: var(--notable-spacing-8);
 }
 
 .notable-avatar-group--medium {
-  --notable-avatar-group-size: 2.5rem;
+  --notable-avatar-group-size: var(--notable-spacing-10);
 }
 
 .notable-avatar-group--large {
-  --notable-avatar-group-size: 3rem;
+  --notable-avatar-group-size: var(--notable-spacing-12);
 }
 
 .notable-avatar-group--extra-large {
@@ -45,14 +45,18 @@
 }
 
 .notable-avatar-group__item + .notable-avatar-group__item {
-  margin-inline-start: calc(-1 * var(--notable-avatar-group-overlap, 8px));
+  margin-inline-start: calc(
+    -1 * var(--notable-avatar-group-overlap, var(--notable-spacing-2))
+  );
 }
 
 .notable-avatar-group--vertical
   .notable-avatar-group__item
   + .notable-avatar-group__item {
   margin-inline-start: 0;
-  margin-block-start: calc(-1 * var(--notable-avatar-group-overlap, 8px));
+  margin-block-start: calc(
+    -1 * var(--notable-avatar-group-overlap, var(--notable-spacing-2))
+  );
 }
 
 .notable-avatar-group__item:hover,

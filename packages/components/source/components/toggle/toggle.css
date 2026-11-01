@@ -5,7 +5,7 @@
   justify-content: center;
   gap: var(--notable-spacing-2);
 
-  min-height: 2.5rem;
+  min-height: var(--notable-spacing-10);
   padding: var(--notable-spacing-2) var(--notable-spacing-4);
 
   border: var(--notable-border-width) solid transparent;
@@ -32,7 +32,7 @@
 }
 
 .notable-toggle:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .notable-toggle--small {
-  min-height: 2rem;
+  min-height: var(--notable-spacing-8);
   padding: var(--notable-spacing-1) var(--notable-spacing-3);
   font-size: var(--notable-font-size-xs);
 }

@@ -5,7 +5,7 @@
   color: var(--notable-color-text);
   font-weight: var(--notable-font-weight-medium);
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: var(--notable-radius-xs);
   transition: color var(--notable-duration-fast) var(--notable-easing-standard);
 }
 
@@ -33,7 +33,7 @@
 }
 
 .notable-link:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 

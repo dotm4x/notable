@@ -56,8 +56,8 @@
 
 .notable-pagination--small .notable-pagination__control,
 .notable-pagination--small .notable-pagination__page {
-  min-width: 2rem;
-  height: 2rem;
+  min-width: var(--notable-spacing-8);
+  height: var(--notable-spacing-8);
 }
 
 .notable-pagination__page {
@@ -80,7 +80,7 @@
 
 .notable-pagination__control:focus-visible,
 .notable-pagination__page:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 
@@ -113,14 +113,14 @@
 }
 
 .notable-pagination--small .notable-pagination__ellipsis {
-  min-width: 2rem;
-  height: 2rem;
+  min-width: var(--notable-spacing-8);
+  height: var(--notable-spacing-8);
 }
 
 .notable-pagination__icon {
   flex-shrink: 0;
-  width: 1rem;
-  height: 1rem;
+  width: var(--notable-spacing-4);
+  height: var(--notable-spacing-4);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -48,7 +48,7 @@
 }
 
 .notable-file-upload__dropzone:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 
@@ -242,7 +242,7 @@
 }
 
 .notable-file-upload__add:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 

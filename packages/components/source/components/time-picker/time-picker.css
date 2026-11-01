@@ -143,7 +143,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 3rem;
+  min-width: var(--notable-spacing-12);
   min-height: 2.25rem;
   padding: 0 var(--notable-spacing-3);
   border-radius: var(--notable-radius-md);
@@ -166,7 +166,7 @@
   inset-inline-start: 0;
   top: 50%;
   width: 3px;
-  height: 1.25rem;
+  height: var(--notable-spacing-5);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-primary);
   transform: translateY(-50%);

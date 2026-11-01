@@ -45,12 +45,12 @@
 }
 
 .notable-radio-group--medium {
-  --notable-radio-group-control-size: 1rem;
-  --notable-radio-group-dot-size: 0.5rem;
+  --notable-radio-group-control-size: var(--notable-spacing-4);
+  --notable-radio-group-dot-size: var(--notable-spacing-2);
 }
 
 .notable-radio-group--large {
-  --notable-radio-group-control-size: 1.25rem;
+  --notable-radio-group-control-size: var(--notable-spacing-5);
   --notable-radio-group-dot-size: 0.625rem;
 }
 
@@ -129,7 +129,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border: 2px solid var(--notable-color-border-strong);
+  border: var(--notable-border-width) solid var(--notable-color-border-strong);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-surface);
   transition:
@@ -175,7 +175,7 @@
 /* Keyboard focus */
 
 .notable-radio-group__input:focus-visible + .notable-radio-group__indicator {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 

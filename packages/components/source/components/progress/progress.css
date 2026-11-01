@@ -76,8 +76,8 @@
    ========================================================================== */
 
 .notable-progress--circular {
-  --notable-progress-diameter: 24px;
-  --notable-progress-thickness: 4px;
+  --notable-progress-diameter: var(--notable-spacing-6);
+  --notable-progress-thickness: var(--notable-spacing-1);
   --notable-progress-radius: calc(
     (var(--notable-progress-diameter) - var(--notable-progress-thickness)) / 2
   );
@@ -100,18 +100,18 @@
 /* Circular sizes */
 
 .notable-progress--circular.notable-progress--small {
-  --notable-progress-diameter: 16px;
+  --notable-progress-diameter: var(--notable-spacing-4);
   --notable-progress-thickness: 3px;
 }
 
 .notable-progress--circular.notable-progress--medium {
-  --notable-progress-diameter: 24px;
-  --notable-progress-thickness: 4px;
+  --notable-progress-diameter: var(--notable-spacing-6);
+  --notable-progress-thickness: var(--notable-spacing-1);
 }
 
 .notable-progress--circular.notable-progress--large {
-  --notable-progress-diameter: 32px;
-  --notable-progress-thickness: 4px;
+  --notable-progress-diameter: var(--notable-spacing-8);
+  --notable-progress-thickness: var(--notable-spacing-1);
 }
 
 /* Circular SVG */

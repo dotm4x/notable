@@ -5,7 +5,7 @@
   justify-content: center;
   gap: var(--notable-spacing-2);
 
-  min-height: 2.5rem;
+  min-height: var(--notable-spacing-10);
   padding: var(--notable-spacing-2) var(--notable-spacing-4);
 
   border: var(--notable-border-width) solid transparent;
@@ -30,7 +30,7 @@
 }
 
 .notable-button:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 
@@ -145,13 +145,13 @@
 /* Sizes */
 
 .notable-button--small {
-  min-height: 2rem;
+  min-height: var(--notable-spacing-8);
   padding: var(--notable-spacing-1) var(--notable-spacing-3);
   font-size: var(--notable-font-size-xs);
 }
 
 .notable-button--medium {
-  min-height: 2.5rem;
+  min-height: var(--notable-spacing-10);
   padding: var(--notable-spacing-2) var(--notable-spacing-4);
 }
 
@@ -163,17 +163,17 @@
 /* Icon sizes */
 
 .notable-button--icon {
-  width: 2.5rem;
-  min-width: 2.5rem;
-  min-height: 2.5rem;
+  width: var(--notable-spacing-10);
+  min-width: var(--notable-spacing-10);
+  min-height: var(--notable-spacing-10);
   padding: 0;
   aspect-ratio: 1;
 }
 
 .notable-button--icon-small {
-  width: 2rem;
-  min-width: 2rem;
-  min-height: 2rem;
+  width: var(--notable-spacing-8);
+  min-width: var(--notable-spacing-8);
+  min-height: var(--notable-spacing-8);
   padding: 0;
   aspect-ratio: 1;
 }

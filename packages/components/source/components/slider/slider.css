@@ -100,8 +100,8 @@
   z-index: 1;
   inset-block-start: 50%;
   inset-inline-start: var(--notable-slider-mark-position);
-  width: 2px;
-  height: 8px;
+  width: var(--notable-border-width);
+  height: var(--notable-spacing-2);
   border-radius: var(--notable-radius-full);
   background: var(--notable-color-border-strong);
   pointer-events: none;
@@ -143,8 +143,8 @@
   inset-block-start: auto;
   inset-inline-start: 50%;
   bottom: var(--notable-slider-mark-position);
-  width: 8px;
-  height: 2px;
+  width: var(--notable-spacing-2);
+  height: var(--notable-border-width);
   translate: -50% 50%;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .notable-slider__thumb:has(input:focus-visible) {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
 }

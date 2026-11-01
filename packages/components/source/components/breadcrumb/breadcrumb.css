@@ -45,7 +45,7 @@
 
 .notable-breadcrumb__link:focus-visible,
 .notable-breadcrumb__trigger:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 
@@ -56,7 +56,7 @@
 
 .notable-breadcrumb__current {
   color: var(--notable-color-text);
-  font-weight: 500;
+  font-weight: var(--notable-font-weight-medium);
 }
 
 .notable-breadcrumb__menu-link {

@@ -16,15 +16,15 @@
 }
 
 .notable-avatar--small {
-  --notable-avatar-size: 2rem;
+  --notable-avatar-size: var(--notable-spacing-8);
 }
 
 .notable-avatar--medium {
-  --notable-avatar-size: 2.5rem;
+  --notable-avatar-size: var(--notable-spacing-10);
 }
 
 .notable-avatar--large {
-  --notable-avatar-size: 3rem;
+  --notable-avatar-size: var(--notable-spacing-12);
 }
 
 .notable-avatar--extra-large {

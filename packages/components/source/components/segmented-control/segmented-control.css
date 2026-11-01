@@ -46,20 +46,20 @@
 }
 
 .notable-segmented-control--small {
-  min-height: 2rem;
+  min-height: var(--notable-spacing-8);
   padding: 2px;
   font-size: var(--notable-font-size-xs);
 }
 
 .notable-segmented-control--medium {
-  min-height: 2.5rem;
+  min-height: var(--notable-spacing-10);
   padding: 3px;
   font-size: var(--notable-font-size-sm);
 }
 
 .notable-segmented-control--large {
   min-height: 2.875rem;
-  padding: 4px;
+  padding: var(--notable-spacing-1);
   font-size: var(--notable-font-size-md);
 }
 
@@ -70,7 +70,7 @@
   left: 0;
   height: 100%;
   box-sizing: border-box;
-  border-radius: calc(var(--notable-radius-full) - 2px);
+  border-radius: calc(var(--notable-radius-full) - var(--notable-border-width));
   background-color: var(--notable-color-surface-raised);
   box-shadow: var(--notable-shadow-md);
   pointer-events: none;
@@ -89,7 +89,7 @@
   align-items: center;
   justify-content: center;
   min-width: 0;
-  border-radius: calc(var(--notable-radius-full) - 2px);
+  border-radius: calc(var(--notable-radius-full) - var(--notable-border-width));
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -162,7 +162,7 @@
 
 .notable-segmented-control__input:focus-visible
   ~ .notable-segmented-control__content {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
 }

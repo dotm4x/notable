@@ -6,8 +6,8 @@
 .notable-tooltip__content {
   z-index: 1000;
   width: max-content;
-  max-width: min(16rem, calc(100vw - 2rem));
-  max-height: calc(100vh - 1rem);
+  max-width: min(16rem, calc(100vw - var(--notable-spacing-8)));
+  max-height: calc(100vh - var(--notable-spacing-4));
   overflow: auto;
   padding: var(--notable-spacing-2) var(--notable-spacing-3);
   border-radius: var(--notable-radius-xl);

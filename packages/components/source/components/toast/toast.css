@@ -346,7 +346,7 @@
 
 .notable-toast__close:focus-visible,
 .notable-toast__action:focus-visible {
-  outline: 2px solid var(--notable-color-focus);
+  outline: var(--notable-border-width) solid var(--notable-color-focus);
   outline-offset: 2px;
 }
 
