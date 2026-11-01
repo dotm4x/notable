@@ -45,3 +45,4 @@ export * from './toast/index.js';
 export * from './toggle/index.js';
 export * from './toggle-group/index.js';
 export * from './tooltip/index.js';
+export * from './control-group/index.js';

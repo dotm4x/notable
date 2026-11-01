@@ -1,0 +1,158 @@
+.notable-control-group {
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.notable-control-group[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+.notable-control-group > .notable-button--outline {
+  background: var(--notable-color-surface);
+}
+
+.notable-control-group
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-field,
+    .notable-control-group__text
+  ) {
+  position: relative;
+  min-width: 0;
+  border-radius: 0;
+}
+
+.notable-control-group[data-orientation='horizontal']
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-field,
+    .notable-control-group__text
+  )
+  + :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-field,
+    .notable-control-group__text
+  ) {
+  margin-inline-start: calc(0px - var(--notable-border-width));
+}
+
+.notable-control-group[data-orientation='vertical']
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-field,
+    .notable-control-group__text
+  )
+  + :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-field,
+    .notable-control-group__text
+  ) {
+  margin-block-start: calc(0px - var(--notable-border-width));
+}
+
+.notable-control-group[data-orientation='horizontal'] > .notable-field {
+  flex: 1 1 0;
+  width: auto;
+}
+
+.notable-control-group > .notable-select__trigger {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.notable-control-group > .notable-field .notable-field__box {
+  border-radius: 0;
+}
+
+.notable-control-group
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-field,
+    .notable-control-group__text
+  ):focus-visible,
+.notable-control-group > .notable-field:focus-within {
+  z-index: 1;
+}
+
+.notable-control-group[data-orientation='horizontal']
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-control-group__text
+  ):first-child,
+.notable-control-group[data-orientation='horizontal']
+  > .notable-field:first-child
+  .notable-field__box {
+  border-start-start-radius: var(--notable-radius-lg);
+  border-end-start-radius: var(--notable-radius-lg);
+}
+
+.notable-control-group[data-orientation='horizontal']
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-control-group__text
+  ):last-child,
+.notable-control-group[data-orientation='horizontal']
+  > .notable-field:last-child
+  .notable-field__box {
+  border-start-end-radius: var(--notable-radius-lg);
+  border-end-end-radius: var(--notable-radius-lg);
+}
+
+.notable-control-group[data-orientation='vertical']
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-control-group__text
+  ):first-child,
+.notable-control-group[data-orientation='vertical']
+  > .notable-field:first-child
+  .notable-field__box {
+  border-start-start-radius: var(--notable-radius-lg);
+  border-start-end-radius: var(--notable-radius-lg);
+}
+
+.notable-control-group[data-orientation='vertical']
+  > :is(
+    .notable-button,
+    .notable-select__trigger,
+    .notable-control-group__text
+  ):last-child,
+.notable-control-group[data-orientation='vertical']
+  > .notable-field:last-child
+  .notable-field__box {
+  border-end-start-radius: var(--notable-radius-lg);
+  border-end-end-radius: var(--notable-radius-lg);
+}
+
+.notable-control-group__text {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: var(--notable-spacing-3);
+  border: var(--notable-border-width) solid var(--notable-color-border-strong);
+  background: var(--notable-color-surface-sunken);
+  color: var(--notable-color-text-muted);
+  font-family: var(--notable-font-family);
+  font-size: var(--notable-font-size-sm);
+  line-height: var(--notable-line-height-normal);
+  white-space: nowrap;
+}
+
+.notable-control-group > .notable-control-group {
+  margin-inline-start: var(--notable-spacing-2);
+}
+
+.notable-control-group[data-orientation='vertical'] > .notable-control-group {
+  margin-inline-start: 0;
+  margin-block-start: var(--notable-spacing-2);
+}
