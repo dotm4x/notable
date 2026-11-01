@@ -1,10 +1,17 @@
 .notable-table-of-contents {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--notable-spacing-2);
   min-width: 0;
   color: var(--notable-color-text);
   font-family: var(--notable-font-family);
+}
+
+.notable-table-of-contents__highlight {
+  border-radius: var(--notable-radius-xs);
+  background-color: var(--notable-color-surface-hover);
+  pointer-events: none;
 }
 
 .notable-table-of-contents__header {

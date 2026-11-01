@@ -18,6 +18,7 @@ import {
   EASING_STANDARD,
   SPRING_LAYOUT,
 } from '../../styles/motion.js';
+import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import './table-of-contents.css';
 
 /** Supported placement of the table of contents relative to its content. */
@@ -266,6 +267,7 @@ const TableOfContentsRoot = forwardRef<HTMLElement, TableOfContentsRootProps>(
               .filter(Boolean)
               .join(' ')}
           >
+            <AnimatedHighlight className="notable-table-of-contents__highlight" />
             {children}
           </nav>
         </LayoutGroup>
@@ -313,6 +315,7 @@ const TableOfContentsItem = forwardRef<
 ) {
   const { activeId, handleLinkClick, prefersReducedMotion, side } =
     useTableOfContentsContext();
+  const [hovered, setHovered] = useState(false);
   const id = getFragmentId(href);
   const isActive = id !== null && activeId === id;
 
@@ -324,9 +327,12 @@ const TableOfContentsItem = forwardRef<
         href={href}
         aria-current={isActive ? 'location' : undefined}
         data-active={isActive ? '' : undefined}
+        data-highlighted={hovered ? '' : undefined}
         className={['notable-table-of-contents__link', className]
           .filter(Boolean)
           .join(' ')}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         onClick={(event) => {
           onClick?.(event);
           handleLinkClick(event, href);
