@@ -1,5 +1,5 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete';
-import { Search } from 'lucide-react';
+import { Search } from '@notable/icons';
 import {
   createContext,
   forwardRef,

@@ -1,4 +1,4 @@
-import { CircleEllipsis, Plus, Search } from 'lucide-react';
+import { CircleEllipsis, Plus, Search } from '@notable/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './button.js';
 import { Spinner } from '../spinner/spinner.js';

@@ -1,4 +1,4 @@
-import { AtSign, Search, X } from 'lucide-react';
+import { AtSign, Search, X } from '@notable/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Button } from '../button/button.js';

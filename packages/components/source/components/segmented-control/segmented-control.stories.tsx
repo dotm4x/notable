@@ -8,7 +8,7 @@ import {
   LayoutGrid,
   Moon,
   Sun,
-} from 'lucide-react';
+} from '@notable/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SegmentedControl } from './segmented-control.js';
 

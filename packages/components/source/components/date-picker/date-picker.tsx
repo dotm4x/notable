@@ -1,4 +1,4 @@
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar as CalendarIcon } from '@notable/icons';
 import {
   forwardRef,
   useId,

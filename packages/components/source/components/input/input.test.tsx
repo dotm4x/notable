@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Search, X } from 'lucide-react';
+import { Search, X } from '@notable/icons';
 import { createRef, useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { Input } from './input.js';

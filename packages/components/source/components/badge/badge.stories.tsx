@@ -5,7 +5,7 @@ import {
   Clock3,
   Info,
   Sparkles,
-} from 'lucide-react';
+} from '@notable/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge, type BadgeVariant } from './badge.js';
 

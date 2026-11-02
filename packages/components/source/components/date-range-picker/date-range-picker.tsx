@@ -1,4 +1,4 @@
-import { CalendarRange, X } from 'lucide-react';
+import { CalendarRange, X } from '@notable/icons';
 import {
   forwardRef,
   useId,

@@ -1,5 +1,5 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
-import { Check, ChevronDown, X } from 'lucide-react';
+import { Check, ChevronDown, X } from '@notable/icons';
 import {
   Fragment,
   forwardRef,

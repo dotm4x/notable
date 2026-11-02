@@ -8,7 +8,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from '@notable/icons';
 import '../../internal/styles/floating-surface.css';
 import './navigation-menu.css';
 

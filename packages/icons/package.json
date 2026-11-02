@@ -1,0 +1,60 @@
+{
+  "name": "@notable/icons",
+  "version": "0.1.0",
+  "description": "Notable's icon library.",
+  "license": "MIT",
+  "author": "dotm4x",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotm4x/notable.git",
+    "directory": "packages/icons"
+  },
+  "homepage": "https://github.com/dotm4x/notable#readme",
+  "bugs": {
+    "url": "https://github.com/dotm4x/notable/issues"
+  },
+  "keywords": [
+    "icons",
+    "react",
+    "design-system",
+    "ui",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {}
+}

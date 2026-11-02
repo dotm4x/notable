@@ -1,4 +1,4 @@
-import { Clock as ClockIcon } from 'lucide-react';
+import { Clock as ClockIcon } from '@notable/icons';
 import {
   forwardRef,
   useId,

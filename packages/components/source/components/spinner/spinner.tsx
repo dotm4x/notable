@@ -1,4 +1,4 @@
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from '@notable/icons';
 import type { HTMLAttributes } from 'react';
 import './spinner.css';
 

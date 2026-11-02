@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChevronDown, Minus, Plus } from 'lucide-react';
+import { ChevronDown, Minus, Plus } from '@notable/icons';
 import { Collapsible } from './collapsible.js';
 
 const meta = {
