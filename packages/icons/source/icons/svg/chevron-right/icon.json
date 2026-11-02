@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevron-right",
+  "description": "Right chevron for drill-in or next items.",
+  "keywords": [
+    "chevron",
+    "right",
+    "next",
+    "forward",
+    "navigate"
+  ],
+  "categories": [
+    "navigation",
+    "ui"
+  ],
+  "aliases": [
+    "arrow-right-small",
+    "next"
+  ],
+  "useCases": [
+    "next button",
+    "drill-in",
+    "list item"
+  ]
+}

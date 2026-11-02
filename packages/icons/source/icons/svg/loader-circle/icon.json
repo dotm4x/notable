@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "loader-circle",
+  "description": "Circular spinner for loading and busy states.",
+  "keywords": [
+    "loader",
+    "spinner",
+    "loading",
+    "progress",
+    "busy"
+  ],
+  "categories": [
+    "status",
+    "feedback"
+  ],
+  "aliases": [
+    "spinner",
+    "loading"
+  ],
+  "useCases": [
+    "loading state",
+    "spinner",
+    "busy indicator"
+  ]
+}

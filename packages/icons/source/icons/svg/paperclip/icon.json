@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "paperclip",
+  "description": "Paperclip icon for attachments and file uploads.",
+  "keywords": [
+    "paperclip",
+    "attach",
+    "attachment",
+    "file",
+    "clip"
+  ],
+  "categories": [
+    "files",
+    "ui"
+  ],
+  "aliases": [
+    "attach",
+    "attachment"
+  ],
+  "useCases": [
+    "attach file",
+    "upload",
+    "attachment"
+  ]
+}

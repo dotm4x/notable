@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-image",
+  "description": "Image file icon for photo and picture attachments.",
+  "keywords": [
+    "file",
+    "image",
+    "photo",
+    "picture",
+    "media"
+  ],
+  "categories": [
+    "files",
+    "media"
+  ],
+  "aliases": [
+    "image-file",
+    "photo"
+  ],
+  "useCases": [
+    "image file",
+    "photo attachment",
+    "gallery"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "search",
+  "description": "Magnifying glass for search and lookup.",
+  "keywords": [
+    "search",
+    "find",
+    "magnify",
+    "lookup",
+    "query"
+  ],
+  "categories": [
+    "navigation",
+    "ui"
+  ],
+  "aliases": [
+    "find",
+    "magnifying-glass"
+  ],
+  "useCases": [
+    "search input",
+    "find",
+    "filter"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "info",
+  "description": "Information icon for help, details, and guidance.",
+  "keywords": [
+    "info",
+    "information",
+    "help",
+    "details",
+    "about"
+  ],
+  "categories": [
+    "status",
+    "ui"
+  ],
+  "aliases": [
+    "information",
+    "help"
+  ],
+  "useCases": [
+    "info tooltip",
+    "help",
+    "details"
+  ]
+}

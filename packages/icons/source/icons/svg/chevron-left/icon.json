@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevron-left",
+  "description": "Left chevron for back navigation or previous items.",
+  "keywords": [
+    "chevron",
+    "left",
+    "back",
+    "previous",
+    "navigate"
+  ],
+  "categories": [
+    "navigation",
+    "ui"
+  ],
+  "aliases": [
+    "arrow-left",
+    "back"
+  ],
+  "useCases": [
+    "back button",
+    "previous item",
+    "carousel prev"
+  ]
+}

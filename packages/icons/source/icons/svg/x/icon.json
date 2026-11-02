@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "x",
+  "description": "Close icon for dismissing or removing.",
+  "keywords": [
+    "x",
+    "close",
+    "dismiss",
+    "cancel",
+    "remove"
+  ],
+  "categories": [
+    "actions",
+    "ui"
+  ],
+  "aliases": [
+    "close",
+    "cancel"
+  ],
+  "useCases": [
+    "close modal",
+    "dismiss",
+    "remove item"
+  ]
+}

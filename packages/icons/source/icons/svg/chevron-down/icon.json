@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevron-down",
+  "description": "Down chevron for expanding content or dropdowns.",
+  "keywords": [
+    "chevron",
+    "down",
+    "expand",
+    "dropdown",
+    "collapse"
+  ],
+  "categories": [
+    "navigation",
+    "ui"
+  ],
+  "aliases": [
+    "arrow-down",
+    "expand"
+  ],
+  "useCases": [
+    "dropdown toggle",
+    "expand section",
+    "accordion"
+  ]
+}

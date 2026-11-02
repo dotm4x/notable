@@ -1,0 +1,26 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "arrow-right",
+  "description": "Right-pointing arrow used to indicate forward navigation or next actions.",
+  "keywords": [
+    "arrow",
+    "right",
+    "next",
+    "forward",
+    "direction",
+    "navigate"
+  ],
+  "categories": [
+    "navigation",
+    "ui"
+  ],
+  "aliases": [
+    "arrow-forward",
+    "next"
+  ],
+  "useCases": [
+    "next step button",
+    "forward navigation",
+    "carousel next"
+  ]
+}

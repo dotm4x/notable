@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "panel-left",
+  "description": "Panel icon for sidebars and layout toggles.",
+  "keywords": [
+    "panel",
+    "left",
+    "sidebar",
+    "layout",
+    "drawer"
+  ],
+  "categories": [
+    "layout",
+    "navigation"
+  ],
+  "aliases": [
+    "sidebar",
+    "drawer-toggle"
+  ],
+  "useCases": [
+    "sidebar toggle",
+    "panel",
+    "drawer"
+  ]
+}

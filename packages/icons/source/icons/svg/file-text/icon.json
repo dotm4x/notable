@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-text",
+  "description": "Text document icon for notes and articles.",
+  "keywords": [
+    "file",
+    "text",
+    "document",
+    "note",
+    "content"
+  ],
+  "categories": [
+    "files",
+    "content"
+  ],
+  "aliases": [
+    "text-file",
+    "document"
+  ],
+  "useCases": [
+    "text document",
+    "note",
+    "article"
+  ]
+}

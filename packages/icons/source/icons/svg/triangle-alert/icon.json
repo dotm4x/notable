@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "triangle-alert",
+  "description": "Warning triangle for alerts and caution states.",
+  "keywords": [
+    "alert",
+    "warning",
+    "caution",
+    "error",
+    "danger"
+  ],
+  "categories": [
+    "status",
+    "feedback"
+  ],
+  "aliases": [
+    "warning",
+    "alert-triangle"
+  ],
+  "useCases": [
+    "warning message",
+    "error state",
+    "caution"
+  ]
+}

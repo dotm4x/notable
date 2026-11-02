@@ -1,0 +1,25 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "upload",
+  "description": "Upload icon for importing and transferring files.",
+  "keywords": [
+    "upload",
+    "import",
+    "send",
+    "transfer",
+    "cloud"
+  ],
+  "categories": [
+    "actions",
+    "files"
+  ],
+  "aliases": [
+    "import",
+    "upload-cloud"
+  ],
+  "useCases": [
+    "upload file",
+    "import data",
+    "transfer"
+  ]
+}
