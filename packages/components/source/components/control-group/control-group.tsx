@@ -59,7 +59,7 @@ const ControlGroupRoot = forwardRef<HTMLDivElement, ControlGroupProps>(
           ref={ref}
           role="group"
           data-orientation={orientation}
-          className={joinClassNames('notable-control-group', className)}
+          className={joinClassNames('one-control-group', className)}
         />
       </ControlGroupOrientationContext.Provider>
     );
@@ -80,7 +80,7 @@ function ControlGroupSeparator({
     <Separator
       {...props}
       orientation={resolvedOrientation}
-      className={joinClassNames('notable-control-group__separator', className)}
+      className={joinClassNames('one-control-group__separator', className)}
     />
   );
 }
@@ -91,7 +91,7 @@ function ControlGroupText({
   render,
   ...props
 }: ControlGroupTextProps) {
-  const classes = joinClassNames('notable-control-group__text', className);
+  const classes = joinClassNames('one-control-group__text', className);
 
   if (render) {
     return cloneElement(render, {

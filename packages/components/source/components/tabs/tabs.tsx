@@ -107,7 +107,7 @@ const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
       <BaseTabs.Root
         {...props}
         ref={ref}
-        className={['notable-tabs', className].filter(Boolean).join(' ')}
+        className={['one-tabs', className].filter(Boolean).join(' ')}
         orientation={orientation}
         data-orientation={orientation}
         defaultValue={defaultValue}
@@ -233,7 +233,7 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(function TabsList(
     const listRect = list.getBoundingClientRect();
     const tabRect = activeTab.getBoundingClientRect();
     const vertical =
-      list.closest('.notable-tabs')?.getAttribute('data-orientation') ===
+      list.closest('.one-tabs')?.getAttribute('data-orientation') ===
       'vertical';
     setIsVertical(vertical);
     setIndicatorBounds({
@@ -309,7 +309,7 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(function TabsList(
       {...props}
       ref={setListRef}
       activateOnFocus
-      className={['notable-tabs__list', className].filter(Boolean).join(' ')}
+      className={['one-tabs__list', className].filter(Boolean).join(' ')}
       data-dragging={drag.isDragging || undefined}
       onPointerDown={(event: ReactPointerEvent<HTMLDivElement>) => {
         onPointerDown?.(event);
@@ -357,12 +357,12 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(function TabsList(
       }}
     >
       <TabsHighlightContext.Provider value={highlightedValue}>
-        <AnimatedHighlight className="notable-tabs__highlight" />
+        <AnimatedHighlight className="one-tabs__highlight" />
         {children}
       </TabsHighlightContext.Provider>
       {indicatorBounds && (
         <motion.span
-          className="notable-tabs__indicator"
+          className="one-tabs__indicator"
           data-orientation={isVertical ? 'vertical' : 'horizontal'}
           aria-hidden="true"
           initial={false}
@@ -411,11 +411,9 @@ const TabsTrigger = forwardRef<HTMLElement, TabsTriggerProps>(
         data-selector-value={props.value}
         data-highlighted={isHighlighted || undefined}
         data-selector-item
-        className={['notable-tabs__trigger', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-tabs__trigger', className].filter(Boolean).join(' ')}
       >
-        <span className="notable-tabs__trigger-label">{children}</span>
+        <span className="one-tabs__trigger-label">{children}</span>
       </BaseTabs.Tab>
     );
   },
@@ -445,7 +443,7 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
 
       const tabValues = Array.from(
         panel
-          .closest('.notable-tabs')
+          .closest('.one-tabs')
           ?.querySelectorAll<HTMLElement>(
             '[role="tab"][data-selector-value]',
           ) ?? [],
@@ -518,9 +516,7 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
         // Base UI hides a panel as soon as it deselects; hold it visible (and
         // inert) until the exit animation completes.
         hidden={!isActive && isExited}
-        className={['notable-tabs__content', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-tabs__content', className].filter(Boolean).join(' ')}
       />
     );
   },

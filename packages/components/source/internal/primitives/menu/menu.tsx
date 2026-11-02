@@ -1,6 +1,6 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu';
 import { Menu as BaseMenu } from '@base-ui/react/menu';
-import { Check, ChevronRight, Circle } from '@notable/icons';
+import { Check, ChevronRight, Circle } from '@one/icons';
 import {
   createContext,
   forwardRef,
@@ -120,7 +120,7 @@ function joinClassNames(...classNames: (string | undefined)[]): string {
 }
 
 /**
- * Wires Base UI's menu state into Notable. Keyboard navigation, focus
+ * Wires Base UI's menu state into One. Keyboard navigation, focus
  * management, and dismissal come from Base UI.
  */
 export function MenuRoot({
@@ -165,7 +165,7 @@ const MenuPopupSurface = forwardRef<HTMLDivElement, MenuPopupSurfaceProps>(
       <BaseMenu.Popup
         ref={ref}
         className={joinClassNames(
-          'notable-menu__popup notable-floating-surface',
+          'one-menu__popup one-floating-surface',
           className,
         )}
         {...props}
@@ -193,7 +193,7 @@ export const MenuPopup = forwardRef<HTMLDivElement, MenuPopupProps>(
           align={resolvedAlign}
           sideOffset={sideOffset}
           alignOffset={alignOffset}
-          className="notable-menu__positioner"
+          className="one-menu__positioner"
         >
           <MenuPopupSurface ref={ref} className={className} {...props}>
             {children}
@@ -244,7 +244,7 @@ export const MenuContextPopup = forwardRef<
 >(function MenuContextPopup({ className, children, ...props }, ref) {
   return (
     <BaseContextMenu.Portal>
-      <BaseContextMenu.Positioner className="notable-menu__positioner">
+      <BaseContextMenu.Positioner className="one-menu__positioner">
         <MenuPopupSurface ref={ref} className={className} {...props}>
           {children}
         </MenuPopupSurface>
@@ -285,7 +285,7 @@ export const MenuSubmenuTrigger = forwardRef<
     <BaseMenu.SubmenuTrigger
       ref={ref}
       className={joinClassNames(
-        'notable-menu__item notable-menu__submenu-trigger',
+        'one-menu__item one-menu__submenu-trigger',
         className,
       )}
       {...props}
@@ -294,7 +294,7 @@ export const MenuSubmenuTrigger = forwardRef<
       <ChevronRight
         size={16}
         aria-hidden="true"
-        className="notable-menu__submenu-chevron"
+        className="one-menu__submenu-chevron"
       />
     </BaseMenu.SubmenuTrigger>
   );
@@ -305,7 +305,7 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
     return (
       <BaseMenu.Item
         ref={ref}
-        className={joinClassNames('notable-menu__item', className)}
+        className={joinClassNames('one-menu__item', className)}
         {...props}
       />
     );
@@ -321,13 +321,13 @@ export const MenuCheckboxItem = forwardRef<
     <BaseMenu.CheckboxItem
       ref={ref}
       className={joinClassNames(
-        'notable-menu__item notable-menu__item--selectable',
+        'one-menu__item one-menu__item--selectable',
         className,
       )}
       {...props}
     >
       <BaseMenu.CheckboxItemIndicator
-        className="notable-menu__item-indicator"
+        className="one-menu__item-indicator"
         keepMounted
       >
         <Check size={16} aria-hidden="true" />
@@ -343,7 +343,7 @@ export const MenuRadioGroup = forwardRef<HTMLDivElement, MenuRadioGroupProps>(
     return (
       <BaseMenu.RadioGroup
         ref={ref}
-        className={joinClassNames('notable-menu__radio-group', className)}
+        className={joinClassNames('one-menu__radio-group', className)}
         {...props}
       />
     );
@@ -357,13 +357,13 @@ export const MenuRadioItem = forwardRef<HTMLDivElement, MenuRadioItemProps>(
       <BaseMenu.RadioItem
         ref={ref}
         className={joinClassNames(
-          'notable-menu__item notable-menu__item--selectable',
+          'one-menu__item one-menu__item--selectable',
           className,
         )}
         {...props}
       >
         <BaseMenu.RadioItemIndicator
-          className="notable-menu__item-indicator"
+          className="one-menu__item-indicator"
           keepMounted
         >
           <Circle size={8} fill="currentColor" aria-hidden="true" />
@@ -379,7 +379,7 @@ export const MenuGroup = forwardRef<HTMLDivElement, MenuGroupProps>(
     return (
       <BaseMenu.Group
         ref={ref}
-        className={joinClassNames('notable-menu__group', className)}
+        className={joinClassNames('one-menu__group', className)}
         {...props}
       />
     );
@@ -391,7 +391,7 @@ export const MenuGroupLabel = forwardRef<HTMLDivElement, MenuGroupLabelProps>(
     return (
       <BaseMenu.GroupLabel
         ref={ref}
-        className={joinClassNames('notable-menu__group-label', className)}
+        className={joinClassNames('one-menu__group-label', className)}
         {...props}
       />
     );
@@ -403,7 +403,7 @@ export const MenuSeparator = forwardRef<HTMLDivElement, MenuSeparatorProps>(
     return (
       <BaseMenu.Separator
         ref={ref}
-        className={joinClassNames('notable-menu__separator', className)}
+        className={joinClassNames('one-menu__separator', className)}
         {...props}
       />
     );

@@ -38,9 +38,7 @@ export function Tooltip({
   const describedBy = disabled
     ? existingDescribedBy
     : [existingDescribedBy, tooltipId].filter(Boolean).join(' ') || undefined;
-  const wrapperClassName = ['notable-tooltip', className]
-    .filter(Boolean)
-    .join(' ');
+  const wrapperClassName = ['one-tooltip', className].filter(Boolean).join(' ');
 
   return (
     <BaseTooltip.Root disabled={disabled}>
@@ -56,7 +54,7 @@ export function Tooltip({
             <BaseTooltip.Popup
               id={tooltipId}
               role="tooltip"
-              className="notable-tooltip__content"
+              className="one-tooltip__content"
             >
               {content}
             </BaseTooltip.Popup>

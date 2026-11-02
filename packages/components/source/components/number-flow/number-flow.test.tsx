@@ -5,15 +5,15 @@ import { NumberFlow as PublicNumberFlow } from '../../index.js';
 
 function getDigitValues(container: HTMLElement): number[] {
   return Array.from(
-    container.querySelectorAll<HTMLElement>('.notable-number-flow__digit'),
+    container.querySelectorAll<HTMLElement>('.one-number-flow__digit'),
     (digit) => Number(digit.dataset.digit),
   );
 }
 
 function getStripOffsets(container: HTMLElement): string[] {
   return Array.from(
-    container.querySelectorAll<HTMLElement>('.notable-number-flow__strip'),
-    (strip) => strip.style.getPropertyValue('--notable-number-flow-digit'),
+    container.querySelectorAll<HTMLElement>('.one-number-flow__strip'),
+    (strip) => strip.style.getPropertyValue('--one-number-flow-digit'),
   );
 }
 
@@ -41,7 +41,7 @@ describe('NumberFlow', () => {
     const visibleText = getByText('1,234');
 
     // Assert
-    expect(visibleText).toHaveClass('notable-number-flow__sr-only');
+    expect(visibleText).toHaveClass('one-number-flow__sr-only');
     expect(getDigitValues(container)).toEqual([1, 2, 3, 4]);
     expect(getStripOffsets(container)).toEqual(['1', '2', '3', '4']);
   });
@@ -51,11 +51,9 @@ describe('NumberFlow', () => {
     const { container } = render(<NumberFlow value={42} />);
 
     // Assert
-    expect(getRoot(container)).toHaveClass('notable-number-flow');
+    expect(getRoot(container)).toHaveClass('one-number-flow');
     expect(
-      getRoot(container).style.getPropertyValue(
-        '--notable-number-flow-duration',
-      ),
+      getRoot(container).style.getPropertyValue('--one-number-flow-duration'),
     ).toBe('');
   });
 
@@ -90,7 +88,7 @@ describe('NumberFlow', () => {
     rerender(<NumberFlow value={10} />);
 
     // Assert
-    expect(getByText('10')).toHaveClass('notable-number-flow__sr-only');
+    expect(getByText('10')).toHaveClass('one-number-flow__sr-only');
     expect(getDigitValues(container)).toEqual([1, 0]);
   });
 
@@ -115,22 +113,20 @@ describe('NumberFlow', () => {
     rerender(<NumberFlow value={99} />);
 
     // Assert
-    expect(getByText('99')).toHaveClass('notable-number-flow__sr-only');
+    expect(getByText('99')).toHaveClass('one-number-flow__sr-only');
     expect(getDigitValues(container)).toEqual([9, 9]);
   });
 
   it('keeps the element for an unchanged place value when digit count changes', () => {
     // Arrange
     const { container, rerender } = render(<NumberFlow value={9} />);
-    const onesBefore = container.querySelectorAll(
-      '.notable-number-flow__digit',
-    )[0];
+    const onesBefore = container.querySelectorAll('.one-number-flow__digit')[0];
 
     // Act
     rerender(<NumberFlow value={10} />);
 
     // Assert
-    const digits = container.querySelectorAll('.notable-number-flow__digit');
+    const digits = container.querySelectorAll('.one-number-flow__digit');
     expect(digits[1]).toBe(onesBefore);
     expect(digits[1]).toHaveAttribute('data-digit', '0');
   });
@@ -253,7 +249,7 @@ describe('NumberFlow', () => {
     const root = getRoot(container);
 
     // Assert
-    expect(root.style.getPropertyValue('--notable-number-flow-duration')).toBe(
+    expect(root.style.getPropertyValue('--one-number-flow-duration')).toBe(
       '300ms',
     );
   });
@@ -273,7 +269,7 @@ describe('NumberFlow', () => {
     const root = getRoot(container);
 
     // Assert
-    expect(root).toHaveClass('notable-number-flow', 'custom-flow');
+    expect(root).toHaveClass('one-number-flow', 'custom-flow');
     expect(root).toHaveAttribute('id', 'total');
     expect(root.style.color).toBe('rebeccapurple');
   });
@@ -311,7 +307,7 @@ describe('NumberFlow', () => {
     const { container } = render(<NumberFlow value={808} />);
 
     // Act
-    const visualLayer = container.querySelector('.notable-number-flow__visual');
+    const visualLayer = container.querySelector('.one-number-flow__visual');
 
     // Assert
     expect(visualLayer).toHaveAttribute('aria-hidden', 'true');

@@ -2,20 +2,20 @@
    Accordion
    ========================================================================== */
 
-.notable-accordion {
+.one-accordion {
   display: flex;
   flex-direction: column;
   width: 100%;
   min-width: 0;
-  color: var(--notable-color-text);
-  font-family: var(--notable-font-family);
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
 }
 
-.notable-accordion__item {
-  border-bottom: var(--notable-border-width) solid var(--notable-color-border);
+.one-accordion__item {
+  border-bottom: var(--one-border-width) solid var(--one-color-border);
 }
 
-.notable-accordion__heading {
+.one-accordion__heading {
   margin: 0;
   padding: 0;
   font-size: inherit;
@@ -24,65 +24,64 @@
 
 /* Trigger */
 
-.notable-accordion__trigger {
+.one-accordion__trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--notable-spacing-3);
+  gap: var(--one-spacing-3);
   width: 100%;
   margin: 0;
-  padding: var(--notable-spacing-3) 0;
+  padding: var(--one-spacing-3) 0;
   border: 0;
-  border-radius: var(--notable-radius-xs);
+  border-radius: var(--one-radius-xs);
   background: transparent;
   color: inherit;
   font-family: inherit;
-  font-size: var(--notable-font-size-sm);
-  font-weight: var(--notable-font-weight-medium);
-  line-height: var(--notable-line-height-normal);
+  font-size: var(--one-font-size-sm);
+  font-weight: var(--one-font-weight-medium);
+  line-height: var(--one-line-height-normal);
   text-align: start;
   cursor: pointer;
-  transition: color var(--notable-duration-fast) var(--notable-easing-standard);
+  transition: color var(--one-duration-fast) var(--one-easing-standard);
 }
 
-.notable-accordion__trigger:hover:not(:disabled) {
+.one-accordion__trigger:hover:not(:disabled) {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
 
-.notable-accordion__trigger:active:not(:disabled) {
-  color: var(--notable-color-text-muted);
+.one-accordion__trigger:active:not(:disabled) {
+  color: var(--one-color-text-muted);
 }
 
-.notable-accordion__trigger:focus-visible {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-accordion__trigger:focus-visible {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
 }
 
-.notable-accordion__trigger:disabled {
-  color: var(--notable-color-text-disabled);
+.one-accordion__trigger:disabled {
+  color: var(--one-color-text-disabled);
   cursor: not-allowed;
 }
 
-.notable-accordion__title {
+.one-accordion__title {
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
-.notable-accordion__chevron {
+.one-accordion__chevron {
   flex: 0 0 auto;
-  width: var(--notable-spacing-4);
-  height: var(--notable-spacing-4);
-  color: var(--notable-color-text-muted);
-  transition: transform var(--notable-duration-base)
-    var(--notable-easing-standard);
+  width: var(--one-spacing-4);
+  height: var(--one-spacing-4);
+  color: var(--one-color-text-muted);
+  transition: transform var(--one-duration-base) var(--one-easing-standard);
 }
 
-.notable-accordion__trigger:disabled .notable-accordion__chevron {
-  color: var(--notable-color-text-disabled);
+.one-accordion__trigger:disabled .one-accordion__chevron {
+  color: var(--one-color-text-disabled);
 }
 
-.notable-accordion__item[data-open] .notable-accordion__chevron {
+.one-accordion__item[data-open] .one-accordion__chevron {
   transform: rotate(180deg);
 }
 
@@ -90,43 +89,43 @@
    Animates between 0fr and 1fr grid rows so the height follows the content
    without measuring it or animating `height: auto`. */
 
-.notable-accordion__panel {
+.one-accordion__panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows var(--notable-duration-base)
-    var(--notable-easing-standard);
+  transition: grid-template-rows var(--one-duration-base)
+    var(--one-easing-standard);
 }
 
 /* Base UI sets `hidden` on closed panels; keep it from being overridden by `display: grid`. */
-.notable-accordion__panel[hidden] {
+.one-accordion__panel[hidden] {
   display: none;
 }
 
-.notable-accordion__panel[data-open] {
+.one-accordion__panel[data-open] {
   grid-template-rows: 1fr;
 }
 
 /* Starts an opening panel collapsed so it animates open when it mounts. */
-.notable-accordion__panel[data-starting-style] {
+.one-accordion__panel[data-starting-style] {
   grid-template-rows: 0fr;
 }
 
-.notable-accordion__content {
+.one-accordion__content {
   min-height: 0;
   overflow: hidden;
 }
 
-.notable-accordion__content-inner {
-  padding-bottom: var(--notable-spacing-3);
-  font-size: var(--notable-font-size-sm);
-  line-height: var(--notable-line-height-relaxed);
+.one-accordion__content-inner {
+  padding-bottom: var(--one-spacing-3);
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-relaxed);
   overflow-wrap: anywhere;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-accordion__trigger,
-  .notable-accordion__chevron,
-  .notable-accordion__panel {
+  .one-accordion__trigger,
+  .one-accordion__chevron,
+  .one-accordion__panel {
     transition: none;
   }
 }

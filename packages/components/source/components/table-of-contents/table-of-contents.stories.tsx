@@ -26,9 +26,9 @@ export const RightSide: Story = {
     >
       <article
         style={{
-          color: 'var(--notable-color-text)',
-          fontFamily: 'var(--notable-font-family)',
-          lineHeight: 'var(--notable-line-height-relaxed)',
+          color: 'var(--one-color-text)',
+          fontFamily: 'var(--one-font-family)',
+          lineHeight: 'var(--one-line-height-relaxed)',
         }}
       >
         <section id="principles" style={{ minHeight: '16rem' }}>
@@ -120,9 +120,9 @@ export const Default: Story = {
 
       <article
         style={{
-          color: 'var(--notable-color-text)',
-          fontFamily: 'var(--notable-font-family)',
-          lineHeight: 'var(--notable-line-height-relaxed)',
+          color: 'var(--one-color-text)',
+          fontFamily: 'var(--one-font-family)',
+          lineHeight: 'var(--one-line-height-relaxed)',
         }}
       >
         <section id="principles" style={{ minHeight: '16rem' }}>

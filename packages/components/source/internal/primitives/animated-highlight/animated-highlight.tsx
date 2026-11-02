@@ -77,7 +77,7 @@ export function AnimatedHighlight({
     <motion.div
       ref={ref}
       aria-hidden="true"
-      className={['notable-animated-highlight', className]
+      className={['one-animated-highlight', className]
         .filter(Boolean)
         .join(' ')}
       style={{

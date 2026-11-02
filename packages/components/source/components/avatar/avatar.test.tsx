@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { CircleHelp } from '@notable/icons';
+import { CircleHelp } from '@one/icons';
 import { describe, expect, it, vi } from 'vitest';
 import { Avatar } from './avatar.js';
 import { Avatar as PublicAvatar } from '../../index.js';
@@ -8,9 +8,9 @@ describe('Avatar', () => {
   it('renders a default fallback icon', () => {
     const { container } = render(<Avatar data-testid="avatar" />);
 
-    expect(screen.getByTestId('avatar')).toHaveClass('notable-avatar--medium');
+    expect(screen.getByTestId('avatar')).toHaveClass('one-avatar--medium');
     expect(
-      container.querySelector('.notable-avatar__fallback--default'),
+      container.querySelector('.one-avatar__fallback--default'),
     ).toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe('Avatar', () => {
       </Avatar>,
     );
     const defaultFallback = container.querySelector(
-      '.notable-avatar__fallback--default',
+      '.one-avatar__fallback--default',
     );
 
     expect(defaultFallback).toBeVisible();
@@ -88,7 +88,7 @@ describe('Avatar', () => {
     fireEvent.error(screen.getByAltText('Sam'));
 
     expect(
-      container.querySelector('.notable-avatar__fallback--default'),
+      container.querySelector('.one-avatar__fallback--default'),
     ).toBeVisible();
   });
 
@@ -140,9 +140,7 @@ describe('Avatar', () => {
     (size) => {
       render(<Avatar size={size} data-testid="avatar" />);
 
-      expect(screen.getByTestId('avatar')).toHaveClass(
-        `notable-avatar--${size}`,
-      );
+      expect(screen.getByTestId('avatar')).toHaveClass(`one-avatar--${size}`);
     },
   );
 

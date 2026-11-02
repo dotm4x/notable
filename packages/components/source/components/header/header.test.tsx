@@ -29,7 +29,7 @@ describe('Header', () => {
 
     const header = screen.getByTestId('header');
     expect(header.tagName).toBe('HEADER');
-    expect(header).toHaveClass('notable-header', 'notable-header--normal');
+    expect(header).toHaveClass('one-header', 'one-header--normal');
     expect(header).toHaveAttribute('data-mode', 'normal');
     expect(header).not.toHaveAttribute('data-state');
   });
@@ -42,7 +42,7 @@ describe('Header', () => {
     );
 
     const header = screen.getByTestId('header');
-    expect(header).toHaveClass('notable-header--fixed');
+    expect(header).toHaveClass('one-header--fixed');
     expect(header).toHaveAttribute('data-mode', 'fixed');
     expect(header).not.toHaveAttribute('data-state');
   });
@@ -72,7 +72,7 @@ describe('Header', () => {
 
     scrollTo(120);
     expect(header).toHaveAttribute('data-state', 'floating');
-    expect(header).toHaveClass('notable-header--floating');
+    expect(header).toHaveClass('one-header--floating');
   });
 
   it('hides after a sufficient downward scroll and reveals on upward scroll', () => {
@@ -204,7 +204,7 @@ describe('Header', () => {
     expect(ref.current).toBe(screen.getByRole('banner'));
     expect(ref.current).toHaveAttribute('id', 'site-header');
     expect(ref.current).toHaveAttribute('aria-label', 'Site');
-    expect(ref.current).toHaveClass('custom', 'notable-header');
+    expect(ref.current).toHaveClass('custom', 'one-header');
   });
 
   it('is exported from the package entry point', () => {

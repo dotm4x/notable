@@ -2,46 +2,42 @@
    NumberFlow
    ========================================================================== */
 
-.notable-number-flow {
+.one-number-flow {
   position: relative;
   display: inline-block;
   white-space: nowrap;
 }
 
-.notable-number-flow__visual {
+.one-number-flow__visual {
   display: inline;
 }
 
 /* Each digit is a clipped window one line tall. The strip holds glyphs 0-9
    stacked vertically, so each digit moves the strip by one tenth of its height. */
 
-.notable-number-flow__digit {
+.one-number-flow__digit {
   display: inline-block;
   height: 1lh;
   overflow: hidden;
   vertical-align: top;
 }
 
-.notable-number-flow__strip {
+.one-number-flow__strip {
   display: block;
   text-align: center;
-  transform: translate3d(
-    0,
-    calc(var(--notable-number-flow-digit, 0) * -10%),
-    0
-  );
+  transform: translate3d(0, calc(var(--one-number-flow-digit, 0) * -10%), 0);
   transition: transform
-    var(--notable-number-flow-duration, var(--notable-duration-base))
-    var(--notable-easing-spring);
+    var(--one-number-flow-duration, var(--one-duration-base))
+    var(--one-easing-spring);
 }
 
-.notable-number-flow__glyph {
+.one-number-flow__glyph {
   display: block;
 }
 
 /* Visually hidden, but still available to assistive technology. */
 
-.notable-number-flow__sr-only {
+.one-number-flow__sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -54,7 +50,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-number-flow__strip {
+  .one-number-flow__strip {
     transition: none;
   }
 }

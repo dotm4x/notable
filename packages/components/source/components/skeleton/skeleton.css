@@ -2,10 +2,10 @@
    Skeleton
    ========================================================================== */
 
-.notable-skeleton {
-  --notable-skeleton-highlight: color-mix(
+.one-skeleton {
+  --one-skeleton-highlight: color-mix(
     in srgb,
-    var(--notable-color-surface) 70%,
+    var(--one-color-surface) 70%,
     transparent
   );
 
@@ -13,70 +13,70 @@
   display: block;
   max-width: 100%;
   overflow: hidden;
-  background: var(--notable-color-surface-active);
-  border-radius: var(--notable-radius-sm);
+  background: var(--one-color-surface-active);
+  border-radius: var(--one-radius-sm);
   isolation: isolate;
 }
 
-[data-theme='dark'] .notable-skeleton {
-  background: var(--notable-color-surface-hover);
-  --notable-skeleton-highlight: color-mix(
+[data-theme='dark'] .one-skeleton {
+  background: var(--one-color-surface-hover);
+  --one-skeleton-highlight: color-mix(
     in srgb,
-    var(--notable-color-text) 10%,
+    var(--one-color-text) 10%,
     transparent
   );
 }
 
 /* Variants */
 
-.notable-skeleton--text {
+.one-skeleton--text {
   width: 100%;
   height: 1em;
-  border-radius: var(--notable-radius-xs);
+  border-radius: var(--one-radius-xs);
 }
 
-.notable-skeleton--rectangular {
-  height: var(--notable-spacing-10);
+.one-skeleton--rectangular {
+  height: var(--one-spacing-10);
 }
 
-.notable-skeleton--circular {
-  width: var(--notable-spacing-10);
+.one-skeleton--circular {
+  width: var(--one-spacing-10);
   max-width: none;
   aspect-ratio: 1;
   height: auto;
-  border-radius: var(--notable-radius-full);
+  border-radius: var(--one-radius-full);
 }
 
 /* Shimmer: a soft highlight that sweeps across the placeholder */
 
-.notable-skeleton--shimmer::after {
+.one-skeleton--shimmer::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--notable-skeleton-highlight) 50%,
+    var(--one-skeleton-highlight) 50%,
     transparent 100%
   );
   transform: translateX(-100%);
-  animation: notable-skeleton-shimmer calc(var(--notable-duration-slow) * 2)
-    var(--notable-easing-standard) infinite;
+  animation: one-skeleton-shimmer calc(var(--one-duration-slow) * 2)
+    var(--one-easing-standard) infinite;
 }
 
 /* Spotlight: on hover, the shimmer highlight grows from the cursor and follows it */
 
-.notable-skeleton--spotlight::before {
+.one-skeleton--spotlight::before {
   content: '';
   position: absolute;
-  left: var(--notable-skeleton-pointer-x, 50%);
-  top: var(--notable-skeleton-pointer-y, 50%);
+  left: var(--one-skeleton-pointer-x, 50%);
+  top: var(--one-skeleton-pointer-y, 50%);
   width: 12rem;
   aspect-ratio: 1;
-  border-radius: var(--notable-radius-full);
+  border-radius: var(--one-radius-full);
   background: radial-gradient(
     closest-side,
-    var(--notable-skeleton-highlight),
+    var(--one-skeleton-highlight),
     transparent
   );
   translate: -50% -50%;
@@ -84,29 +84,29 @@
   opacity: 0;
   pointer-events: none;
   transition:
-    scale var(--notable-duration-slow) var(--notable-easing-standard),
-    opacity var(--notable-duration-slow) var(--notable-easing-standard);
+    scale var(--one-duration-slow) var(--one-easing-standard),
+    opacity var(--one-duration-slow) var(--one-easing-standard);
 }
 
-.notable-skeleton--spotlight:hover::before {
+.one-skeleton--spotlight:hover::before {
   scale: 1;
   opacity: 1;
 }
 
 /* Pulse: a gentle opacity breathing effect that never fully disappears */
 
-.notable-skeleton--pulse {
-  animation: notable-skeleton-pulse calc(var(--notable-duration-slow) * 2)
-    var(--notable-easing-standard) infinite alternate;
+.one-skeleton--pulse {
+  animation: one-skeleton-pulse calc(var(--one-duration-slow) * 2)
+    var(--one-easing-standard) infinite alternate;
 }
 
-@keyframes notable-skeleton-shimmer {
+@keyframes one-skeleton-shimmer {
   to {
     transform: translateX(100%);
   }
 }
 
-@keyframes notable-skeleton-pulse {
+@keyframes one-skeleton-pulse {
   from {
     opacity: 1;
   }
@@ -117,16 +117,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-skeleton--shimmer::after {
+  .one-skeleton--shimmer::after {
     display: none;
     animation: none;
   }
 
-  .notable-skeleton--spotlight::before {
+  .one-skeleton--spotlight::before {
     display: none;
   }
 
-  .notable-skeleton--pulse {
+  .one-skeleton--pulse {
     animation: none;
   }
 }

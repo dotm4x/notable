@@ -1,4 +1,4 @@
-import { CalendarRange, X } from '@notable/icons';
+import { CalendarRange, X } from '@one/icons';
 import {
   forwardRef,
   useId,
@@ -196,7 +196,7 @@ export const DateRangePicker = forwardRef<
     commit(EMPTY_RANGE);
   };
 
-  const classes = ['notable-date-range-picker__trigger', className]
+  const classes = ['one-date-range-picker__trigger', className]
     .filter(Boolean)
     .join(' ');
 
@@ -214,7 +214,7 @@ export const DateRangePicker = forwardRef<
           {ariaLabel}
         </span>
       )}
-      <div className="notable-date-range-picker">
+      <div className="one-date-range-picker">
         <Popover open={isOpen} onOpenChange={setOpen}>
           <Popover.Trigger>
             <button
@@ -226,21 +226,18 @@ export const DateRangePicker = forwardRef<
               aria-labelledby={labelledBy}
               data-readonly={readOnly || undefined}
             >
-              <span
-                className="notable-date-range-picker__icon"
-                aria-hidden="true"
-              >
+              <span className="one-date-range-picker__icon" aria-hidden="true">
                 <CalendarRange />
               </span>
               <span
                 id={valueId}
-                className="notable-date-range-picker__value"
+                className="one-date-range-picker__value"
                 data-placeholder={hasSelection ? undefined : ''}
               >
                 {displayStart && displayEnd ? (
                   <>
                     {formatDay(displayStart)}
-                    <span className="notable-date-range-picker__separator">
+                    <span className="one-date-range-picker__separator">
                       {' – '}
                     </span>
                     {formatDay(displayEnd)}
@@ -269,7 +266,7 @@ export const DateRangePicker = forwardRef<
         {clearable && isInteractive && hasSelection && (
           <button
             type="button"
-            className="notable-date-range-picker__clear"
+            className="one-date-range-picker__clear"
             aria-label="Clear date range"
             onClick={handleClear}
           >

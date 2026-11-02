@@ -1,3 +1,3 @@
-# @notable/icons
+# @one/icons
 
-Notable's icon library.
+One's icon library.

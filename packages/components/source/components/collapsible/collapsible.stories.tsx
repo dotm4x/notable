@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChevronDown, Minus, Plus } from '@notable/icons';
+import { ChevronDown, Minus, Plus } from '@one/icons';
 import { Collapsible } from './collapsible.js';
 
 const meta = {
@@ -131,7 +131,7 @@ export const LongText: Story = {
       <Collapsible.Content>
         <div>
           <p>
-            Notable components are designed to be expressive, coherent, and
+            One components are designed to be expressive, coherent, and
             accessible. Each disclosure keeps its content in the document so
             that state survives toggling, while the visible height animates
             smoothly between the collapsed and expanded states.

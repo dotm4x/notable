@@ -123,14 +123,14 @@ function NumberFlowDigit({
   glyphs: readonly string[];
 }) {
   const style: CSSProperties & TCssCustomProperties = {
-    '--notable-number-flow-digit': String(digit),
+    '--one-number-flow-digit': String(digit),
   };
 
   return (
-    <span className="notable-number-flow__digit" data-digit={digit}>
-      <span className="notable-number-flow__strip" style={style}>
+    <span className="one-number-flow__digit" data-digit={digit}>
+      <span className="one-number-flow__strip" style={style}>
         {glyphs.map((glyph, index) => (
-          <span key={index} className="notable-number-flow__glyph">
+          <span key={index} className="one-number-flow__glyph">
             {glyph}
           </span>
         ))}
@@ -168,17 +168,17 @@ export function NumberFlow({
   const formatted = formatter.format(value);
   const pieces = createPieces(formatter.formatToParts(value), glyphs);
 
-  const classes = ['notable-number-flow', className].filter(Boolean).join(' ');
+  const classes = ['one-number-flow', className].filter(Boolean).join(' ');
 
   const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   if (duration !== undefined) {
-    inlineStyle['--notable-number-flow-duration'] = `${duration}ms`;
+    inlineStyle['--one-number-flow-duration'] = `${duration}ms`;
   }
 
   return (
     <span {...props} className={classes} style={inlineStyle}>
-      <span className="notable-number-flow__sr-only">{formatted}</span>
-      <span className="notable-number-flow__visual" aria-hidden="true">
+      <span className="one-number-flow__sr-only">{formatted}</span>
+      <span className="one-number-flow__visual" aria-hidden="true">
         {pieces.map((piece) =>
           piece.kind === 'digit' ? (
             <NumberFlowDigit

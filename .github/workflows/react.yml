@@ -43,13 +43,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: pnpm --filter @notable/components exec playwright install --with-deps chromium
+        run: pnpm --filter @one/components exec playwright install --with-deps chromium
 
       - name: Build components
-        run: pnpm --filter @notable/components build
+        run: pnpm --filter @one/components build
 
       - name: Typecheck
         run: pnpm typecheck
 
       - name: Run tests
-        run: pnpm --filter @notable/components test:all
+        run: pnpm --filter @one/components test:all

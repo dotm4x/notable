@@ -45,7 +45,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build components
-        run: pnpm --filter @notable/components build
+        run: pnpm --filter @one/components build
 
       - name: Typecheck
-        run: pnpm --filter @notable/site typecheck
+        run: pnpm --filter @one/site typecheck

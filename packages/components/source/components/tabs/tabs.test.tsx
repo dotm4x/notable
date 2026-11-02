@@ -330,7 +330,7 @@ describe('Tabs', () => {
     expect(rootRef.current).toBe(screen.getByTestId('tabs'));
     const trigger = screen.getByRole('tab', { name: 'Current' });
     expect(triggerRef.current).toBe(trigger);
-    expect(trigger).toHaveClass('notable-tabs__trigger', 'custom-trigger');
+    expect(trigger).toHaveClass('one-tabs__trigger', 'custom-trigger');
     expect(trigger).toHaveAttribute('title', 'Current tab');
     expect(trigger).toHaveAttribute('type', 'button');
   });
@@ -338,13 +338,13 @@ describe('Tabs', () => {
   it('renders one sliding indicator in the tab list', () => {
     const { container } = render(<BasicTabs />);
 
-    const indicator = container.querySelector('.notable-tabs__indicator');
+    const indicator = container.querySelector('.one-tabs__indicator');
     expect(indicator).toHaveAttribute('aria-hidden', 'true');
-    expect(container.querySelector('.notable-tabs__list')).toHaveClass(
-      'notable-tabs__list',
+    expect(container.querySelector('.one-tabs__list')).toHaveClass(
+      'one-tabs__list',
     );
-    expect(container.querySelector('.notable-tabs__list')).not.toHaveClass(
-      'notable-selector',
+    expect(container.querySelector('.one-tabs__list')).not.toHaveClass(
+      'one-selector',
     );
   });
 
@@ -360,16 +360,16 @@ describe('Tabs', () => {
       </Tabs>,
     );
 
-    expect(container.querySelector('.notable-tabs')).toHaveAttribute(
+    expect(container.querySelector('.one-tabs')).toHaveAttribute(
       'data-orientation',
       'vertical',
     );
-    expect(container.querySelector('.notable-tabs__indicator')).toHaveAttribute(
+    expect(container.querySelector('.one-tabs__indicator')).toHaveAttribute(
       'data-orientation',
       'vertical',
     );
-    expect(screen.getByRole('tablist')).toHaveClass('notable-tabs__list');
-    expect(screen.getByRole('tablist')).not.toHaveClass('notable-selector');
+    expect(screen.getByRole('tablist')).toHaveClass('one-tabs__list');
+    expect(screen.getByRole('tablist')).not.toHaveClass('one-selector');
   });
 
   it.each([
@@ -772,7 +772,7 @@ describe('Tabs animated highlight', () => {
     const tablist = screen.getByRole('tablist', { name: 'Example' });
 
     // Assert
-    const highlights = tablist.querySelectorAll('.notable-animated-highlight');
+    const highlights = tablist.querySelectorAll('.one-animated-highlight');
     expect(highlights).toHaveLength(1);
     expect(tablist.firstElementChild).toBe(highlights[0]);
     expect(highlights[0]).toHaveAttribute('aria-hidden', 'true');

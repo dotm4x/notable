@@ -10,7 +10,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from '@notable/icons';
+} from '@one/icons';
 import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import { getPaginationRange } from './pagination-range.js';
 import './pagination.css';
@@ -127,8 +127,8 @@ const PaginationRoot = forwardRef<HTMLElement, TPaginationProps>(
           aria-label="Pagination"
           {...props}
           className={joinClassNames(
-            'notable-pagination',
-            `notable-pagination--${size}`,
+            'one-pagination',
+            `one-pagination--${size}`,
             className,
           )}
           data-disabled={disabled || undefined}
@@ -158,7 +158,7 @@ function PaginationControl({
     <button
       type="button"
       {...props}
-      className={joinClassNames('notable-pagination__control', className)}
+      className={joinClassNames('one-pagination__control', className)}
       disabled={context.disabled || disabled}
     />
   );
@@ -191,7 +191,7 @@ function PaginationEdgeControl({
         onClick?.(event);
         onNavigate();
       }}
-      className={joinClassNames('notable-pagination__edge', className)}
+      className={joinClassNames('one-pagination__edge', className)}
     >
       {children ?? icon}
     </PaginationControl>
@@ -205,7 +205,7 @@ function PaginationFirst(props: TPaginationControlProps) {
       {...props}
       defaultLabel="Go to first page"
       icon={
-        <ChevronsLeft aria-hidden="true" className="notable-pagination__icon" />
+        <ChevronsLeft aria-hidden="true" className="one-pagination__icon" />
       }
       boundaryDisabled={currentPage <= 1}
       onNavigate={() => goToPage(1)}
@@ -219,9 +219,7 @@ function PaginationPrevious(props: TPaginationControlProps) {
     <PaginationEdgeControl
       {...props}
       defaultLabel="Go to previous page"
-      icon={
-        <ChevronLeft aria-hidden="true" className="notable-pagination__icon" />
-      }
+      icon={<ChevronLeft aria-hidden="true" className="one-pagination__icon" />}
       boundaryDisabled={currentPage <= 1}
       onNavigate={() => goToPage(currentPage - 1)}
     />
@@ -235,7 +233,7 @@ function PaginationNext(props: TPaginationControlProps) {
       {...props}
       defaultLabel="Go to next page"
       icon={
-        <ChevronRight aria-hidden="true" className="notable-pagination__icon" />
+        <ChevronRight aria-hidden="true" className="one-pagination__icon" />
       }
       boundaryDisabled={currentPage >= pageCount}
       onNavigate={() => goToPage(currentPage + 1)}
@@ -250,10 +248,7 @@ function PaginationLast(props: TPaginationControlProps) {
       {...props}
       defaultLabel="Go to last page"
       icon={
-        <ChevronsRight
-          aria-hidden="true"
-          className="notable-pagination__icon"
-        />
+        <ChevronsRight aria-hidden="true" className="one-pagination__icon" />
       }
       boundaryDisabled={currentPage >= pageCount}
       onNavigate={() => goToPage(pageCount)}
@@ -274,16 +269,16 @@ function PaginationItems({ className, ...props }: TPaginationItemsProps) {
   return (
     <div
       {...props}
-      className={joinClassNames('notable-pagination__items', className)}
+      className={joinClassNames('one-pagination__items', className)}
     >
-      <AnimatedHighlight className="notable-pagination__indicator" />
+      <AnimatedHighlight className="one-pagination__indicator" />
       {range.map((item) => {
         if (item.type === 'ellipsis') {
           return (
             <span
               key={item.key}
               aria-hidden="true"
-              className="notable-pagination__ellipsis"
+              className="one-pagination__ellipsis"
             >
               …
             </span>
@@ -296,7 +291,7 @@ function PaginationItems({ className, ...props }: TPaginationItemsProps) {
             aria-label={`Page ${item.page}`}
             aria-current={isCurrent ? 'page' : undefined}
             data-highlighted={isCurrent || undefined}
-            className="notable-pagination__page"
+            className="one-pagination__page"
             onClick={() => goToPage(item.page)}
           >
             {item.page}

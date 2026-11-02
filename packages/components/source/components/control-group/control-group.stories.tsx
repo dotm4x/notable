@@ -86,7 +86,7 @@ export const InputComposition: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole('textbox');
-    const inputBox = input.closest<HTMLElement>('.notable-field__box');
+    const inputBox = input.closest<HTMLElement>('.one-field__box');
     const searchButton = canvas.getByRole('button', { name: 'Search' });
 
     if (!inputBox) {

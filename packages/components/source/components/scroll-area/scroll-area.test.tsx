@@ -74,12 +74,12 @@ describe('ScrollArea', () => {
 
       // Assert
       const root = getRoot(container);
-      expect(root).toHaveClass('notable-scroll-area', 'custom-root');
+      expect(root).toHaveClass('one-scroll-area', 'custom-root');
       expect(root.style.height).toBe('120px');
       expect(root).not.toHaveAttribute('id');
 
       const viewport = screen.getByTestId('notes-viewport');
-      expect(viewport).toHaveClass('notable-scroll-area__viewport');
+      expect(viewport).toHaveClass('one-scroll-area__viewport');
       expect(viewport).toHaveAttribute('id', 'notes');
       expect(viewport).toHaveAttribute('aria-label', 'Notes');
     });
@@ -93,7 +93,7 @@ describe('ScrollArea', () => {
 
       // Assert
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
-      expect(ref.current).toHaveClass('notable-scroll-area__viewport');
+      expect(ref.current).toHaveClass('one-scroll-area__viewport');
     });
 
     it('is exported from the package entry point', () => {
@@ -133,8 +133,8 @@ describe('ScrollArea', () => {
       );
 
       // Assert
-      const content = container.querySelector('.notable-scroll-area__content');
-      expect(content).toHaveClass('notable-scroll-area__content--vertical');
+      const content = container.querySelector('.one-scroll-area__content');
+      expect(content).toHaveClass('one-scroll-area__content--vertical');
       expect(content).toHaveStyle({ minWidth: '100%' });
     });
 
@@ -147,8 +147,8 @@ describe('ScrollArea', () => {
       );
 
       // Assert
-      const content = container.querySelector('.notable-scroll-area__content');
-      expect(content).not.toHaveClass('notable-scroll-area__content--vertical');
+      const content = container.querySelector('.one-scroll-area__content');
+      expect(content).not.toHaveClass('one-scroll-area__content--vertical');
       expect(content).not.toHaveStyle({ minWidth: '100%' });
     });
 
@@ -180,9 +180,7 @@ describe('ScrollArea', () => {
         <ScrollArea orientation="both">Content</ScrollArea>,
       );
 
-      expect(
-        container.querySelector('.notable-scroll-area__scrollbar'),
-      ).toBeNull();
+      expect(container.querySelector('.one-scroll-area__scrollbar')).toBeNull();
     });
 
     it.each([
@@ -207,13 +205,13 @@ describe('ScrollArea', () => {
         await waitFor(() => {
           expect(
             container.querySelector(
-              `.notable-scroll-area__scrollbar--${expectedOrientation}`,
+              `.one-scroll-area__scrollbar--${expectedOrientation}`,
             ),
           ).not.toBeNull();
         });
         expect(
           container.querySelector(
-            `.notable-scroll-area__scrollbar--${expectedOrientation === 'vertical' ? 'horizontal' : 'vertical'}`,
+            `.one-scroll-area__scrollbar--${expectedOrientation === 'vertical' ? 'horizontal' : 'vertical'}`,
           ),
         ).toBeNull();
       },
@@ -235,10 +233,10 @@ describe('ScrollArea', () => {
 
       await waitFor(() => {
         expect(
-          container.querySelectorAll('.notable-scroll-area__scrollbar'),
+          container.querySelectorAll('.one-scroll-area__scrollbar'),
         ).toHaveLength(2);
         expect(
-          container.querySelector('.notable-scroll-area__corner'),
+          container.querySelector('.one-scroll-area__corner'),
         ).not.toBeNull();
       });
     });
@@ -259,7 +257,7 @@ describe('ScrollArea', () => {
 
       await waitFor(() => {
         expect(
-          container.querySelector('.notable-scroll-area__scrollbar'),
+          container.querySelector('.one-scroll-area__scrollbar'),
         ).toBeNull();
       });
     });
@@ -280,7 +278,7 @@ describe('ScrollArea', () => {
 
       await waitFor(() => {
         expect(
-          container.querySelector('.notable-scroll-area__scrollbar'),
+          container.querySelector('.one-scroll-area__scrollbar'),
         ).toBeNull();
       });
     });
@@ -301,7 +299,7 @@ describe('ScrollArea', () => {
 
       await waitFor(() => {
         expect(
-          container.querySelectorAll('.notable-scroll-area__scrollbar'),
+          container.querySelectorAll('.one-scroll-area__scrollbar'),
         ).toHaveLength(2);
       });
 
@@ -311,9 +309,7 @@ describe('ScrollArea', () => {
         </ScrollArea>,
       );
 
-      expect(getRoot(container)).toHaveClass(
-        'notable-scroll-area--auto-scrollbar',
-      );
+      expect(getRoot(container)).toHaveClass('one-scroll-area--auto-scrollbar');
 
       rerender(
         <ScrollArea orientation="both" scrollbar="hidden">
@@ -321,9 +317,7 @@ describe('ScrollArea', () => {
         </ScrollArea>,
       );
 
-      expect(
-        container.querySelector('.notable-scroll-area__scrollbar'),
-      ).toBeNull();
+      expect(container.querySelector('.one-scroll-area__scrollbar')).toBeNull();
     });
 
     it('keeps viewport focus and programmatic scrolling available when bars are hidden', () => {
@@ -349,7 +343,7 @@ describe('ScrollArea', () => {
       const { container } = render(<ScrollArea>Content</ScrollArea>);
 
       // Assert
-      expect(getRoot(container)).not.toHaveClass('notable-scroll-area--fade');
+      expect(getRoot(container)).not.toHaveClass('one-scroll-area--fade');
     });
 
     it('applies the fade class when fadeEdges is enabled', () => {
@@ -357,7 +351,7 @@ describe('ScrollArea', () => {
       const { container } = render(<ScrollArea fadeEdges>Content</ScrollArea>);
 
       // Assert
-      expect(getRoot(container)).toHaveClass('notable-scroll-area--fade');
+      expect(getRoot(container)).toHaveClass('one-scroll-area--fade');
     });
 
     it('sets the fade size as a custom property on the root', () => {
@@ -371,7 +365,7 @@ describe('ScrollArea', () => {
       // Assert
       expect(
         getRoot(container).style.getPropertyValue(
-          '--notable-scroll-area-fade-size',
+          '--one-scroll-area-fade-size',
         ),
       ).toBe('2rem');
     });
@@ -387,19 +381,19 @@ describe('ScrollArea', () => {
       // Assert
       const root = getRoot(container);
       expect(root.style.maxHeight).toBe('200px');
-      expect(
-        root.style.getPropertyValue('--notable-scroll-area-fade-size'),
-      ).toBe('16px');
+      expect(root.style.getPropertyValue('--one-scroll-area-fade-size')).toBe(
+        '16px',
+      );
     });
   });
 
   describe('edge effects', () => {
     function getEdgeOverlays(container: HTMLElement): string[] {
       return Array.from(
-        container.querySelectorAll('.notable-scroll-area__edge'),
+        container.querySelectorAll('.one-scroll-area__edge'),
         (overlay) =>
           Array.from(overlay.classList).find((className) =>
-            className.startsWith('notable-scroll-area__edge--'),
+            className.startsWith('one-scroll-area__edge--'),
           ) ?? '',
       );
     }
@@ -410,8 +404,8 @@ describe('ScrollArea', () => {
 
       // Assert
       const root = getRoot(container);
-      expect(root).not.toHaveClass('notable-scroll-area--fade');
-      expect(root).not.toHaveClass('notable-scroll-area--blur');
+      expect(root).not.toHaveClass('one-scroll-area--fade');
+      expect(root).not.toHaveClass('one-scroll-area--blur');
       expect(getEdgeOverlays(container)).toEqual([]);
     });
 
@@ -422,7 +416,7 @@ describe('ScrollArea', () => {
       );
 
       // Assert
-      expect(getRoot(container)).toHaveClass('notable-scroll-area--fade');
+      expect(getRoot(container)).toHaveClass('one-scroll-area--fade');
       expect(getEdgeOverlays(container)).toEqual([]);
     });
 
@@ -435,10 +429,10 @@ describe('ScrollArea', () => {
       );
 
       // Assert
-      expect(getRoot(container)).toHaveClass('notable-scroll-area--blur');
+      expect(getRoot(container)).toHaveClass('one-scroll-area--blur');
       expect(getEdgeOverlays(container)).toEqual([
-        'notable-scroll-area__edge--top',
-        'notable-scroll-area__edge--bottom',
+        'one-scroll-area__edge--top',
+        'one-scroll-area__edge--bottom',
       ]);
     });
 
@@ -452,8 +446,8 @@ describe('ScrollArea', () => {
 
       // Assert
       expect(getEdgeOverlays(container)).toEqual([
-        'notable-scroll-area__edge--start',
-        'notable-scroll-area__edge--end',
+        'one-scroll-area__edge--start',
+        'one-scroll-area__edge--end',
       ]);
     });
 
@@ -467,10 +461,10 @@ describe('ScrollArea', () => {
 
       // Assert
       expect(getEdgeOverlays(container)).toEqual([
-        'notable-scroll-area__edge--top',
-        'notable-scroll-area__edge--bottom',
-        'notable-scroll-area__edge--start',
-        'notable-scroll-area__edge--end',
+        'one-scroll-area__edge--top',
+        'one-scroll-area__edge--bottom',
+        'one-scroll-area__edge--start',
+        'one-scroll-area__edge--end',
       ]);
     });
 
@@ -483,7 +477,7 @@ describe('ScrollArea', () => {
       );
 
       // Assert
-      const overlays = container.querySelectorAll('.notable-scroll-area__edge');
+      const overlays = container.querySelectorAll('.one-scroll-area__edge');
       overlays.forEach((overlay) => {
         expect(overlay).not.toHaveAttribute('tabindex');
         expect(overlay).toBeEmptyDOMElement();
@@ -500,8 +494,8 @@ describe('ScrollArea', () => {
 
       // Assert
       const root = getRoot(container);
-      expect(root).toHaveClass('notable-scroll-area--blur');
-      expect(root).not.toHaveClass('notable-scroll-area--fade');
+      expect(root).toHaveClass('one-scroll-area--blur');
+      expect(root).not.toHaveClass('one-scroll-area--fade');
     });
 
     it('sets the edge size from edgeEffectSize and prefers it over fadeSize', () => {
@@ -515,7 +509,7 @@ describe('ScrollArea', () => {
       // Assert
       expect(
         getRoot(container).style.getPropertyValue(
-          '--notable-scroll-area-edge-size',
+          '--one-scroll-area-edge-size',
         ),
       ).toBe('2rem');
     });
@@ -535,9 +529,9 @@ describe('ScrollArea', () => {
       // Assert
       const root = getRoot(container);
       expect(root.style.maxHeight).toBe('200px');
-      expect(
-        root.style.getPropertyValue('--notable-scroll-area-edge-size'),
-      ).toBe('16px');
+      expect(root.style.getPropertyValue('--one-scroll-area-edge-size')).toBe(
+        '16px',
+      );
     });
 
     it('marks the overflowing edge for blur so overlays track overflow', async () => {
@@ -640,7 +634,7 @@ describe('ScrollArea', () => {
       });
       expect(
         container.querySelector(
-          '.notable-scroll-area__scrollbar, .notable-scroll-area__thumb, .notable-scroll-area__corner',
+          '.one-scroll-area__scrollbar, .one-scroll-area__thumb, .one-scroll-area__corner',
         ),
       ).toBeNull();
     });

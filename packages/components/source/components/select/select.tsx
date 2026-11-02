@@ -1,5 +1,5 @@
 import { Select as BaseSelect } from '@base-ui/react/select';
-import { Check, ChevronDown } from '@notable/icons';
+import { Check, ChevronDown } from '@one/icons';
 import { AutoSize } from '../../internal/primitives/auto-size/auto-size.js';
 import {
   Children,
@@ -30,7 +30,7 @@ export type SelectProps = {
   children?: ReactNode;
 };
 
-/** Base UI props with `className` narrowed to a string, since Notable composes class names directly. */
+/** Base UI props with `className` narrowed to a string, since One composes class names directly. */
 type WithStringClassName<TProps extends { className?: unknown }> = Omit<
   TProps,
   'className'
@@ -146,7 +146,7 @@ const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(
     return (
       <BaseSelect.Label
         ref={ref}
-        className={joinClassNames('notable-select__label', className)}
+        className={joinClassNames('one-select__label', className)}
         {...props}
       />
     );
@@ -158,7 +158,7 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
     return (
       <BaseSelect.Trigger
         ref={ref}
-        className={joinClassNames('notable-select__trigger', className)}
+        className={joinClassNames('one-select__trigger', className)}
         {...props}
       />
     );
@@ -168,10 +168,10 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
 const SelectValue = forwardRef<HTMLSpanElement, SelectValueProps>(
   function SelectValue({ className, ...props }, ref) {
     return (
-      <AutoSize axis="horizontal" className="notable-select__value-container">
+      <AutoSize axis="horizontal" className="one-select__value-container">
         <BaseSelect.Value
           ref={ref}
-          className={joinClassNames('notable-select__value', className)}
+          className={joinClassNames('one-select__value', className)}
           {...props}
         />
       </AutoSize>
@@ -184,7 +184,7 @@ const SelectIcon = forwardRef<HTMLSpanElement, SelectIconProps>(
     return (
       <BaseSelect.Icon
         ref={ref}
-        className={joinClassNames('notable-select__icon', className)}
+        className={joinClassNames('one-select__icon', className)}
         {...props}
       >
         {children ?? <ChevronDown size={16} aria-hidden="true" />}
@@ -237,12 +237,12 @@ const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
           sideOffset={sideOffset}
           alignOffset={alignOffset}
           alignItemWithTrigger={false}
-          className="notable-select__positioner"
+          className="one-select__positioner"
         >
           <BaseSelect.Popup
             ref={ref}
             className={joinClassNames(
-              'notable-select__popup notable-floating-surface',
+              'one-select__popup one-floating-surface',
               className,
             )}
             onKeyDownCapture={(event) => {
@@ -265,7 +265,7 @@ const SelectList = forwardRef<HTMLDivElement, SelectListProps>(
     return (
       <BaseSelect.List
         ref={ref}
-        className={joinClassNames('notable-select__list', className)}
+        className={joinClassNames('one-select__list', className)}
         {...props}
       />
     );
@@ -277,13 +277,13 @@ const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
     return (
       <BaseSelect.Item
         ref={ref}
-        className={joinClassNames('notable-select__item', className)}
+        className={joinClassNames('one-select__item', className)}
         {...props}
       >
-        <BaseSelect.ItemText className="notable-select__item-text">
+        <BaseSelect.ItemText className="one-select__item-text">
           {children}
         </BaseSelect.ItemText>
-        <BaseSelect.ItemIndicator className="notable-select__item-indicator">
+        <BaseSelect.ItemIndicator className="one-select__item-indicator">
           <Check size={16} aria-hidden="true" />
         </BaseSelect.ItemIndicator>
       </BaseSelect.Item>
@@ -296,7 +296,7 @@ const SelectGroup = forwardRef<HTMLDivElement, SelectGroupProps>(
     return (
       <BaseSelect.Group
         ref={ref}
-        className={joinClassNames('notable-select__group', className)}
+        className={joinClassNames('one-select__group', className)}
         {...props}
       />
     );
@@ -308,7 +308,7 @@ const SelectGroupLabel = forwardRef<HTMLDivElement, SelectGroupLabelProps>(
     return (
       <BaseSelect.GroupLabel
         ref={ref}
-        className={joinClassNames('notable-select__group-label', className)}
+        className={joinClassNames('one-select__group-label', className)}
         {...props}
       />
     );
@@ -320,7 +320,7 @@ const SelectSeparator = forwardRef<HTMLDivElement, SelectSeparatorProps>(
     return (
       <BaseSelect.Separator
         ref={ref}
-        className={joinClassNames('notable-select__separator', className)}
+        className={joinClassNames('one-select__separator', className)}
         {...props}
       />
     );

@@ -21,7 +21,7 @@ import {
   type ReactNode,
   type RefAttributes,
 } from 'react';
-import { ChevronDown, PanelLeft } from '@notable/icons';
+import { ChevronDown, PanelLeft } from '@one/icons';
 import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import { Button, type ButtonProps } from '../button/button.js';
 import { Collapsible } from '../collapsible/collapsible.js';
@@ -32,11 +32,11 @@ import './sidebar.css';
 
 const mobileQuery = '(max-width: 48rem)';
 const highlightTargetSelector = [
-  '.notable-sidebar__item',
-  '.notable-sidebar__submenu-trigger',
-  '.notable-sidebar__group-action',
-  '.notable-sidebar__menu-action',
-  '.notable-sidebar__trigger',
+  '.one-sidebar__item',
+  '.one-sidebar__submenu-trigger',
+  '.one-sidebar__group-action',
+  '.one-sidebar__menu-action',
+  '.one-sidebar__trigger',
 ].join(', ');
 
 function findHighlightTarget(
@@ -262,9 +262,7 @@ function SidebarInsetElement({ className, ...props }: TSidebarInsetProps) {
   return (
     <div
       {...props}
-      className={['notable-sidebar__inset', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-sidebar__inset', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -426,11 +424,11 @@ const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
       toggleSidebar,
     };
     const sidebarStyle: CSSProperties & TCssCustomProperties = {
-      '--notable-sidebar-width': toCssLength(width),
-      '--notable-sidebar-collapsed-width': toCssLength(collapsedWidth),
+      '--one-sidebar-width': toCssLength(width),
+      '--one-sidebar-collapsed-width': toCssLength(collapsedWidth),
     };
     const mobileDrawerStyle: CSSProperties & TCssCustomProperties = {
-      '--notable-drawer-horizontal-size': toCssLength(mobileWidth),
+      '--one-drawer-horizontal-size': toCssLength(mobileWidth),
     };
     const layoutChildren = Children.toArray(children);
     const sidebarChildren = layoutChildren.filter(
@@ -439,9 +437,7 @@ const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
     const insetChildren = layoutChildren.filter(
       (child) => isValidElement(child) && child.type === SidebarInsetElement,
     );
-    const classes = ['notable-sidebar-layout', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-sidebar-layout', className].filter(Boolean).join(' ');
 
     const sidebar = (
       <nav
@@ -451,7 +447,7 @@ const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
         data-state={isMobile || isOpen ? 'expanded' : 'collapsed'}
         data-collapsible={isMobile || isOpen ? 'none' : 'icon'}
         data-animate-on-hover={animateOnHover ? 'true' : 'false'}
-        className="notable-sidebar"
+        className="one-sidebar"
         style={sidebarStyle}
         onPointerOver={handlePointerOver}
         onPointerLeave={handlePointerLeave}
@@ -459,7 +455,7 @@ const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
         onBlurCapture={handleBlurCapture}
       >
         <AnimatedHighlight
-          className="notable-sidebar__highlight"
+          className="one-sidebar__highlight"
           followTargetShape
         />
         {sidebarChildren}
@@ -479,7 +475,7 @@ const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
           {isMobile ? (
             <Drawer open={mobileOpen} onOpenChange={setMobileOpen} side="left">
               <Drawer.Content
-                className="notable-sidebar__mobile-drawer"
+                className="one-sidebar__mobile-drawer"
                 showCloseButton={false}
                 aria-label={label}
                 style={mobileDrawerStyle}
@@ -503,9 +499,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, TSidebarHeaderProps>(
       <div
         {...props}
         ref={ref}
-        className={['notable-sidebar__header', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-sidebar__header', className].filter(Boolean).join(' ')}
       />
     );
   },
@@ -517,19 +511,14 @@ const SidebarBrand = forwardRef<HTMLDivElement, TSidebarBrandProps>(
       <div
         {...props}
         ref={ref}
-        className={['notable-sidebar__brand', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-sidebar__brand', className].filter(Boolean).join(' ')}
       >
         {icon && (
-          <span className="notable-sidebar__brand-icon" aria-hidden="true">
+          <span className="one-sidebar__brand-icon" aria-hidden="true">
             {icon}
           </span>
         )}
-        <span
-          className="notable-sidebar__brand-label"
-          data-sidebar="brand-label"
-        >
+        <span className="one-sidebar__brand-label" data-sidebar="brand-label">
           {children}
         </span>
       </div>
@@ -543,7 +532,7 @@ const SidebarContent = forwardRef<HTMLDivElement, TSidebarContentProps>(
       <div
         {...props}
         ref={ref}
-        className={['notable-sidebar__content', className]
+        className={['one-sidebar__content', className]
           .filter(Boolean)
           .join(' ')}
       />
@@ -557,9 +546,7 @@ const SidebarGroup = forwardRef<HTMLElement, TSidebarGroupProps>(
       <section
         {...props}
         ref={ref}
-        className={['notable-sidebar__group', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-sidebar__group', className].filter(Boolean).join(' ')}
       />
     );
   },
@@ -574,7 +561,7 @@ const SidebarGroupLabel = forwardRef<
       {...props}
       ref={ref}
       data-sidebar="group-label"
-      className={['notable-sidebar__group-label', className]
+      className={['one-sidebar__group-label', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -592,7 +579,7 @@ const SidebarGroupAction = forwardRef<
       data-sidebar="group-action"
       variant="ghost"
       size="icon-small"
-      className={['notable-sidebar__group-action', className]
+      className={['one-sidebar__group-action', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -607,7 +594,7 @@ const SidebarGroupContent = forwardRef<
     <div
       {...props}
       ref={ref}
-      className={['notable-sidebar__group-content', className]
+      className={['one-sidebar__group-content', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -620,9 +607,7 @@ const SidebarMenu = forwardRef<HTMLUListElement, TSidebarMenuProps>(
       <ul
         {...props}
         ref={ref}
-        className={['notable-sidebar__menu', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-sidebar__menu', className].filter(Boolean).join(' ')}
       />
     );
   },
@@ -634,7 +619,7 @@ const SidebarMenuItem = forwardRef<HTMLLIElement, TSidebarMenuItemProps>(
       <li
         {...props}
         ref={ref}
-        className={['notable-sidebar__menu-item', className]
+        className={['one-sidebar__menu-item', className]
           .filter(Boolean)
           .join(' ')}
       />
@@ -667,8 +652,8 @@ const SidebarItem = forwardRef<HTMLElement, TSidebarItemProps>(
       accessibleLabel ??
       (typeof children === 'string' ? children : undefined);
     const classes = [
-      'notable-sidebar__item',
-      active && 'notable-sidebar__item--active',
+      'one-sidebar__item',
+      active && 'one-sidebar__item--active',
       className,
     ]
       .filter(Boolean)
@@ -690,11 +675,11 @@ const SidebarItem = forwardRef<HTMLElement, TSidebarItemProps>(
     const content = (
       <>
         {icon && (
-          <span className="notable-sidebar__item-icon" aria-hidden="true">
+          <span className="one-sidebar__item-icon" aria-hidden="true">
             {icon}
           </span>
         )}
-        <span className="notable-sidebar__item-label">{children}</span>
+        <span className="one-sidebar__item-label">{children}</span>
       </>
     );
 
@@ -762,7 +747,7 @@ const SidebarMenuAction = forwardRef<
       data-sidebar="menu-action"
       variant="ghost"
       size="icon-small"
-      className={['notable-sidebar__menu-action', className]
+      className={['one-sidebar__menu-action', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -776,7 +761,7 @@ const SidebarMenuBadge = forwardRef<HTMLSpanElement, TSidebarMenuBadgeProps>(
         {...props}
         ref={ref}
         data-sidebar="menu-badge"
-        className={['notable-sidebar__menu-badge', className]
+        className={['one-sidebar__menu-badge', className]
           .filter(Boolean)
           .join(' ')}
       />
@@ -831,7 +816,7 @@ const SidebarSubmenu = forwardRef<HTMLDivElement, TSidebarSubmenuProps>(
     const trigger = (
       <Button
         variant="ghost"
-        className="notable-sidebar__submenu-trigger"
+        className="one-sidebar__submenu-trigger"
         data-sidebar="menu-button"
         aria-label={label}
         aria-expanded={isOpen && (sidebarOpen || isMobile)}
@@ -839,14 +824,14 @@ const SidebarSubmenu = forwardRef<HTMLDivElement, TSidebarSubmenuProps>(
         onClick={handleClick}
       >
         {icon && (
-          <span className="notable-sidebar__item-icon" aria-hidden="true">
+          <span className="one-sidebar__item-icon" aria-hidden="true">
             {icon}
           </span>
         )}
-        <span className="notable-sidebar__item-label">{label}</span>
+        <span className="one-sidebar__item-label">{label}</span>
         <ChevronDown
           aria-hidden="true"
-          className="notable-sidebar__submenu-chevron"
+          className="one-sidebar__submenu-chevron"
         />
       </Button>
     );
@@ -858,7 +843,7 @@ const SidebarSubmenu = forwardRef<HTMLDivElement, TSidebarSubmenuProps>(
         open={isOpen}
         onOpenChange={handleOpenChange}
         data-sidebar-stagger={hasBeenOpened ? 'true' : undefined}
-        className={['notable-sidebar__submenu', className]
+        className={['one-sidebar__submenu', className]
           .filter(Boolean)
           .join(' ')}
       >
@@ -871,9 +856,9 @@ const SidebarSubmenu = forwardRef<HTMLDivElement, TSidebarSubmenuProps>(
         )}
         <Collapsible.Content
           id={submenuId}
-          className="notable-sidebar__submenu-content"
+          className="one-sidebar__submenu-content"
         >
-          <ul className="notable-sidebar__submenu-list">{children}</ul>
+          <ul className="one-sidebar__submenu-list">{children}</ul>
         </Collapsible.Content>
       </Collapsible.Root>
     );
@@ -884,7 +869,7 @@ const SidebarSubmenuItem = forwardRef<HTMLElement, TSidebarSubmenuItemProps>(
   function SidebarSubmenuItem({ className, ...props }, ref) {
     return (
       <li
-        className={['notable-sidebar__submenu-item', className]
+        className={['one-sidebar__submenu-item', className]
           .filter(Boolean)
           .join(' ')}
       >
@@ -900,9 +885,7 @@ const SidebarFooter = forwardRef<HTMLDivElement, TSidebarFooterProps>(
       <div
         {...props}
         ref={ref}
-        className={['notable-sidebar__footer', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-sidebar__footer', className].filter(Boolean).join(' ')}
       />
     );
   },
@@ -930,7 +913,7 @@ const SidebarTrigger = forwardRef<HTMLButtonElement, TSidebarTriggerProps>(
         ref={ref}
         variant="ghost"
         size="icon"
-        className={['notable-sidebar__trigger', className]
+        className={['one-sidebar__trigger', className]
           .filter(Boolean)
           .join(' ')}
         aria-label={accessibleName ?? defaultName}
@@ -945,10 +928,7 @@ const SidebarTrigger = forwardRef<HTMLButtonElement, TSidebarTriggerProps>(
         }}
       >
         {children ?? (
-          <PanelLeft
-            aria-hidden="true"
-            className="notable-sidebar__trigger-icon"
-          />
+          <PanelLeft aria-hidden="true" className="one-sidebar__trigger-icon" />
         )}
       </Button>
     );
@@ -974,9 +954,7 @@ const SidebarRail = forwardRef<HTMLButtonElement, TSidebarRailProps>(
         ref={ref}
         variant="ghost"
         size="icon-small"
-        className={['notable-sidebar__rail', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={['one-sidebar__rail', className].filter(Boolean).join(' ')}
         aria-label={accessibleName}
         aria-controls={sidebarId}
         aria-expanded={isMobile ? mobileOpen : open}

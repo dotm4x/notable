@@ -5,7 +5,7 @@ import './separator.css';
 /** Direction of the dividing line. */
 export type SeparatorOrientation = 'horizontal' | 'vertical';
 
-/** Notable border color token names. */
+/** One border color token names. */
 export type SeparatorColor = 'subtle' | 'default' | 'strong';
 
 /** Props for {@link Separator}, in addition to native `div` attributes. */
@@ -16,7 +16,7 @@ export type SeparatorProps = Omit<
   /** Additional CSS class for the separator element. */
   className?: string;
   /**
-   * Line color. A Notable token name maps to its border token, and any other
+   * Line color. A One token name maps to its border token, and any other
    * string is used as CSS as provided. Defaults to the standard border color.
    */
   color?: SeparatorColor | string;
@@ -36,9 +36,9 @@ export type SeparatorProps = Omit<
 };
 
 const colorTokens: Readonly<Record<SeparatorColor, string>> = {
-  subtle: 'var(--notable-color-border-subtle)',
-  default: 'var(--notable-color-border)',
-  strong: 'var(--notable-color-border-strong)',
+  subtle: 'var(--one-color-border-subtle)',
+  default: 'var(--one-color-border)',
+  strong: 'var(--one-color-border-strong)',
 };
 
 function resolveColor(color: SeparatorProps['color']): string | undefined {
@@ -76,18 +76,14 @@ export function Separator({
   const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   const resolvedThickness = resolveThickness(thickness);
   if (resolvedThickness !== undefined) {
-    inlineStyle['--notable-separator-thickness'] = resolvedThickness;
+    inlineStyle['--one-separator-thickness'] = resolvedThickness;
   }
   const resolvedColor = resolveColor(color);
   if (resolvedColor !== undefined) {
-    inlineStyle['--notable-separator-color'] = resolvedColor;
+    inlineStyle['--one-separator-color'] = resolvedColor;
   }
 
-  const classes = [
-    'notable-separator',
-    `notable-separator--${orientation}`,
-    className,
-  ]
+  const classes = ['one-separator', `one-separator--${orientation}`, className]
     .filter(Boolean)
     .join(' ');
 

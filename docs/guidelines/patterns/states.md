@@ -1,6 +1,6 @@
 # States
 
-A state describes the condition an element is in at a given moment. Notable uses a consistent set of states so that users can understand what an element is doing and how it will respond.
+A state describes the condition an element is in at a given moment. One uses a consistent set of states so that users can understand what an element is doing and how it will respond.
 
 ## The states
 

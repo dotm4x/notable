@@ -1,29 +1,29 @@
-.notable-floating-surface {
-  background: var(--notable-color-surface-floating);
-  color: var(--notable-color-text);
-  border-radius: var(--notable-radius-lg);
-  box-shadow: var(--notable-shadow-md);
+.one-floating-surface {
+  background: var(--one-color-surface-floating);
+  color: var(--one-color-text);
+  border-radius: var(--one-radius-lg);
+  box-shadow: var(--one-shadow-md);
   transform-origin: var(--transform-origin);
-  font-family: var(--notable-font-family);
+  font-family: var(--one-font-family);
   transition:
-    opacity var(--notable-duration-base)
-      var(--notable-floating-surface-easing, var(--notable-easing-standard)),
-    transform var(--notable-duration-base)
-      var(--notable-floating-surface-easing, var(--notable-easing-standard));
+    opacity var(--one-duration-base)
+      var(--one-floating-surface-easing, var(--one-easing-standard)),
+    transform var(--one-duration-base)
+      var(--one-floating-surface-easing, var(--one-easing-standard));
 }
 
-.notable-floating-surface[data-starting-style],
-.notable-floating-surface[data-ending-style] {
+.one-floating-surface[data-starting-style],
+.one-floating-surface[data-ending-style] {
   opacity: 0;
   transform: scale(0.96);
 }
 
-.notable-floating-surface[data-ending-style] {
-  transition-duration: var(--notable-duration-fast);
+.one-floating-surface[data-ending-style] {
+  transition-duration: var(--one-duration-fast);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-floating-surface {
+  .one-floating-surface {
     transition: none;
   }
 }

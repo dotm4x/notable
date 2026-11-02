@@ -1,22 +1,22 @@
-.notable-toggle {
+.one-toggle {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--notable-spacing-2);
+  gap: var(--one-spacing-2);
 
-  min-height: var(--notable-spacing-10);
-  padding: var(--notable-spacing-2) var(--notable-spacing-4);
+  min-height: var(--one-spacing-10);
+  padding: var(--one-spacing-2) var(--one-spacing-4);
 
-  border: var(--notable-border-width) solid transparent;
-  border-radius: var(--notable-radius-full);
+  border: var(--one-border-width) solid transparent;
+  border-radius: var(--one-radius-full);
   background: transparent;
-  color: var(--notable-color-text);
+  color: var(--one-color-text);
 
-  font-family: var(--notable-font-family);
-  font-size: var(--notable-font-size-sm);
-  font-weight: var(--notable-font-weight-medium);
-  line-height: var(--notable-line-height-normal);
+  font-family: var(--one-font-family);
+  font-size: var(--one-font-size-sm);
+  font-weight: var(--one-font-weight-medium);
+  line-height: var(--one-line-height-normal);
   text-align: center;
   white-space: nowrap;
 
@@ -25,60 +25,60 @@
   -webkit-tap-highlight-color: transparent;
 
   transition:
-    background-color var(--notable-duration-fast) var(--notable-easing-standard),
-    color var(--notable-duration-fast) var(--notable-easing-standard),
-    border-color var(--notable-duration-fast) var(--notable-easing-standard),
-    box-shadow var(--notable-duration-fast) var(--notable-easing-standard);
+    background-color var(--one-duration-fast) var(--one-easing-standard),
+    color var(--one-duration-fast) var(--one-easing-standard),
+    border-color var(--one-duration-fast) var(--one-easing-standard),
+    box-shadow var(--one-duration-fast) var(--one-easing-standard);
 }
 
-.notable-toggle:focus-visible {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-toggle:focus-visible {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
 }
 
-.notable-toggle:disabled,
-.notable-toggle[data-disabled] {
+.one-toggle:disabled,
+.one-toggle[data-disabled] {
   pointer-events: none;
   opacity: 0.5;
-  color: var(--notable-color-text-disabled);
+  color: var(--one-color-text-disabled);
   cursor: not-allowed;
 }
 
-.notable-toggle--default:not([data-pressed]):hover:not(:disabled) {
-  background: var(--notable-color-surface-hover);
+.one-toggle--default:not([data-pressed]):hover:not(:disabled) {
+  background: var(--one-color-surface-hover);
 }
 
-.notable-toggle--default[data-pressed] {
-  background: var(--notable-color-secondary);
-  color: var(--notable-color-on-secondary);
+.one-toggle--default[data-pressed] {
+  background: var(--one-color-secondary);
+  color: var(--one-color-on-secondary);
 }
 
-.notable-toggle--outline {
-  border-color: var(--notable-color-border-strong);
+.one-toggle--outline {
+  border-color: var(--one-color-border-strong);
 }
 
-.notable-toggle--outline:not([data-pressed]):hover:not(:disabled) {
-  background: var(--notable-color-surface-hover);
+.one-toggle--outline:not([data-pressed]):hover:not(:disabled) {
+  background: var(--one-color-surface-hover);
 }
 
-.notable-toggle--outline[data-pressed] {
-  background: var(--notable-color-surface-active);
+.one-toggle--outline[data-pressed] {
+  background: var(--one-color-surface-active);
 }
 
-.notable-toggle--small {
-  min-height: var(--notable-spacing-8);
-  padding: var(--notable-spacing-1) var(--notable-spacing-3);
-  font-size: var(--notable-font-size-xs);
+.one-toggle--small {
+  min-height: var(--one-spacing-8);
+  padding: var(--one-spacing-1) var(--one-spacing-3);
+  font-size: var(--one-font-size-xs);
 }
 
-.notable-toggle--large {
+.one-toggle--large {
   min-height: 2.75rem;
-  padding: var(--notable-spacing-3) var(--notable-spacing-6);
-  font-size: var(--notable-font-size-md);
+  padding: var(--one-spacing-3) var(--one-spacing-6);
+  font-size: var(--one-font-size-md);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-toggle {
+  .one-toggle {
     transition: none;
   }
 }

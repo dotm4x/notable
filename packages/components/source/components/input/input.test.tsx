@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Search, X } from '@notable/icons';
+import { Search, X } from '@one/icons';
 import { createRef, useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { Input } from './input.js';
@@ -141,9 +141,9 @@ describe('Input', () => {
     expect(
       screen.getByRole('textbox', { name: 'Grammar field' }),
     ).toHaveAttribute('aria-invalid', 'grammar');
-    expect(
-      screen.getByRole('textbox').closest('.notable-field'),
-    ).toHaveAttribute('data-invalid');
+    expect(screen.getByRole('textbox').closest('.one-field')).toHaveAttribute(
+      'data-invalid',
+    );
   });
 
   it('renders optional leading and trailing icons as decorative content', () => {

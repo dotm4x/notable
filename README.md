@@ -1,10 +1,10 @@
-# Notable
+# One
 
 **Expressive, accessible components with thoughtful details and a cohesive design language.**
 
-Notable is a component library built for React, designed around a cohesive and expressive design language. It brings together thoughtful visual foundations, design principles, interaction patterns, and production-ready components.
+One is a component library built for React, designed around a cohesive and expressive design language. It brings together thoughtful visual foundations, design principles, interaction patterns, and production-ready components.
 
-Notable balances personality with precision, combining expressive visuals, purposeful motion, and robust accessibility to create experiences that feel natural and consistent.
+One balances personality with precision, combining expressive visuals, purposeful motion, and robust accessibility to create experiences that feel natural and consistent.
 
 ## Contents
 
@@ -19,11 +19,11 @@ Notable balances personality with precision, combining expressive visuals, purpo
 
 Interfaces should be more than functional. They should feel considered.
 
-Notable aims to make everyday interactions clearer, more natural, and more expressive. Every detail should contribute to a cohesive experience, from the shape of a surface to the movement of an interaction.
+One aims to make everyday interactions clearer, more natural, and more expressive. Every detail should contribute to a cohesive experience, from the shape of a surface to the movement of an interaction.
 
 ## Design language
 
-Notable is built around four dimensions:
+One is built around four dimensions:
 
 - **Foundations** — Color, typography, spacing, shape, elevation, focus, and motion.
 - **Components** — Accessible components built for React, with consistent visuals and behavior.
@@ -33,12 +33,12 @@ Notable is built around four dimensions:
 ## Installation
 
 ```sh
-npm install @notable/components
+npm install @one/components
 ```
 
 ## Guidelines
 
-Explore the [design guidelines](./docs/guidelines/README.md) for the foundations, patterns, principles, and conventions that define Notable.
+Explore the [design guidelines](./docs/guidelines/README.md) for the foundations, patterns, principles, and conventions that define One.
 
 - [Foundations](./docs/guidelines/foundations/README.md)
 - [Components](./docs/guidelines/components/README.md)
@@ -47,7 +47,7 @@ Explore the [design guidelines](./docs/guidelines/README.md) for the foundations
 
 ## Preview
 
-![Notable preview](./assets/preview.png)
+![One preview](./assets/preview.png)
 
 ## Components
 
@@ -55,4 +55,4 @@ The component library is located in [`packages/components`](./packages/component
 
 ## License
 
-Notable is available under the [MIT License](./LICENSE).
+One is available under the [MIT License](./LICENSE).

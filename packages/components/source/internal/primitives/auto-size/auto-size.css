@@ -1,13 +1,13 @@
-.notable-auto-size {
+.one-auto-size {
   overflow: visible;
 }
 
-.notable-auto-size[data-animating] {
+.one-auto-size[data-animating] {
   overflow: hidden;
 }
 
-.notable-auto-size[data-axis='horizontal'] > .notable-auto-size__content,
-.notable-auto-size[data-axis='both'] > .notable-auto-size__content {
+.one-auto-size[data-axis='horizontal'] > .one-auto-size__content,
+.one-auto-size[data-axis='both'] > .one-auto-size__content {
   width: max-content;
   max-width: none;
 }

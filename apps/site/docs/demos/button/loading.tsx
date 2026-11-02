@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Spinner } from '@notable/components';
+import { Button, Spinner } from '@one/components';
 
 /** Demonstrates loading state Buttons. */
 export function ButtonLoadingDemo() {

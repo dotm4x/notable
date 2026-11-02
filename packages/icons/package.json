@@ -1,17 +1,17 @@
 {
-  "name": "@notable/icons",
+  "name": "@one/icons",
   "version": "0.1.0",
-  "description": "Notable's icon library.",
+  "description": "One's icon library.",
   "license": "MIT",
   "author": "dotm4x",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dotm4x/notable.git",
+    "url": "https://github.com/dotm4x/one.git",
     "directory": "packages/icons"
   },
-  "homepage": "https://github.com/dotm4x/notable#readme",
+  "homepage": "https://github.com/dotm4x/one#readme",
   "bugs": {
-    "url": "https://github.com/dotm4x/notable/issues"
+    "url": "https://github.com/dotm4x/one/issues"
   },
   "keywords": [
     "icons",

@@ -1,6 +1,6 @@
 # Restraint
 
-Restraint means that Notable adds visual and motion effects only when they serve the task. Notable has personality, and that personality should be felt, but it must never cost the user clarity, focus, or speed.
+Restraint means that One adds visual and motion effects only when they serve the task. One has personality, and that personality should be felt, but it must never cost the user clarity, focus, or speed.
 
 ## Add only what earns its place
 

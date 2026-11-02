@@ -1,12 +1,12 @@
 # Principles
 
-Principles are the values that guide every design decision in Notable. They are short, stable, and independent of platform, component, or technology. When a specific rule is unclear or missing, a principle is the place to reason from.
+Principles are the values that guide every design decision in One. They are short, stable, and independent of platform, component, or technology. When a specific rule is unclear or missing, a principle is the place to reason from.
 
 ## Guidelines in this category
 
 - [Clarity](./clarity.md): every element communicates what it is and what state it is in.
 - [Restraint](./restraint.md): expression serves the task, and consistency governs when variation is justified.
-- [Expression](./expression.md): Notable feels warm, friendly, and a little playful.
+- [Expression](./expression.md): One feels warm, friendly, and a little playful.
 - [Continuity](./continuity.md): the user can follow every change.
 
 Accessibility is not listed here as a principle. It is a foundation, because it constrains every principle rather than competing with them. See [Accessibility](../foundations/accessibility.md).
@@ -23,7 +23,7 @@ The four principles are not equal in every decision. They form an order of prece
 
 - **Clarity** comes first. If the user cannot tell what an element is, what state it is in, or what will happen, nothing else justifies the design.
 - **Continuity** serves clarity. Movement that shows how one state became another makes change understandable. Movement that is only transition for its own sake does not.
-- **Expression** is bounded by clarity and restraint. It gives Notable its warmth and playfulness, but it must not obscure meaning.
+- **Expression** is bounded by clarity and restraint. It gives One its warmth and playfulness, but it must not obscure meaning.
 - **Restraint** governs the amount of expression. It decides how much motion, color, and detail a moment can carry, and it keeps variation consistent.
 
 ## Trade-offs

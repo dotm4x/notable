@@ -1,7 +1,7 @@
 'use client';
 
 import { Plus } from 'lucide-react';
-import { Button } from '@notable/components';
+import { Button } from '@one/components';
 
 /** Demonstrates Button with leading icon. */
 export function ButtonWithIconDemo() {

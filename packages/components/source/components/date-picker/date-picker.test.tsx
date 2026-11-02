@@ -547,7 +547,7 @@ describe('DatePicker', () => {
       renderPicker({ className: 'custom-picker' });
 
       expect(trigger()).toHaveClass(
-        'notable-date-picker__trigger',
+        'one-date-picker__trigger',
         'custom-picker',
       );
     });

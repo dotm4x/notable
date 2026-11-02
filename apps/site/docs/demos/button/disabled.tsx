@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@notable/components';
+import { Button } from '@one/components';
 
 /** Demonstrates disabled Buttons. */
 export function ButtonDisabledDemo() {

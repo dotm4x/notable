@@ -1,10 +1,10 @@
-import '@notable/components/styles.css';
+import '@one/components/styles.css';
 import '../source/styles/index.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Notable',
+  title: 'One',
   description: 'Design language and component system',
 };
 

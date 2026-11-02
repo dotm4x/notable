@@ -1,17 +1,17 @@
 {
-  "name": "@notable/components",
+  "name": "@one/components",
   "version": "0.1.0",
   "description": "A collection of thoughtfully crafted, expressive React components for the web.",
   "license": "MIT",
   "author": "dotm4x",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dotm4x/notable.git",
+    "url": "https://github.com/dotm4x/one.git",
     "directory": "packages/components"
   },
-  "homepage": "https://github.com/dotm4x/notable#readme",
+  "homepage": "https://github.com/dotm4x/one#readme",
   "bugs": {
-    "url": "https://github.com/dotm4x/notable/issues"
+    "url": "https://github.com/dotm4x/one/issues"
   },
   "keywords": [
     "react",
@@ -50,7 +50,7 @@
     "test:storybook": "vitest run --project=storybook",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "prebuild": "pnpm --filter @notable/icons build"
+    "prebuild": "pnpm --filter @one/icons build"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
@@ -83,6 +83,6 @@
     "@base-ui/react": "^1.9.0",
     "@fontsource-variable/geist": "^5.3.0",
     "motion": "^14.6.0",
-    "@notable/icons": "workspace:*"
+    "@one/icons": "workspace:*"
   }
 }

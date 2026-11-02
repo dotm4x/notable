@@ -1,14 +1,14 @@
 # AGENTS.md
 
-# Notable
+# One
 
-Notable is a design language for creating expressive, coherent, accessible, and thoughtfully crafted digital experiences.
+One is a design language for creating expressive, coherent, accessible, and thoughtfully crafted digital experiences.
 
 It is not a single component library, framework, or platform-specific implementation. It defines a shared design philosophy, visual language, interaction principles, foundations, patterns, and guidelines that can be realized through multiple implementations.
 
-The repository contains the design language's documentation, implementations, development tools, and supporting infrastructure. Each implementation translates Notable's principles into the conventions and capabilities of its target platform while preserving the coherence of the overall system.
+The repository contains the design language's documentation, implementations, development tools, and supporting infrastructure. Each implementation translates One's principles into the conventions and capabilities of its target platform while preserving the coherence of the overall system.
 
-The goal is to make Notable recognizable, adaptable, maintainable, and technically sound across its implementations.
+The goal is to make One recognizable, adaptable, maintainable, and technically sound across its implementations.
 
 ---
 
@@ -16,7 +16,7 @@ The goal is to make Notable recognizable, adaptable, maintainable, and technical
 
 ### Design language first
 
-- Treat Notable as a cohesive design language, not merely a collection of components.
+- Treat One as a cohesive design language, not merely a collection of components.
 - Use `docs/guidelines/` as the authoritative source for design principles, foundations, patterns, and component guidance.
 - Consult the relevant guidelines before designing, implementing, or changing behavior that affects the user experience.
 - Preserve the distinction between the design language and its individual implementations.
@@ -60,13 +60,13 @@ The goal is to make Notable recognizable, adaptable, maintainable, and technical
 
 ## 2. Design Language and Guidelines
 
-The Notable design language is the shared source of truth for product-facing design decisions.
+The One design language is the shared source of truth for product-facing design decisions.
 
 ### Guideline hierarchy
 
 The guidelines are organized into distinct areas:
 
-- `docs/guidelines/principles/` defines the foundational principles of Notable.
+- `docs/guidelines/principles/` defines the foundational principles of One.
 - `docs/guidelines/foundations/` defines shared design foundations such as colors, typography, spacing, shape, elevation, focus, motion, and accessibility.
 - `docs/guidelines/patterns/` defines reusable interaction and behavioral patterns.
 - `docs/guidelines/components/` defines component-level design and behavioral expectations.
@@ -95,7 +95,7 @@ Use the most relevant documents for the task. Read their indexes and follow refe
 - Update affected documentation and examples alongside the implementation.
 - Report unresolved ambiguities when a reliable decision cannot be established.
 
-Do not silently redefine Notable's design language through implementation code.
+Do not silently redefine One's design language through implementation code.
 
 ---
 
@@ -105,7 +105,7 @@ Do not silently redefine Notable's design language through implementation code.
 
 - Preserve the repository's modular structure and the separation between design documentation, implementations, applications, and tooling.
 - Keep shared design concepts independent of any one implementation's internal architecture.
-- Treat each implementation as a realization of Notable rather than as the owner of the entire design language.
+- Treat each implementation as a realization of One rather than as the owner of the entire design language.
 - Keep platform-specific APIs, dependencies, build systems, and runtime assumptions within their appropriate boundaries.
 - Share concepts and behavior where doing so improves consistency, but do not force fundamentally different platforms into identical implementation structures.
 - Avoid cross-package dependencies that introduce unnecessary coupling or circular dependency risks.
@@ -242,7 +242,7 @@ Fix directly related, low-risk issues when they fit the task. For broader or pot
 
 ## 7. Consistency Across Implementations
 
-Notable may have multiple implementations with different technical constraints.
+One may have multiple implementations with different technical constraints.
 
 Consistency means preserving shared design intent and user-facing expectations where appropriate. It does not mean forcing every platform to use identical code, APIs, dependencies, or internal architecture.
 
@@ -250,7 +250,7 @@ Consistency means preserving shared design intent and user-facing expectations w
 - Reuse the same conceptual foundations and patterns when applicable.
 - Keep terminology and design decisions aligned.
 - Preserve meaningful behavioral expectations across platforms.
-- Respect native platform conventions and capabilities when they improve usability or accessibility without contradicting Notable's design intent.
+- Respect native platform conventions and capabilities when they improve usability or accessibility without contradicting One's design intent.
 - Do not copy implementation details between platforms without evaluating whether they are appropriate.
 - Do not introduce a platform-specific workaround into shared guidelines unless it expresses a genuinely shared requirement.
 - When one implementation reveals a gap in the design language, evaluate whether the shared documentation should change.
@@ -397,7 +397,7 @@ Do not assume that a change is safe simply because the local module still compil
 
 ## 12. Commit Conventions
 
-Notable follows the Conventional Commits specification. Commit messages must be concise, precise, and supported by the actual changes.
+One follows the Conventional Commits specification. Commit messages must be concise, precise, and supported by the actual changes.
 
 ### Format
 
@@ -517,7 +517,7 @@ When performing cleanup, verify that apparently unused files and exports are not
 When multiple solutions are possible, evaluate them in this order:
 
 1. Correctness and preservation of intended behavior.
-2. Compliance with Notable's documented design language.
+2. Compliance with One's documented design language.
 3. Accessibility, usability, and platform-appropriate behavior.
 4. Architectural coherence and modularity.
 5. Simplicity and maintainability.
@@ -566,7 +566,7 @@ Be proactive about correctness and maintenance, but do not expand the task witho
 A task is complete when:
 
 - The requested outcome has been implemented.
-- The change follows applicable instructions and Notable's documented design language.
+- The change follows applicable instructions and One's documented design language.
 - Architectural boundaries and public contracts remain coherent.
 - Relevant tests and checks have been executed.
 - Regressions introduced by the change have been resolved.
@@ -586,4 +586,4 @@ Provide a concise, factual summary containing:
 
 Do not claim exhaustive correctness or complete repository cleanliness without evidence.
 
-**The objective is to evolve Notable as a coherent, technology-independent design language supported by modular, reliable, accessible, and maintainable implementations.**
+**The objective is to evolve One as a coherent, technology-independent design language supported by modular, reliable, accessible, and maintainable implementations.**

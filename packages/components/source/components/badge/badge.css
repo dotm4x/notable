@@ -1,68 +1,68 @@
-.notable-badge {
+.one-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--notable-spacing-1);
-  border: var(--notable-border-width) solid transparent;
-  border-radius: var(--notable-radius-full);
-  font-family: var(--notable-font-family);
-  font-weight: var(--notable-font-weight-semibold);
-  line-height: var(--notable-line-height-tight);
+  gap: var(--one-spacing-1);
+  border: var(--one-border-width) solid transparent;
+  border-radius: var(--one-radius-full);
+  font-family: var(--one-font-family);
+  font-weight: var(--one-font-weight-semibold);
+  line-height: var(--one-line-height-tight);
   white-space: nowrap;
   vertical-align: middle;
 }
 
-.notable-badge--small {
-  padding: 0.125rem var(--notable-spacing-2);
-  font-size: var(--notable-font-size-xs);
+.one-badge--small {
+  padding: 0.125rem var(--one-spacing-2);
+  font-size: var(--one-font-size-xs);
 }
 
-.notable-badge--medium {
-  padding: 0.125rem var(--notable-spacing-3);
-  font-size: var(--notable-font-size-sm);
+.one-badge--medium {
+  padding: 0.125rem var(--one-spacing-3);
+  font-size: var(--one-font-size-sm);
 }
 
-.notable-badge > :where(svg) {
+.one-badge > :where(svg) {
   width: 1em;
   height: 1em;
   flex: 0 0 auto;
 }
 
-.notable-badge--default {
-  background: var(--notable-color-primary);
-  color: var(--notable-color-on-primary);
+.one-badge--default {
+  background: var(--one-color-primary);
+  color: var(--one-color-on-primary);
 }
 
-.notable-badge--secondary {
-  background: var(--notable-color-secondary);
-  color: var(--notable-color-on-secondary);
+.one-badge--secondary {
+  background: var(--one-color-secondary);
+  color: var(--one-color-on-secondary);
 }
 
-.notable-badge--outline {
-  border-color: var(--notable-color-border-strong);
-  background: var(--notable-color-surface);
-  color: var(--notable-color-text);
+.one-badge--outline {
+  border-color: var(--one-color-border-strong);
+  background: var(--one-color-surface);
+  color: var(--one-color-text);
 }
 
-.notable-badge--success {
-  border-color: var(--notable-color-success-border);
-  background: var(--notable-color-success-subtle);
-  color: var(--notable-color-success);
+.one-badge--success {
+  border-color: var(--one-color-success-border);
+  background: var(--one-color-success-subtle);
+  color: var(--one-color-success);
 }
 
-.notable-badge--warning {
-  border-color: var(--notable-color-warning-border);
-  background: var(--notable-color-warning-subtle);
-  color: var(--notable-color-warning);
+.one-badge--warning {
+  border-color: var(--one-color-warning-border);
+  background: var(--one-color-warning-subtle);
+  color: var(--one-color-warning);
 }
 
-.notable-badge--danger {
-  border-color: var(--notable-color-danger-border);
-  background: var(--notable-color-danger-subtle);
-  color: var(--notable-color-danger);
+.one-badge--danger {
+  border-color: var(--one-color-danger-border);
+  background: var(--one-color-danger-subtle);
+  color: var(--one-color-danger);
 }
 
-.notable-badge__sr-only {
+.one-badge__sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -74,8 +74,8 @@
   border: 0;
 }
 
-.notable-badge--info {
-  border-color: var(--notable-color-info-border);
-  background: var(--notable-color-info-subtle);
-  color: var(--notable-color-info);
+.one-badge--info {
+  border-color: var(--one-color-info-border);
+  background: var(--one-color-info-subtle);
+  color: var(--one-color-info);
 }

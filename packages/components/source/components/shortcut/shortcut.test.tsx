@@ -38,7 +38,7 @@ describe('Shortcut', () => {
     );
 
     const key = screen.getByTestId('shortcut');
-    expect(key).toHaveClass('notable-shortcut', 'custom-shortcut');
+    expect(key).toHaveClass('one-shortcut', 'custom-shortcut');
     expect(key).toHaveAttribute('id', 'shortcut');
     expect(key).toHaveAttribute('title', 'Open search');
     expect(key).toHaveAccessibleName('Command K');

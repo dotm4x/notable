@@ -233,7 +233,7 @@ describe('Popover', () => {
     const popup = screen.getByRole('dialog', { name: 'Filters' });
     expect(popup).toHaveAttribute('data-side', 'top');
     expect(popup).toHaveAttribute('data-align', 'end');
-    expect(popup).toHaveClass('notable-popover', 'custom-popover');
+    expect(popup).toHaveClass('one-popover', 'custom-popover');
   });
 
   it('moves focus into a popover with interactive content on open', async () => {

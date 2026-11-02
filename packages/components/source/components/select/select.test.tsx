@@ -98,7 +98,7 @@ describe('Select', () => {
     expect(trigger.querySelector('[data-placeholder]')).not.toBeNull();
   });
 
-  it('applies the notable class names to the trigger', () => {
+  it('applies the one class names to the trigger', () => {
     // Arrange
     render(<BasicSelect />);
 
@@ -106,9 +106,9 @@ describe('Select', () => {
     const trigger = screen.getByRole('combobox', { name: 'Fruit' });
 
     // Assert
-    expect(trigger).toHaveClass('notable-select__trigger');
-    expect(trigger.querySelector('.notable-select__value')).not.toBeNull();
-    expect(trigger.querySelector('.notable-select__icon')).not.toBeNull();
+    expect(trigger).toHaveClass('one-select__trigger');
+    expect(trigger.querySelector('.one-select__value')).not.toBeNull();
+    expect(trigger.querySelector('.one-select__icon')).not.toBeNull();
   });
 
   it('animates the selected value width when its label changes', async () => {
@@ -117,7 +117,7 @@ describe('Select', () => {
     render(<BasicSelect defaultValue="apple" />);
     const trigger = screen.getByRole('combobox', { name: 'Fruit' });
     const animatedValue = trigger.querySelector(
-      '.notable-auto-size[data-axis="horizontal"]',
+      '.one-auto-size[data-axis="horizontal"]',
     );
 
     expect(animatedValue).not.toBeNull();
@@ -129,7 +129,7 @@ describe('Select', () => {
     // Assert
     expect(trigger).toHaveTextContent('Banana');
     expect(
-      trigger.querySelector('.notable-auto-size[data-axis="horizontal"]'),
+      trigger.querySelector('.one-auto-size[data-axis="horizontal"]'),
     ).toBe(animatedValue);
   });
 
@@ -143,9 +143,9 @@ describe('Select', () => {
 
     // Assert
     const listbox = await screen.findByRole('listbox');
-    expect(listbox).toHaveClass('notable-select__list');
-    expect(listbox.closest('.notable-select__popup')).toHaveClass(
-      'notable-floating-surface',
+    expect(listbox).toHaveClass('one-select__list');
+    expect(listbox.closest('.one-select__popup')).toHaveClass(
+      'one-floating-surface',
     );
   });
 
@@ -339,10 +339,10 @@ describe('Select', () => {
     const groups = within(listbox).getAllByRole('group');
     expect(groups).toHaveLength(2);
     expect(within(groups[0]).getByText('Fruits')).toHaveClass(
-      'notable-select__group-label',
+      'one-select__group-label',
     );
     expect(within(groups[1]).getByText('Vegetables')).toBeInTheDocument();
-    expect(listbox.querySelector('.notable-select__separator')).not.toBeNull();
+    expect(listbox.querySelector('.one-select__separator')).not.toBeNull();
   });
 
   it('submits the selected value with a form using name', () => {
@@ -410,7 +410,7 @@ describe('Select', () => {
     const trigger = screen.getByTestId('trigger');
 
     // Assert
-    expect(trigger).toHaveClass('notable-select__trigger', 'custom-trigger');
+    expect(trigger).toHaveClass('one-select__trigger', 'custom-trigger');
   });
 });
 
@@ -425,8 +425,8 @@ describe('Select animated highlight', () => {
 
     // Assert
     const listbox = await screen.findByRole('listbox');
-    const popup = listbox.closest<HTMLElement>('.notable-select__popup');
-    const surfaces = popup?.querySelectorAll('.notable-animated-highlight');
+    const popup = listbox.closest<HTMLElement>('.one-select__popup');
+    const surfaces = popup?.querySelectorAll('.one-animated-highlight');
     expect(surfaces).toHaveLength(1);
     expect(surfaces?.[0]).toHaveAttribute('aria-hidden', 'true');
   });

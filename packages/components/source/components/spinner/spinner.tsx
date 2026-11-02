@@ -1,4 +1,4 @@
-import { LoaderCircle } from '@notable/icons';
+import { LoaderCircle } from '@one/icons';
 import type { HTMLAttributes } from 'react';
 import './spinner.css';
 
@@ -23,7 +23,7 @@ export function Spinner({
   'aria-label': ariaLabel,
   ...props
 }: SpinnerProps) {
-  const classes = ['notable-spinner', `notable-spinner--${size}`, className]
+  const classes = ['one-spinner', `one-spinner--${size}`, className]
     .filter(Boolean)
     .join(' ');
 
@@ -34,7 +34,7 @@ export function Spinner({
       role="status"
       aria-label={ariaLabel ?? label}
     >
-      <LoaderCircle className="notable-spinner__icon" aria-hidden="true" />
+      <LoaderCircle className="one-spinner__icon" aria-hidden="true" />
     </span>
   );
 }

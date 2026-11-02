@@ -1,7 +1,6 @@
 :root {
-  --notable-shadow-sm: 0 1px 2px var(--notable-color-shadow);
-  --notable-shadow-md:
-    0 1px 3px var(--notable-color-shadow-strong),
-    0 1px 2px var(--notable-color-shadow);
-  --notable-shadow-lg: 0 2px 8px var(--notable-color-shadow-strong);
+  --one-shadow-sm: 0 1px 2px var(--one-color-shadow);
+  --one-shadow-md:
+    0 1px 3px var(--one-color-shadow-strong), 0 1px 2px var(--one-color-shadow);
+  --one-shadow-lg: 0 2px 8px var(--one-color-shadow-strong);
 }

@@ -51,7 +51,7 @@ describe('Field', () => {
 
     expect(screen.getByTestId('field')).toHaveAttribute('data-invalid');
     expect(screen.getByTestId('field')).toHaveClass(
-      'notable-field',
+      'one-field',
       'custom-field',
     );
   });

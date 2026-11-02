@@ -1,6 +1,6 @@
 # Accessibility
 
-Accessibility is the baseline for every Notable design, not an optional enhancement. Every interface must be usable with a keyboard, with a pointer, with touch, and with assistive technology. Accessibility is also part of expression: an element that cannot be used is not expressive at all.
+Accessibility is the baseline for every One design, not an optional enhancement. Every interface must be usable with a keyboard, with a pointer, with touch, and with assistive technology. Accessibility is also part of expression: an element that cannot be used is not expressive at all.
 
 ## Usability across inputs
 
@@ -42,4 +42,4 @@ Automated accessibility checks are a floor, not the goal. They catch many proble
 
 ## Principle
 
-Everything Notable offers should be available to everyone. A design is not finished until its interactions, names, contrast, and motion all work for people who cannot use it the default way.
+Everything One offers should be available to everyone. A design is not finished until its interactions, names, contrast, and motion all work for people who cannot use it the default way.

@@ -1,7 +1,7 @@
 'use client';
 
 import { CircleEllipsis, Plus, Search } from 'lucide-react';
-import { Button } from '@notable/components';
+import { Button } from '@one/components';
 
 /** Demonstrates icon-only Button sizes and variants. */
 export function ButtonIconsDemo() {

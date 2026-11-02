@@ -1,6 +1,6 @@
 # Foundations
 
-Foundations are the shared rules that every component builds on. They define how Notable looks and behaves before any component is involved: color, shape, space, type, depth, motion, focus, and accessibility.
+Foundations are the shared rules that every component builds on. They define how One looks and behaves before any component is involved: color, shape, space, type, depth, motion, focus, and accessibility.
 
 ## Guidelines in this category
 

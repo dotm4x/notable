@@ -63,9 +63,7 @@ function ControlledDialog({
 }
 
 function getBackdrop(): HTMLElement {
-  const backdrop = document.querySelector<HTMLElement>(
-    '.notable-dialog__backdrop',
-  );
+  const backdrop = document.querySelector<HTMLElement>('.one-dialog__backdrop');
 
   if (!backdrop) {
     throw new Error('Expected the dialog backdrop to be rendered.');
@@ -415,7 +413,7 @@ describe('Dialog', () => {
 
       // Assert
       expect(screen.getByRole('button', { name: 'Not now' })).toHaveClass(
-        'notable-button--outline',
+        'one-button--outline',
       );
     });
 
@@ -601,9 +599,9 @@ describe('Dialog', () => {
 
   describe('Dialog.Content props', () => {
     it.each([
-      ['small', 'notable-dialog--small'],
-      ['medium', 'notable-dialog--medium'],
-      ['large', 'notable-dialog--large'],
+      ['small', 'one-dialog--small'],
+      ['medium', 'one-dialog--medium'],
+      ['large', 'one-dialog--large'],
     ] as const)('applies the %s size class', (size, className) => {
       // Arrange & Act
       render(
@@ -615,10 +613,7 @@ describe('Dialog', () => {
       );
 
       // Assert
-      expect(screen.getByRole('dialog')).toHaveClass(
-        'notable-dialog',
-        className,
-      );
+      expect(screen.getByRole('dialog')).toHaveClass('one-dialog', className);
     });
 
     it('defaults to the medium size', () => {
@@ -626,7 +621,7 @@ describe('Dialog', () => {
       renderDialog({ defaultOpen: true });
 
       // Assert
-      expect(screen.getByRole('dialog')).toHaveClass('notable-dialog--medium');
+      expect(screen.getByRole('dialog')).toHaveClass('one-dialog--medium');
     });
 
     it('merges className and forwards HTML attributes to the popup element', () => {
@@ -646,7 +641,7 @@ describe('Dialog', () => {
 
       // Assert
       const dialog = screen.getByTestId('delete-dialog');
-      expect(dialog).toHaveClass('notable-dialog', 'custom-dialog');
+      expect(dialog).toHaveClass('one-dialog', 'custom-dialog');
       expect(dialog).toHaveAttribute('id', 'delete-dialog');
       expect(dialog).toHaveAttribute('aria-label', 'Delete confirmation');
       expect(dialog).toHaveAccessibleName('Notice');
@@ -679,21 +674,21 @@ describe('Dialog', () => {
 
       // Assert
       expect(screen.getByTestId('header')).toHaveClass(
-        'notable-dialog__header',
+        'one-dialog__header',
         'header',
       );
       expect(screen.getByTestId('title').tagName).toBe('H2');
       expect(screen.getByTestId('title')).toHaveClass(
-        'notable-dialog__title',
+        'one-dialog__title',
         'title',
       );
       expect(screen.getByTestId('description').tagName).toBe('P');
       expect(screen.getByTestId('description')).toHaveClass(
-        'notable-dialog__description',
+        'one-dialog__description',
         'description',
       );
       expect(screen.getByTestId('footer')).toHaveClass(
-        'notable-dialog__footer',
+        'one-dialog__footer',
         'footer',
       );
     });

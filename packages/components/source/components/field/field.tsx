@@ -25,7 +25,7 @@ function FieldRoot({ className, ...props }: TFieldRootProps) {
   return (
     <BaseField.Root
       {...props}
-      className={joinClassNames('notable-field', className)}
+      className={joinClassNames('one-field', className)}
     />
   );
 }
@@ -35,7 +35,7 @@ function FieldLabel({ className, ...props }: TFieldLabelProps) {
   return (
     <BaseField.Label
       {...props}
-      className={joinClassNames('notable-field__label', className)}
+      className={joinClassNames('one-field__label', className)}
     />
   );
 }
@@ -45,7 +45,7 @@ function FieldControl({ className, ...props }: TFieldControlProps) {
   return (
     <BaseField.Control
       {...props}
-      className={joinClassNames('notable-field__control', className)}
+      className={joinClassNames('one-field__control', className)}
     />
   );
 }
@@ -55,7 +55,7 @@ function FieldDescription({ className, ...props }: TFieldDescriptionProps) {
   return (
     <BaseField.Description
       {...props}
-      className={joinClassNames('notable-field__description', className)}
+      className={joinClassNames('one-field__description', className)}
     />
   );
 }
@@ -68,18 +68,15 @@ function FieldError({ className, ...props }: TFieldErrorProps) {
   return (
     <BaseField.Error
       {...props}
-      className={joinClassNames('notable-field__error', className)}
+      className={joinClassNames('one-field__error', className)}
     />
   );
 }
 
-/** Bordered container for a control and its icons. Gives controls the Notable field appearance. */
+/** Bordered container for a control and its icons. Gives controls the One field appearance. */
 function FieldBox({ className, ...props }: TFieldBoxProps) {
   return (
-    <span
-      {...props}
-      className={joinClassNames('notable-field__box', className)}
-    />
+    <span {...props} className={joinClassNames('one-field__box', className)} />
   );
 }
 
@@ -90,7 +87,7 @@ function joinClassNames(...classNames: (string | undefined)[]) {
 /**
  * Field layout for a control with its label, description, and error message.
  * Built on Base UI Field; use `Field.Control` for the control or pass any
- * Base UI or Notable input to it with `render`.
+ * Base UI or One input to it with `render`.
  */
 export const Field = {
   Root: FieldRoot,

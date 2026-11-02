@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@notable/components';
+import { Button } from '@one/components';
 
 /** Demonstrates available Button sizes. */
 export function ButtonSizesDemo() {

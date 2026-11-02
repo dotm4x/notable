@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from '@notable/icons';
+import { ChevronLeft, ChevronRight } from '@one/icons';
 import {
   AnimatePresence,
   motion,
@@ -350,7 +350,7 @@ function CalendarMonth({
 
   return (
     <motion.div
-      className="notable-calendar__month"
+      className="one-calendar__month"
       data-active={isPresent ? '' : undefined}
       aria-hidden={isPresent ? undefined : true}
       custom={direction}
@@ -368,7 +368,7 @@ function CalendarMonth({
       }}
     >
       <table
-        className="notable-calendar__grid"
+        className="one-calendar__grid"
         role="grid"
         aria-labelledby={titleId}
       >
@@ -378,7 +378,7 @@ function CalendarMonth({
               <th
                 key={weekday.key}
                 scope="col"
-                className="notable-calendar__weekday"
+                className="one-calendar__weekday"
               >
                 <abbr title={weekday.long}>{weekday.short}</abbr>
               </th>
@@ -407,7 +407,7 @@ function CalendarMonth({
                     aria-selected={
                       isSelected || dayRange.isStart || isRangeMember
                     }
-                    className="notable-calendar__cell"
+                    className="one-calendar__cell"
                     data-in-range={dayRange.isInRange ? '' : undefined}
                     data-range-start={dayRange.isStart ? '' : undefined}
                     data-range-end={dayRange.isEnd ? '' : undefined}
@@ -417,7 +417,7 @@ function CalendarMonth({
                   >
                     <button
                       type="button"
-                      className="notable-calendar__day"
+                      className="one-calendar__day"
                       data-date={dayKey}
                       aria-label={dayFormatter.format(day)}
                       aria-current={isToday ? 'date' : undefined}
@@ -667,8 +667,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
     };
 
     const classes = [
-      'notable-calendar',
-      disabled ? 'notable-calendar--disabled' : undefined,
+      'one-calendar',
+      disabled ? 'one-calendar--disabled' : undefined,
       className,
     ]
       .filter(Boolean)
@@ -681,27 +681,24 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
         className={classes}
         data-disabled={disabled ? '' : undefined}
       >
-        <div className="notable-calendar__header">
+        <div className="one-calendar__header">
           <Button
             variant="ghost"
             size="icon"
-            className="notable-calendar__nav"
+            className="one-calendar__nav"
             aria-label="Previous month"
             disabled={disabled || !canGoPrevious}
             onClick={() => shiftMonth(-1)}
           >
             <ChevronLeft
-              className="notable-calendar__nav-icon"
+              className="one-calendar__nav-icon"
               aria-hidden="true"
             />
           </Button>
-          <AutoSize
-            axis="horizontal"
-            className="notable-calendar__title-container"
-          >
+          <AutoSize axis="horizontal" className="one-calendar__title-container">
             <span
               id={titleId}
-              className="notable-calendar__title"
+              className="one-calendar__title"
               aria-live="polite"
             >
               {titleFormatter.format(visibleMonth)}
@@ -710,20 +707,20 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           <Button
             variant="ghost"
             size="icon"
-            className="notable-calendar__nav"
+            className="one-calendar__nav"
             aria-label="Next month"
             disabled={disabled || !canGoNext}
             onClick={() => shiftMonth(1)}
           >
             <ChevronRight
-              className="notable-calendar__nav-icon"
+              className="one-calendar__nav-icon"
               aria-hidden="true"
             />
           </Button>
         </div>
 
         <div
-          className="notable-calendar__viewport"
+          className="one-calendar__viewport"
           onPointerLeave={() => setHoveredDay(null)}
         >
           <AnimatedHighlight followTargetShape />
@@ -751,7 +748,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           </AnimatePresence>
         </div>
 
-        <span className="notable-calendar__sr-only" aria-live="polite">
+        <span className="one-calendar__sr-only" aria-live="polite">
           {selected ? dayFormatter.format(selected) : ''}
         </span>
       </div>

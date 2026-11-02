@@ -1,4 +1,4 @@
-import { Clock as ClockIcon } from '@notable/icons';
+import { Clock as ClockIcon } from '@one/icons';
 import {
   forwardRef,
   useId,
@@ -244,9 +244,9 @@ type TimeColumnProps = {
 
 function TimeColumn({ legend, children }: TimeColumnProps) {
   return (
-    <fieldset className="notable-time-picker__column">
-      <legend className="notable-time-picker__legend">{legend}</legend>
-      <div className="notable-time-picker__list" ref={revealSelection}>
+    <fieldset className="one-time-picker__column">
+      <legend className="one-time-picker__legend">{legend}</legend>
+      <div className="one-time-picker__list" ref={revealSelection}>
         {children}
       </div>
     </fieldset>
@@ -276,7 +276,7 @@ function TimeOption({
 }: TimeOptionProps) {
   return (
     <label
-      className="notable-time-picker__option"
+      className="one-time-picker__option"
       data-selected={checked ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
       data-highlighted={highlighted ? '' : undefined}
@@ -284,7 +284,7 @@ function TimeOption({
       onPointerLeave={() => onHover(false)}
     >
       <input
-        className="notable-time-picker__input"
+        className="one-time-picker__input"
         type="radio"
         name={name}
         value={value}
@@ -433,7 +433,7 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
           isHourEnabled(constraints, to24(hour12, 'pm'))
         : isHourEnabled(constraints, to24(hour12, selectedPeriod));
 
-    const classes = ['notable-time-picker__trigger', className]
+    const classes = ['one-time-picker__trigger', className]
       .filter(Boolean)
       .join(' ');
 
@@ -472,12 +472,12 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
               aria-labelledby={labelledBy}
               data-readonly={readOnly || undefined}
             >
-              <span className="notable-time-picker__icon" aria-hidden="true">
+              <span className="one-time-picker__icon" aria-hidden="true">
                 <ClockIcon />
               </span>
               <span
                 id={valueId}
-                className="notable-time-picker__value"
+                className="one-time-picker__value"
                 data-placeholder={selected === undefined ? '' : undefined}
               >
                 {displayText}
@@ -487,9 +487,9 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
           <Popover.Content
             aria-label="Choose time"
             align="start"
-            className="notable-time-picker__popup"
+            className="one-time-picker__popup"
           >
-            <div className="notable-time-picker__panel">
+            <div className="one-time-picker__panel">
               <AnimatedHighlight followTargetShape />
               <TimeColumn legend="Hour">
                 {format === '24h'

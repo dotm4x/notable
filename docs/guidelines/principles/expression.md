@@ -1,6 +1,6 @@
 # Expression
 
-Notable should feel friendly, warm, and a little playful. Its character is approachable and human. It is not sterile, industrial, or corporate. Expression is carried by shape, motion, typography, and the way feedback responds to the user.
+One should feel friendly, warm, and a little playful. Its character is approachable and human. It is not sterile, industrial, or corporate. Expression is carried by shape, motion, typography, and the way feedback responds to the user.
 
 ## Warmth through shape
 
@@ -8,7 +8,7 @@ Rounded forms and soft curves make interactive elements feel approachable. Sharp
 
 ## Personality through motion
 
-Motion is part of Notable's identity. Movement should feel fluid and responsive, as if objects have weight and follow the user's attention. A well-timed transition can say more about the product than any color.
+Motion is part of One's identity. Movement should feel fluid and responsive, as if objects have weight and follow the user's attention. A well-timed transition can say more about the product than any color.
 
 ## Playful, not childish
 
@@ -20,4 +20,4 @@ Typography carries part of this character, but readability comes first. A warm v
 
 ## Principle
 
-Expression should make Notable feel like a considered product made for people. It must never come at the cost of clarity or access.
+Expression should make One feel like a considered product made for people. It must never come at the cost of clarity or access.

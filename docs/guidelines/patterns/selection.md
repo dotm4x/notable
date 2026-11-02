@@ -1,6 +1,6 @@
 # Selection
 
-Selection is how a user chooses a value or item. Notable distinguishes between three related but different concepts: highlighted, selected, and current. Each communicates a different fact, and each must remain understandable when more than one applies to the same item.
+Selection is how a user chooses a value or item. One distinguishes between three related but different concepts: highlighted, selected, and current. Each communicates a different fact, and each must remain understandable when more than one applies to the same item.
 
 ## Highlighted
 

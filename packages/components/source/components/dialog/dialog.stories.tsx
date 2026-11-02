@@ -274,16 +274,16 @@ export const CustomStyling: Story = {
       <Dialog.Content
         style={
           {
-            '--notable-dialog-width': '40rem',
-            backgroundColor: 'var(--notable-color-primary)',
-            color: 'var(--notable-color-on-primary)',
+            '--one-dialog-width': '40rem',
+            backgroundColor: 'var(--one-color-primary)',
+            color: 'var(--one-color-on-primary)',
           } as CSSProperties
         }
       >
         <Dialog.Header>
           <Dialog.Title>Custom styling</Dialog.Title>
           <Dialog.Description>
-            Width and colors are set through Notable CSS custom properties.
+            Width and colors are set through One CSS custom properties.
           </Dialog.Description>
         </Dialog.Header>
         <Dialog.Footer>

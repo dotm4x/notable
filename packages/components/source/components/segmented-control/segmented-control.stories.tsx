@@ -8,7 +8,7 @@ import {
   LayoutGrid,
   Moon,
   Sun,
-} from '@notable/icons';
+} from '@one/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SegmentedControl } from './segmented-control.js';
 
@@ -152,7 +152,7 @@ function ControlledDemo() {
       <span
         style={{
           fontSize: '14px',
-          color: 'var(--notable-color-text-muted)',
+          color: 'var(--one-color-text-muted)',
         }}
       >
         Selected value: {period}
@@ -267,10 +267,10 @@ function InteractivePeriodDemo() {
       <div
         style={{
           padding: '16px',
-          borderRadius: 'var(--notable-radius-lg)',
-          backgroundColor: 'var(--notable-color-surface-sunken)',
+          borderRadius: 'var(--one-radius-lg)',
+          backgroundColor: 'var(--one-color-surface-sunken)',
           border:
-            'var(--notable-border-width) solid var(--notable-color-border-subtle)',
+            'var(--one-border-width) solid var(--one-color-border-subtle)',
           fontSize: '14px',
         }}
       >
@@ -303,7 +303,7 @@ function DraggableDemo() {
       <span
         style={{
           fontSize: '14px',
-          color: 'var(--notable-color-text-muted)',
+          color: 'var(--one-color-text-muted)',
         }}
       >
         Selected timeframe: <strong>{period}</strong>
@@ -311,7 +311,7 @@ function DraggableDemo() {
       <span
         style={{
           fontSize: '12px',
-          color: 'var(--notable-color-text-muted)',
+          color: 'var(--one-color-text-muted)',
         }}
       >
         Drag the selected indicator horizontally, or click an option.

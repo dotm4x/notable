@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@notable/components';
+import { Button } from '@one/components';
 
 /** Demonstrates all available Button visual variants. */
 export function ButtonVariantsDemo() {

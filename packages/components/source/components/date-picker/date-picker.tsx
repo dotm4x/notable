@@ -1,4 +1,4 @@
-import { Calendar as CalendarIcon } from '@notable/icons';
+import { Calendar as CalendarIcon } from '@one/icons';
 import {
   forwardRef,
   useId,
@@ -110,7 +110,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
       setOpen(false);
     };
 
-    const classes = ['notable-date-picker__trigger', className]
+    const classes = ['one-date-picker__trigger', className]
       .filter(Boolean)
       .join(' ');
 
@@ -139,12 +139,12 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
               aria-labelledby={labelledBy}
               data-readonly={readOnly || undefined}
             >
-              <span className="notable-date-picker__icon" aria-hidden="true">
+              <span className="one-date-picker__icon" aria-hidden="true">
                 <CalendarIcon />
               </span>
               <span
                 id={valueId}
-                className="notable-date-picker__value"
+                className="one-date-picker__value"
                 data-placeholder={value ? undefined : ''}
               >
                 {displayText}

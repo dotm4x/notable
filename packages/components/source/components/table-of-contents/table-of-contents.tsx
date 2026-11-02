@@ -260,15 +260,15 @@ const TableOfContentsRoot = forwardRef<HTMLElement, TableOfContentsRootProps>(
             }
             aria-labelledby={ariaLabelledBy}
             className={[
-              'notable-table-of-contents',
-              side === 'right' ? 'notable-table-of-contents--right' : null,
+              'one-table-of-contents',
+              side === 'right' ? 'one-table-of-contents--right' : null,
               className,
             ]
               .filter(Boolean)
               .join(' ')}
           >
             <AnimatedHighlight
-              className="notable-table-of-contents__highlight"
+              className="one-table-of-contents__highlight"
               followTargetShape
             />
             {children}
@@ -287,7 +287,7 @@ const TableOfContentsHeader = forwardRef<
     <h2
       {...props}
       ref={ref}
-      className={['notable-table-of-contents__header', className]
+      className={['one-table-of-contents__header', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -302,7 +302,7 @@ const TableOfContentsList = forwardRef<
     <ul
       {...props}
       ref={ref}
-      className={['notable-table-of-contents__list', className]
+      className={['one-table-of-contents__list', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -323,7 +323,7 @@ const TableOfContentsItem = forwardRef<
   const isActive = id !== null && activeId === id;
 
   return (
-    <li className="notable-table-of-contents__item">
+    <li className="one-table-of-contents__item">
       <a
         {...props}
         ref={ref}
@@ -331,7 +331,7 @@ const TableOfContentsItem = forwardRef<
         aria-current={isActive ? 'location' : undefined}
         data-active={isActive ? '' : undefined}
         data-highlighted={hovered ? '' : undefined}
-        className={['notable-table-of-contents__link', className]
+        className={['one-table-of-contents__link', className]
           .filter(Boolean)
           .join(' ')}
         onMouseEnter={() => setHovered(true)}
@@ -344,14 +344,14 @@ const TableOfContentsItem = forwardRef<
         {isActive && (
           <motion.span
             aria-hidden="true"
-            className="notable-table-of-contents__indicator"
+            className="one-table-of-contents__indicator"
             layoutId="active-indicator"
             initial={false}
             transition={prefersReducedMotion ? { duration: 0 } : SPRING_LAYOUT}
           />
         )}
         <motion.span
-          className="notable-table-of-contents__label"
+          className="one-table-of-contents__label"
           animate={{ x: isActive ? (side === 'right' ? -2 : 2) : 0 }}
           transition={
             prefersReducedMotion

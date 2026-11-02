@@ -225,9 +225,9 @@ export const Themes: Story = {
           data-theme={theme}
           style={{
             padding: '16px',
-            borderRadius: 'var(--notable-radius-md)',
-            background: 'var(--notable-color-background)',
-            color: 'var(--notable-color-text)',
+            borderRadius: 'var(--one-radius-md)',
+            background: 'var(--one-color-background)',
+            color: 'var(--one-color-text)',
           }}
         >
           <Tabs defaultValue="first">

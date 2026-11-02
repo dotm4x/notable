@@ -70,13 +70,10 @@ describe('ToggleGroup', () => {
 
     const bold = screen.getByRole('button', { name: 'Bold' });
     expect(bold).toHaveAttribute('aria-pressed', 'false');
-    expect(bold).toHaveClass(
-      'notable-toggle--outline',
-      'notable-toggle--small',
-    );
+    expect(bold).toHaveClass('one-toggle--outline', 'one-toggle--small');
     expect(screen.getByRole('button', { name: 'Italic' })).toHaveClass(
-      'notable-toggle--outline',
-      'notable-toggle--small',
+      'one-toggle--outline',
+      'one-toggle--small',
     );
   });
 

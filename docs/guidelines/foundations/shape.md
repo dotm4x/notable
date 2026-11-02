@@ -1,6 +1,6 @@
 # Shape
 
-Shape is one of the main ways Notable expresses its friendly character. Corners, borders, and curves signal approachability. A consistent shape language also tells the user which elements belong together.
+Shape is one of the main ways One expresses its friendly character. Corners, borders, and curves signal approachability. A consistent shape language also tells the user which elements belong together.
 
 See [Values](./values.md#radius) for the radius scale and [Values](./values.md#borders) for border widths.
 
@@ -28,4 +28,4 @@ Shape should feel warm and approachable without sacrificing structure. The user 
 
 ## One radius family
 
-Notable uses a single radius family. Each size takes its step on that scale. Dense controls, such as those in popups, take the step their size and nesting call for, not a separate and tighter curve.
+One uses a single radius family. Each size takes its step on that scale. Dense controls, such as those in popups, take the step their size and nesting call for, not a separate and tighter curve.

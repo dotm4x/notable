@@ -1,22 +1,22 @@
-.notable-tooltip {
+.one-tooltip {
   display: inline-flex;
   vertical-align: middle;
 }
 
-.notable-tooltip__content {
+.one-tooltip__content {
   z-index: 1000;
   width: max-content;
-  max-width: min(16rem, calc(100vw - var(--notable-spacing-8)));
-  max-height: calc(100vh - var(--notable-spacing-4));
+  max-width: min(16rem, calc(100vw - var(--one-spacing-8)));
+  max-height: calc(100vh - var(--one-spacing-4));
   overflow: auto;
-  padding: var(--notable-spacing-2) var(--notable-spacing-3);
-  border-radius: var(--notable-radius-xl);
-  background: var(--notable-color-text);
-  box-shadow: var(--notable-shadow-lg);
-  color: var(--notable-color-text-inverse);
-  font-family: var(--notable-font-family);
-  font-size: var(--notable-font-size-xs);
-  line-height: var(--notable-line-height-normal);
+  padding: var(--one-spacing-2) var(--one-spacing-3);
+  border-radius: var(--one-radius-xl);
+  background: var(--one-color-text);
+  box-shadow: var(--one-shadow-lg);
+  color: var(--one-color-text-inverse);
+  font-family: var(--one-font-family);
+  font-size: var(--one-font-size-xs);
+  line-height: var(--one-line-height-normal);
   text-align: center;
   white-space: normal;
   pointer-events: none;
@@ -24,30 +24,30 @@
   visibility: hidden;
   transform: scale(0.96);
   transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard),
-    transform var(--notable-duration-base) var(--notable-easing-spring),
-    visibility 0s linear var(--notable-duration-base);
+    opacity var(--one-duration-base) var(--one-easing-standard),
+    transform var(--one-duration-base) var(--one-easing-spring),
+    visibility 0s linear var(--one-duration-base);
 }
 
-.notable-tooltip__content[data-open] {
+.one-tooltip__content[data-open] {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
   transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard),
-    transform var(--notable-duration-base) var(--notable-easing-spring),
+    opacity var(--one-duration-base) var(--one-easing-standard),
+    transform var(--one-duration-base) var(--one-easing-spring),
     visibility 0s linear 0s;
 }
 
 /* Base UI disables transitions while this attribute is set, so the first
    frame is painted hidden and the open state then animates from it. */
-.notable-tooltip__content[data-starting-style] {
+.one-tooltip__content[data-starting-style] {
   opacity: 0;
   transform: scale(0.96);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-tooltip__content {
+  .one-tooltip__content {
     transition: none;
   }
 }

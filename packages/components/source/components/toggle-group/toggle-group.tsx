@@ -132,9 +132,7 @@ const ToggleGroupRoot = forwardRef<HTMLDivElement, TToggleGroupProps>(
         <BaseToggleGroup
           {...baseProps}
           ref={ref}
-          className={['notable-toggle-group', className]
-            .filter(Boolean)
-            .join(' ')}
+          className={['one-toggle-group', className].filter(Boolean).join(' ')}
           disabled={disabled}
           orientation={orientation}
           multiple={type === 'multiple'}
@@ -170,7 +168,7 @@ const ToggleGroupItem = forwardRef<HTMLButtonElement, TToggleGroupItemProps>(
         value={value}
         variant={styles.variant}
         size={styles.size}
-        className={['notable-toggle-group__item', className]
+        className={['one-toggle-group__item', className]
           .filter(Boolean)
           .join(' ')}
       />

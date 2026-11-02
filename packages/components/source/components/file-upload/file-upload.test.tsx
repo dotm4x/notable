@@ -39,7 +39,7 @@ function getInput(container: HTMLElement) {
 }
 
 function getRoot(container: HTMLElement) {
-  const root = container.querySelector<HTMLElement>('.notable-file-upload');
+  const root = container.querySelector<HTMLElement>('.one-file-upload');
   if (!root) {
     throw new Error('Expected a FileUpload root');
   }
@@ -70,7 +70,7 @@ describe('FileUpload', () => {
       const { container } = render(<FileUpload mode={mode} />);
 
       const root = getRoot(container);
-      expect(root).toHaveClass(`notable-file-upload--${mode}`);
+      expect(root).toHaveClass(`one-file-upload--${mode}`);
       expect(root).toHaveAttribute('data-mode', mode);
     },
   );
@@ -166,7 +166,7 @@ describe('FileUpload', () => {
 
     expect(screen.getByRole('status')).toHaveTextContent('notes.txt');
     expect(
-      screen.getByText('notes.txt', { selector: '.notable-file-upload__name' }),
+      screen.getByText('notes.txt', { selector: '.one-file-upload__name' }),
     ).toBeInTheDocument();
   });
 
@@ -403,7 +403,7 @@ describe('FileUpload', () => {
 
     const dropzone = screen
       .getByText('Drop files here')
-      .closest<HTMLElement>('.notable-file-upload__dropzone');
+      .closest<HTMLElement>('.one-file-upload__dropzone');
     expect(dropzone).not.toBeNull();
     expect(
       within(dropzone as HTMLElement).getByText(

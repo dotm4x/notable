@@ -390,8 +390,8 @@ describe('Combobox animated highlight', () => {
 
     // Assert
     const listbox = await screen.findByRole('listbox');
-    const popup = listbox.closest<HTMLElement>('.notable-combobox__popup');
-    const surfaces = popup?.querySelectorAll('.notable-animated-highlight');
+    const popup = listbox.closest<HTMLElement>('.one-combobox__popup');
+    const surfaces = popup?.querySelectorAll('.one-animated-highlight');
     expect(surfaces).toHaveLength(1);
     expect(surfaces?.[0]).toHaveAttribute('aria-hidden', 'true');
   });
@@ -407,10 +407,8 @@ describe('Combobox animated highlight', () => {
 
     // Assert
     const listbox = await screen.findByRole('listbox');
-    const popup = listbox.closest<HTMLElement>('.notable-combobox__popup');
-    expect(popup?.querySelectorAll('.notable-animated-highlight')).toHaveLength(
-      1,
-    );
+    const popup = listbox.closest<HTMLElement>('.one-combobox__popup');
+    expect(popup?.querySelectorAll('.one-animated-highlight')).toHaveLength(1);
     expect(
       screen.queryByRole('option', { name: 'Apple' }),
     ).not.toBeInTheDocument();

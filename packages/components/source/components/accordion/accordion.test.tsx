@@ -51,8 +51,8 @@ function getPanel(triggerName: string) {
   // Base UI keeps closed panels mounted, so locate the panel through its item.
   const trigger = getTrigger(triggerName);
   const panel = trigger
-    .closest('.notable-accordion__item')
-    ?.querySelector<HTMLElement>('.notable-accordion__panel');
+    .closest('.one-accordion__item')
+    ?.querySelector<HTMLElement>('.one-accordion__panel');
 
   if (!panel) {
     throw new Error(`Panel for trigger "${triggerName}" was not found.`);

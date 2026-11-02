@@ -1,14 +1,14 @@
 :root {
   /* Spacing */
-  --notable-spacing-0: 0;
-  --notable-spacing-1: 0.25rem;
-  --notable-spacing-2: 0.5rem;
-  --notable-spacing-3: 0.75rem;
-  --notable-spacing-4: 1rem;
-  --notable-spacing-5: 1.25rem;
-  --notable-spacing-6: 1.5rem;
-  --notable-spacing-8: 2rem;
-  --notable-spacing-10: 2.5rem;
-  --notable-spacing-12: 3rem;
-  --notable-spacing-16: 4rem;
+  --one-spacing-0: 0;
+  --one-spacing-1: 0.25rem;
+  --one-spacing-2: 0.5rem;
+  --one-spacing-3: 0.75rem;
+  --one-spacing-4: 1rem;
+  --one-spacing-5: 1.25rem;
+  --one-spacing-6: 1.5rem;
+  --one-spacing-8: 2rem;
+  --one-spacing-10: 2.5rem;
+  --one-spacing-12: 3rem;
+  --one-spacing-16: 4rem;
 }

@@ -371,8 +371,8 @@ describe('RadioGroup', () => {
 
     const group = screen.getByRole('group', { name: 'Plan' });
 
-    expect(group).toHaveClass('notable-radio-group--horizontal');
-    expect(group).toHaveClass('notable-radio-group--large');
+    expect(group).toHaveClass('one-radio-group--horizontal');
+    expect(group).toHaveClass('one-radio-group--large');
   });
 
   it('exposes RadioGroup.Item as the same component as RadioGroupItem', () => {

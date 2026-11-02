@@ -205,7 +205,7 @@ importers:
       '@icons-pack/react-simple-icons':
         specifier: ^13.15.1
         version: 13.15.1(react@19.3.1)
-      '@notable/components':
+      '@one/components':
         specifier: workspace:*
         version: link:../../packages/components
       lucide-react:
@@ -239,7 +239,7 @@ importers:
       '@fontsource-variable/geist':
         specifier: ^5.3.0
         version: 5.3.0
-      '@notable/icons':
+      '@one/icons':
         specifier: workspace:*
         version: link:../icons
       motion:

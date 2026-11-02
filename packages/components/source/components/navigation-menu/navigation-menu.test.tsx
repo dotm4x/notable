@@ -220,7 +220,7 @@ describe('NavigationMenu', () => {
     expect(
       screen
         .getByRole('navigation', { name: 'Main' })
-        .querySelector('.notable-navigation-menu__highlight'),
+        .querySelector('.one-navigation-menu__highlight'),
     ).not.toBeInTheDocument();
   });
 
@@ -376,16 +376,16 @@ describe('NavigationMenu', () => {
     );
 
     expect(screen.getByRole('navigation', { name: 'Main' })).toHaveClass(
-      'notable-navigation-menu',
+      'one-navigation-menu',
       'custom-root',
     );
     expect(screen.getByRole('list')).toHaveClass(
-      'notable-navigation-menu__list',
+      'one-navigation-menu__list',
       'custom-list',
     );
     expect(screen.getByRole('listitem')).toHaveClass('custom-item');
     expect(screen.getByRole('link', { name: 'Home' })).toHaveClass(
-      'notable-navigation-menu__link',
+      'one-navigation-menu__link',
       'custom-link',
     );
   });
@@ -398,7 +398,7 @@ describe('NavigationMenu', () => {
 
     const group = await screen.findByRole('group', { name: 'Learn' });
     expect(
-      group.querySelector('.notable-navigation-menu__highlight'),
+      group.querySelector('.one-navigation-menu__highlight'),
     ).not.toBeInTheDocument();
   });
 

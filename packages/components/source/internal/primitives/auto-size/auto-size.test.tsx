@@ -113,7 +113,7 @@ describe('AutoSize', () => {
   function getContainer() {
     return screen
       .getByText('Content')
-      .closest<HTMLElement>('.notable-auto-size') as HTMLElement;
+      .closest<HTMLElement>('.one-auto-size') as HTMLElement;
   }
 
   it('renders its children inside a content wrapper with a vertical axis by default', () => {

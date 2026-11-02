@@ -63,8 +63,8 @@ const CardRoot = forwardRef<HTMLElement, CardProps>(function Card(
 ) {
   const Component = Element as ElementType;
   const classes = [
-    'notable-card',
-    padding === 'none' && 'notable-card--padding-none',
+    'one-card',
+    padding === 'none' && 'one-card--padding-none',
     className,
   ]
     .filter(Boolean)
@@ -79,9 +79,7 @@ const CardRoot = forwardRef<HTMLElement, CardProps>(function Card(
 
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   function CardHeader({ children, className, ...props }, ref) {
-    const classes = ['notable-card__header', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-card__header', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
@@ -96,7 +94,7 @@ const CardTitle = forwardRef<HTMLElement, CardTitleProps>(function CardTitle(
   ref,
 ) {
   const Component = Element as ElementType;
-  const classes = ['notable-card__title', className].filter(Boolean).join(' ');
+  const classes = ['one-card__title', className].filter(Boolean).join(' ');
 
   return (
     <Component ref={ref} className={classes} {...props}>
@@ -111,7 +109,7 @@ const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
     ref,
   ) {
     const Component = Element as ElementType;
-    const classes = ['notable-card__description', className]
+    const classes = ['one-card__description', className]
       .filter(Boolean)
       .join(' ');
 
@@ -125,9 +123,7 @@ const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
 
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   function CardContent({ children, className, ...props }, ref) {
-    const classes = ['notable-card__content', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-card__content', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
@@ -139,9 +135,7 @@ const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
 
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   function CardFooter({ children, className, ...props }, ref) {
-    const classes = ['notable-card__footer', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-card__footer', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>

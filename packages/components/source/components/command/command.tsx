@@ -1,5 +1,5 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete';
-import { Search } from '@notable/icons';
+import { Search } from '@one/icons';
 import {
   createContext,
   forwardRef,
@@ -85,7 +85,7 @@ export type CommandInputProps = Omit<
   | 'trailingIconInteractive'
 >;
 
-/** Base UI props with `className` narrowed to a string, since Notable composes class names directly. */
+/** Base UI props with `className` narrowed to a string, since One composes class names directly. */
 type WithStringClassName<TProps extends { className?: unknown }> = Omit<
   TProps,
   'className'
@@ -368,7 +368,7 @@ function CommandDialog({
         size={size}
         showCloseButton={false}
         aria-label={label}
-        className="notable-command__dialog"
+        className="one-command__dialog"
       >
         <CommandRoot items={items} filter={filter} onItemSelect={closePalette}>
           {children}
@@ -381,7 +381,7 @@ function CommandDialog({
 const CommandInput = forwardRef<HTMLInputElement, CommandInputProps>(
   function CommandInput({ className, ...props }, ref) {
     return (
-      <div className={joinClassNames('notable-command__input', className)}>
+      <div className={joinClassNames('one-command__input', className)}>
         <BaseAutocomplete.Input
           ref={ref}
           aria-label="Search commands"
@@ -405,25 +405,25 @@ const CommandItemPart = forwardRef<HTMLDivElement, CommandItemProps>(
         ref={ref}
         value={item}
         disabled={item.disabled}
-        className={joinClassNames('notable-command__item', className)}
+        className={joinClassNames('one-command__item', className)}
         {...props}
         onClick={() => selectItem(item)}
       >
         {item.icon && (
-          <span className="notable-command__item-icon" aria-hidden="true">
+          <span className="one-command__item-icon" aria-hidden="true">
             {item.icon}
           </span>
         )}
-        <span className="notable-command__item-text">
-          <span className="notable-command__item-label">{item.label}</span>
+        <span className="one-command__item-text">
+          <span className="one-command__item-label">{item.label}</span>
           {item.description && (
-            <span className="notable-command__item-description">
+            <span className="one-command__item-description">
               {item.description}
             </span>
           )}
         </span>
         {item.shortcut && item.shortcut.length > 0 && (
-          <span className="notable-command__item-shortcut">
+          <span className="one-command__item-shortcut">
             {item.shortcut.map((key, index) => (
               <Shortcut key={`${key}-${index}`}>{key}</Shortcut>
             ))}
@@ -440,12 +440,12 @@ const CommandList = forwardRef<HTMLDivElement, CommandListProps>(
       children ?? ((item: CommandItem) => <CommandItemPart item={item} />);
 
     return (
-      <div className="notable-command__list-frame">
+      <div className="one-command__list-frame">
         <AnimatedHighlight />
         <BaseAutocomplete.List
           ref={ref}
           aria-label="Commands"
-          className={joinClassNames('notable-command__list', className)}
+          className={joinClassNames('one-command__list', className)}
           {...props}
         >
           {(entry: CommandItem | CommandGroup, index: number) =>
@@ -453,9 +453,9 @@ const CommandList = forwardRef<HTMLDivElement, CommandListProps>(
               <BaseAutocomplete.Group
                 key={entry.label}
                 items={entry.items}
-                className="notable-command__group"
+                className="one-command__group"
               >
-                <BaseAutocomplete.GroupLabel className="notable-command__group-label">
+                <BaseAutocomplete.GroupLabel className="one-command__group-label">
                   {entry.label}
                 </BaseAutocomplete.GroupLabel>
                 <BaseAutocomplete.Collection>
@@ -484,7 +484,7 @@ const CommandEmpty = forwardRef<HTMLDivElement, CommandEmptyProps>(
     return (
       <BaseAutocomplete.Empty
         ref={ref}
-        className={joinClassNames('notable-command__empty', className)}
+        className={joinClassNames('one-command__empty', className)}
         {...props}
       >
         {children}
@@ -498,7 +498,7 @@ const CommandGroupPart = forwardRef<HTMLDivElement, CommandGroupProps>(
     return (
       <BaseAutocomplete.Group
         ref={ref}
-        className={joinClassNames('notable-command__group', className)}
+        className={joinClassNames('one-command__group', className)}
         {...props}
       />
     );
@@ -510,7 +510,7 @@ const CommandGroupLabel = forwardRef<HTMLDivElement, CommandGroupLabelProps>(
     return (
       <BaseAutocomplete.GroupLabel
         ref={ref}
-        className={joinClassNames('notable-command__group-label', className)}
+        className={joinClassNames('one-command__group-label', className)}
         {...props}
       />
     );
@@ -522,7 +522,7 @@ const CommandSeparator = forwardRef<HTMLDivElement, CommandSeparatorProps>(
     return (
       <BaseAutocomplete.Separator
         ref={ref}
-        className={joinClassNames('notable-command__separator', className)}
+        className={joinClassNames('one-command__separator', className)}
         {...props}
       />
     );

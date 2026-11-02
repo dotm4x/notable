@@ -25,15 +25,11 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     );
 
-    expect(screen.getByTestId('group')).toHaveClass(
-      'notable-avatar-group--large',
-    );
+    expect(screen.getByTestId('group')).toHaveClass('one-avatar-group--large');
     expect(screen.getByTestId('group')).toHaveStyle(
-      '--notable-avatar-group-overlap: 12px',
+      '--one-avatar-group-overlap: 12px',
     );
-    expect(screen.getByTestId('avatar-Max')).toHaveClass(
-      'notable-avatar--medium',
-    );
+    expect(screen.getByTestId('avatar-Max')).toHaveClass('one-avatar--medium');
   });
 
   it('clamps invalid overlap to zero', () => {
@@ -44,7 +40,7 @@ describe('AvatarGroup', () => {
     );
 
     expect(screen.getByTestId('group')).toHaveStyle(
-      '--notable-avatar-group-overlap: 0px',
+      '--one-avatar-group-overlap: 0px',
     );
   });
 
@@ -58,13 +54,13 @@ describe('AvatarGroup', () => {
       );
 
       expect(screen.getByTestId('group')).toHaveClass(
-        `notable-avatar-group--${orientation}`,
+        `one-avatar-group--${orientation}`,
       );
       expect(screen.getByTestId('avatar-Max').parentElement).toHaveClass(
-        'notable-avatar-group__item',
+        'one-avatar-group__item',
       );
       expect(screen.getByTestId('group')).toHaveStyle(
-        '--notable-avatar-group-overlap: 10px',
+        '--one-avatar-group-overlap: 10px',
       );
     },
   );

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace component CSS literals with existing Notable tokens wherever the value and meaning match, without adding tokens or changing unrelated local work.
+**Goal:** Replace component CSS literals with existing One tokens wherever the value and meaning match, without adding tokens or changing unrelated local work.
 
 **Architecture:** Keep `source/styles/tokens/` authoritative. Use semantic color and typography tokens, the existing border-width token, and spacing tokens for matching reusable dimensions and layout values. Preserve values that have no appropriate token or are implementation-specific.
 
@@ -55,7 +55,7 @@
 - Modify `packages/components/source/internal/primitives/menu/menu.css`
 
 - [x] Run a static scan and confirm the focus-outline literals and radio indicator's 2px border are present.
-- [x] Replace focus and border widths with `var(--notable-border-width)`; use it for the Slider/Tabs 2px stroke dimensions and Segmented Control's inner-radius subtraction too. Leave outline offsets unchanged because they describe placement, not stroke width.
+- [x] Replace focus and border widths with `var(--one-border-width)`; use it for the Slider/Tabs 2px stroke dimensions and Segmented Control's inner-radius subtraction too. Leave outline offsets unchanged because they describe placement, not stroke width.
 - [x] Re-run the scan and confirm no matching hard-coded border/focus stroke widths remain in the task files.
 
 ### Task 2: Reuse the spacing scale for matching dimensions and insets
@@ -84,7 +84,7 @@
 - Modify `packages/components/source/internal/primitives/menu/menu.css`
 
 - [x] Run a static scan to record exact literals matching the existing spacing scale in layout, size, and component custom-property declarations.
-- [x] Replace those exact matches with their `--notable-spacing-*` token; leave non-scale values and text-relative values unchanged.
+- [x] Replace those exact matches with their `--one-spacing-*` token; leave non-scale values and text-relative values unchanged.
 - [x] Re-run the scan and confirm no matching raw spacing-scale values remain in the targeted declarations.
 
 ### Task 3: Tokenize the remaining exact typography and palette matches
@@ -95,8 +95,8 @@
 - Modify `packages/components/source/components/link/link.css`
 - Modify `packages/components/source/components/scroll-area/scroll-area.css`
 
-- [x] Confirm the breadcrumb's 500 weight matches `--notable-font-weight-medium` and the scroll masks' `#000` matches the invariant `--notable-black` primitive.
-- [x] Replace those literals with the corresponding existing tokens; use `--notable-radius-xs` for the Link's 2px radius, which is outside the documented radius family.
+- [x] Confirm the breadcrumb's 500 weight matches `--one-font-weight-medium` and the scroll masks' `#000` matches the invariant `--one-black` primitive.
+- [x] Replace those literals with the corresponding existing tokens; use `--one-radius-xs` for the Link's 2px radius, which is outside the documented radius family.
 - [x] Verify the raw literals are gone while mask gradients still end in `transparent`.
 
 ### Task 4: Verify package behavior and output
@@ -104,6 +104,6 @@
 **Files:** None.
 
 - [ ] Run `pnpm format:check` and `pnpm lint`.
-- [x] Run `pnpm --filter @notable/components typecheck` and `pnpm --filter @notable/components build`.
-- [ ] Run `pnpm --filter @notable/components test:all` and confirm all tests pass.
+- [x] Run `pnpm --filter @one/components typecheck` and `pnpm --filter @one/components build`.
+- [ ] Run `pnpm --filter @one/components test:all` and confirm all tests pass.
 - [x] Review `git diff` to ensure no unrelated or user-owned files were changed.

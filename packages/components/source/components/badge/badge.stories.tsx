@@ -5,7 +5,7 @@ import {
   Clock,
   Info,
   Sparkles,
-} from '@notable/icons';
+} from '@one/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge, type BadgeVariant } from './badge.js';
 
@@ -138,7 +138,7 @@ export const Icon: Story = {
     children: (
       <>
         <CircleHelp aria-hidden="true" />
-        <span className="notable-badge__sr-only">More information</span>
+        <span className="one-badge__sr-only">More information</span>
       </>
     ),
     variant: 'info',
@@ -185,9 +185,9 @@ export const Themes: Story = {
             flexWrap: 'wrap',
             gap: '8px',
             padding: '16px',
-            borderRadius: 'var(--notable-radius-lg)',
-            background: 'var(--notable-color-background)',
-            color: 'var(--notable-color-text)',
+            borderRadius: 'var(--one-radius-lg)',
+            background: 'var(--one-color-background)',
+            color: 'var(--one-color-text)',
           }}
         >
           {variants.map((variant) => (

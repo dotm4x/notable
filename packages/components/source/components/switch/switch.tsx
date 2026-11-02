@@ -89,8 +89,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     [ariaErrorMessage, errorId].filter(Boolean).join(' ') || undefined;
 
   const getTravel = (control: HTMLElement) => {
-    const track = control.querySelector<HTMLElement>('.notable-switch__track');
-    const thumb = control.querySelector<HTMLElement>('.notable-switch__thumb');
+    const track = control.querySelector<HTMLElement>('.one-switch__track');
+    const thumb = control.querySelector<HTMLElement>('.one-switch__thumb');
 
     if (!track || !thumb) {
       return 0;
@@ -150,12 +150,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
     drag.moved = true;
     drag.offset = Math.max(0, Math.min(drag.startOffset + deltaX, drag.travel));
+    control.style.setProperty('--one-switch-drag-offset', `${drag.offset}px`);
     control.style.setProperty(
-      '--notable-switch-drag-offset',
-      `${drag.offset}px`,
-    );
-    control.style.setProperty(
-      '--notable-switch-drag-progress',
+      '--one-switch-drag-progress',
       `${drag.travel ? (drag.offset / drag.travel) * 100 : 0}%`,
     );
     setIsDragging(true);
@@ -175,8 +172,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
     dragRef.current = null;
     setIsDragging(false);
-    control?.style.removeProperty('--notable-switch-drag-offset');
-    control?.style.removeProperty('--notable-switch-drag-progress');
+    control?.style.removeProperty('--one-switch-drag-offset');
+    control?.style.removeProperty('--one-switch-drag-progress');
 
     if (control?.hasPointerCapture?.(event.pointerId)) {
       control.releasePointerCapture(event.pointerId);
@@ -200,14 +197,14 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
 
   return (
     <div
-      className="notable-switch-field"
+      className="one-switch-field"
       data-disabled={props.disabled || undefined}
       data-invalid={isInvalid || undefined}
     >
-      <label className="notable-switch" htmlFor={switchId}>
+      <label className="one-switch" htmlFor={switchId}>
         <span
           ref={controlRef}
-          className="notable-switch__control"
+          className="one-switch__control"
           data-dragging={isDragging || undefined}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -228,26 +225,26 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
             id={switchId}
             type="checkbox"
             role="switch"
-            className={['notable-switch__input', className]
+            className={['one-switch__input', className]
               .filter(Boolean)
               .join(' ')}
             aria-describedby={describedBy}
             aria-invalid={invalid || Boolean(error) ? true : ariaInvalid}
             aria-errormessage={errorMessage}
           />
-          <span className="notable-switch__track" aria-hidden="true">
-            <span className="notable-switch__thumb" />
+          <span className="one-switch__track" aria-hidden="true">
+            <span className="one-switch__thumb" />
           </span>
         </span>
-        {label && <span className="notable-switch__label">{label}</span>}
+        {label && <span className="one-switch__label">{label}</span>}
       </label>
       {description && (
-        <span className="notable-switch__description" id={descriptionId}>
+        <span className="one-switch__description" id={descriptionId}>
           {description}
         </span>
       )}
       {error && (
-        <span className="notable-switch__error" id={errorId} aria-live="polite">
+        <span className="one-switch__error" id={errorId} aria-live="polite">
           {error}
         </span>
       )}

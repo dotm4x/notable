@@ -1,7 +1,7 @@
 :root {
-  --notable-blur-none: 0px;
-  --notable-blur-subtle: 4px;
-  --notable-blur-medium: 8px;
-  --notable-blur-strong: 16px;
-  --notable-blur-intense: 24px;
+  --one-blur-none: 0px;
+  --one-blur-subtle: 4px;
+  --one-blur-medium: 8px;
+  --one-blur-strong: 16px;
+  --one-blur-intense: 24px;
 }

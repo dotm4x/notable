@@ -23,10 +23,7 @@ describe('Separator', () => {
 
     // Assert
     expect(separator.tagName).toBe('DIV');
-    expect(separator).toHaveClass(
-      'notable-separator',
-      'notable-separator--horizontal',
-    );
+    expect(separator).toHaveClass('one-separator', 'one-separator--horizontal');
     expect(separator).toHaveAttribute('role', 'separator');
     expect(separator).toHaveAttribute('aria-orientation', 'horizontal');
   });
@@ -34,11 +31,8 @@ describe('Separator', () => {
   it('renders a vertical separator with matching orientation semantics', () => {
     const separator = renderSeparator({ orientation: 'vertical' });
 
-    expect(separator).toHaveClass(
-      'notable-separator',
-      'notable-separator--vertical',
-    );
-    expect(separator).not.toHaveClass('notable-separator--horizontal');
+    expect(separator).toHaveClass('one-separator', 'one-separator--vertical');
+    expect(separator).not.toHaveClass('one-separator--horizontal');
     expect(separator).toHaveAttribute('role', 'separator');
     expect(separator).toHaveAttribute('aria-orientation', 'vertical');
   });
@@ -83,49 +77,49 @@ describe('Separator', () => {
   it('applies a numeric thickness as pixels', () => {
     const separator = renderSeparator({ thickness: 4 });
 
-    expect(
-      separator.style.getPropertyValue('--notable-separator-thickness'),
-    ).toBe('4px');
+    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+      '4px',
+    );
   });
 
   it('passes a string thickness through as CSS', () => {
     const separator = renderSeparator({ thickness: '0.25rem' });
 
-    expect(
-      separator.style.getPropertyValue('--notable-separator-thickness'),
-    ).toBe('0.25rem');
+    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+      '0.25rem',
+    );
   });
 
   it('leaves thickness to the stylesheet default when not provided', () => {
     const separator = renderSeparator();
 
-    expect(
-      separator.style.getPropertyValue('--notable-separator-thickness'),
-    ).toBe('');
+    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+      '',
+    );
   });
 
   it.each([
-    ['subtle', 'var(--notable-color-border-subtle)'],
-    ['default', 'var(--notable-color-border)'],
-    ['strong', 'var(--notable-color-border-strong)'],
+    ['subtle', 'var(--one-color-border-subtle)'],
+    ['default', 'var(--one-color-border)'],
+    ['strong', 'var(--one-color-border-strong)'],
   ] as const)(
     'maps the %s color token to its border token',
     (color, expected) => {
       const separator = renderSeparator({ color });
 
-      expect(
-        separator.style.getPropertyValue('--notable-separator-color'),
-      ).toBe(expected);
+      expect(separator.style.getPropertyValue('--one-separator-color')).toBe(
+        expected,
+      );
     },
   );
 
   it('passes a custom color through as CSS', () => {
     const separator = renderSeparator({
-      color: 'var(--notable-color-primary)',
+      color: 'var(--one-color-primary)',
     });
 
-    expect(separator.style.getPropertyValue('--notable-separator-color')).toBe(
-      'var(--notable-color-primary)',
+    expect(separator.style.getPropertyValue('--one-separator-color')).toBe(
+      'var(--one-color-primary)',
     );
     expect(separator).not.toHaveAttribute('color');
   });
@@ -137,7 +131,7 @@ describe('Separator', () => {
       title: 'Section divider',
     });
 
-    expect(separator).toHaveClass('notable-separator', 'custom-divider');
+    expect(separator).toHaveClass('one-separator', 'custom-divider');
     expect(separator).toHaveAttribute('id', 'section-divider');
     expect(separator).toHaveAttribute('title', 'Section divider');
   });
@@ -149,9 +143,9 @@ describe('Separator', () => {
     });
 
     expect(separator.style.marginBlock).toBe('1rem');
-    expect(
-      separator.style.getPropertyValue('--notable-separator-thickness'),
-    ).toBe('2px');
+    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+      '2px',
+    );
   });
 
   it('renders inside a flex layout as a direct flex item', () => {
@@ -160,11 +154,11 @@ describe('Separator', () => {
         <Separator orientation="vertical" />
       </div>,
     );
-    const separator = container.querySelector('.notable-separator');
+    const separator = container.querySelector('.one-separator');
 
     expect(container.firstElementChild).toHaveStyle({ display: 'flex' });
     expect(separator?.parentElement).toBe(container.firstElementChild);
-    expect(separator).toHaveClass('notable-separator--vertical');
+    expect(separator).toHaveClass('one-separator--vertical');
   });
 
   it('is exported from the package entry point', () => {

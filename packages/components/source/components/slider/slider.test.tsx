@@ -196,7 +196,7 @@ describe('Slider', () => {
     );
 
     const marks = [
-      ...container.querySelectorAll<HTMLElement>('.notable-slider__mark'),
+      ...container.querySelectorAll<HTMLElement>('.one-slider__mark'),
     ];
     expect(marks).toHaveLength(5);
     expect(
@@ -226,8 +226,8 @@ describe('Slider', () => {
     );
 
     expect(getSliderInput()).toHaveAttribute('aria-orientation', 'vertical');
-    expect(container.querySelector('.notable-slider')).toHaveClass(
-      'notable-slider--vertical',
+    expect(container.querySelector('.one-slider')).toHaveClass(
+      'one-slider--vertical',
     );
     expect(screen.getByText('Halfway')).toBeInTheDocument();
   });
@@ -401,7 +401,7 @@ describe('Slider', () => {
     const rectSpy = vi
       .spyOn(Element.prototype, 'getBoundingClientRect')
       .mockImplementation(function (this: Element) {
-        const isThumb = this.classList.contains('notable-slider__thumb');
+        const isThumb = this.classList.contains('one-slider__thumb');
         const thumbValue = isThumb
           ? Number(
               this.querySelector<HTMLInputElement>('input[type="range"]')
@@ -429,7 +429,7 @@ describe('Slider', () => {
       const { container } = render(
         <Slider aria-label="Volume" defaultValue={20} />,
       );
-      const control = container.querySelector('.notable-slider__control');
+      const control = container.querySelector('.one-slider__control');
       const slider = getSliderInput();
 
       if (!control) {
@@ -500,11 +500,9 @@ describe('Slider discrete-step animation', () => {
     const { container } = render(
       <Slider aria-label="Volume" defaultValue={20} />,
     );
-    const thumb = container.querySelector<HTMLElement>(
-      '.notable-slider__thumb',
-    );
+    const thumb = container.querySelector<HTMLElement>('.one-slider__thumb');
     const indicator = container.querySelector<HTMLElement>(
-      '.notable-slider__indicator',
+      '.one-slider__indicator',
     );
     const slider = getSliderInput();
 
@@ -531,11 +529,10 @@ describe('Slider discrete-step animation', () => {
     const { container } = render(
       <Slider aria-label="Range" defaultValue={[20, 80]} />,
     );
-    const thumbs = container.querySelectorAll<HTMLElement>(
-      '.notable-slider__thumb',
-    );
+    const thumbs =
+      container.querySelectorAll<HTMLElement>('.one-slider__thumb');
     const indicator = container.querySelector<HTMLElement>(
-      '.notable-slider__indicator',
+      '.one-slider__indicator',
     );
     const [firstSlider, secondSlider] = screen.getAllByRole('slider');
 
@@ -568,18 +565,18 @@ describe('Slider discrete-step animation', () => {
 
   it('animates thumb and indicator positions with one shared base transition for horizontal and vertical layouts', () => {
     // Arrange
-    const thumbRule = getRuleBody('.notable-slider__thumb');
-    const indicatorRule = getRuleBody('.notable-slider__indicator');
+    const thumbRule = getRuleBody('.one-slider__thumb');
+    const indicatorRule = getRuleBody('.one-slider__indicator');
 
     // Assert
     for (const rule of [thumbRule, indicatorRule]) {
       expect(rule).toMatch(
-        /transition:[\s\S]*inset-inline-start var\(--notable-duration-base\)/,
+        /transition:[\s\S]*inset-inline-start var\(--one-duration-base\)/,
       );
-      expect(rule).toMatch(/bottom var\(--notable-duration-base\)/);
+      expect(rule).toMatch(/bottom var\(--one-duration-base\)/);
     }
-    expect(indicatorRule).toMatch(/width var\(--notable-duration-base\)/);
-    expect(indicatorRule).toMatch(/height var\(--notable-duration-base\)/);
+    expect(indicatorRule).toMatch(/width var\(--one-duration-base\)/);
+    expect(indicatorRule).toMatch(/height var\(--one-duration-base\)/);
   });
 
   it('keeps positional transitions active during pointer drags instead of switching them off', () => {
@@ -593,7 +590,7 @@ describe('Slider discrete-step animation', () => {
   it('scales only the individually pressed thumb, never every thumb through the shared dragging state', () => {
     // Assert
     expect(sliderStylesheet).toMatch(
-      /\.notable-slider__thumb:active\s*\{\s*scale:\s*1\.05;/,
+      /\.one-slider__thumb:active\s*\{\s*scale:\s*1\.05;/,
     );
     expect(sliderStylesheet).not.toMatch(/\[data-dragging\][^{]*\{[^}]*scale:/);
   });
@@ -601,14 +598,14 @@ describe('Slider discrete-step animation', () => {
   it('applies thumb hover styling only to pointer devices', () => {
     // Assert
     expect(sliderStylesheet).toMatch(
-      /@media \(hover: hover\)\s*\{\s*\.notable-slider__thumb:hover\s*\{/,
+      /@media \(hover: hover\)\s*\{\s*\.one-slider__thumb:hover\s*\{/,
     );
   });
 
   it('disables thumb and indicator transitions under reduced motion', () => {
     // Assert
     expect(sliderStylesheet).toMatch(
-      /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*\.notable-slider__thumb,\s*\.notable-slider__indicator\s*\{\s*transition:\s*none;/,
+      /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*\.one-slider__thumb,\s*\.one-slider__indicator\s*\{\s*transition:\s*none;/,
     );
   });
 });

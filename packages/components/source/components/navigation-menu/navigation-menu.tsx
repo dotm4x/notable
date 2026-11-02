@@ -8,7 +8,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
-import { ChevronDown } from '@notable/icons';
+import { ChevronDown } from '@one/icons';
 import '../../internal/styles/floating-surface.css';
 import './navigation-menu.css';
 
@@ -98,20 +98,20 @@ const NavigationMenuRoot = forwardRef<HTMLElement, NavigationMenuProps>(
         }}
         delay={delay}
         closeDelay={closeDelay}
-        className={joinClasses('notable-navigation-menu', className)}
+        className={joinClasses('one-navigation-menu', className)}
       >
         {children}
         <BaseNavigationMenu.Portal>
           <BaseNavigationMenu.Positioner
-            className="notable-navigation-menu__positioner"
+            className="one-navigation-menu__positioner"
             sideOffset={8}
             align="start"
           >
             <BaseNavigationMenu.Popup
               render={<div />}
-              className="notable-floating-surface notable-navigation-menu__popup"
+              className="one-floating-surface one-navigation-menu__popup"
             >
-              <BaseNavigationMenu.Viewport className="notable-navigation-menu__viewport" />
+              <BaseNavigationMenu.Viewport className="one-navigation-menu__viewport" />
             </BaseNavigationMenu.Popup>
           </BaseNavigationMenu.Positioner>
         </BaseNavigationMenu.Portal>
@@ -128,7 +128,7 @@ const NavigationMenuList = forwardRef<
     <BaseNavigationMenu.List
       {...props}
       ref={ref}
-      className={joinClasses('notable-navigation-menu__list', className)}
+      className={joinClasses('one-navigation-menu__list', className)}
     />
   );
 });
@@ -143,7 +143,7 @@ const NavigationMenuItem = forwardRef<HTMLLIElement, NavigationMenuItemProps>(
         {...props}
         ref={ref}
         value={itemValue}
-        className={joinClasses('notable-navigation-menu__item', className)}
+        className={joinClasses('one-navigation-menu__item', className)}
       />
     );
   },
@@ -157,11 +157,11 @@ const NavigationMenuTrigger = forwardRef<
     <BaseNavigationMenu.Trigger
       {...props}
       ref={ref}
-      className={joinClasses('notable-navigation-menu__trigger', className)}
+      className={joinClasses('one-navigation-menu__trigger', className)}
     >
       {children}
       <ChevronDown
-        className="notable-navigation-menu__trigger-icon"
+        className="one-navigation-menu__trigger-icon"
         aria-hidden="true"
         focusable="false"
         size={16}
@@ -178,7 +178,7 @@ const NavigationMenuContent = forwardRef<
     <BaseNavigationMenu.Content
       {...props}
       ref={ref}
-      className={joinClasses('notable-navigation-menu__content', className)}
+      className={joinClasses('one-navigation-menu__content', className)}
     >
       {children}
     </BaseNavigationMenu.Content>
@@ -194,7 +194,7 @@ const NavigationMenuGroup = forwardRef<
       {...props}
       ref={ref}
       role="group"
-      className={joinClasses('notable-navigation-menu__group', className)}
+      className={joinClasses('one-navigation-menu__group', className)}
     >
       {children}
     </div>
@@ -214,7 +214,7 @@ const NavigationMenuLink = forwardRef<
       ref={ref}
       active={active}
       closeOnClick={closeOnClick}
-      className={joinClasses('notable-navigation-menu__link', className)}
+      className={joinClasses('one-navigation-menu__link', className)}
     />
   );
 });

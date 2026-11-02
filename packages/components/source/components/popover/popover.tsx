@@ -106,7 +106,7 @@ const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
     },
     ref,
   ) {
-    const classes = ['notable-popover', 'notable-floating-surface', className]
+    const classes = ['one-popover', 'one-floating-surface', className]
       .filter(Boolean)
       .join(' ');
 
@@ -132,9 +132,7 @@ function PopoverHeader({ className, ...props }: PopoverHeaderProps) {
   return (
     <div
       {...props}
-      className={['notable-popover__header', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-popover__header', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -144,9 +142,7 @@ function PopoverTitle({ className, ...props }: PopoverTitleProps) {
   return (
     <BasePopover.Title
       {...props}
-      className={['notable-popover__title', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-popover__title', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -155,7 +151,7 @@ function PopoverDescription({ className, ...props }: PopoverDescriptionProps) {
   return (
     <BasePopover.Description
       {...props}
-      className={['notable-popover__description', className]
+      className={['one-popover__description', className]
         .filter(Boolean)
         .join(' ')}
     />

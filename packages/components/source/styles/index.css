@@ -9,7 +9,7 @@
 @import './tokens/typography.css';
 
 :root {
-  font-family: var(--notable-font-family);
+  font-family: var(--one-font-family);
 }
 
 body {
@@ -17,14 +17,12 @@ body {
   font-family: inherit;
 }
 
-:where([class^='notable-'], [class*=' notable-']):not(
-  .notable-scroll-area__scrollbar
-) {
+:where([class^='one-'], [class*=' one-']):not(.one-scroll-area__scrollbar) {
   scrollbar-width: none;
 }
 
-:where([class^='notable-'], [class*=' notable-']):not(
-    .notable-scroll-area__scrollbar
+:where([class^='one-'], [class*=' one-']):not(
+    .one-scroll-area__scrollbar
   )::-webkit-scrollbar {
   display: none;
 }

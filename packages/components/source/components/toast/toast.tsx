@@ -1,6 +1,6 @@
 import { Toast as BaseToast } from '@base-ui/react/toast';
 import type { ToastManager } from '@base-ui/react/toast';
-import { Bell, Check, Info, TriangleAlert, X, XCircle } from '@notable/icons';
+import { Bell, Check, Info, TriangleAlert, X, XCircle } from '@one/icons';
 import type { ReactNode } from 'react';
 import './toast.css';
 
@@ -234,11 +234,7 @@ function ToastList() {
           ) : (
             <Bell aria-hidden="true" />
           )));
-    const className = [
-      'notable-toast',
-      `notable-toast--${variant}`,
-      data?.className,
-    ]
+    const className = ['one-toast', `one-toast--${variant}`, data?.className]
       .filter(Boolean)
       .join(' ');
 
@@ -248,12 +244,12 @@ function ToastList() {
         toast={notification}
         className={className}
       >
-        <BaseToast.Content className="notable-toast__content">
+        <BaseToast.Content className="one-toast__content">
           {data?.render ? (
-            <div className="notable-toast__custom">
+            <div className="one-toast__custom">
               {data.render(notification.id)}
               <BaseToast.Close
-                className="notable-toast__close"
+                className="one-toast__close"
                 aria-label="Dismiss notification"
               >
                 <X aria-hidden="true" />
@@ -262,29 +258,29 @@ function ToastList() {
           ) : (
             <>
               {icon && (
-                <span className="notable-toast__icon" aria-hidden="true">
+                <span className="one-toast__icon" aria-hidden="true">
                   {icon}
                 </span>
               )}
-              <div className="notable-toast__body">
+              <div className="one-toast__body">
                 {notification.title && (
-                  <BaseToast.Title className="notable-toast__title">
+                  <BaseToast.Title className="one-toast__title">
                     {notification.title}
                   </BaseToast.Title>
                 )}
                 {notification.description && (
-                  <BaseToast.Description className="notable-toast__description">
+                  <BaseToast.Description className="one-toast__description">
                     {notification.description}
                   </BaseToast.Description>
                 )}
                 {data?.action && (
-                  <BaseToast.Action className="notable-toast__action">
+                  <BaseToast.Action className="one-toast__action">
                     {data.action.label}
                   </BaseToast.Action>
                 )}
               </div>
               <BaseToast.Close
-                className="notable-toast__close"
+                className="one-toast__close"
                 aria-label="Dismiss notification"
               >
                 <X aria-hidden="true" />
@@ -320,7 +316,7 @@ export function ToastProvider({
       {children}
       <BaseToast.Portal>
         <BaseToast.Viewport
-          className={`notable-toast-viewport notable-toast-viewport--${position}`}
+          className={`one-toast-viewport one-toast-viewport--${position}`}
           aria-label={`Notifications ${position.replace(/-/g, ' ')}`}
         >
           <ToastList />

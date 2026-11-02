@@ -59,7 +59,7 @@ describe('SegmentedControl', () => {
         const group = screen.getByRole('radiogroup', {
           name: `Timeframe ${size}`,
         });
-        expect(group).toHaveClass(`notable-segmented-control--${size}`);
+        expect(group).toHaveClass(`one-segmented-control--${size}`);
       },
     );
 
@@ -512,14 +512,14 @@ describe('SegmentedControl', () => {
       );
 
       const indicators = container.querySelectorAll(
-        '.notable-segmented-control__indicator',
+        '.one-segmented-control__indicator',
       );
       expect(indicators).toHaveLength(1);
 
       const group = screen.getByRole('radiogroup', { name: 'Timeframe' });
       const weekItem = screen
         .getByRole('radio', { name: 'Week' })
-        .closest('.notable-segmented-control__item');
+        .closest('.one-segmented-control__item');
       expect(weekItem).toHaveAttribute('data-selected');
       expect(weekItem).toHaveAttribute('data-selector-item');
       expect(indicators[0]?.parentElement).toBe(group);
@@ -532,7 +532,7 @@ describe('SegmentedControl', () => {
       );
 
       const indicators = container.querySelectorAll(
-        '.notable-segmented-control__indicator',
+        '.one-segmented-control__indicator',
       );
       expect(indicators).toHaveLength(0);
     });
@@ -617,7 +617,7 @@ describe('SegmentedControl', () => {
         }
         const items = Array.from(
           this.parentElement?.querySelectorAll(
-            '.notable-segmented-control__item',
+            '.one-segmented-control__item',
           ) ?? [],
         );
         const index = items.indexOf(this);
@@ -635,7 +635,7 @@ describe('SegmentedControl', () => {
 
       // Assert
       const indicator = container.querySelector<HTMLElement>(
-        '.notable-segmented-control__indicator',
+        '.one-segmented-control__indicator',
       );
       expect(indicator?.style.left).toBe('0px');
       expect(indicator?.style.width).toBe('103px');
@@ -659,18 +659,18 @@ describe('SegmentedControl', () => {
         name: 'Draggable timeframe',
       });
       const indicator = container.querySelector(
-        '.notable-segmented-control__indicator',
+        '.one-segmented-control__indicator',
       );
 
       expect(indicator).toBeInTheDocument();
 
       const dayItem = screen
         .getByRole('radio', { name: 'Day' })
-        .closest('.notable-segmented-control__item');
+        .closest('.one-segmented-control__item');
 
       const monthItem = screen
         .getByRole('radio', { name: 'Month' })
-        .closest('.notable-segmented-control__item');
+        .closest('.one-segmented-control__item');
 
       if (!dayItem || !monthItem) {
         throw new Error('Expected option elements to exist');
@@ -767,13 +767,13 @@ describe('SegmentedControl', () => {
       });
       const dayItem = screen
         .getByRole('radio', { name: 'Day' })
-        .closest('.notable-segmented-control__item');
+        .closest('.one-segmented-control__item');
       const weekItem = screen
         .getByRole('radio', { name: 'Week' })
-        .closest('.notable-segmented-control__item');
+        .closest('.one-segmented-control__item');
       const monthItem = screen
         .getByRole('radio', { name: 'Month' })
-        .closest('.notable-segmented-control__item');
+        .closest('.one-segmented-control__item');
 
       if (!dayItem || !weekItem || !monthItem) {
         throw new Error('Expected option elements to exist');

@@ -1,39 +1,39 @@
-.notable-switch-field {
-  --notable-switch-width: var(--notable-spacing-10);
-  --notable-switch-height: var(--notable-spacing-6);
-  --notable-switch-padding: 3px;
-  --notable-switch-thumb-size: 0.875rem;
-  --notable-switch-travel: calc(
-    var(--notable-switch-width) - var(--notable-switch-thumb-size) - 2 *
-      (var(--notable-border-width) + var(--notable-switch-padding))
+.one-switch-field {
+  --one-switch-width: var(--one-spacing-10);
+  --one-switch-height: var(--one-spacing-6);
+  --one-switch-padding: 3px;
+  --one-switch-thumb-size: 0.875rem;
+  --one-switch-travel: calc(
+    var(--one-switch-width) - var(--one-switch-thumb-size) - 2 *
+      (var(--one-border-width) + var(--one-switch-padding))
   );
 
   display: inline-flex;
   flex-direction: column;
-  gap: var(--notable-spacing-1);
-  color: var(--notable-color-text);
-  font-family: var(--notable-font-family);
+  gap: var(--one-spacing-1);
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
 }
 
-.notable-switch {
+.one-switch {
   display: inline-flex;
   align-items: center;
-  gap: var(--notable-spacing-3);
+  gap: var(--one-spacing-3);
   width: fit-content;
   cursor: pointer;
   user-select: none;
 }
 
-.notable-switch__control {
+.one-switch__control {
   position: relative;
   display: inline-flex;
   flex: 0 0 auto;
-  width: var(--notable-switch-width);
-  height: var(--notable-switch-height);
+  width: var(--one-switch-width);
+  height: var(--one-switch-height);
   touch-action: pan-y;
 }
 
-.notable-switch__input {
+.one-switch__input {
   position: absolute;
   z-index: 1;
   inset: 0;
@@ -44,110 +44,104 @@
   cursor: inherit;
 }
 
-.notable-switch__track {
+.one-switch__track {
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: var(--notable-switch-padding);
-  border: var(--notable-border-width) solid transparent;
-  border-radius: var(--notable-radius-full);
-  background: var(--notable-color-border-strong);
+  padding: var(--one-switch-padding);
+  border: var(--one-border-width) solid transparent;
+  border-radius: var(--one-radius-full);
+  background: var(--one-color-border-strong);
   transition:
-    background-color var(--notable-duration-base) var(--notable-easing-standard),
-    box-shadow var(--notable-duration-base) var(--notable-easing-standard);
+    background-color var(--one-duration-base) var(--one-easing-standard),
+    box-shadow var(--one-duration-base) var(--one-easing-standard);
 }
 
-.notable-switch__thumb {
-  width: var(--notable-switch-thumb-size);
-  height: var(--notable-switch-thumb-size);
+.one-switch__thumb {
+  width: var(--one-switch-thumb-size);
+  height: var(--one-switch-thumb-size);
   flex: 0 0 auto;
-  border-radius: var(--notable-radius-full);
-  background: var(--notable-color-surface);
-  box-shadow: 0 1px 2px var(--notable-color-shadow-strong);
-  transition: transform var(--notable-duration-base)
-    var(--notable-easing-standard);
+  border-radius: var(--one-radius-full);
+  background: var(--one-color-surface);
+  box-shadow: 0 1px 2px var(--one-color-shadow-strong);
+  transition: transform var(--one-duration-base) var(--one-easing-standard);
 }
 
-.notable-switch__input:checked + .notable-switch__track {
-  background: var(--notable-color-primary);
+.one-switch__input:checked + .one-switch__track {
+  background: var(--one-color-primary);
 }
 
-.notable-switch__control[data-dragging] .notable-switch__track {
+.one-switch__control[data-dragging] .one-switch__track {
   background: color-mix(
     in srgb,
-    var(--notable-color-border-strong)
-      calc(100% - var(--notable-switch-drag-progress)),
-    var(--notable-color-primary) var(--notable-switch-drag-progress)
+    var(--one-color-border-strong) calc(100% - var(--one-switch-drag-progress)),
+    var(--one-color-primary) var(--one-switch-drag-progress)
   );
   transition: none;
 }
 
-.notable-switch__input:checked + .notable-switch__track .notable-switch__thumb {
-  transform: translateX(var(--notable-switch-travel));
+.one-switch__input:checked + .one-switch__track .one-switch__thumb {
+  transform: translateX(var(--one-switch-travel));
 }
 
-.notable-switch__control[data-dragging]
-  .notable-switch__track
-  .notable-switch__thumb {
-  transform: translateX(var(--notable-switch-drag-offset, 0));
+.one-switch__control[data-dragging] .one-switch__track .one-switch__thumb {
+  transform: translateX(var(--one-switch-drag-offset, 0));
   transition: none;
 }
 
-.notable-switch__input:focus-visible + .notable-switch__track {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-switch__input:focus-visible + .one-switch__track {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--notable-color-focus-ring);
+  box-shadow: 0 0 0 4px var(--one-color-focus-ring);
 }
 
-.notable-switch-field[data-invalid] .notable-switch__track {
-  box-shadow: 0 0 0 2px var(--notable-color-danger-border);
+.one-switch-field[data-invalid] .one-switch__track {
+  box-shadow: 0 0 0 2px var(--one-color-danger-border);
 }
 
-.notable-switch__input:disabled + .notable-switch__track {
-  background: var(--notable-color-disabled);
+.one-switch__input:disabled + .one-switch__track {
+  background: var(--one-color-disabled);
 }
 
-.notable-switch__input:disabled:checked + .notable-switch__track {
-  background: var(--notable-color-primary);
+.one-switch__input:disabled:checked + .one-switch__track {
+  background: var(--one-color-primary);
   opacity: 0.55;
 }
 
-.notable-switch__input:disabled
-  + .notable-switch__track
-  .notable-switch__thumb {
-  background: var(--notable-color-on-disabled);
+.one-switch__input:disabled + .one-switch__track .one-switch__thumb {
+  background: var(--one-color-on-disabled);
 }
 
-.notable-switch-field[data-disabled] .notable-switch {
-  color: var(--notable-color-text-disabled);
+.one-switch-field[data-disabled] .one-switch {
+  color: var(--one-color-text-disabled);
   cursor: not-allowed;
 }
 
-.notable-switch__label {
-  font-size: var(--notable-font-size-sm);
-  line-height: var(--notable-line-height-normal);
+.one-switch__label {
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-normal);
 }
 
-.notable-switch__description,
-.notable-switch__error {
-  padding-left: calc(var(--notable-switch-width) + var(--notable-spacing-3));
-  font-size: var(--notable-font-size-xs);
-  line-height: var(--notable-line-height-normal);
+.one-switch__description,
+.one-switch__error {
+  padding-left: calc(var(--one-switch-width) + var(--one-spacing-3));
+  font-size: var(--one-font-size-xs);
+  line-height: var(--one-line-height-normal);
 }
 
-.notable-switch__description {
-  color: var(--notable-color-text-muted);
+.one-switch__description {
+  color: var(--one-color-text-muted);
 }
 
-.notable-switch__error {
-  color: var(--notable-color-danger);
+.one-switch__error {
+  color: var(--one-color-danger);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-switch__track,
-  .notable-switch__thumb {
+  .one-switch__track,
+  .one-switch__thumb {
     transition: none;
   }
 }

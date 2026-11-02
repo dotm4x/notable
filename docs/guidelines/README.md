@@ -1,6 +1,6 @@
-# Notable Design Guidelines
+# One Design Guidelines
 
-Notable is a friendly, expressive interface system. It is built for people who use software daily and want it to feel approachable, responsive, and clear. These guidelines describe how Notable interfaces should look, move, and behave. They describe design intent, not any particular implementation, and they apply to every platform Notable supports.
+One is a friendly, expressive interface system. It is built for people who use software daily and want it to feel approachable, responsive, and clear. These guidelines describe how One interfaces should look, move, and behave. They describe design intent, not any particular implementation, and they apply to every platform One supports.
 
 ## How the guidelines are organized
 
