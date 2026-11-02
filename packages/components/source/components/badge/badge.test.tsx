@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Check, CircleHelp } from 'lucide-react';
+import { Check, CircleHelp } from '@notable/icons';
 import { describe, expect, it } from 'vitest';
 import { Badge } from './badge.js';
 import { Badge as PublicBadge } from '../../index.js';

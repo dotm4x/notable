@@ -2,10 +2,10 @@ import {
   AlertCircle,
   Check,
   CircleHelp,
-  Clock3,
+  Clock,
   Info,
   Sparkles,
-} from 'lucide-react';
+} from '@notable/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge, type BadgeVariant } from './badge.js';
 
@@ -111,7 +111,7 @@ export const Icons: Story = {
         Complete
       </Badge>
       <Badge variant="warning">
-        <Clock3 aria-hidden="true" />
+        <Clock aria-hidden="true" />
         Pending
       </Badge>
       <Badge variant="danger">

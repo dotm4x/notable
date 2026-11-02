@@ -6,7 +6,7 @@ import {
   SearchX,
   Upload,
   UserPlus,
-} from 'lucide-react';
+} from '@notable/icons';
 import { Avatar } from '../avatar/avatar.js';
 import { AvatarGroup } from '../avatar/avatar-group.js';
 import { Button } from '../button/button.js';

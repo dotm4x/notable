@@ -86,13 +86,22 @@
   overflow-wrap: anywhere;
 }
 
-.notable-combobox__item[data-selected] {
-  font-weight: var(--notable-font-weight-semibold);
-}
-
 .notable-combobox__item[data-disabled] {
   color: var(--notable-color-text-disabled);
   cursor: not-allowed;
+}
+
+.notable-combobox__item-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.notable-combobox__item-indicator {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--notable-color-primary);
 }
 
 .notable-combobox__empty {

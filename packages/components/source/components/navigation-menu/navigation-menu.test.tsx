@@ -1,5 +1,5 @@
 import { useState, type ComponentProps } from 'react';
-import { act, render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { NavigationMenu } from './navigation-menu.js';
@@ -209,50 +209,19 @@ describe('NavigationMenu', () => {
     });
   });
 
-  it('highlights the item under the pointer and clears it when the pointer leaves', async () => {
+  it('does not render a background highlight when a navigation item is hovered', async () => {
     const user = userEvent.setup();
     render(<SiteNavigation />);
 
     const trigger = screen.getByRole('button', { name: 'Products' });
     await user.hover(trigger);
-    expect(trigger).toHaveAttribute('data-highlighted');
 
-    await user.unhover(trigger);
     expect(trigger).not.toHaveAttribute('data-highlighted');
-  });
-
-  it('keeps the open item highlighted once the pointer has left it', async () => {
-    const user = userEvent.setup();
-    render(<SiteNavigation />);
-
-    const trigger = screen.getByRole('button', { name: 'Products' });
-    await user.click(trigger);
-    await user.unhover(trigger);
-
-    expect(trigger).toHaveAttribute('data-highlighted');
-  });
-
-  it('marks a link as highlighted only for top-level items, not dropdown links', async () => {
-    const user = userEvent.setup();
-    render(<SiteNavigation />);
-
-    const pricing = screen.getByRole('link', { name: 'Pricing' });
-    await user.hover(pricing);
-    expect(pricing).toHaveAttribute('data-highlighted');
-
-    await user.click(screen.getByRole('button', { name: 'Products' }));
-    const editor = await screen.findByRole('link', { name: 'Editor' });
-    expect(editor).not.toHaveAttribute('data-highlighted');
-  });
-
-  it('renders the highlight outside the accessibility tree', () => {
-    render(<SiteNavigation />);
-
-    const highlight = screen
-      .getByRole('navigation', { name: 'Main' })
-      .querySelector('.notable-navigation-menu__highlight');
-
-    expect(highlight).toHaveAttribute('aria-hidden', 'true');
+    expect(
+      screen
+        .getByRole('navigation', { name: 'Main' })
+        .querySelector('.notable-navigation-menu__highlight'),
+    ).not.toBeInTheDocument();
   });
 
   it('does not open a disabled trigger', async () => {
@@ -421,20 +390,19 @@ describe('NavigationMenu', () => {
     );
   });
 
-  it('renders a labelled group with its own highlight outside the accessibility tree', async () => {
+  it('renders a labelled group without a background highlight', async () => {
     const user = userEvent.setup();
     render(<GroupedNavigation />);
 
     await user.click(screen.getByRole('button', { name: 'Resources' }));
 
     const group = await screen.findByRole('group', { name: 'Learn' });
-    const highlight = group.querySelector(
-      '.notable-navigation-menu__highlight',
-    );
-    expect(highlight).toHaveAttribute('aria-hidden', 'true');
+    expect(
+      group.querySelector('.notable-navigation-menu__highlight'),
+    ).not.toBeInTheDocument();
   });
 
-  it('moves a group highlight between its links on hover', async () => {
+  it('does not render background highlights on grouped links', async () => {
     const user = userEvent.setup();
     render(<GroupedNavigation />);
 
@@ -443,38 +411,9 @@ describe('NavigationMenu', () => {
     const forum = screen.getByRole('link', { name: 'Forum' });
 
     await user.hover(docs);
-    expect(docs).toHaveAttribute('data-highlighted');
-    expect(forum).not.toHaveAttribute('data-highlighted');
-
-    await user.unhover(docs);
     expect(docs).not.toHaveAttribute('data-highlighted');
-  });
-
-  it('keeps highlight state separate for each group', async () => {
-    const user = userEvent.setup();
-    render(<GroupedNavigation />);
-
-    await user.click(screen.getByRole('button', { name: 'Resources' }));
-    const docs = await screen.findByRole('link', { name: 'Documentation' });
-    const forum = screen.getByRole('link', { name: 'Forum' });
-
-    await user.hover(docs);
     await user.hover(forum);
-
-    expect(forum).toHaveAttribute('data-highlighted');
-    expect(docs).not.toHaveAttribute('data-highlighted');
-  });
-
-  it('highlights a group link that receives keyboard focus', async () => {
-    const user = userEvent.setup();
-    render(<GroupedNavigation />);
-
-    await user.click(screen.getByRole('button', { name: 'Resources' }));
-    const docs = await screen.findByRole('link', { name: 'Documentation' });
-
-    act(() => docs.focus());
-
-    expect(docs).toHaveAttribute('data-highlighted');
+    expect(forum).not.toHaveAttribute('data-highlighted');
   });
 });
 

@@ -1,5 +1,5 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
-import { ChevronDown, X } from 'lucide-react';
+import { Check, ChevronDown, X } from '@notable/icons';
 import {
   Fragment,
   forwardRef,
@@ -258,13 +258,18 @@ const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
 );
 
 const ComboboxItem = forwardRef<HTMLDivElement, ComboboxItemProps>(
-  function ComboboxItem({ className, ...props }, ref) {
+  function ComboboxItem({ className, children, ...props }, ref) {
     return (
       <BaseCombobox.Item
         ref={ref}
         className={joinClassNames('notable-combobox__item', className)}
         {...props}
-      />
+      >
+        <span className="notable-combobox__item-text">{children}</span>
+        <BaseCombobox.ItemIndicator className="notable-combobox__item-indicator">
+          <Check size={16} aria-hidden="true" />
+        </BaseCombobox.ItemIndicator>
+      </BaseCombobox.Item>
     );
   },
 );

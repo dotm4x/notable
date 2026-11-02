@@ -1,4 +1,4 @@
-import { Folder, Home } from 'lucide-react';
+import { Folder, Home } from '@notable/icons';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';

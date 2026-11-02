@@ -1,5 +1,5 @@
 import { forwardRef, type AnchorHTMLAttributes } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from '@notable/icons';
 import './link.css';
 
 /** Props for {@link Link}. Accepts all native anchor attributes. */

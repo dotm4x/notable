@@ -5,7 +5,7 @@ import {
   type ComponentPropsWithoutRef,
   type ReactNode,
 } from 'react';
-import { ChevronDown, ChevronRight, Ellipsis } from 'lucide-react';
+import { ChevronDown, ChevronRight, Ellipsis } from '@notable/icons';
 import { DropdownMenu } from '../dropdown-menu/dropdown-menu.js';
 import { MenuItem } from '../../internal/primitives/menu/menu.js';
 import './breadcrumb.css';

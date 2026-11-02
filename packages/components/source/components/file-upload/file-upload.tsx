@@ -15,8 +15,7 @@ import {
   Plus,
   Upload,
   X,
-  type LucideIcon,
-} from 'lucide-react';
+} from '@notable/icons';
 import {
   createContext,
   forwardRef,
@@ -29,6 +28,7 @@ import {
   type DragEvent,
   type MouseEvent,
   type RefObject,
+  type ElementType,
 } from 'react';
 import { Button, type ButtonProps } from '../button/button.js';
 import { DURATION_BASE, EASING_STANDARD } from '../../styles/motion.js';
@@ -601,7 +601,7 @@ function FileUploadItem({
   );
 }
 
-function getFileIcon(file: File): LucideIcon {
+function getFileIcon(file: File): ElementType {
   if (file.type.startsWith('image/')) {
     return FileImage;
   }

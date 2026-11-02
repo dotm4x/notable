@@ -1,4 +1,4 @@
-import { CircleEllipsis, Plus, Search } from 'lucide-react';
+import { CircleEllipsis, Plus, Search } from '@notable/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './button.js';
 import { Spinner } from '../spinner/spinner.js';
@@ -101,7 +101,7 @@ export const Icons: Story = {
       </Button>
 
       <Button variant="outline" size="icon-small" aria-label="Search">
-        <Search aria-hidden="true" />
+        <Search aria-hidden="true" size={20} />
       </Button>
 
       <Button variant="secondary" size="icon-large" aria-label="More options">

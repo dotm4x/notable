@@ -1,8 +1,6 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu';
 import {
-  createContext,
   forwardRef,
-  useContext,
   useId,
   useState,
   type AnchorHTMLAttributes,
@@ -10,8 +8,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
+import { ChevronDown } from '@notable/icons';
 import '../../internal/styles/floating-surface.css';
 import './navigation-menu.css';
 
@@ -52,8 +49,7 @@ export type NavigationMenuContentProps = HTMLAttributes<HTMLDivElement>;
 
 /**
  * Props for `NavigationMenu.Group`, a column or section of links inside a
- * panel. Each group has its own highlight, so links only move the highlight
- * within their group.
+ * panel.
  */
 export type NavigationMenuGroupProps = HTMLAttributes<HTMLDivElement>;
 
@@ -69,26 +65,6 @@ export type NavigationMenuLinkProps =
 function joinClasses(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ');
 }
-
-type NavigationMenuHighlightContextValue = {
-  highlightedValue: string | null;
-  setHoveredValue: (value: string | null) => void;
-  setFocusedValue: (value: string | null) => void;
-};
-
-const NavigationMenuHighlightContext =
-  createContext<NavigationMenuHighlightContextValue | null>(null);
-
-const NavigationMenuItemContext = createContext(false);
-
-type NavigationMenuGroupContextValue = {
-  highlightedKey: string | null;
-  setHoveredKey: (key: string | null) => void;
-  setFocusedKey: (key: string | null) => void;
-};
-
-const NavigationMenuGroupContext =
-  createContext<NavigationMenuGroupContextValue | null>(null);
 
 const NavigationMenuRoot = forwardRef<HTMLElement, NavigationMenuProps>(
   function NavigationMenuRoot(
@@ -107,12 +83,7 @@ const NavigationMenuRoot = forwardRef<HTMLElement, NavigationMenuProps>(
     const [uncontrolledValue, setUncontrolledValue] = useState(
       defaultValue ?? null,
     );
-    const [hoveredValue, setHoveredValue] = useState<string | null>(null);
-    const [focusedValue, setFocusedValue] = useState<string | null>(null);
     const openValue = value !== undefined ? value : uncontrolledValue;
-    // The pointer and keyboard focus take precedence, and the open item keeps
-    // the highlight once both have moved away.
-    const highlightedValue = hoveredValue ?? focusedValue ?? openValue;
 
     return (
       <BaseNavigationMenu.Root
@@ -129,12 +100,7 @@ const NavigationMenuRoot = forwardRef<HTMLElement, NavigationMenuProps>(
         closeDelay={closeDelay}
         className={joinClasses('notable-navigation-menu', className)}
       >
-        <AnimatedHighlight className="notable-navigation-menu__highlight" />
-        <NavigationMenuHighlightContext.Provider
-          value={{ highlightedValue, setHoveredValue, setFocusedValue }}
-        >
-          {children}
-        </NavigationMenuHighlightContext.Provider>
+        {children}
         <BaseNavigationMenu.Portal>
           <BaseNavigationMenu.Positioner
             className="notable-navigation-menu__positioner"
@@ -168,49 +134,17 @@ const NavigationMenuList = forwardRef<
 });
 
 const NavigationMenuItem = forwardRef<HTMLLIElement, NavigationMenuItemProps>(
-  function NavigationMenuItem(
-    {
-      value,
-      className,
-      onPointerEnter,
-      onPointerLeave,
-      onFocus,
-      onBlur,
-      ...props
-    },
-    ref,
-  ) {
+  function NavigationMenuItem({ value, className, ...props }, ref) {
     const generatedValue = useId();
     const itemValue = value ?? generatedValue;
-    const highlight = useContext(NavigationMenuHighlightContext);
 
     return (
-      <NavigationMenuItemContext.Provider
-        value={highlight?.highlightedValue === itemValue}
-      >
-        <BaseNavigationMenu.Item
-          {...props}
-          ref={ref}
-          value={itemValue}
-          className={joinClasses('notable-navigation-menu__item', className)}
-          onPointerEnter={(event) => {
-            onPointerEnter?.(event);
-            highlight?.setHoveredValue(itemValue);
-          }}
-          onPointerLeave={(event) => {
-            onPointerLeave?.(event);
-            highlight?.setHoveredValue(null);
-          }}
-          onFocus={(event) => {
-            onFocus?.(event);
-            highlight?.setFocusedValue(itemValue);
-          }}
-          onBlur={(event) => {
-            onBlur?.(event);
-            highlight?.setFocusedValue(null);
-          }}
-        />
-      </NavigationMenuItemContext.Provider>
+      <BaseNavigationMenu.Item
+        {...props}
+        ref={ref}
+        value={itemValue}
+        className={joinClasses('notable-navigation-menu__item', className)}
+      />
     );
   },
 );
@@ -219,13 +153,10 @@ const NavigationMenuTrigger = forwardRef<
   HTMLButtonElement,
   NavigationMenuTriggerProps
 >(function NavigationMenuTrigger({ className, children, ...props }, ref) {
-  const isHighlighted = useContext(NavigationMenuItemContext);
-
   return (
     <BaseNavigationMenu.Trigger
       {...props}
       ref={ref}
-      data-highlighted={isHighlighted && !props.disabled ? '' : undefined}
       className={joinClasses('notable-navigation-menu__trigger', className)}
     >
       {children}
@@ -249,10 +180,7 @@ const NavigationMenuContent = forwardRef<
       ref={ref}
       className={joinClasses('notable-navigation-menu__content', className)}
     >
-      {/* The panel lives in a portal, so its links must not inherit the item highlight. */}
-      <NavigationMenuItemContext.Provider value={false}>
-        {children}
-      </NavigationMenuItemContext.Provider>
+      {children}
     </BaseNavigationMenu.Content>
   );
 });
@@ -261,10 +189,6 @@ const NavigationMenuGroup = forwardRef<
   HTMLDivElement,
   NavigationMenuGroupProps
 >(function NavigationMenuGroup({ className, children, ...props }, ref) {
-  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  const [focusedKey, setFocusedKey] = useState<string | null>(null);
-  const highlightedKey = hoveredKey ?? focusedKey;
-
   return (
     <div
       {...props}
@@ -272,12 +196,7 @@ const NavigationMenuGroup = forwardRef<
       role="group"
       className={joinClasses('notable-navigation-menu__group', className)}
     >
-      <AnimatedHighlight className="notable-navigation-menu__highlight" />
-      <NavigationMenuGroupContext.Provider
-        value={{ highlightedKey, setHoveredKey, setFocusedKey }}
-      >
-        {children}
-      </NavigationMenuGroupContext.Provider>
+      {children}
     </div>
   );
 });
@@ -286,49 +205,16 @@ const NavigationMenuLink = forwardRef<
   HTMLAnchorElement,
   NavigationMenuLinkProps
 >(function NavigationMenuLink(
-  {
-    active,
-    closeOnClick,
-    className,
-    onPointerEnter,
-    onPointerLeave,
-    onFocus,
-    onBlur,
-    ...props
-  },
+  { active, closeOnClick, className, ...props },
   ref,
 ) {
-  const itemHighlighted = useContext(NavigationMenuItemContext);
-  const group = useContext(NavigationMenuGroupContext);
-  const highlightKey = useId();
-  const isHighlighted = group
-    ? group.highlightedKey === highlightKey
-    : itemHighlighted;
-
   return (
     <BaseNavigationMenu.Link
       {...props}
       ref={ref}
-      data-highlighted={isHighlighted ? '' : undefined}
       active={active}
       closeOnClick={closeOnClick}
       className={joinClasses('notable-navigation-menu__link', className)}
-      onPointerEnter={(event) => {
-        onPointerEnter?.(event);
-        group?.setHoveredKey(highlightKey);
-      }}
-      onPointerLeave={(event) => {
-        onPointerLeave?.(event);
-        group?.setHoveredKey(null);
-      }}
-      onFocus={(event) => {
-        onFocus?.(event);
-        group?.setFocusedKey(highlightKey);
-      }}
-      onBlur={(event) => {
-        onBlur?.(event);
-        group?.setFocusedKey(null);
-      }}
     />
   );
 });

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from '@notable/icons';
 import { describe, expect, it, vi } from 'vitest';
 import { Collapsible, type CollapsibleProps } from './collapsible.js';
 

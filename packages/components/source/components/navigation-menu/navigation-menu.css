@@ -8,10 +8,6 @@
   position: relative;
 }
 
-.notable-navigation-menu__highlight {
-  border-radius: var(--notable-radius-sm);
-}
-
 .notable-navigation-menu__group {
   position: relative;
   display: flex;

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { CircleHelp } from 'lucide-react';
+import { CircleHelp } from '@notable/icons';
 import { describe, expect, it, vi } from 'vitest';
 import { Avatar } from './avatar.js';
 import { Avatar as PublicAvatar } from '../../index.js';
