@@ -1,18 +1,18 @@
-.notable-shortcut {
+.one-shortcut {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--notable-spacing-1);
-  min-width: var(--notable-spacing-5);
-  height: var(--notable-spacing-5);
-  padding-inline: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
+  min-width: var(--one-spacing-5);
+  height: var(--one-spacing-5);
+  padding-inline: var(--one-spacing-1);
   border: none;
-  border-radius: var(--notable-radius-xs);
-  background: var(--notable-color-surface-hover);
-  color: var(--notable-color-text-muted);
-  font-family: var(--notable-font-family);
-  font-size: var(--notable-font-size-xs);
-  font-weight: var(--notable-font-weight-medium);
+  border-radius: var(--one-radius-xs);
+  background: var(--one-color-surface-hover);
+  color: var(--one-color-text-muted);
+  font-family: var(--one-font-family);
+  font-size: var(--one-font-size-xs);
+  font-weight: var(--one-font-weight-medium);
   line-height: 1;
   text-align: center;
   vertical-align: baseline;

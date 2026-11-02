@@ -1,9 +1,9 @@
-.notable-form {
+.one-form {
   display: flex;
   flex-direction: column;
-  gap: var(--notable-spacing-3);
+  gap: var(--one-spacing-3);
 }
 
-.notable-form > .notable-button {
+.one-form > .one-button {
   align-self: flex-start;
 }

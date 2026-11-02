@@ -1,7 +1,7 @@
-.notable-scroll-area {
-  --notable-scroll-area-fade-size: var(--notable-spacing-6);
-  --notable-scroll-area-edge-size: var(--notable-scroll-area-fade-size);
-  --notable-scroll-area-blur: var(--notable-blur-subtle);
+.one-scroll-area {
+  --one-scroll-area-fade-size: var(--one-spacing-6);
+  --one-scroll-area-edge-size: var(--one-scroll-area-fade-size);
+  --one-scroll-area-blur: var(--one-blur-subtle);
 
   position: relative;
   display: flex;
@@ -16,31 +16,31 @@
   --_fade-end: 0px;
 }
 
-.notable-scroll-area[data-overflow-y-start] {
-  --_fade-top: var(--notable-scroll-area-edge-size);
+.one-scroll-area[data-overflow-y-start] {
+  --_fade-top: var(--one-scroll-area-edge-size);
 }
 
-.notable-scroll-area[data-overflow-y-end] {
-  --_fade-bottom: var(--notable-scroll-area-edge-size);
+.one-scroll-area[data-overflow-y-end] {
+  --_fade-bottom: var(--one-scroll-area-edge-size);
 }
 
-.notable-scroll-area[data-overflow-x-start] {
-  --_fade-start: var(--notable-scroll-area-edge-size);
+.one-scroll-area[data-overflow-x-start] {
+  --_fade-start: var(--one-scroll-area-edge-size);
 }
 
-.notable-scroll-area[data-overflow-x-end] {
-  --_fade-end: var(--notable-scroll-area-edge-size);
+.one-scroll-area[data-overflow-x-end] {
+  --_fade-end: var(--one-scroll-area-edge-size);
 }
 
-.notable-scroll-area__viewport {
+.one-scroll-area__viewport {
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
   overscroll-behavior: contain;
 }
 
-.notable-scroll-area__viewport:focus-visible {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-scroll-area__viewport:focus-visible {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: -2px;
 }
 
@@ -48,20 +48,20 @@
  * Edge fades are built from alpha-only gradients. The opaque stop is a mask value, not a visible color,
  * so it does not need a theme token. Blur uses the same mask as its fallback when backdrop filters are unsupported.
  */
-.notable-scroll-area--fade .notable-scroll-area__viewport,
-.notable-scroll-area--blur .notable-scroll-area__viewport {
+.one-scroll-area--fade .one-scroll-area__viewport,
+.one-scroll-area--blur .one-scroll-area__viewport {
   --_mask-vertical: linear-gradient(
     to bottom,
     transparent 0,
-    var(--notable-black) var(--_fade-top),
-    var(--notable-black) calc(100% - var(--_fade-bottom)),
+    var(--one-black) var(--_fade-top),
+    var(--one-black) calc(100% - var(--_fade-bottom)),
     transparent 100%
   );
   --_mask-horizontal: linear-gradient(
     to right,
     transparent 0,
-    var(--notable-black) var(--_fade-start),
-    var(--notable-black) calc(100% - var(--_fade-end)),
+    var(--one-black) var(--_fade-start),
+    var(--one-black) calc(100% - var(--_fade-end)),
     transparent 100%
   );
 
@@ -76,7 +76,7 @@
  * Keeping the mask would fade the blurred content instead of only blurring it.
  */
 @supports (backdrop-filter: blur(1px)) {
-  .notable-scroll-area--blur .notable-scroll-area__viewport {
+  .one-scroll-area--blur .one-scroll-area__viewport {
     mask-image: none;
     -webkit-mask-image: none;
   }
@@ -88,63 +88,47 @@
  * Overlays ignore the pointer, so selection, clicks, drags, and scrolling pass through to the viewport.
  * They are hidden while something inside has focus, so a focus ring is never blurred.
  */
-.notable-scroll-area__edge {
+.one-scroll-area__edge {
   position: absolute;
   z-index: 1;
   pointer-events: none;
-  backdrop-filter: blur(var(--notable-scroll-area-blur));
-  -webkit-backdrop-filter: blur(var(--notable-scroll-area-blur));
+  backdrop-filter: blur(var(--one-scroll-area-blur));
+  -webkit-backdrop-filter: blur(var(--one-scroll-area-blur));
 }
 
-.notable-scroll-area__edge--top {
+.one-scroll-area__edge--top {
   inset-block: 0 auto;
   inset-inline: 0;
   height: var(--_fade-top);
-  mask-image: linear-gradient(to bottom, var(--notable-black), transparent);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    var(--notable-black),
-    transparent
-  );
+  mask-image: linear-gradient(to bottom, var(--one-black), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, var(--one-black), transparent);
 }
 
-.notable-scroll-area__edge--bottom {
+.one-scroll-area__edge--bottom {
   inset-block: auto 0;
   inset-inline: 0;
   height: var(--_fade-bottom);
-  mask-image: linear-gradient(to top, var(--notable-black), transparent);
-  -webkit-mask-image: linear-gradient(
-    to top,
-    var(--notable-black),
-    transparent
-  );
+  mask-image: linear-gradient(to top, var(--one-black), transparent);
+  -webkit-mask-image: linear-gradient(to top, var(--one-black), transparent);
 }
 
-.notable-scroll-area__edge--start {
+.one-scroll-area__edge--start {
   inset-block: 0;
   inset-inline: 0 auto;
   width: var(--_fade-start);
-  mask-image: linear-gradient(to right, var(--notable-black), transparent);
-  -webkit-mask-image: linear-gradient(
-    to right,
-    var(--notable-black),
-    transparent
-  );
+  mask-image: linear-gradient(to right, var(--one-black), transparent);
+  -webkit-mask-image: linear-gradient(to right, var(--one-black), transparent);
 }
 
-.notable-scroll-area__edge--end {
+.one-scroll-area__edge--end {
   inset-block: 0;
   inset-inline: auto 0;
   width: var(--_fade-end);
-  mask-image: linear-gradient(to left, var(--notable-black), transparent);
-  -webkit-mask-image: linear-gradient(
-    to left,
-    var(--notable-black),
-    transparent
-  );
+  mask-image: linear-gradient(to left, var(--one-black), transparent);
+  -webkit-mask-image: linear-gradient(to left, var(--one-black), transparent);
 }
 
-.notable-scroll-area--blur:has(:focus-visible) .notable-scroll-area__edge {
+.one-scroll-area--blur:has(:focus-visible) .one-scroll-area__edge {
   display: none;
 }
 
@@ -152,66 +136,63 @@
  * With a vertical-only orientation, wide children are clipped instead of creating horizontal overflow.
  * This keeps the viewport from scrolling sideways when a control inside it receives focus.
  */
-.notable-scroll-area__content--vertical {
+.one-scroll-area__content--vertical {
   overflow-x: clip;
 }
 
-.notable-scroll-area__scrollbar {
+.one-scroll-area__scrollbar {
   z-index: 1;
   display: flex;
   box-sizing: border-box;
   padding: 2px;
-  transition: opacity var(--notable-duration-fast)
-    var(--notable-easing-standard);
+  transition: opacity var(--one-duration-fast) var(--one-easing-standard);
 }
 
-.notable-scroll-area__scrollbar--vertical {
+.one-scroll-area__scrollbar--vertical {
   width: 14px;
-  margin-block: var(--notable-spacing-1);
-  margin-inline-end: var(--notable-spacing-1);
+  margin-block: var(--one-spacing-1);
+  margin-inline-end: var(--one-spacing-1);
 }
 
-.notable-scroll-area__scrollbar--horizontal {
+.one-scroll-area__scrollbar--horizontal {
   height: 14px;
-  margin-inline: var(--notable-spacing-1);
-  margin-block-end: var(--notable-spacing-1);
+  margin-inline: var(--one-spacing-1);
+  margin-block-end: var(--one-spacing-1);
 }
 
-.notable-scroll-area__thumb {
+.one-scroll-area__thumb {
   width: 100%;
   height: 100%;
-  border-radius: var(--notable-radius-full);
-  background-color: var(--notable-color-text-subtle);
-  transition: background-color var(--notable-duration-fast)
-    var(--notable-easing-standard);
+  border-radius: var(--one-radius-full);
+  background-color: var(--one-color-text-subtle);
+  transition: background-color var(--one-duration-fast)
+    var(--one-easing-standard);
 }
 
-.notable-scroll-area__thumb:hover,
-.notable-scroll-area__thumb[data-scrolling] {
-  background-color: var(--notable-color-text-muted);
+.one-scroll-area__thumb:hover,
+.one-scroll-area__thumb[data-scrolling] {
+  background-color: var(--one-color-text-muted);
 }
 
-.notable-scroll-area__corner {
+.one-scroll-area__corner {
   background: transparent;
 }
 
-.notable-scroll-area--auto-scrollbar .notable-scroll-area__scrollbar {
+.one-scroll-area--auto-scrollbar .one-scroll-area__scrollbar {
   opacity: 0;
   pointer-events: none;
 }
 
-.notable-scroll-area--auto-scrollbar:hover .notable-scroll-area__scrollbar,
-.notable-scroll-area--auto-scrollbar
-  .notable-scroll-area__scrollbar[data-hovering],
-.notable-scroll-area--auto-scrollbar
-  .notable-scroll-area__scrollbar[data-scrolling] {
+.one-scroll-area--auto-scrollbar:hover .one-scroll-area__scrollbar,
+.one-scroll-area--auto-scrollbar .one-scroll-area__scrollbar[data-hovering],
+.one-scroll-area--auto-scrollbar .one-scroll-area__scrollbar[data-scrolling] {
   opacity: 1;
   pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-scroll-area__scrollbar,
-  .notable-scroll-area__thumb {
+  .one-scroll-area__scrollbar,
+  .one-scroll-area__thumb {
     transition: none;
   }
 }

@@ -39,7 +39,7 @@ export type ScrollAreaProps = Omit<
    */
   edgeEffect?: ScrollAreaEdgeEffect;
   /**
-   * Length of the edge effect, such as `"24px"`. Defaults to `--notable-scroll-area-fade-size`.
+   * Length of the edge effect, such as `"24px"`. Defaults to `--one-scroll-area-fade-size`.
    * Takes precedence over the deprecated `fadeSize`.
    */
   edgeEffectSize?: string;
@@ -102,10 +102,9 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       edgeEffect ?? (fadeEdges ? 'fade' : 'none');
 
     const rootClassName = [
-      'notable-scroll-area',
-      scrollbarMode === 'auto' && 'notable-scroll-area--auto-scrollbar',
-      resolvedEdgeEffect !== 'none' &&
-        `notable-scroll-area--${resolvedEdgeEffect}`,
+      'one-scroll-area',
+      scrollbarMode === 'auto' && 'one-scroll-area--auto-scrollbar',
+      resolvedEdgeEffect !== 'none' && `one-scroll-area--${resolvedEdgeEffect}`,
       className,
     ]
       .filter(Boolean)
@@ -116,10 +115,10 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       ...style,
       ...(fadeSize === undefined
         ? {}
-        : { '--notable-scroll-area-fade-size': fadeSize }),
+        : { '--one-scroll-area-fade-size': fadeSize }),
       ...(edgeEffectSize === undefined
         ? {}
-        : { '--notable-scroll-area-edge-size': edgeEffectSize }),
+        : { '--one-scroll-area-edge-size': edgeEffectSize }),
     } as CSSProperties;
 
     // Base UI sets `overflow: scroll` inline. Clip the unused axis so only the chosen directions scroll.
@@ -132,15 +131,15 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       <BaseScrollArea.Root className={rootClassName} style={rootStyle}>
         <BaseScrollArea.Viewport
           ref={ref}
-          className="notable-scroll-area__viewport"
+          className="one-scroll-area__viewport"
           style={viewportStyle}
           {...viewportProps}
         >
           <BaseScrollArea.Content
             className={
               hasHorizontalAxis
-                ? 'notable-scroll-area__content'
-                : 'notable-scroll-area__content notable-scroll-area__content--vertical'
+                ? 'one-scroll-area__content'
+                : 'one-scroll-area__content one-scroll-area__content--vertical'
             }
             // Overrides Base UI's inline `min-width: fit-content`, which would let content widen past the viewport.
             style={hasHorizontalAxis ? undefined : { minWidth: '100%' }}
@@ -152,37 +151,37 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
         {showVerticalScrollbar && (
           <BaseScrollArea.Scrollbar
             orientation="vertical"
-            className="notable-scroll-area__scrollbar notable-scroll-area__scrollbar--vertical"
+            className="one-scroll-area__scrollbar one-scroll-area__scrollbar--vertical"
           >
-            <BaseScrollArea.Thumb className="notable-scroll-area__thumb" />
+            <BaseScrollArea.Thumb className="one-scroll-area__thumb" />
           </BaseScrollArea.Scrollbar>
         )}
 
         {showHorizontalScrollbar && (
           <BaseScrollArea.Scrollbar
             orientation="horizontal"
-            className="notable-scroll-area__scrollbar notable-scroll-area__scrollbar--horizontal"
+            className="one-scroll-area__scrollbar one-scroll-area__scrollbar--horizontal"
           >
-            <BaseScrollArea.Thumb className="notable-scroll-area__thumb" />
+            <BaseScrollArea.Thumb className="one-scroll-area__thumb" />
           </BaseScrollArea.Scrollbar>
         )}
 
         {showVerticalScrollbar && showHorizontalScrollbar && (
-          <BaseScrollArea.Corner className="notable-scroll-area__corner" />
+          <BaseScrollArea.Corner className="one-scroll-area__corner" />
         )}
 
         {resolvedEdgeEffect === 'blur' && (
           <>
             {hasVerticalAxis && (
               <>
-                <div className="notable-scroll-area__edge notable-scroll-area__edge--top" />
-                <div className="notable-scroll-area__edge notable-scroll-area__edge--bottom" />
+                <div className="one-scroll-area__edge one-scroll-area__edge--top" />
+                <div className="one-scroll-area__edge one-scroll-area__edge--bottom" />
               </>
             )}
             {hasHorizontalAxis && (
               <>
-                <div className="notable-scroll-area__edge notable-scroll-area__edge--start" />
-                <div className="notable-scroll-area__edge notable-scroll-area__edge--end" />
+                <div className="one-scroll-area__edge one-scroll-area__edge--start" />
+                <div className="one-scroll-area__edge one-scroll-area__edge--end" />
               </>
             )}
           </>

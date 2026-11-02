@@ -2,17 +2,17 @@
    Separator
    ========================================================================== */
 
-.notable-separator {
+.one-separator {
   flex: 0 0 auto;
   align-self: stretch;
-  background: var(--notable-separator-color, var(--notable-color-border));
+  background: var(--one-separator-color, var(--one-color-border));
 }
 
-.notable-separator--horizontal {
-  block-size: var(--notable-separator-thickness, var(--notable-border-width));
+.one-separator--horizontal {
+  block-size: var(--one-separator-thickness, var(--one-border-width));
 }
 
-.notable-separator--vertical {
+.one-separator--vertical {
   block-size: 100%;
-  inline-size: var(--notable-separator-thickness, var(--notable-border-width));
+  inline-size: var(--one-separator-thickness, var(--one-border-width));
 }

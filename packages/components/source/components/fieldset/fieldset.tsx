@@ -17,7 +17,7 @@ const FieldsetRoot = forwardRef<HTMLFieldSetElement, TFieldsetRootProps>(
       <BaseFieldset.Root
         {...props}
         ref={ref}
-        className={joinClassNames('notable-fieldset', className)}
+        className={joinClassNames('one-fieldset', className)}
       />
     );
   },
@@ -29,7 +29,7 @@ const FieldsetLegend = forwardRef<HTMLLegendElement, TFieldsetLegendProps>(
       <legend
         {...props}
         ref={ref}
-        className={joinClassNames('notable-fieldset__legend', className)}
+        className={joinClassNames('one-fieldset__legend', className)}
       />
     );
   },

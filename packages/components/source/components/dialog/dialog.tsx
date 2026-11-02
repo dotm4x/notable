@@ -1,6 +1,6 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
 import type { BaseUIEvent } from '@base-ui/react/types';
-import { X } from 'lucide-react';
+import { X } from '@one/icons';
 import {
   cloneElement,
   createContext,
@@ -190,15 +190,15 @@ const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
       closeOnBackdropClickRef.current = closeOnBackdropClick;
     }, [closeOnBackdropClick, closeOnBackdropClickRef]);
 
-    const classes = ['notable-dialog', `notable-dialog--${size}`, className]
+    const classes = ['one-dialog', `one-dialog--${size}`, className]
       .filter(Boolean)
       .join(' ');
 
     return (
       <BaseDialog.Portal>
-        <BaseDialog.Backdrop className="notable-dialog__backdrop" />
+        <BaseDialog.Backdrop className="one-dialog__backdrop" />
         <BaseDialog.Popup {...props} ref={ref} className={classes}>
-          <div className="notable-dialog__body">
+          <div className="one-dialog__body">
             {children}
             {showCloseButton && (
               <BaseDialog.Close
@@ -206,7 +206,7 @@ const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="notable-dialog__close-button"
+                    className="one-dialog__close-button"
                     aria-label="Close dialog"
                   />
                 }
@@ -226,9 +226,7 @@ function DialogHeader({ className, ...props }: DialogHeaderProps) {
   return (
     <div
       {...props}
-      className={['notable-dialog__header', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-dialog__header', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -240,7 +238,7 @@ function DialogTitle({ className, ...props }: DialogTitleProps) {
   return (
     <BaseDialog.Title
       {...props}
-      className={['notable-dialog__title', className].filter(Boolean).join(' ')}
+      className={['one-dialog__title', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -252,7 +250,7 @@ function DialogDescription({ className, ...props }: DialogDescriptionProps) {
   return (
     <BaseDialog.Description
       {...props}
-      className={['notable-dialog__description', className]
+      className={['one-dialog__description', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -263,9 +261,7 @@ function DialogFooter({ className, ...props }: DialogFooterProps) {
   return (
     <div
       {...props}
-      className={['notable-dialog__footer', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-dialog__footer', className].filter(Boolean).join(' ')}
     />
   );
 }

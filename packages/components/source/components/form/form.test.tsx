@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';
 import { Form } from './form.js';
 
 describe('Form', () => {
-  it('renders a native form element with the Notable class name', () => {
+  it('renders a native form element with the One class name', () => {
     const { container } = render(
       <Form className="signup">
         <Input label="Email" />
@@ -18,7 +18,7 @@ describe('Form', () => {
     );
 
     const form = container.querySelector('form');
-    expect(form).toHaveClass('notable-form', 'signup');
+    expect(form).toHaveClass('one-form', 'signup');
   });
 
   it('passes native form attributes through', () => {

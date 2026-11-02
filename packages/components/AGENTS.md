@@ -1,12 +1,12 @@
-# AGENTS.md — Notable React
+# AGENTS.md — One React
 
-This package is the React implementation of Notable, a technology-independent design language for expressive, coherent, accessible, and thoughtfully crafted digital experiences.
+This package is the React implementation of One, a technology-independent design language for expressive, coherent, accessible, and thoughtfully crafted digital experiences.
 
-Notable's design language is defined in `docs/guidelines/`. This package translates those guidelines into reusable React components, styles, interaction behavior, and public APIs.
+One's design language is defined in `docs/guidelines/`. This package translates those guidelines into reusable React components, styles, interaction behavior, and public APIs.
 
 Follow the root `AGENTS.md` and all applicable instructions. These instructions establish the implementation-specific conventions for this package.
 
-The objectives are to preserve Notable's design intent, deliver an excellent developer experience, maintain strict correctness and accessibility, and keep the implementation cohesive, modular, and easy to maintain.
+The objectives are to preserve One's design intent, deliver an excellent developer experience, maintain strict correctness and accessibility, and keep the implementation cohesive, modular, and easy to maintain.
 
 ---
 
@@ -24,7 +24,7 @@ Before implementing or modifying a component:
 - Follow the relevant principles, foundations, patterns, and component guidelines.
 - Treat the documented design language as the authority for visual decisions and interaction behavior.
 - Do not introduce isolated visual conventions or undocumented behavior without justification.
-- Preserve Notable's expressive character, visual coherence, and restraint.
+- Preserve One's expressive character, visual coherence, and restraint.
 - Use existing shared foundations and patterns instead of implementing competing versions.
 - If a guideline is ambiguous or contradictory, investigate related documentation and implementations before deciding.
 - Update shared guidelines when a change establishes a design decision that applies beyond React.
@@ -87,23 +87,23 @@ Conversely, do not recreate complex interaction behavior manually when Base UI a
 
 ### Mandatory Base UI encapsulation
 
-**Never expose Base UI as Notable's public component API.**
+**Never expose Base UI as One's public component API.**
 
-Base UI is an internal implementation dependency, not the public identity of Notable.
+Base UI is an internal implementation dependency, not the public identity of One.
 
-- Wrap Base UI primitives in Notable-owned components.
-- Define Notable's own public props, types, exports, composition model, and styling.
-- Adapt Base UI's API to Notable's documented design and interaction requirements.
+- Wrap Base UI primitives in One-owned components.
+- Define One's own public props, types, exports, composition model, and styling.
+- Adapt Base UI's API to One's documented design and interaction requirements.
 - Expose only the behavior and customization that consumers genuinely need.
 - Keep Base UI imports, primitive details, internal state adapters, and implementation-specific types private.
-- Do not require consumers to import Base UI primitives to complete ordinary Notable workflows.
+- Do not require consumers to import Base UI primitives to complete ordinary One workflows.
 - Do not expose Base UI-specific prop names or types solely for convenience.
 - Do not blindly forward every primitive prop or internal attribute.
-- Forward native attributes and extensibility points when they are appropriate to Notable's public contract.
+- Forward native attributes and extensibility points when they are appropriate to One's public contract.
 - Keep the underlying primitive replaceable without unnecessarily breaking consumers.
 - Use the installed Base UI version's actual API and documentation. Do not assume APIs from another version.
 
-Wrapping a primitive does not mean hiding useful behavior. Preserve necessary capabilities through an intentional Notable API.
+Wrapping a primitive does not mean hiding useful behavior. Preserve necessary capabilities through an intentional One API.
 
 ### Composition and compound components
 
@@ -209,7 +209,7 @@ Consistency in naming is mandatory across files, components, styles, tests, stor
 - Component files: match the component's established name, such as `radio-group.tsx`.
 - React components and public namespaces: PascalCase.
 - Variables, functions, hooks, and parameters: camelCase.
-- CSS classes: follow the Notable class naming convention defined below.
+- CSS classes: follow the One class naming convention defined below.
 - Test and Storybook files: `<component>.test.tsx` and `<component>.stories.tsx`.
 
 Use clear English names and established terminology. Avoid unexplained abbreviations and inconsistent synonyms.
@@ -339,15 +339,15 @@ For example:
 
 ```css
 /* Semantic surfaces */
---notable-surface: ...;
---notable-surface-raised: ...;
+--one-surface: ...;
+--one-surface-raised: ...;
 
 /* Semantic text */
---notable-text: ...;
---notable-text-muted: ...;
+--one-text: ...;
+--one-text-muted: ...;
 
 /* Interactive states */
---notable-focus-ring: ...;
+--one-focus-ring: ...;
 ```
 
 This example illustrates organizational intent, not new token names that must be introduced.
@@ -380,24 +380,24 @@ Rules:
 
 Use a consistent, component-scoped BEM-inspired naming convention.
 
-The root prefix is `notable-`.
+The root prefix is `one-`.
 
 ### Component block
 
 A component's root class is:
 
 ```css
-.notable-avatar {
+.one-avatar {
 }
-.notable-dialog {
+.one-dialog {
 }
-.notable-radio-group {
+.one-radio-group {
 }
 ```
 
 Format:
 
-`notable-{component}`
+`one-{component}`
 
 Use lowercase kebab-case for component names.
 
@@ -406,45 +406,45 @@ Use lowercase kebab-case for component names.
 Elements belonging to a component use a double underscore:
 
 ```css
-.notable-avatar__image {
+.one-avatar__image {
 }
-.notable-avatar__fallback {
+.one-avatar__fallback {
 }
 
-.notable-dialog__title {
+.one-dialog__title {
 }
-.notable-dialog__description {
+.one-dialog__description {
 }
-.notable-dialog__close {
+.one-dialog__close {
 }
 ```
 
 Format:
 
-`notable-{component}__{element}`
+`one-{component}__{element}`
 
 An element is a meaningful part of its component, not an arbitrary wrapper.
 
-Avoid unnecessary nesting in class names. Prefer `.notable-dialog__title` over `.notable-dialog__content__title`.
+Avoid unnecessary nesting in class names. Prefer `.one-dialog__title` over `.one-dialog__content__title`.
 
 ### Modifiers
 
 Use a double hyphen for explicit component variants:
 
 ```css
-.notable-button--primary {
+.one-button--primary {
 }
-.notable-button--secondary {
+.one-button--secondary {
 }
-.notable-button--small {
+.one-button--small {
 }
-.notable-button--large {
+.one-button--large {
 }
 ```
 
 Format:
 
-`notable-{component}--{modifier}`
+`one-{component}--{modifier}`
 
 Use modifiers for intentional, documented variations, not every implementation detail.
 
@@ -453,15 +453,15 @@ Use modifiers for intentional, documented variations, not every implementation d
 Prefer semantic attributes for runtime states where appropriate:
 
 ```css
-.notable-switch[data-checked] {
+.one-switch[data-checked] {
 }
-.notable-dialog[data-open] {
+.one-dialog[data-open] {
 }
-.notable-select__item[aria-selected='true'] {
+.one-select__item[aria-selected='true'] {
 }
-.notable-button:focus-visible {
+.one-button:focus-visible {
 }
-.notable-button:disabled {
+.one-button:disabled {
 }
 ```
 
@@ -502,26 +502,26 @@ An icon should communicate the intended action or meaning clearly. Do not add ic
 
 ## 9. Base UI Integration
 
-Base UI is an internal tool for complex interaction behavior, not a public dependency of Notable's component API.
+Base UI is an internal tool for complex interaction behavior, not a public dependency of One's component API.
 
 ### Integration rules
 
 - Use the installed `@base-ui/react` package and verify its actual API before implementation.
-- Wrap primitives in Notable-owned components and namespaces.
+- Wrap primitives in One-owned components and namespaces.
 - Keep Base UI types and implementation details internal.
-- Map Base UI states and props to an intentional Notable API.
+- Map Base UI states and props to an intentional One API.
 - Preserve useful native attributes and consumer capabilities when they fit the public contract.
 - Do not forward arbitrary props indiscriminately.
 - Avoid duplicating state that Base UI already manages.
 - Do not build a second focus-management, dismissal, keyboard-navigation, or selection system when Base UI already provides the necessary behavior.
-- Add custom behavior only when Notable's documented requirements are not already satisfied.
+- Add custom behavior only when One's documented requirements are not already satisfied.
 - Avoid CSS selectors that depend on undocumented implementation details.
-- Test the integration between Notable's wrapper and Base UI, not Base UI's entire internal implementation.
+- Test the integration between One's wrapper and Base UI, not Base UI's entire internal implementation.
 
 ### Styling Base UI
 
-- Apply Notable classes through supported styling mechanisms.
-- Use Notable design tokens for all shared design decisions.
+- Apply One classes through supported styling mechanisms.
+- Use One design tokens for all shared design decisions.
 - Preserve the expected visual and interaction states.
 - Verify focus, disabled, selected, open, closed, and other relevant states.
 - Do not override primitive behavior merely to reproduce a visual effect.
@@ -529,19 +529,19 @@ Base UI is an internal tool for complex interaction behavior, not a public depen
 
 ### Testing Base UI wrappers
 
-Do not write redundant tests for behavior that Base UI already guarantees and that Notable does not change.
+Do not write redundant tests for behavior that Base UI already guarantees and that One does not change.
 
 For example, if a wrapper uses a Base UI dialog without modifying its keyboard and dismissal behavior, do not recreate an exhaustive test suite for Base UI itself.
 
 Instead, test:
 
-- Notable's public API and composition.
+- One's public API and composition.
 - The correct integration of the primitive.
-- Notable-specific state and styling contracts.
+- One-specific state and styling contracts.
 - Any customized behavior or altered defaults.
-- Accessibility relationships that Notable introduces or controls.
+- Accessibility relationships that One introduces or controls.
 - Regressions caused by the wrapper or its styling.
-- Any behavior whose correctness depends on Notable's own implementation.
+- Any behavior whose correctness depends on One's own implementation.
 
 Add tests for underlying primitive behavior when the wrapper changes that behavior, depends on a specific integration detail, or exposes a contract that could regress independently.
 
@@ -717,7 +717,7 @@ This is illustrative. Adapt the test to the component's actual public API and ac
 
 When a component wraps Base UI, do not duplicate Base UI's own test coverage.
 
-Test the behavior that Notable owns:
+Test the behavior that One owns:
 
 - Its public API.
 - Its composition and wrapper integration.
@@ -725,9 +725,9 @@ Test the behavior that Notable owns:
 - Its styling and state mapping.
 - Its accessibility contract.
 - Its documented interactions.
-- Any integration behavior that could regress through changes in Notable's code.
+- Any integration behavior that could regress through changes in One's code.
 
-Do not write large test suites for primitive functionality that Notable neither implements nor changes.
+Do not write large test suites for primitive functionality that One neither implements nor changes.
 
 ### Regression tests
 
@@ -838,7 +838,7 @@ Do not repeat every unit-level assertion in Playwright.
 
 Prefer browser tests that verify meaningful integration behavior, such as:
 
-- A composed Notable dialog opening and closing in the sandbox.
+- A composed One dialog opening and closing in the sandbox.
 - Keyboard interaction and focus restoration.
 - A popover or select functioning in a real browser.
 - Correct positioning, layering, scrolling, or responsive behavior.
@@ -888,7 +888,7 @@ Choose stories that demonstrate the public contract clearly and reveal meaningfu
 - Use autodocs where supported and consistent with the installed configuration.
 - Keep component metadata and story examples synchronized with the public API.
 - Use real component implementations rather than duplicating component logic in stories.
-- Reuse existing Notable components, design tokens, and Lucide icons.
+- Reuse existing One components, design tokens, and Lucide icons.
 - Avoid emoji and arbitrary placeholder glyphs when an appropriate icon is available.
 
 ### Story naming and documentation standards
@@ -924,7 +924,7 @@ Choose stories that demonstrate the public contract clearly and reveal meaningfu
 
 ### Visual consistency
 
-- Use Notable's tokens and guidelines rather than story-specific styling that conceals implementation problems.
+- Use One's tokens and guidelines rather than story-specific styling that conceals implementation problems.
 - Keep backgrounds and surrounding content appropriate for the component being demonstrated.
 - Avoid inconsistent example layouts across similar components.
 - Use the same public API consumers are expected to use.
@@ -935,7 +935,7 @@ Stories must reflect the actual behavior of the exported component, not a simpli
 
 ## 15. Motion and Animation
 
-Motion is part of Notable's design language and must be implemented consistently.
+Motion is part of One's design language and must be implemented consistently.
 
 - Follow `docs/guidelines/foundations/motion.md` and relevant interaction-pattern guidelines.
 - Reuse the shared motion tokens and helpers.
@@ -961,7 +961,7 @@ The public API must remain intentional, coherent, and independent of internal im
 - Export supported components and their public types through the established package entry point.
 - Export compound components using the intended namespace API.
 - Keep internal helpers, private hooks, Base UI adapters, and internal types out of public exports.
-- Do not expose Base UI primitives as substitutes for Notable components.
+- Do not expose Base UI primitives as substitutes for One components.
 - Keep exports, declarations, styles, package metadata, and documentation synchronized.
 - Preserve the package's supported import paths and module formats.
 - Avoid redundant aliases, duplicate public entry points, and unnecessary compatibility layers.
@@ -969,7 +969,7 @@ The public API must remain intentional, coherent, and independent of internal im
 - Inspect consumer-facing API changes before modifying existing exports.
 - Do not introduce breaking changes without explicit justification and corresponding documentation.
 
-The public API should describe Notable, not reveal how Notable happens to be implemented today.
+The public API should describe One, not reveal how One happens to be implemented today.
 
 ---
 
@@ -1091,7 +1091,7 @@ When performing a cleanup, verify that code is genuinely unused before deleting 
 For every assigned task:
 
 1. Read the root instructions and applicable local instructions.
-2. Read the relevant Notable design guidelines.
+2. Read the relevant One design guidelines.
 3. Inspect the affected component, shared helpers, tokens, styles, tests, stories, exports, and consumers.
 4. Determine whether Base UI is justified or whether native React and HTML are sufficient.
 5. Identify the intended public API and relevant accessibility requirements.
@@ -1115,7 +1115,7 @@ Ask for clarification when an unresolved requirement materially affects public b
 
 A task is complete only when:
 
-- The implementation follows Notable's design language.
+- The implementation follows One's design language.
 - The public API is coherent and does not leak Base UI implementation details.
 - Existing tokens, shared helpers, CSS conventions, and naming patterns are respected.
 - Accessibility and relevant interaction behavior are preserved.
@@ -1141,4 +1141,4 @@ Provide a concise summary of:
 
 Never claim that a task is fully verified when required checks were skipped or failed.
 
-**The goal is a React implementation that feels unmistakably like Notable, while remaining accessible, modular, consistent, and independent of its underlying implementation primitives.**
+**The goal is a React implementation that feels unmistakably like One, while remaining accessible, modular, consistent, and independent of its underlying implementation primitives.**

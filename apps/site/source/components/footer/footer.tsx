@@ -1,6 +1,6 @@
 'use client';
 
-import { Footer, Link } from '@notable/components';
+import { Footer, Link } from '@one/components';
 import './footer.css';
 
 export function SiteFooter() {
@@ -13,7 +13,7 @@ export function SiteFooter() {
         </Link>
         . The source code is available on{' '}
         <Link
-          href="https://github.com/dotm4x/notable"
+          href="https://github.com/dotm4x/one"
           target="_blank"
           rel="noreferrer"
         >

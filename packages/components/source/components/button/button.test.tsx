@@ -26,7 +26,7 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: 'Save' });
 
     expect(button).toHaveAttribute('type', 'submit');
-    expect(button).toHaveClass('notable-button', 'custom-button');
+    expect(button).toHaveClass('one-button', 'custom-button');
   });
 
   it('defaults to type button', () => {
@@ -42,7 +42,7 @@ describe('Button', () => {
     render(<Button variant="secondary">Cancel</Button>);
 
     expect(screen.getByRole('button', { name: 'Cancel' })).toHaveClass(
-      'notable-button--secondary',
+      'one-button--secondary',
     );
   });
 
@@ -50,7 +50,7 @@ describe('Button', () => {
     render(<Button size="large">Continue</Button>);
 
     expect(screen.getByRole('button', { name: 'Continue' })).toHaveClass(
-      'notable-button--large',
+      'one-button--large',
     );
   });
 
@@ -64,7 +64,7 @@ describe('Button', () => {
       );
 
       expect(screen.getByRole('button', { name: 'Search' })).toHaveClass(
-        `notable-button--${size}`,
+        `one-button--${size}`,
       );
     },
   );
@@ -128,6 +128,6 @@ describe('Button', () => {
     const link = screen.getByRole('link', { name: 'GitHub' });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', 'https://github.com');
-    expect(link).toHaveClass('notable-button', 'notable-button--outline');
+    expect(link).toHaveClass('one-button', 'one-button--outline');
   });
 });

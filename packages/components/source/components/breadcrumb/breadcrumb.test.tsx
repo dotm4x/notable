@@ -66,7 +66,7 @@ describe('Breadcrumb', () => {
       );
 
       const separators = container.querySelectorAll(
-        '.notable-breadcrumb__separator',
+        '.one-breadcrumb__separator',
       );
       expect(separators).toHaveLength(2);
       separators.forEach((separator) => {
@@ -74,8 +74,8 @@ describe('Breadcrumb', () => {
       });
       expect(
         container
-          .querySelectorAll('.notable-breadcrumb__entry')[0]
-          .querySelector('.notable-breadcrumb__separator'),
+          .querySelectorAll('.one-breadcrumb__entry')[0]
+          .querySelector('.one-breadcrumb__separator'),
       ).toBeNull();
     });
 
@@ -101,7 +101,7 @@ describe('Breadcrumb', () => {
       const nav = screen.getByTestId('trail');
       expect(ref.current).toBe(nav);
       expect(nav.tagName).toBe('NAV');
-      expect(nav).toHaveClass('notable-breadcrumb', 'custom');
+      expect(nav).toHaveClass('one-breadcrumb', 'custom');
     });
   });
 

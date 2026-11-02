@@ -24,7 +24,7 @@ describe('ControlGroup', () => {
 
     expect(group).toHaveAttribute('data-orientation', 'horizontal');
     expect(group).toHaveAttribute('data-testid', 'group');
-    expect(group).toHaveClass('notable-control-group');
+    expect(group).toHaveClass('one-control-group');
   });
 
   it('supports vertical orientation and nested groups', () => {
@@ -102,7 +102,7 @@ describe('ControlGroup', () => {
 
     const label = screen.getByTestId('group-label');
     expect(label).toHaveTextContent('Query');
-    expect(label).toHaveClass('notable-control-group__text');
+    expect(label).toHaveClass('one-control-group__text');
     expect(label.tagName).toBe('LABEL');
     expect(screen.getByLabelText('Query')).toHaveAttribute('id', 'query');
   });
@@ -138,9 +138,9 @@ describe('ControlGroup', () => {
     );
 
     const input = screen.getByRole('textbox', { name: 'Search query' });
-    await user.type(input, 'notable');
+    await user.type(input, 'one');
 
-    expect(input).toHaveValue('notable');
+    expect(input).toHaveValue('one');
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
 

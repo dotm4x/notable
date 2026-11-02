@@ -2,7 +2,7 @@
    Collapsible
    ========================================================================== */
 
-.notable-collapsible {
+.one-collapsible {
   min-width: 0;
   color: inherit;
   font-family: inherit;
@@ -11,14 +11,14 @@
 /* Trigger
    Visually neutral: consumers provide their own content, icons, and spacing. */
 
-.notable-collapsible__trigger {
+.one-collapsible__trigger {
   display: flex;
   align-items: center;
   width: 100%;
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: var(--notable-radius-xs);
+  border-radius: var(--one-radius-xs);
   background: transparent;
   color: inherit;
   font: inherit;
@@ -26,13 +26,13 @@
   cursor: pointer;
 }
 
-.notable-collapsible__trigger:focus-visible {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-collapsible__trigger:focus-visible {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
 }
 
-.notable-collapsible__trigger:disabled {
-  color: var(--notable-color-text-disabled);
+.one-collapsible__trigger:disabled {
+  color: var(--one-color-text-disabled);
   cursor: not-allowed;
 }
 
@@ -40,35 +40,35 @@
    Animates between 0fr and 1fr grid rows so the height follows the content
    without measuring it or animating `height: auto`. */
 
-.notable-collapsible__content {
+.one-collapsible__content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows var(--notable-duration-base)
-    var(--notable-easing-standard);
+  transition: grid-template-rows var(--one-duration-base)
+    var(--one-easing-standard);
 }
 
 /* Base UI sets `hidden` on closed panels; keep it from being overridden by `display: grid`. */
-.notable-collapsible__content[hidden] {
+.one-collapsible__content[hidden] {
   display: none;
 }
 
-.notable-collapsible__content[data-open] {
+.one-collapsible__content[data-open] {
   grid-template-rows: 1fr;
 }
 
 /* Starts an opening panel collapsed so it animates open when it mounts. */
-.notable-collapsible__content[data-starting-style] {
+.one-collapsible__content[data-starting-style] {
   grid-template-rows: 0fr;
 }
 
-.notable-collapsible__content-inner {
+.one-collapsible__content-inner {
   min-height: 0;
   overflow: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-collapsible__trigger,
-  .notable-collapsible__content {
+  .one-collapsible__trigger,
+  .one-collapsible__content {
     transition: none;
   }
 }

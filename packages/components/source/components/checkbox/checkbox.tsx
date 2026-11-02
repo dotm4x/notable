@@ -70,22 +70,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div
-        className="notable-checkbox-field"
+        className="one-checkbox-field"
         data-disabled={props.disabled || undefined}
       >
-        <label className="notable-checkbox" htmlFor={checkboxId}>
-          <span className="notable-checkbox__control">
+        <label className="one-checkbox" htmlFor={checkboxId}>
+          <span className="one-checkbox__control">
             <input
               {...props}
               ref={setInputRef}
               id={checkboxId}
               type="checkbox"
-              className={['notable-checkbox__input', className]
+              className={['one-checkbox__input', className]
                 .filter(Boolean)
                 .join(' ')}
               aria-describedby={describedBy}
             />
-            <span className="notable-checkbox__indicator" aria-hidden="true">
+            <span className="one-checkbox__indicator" aria-hidden="true">
               <svg viewBox="0 0 16 16" fill="none">
                 <path
                   d="m3.5 8.5 3 3 6-7"
@@ -103,10 +103,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               </svg>
             </span>
           </span>
-          {label && <span className="notable-checkbox__label">{label}</span>}
+          {label && <span className="one-checkbox__label">{label}</span>}
         </label>
         {description && (
-          <span className="notable-checkbox__description" id={descriptionId}>
+          <span className="one-checkbox__description" id={descriptionId}>
             {description}
           </span>
         )}

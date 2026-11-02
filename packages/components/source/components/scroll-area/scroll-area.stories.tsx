@@ -42,24 +42,24 @@ type Story = StoryObj<typeof meta>;
 
 const listStyle: CSSProperties = {
   display: 'grid',
-  gap: 'var(--notable-spacing-2)',
+  gap: 'var(--one-spacing-2)',
   listStyle: 'none',
   margin: 0,
-  padding: 'var(--notable-spacing-3)',
+  padding: 'var(--one-spacing-3)',
 };
 
 const rowStyle: CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: 'var(--notable-spacing-3)',
-  padding: 'var(--notable-spacing-2) var(--notable-spacing-3)',
-  borderRadius: 'var(--notable-radius-md)',
-  background: 'var(--notable-color-background)',
+  gap: 'var(--one-spacing-3)',
+  padding: 'var(--one-spacing-2) var(--one-spacing-3)',
+  borderRadius: 'var(--one-radius-md)',
+  background: 'var(--one-color-background)',
 };
 
 const mutedTextStyle: CSSProperties = {
-  color: 'var(--notable-color-text-muted)',
+  color: 'var(--one-color-text-muted)',
   fontSize: '0.875rem',
 };
 
@@ -104,7 +104,7 @@ const projectFiles = [
 
 const paragraphs = [
   'Scroll areas keep dense content contained inside a fixed region while preserving native keyboard scrolling. The viewport is the focusable element, so arrow keys, Page Up, and Page Down continue to work without extra handling.',
-  'The region uses native scrolling, while Notable hides scrollbar visuals. Trackpad, keyboard, touch, and wheel scrolling remain available.',
+  'The region uses native scrolling, while One hides scrollbar visuals. Trackpad, keyboard, touch, and wheel scrolling remain available.',
   'When the content is shorter than the region, no edge indicator is shown. Edge fades only appear on sides that still have hidden content.',
   'Long text wraps to the width of the container. Resizing the parent recalculates overflow and updates the edge indicators.',
   'Nested controls such as buttons, switches, and inputs remain fully interactive inside the scrolling region. Scrolling starts from pointer movement over the content, but focusing a control scrolls it into view automatically.',
@@ -160,8 +160,8 @@ export const Horizontal: Story = {
         <div
           style={{
             display: 'flex',
-            gap: 'var(--notable-spacing-3)',
-            padding: 'var(--notable-spacing-3)',
+            gap: 'var(--one-spacing-3)',
+            padding: 'var(--one-spacing-3)',
           }}
         >
           {[
@@ -230,8 +230,7 @@ export const Bidirectional: Story = {
                   key={heading}
                   scope="col"
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     textAlign: 'left',
                     whiteSpace: 'nowrap',
                   }}
@@ -245,12 +244,11 @@ export const Bidirectional: Story = {
             {Array.from({ length: 24 }, (_, index) => (
               <tr
                 key={index}
-                style={{ borderTop: '1px solid var(--notable-color-border)' }}
+                style={{ borderTop: '1px solid var(--one-color-border)' }}
               >
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -258,8 +256,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -267,8 +264,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -276,8 +272,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -285,8 +280,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -294,8 +288,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -303,8 +296,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -316,8 +308,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -325,8 +316,7 @@ export const Bidirectional: Story = {
                 </td>
                 <td
                   style={{
-                    padding:
-                      'var(--notable-spacing-2) var(--notable-spacing-3)',
+                    padding: 'var(--one-spacing-2) var(--one-spacing-3)',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -343,7 +333,7 @@ export const Bidirectional: Story = {
 
 export const LongListAndText: Story = {
   render: (args) => (
-    <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
+    <div style={{ display: 'grid', gap: 'var(--one-spacing-4)' }}>
       <Card padding="none">
         <ScrollArea {...args}>
           <ContactList />
@@ -354,8 +344,8 @@ export const LongListAndText: Story = {
           <div
             style={{
               display: 'grid',
-              gap: 'var(--notable-spacing-3)',
-              padding: 'var(--notable-spacing-3)',
+              gap: 'var(--one-spacing-3)',
+              padding: 'var(--one-spacing-3)',
             }}
           >
             {paragraphs.map((paragraph) => (
@@ -400,13 +390,13 @@ export const EdgeFadeEnabledAndDisabled: Story = {
       style={{
         display: 'flex',
         flexWrap: 'wrap',
-        gap: 'var(--notable-spacing-4)',
+        gap: 'var(--one-spacing-4)',
       }}
     >
       {[false, true].map((fadeEdges) => (
         <div
           key={String(fadeEdges)}
-          style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
+          style={{ display: 'grid', gap: 'var(--one-spacing-2)' }}
         >
           <span style={mutedTextStyle}>
             {fadeEdges ? 'fadeEdges' : 'No fade'}
@@ -430,8 +420,8 @@ function ThemedScrollArea({ theme }: { theme: 'light' | 'dark' }) {
     <Card
       data-theme={theme}
       style={{
-        background: 'var(--notable-color-background)',
-        padding: 'var(--notable-spacing-3)',
+        background: 'var(--one-color-background)',
+        padding: 'var(--one-spacing-3)',
       }}
     >
       <ScrollArea
@@ -451,7 +441,7 @@ export const LightAndDark: Story = {
       style={{
         display: 'flex',
         flexWrap: 'wrap',
-        gap: 'var(--notable-spacing-4)',
+        gap: 'var(--one-spacing-4)',
       }}
     >
       <ThemedScrollArea theme="light" />
@@ -470,7 +460,7 @@ export const ShortContent: Story = {
         fadeEdges
         style={{ height: '12rem', width: '20rem' }}
       >
-        <div style={{ padding: 'var(--notable-spacing-3)' }}>
+        <div style={{ padding: 'var(--one-spacing-3)' }}>
           <p style={{ margin: 0 }}>
             This content fits inside the region, so no overflow edge indicator
             appears.
@@ -491,7 +481,7 @@ function DynamicNotifications() {
     <div
       style={{
         display: 'grid',
-        gap: 'var(--notable-spacing-3)',
+        gap: 'var(--one-spacing-3)',
         justifyItems: 'start',
       }}
     >
@@ -539,11 +529,11 @@ export const SettingsPanel: Story = {
         <div
           style={{
             display: 'grid',
-            gap: 'var(--notable-spacing-4)',
-            padding: 'var(--notable-spacing-4)',
+            gap: 'var(--one-spacing-4)',
+            padding: 'var(--one-spacing-4)',
           }}
         >
-          <section style={{ display: 'grid', gap: 'var(--notable-spacing-3)' }}>
+          <section style={{ display: 'grid', gap: 'var(--one-spacing-3)' }}>
             <h3 style={{ margin: 0, fontSize: '1rem' }}>Profile</h3>
             <Input aria-label="Display name" defaultValue="Ana Torres" />
             <Input
@@ -553,14 +543,14 @@ export const SettingsPanel: Story = {
             />
           </section>
           <Separator />
-          <section style={{ display: 'grid', gap: 'var(--notable-spacing-3)' }}>
+          <section style={{ display: 'grid', gap: 'var(--one-spacing-3)' }}>
             <h3 style={{ margin: 0, fontSize: '1rem' }}>Notifications</h3>
             <Switch label="Email digests" defaultChecked />
             <Switch label="Mentions" defaultChecked />
             <Switch label="Product updates" />
           </section>
           <Separator />
-          <section style={{ display: 'grid', gap: 'var(--notable-spacing-3)' }}>
+          <section style={{ display: 'grid', gap: 'var(--one-spacing-3)' }}>
             <h3 style={{ margin: 0, fontSize: '1rem' }}>Privacy</h3>
             <Switch label="Show online status" defaultChecked />
             <Switch label="Share usage data" />
@@ -589,8 +579,8 @@ export const DialogLayout: Story = {
           <div
             style={{
               display: 'grid',
-              gap: 'var(--notable-spacing-3)',
-              paddingBlock: 'var(--notable-spacing-1)',
+              gap: 'var(--one-spacing-3)',
+              paddingBlock: 'var(--one-spacing-1)',
             }}
           >
             {paragraphs.map((paragraph) => (
@@ -613,11 +603,11 @@ export const DialogLayout: Story = {
 
 export const FadeVisualization: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
+    <div style={{ display: 'grid', gap: 'var(--one-spacing-4)' }}>
       {['1.5rem', '3rem'].map((fadeSize) => (
         <div
           key={fadeSize}
-          style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
+          style={{ display: 'grid', gap: 'var(--one-spacing-2)' }}
         >
           <span style={mutedTextStyle}>fadeSize=&quot;{fadeSize}&quot;</span>
           <Card padding="none">
@@ -630,8 +620,8 @@ export const FadeVisualization: Story = {
               <div
                 style={{
                   display: 'flex',
-                  gap: 'var(--notable-spacing-3)',
-                  padding: 'var(--notable-spacing-3)',
+                  gap: 'var(--one-spacing-3)',
+                  padding: 'var(--one-spacing-3)',
                 }}
               >
                 {Array.from({ length: 12 }, (_, index) => (
@@ -641,8 +631,8 @@ export const FadeVisualization: Story = {
                       width: '6rem',
                       height: '4rem',
                       flexShrink: 0,
-                      borderRadius: 'var(--notable-radius-md)',
-                      background: 'var(--notable-color-border-strong)',
+                      borderRadius: 'var(--one-radius-md)',
+                      background: 'var(--one-color-border-strong)',
                     }}
                   />
                 ))}
@@ -681,8 +671,8 @@ function EdgeEffectSample({
           <div
             style={{
               display: 'flex',
-              gap: 'var(--notable-spacing-3)',
-              padding: 'var(--notable-spacing-3)',
+              gap: 'var(--one-spacing-3)',
+              padding: 'var(--one-spacing-3)',
             }}
           >
             {Array.from({ length: 12 }, (_, index) => (
@@ -692,8 +682,8 @@ function EdgeEffectSample({
                   width: '6rem',
                   height: '4rem',
                   flexShrink: 0,
-                  borderRadius: 'var(--notable-radius-md)',
-                  background: 'var(--notable-color-border-strong)',
+                  borderRadius: 'var(--one-radius-md)',
+                  background: 'var(--one-color-border-strong)',
                 }}
               />
             ))}
@@ -706,24 +696,24 @@ function EdgeEffectSample({
 
 export const EdgeEffectComparison: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: 'var(--notable-spacing-6)' }}>
+    <div style={{ display: 'grid', gap: 'var(--one-spacing-6)' }}>
       {(['vertical', 'horizontal'] as const).map((orientation) => (
         <div
           key={orientation}
-          style={{ display: 'grid', gap: 'var(--notable-spacing-3)' }}
+          style={{ display: 'grid', gap: 'var(--one-spacing-3)' }}
         >
           <span style={mutedTextStyle}>{orientation} scrolling</span>
           <div
             style={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: 'var(--notable-spacing-4)',
+              gap: 'var(--one-spacing-4)',
             }}
           >
             {edgeEffects.map((edgeEffect) => (
               <div
                 key={edgeEffect}
-                style={{ display: 'grid', gap: 'var(--notable-spacing-2)' }}
+                style={{ display: 'grid', gap: 'var(--one-spacing-2)' }}
               >
                 <span style={mutedTextStyle}>
                   edgeEffect=&quot;{edgeEffect}&quot;
@@ -747,7 +737,7 @@ export const EdgeEffectThemes: Story = {
       style={{
         display: 'flex',
         flexWrap: 'wrap',
-        gap: 'var(--notable-spacing-4)',
+        gap: 'var(--one-spacing-4)',
       }}
     >
       {(['light', 'dark'] as const).map((theme) => (
@@ -755,8 +745,8 @@ export const EdgeEffectThemes: Story = {
           key={theme}
           data-theme={theme}
           style={{
-            background: 'var(--notable-color-background)',
-            padding: 'var(--notable-spacing-3)',
+            background: 'var(--one-color-background)',
+            padding: 'var(--one-spacing-3)',
           }}
         >
           <span style={mutedTextStyle}>{theme}</span>
@@ -775,7 +765,7 @@ export const EdgeEffectThemes: Story = {
 
 export const NarrowAndWideContainers: Story = {
   render: (args) => (
-    <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
+    <div style={{ display: 'grid', gap: 'var(--one-spacing-4)' }}>
       <Card padding="none" style={{ width: '12rem' }}>
         <ScrollArea {...args} style={{ height: '10rem' }}>
           <ContactList />

@@ -65,9 +65,7 @@ function ControlledDrawer({
 }
 
 function getBackdrop(): HTMLElement {
-  const backdrop = document.querySelector<HTMLElement>(
-    '.notable-drawer__backdrop',
-  );
+  const backdrop = document.querySelector<HTMLElement>('.one-drawer__backdrop');
 
   if (!backdrop) {
     throw new Error('Expected the drawer backdrop to be rendered.');
@@ -430,7 +428,7 @@ describe('Drawer', () => {
 
       // Assert
       const closeButton = screen.getByRole('button', { name: 'Dismiss' });
-      expect(closeButton).toHaveClass('notable-button--outline');
+      expect(closeButton).toHaveClass('one-button--outline');
     });
 
     it('does not close when its onClick calls preventDefault', async () => {
@@ -609,8 +607,8 @@ describe('Drawer', () => {
 
         // Assert
         expect(screen.getByRole('dialog')).toHaveClass(
-          'notable-drawer',
-          `notable-drawer--${side}`,
+          'one-drawer',
+          `one-drawer--${side}`,
         );
       },
     );
@@ -626,7 +624,7 @@ describe('Drawer', () => {
       );
 
       // Assert
-      expect(screen.getByRole('dialog')).toHaveClass('notable-drawer--right');
+      expect(screen.getByRole('dialog')).toHaveClass('one-drawer--right');
     });
   });
 
@@ -642,7 +640,7 @@ describe('Drawer', () => {
       );
 
       // Assert
-      expect(screen.getByRole('dialog')).toHaveClass('notable-drawer--medium');
+      expect(screen.getByRole('dialog')).toHaveClass('one-drawer--medium');
     });
 
     it.each(['small', 'medium', 'large'] as const)(
@@ -658,9 +656,7 @@ describe('Drawer', () => {
         );
 
         // Assert
-        expect(screen.getByRole('dialog')).toHaveClass(
-          `notable-drawer--${size}`,
-        );
+        expect(screen.getByRole('dialog')).toHaveClass(`one-drawer--${size}`);
       },
     );
 
@@ -680,7 +676,7 @@ describe('Drawer', () => {
 
       // Assert
       const surface = screen.getByRole('dialog');
-      expect(surface).toHaveClass('notable-drawer', 'custom-drawer');
+      expect(surface).toHaveClass('one-drawer', 'custom-drawer');
       expect(surface).toHaveStyle({ zIndex: '7' });
       expect(surface).toHaveAttribute('data-testid', 'drawer-surface');
     });
@@ -789,16 +785,14 @@ describe('Drawer', () => {
 
       // Assert
       expect(
-        screen.getByText('Body text').closest('.notable-drawer__body'),
+        screen.getByText('Body text').closest('.one-drawer__body'),
       ).not.toBeNull();
       expect(
         screen
           .getByRole('heading', { name: 'Project settings' })
-          .closest('.notable-drawer__body'),
+          .closest('.one-drawer__body'),
       ).toBeNull();
-      expect(
-        screen.getByText('Save').closest('.notable-drawer__body'),
-      ).toBeNull();
+      expect(screen.getByText('Save').closest('.one-drawer__body')).toBeNull();
     });
 
     it('keeps the header and footer pinned when they are placed among body content', () => {
@@ -819,15 +813,13 @@ describe('Drawer', () => {
 
       // Assert
       expect(
-        screen.getByText('Body text').closest('.notable-drawer__body'),
+        screen.getByText('Body text').closest('.one-drawer__body'),
       ).not.toBeNull();
-      expect(
-        screen.getByText('Done').closest('.notable-drawer__body'),
-      ).toBeNull();
+      expect(screen.getByText('Done').closest('.one-drawer__body')).toBeNull();
       expect(
         screen
           .getByRole('heading', { name: 'Late header' })
-          .closest('.notable-drawer__body'),
+          .closest('.one-drawer__body'),
       ).toBeNull();
     });
 
@@ -837,8 +829,8 @@ describe('Drawer', () => {
 
       // Assert
       const closeButton = screen.getByRole('button', { name: 'Close drawer' });
-      expect(closeButton.parentElement).toHaveClass('notable-drawer');
-      expect(closeButton.closest('.notable-drawer__toolbar')).toBeNull();
+      expect(closeButton.parentElement).toHaveClass('one-drawer');
+      expect(closeButton.closest('.one-drawer__toolbar')).toBeNull();
     });
 
     it('places the close button in a toolbar outside the body when there is no header', () => {
@@ -853,8 +845,8 @@ describe('Drawer', () => {
 
       // Assert
       const closeButton = screen.getByRole('button', { name: 'Close drawer' });
-      expect(closeButton.closest('.notable-drawer__toolbar')).not.toBeNull();
-      expect(closeButton.closest('.notable-drawer__body')).toBeNull();
+      expect(closeButton.closest('.one-drawer__toolbar')).not.toBeNull();
+      expect(closeButton.closest('.one-drawer__body')).toBeNull();
     });
   });
 
@@ -1013,7 +1005,7 @@ describe('Drawer', () => {
       // Act
       // The parent backdrop is inert while the child is open, so the press targets the child's viewport.
       const viewports = document.querySelectorAll<HTMLElement>(
-        '.notable-drawer__viewport',
+        '.one-drawer__viewport',
       );
       await user.click(viewports[viewports.length - 1]);
 
@@ -1074,9 +1066,9 @@ describe('Drawer', () => {
 
       // Assert
       await waitFor(() => {
-        expect(document.querySelector('.notable-drawer')).toBeNull();
+        expect(document.querySelector('.one-drawer')).toBeNull();
       });
-      expect(document.querySelector('.notable-drawer__backdrop')).toBeNull();
+      expect(document.querySelector('.one-drawer__backdrop')).toBeNull();
     });
   });
 

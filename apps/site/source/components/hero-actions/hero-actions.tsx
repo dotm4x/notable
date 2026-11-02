@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@notable/components';
+import { Button } from '@one/components';
 import './hero-actions.css';
 
 export function HeroActions() {

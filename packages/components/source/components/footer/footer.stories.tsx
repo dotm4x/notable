@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Mail } from 'lucide-react';
+import { Mail } from '@one/icons';
 import { Button } from '../button/button.js';
 import { Link } from '../link/link.js';
 import { Footer } from './footer.js';
@@ -187,7 +187,7 @@ export const Custom: Story = {
         </Footer.Section>
       </Footer.Content>
       <Footer.Bottom>
-        <span>Built with Notable</span>
+        <span>Built with One</span>
       </Footer.Bottom>
     </Footer>
   ),

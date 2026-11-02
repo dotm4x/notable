@@ -1,10 +1,10 @@
-.notable-animated-highlight {
+.one-animated-highlight {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
-  border-radius: var(--notable-radius-md);
-  background: var(--notable-color-surface-highlight);
+  border-radius: var(--one-radius-md);
+  background: var(--one-color-surface-highlight);
   pointer-events: none;
   will-change: transform;
 }

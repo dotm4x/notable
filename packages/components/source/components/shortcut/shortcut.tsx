@@ -10,7 +10,7 @@ export type ShortcutProps = HTMLAttributes<HTMLElement>;
  */
 export const Shortcut = forwardRef<HTMLElement, ShortcutProps>(
   function Shortcut({ className, ...props }, ref) {
-    const classes = ['notable-shortcut', className].filter(Boolean).join(' ');
+    const classes = ['one-shortcut', className].filter(Boolean).join(' ');
 
     return <kbd {...props} ref={ref} className={classes} />;
   },

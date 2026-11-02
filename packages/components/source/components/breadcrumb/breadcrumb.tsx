@@ -5,7 +5,7 @@ import {
   type ComponentPropsWithoutRef,
   type ReactNode,
 } from 'react';
-import { ChevronDown, ChevronRight, Ellipsis } from 'lucide-react';
+import { ChevronDown, ChevronRight, Ellipsis } from '@one/icons';
 import { DropdownMenu } from '../dropdown-menu/dropdown-menu.js';
 import { MenuItem } from '../../internal/primitives/menu/menu.js';
 import './breadcrumb.css';
@@ -62,18 +62,18 @@ const DEFAULT_SEPARATOR = <ChevronRight size={14} aria-hidden="true" />;
 function BreadcrumbItem({ href, current, children }: BreadcrumbItemProps) {
   if (current) {
     return (
-      <span className="notable-breadcrumb__current" aria-current="page">
+      <span className="one-breadcrumb__current" aria-current="page">
         {children}
       </span>
     );
   }
 
   if (href === undefined) {
-    return <span className="notable-breadcrumb__text">{children}</span>;
+    return <span className="one-breadcrumb__text">{children}</span>;
   }
 
   return (
-    <a className="notable-breadcrumb__link" href={href}>
+    <a className="one-breadcrumb__link" href={href}>
       {children}
     </a>
   );
@@ -87,10 +87,7 @@ function BreadcrumbMenuLink({
   children: ReactNode;
 }) {
   return (
-    <MenuItem
-      render={<a href={href} />}
-      className="notable-breadcrumb__menu-link"
-    >
+    <MenuItem render={<a href={href} />} className="one-breadcrumb__menu-link">
       {children}
     </MenuItem>
   );
@@ -100,12 +97,12 @@ function BreadcrumbDropdown({ label, items }: BreadcrumbDropdownProps) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <button type="button" className="notable-breadcrumb__trigger">
+        <button type="button" className="one-breadcrumb__trigger">
           {label}
           <ChevronDown size={14} aria-hidden="true" />
         </button>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content className="notable-breadcrumb__menu" align="start">
+      <DropdownMenu.Content className="one-breadcrumb__menu" align="start">
         {items.map((item) => (
           <BreadcrumbMenuLink key={item.href} href={item.href}>
             {item.label}
@@ -166,13 +163,13 @@ function BreadcrumbCollapsed({ entries }: { entries: ReactNode[] }) {
       <DropdownMenu.Trigger>
         <button
           type="button"
-          className="notable-breadcrumb__trigger"
+          className="one-breadcrumb__trigger"
           aria-label="Show hidden breadcrumb items"
         >
           <Ellipsis size={16} aria-hidden="true" />
         </button>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content className="notable-breadcrumb__menu" align="start">
+      <DropdownMenu.Content className="one-breadcrumb__menu" align="start">
         {entries.map(renderHiddenEntry)}
       </DropdownMenu.Content>
     </DropdownMenu.Root>
@@ -222,20 +219,17 @@ const BreadcrumbRoot = forwardRef<HTMLElement, BreadcrumbProps>(
       <nav
         ref={ref}
         aria-label="Breadcrumb"
-        className={['notable-breadcrumb', className].filter(Boolean).join(' ')}
+        className={['one-breadcrumb', className].filter(Boolean).join(' ')}
         {...props}
       >
-        <ol className="notable-breadcrumb__list">
+        <ol className="one-breadcrumb__list">
           {slots.map((slot, index) => (
             <li
               key={isValidElement(slot) ? slot.key : index}
-              className="notable-breadcrumb__entry"
+              className="one-breadcrumb__entry"
             >
               {index > 0 && (
-                <span
-                  className="notable-breadcrumb__separator"
-                  aria-hidden="true"
-                >
+                <span className="one-breadcrumb__separator" aria-hidden="true">
                   {separator}
                 </span>
               )}

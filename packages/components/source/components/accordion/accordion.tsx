@@ -1,6 +1,6 @@
 import { useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from '@one/icons';
 import './accordion.css';
 
 type AccordionBaseProps = {
@@ -67,7 +67,7 @@ function toExpandedValues(
 function AccordionRoot(props: AccordionProps) {
   const { children, className, disabled = false } = props;
   const rootRef = useRef<HTMLDivElement>(null);
-  const classes = ['notable-accordion', className].filter(Boolean).join(' ');
+  const classes = ['one-accordion', className].filter(Boolean).join(' ');
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const root = rootRef.current;
@@ -81,7 +81,7 @@ function AccordionRoot(props: AccordionProps) {
       root.querySelectorAll<HTMLButtonElement>(
         '[data-accordion-trigger]:not(:disabled)',
       ),
-    ).filter((trigger) => trigger.closest('.notable-accordion') === root);
+    ).filter((trigger) => trigger.closest('.one-accordion') === root);
     const currentIndex = triggers.findIndex(
       (trigger) => trigger === event.target,
     );
@@ -145,31 +145,26 @@ function AccordionItem({
   title,
   value,
 }: AccordionItemProps) {
-  const classes = ['notable-accordion__item', className]
-    .filter(Boolean)
-    .join(' ');
+  const classes = ['one-accordion__item', className].filter(Boolean).join(' ');
 
   return (
     <BaseAccordion.Item className={classes} disabled={disabled} value={value}>
-      <BaseAccordion.Header className="notable-accordion__heading">
+      <BaseAccordion.Header className="one-accordion__heading">
         <BaseAccordion.Trigger
-          className="notable-accordion__trigger"
+          className="one-accordion__trigger"
           data-accordion-trigger
         >
-          <span className="notable-accordion__title">{title}</span>
-          <ChevronDown
-            className="notable-accordion__chevron"
-            aria-hidden="true"
-          />
+          <span className="one-accordion__title">{title}</span>
+          <ChevronDown className="one-accordion__chevron" aria-hidden="true" />
         </BaseAccordion.Trigger>
       </BaseAccordion.Header>
       <BaseAccordion.Panel
-        className="notable-accordion__panel"
+        className="one-accordion__panel"
         role="group"
         keepMounted
       >
-        <div className="notable-accordion__content">
-          <div className="notable-accordion__content-inner">{children}</div>
+        <div className="one-accordion__content">
+          <div className="one-accordion__content-inner">{children}</div>
         </div>
       </BaseAccordion.Panel>
     </BaseAccordion.Item>

@@ -114,7 +114,7 @@ export const Flush: Story = {
   },
   render: (args) => (
     <Card {...args}>
-      <Card.Header style={{ padding: 'var(--notable-spacing-6)' }}>
+      <Card.Header style={{ padding: 'var(--one-spacing-6)' }}>
         <Card.Title>Recent activity</Card.Title>
         <Card.Description>
           Content below sits flush with the edge.
@@ -125,7 +125,7 @@ export const Flush: Story = {
           style={{
             height: 120,
             overflow: 'auto',
-            padding: 'var(--notable-spacing-6)',
+            padding: 'var(--one-spacing-6)',
           }}
         >
           Scrollable content that stays inside the rounded card corners.
@@ -182,8 +182,8 @@ export const Themes: Story = {
           data-theme={theme}
           style={{
             padding: 16,
-            borderRadius: 'var(--notable-radius-md)',
-            background: 'var(--notable-color-background)',
+            borderRadius: 'var(--one-radius-md)',
+            background: 'var(--one-color-background)',
           }}
         >
           <Card {...args}>

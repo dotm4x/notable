@@ -151,9 +151,9 @@ export const Themes: Story = {
             alignItems: 'center',
             gap: '8px',
             padding: '16px',
-            borderRadius: 'var(--notable-radius-md)',
-            background: 'var(--notable-color-background)',
-            color: 'var(--notable-color-text)',
+            borderRadius: 'var(--one-radius-md)',
+            background: 'var(--one-color-background)',
+            color: 'var(--one-color-text)',
           }}
         >
           <span>{theme} theme:</span>

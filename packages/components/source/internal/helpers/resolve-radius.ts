@@ -1,8 +1,7 @@
-/** Notable radius token names. */
-export type NotableRadiusToken =
-  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+/** One radius token names. */
+export type OneRadiusToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 
-const radiusTokens: ReadonlySet<string> = new Set<NotableRadiusToken>([
+const radiusTokens: ReadonlySet<string> = new Set<OneRadiusToken>([
   'xs',
   'sm',
   'md',
@@ -17,7 +16,7 @@ const radiusTokens: ReadonlySet<string> = new Set<NotableRadiusToken>([
  * passes any other string through as CSS.
  */
 export function resolveRadius(
-  radius: NotableRadiusToken | number | string | undefined,
+  radius: OneRadiusToken | number | string | undefined,
 ): string | undefined {
   if (radius === undefined) {
     return undefined;
@@ -26,7 +25,7 @@ export function resolveRadius(
     return `${radius}px`;
   }
   if (radiusTokens.has(radius)) {
-    return `var(--notable-radius-${radius})`;
+    return `var(--one-radius-${radius})`;
   }
   return radius;
 }

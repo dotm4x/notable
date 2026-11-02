@@ -4,8 +4,8 @@
  * so the transitions below run in every browser without keyframes.
  * `z-index` has no shared layering token, so it is set locally.
  */
-.notable-dialog {
-  --notable-dialog-width: 32rem;
+.one-dialog {
+  --one-dialog-width: 32rem;
 
   position: fixed;
   inset-block-start: 50%;
@@ -13,106 +13,102 @@
   translate: -50% -50%;
   z-index: 50;
   box-sizing: border-box;
-  width: min(
-    var(--notable-dialog-width),
-    calc(100vw - var(--notable-spacing-8))
-  );
-  max-height: calc(100dvh - var(--notable-spacing-8));
+  width: min(var(--one-dialog-width), calc(100vw - var(--one-spacing-8)));
+  max-height: calc(100dvh - var(--one-spacing-8));
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: var(--notable-radius-xl);
-  background: var(--notable-color-surface-raised);
-  color: var(--notable-color-text);
-  box-shadow: var(--notable-shadow-lg);
+  border-radius: var(--one-radius-xl);
+  background: var(--one-color-surface-raised);
+  color: var(--one-color-text);
+  box-shadow: var(--one-shadow-lg);
   overflow: auto;
   overscroll-behavior: contain;
-  font-family: var(--notable-font-family);
+  font-family: var(--one-font-family);
   transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard),
-    transform var(--notable-duration-base) var(--notable-easing-standard);
+    opacity var(--one-duration-base) var(--one-easing-standard),
+    transform var(--one-duration-base) var(--one-easing-standard);
 }
 
-.notable-dialog[data-starting-style],
-.notable-dialog[data-ending-style] {
+.one-dialog[data-starting-style],
+.one-dialog[data-ending-style] {
   opacity: 0;
-  transform: translateY(var(--notable-spacing-2)) scale(0.98);
+  transform: translateY(var(--one-spacing-2)) scale(0.98);
 }
 
-.notable-dialog__backdrop {
+.one-dialog__backdrop {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background-color: var(--notable-color-overlay);
-  backdrop-filter: blur(var(--notable-blur-subtle));
+  background-color: var(--one-color-overlay);
+  backdrop-filter: blur(var(--one-blur-subtle));
   transition:
-    opacity var(--notable-duration-base) var(--notable-easing-standard),
-    backdrop-filter var(--notable-duration-base) var(--notable-easing-standard);
+    opacity var(--one-duration-base) var(--one-easing-standard),
+    backdrop-filter var(--one-duration-base) var(--one-easing-standard);
 }
 
-.notable-dialog__backdrop[data-starting-style],
-.notable-dialog__backdrop[data-ending-style] {
+.one-dialog__backdrop[data-starting-style],
+.one-dialog__backdrop[data-ending-style] {
   opacity: 0;
-  backdrop-filter: blur(var(--notable-blur-none));
+  backdrop-filter: blur(var(--one-blur-none));
 }
 
-.notable-dialog--small {
-  --notable-dialog-width: 24rem;
+.one-dialog--small {
+  --one-dialog-width: 24rem;
 }
 
-.notable-dialog--medium {
-  --notable-dialog-width: 32rem;
+.one-dialog--medium {
+  --one-dialog-width: 32rem;
 }
 
-.notable-dialog--large {
-  --notable-dialog-width: 48rem;
+.one-dialog--large {
+  --one-dialog-width: 48rem;
 }
 
-.notable-dialog__body {
+.one-dialog__body {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--notable-spacing-4);
-  padding: var(--notable-spacing-6);
+  gap: var(--one-spacing-4);
+  padding: var(--one-spacing-6);
 }
 
-.notable-dialog__header {
+.one-dialog__header {
   display: flex;
   flex-direction: column;
-  gap: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
 }
 
-.notable-dialog__body:has(.notable-dialog__close-button)
-  > .notable-dialog__header {
-  padding-inline-end: var(--notable-spacing-8);
+.one-dialog__body:has(.one-dialog__close-button) > .one-dialog__header {
+  padding-inline-end: var(--one-spacing-8);
 }
 
-.notable-dialog__title {
+.one-dialog__title {
   margin: 0;
-  color: var(--notable-color-text);
-  font-size: var(--notable-font-size-lg);
-  font-weight: var(--notable-font-weight-semibold);
-  line-height: var(--notable-line-height-tight);
+  color: var(--one-color-text);
+  font-size: var(--one-font-size-lg);
+  font-weight: var(--one-font-weight-semibold);
+  line-height: var(--one-line-height-tight);
 }
 
-.notable-dialog__description {
+.one-dialog__description {
   margin: 0;
-  color: var(--notable-color-text-muted);
-  font-size: var(--notable-font-size-sm);
-  line-height: var(--notable-line-height-relaxed);
+  color: var(--one-color-text-muted);
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-relaxed);
 }
 
-.notable-dialog__footer {
+.one-dialog__footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: var(--notable-spacing-2);
+  gap: var(--one-spacing-2);
 }
 
-.notable-dialog__close-button {
+.one-dialog__close-button {
   position: absolute;
-  inset-block-start: var(--notable-spacing-3);
-  inset-inline-end: var(--notable-spacing-3);
+  inset-block-start: var(--one-spacing-3);
+  inset-inline-end: var(--one-spacing-3);
 }
 
 /*
@@ -120,8 +116,8 @@
  * popup without waiting for an animation to finish.
  */
 @media (prefers-reduced-motion: reduce) {
-  .notable-dialog,
-  .notable-dialog__backdrop {
+  .one-dialog,
+  .one-dialog__backdrop {
     transition: none;
   }
 }

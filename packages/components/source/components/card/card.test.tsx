@@ -12,7 +12,7 @@ describe('Card', () => {
     // Assert
     const card = screen.getByTestId('card');
     expect(card.tagName).toBe('DIV');
-    expect(card).toHaveClass('notable-card');
+    expect(card).toHaveClass('one-card');
   });
 
   it('renders the semantic element selected with as', () => {
@@ -32,16 +32,14 @@ describe('Card', () => {
       </Card>,
     );
 
-    expect(screen.getByTestId('card')).toHaveClass(
-      'notable-card--padding-none',
-    );
+    expect(screen.getByTestId('card')).toHaveClass('one-card--padding-none');
   });
 
   it('does not apply the padding none modifier by default', () => {
     render(<Card data-testid="card">Body</Card>);
 
     expect(screen.getByTestId('card')).not.toHaveClass(
-      'notable-card--padding-none',
+      'one-card--padding-none',
     );
   });
 
@@ -58,7 +56,7 @@ describe('Card', () => {
     );
 
     const card = screen.getByTestId('card');
-    expect(card).toHaveClass('notable-card', 'custom');
+    expect(card).toHaveClass('one-card', 'custom');
     expect(card).toHaveAttribute('id', 'billing');
     expect(card.style.marginTop).toBe('4px');
   });
@@ -67,7 +65,7 @@ describe('Card', () => {
     const ref = createRef<HTMLElement>();
     render(<Card ref={ref}>Body</Card>);
 
-    expect(ref.current).toHaveClass('notable-card');
+    expect(ref.current).toHaveClass('one-card');
   });
 
   it('renders compound parts with their classes and default elements', () => {
@@ -85,19 +83,19 @@ describe('Card', () => {
     );
 
     const title = screen.getByRole('heading', { level: 3, name: 'Billing' });
-    expect(title).toHaveClass('notable-card__title');
+    expect(title).toHaveClass('one-card__title');
     expect(screen.getByText('Manage your plan.')).toHaveClass(
-      'notable-card__description',
+      'one-card__description',
     );
     expect(screen.getByText('Manage your plan.').tagName).toBe('P');
     expect(screen.getByText('Current plan: Pro')).toHaveClass(
-      'notable-card__content',
+      'one-card__content',
     );
     expect(screen.getByText('Save').parentElement).toHaveClass(
-      'notable-card__footer',
+      'one-card__footer',
     );
     expect(screen.getByText('Billing').parentElement).toHaveClass(
-      'notable-card__header',
+      'one-card__header',
     );
   });
 
@@ -133,11 +131,11 @@ describe('Card', () => {
       </Card>,
     );
 
-    expect(headerRef.current).toHaveClass('notable-card__header');
-    expect(titleRef.current).toHaveClass('notable-card__title');
-    expect(descriptionRef.current).toHaveClass('notable-card__description');
-    expect(contentRef.current).toHaveClass('notable-card__content');
-    expect(footerRef.current).toHaveClass('notable-card__footer');
+    expect(headerRef.current).toHaveClass('one-card__header');
+    expect(titleRef.current).toHaveClass('one-card__title');
+    expect(descriptionRef.current).toHaveClass('one-card__description');
+    expect(contentRef.current).toHaveClass('one-card__content');
+    expect(footerRef.current).toHaveClass('one-card__footer');
   });
 
   it('is exported from the package entry point', () => {

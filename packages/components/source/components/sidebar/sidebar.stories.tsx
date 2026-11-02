@@ -8,7 +8,7 @@ import {
   Settings,
   SquarePen,
   UserRound,
-} from 'lucide-react';
+} from '@one/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Avatar } from '../avatar/avatar.js';
@@ -31,7 +31,7 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
   return (
     <Sidebar.Root defaultOpen={defaultOpen}>
       <Sidebar.Header>
-        <Sidebar.Brand icon={<Box aria-hidden="true" />}>Notable</Sidebar.Brand>
+        <Sidebar.Brand icon={<Box aria-hidden="true" />}>One</Sidebar.Brand>
       </Sidebar.Header>
       <Sidebar.Content>
         <Sidebar.Group>
@@ -56,9 +56,7 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
                 </Sidebar.Item>
                 <Sidebar.MenuBadge>
                   <span aria-hidden="true">3</span>
-                  <span className="notable-sidebar__sr-only">
-                    3 unread updates
-                  </span>
+                  <span className="one-sidebar__sr-only">3 unread updates</span>
                 </Sidebar.MenuBadge>
               </Sidebar.MenuItem>
               <Sidebar.MenuItem>
@@ -159,10 +157,10 @@ export const Collapsed: Story = {
     const canvas = within(canvasElement);
     const sidebar = canvas.getByRole('navigation', { name: 'Sidebar' });
     const brand = canvasElement.querySelector<HTMLElement>(
-      '.notable-sidebar__brand',
+      '.one-sidebar__brand',
     );
     const brandIcon = brand?.querySelector<HTMLElement>(
-      '.notable-sidebar__brand-icon',
+      '.one-sidebar__brand-icon',
     );
     const items = [
       canvas.getByRole('link', { name: 'Overview' }),
@@ -185,9 +183,7 @@ export const Collapsed: Story = {
     ).toBeLessThan(2);
 
     const itemIcons = items.map((item) => {
-      const icon = item.querySelector<HTMLElement>(
-        '.notable-sidebar__item-icon',
-      );
+      const icon = item.querySelector<HTMLElement>('.one-sidebar__item-icon');
 
       if (!icon) {
         throw new Error(

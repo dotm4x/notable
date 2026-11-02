@@ -1,4 +1,4 @@
-import { CircleHelp, UserRound } from 'lucide-react';
+import { CircleHelp, UserRound } from '@one/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Avatar } from './avatar.js';
 

@@ -66,9 +66,9 @@ export const Toggle = forwardRef<HTMLButtonElement, TToggleProps>(
         defaultPressed={defaultPressed}
         onPressedChange={(nextPressed) => onPressedChange?.(nextPressed)}
         className={[
-          'notable-toggle',
-          `notable-toggle--${variant}`,
-          `notable-toggle--${size}`,
+          'one-toggle',
+          `one-toggle--${variant}`,
+          `one-toggle--${size}`,
           className,
         ]
           .filter(Boolean)

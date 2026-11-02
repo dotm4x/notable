@@ -121,9 +121,9 @@ const RadioGroupRoot = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
           {...props}
           ref={ref}
           className={[
-            'notable-radio-group',
-            `notable-radio-group--${size}`,
-            `notable-radio-group--${orientation}`,
+            'one-radio-group',
+            `one-radio-group--${size}`,
+            `one-radio-group--${orientation}`,
             className,
           ]
             .filter(Boolean)
@@ -138,18 +138,13 @@ const RadioGroupRoot = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
             }
           }}
         >
-          {label && (
-            <legend className="notable-radio-group__label">{label}</legend>
-          )}
+          {label && <legend className="one-radio-group__label">{label}</legend>}
           {description && (
-            <span
-              className="notable-radio-group__description"
-              id={descriptionId}
-            >
+            <span className="one-radio-group__description" id={descriptionId}>
               {description}
             </span>
           )}
-          <div className="notable-radio-group__options">{children}</div>
+          <div className="one-radio-group__options">{children}</div>
         </fieldset>
       </RadioGroupContext.Provider>
     );
@@ -191,11 +186,11 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
 
     return (
       <div
-        className="notable-radio-group__item"
+        className="one-radio-group__item"
         data-disabled={disabled || undefined}
       >
-        <label className="notable-radio-group__option" htmlFor={inputId}>
-          <span className="notable-radio-group__control">
+        <label className="one-radio-group__option" htmlFor={inputId}>
+          <span className="one-radio-group__control">
             <input
               {...props}
               ref={ref}
@@ -203,7 +198,7 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
               type="radio"
               name={group.name}
               value={value}
-              className={['notable-radio-group__input', className]
+              className={['one-radio-group__input', className]
                 .filter(Boolean)
                 .join(' ')}
               checked={group.selectedValue === value}
@@ -212,16 +207,13 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
               required={group.required}
               aria-describedby={describedBy}
             />
-            <span
-              className="notable-radio-group__indicator"
-              aria-hidden="true"
-            />
+            <span className="one-radio-group__indicator" aria-hidden="true" />
           </span>
-          {label && <span className="notable-radio-group__text">{label}</span>}
+          {label && <span className="one-radio-group__text">{label}</span>}
         </label>
         {description && (
           <span
-            className="notable-radio-group__item-description"
+            className="one-radio-group__item-description"
             id={descriptionId}
           >
             {description}

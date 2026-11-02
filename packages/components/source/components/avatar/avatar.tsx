@@ -79,7 +79,7 @@ function AvatarRoot({
   const hasCustomFallback = childItems.some(
     (child) => isValidElement(child) && child.type === Avatar.Fallback,
   );
-  const classes = ['notable-avatar', `notable-avatar--${size}`, className]
+  const classes = ['one-avatar', `one-avatar--${size}`, className]
     .filter(Boolean)
     .join(' ');
 
@@ -90,7 +90,7 @@ function AvatarRoot({
       <span {...props} className={classes}>
         {!hasCustomFallback && (
           <span
-            className="notable-avatar__fallback notable-avatar__fallback--default"
+            className="one-avatar__fallback one-avatar__fallback--default"
             aria-hidden="true"
             hidden={activeSource !== null && loadedSource === activeSource}
           >
@@ -145,7 +145,7 @@ function AvatarImage({
     <img
       {...props}
       alt={alt}
-      className={['notable-avatar__image', className].filter(Boolean).join(' ')}
+      className={['one-avatar__image', className].filter(Boolean).join(' ')}
       hidden={!isLoaded}
       onError={handleError}
       onLoad={handleLoad}
@@ -166,9 +166,7 @@ function AvatarFallback({
   return (
     <span
       {...props}
-      className={['notable-avatar__fallback', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-avatar__fallback', className].filter(Boolean).join(' ')}
       hidden={activeSource !== null && loadedSource === activeSource}
     >
       {children}

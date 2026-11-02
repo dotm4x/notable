@@ -43,7 +43,7 @@ export const Hierarchy: Story = {
     <Breadcrumb>
       <Breadcrumb.Item href="#">Workspace</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Projects</Breadcrumb.Item>
-      <Breadcrumb.Item href="#">Notable</Breadcrumb.Item>
+      <Breadcrumb.Item href="#">One</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Packages</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Components</Breadcrumb.Item>
       <Breadcrumb.Item href="#">React</Breadcrumb.Item>
@@ -82,7 +82,7 @@ export const Collapsible: Story = {
     <Breadcrumb maxVisibleItems={4}>
       <Breadcrumb.Item href="#">Workspace</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Projects</Breadcrumb.Item>
-      <Breadcrumb.Item href="#">Notable</Breadcrumb.Item>
+      <Breadcrumb.Item href="#">One</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Packages</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Components</Breadcrumb.Item>
       <Breadcrumb.Item current>Breadcrumb</Breadcrumb.Item>
@@ -104,12 +104,12 @@ export const Dropdown: Story = {
       <Breadcrumb.Dropdown
         label="Projects"
         items={[
-          { label: 'Notable', href: '#notable' },
+          { label: 'One', href: '#one' },
           { label: 'Website', href: '#website' },
           { label: 'Tooling', href: '#tooling' },
         ]}
       />
-      <Breadcrumb.Item current>Notable</Breadcrumb.Item>
+      <Breadcrumb.Item current>One</Breadcrumb.Item>
     </Breadcrumb>
   ),
 };
@@ -128,7 +128,7 @@ export const Combined: Story = {
       <Breadcrumb.Dropdown
         label="Projects"
         items={[
-          { label: 'Notable', href: '#notable' },
+          { label: 'One', href: '#one' },
           { label: 'Website', href: '#website' },
         ]}
       />

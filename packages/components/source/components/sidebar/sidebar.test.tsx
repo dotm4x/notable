@@ -1,4 +1,4 @@
-import { Folder, Home } from 'lucide-react';
+import { Folder, Home } from '@one/icons';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -124,7 +124,7 @@ describe('Sidebar', () => {
 
     expect(screen.getByRole('navigation', { name: 'Sidebar' })).toHaveAttribute(
       'style',
-      expect.stringContaining('--notable-sidebar-width: 18rem'),
+      expect.stringContaining('--one-sidebar-width: 18rem'),
     );
     expect(
       screen.queryByRole('link', { name: 'Alpha' }),

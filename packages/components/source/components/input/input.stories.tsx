@@ -1,11 +1,11 @@
-import { AtSign, Search, X } from 'lucide-react';
+import { AtSign, Search, X } from '@one/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Button } from '../button/button.js';
 import { Input } from './input.js';
 
 function ClearableSearchExample() {
-  const [value, setValue] = useState('Notable');
+  const [value, setValue] = useState('One');
 
   return (
     <Input

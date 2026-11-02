@@ -51,7 +51,7 @@ describe('Fieldset', () => {
 
     expect(screen.getByRole('checkbox', { name: 'Email' })).toBeDisabled();
     expect(screen.getByLabelText('Name')).toBeDisabled();
-    expect(container.querySelector('.notable-field')).toHaveAttribute(
+    expect(container.querySelector('.one-field')).toHaveAttribute(
       'data-disabled',
     );
   });
@@ -65,7 +65,7 @@ describe('Fieldset', () => {
     );
 
     expect(screen.getByLabelText('Display name')).toBeDisabled();
-    expect(container.querySelector('.notable-field')).toHaveAttribute(
+    expect(container.querySelector('.one-field')).toHaveAttribute(
       'data-disabled',
     );
   });
@@ -150,9 +150,9 @@ describe('Fieldset', () => {
 
     const fieldset = screen.getByTestId('contact-fieldset');
     expect(fieldset).toHaveAttribute('name', 'contact');
-    expect(fieldset).toHaveClass('notable-fieldset', 'custom');
+    expect(fieldset).toHaveClass('one-fieldset', 'custom');
     expect(container.querySelector('legend')).toHaveClass(
-      'notable-fieldset__legend',
+      'one-fieldset__legend',
       'custom-legend',
     );
   });

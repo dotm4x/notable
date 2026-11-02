@@ -76,9 +76,9 @@ export function Button({
   const isMotionDisabled = disabled || shouldReduceMotion;
 
   const classes = [
-    'notable-button',
-    `notable-button--${variant}`,
-    `notable-button--${size}`,
+    'one-button',
+    `one-button--${variant}`,
+    `one-button--${size}`,
     className,
   ]
     .filter(Boolean)
@@ -133,7 +133,7 @@ export function Button({
           handlePropsClick?.(event);
         }}
       >
-        <span className="notable-button__content">
+        <span className="one-button__content">
           {childProps.children as ReactNode}
         </span>
       </Component>
@@ -152,7 +152,7 @@ export function Button({
       whileTap={isMotionDisabled ? undefined : (whileTap ?? { scale: 0.97 })}
       transition={transition ?? SPRING_INTERACTIVE}
     >
-      <span className="notable-button__content">{children}</span>
+      <span className="one-button__content">{children}</span>
     </motion.button>
   );
 }

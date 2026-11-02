@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from '@one/icons';
 import { describe, expect, it, vi } from 'vitest';
 import { Collapsible, type CollapsibleProps } from './collapsible.js';
 
@@ -248,15 +248,15 @@ describe('Collapsible', () => {
       </Collapsible>,
     );
 
-    expect(document.querySelector('.notable-collapsible')).toHaveClass(
+    expect(document.querySelector('.one-collapsible')).toHaveClass(
       'custom-root',
     );
     expect(screen.getByRole('button', { name: 'Details' })).toHaveClass(
-      'notable-collapsible__trigger',
+      'one-collapsible__trigger',
       'custom-trigger',
     );
     expect(screen.getByText('Paragraph').parentElement).toHaveClass(
-      'notable-collapsible__content-inner',
+      'one-collapsible__content-inner',
       'custom-content',
     );
     expect(screen.getByText('Emphasis')).toBeVisible();

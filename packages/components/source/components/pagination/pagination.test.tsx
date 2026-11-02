@@ -55,9 +55,7 @@ describe('Pagination', () => {
     it('renders ellipses for omitted pages and keeps them out of the accessibility tree', () => {
       const { container } = render(<Pagination page={10} pageCount={20} />);
 
-      const ellipses = container.querySelectorAll(
-        '.notable-pagination__ellipsis',
-      );
+      const ellipses = container.querySelectorAll('.one-pagination__ellipsis');
       expect(ellipses).toHaveLength(2);
       ellipses.forEach((ellipsis) => {
         expect(ellipsis).toHaveAttribute('aria-hidden', 'true');
@@ -106,7 +104,7 @@ describe('Pagination', () => {
       );
 
       expect(container.querySelector('nav')).toHaveClass(
-        'notable-pagination--small',
+        'one-pagination--small',
       );
     });
 
@@ -123,7 +121,7 @@ describe('Pagination', () => {
       );
 
       expect(container.querySelector('nav')).toHaveClass(
-        'notable-pagination',
+        'one-pagination',
         'custom-pagination',
       );
     });

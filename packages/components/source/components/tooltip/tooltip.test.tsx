@@ -38,12 +38,12 @@ describe('Tooltip', () => {
     await user.hover(screen.getByRole('button', { name: 'Help' }));
 
     expect(
-      document.querySelector('.notable-tooltip__content[data-open]'),
+      document.querySelector('.one-tooltip__content[data-open]'),
     ).toBeNull();
 
     await waitFor(() =>
       expect(
-        document.querySelector('.notable-tooltip__content[data-open]'),
+        document.querySelector('.one-tooltip__content[data-open]'),
       ).not.toBeNull(),
     );
   });
@@ -64,7 +64,7 @@ describe('Tooltip', () => {
     expect(trigger).toHaveFocus();
     expect(trigger).not.toHaveAttribute('aria-describedby');
     expect(
-      document.querySelector('.notable-tooltip__content[data-open]'),
+      document.querySelector('.one-tooltip__content[data-open]'),
     ).toBeNull();
   });
 
@@ -142,7 +142,7 @@ describe('Tooltip', () => {
 
     await waitFor(() =>
       expect(
-        document.querySelector('.notable-tooltip__content[data-open]'),
+        document.querySelector('.one-tooltip__content[data-open]'),
       ).toBeNull(),
     );
   });

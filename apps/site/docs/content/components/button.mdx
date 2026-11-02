@@ -1,0 +1,84 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+---
+
+import {
+  ButtonVariantsDemo,
+  ButtonSizesDemo,
+  ButtonIconsDemo,
+  ButtonLoadingDemo,
+  ButtonDisabledDemo,
+  ButtonLongTextDemo,
+  ButtonWithIconDemo,
+} from '../../demos/button';
+
+## Installation
+
+```bash
+pnpm add @one/components
+```
+
+Import the styles once in your app:
+
+```tsx
+import '@one/components/styles.css';
+```
+
+## Usage
+
+```tsx
+import { Button } from '@one/components';
+
+export function Example() {
+  return <Button>Click me</Button>;
+}
+```
+
+## Examples
+
+### Variants
+
+<ButtonVariantsDemo />
+
+### Sizes
+
+<ButtonSizesDemo />
+
+### With Icon
+
+<ButtonWithIconDemo />
+
+### Icons
+
+<ButtonIconsDemo />
+
+### Loading
+
+<ButtonLoadingDemo />
+
+### Disabled
+
+<ButtonDisabledDemo />
+
+### Long Text
+
+<ButtonLongTextDemo />
+
+## API Reference
+
+### Button
+
+| Prop       | Type                                                                       | Default     | Description                               |
+| ---------- | -------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
+| `variant`  | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger'`             | `'primary'` | Visual appearance.                        |
+| `size`     | `'small' \| 'medium' \| 'large' \| 'icon' \| 'icon-small' \| 'icon-large'` | `'medium'`  | Button size.                              |
+| `disabled` | `boolean`                                                                  | `false`     | Disables interaction.                     |
+| `asChild`  | `boolean`                                                                  | `false`     | Renders child element with button styles. |
+| `children` | `ReactNode`                                                                | —           | Button content.                           |
+
+## Accessibility
+
+- Use an accessible name for icon-only buttons via `aria-label`.
+- Set `aria-busy="true"` and disable the button while loading.
+- Buttons default to `type="button"` to avoid accidental form submission.

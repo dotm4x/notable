@@ -58,8 +58,8 @@ export const Inline: Story = {
   },
   render: (args) => (
     <p>
-      Notable is a design language. <Link {...args}>Read the guidelines</Link>{' '}
-      to see how components should behave.
+      One is a design language. <Link {...args}>Read the guidelines</Link> to
+      see how components should behave.
     </p>
   ),
 };

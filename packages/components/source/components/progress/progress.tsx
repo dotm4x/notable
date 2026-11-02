@@ -2,21 +2,21 @@ import type { CSSProperties, HTMLAttributes } from 'react';
 import type { TCssCustomProperties } from '../../internal/helpers/css-custom-properties.js';
 import {
   resolveRadius,
-  type NotableRadiusToken,
+  type OneRadiusToken,
 } from '../../internal/helpers/resolve-radius.js';
 import './progress.css';
 
 /** Track thickness preset. */
 export type ProgressSize = 'small' | 'medium' | 'large';
 
-/** Notable indicator color token names. */
+/** One indicator color token names. */
 export type ProgressColor = 'primary' | 'success' | 'danger';
 
-/** Notable track color token names. */
+/** One track color token names. */
 export type ProgressTrackColor = 'subtle' | 'default' | 'strong';
 
-/** Notable radius token names. */
-export type ProgressRadiusToken = NotableRadiusToken;
+/** One radius token names. */
+export type ProgressRadiusToken = OneRadiusToken;
 
 /**
  * `smooth` animates determinate changes and indeterminate movement. `none`
@@ -56,12 +56,12 @@ type ProgressBaseProps = Omit<
    */
   thickness?: number | string;
   /**
-   * Indicator color. A Notable token name maps to its color token, and any other
+   * Indicator color. A One token name maps to its color token, and any other
    * string is used as CSS as provided. Defaults to the primary color.
    */
   color?: ProgressColor | string;
   /**
-   * Track color. A Notable token name maps to its border token, and any other
+   * Track color. A One token name maps to its border token, and any other
    * string is used as CSS as provided. Defaults to the standard border color.
    */
   trackColor?: ProgressTrackColor | string;
@@ -76,7 +76,7 @@ export type ProgressLinearProps = ProgressBaseProps & {
   /** Track thickness preset. Defaults to `medium`. */
   size?: ProgressSize;
   /**
-   * Track corner radius. A Notable radius token name maps to its token, a
+   * Track corner radius. A One radius token name maps to its token, a
    * number is treated as pixels, and any other string is used as CSS. Defaults
    * to a pill shape.
    */
@@ -88,7 +88,7 @@ export type ProgressCircularProps = ProgressBaseProps & {
   /** Visual shape. */
   variant: 'circular';
   /**
-   * Ring diameter. A preset maps to a Notable spacing size, a number is treated
+   * Ring diameter. A preset maps to a One spacing size, a number is treated
    * as pixels, and any other string is used as CSS. Defaults to `medium`.
    */
   size?: ProgressSize | number | string;
@@ -102,15 +102,15 @@ export type ProgressProps = ProgressLinearProps | ProgressCircularProps;
 const DEFAULT_MAX = 100;
 
 const colorTokens: Readonly<Record<ProgressColor, string>> = {
-  primary: 'var(--notable-color-primary)',
-  success: 'var(--notable-color-success)',
-  danger: 'var(--notable-color-danger)',
+  primary: 'var(--one-color-primary)',
+  success: 'var(--one-color-success)',
+  danger: 'var(--one-color-danger)',
 };
 
 const trackColorTokens: Readonly<Record<ProgressTrackColor, string>> = {
-  subtle: 'var(--notable-color-border-subtle)',
-  default: 'var(--notable-color-border)',
-  strong: 'var(--notable-color-border-strong)',
+  subtle: 'var(--one-color-border-subtle)',
+  default: 'var(--one-color-border)',
+  strong: 'var(--one-color-border-strong)',
 };
 
 function resolveMax(max: number | undefined): number {
@@ -189,10 +189,10 @@ function CircularIndicator({ percentage }: { percentage: number | undefined }) {
       : { strokeDashoffset: 100 - percentage };
 
   return (
-    <svg className="notable-progress__svg" aria-hidden="true" focusable="false">
-      <circle className="notable-progress__track" cx="50%" cy="50%" />
+    <svg className="one-progress__svg" aria-hidden="true" focusable="false">
+      <circle className="one-progress__track" cx="50%" cy="50%" />
       <circle
-        className="notable-progress__arc"
+        className="one-progress__arc"
         cx="50%"
         cy="50%"
         pathLength={100}
@@ -238,30 +238,30 @@ export function Progress({
   }
   const resolvedDiameter = isCircular ? resolveDiameter(size) : undefined;
   if (resolvedDiameter !== undefined) {
-    inlineStyle['--notable-progress-diameter'] = resolvedDiameter;
+    inlineStyle['--one-progress-diameter'] = resolvedDiameter;
   }
   const resolvedThickness = resolveThickness(thickness);
   if (resolvedThickness !== undefined) {
-    inlineStyle['--notable-progress-thickness'] = resolvedThickness;
+    inlineStyle['--one-progress-thickness'] = resolvedThickness;
   }
   const resolvedColor = resolveColor(color);
   if (resolvedColor !== undefined) {
-    inlineStyle['--notable-progress-color'] = resolvedColor;
+    inlineStyle['--one-progress-color'] = resolvedColor;
   }
   const resolvedTrackColor = resolveTrackColor(trackColor);
   if (resolvedTrackColor !== undefined) {
-    inlineStyle['--notable-progress-track-color'] = resolvedTrackColor;
+    inlineStyle['--one-progress-track-color'] = resolvedTrackColor;
   }
   if (percentage !== undefined) {
-    inlineStyle['--notable-progress-value'] = `${percentage}%`;
+    inlineStyle['--one-progress-value'] = `${percentage}%`;
   }
 
   const classes = [
-    'notable-progress',
-    isCircular ? 'notable-progress--circular' : 'notable-progress--linear',
-    isProgressSize(size) && `notable-progress--${size}`,
-    `notable-progress--${animation}`,
-    isIndeterminate && 'notable-progress--indeterminate',
+    'one-progress',
+    isCircular ? 'one-progress--circular' : 'one-progress--linear',
+    isProgressSize(size) && `one-progress--${size}`,
+    `one-progress--${animation}`,
+    isIndeterminate && 'one-progress--indeterminate',
     className,
   ]
     .filter(Boolean)
@@ -280,7 +280,7 @@ export function Progress({
       {isCircular ? (
         <CircularIndicator percentage={percentage} />
       ) : (
-        <div className="notable-progress__indicator" />
+        <div className="one-progress__indicator" />
       )}
     </div>
   );

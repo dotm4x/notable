@@ -108,7 +108,7 @@ describe('Toggle', () => {
       render(<Toggle variant={variant}>Bold</Toggle>);
 
       expect(screen.getByRole('button', { name: 'Bold' })).toHaveClass(
-        `notable-toggle--${variant}`,
+        `one-toggle--${variant}`,
       );
     },
   );
@@ -119,7 +119,7 @@ describe('Toggle', () => {
       render(<Toggle size={size}>Bold</Toggle>);
 
       expect(screen.getByRole('button', { name: 'Bold' })).toHaveClass(
-        `notable-toggle--${size}`,
+        `one-toggle--${size}`,
       );
     },
   );

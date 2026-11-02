@@ -186,9 +186,9 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(function Header(
   const isDynamic = mode === 'dynamic';
   const isHidden = isDynamic && state === 'hidden';
   const classes = [
-    'notable-header',
-    `notable-header--${mode}`,
-    isDynamic && `notable-header--${state}`,
+    'one-header',
+    `one-header--${mode}`,
+    isDynamic && `one-header--${state}`,
     className,
   ]
     .filter(Boolean)

@@ -71,7 +71,7 @@ export const Custom: Story = {
       <Separator
         {...args}
         thickness="0.5rem"
-        color="var(--notable-color-primary)"
+        color="var(--one-color-primary)"
       />
       <div
         style={{ display: 'flex', alignItems: 'stretch', gap: 16, height: 48 }}

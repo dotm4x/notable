@@ -97,7 +97,7 @@ const CheckboxGroupRoot = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
         <fieldset
           {...props}
           ref={ref}
-          className={['notable-checkbox-group', className]
+          className={['one-checkbox-group', className]
             .filter(Boolean)
             .join(' ')}
           aria-describedby={describedBy}
@@ -105,17 +105,17 @@ const CheckboxGroupRoot = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
           data-disabled={disabled || undefined}
         >
           {label && (
-            <legend className="notable-checkbox-group__label">{label}</legend>
+            <legend className="one-checkbox-group__label">{label}</legend>
           )}
           {description && (
             <span
-              className="notable-checkbox-group__description"
+              className="one-checkbox-group__description"
               id={descriptionId}
             >
               {description}
             </span>
           )}
-          <div className="notable-checkbox-group__options">{children}</div>
+          <div className="one-checkbox-group__options">{children}</div>
         </fieldset>
       </CheckboxGroupContext.Provider>
     );

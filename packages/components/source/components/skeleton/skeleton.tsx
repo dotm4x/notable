@@ -1,7 +1,7 @@
 import type { CSSProperties, HTMLAttributes, PointerEvent } from 'react';
 import {
   resolveRadius,
-  type NotableRadiusToken,
+  type OneRadiusToken,
 } from '../../internal/helpers/resolve-radius.js';
 import './skeleton.css';
 
@@ -11,8 +11,8 @@ export type SkeletonVariant = 'text' | 'circular' | 'rectangular';
 /** Placeholder animations. */
 export type SkeletonAnimation = 'shimmer' | 'pulse' | 'none';
 
-/** Notable radius token names. */
-export type SkeletonRadiusToken = NotableRadiusToken;
+/** One radius token names. */
+export type SkeletonRadiusToken = OneRadiusToken;
 
 /** Props for {@link Skeleton}, in addition to native `span` attributes. */
 export type SkeletonProps = Omit<
@@ -27,7 +27,7 @@ export type SkeletonProps = Omit<
    */
   animation?: SkeletonAnimation;
   /**
-   * Border radius. A Notable token name maps to its radius token, a number is
+   * Border radius. A One token name maps to its radius token, a number is
    * treated as pixels, and any other string is used as CSS as provided.
    */
   radius?: SkeletonRadiusToken | number | string;
@@ -64,11 +64,11 @@ export function Skeleton({
     onPointerMove?.(event);
     // The spotlight is positioned with CSS variables so pointer moves never re-render.
     event.currentTarget.style.setProperty(
-      '--notable-skeleton-pointer-x',
+      '--one-skeleton-pointer-x',
       `${event.nativeEvent.offsetX}px`,
     );
     event.currentTarget.style.setProperty(
-      '--notable-skeleton-pointer-y',
+      '--one-skeleton-pointer-y',
       `${event.nativeEvent.offsetY}px`,
     );
   };
@@ -90,10 +90,10 @@ export function Skeleton({
   }
 
   const classes = [
-    'notable-skeleton',
-    `notable-skeleton--${variant}`,
-    `notable-skeleton--${animation}`,
-    animation !== 'none' && 'notable-skeleton--spotlight',
+    'one-skeleton',
+    `one-skeleton--${variant}`,
+    `one-skeleton--${animation}`,
+    animation !== 'none' && 'one-skeleton--spotlight',
     className,
   ]
     .filter(Boolean)

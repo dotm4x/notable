@@ -7,7 +7,7 @@
  * `tokens/motion.css`. Because CSS custom properties cannot be passed
  * directly into Motion's `Transition` option, they are maintained here as
  * typed constants that must be kept in sync with the CSS file. CSS-only
- * tokens, such as `--notable-duration-medium`, are not mirrored here.
+ * tokens, such as `--one-duration-medium`, are not mirrored here.
  *
  * Durations are expressed in seconds, as required by Motion.
  * The corresponding CSS properties use milliseconds.
@@ -17,13 +17,13 @@
 // Durations (seconds)
 // ---------------------------------------------------------------------------
 
-/** 0.14 s. Equivalent to `--notable-duration-fast`. */
+/** 0.14 s. Equivalent to `--one-duration-fast`. */
 export const DURATION_FAST = 0.14 as const;
 
-/** 0.16 s. Equivalent to `--notable-duration-base`. */
+/** 0.16 s. Equivalent to `--one-duration-base`. */
 export const DURATION_BASE = 0.16 as const;
 
-/** 0.8 s. Equivalent to `--notable-duration-slow`. */
+/** 0.8 s. Equivalent to `--one-duration-slow`. */
 export const DURATION_SLOW = 0.8 as const;
 
 // ---------------------------------------------------------------------------
@@ -32,12 +32,12 @@ export const DURATION_SLOW = 0.8 as const;
 
 /**
  * Standard CSS `ease` expressed as a cubic-bezier for Motion.
- * Equivalent to `--notable-easing-standard`.
+ * Equivalent to `--one-easing-standard`.
  */
 export const EASING_STANDARD = [0.25, 0.1, 0.25, 1] as const;
 
 /**
- * Ease-out cubic-bezier. Equivalent to `--notable-easing-spring`.
+ * Ease-out cubic-bezier. Equivalent to `--one-easing-spring`.
  */
 export const EASING_SPRING = [0.2, 0.8, 0.2, 1] as const;
 

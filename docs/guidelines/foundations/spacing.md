@@ -1,6 +1,6 @@
 # Spacing
 
-Spacing creates grouping and rhythm. It tells the user which elements belong together and which are separate, before they read a single word. Notable uses a consistent scale, so that the same relationship looks the same everywhere.
+Spacing creates grouping and rhythm. It tells the user which elements belong together and which are separate, before they read a single word. One uses a consistent scale, so that the same relationship looks the same everywhere.
 
 See [Values](./values.md#spacing) for the spacing scale.
 

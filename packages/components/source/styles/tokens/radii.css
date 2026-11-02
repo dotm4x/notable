@@ -1,10 +1,10 @@
 :root {
   /* Radii */
-  --notable-radius-xs: 0.25rem;
-  --notable-radius-sm: 0.5rem;
-  --notable-radius-md: 0.75rem;
-  --notable-radius-lg: 1rem;
-  --notable-radius-xl: 1.5rem;
-  --notable-radius-2xl: 2rem;
-  --notable-radius-full: 9999px;
+  --one-radius-xs: 0.25rem;
+  --one-radius-sm: 0.5rem;
+  --one-radius-md: 0.75rem;
+  --one-radius-lg: 1rem;
+  --one-radius-xl: 1.5rem;
+  --one-radius-2xl: 2rem;
+  --one-radius-full: 9999px;
 }

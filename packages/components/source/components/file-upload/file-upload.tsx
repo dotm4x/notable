@@ -15,8 +15,7 @@ import {
   Plus,
   Upload,
   X,
-  type LucideIcon,
-} from 'lucide-react';
+} from '@one/icons';
 import {
   createContext,
   forwardRef,
@@ -29,6 +28,7 @@ import {
   type DragEvent,
   type MouseEvent,
   type RefObject,
+  type ElementType,
 } from 'react';
 import { Button, type ButtonProps } from '../button/button.js';
 import { DURATION_BASE, EASING_STANDARD } from '../../styles/motion.js';
@@ -356,8 +356,8 @@ const FileUploadRoot = forwardRef<HTMLDivElement, TFileUploadRootProps>(
         <div
           ref={ref}
           className={classNames(
-            'notable-file-upload',
-            `notable-file-upload--${mode}`,
+            'one-file-upload',
+            `one-file-upload--${mode}`,
             className,
           )}
           data-mode={mode}
@@ -382,7 +382,7 @@ const FileUploadRoot = forwardRef<HTMLDivElement, TFileUploadRootProps>(
             multiple={multiple}
             disabled={disabled}
             required={required}
-            className="notable-file-upload__input"
+            className="one-file-upload__input"
             tabIndex={-1}
             aria-hidden="true"
             onChange={handleInputChange}
@@ -416,7 +416,7 @@ function FileUploadDropzone({
 
   return (
     <div
-      className={classNames('notable-file-upload__dropzone', className)}
+      className={classNames('one-file-upload__dropzone', className)}
       onClick={canSelect ? handleClick : undefined}
       {...props}
     >
@@ -444,7 +444,7 @@ function FileUploadIcon({
 }: TFileUploadIconProps) {
   return (
     <span
-      className={classNames('notable-file-upload__icon', className)}
+      className={classNames('one-file-upload__icon', className)}
       {...props}
       aria-hidden="true"
     >
@@ -456,7 +456,7 @@ function FileUploadIcon({
 function FileUploadTitle({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={classNames('notable-file-upload__title', className)}
+      className={classNames('one-file-upload__title', className)}
       {...props}
     />
   );
@@ -465,7 +465,7 @@ function FileUploadTitle({ className, ...props }: ComponentProps<'div'>) {
 function FileUploadDescription({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={classNames('notable-file-upload__description', className)}
+      className={classNames('one-file-upload__description', className)}
       {...props}
     />
   );
@@ -474,7 +474,7 @@ function FileUploadDescription({ className, ...props }: ComponentProps<'div'>) {
 function FileUploadHelper({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={classNames('notable-file-upload__helper', className)}
+      className={classNames('one-file-upload__helper', className)}
       {...props}
     />
   );
@@ -496,7 +496,7 @@ function FileUploadTrigger({
   return (
     <Button
       type="button"
-      className="notable-file-upload__trigger"
+      className="one-file-upload__trigger"
       variant={variant ?? (isInline ? 'ghost' : 'secondary')}
       size={size ?? (isInline ? 'icon-small' : 'small')}
       disabled={!canSelect}
@@ -537,17 +537,14 @@ function FileUploadList({
       : 'Add file';
 
   return (
-    <AutoSize axis="vertical" className="notable-file-upload__list-container">
-      <ul
-        className={classNames('notable-file-upload__list', className)}
-        {...props}
-      >
+    <AutoSize axis="vertical" className="one-file-upload__list-container">
+      <ul className={classNames('one-file-upload__list', className)} {...props}>
         <AnimatePresence initial={false}>{children}</AnimatePresence>
         {showAddTile && (
-          <li className="notable-file-upload__add-item">
+          <li className="one-file-upload__add-item">
             <button
               type="button"
-              className="notable-file-upload__add"
+              className="one-file-upload__add"
               aria-label={addLabel}
               onClick={openPicker}
             >
@@ -577,7 +574,7 @@ function FileUploadItem({
   return (
     <FileItemContext.Provider value={file}>
       <motion.li
-        className={classNames('notable-file-upload__item', className)}
+        className={classNames('one-file-upload__item', className)}
         initial={shouldReduceMotion ? false : { opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
         exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
@@ -601,7 +598,7 @@ function FileUploadItem({
   );
 }
 
-function getFileIcon(file: File): LucideIcon {
+function getFileIcon(file: File): ElementType {
   if (file.type.startsWith('image/')) {
     return FileImage;
   }
@@ -649,12 +646,12 @@ function FileUploadPreview({ className, ...props }: TFileUploadPreviewProps) {
 
   return (
     <span
-      className={classNames('notable-file-upload__preview', className)}
+      className={classNames('one-file-upload__preview', className)}
       {...props}
       aria-hidden="true"
     >
       {imageUrl ? (
-        <img className="notable-file-upload__image" src={imageUrl} alt="" />
+        <img className="one-file-upload__image" src={imageUrl} alt="" />
       ) : (
         <Icon size={18} aria-hidden="true" />
       )}
@@ -674,7 +671,7 @@ function FileUploadName({
 
   return (
     <span
-      className={classNames('notable-file-upload__name', className)}
+      className={classNames('one-file-upload__name', className)}
       title={file.name}
       {...props}
     >
@@ -694,10 +691,7 @@ function FileUploadSize({
   const file = useFileItem();
 
   return (
-    <span
-      className={classNames('notable-file-upload__size', className)}
-      {...props}
-    >
+    <span className={classNames('one-file-upload__size', className)} {...props}>
       {children ?? formatFileSize(file.size)}
     </span>
   );
@@ -720,7 +714,7 @@ function FileUploadRemove({
       type="button"
       variant="ghost"
       size="icon-small"
-      className={classNames('notable-file-upload__remove', className)}
+      className={classNames('one-file-upload__remove', className)}
       aria-label={`Remove ${file.name}`}
       disabled={!canSelect}
       onClick={(event) => {
@@ -752,7 +746,7 @@ function FileUploadClear({
       type="button"
       variant="ghost"
       size="small"
-      className={classNames('notable-file-upload__clear', className)}
+      className={classNames('one-file-upload__clear', className)}
       disabled={!canSelect || files.length === 0}
       onClick={(event) => {
         onClick?.(event);
@@ -783,23 +777,23 @@ function FileUploadRejections({
 
   return (
     <div
-      className={classNames('notable-file-upload__rejections', className)}
+      className={classNames('one-file-upload__rejections', className)}
       {...props}
     >
-      <span className="notable-file-upload__status" role="status">
+      <span className="one-file-upload__status" role="status">
         {rejections.length > 0 ? describeRejections(rejections) : ''}
       </span>
       {rejections.length > 0 && (
-        <ul className="notable-file-upload__rejection-list">
+        <ul className="one-file-upload__rejection-list">
           {rejections.map((rejection, index) => (
             <li
               key={`${index}-${getStableFileKey(rejection.file)}-${rejection.code}`}
-              className="notable-file-upload__rejection"
+              className="one-file-upload__rejection"
             >
-              <span className="notable-file-upload__name">
+              <span className="one-file-upload__name">
                 {rejection.file.name}
               </span>
-              <span className="notable-file-upload__rejection-reason">
+              <span className="one-file-upload__rejection-reason">
                 {FILE_UPLOAD_REJECTION_MESSAGES[rejection.code]}
               </span>
             </li>

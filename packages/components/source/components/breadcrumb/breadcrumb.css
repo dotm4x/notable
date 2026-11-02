@@ -1,35 +1,35 @@
-.notable-breadcrumb__list {
+.one-breadcrumb__list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: var(--notable-font-size-sm);
-  color: var(--notable-color-text-muted);
+  font-size: var(--one-font-size-sm);
+  color: var(--one-color-text-muted);
 }
 
-.notable-breadcrumb__entry {
+.one-breadcrumb__entry {
   display: inline-flex;
   align-items: center;
-  gap: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
   min-width: 0;
 }
 
-.notable-breadcrumb__separator {
+.one-breadcrumb__separator {
   display: inline-flex;
-  color: var(--notable-color-text-subtle);
+  color: var(--one-color-text-subtle);
 }
 
-.notable-breadcrumb__link,
-.notable-breadcrumb__trigger {
+.one-breadcrumb__link,
+.one-breadcrumb__trigger {
   display: inline-flex;
   align-items: center;
-  gap: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
   border: none;
-  border-radius: var(--notable-radius-sm);
-  padding: var(--notable-spacing-1);
+  border-radius: var(--one-radius-sm);
+  padding: var(--one-spacing-1);
   background: transparent;
   color: inherit;
   font: inherit;
@@ -37,28 +37,28 @@
   cursor: pointer;
 }
 
-.notable-breadcrumb__link:hover,
-.notable-breadcrumb__trigger:hover {
-  color: var(--notable-color-text);
+.one-breadcrumb__link:hover,
+.one-breadcrumb__trigger:hover {
+  color: var(--one-color-text);
   text-decoration: underline;
 }
 
-.notable-breadcrumb__link:focus-visible,
-.notable-breadcrumb__trigger:focus-visible {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-breadcrumb__link:focus-visible,
+.one-breadcrumb__trigger:focus-visible {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
 }
 
-.notable-breadcrumb__current,
-.notable-breadcrumb__text {
-  padding: var(--notable-spacing-1);
+.one-breadcrumb__current,
+.one-breadcrumb__text {
+  padding: var(--one-spacing-1);
 }
 
-.notable-breadcrumb__current {
-  color: var(--notable-color-text);
-  font-weight: var(--notable-font-weight-medium);
+.one-breadcrumb__current {
+  color: var(--one-color-text);
+  font-weight: var(--one-font-weight-medium);
 }
 
-.notable-breadcrumb__menu-link {
+.one-breadcrumb__menu-link {
   text-decoration: none;
 }

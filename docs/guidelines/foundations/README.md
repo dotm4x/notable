@@ -1,6 +1,6 @@
 # Foundations
 
-Foundations are the shared rules that every component builds on. They define how Notable looks and behaves before any component is involved: color, shape, space, type, depth, motion, focus, and accessibility.
+Foundations are the shared rules that every component builds on. They define how One looks and behaves before any component is involved: color, shape, space, type, depth, motion, focus, and accessibility.
 
 ## Guidelines in this category
 
@@ -12,6 +12,7 @@ Foundations are the shared rules that every component builds on. They define how
 - [Motion](./motion.md): the character, timing, and reduction of movement.
 - [Focus](./focus.md): keyboard position and its visual treatment.
 - [Accessibility](./accessibility.md): the baseline every design must meet.
+- [Icons](./icons.md): grid, stroke, color, and usage rules for icons.
 - [Values](./values.md): the concrete values behind colors, spacing, shape, depth, motion, and type.
 
 ## Relationship to the other categories

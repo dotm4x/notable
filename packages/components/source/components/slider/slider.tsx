@@ -262,9 +262,9 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
         ref={ref}
         id={sliderId}
         className={joinClassNames(
-          'notable-slider',
-          'notable-slider--fixed',
-          `notable-slider--${orientation}`,
+          'one-slider',
+          'one-slider--fixed',
+          `one-slider--${orientation}`,
           className,
         )}
         data-disabled
@@ -273,14 +273,14 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
         data-readonly={readOnly || undefined}
       >
         {(hasLabel || showValue) && (
-          <div className="notable-slider__header">
+          <div className="one-slider__header">
             {hasLabel && (
-              <span className="notable-slider__label" id={labelId}>
+              <span className="one-slider__label" id={labelId}>
                 {label}
               </span>
             )}
             {showValue && (
-              <output className="notable-slider__value">
+              <output className="one-slider__value">
                 {fixedValues
                   .map(
                     (fixedValue) =>
@@ -293,12 +293,12 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
           </div>
         )}
         {hasDescription && (
-          <span className="notable-slider__description" id={descriptionId}>
+          <span className="one-slider__description" id={descriptionId}>
             {description}
           </span>
         )}
         {hasError && (
-          <span className="notable-slider__error" id={errorId}>
+          <span className="one-slider__error" id={errorId}>
             {error}
           </span>
         )}
@@ -313,24 +313,22 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
               disabled={disabled}
             />
           ))}
-        <div className="notable-slider__control" data-orientation={orientation}>
-          <div className="notable-slider__track">
+        <div className="one-slider__control" data-orientation={orientation}>
+          <div className="one-slider__track">
             {resolvedMarks.map((mark) => (
               <span
                 key={mark.value}
-                className="notable-slider__mark"
+                className="one-slider__mark"
                 data-active={mark.value === min || undefined}
                 aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
                 style={
                   {
-                    '--notable-slider-mark-position': `${max === min ? 50 : ((mark.value - min) / (max - min)) * 100}%`,
+                    '--one-slider-mark-position': `${max === min ? 50 : ((mark.value - min) / (max - min)) * 100}%`,
                   } as CSSProperties
                 }
               >
                 {hasMarkLabel(mark.label) && (
-                  <span className="notable-slider__mark-label">
-                    {mark.label}
-                  </span>
+                  <span className="one-slider__mark-label">{mark.label}</span>
                 )}
               </span>
             ))}
@@ -355,7 +353,7 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
                 aria-orientation={orientation}
                 aria-required={required || undefined}
                 tabIndex={-1}
-                className="notable-slider__thumb"
+                className="one-slider__thumb"
               />
             ))}
           </div>
@@ -370,8 +368,8 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
       ref={ref}
       id={sliderId}
       className={joinClassNames(
-        'notable-slider',
-        `notable-slider--${orientation}`,
+        'one-slider',
+        `one-slider--${orientation}`,
         className,
       )}
       data-invalid={isInvalid || undefined}
@@ -408,14 +406,14 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
       }}
     >
       {(hasLabel || showValue) && (
-        <div className="notable-slider__header">
+        <div className="one-slider__header">
           {hasLabel && (
-            <BaseSlider.Label className="notable-slider__label">
+            <BaseSlider.Label className="one-slider__label">
               {label}
             </BaseSlider.Label>
           )}
           {showValue && (
-            <BaseSlider.Value className="notable-slider__value">
+            <BaseSlider.Value className="one-slider__value">
               {formatValue
                 ? (_formattedValues, values) =>
                     values.map(formatValue).join(' – ')
@@ -425,18 +423,18 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
         </div>
       )}
       {hasDescription && (
-        <span className="notable-slider__description" id={descriptionId}>
+        <span className="one-slider__description" id={descriptionId}>
           {description}
         </span>
       )}
       {hasError && (
-        <span className="notable-slider__error" id={errorId}>
+        <span className="one-slider__error" id={errorId}>
           {error}
         </span>
       )}
-      <BaseSlider.Control className="notable-slider__control">
-        <BaseSlider.Track className="notable-slider__track">
-          <BaseSlider.Indicator className="notable-slider__indicator" />
+      <BaseSlider.Control className="one-slider__control">
+        <BaseSlider.Track className="one-slider__track">
+          <BaseSlider.Indicator className="one-slider__indicator" />
           {resolvedMarks.map((mark) => {
             const isActive = isRange
               ? mark.value >= Math.min(...currentValues) &&
@@ -446,19 +444,17 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
             return (
               <span
                 key={mark.value}
-                className="notable-slider__mark"
+                className="one-slider__mark"
                 data-active={isActive || undefined}
                 aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
                 style={
                   {
-                    '--notable-slider-mark-position': `${((mark.value - min) / (max - min)) * 100}%`,
+                    '--one-slider-mark-position': `${((mark.value - min) / (max - min)) * 100}%`,
                   } as CSSProperties
                 }
               >
                 {hasMarkLabel(mark.label) && (
-                  <span className="notable-slider__mark-label">
-                    {mark.label}
-                  </span>
+                  <span className="one-slider__mark-label">{mark.label}</span>
                 )}
               </span>
             );
@@ -467,7 +463,7 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
             <BaseSlider.Thumb
               key={index}
               index={isRange ? index : undefined}
-              className="notable-slider__thumb"
+              className="one-slider__thumb"
               aria-label={thumbLabels?.[index] ?? ariaLabel}
               aria-labelledby={ariaLabelledBy}
               aria-describedby={describedBy}

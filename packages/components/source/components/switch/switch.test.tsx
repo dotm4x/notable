@@ -20,7 +20,7 @@ function dragSwitch(toggle: HTMLElement, distance: number, cancel = false) {
 }
 
 function getControl(toggle: HTMLElement) {
-  const control = toggle.closest<HTMLElement>('.notable-switch__control');
+  const control = toggle.closest<HTMLElement>('.one-switch__control');
   if (!control) {
     throw new Error('Expected a switch control.');
   }
@@ -197,21 +197,21 @@ describe('Switch', () => {
 
       fireEvent.pointerDown(toggle, { pointerId: 1, button: 0, clientX: 100 });
       fireEvent.pointerMove(toggle, { pointerId: 1, clientX: 108 });
-      expect(
-        control.style.getPropertyValue('--notable-switch-drag-offset'),
-      ).toBe('8px');
-      expect(
-        control.style.getPropertyValue('--notable-switch-drag-progress'),
-      ).toBe(`${(8 / TRAVEL) * 100}%`);
+      expect(control.style.getPropertyValue('--one-switch-drag-offset')).toBe(
+        '8px',
+      );
+      expect(control.style.getPropertyValue('--one-switch-drag-progress')).toBe(
+        `${(8 / TRAVEL) * 100}%`,
+      );
       expect(control).toHaveAttribute('data-dragging');
 
       fireEvent.pointerMove(toggle, { pointerId: 1, clientX: 400 });
-      expect(
-        control.style.getPropertyValue('--notable-switch-drag-offset'),
-      ).toBe(`${TRAVEL}px`);
-      expect(
-        control.style.getPropertyValue('--notable-switch-drag-progress'),
-      ).toBe('100%');
+      expect(control.style.getPropertyValue('--one-switch-drag-offset')).toBe(
+        `${TRAVEL}px`,
+      );
+      expect(control.style.getPropertyValue('--one-switch-drag-progress')).toBe(
+        '100%',
+      );
     });
 
     it('cleans up and keeps its state when cancelled', () => {
@@ -225,12 +225,12 @@ describe('Switch', () => {
       expect(toggle).not.toBeChecked();
       expect(onChange).not.toHaveBeenCalled();
       expect(control).not.toHaveAttribute('data-dragging');
-      expect(
-        control.style.getPropertyValue('--notable-switch-drag-offset'),
-      ).toBe('');
-      expect(
-        control.style.getPropertyValue('--notable-switch-drag-progress'),
-      ).toBe('');
+      expect(control.style.getPropertyValue('--one-switch-drag-offset')).toBe(
+        '',
+      );
+      expect(control.style.getPropertyValue('--one-switch-drag-progress')).toBe(
+        '',
+      );
     });
 
     it('toggles natively on a click without dragging', async () => {

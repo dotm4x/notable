@@ -433,7 +433,7 @@ describe('Calendar', () => {
       const { container } = renderCalendar({ disabled: true });
 
       expect(container.firstChild).toHaveAttribute('data-disabled');
-      expect(container.firstChild).toHaveClass('notable-calendar--disabled');
+      expect(container.firstChild).toHaveClass('one-calendar--disabled');
     });
 
     it('removes every day from the tab order', () => {
@@ -746,7 +746,7 @@ describe('Calendar', () => {
       } as Partial<CalendarProps>);
 
       expect(container.firstChild).toHaveClass(
-        'notable-calendar',
+        'one-calendar',
         'custom-calendar',
       );
       expect(screen.getByTestId('calendar-root')).toBe(container.firstChild);
@@ -757,7 +757,7 @@ describe('Calendar', () => {
       render(<Calendar ref={ref} locale="en-US" />);
 
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
-      expect(ref.current).toHaveClass('notable-calendar');
+      expect(ref.current).toHaveClass('one-calendar');
     });
 
     it('uses the locale for weekday and month labels', () => {

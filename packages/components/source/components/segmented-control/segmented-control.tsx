@@ -92,7 +92,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
   ) {
     const generatedId = useId();
     const controlId = id ?? generatedId;
-    const groupName = name ?? `notable-segmented-control-${controlId}`;
+    const groupName = name ?? `one-segmented-control-${controlId}`;
     const labelId = label ? `${controlId}-label` : undefined;
     const resolvedAriaLabelledBy = ariaLabelledBy ?? labelId;
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -232,8 +232,8 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
     });
 
     const classes = [
-      'notable-segmented-control',
-      `notable-segmented-control--${size}`,
+      'one-segmented-control',
+      `one-segmented-control--${size}`,
       className,
     ]
       .filter(Boolean)
@@ -266,7 +266,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
       >
         {selectedOption && indicatorBounds && (
           <motion.span
-            className="notable-segmented-control__indicator"
+            className="one-segmented-control__indicator"
             data-disabled={disabled || selectedOption.disabled || undefined}
             aria-hidden="true"
             initial={false}
@@ -300,7 +300,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
                 }
               }}
               htmlFor={optionId}
-              className="notable-segmented-control__item"
+              className="one-segmented-control__item"
               data-selector-item
               data-selected={isSelected || undefined}
               data-disabled={isOptionDisabled || undefined}
@@ -308,7 +308,7 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
               <input
                 id={optionId}
                 type="radio"
-                className="notable-segmented-control__input"
+                className="one-segmented-control__input"
                 name={groupName}
                 value={option.value}
                 checked={isSelected}
@@ -316,16 +316,16 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
                 aria-label={option['aria-label']}
                 onChange={() => handleSelect(option.value)}
               />
-              <span className="notable-segmented-control__content">
+              <span className="one-segmented-control__content">
                 {option.icon && (
                   <span
-                    className="notable-segmented-control__icon"
+                    className="one-segmented-control__icon"
                     aria-hidden="true"
                   >
                     {option.icon}
                   </span>
                 )}
-                <span className="notable-segmented-control__label">
+                <span className="one-segmented-control__label">
                   {option.label}
                 </span>
               </span>
@@ -338,10 +338,10 @@ export const SegmentedControl: SegmentedControlComponent = forwardRef(
     if (label) {
       return (
         <div
-          className="notable-segmented-control-field"
+          className="one-segmented-control-field"
           data-disabled={disabled || undefined}
         >
-          <span id={labelId} className="notable-segmented-control__group-label">
+          <span id={labelId} className="one-segmented-control__group-label">
             {label}
           </span>
           {controlContent}

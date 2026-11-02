@@ -10,9 +10,9 @@ describe('Empty', () => {
 
     const empty = screen.getByTestId('empty');
     expect(empty.tagName).toBe('DIV');
-    expect(empty).toHaveClass('notable-empty');
-    expect(empty).not.toHaveClass('notable-empty--variant-outline');
-    expect(empty).not.toHaveClass('notable-empty--size-compact');
+    expect(empty).toHaveClass('one-empty');
+    expect(empty).not.toHaveClass('one-empty--variant-outline');
+    expect(empty).not.toHaveClass('one-empty--size-compact');
   });
 
   it('exposes every compound member on the root at runtime', () => {
@@ -62,7 +62,7 @@ describe('Empty', () => {
 
     expect(screen.getByRole('heading', { name: 'Nothing here' })).toBeVisible();
     expect(
-      document.querySelector('.notable-empty__description'),
+      document.querySelector('.one-empty__description'),
     ).not.toBeInTheDocument();
   });
 
@@ -74,7 +74,7 @@ describe('Empty', () => {
     );
 
     expect(screen.getByTestId('empty')).toHaveClass(
-      'notable-empty--variant-outline',
+      'one-empty--variant-outline',
     );
 
     rerender(
@@ -84,7 +84,7 @@ describe('Empty', () => {
     );
 
     expect(screen.getByTestId('empty')).toHaveClass(
-      'notable-empty--variant-surface',
+      'one-empty--variant-surface',
     );
   });
 
@@ -95,9 +95,7 @@ describe('Empty', () => {
       </Empty>,
     );
 
-    expect(screen.getByTestId('empty')).toHaveClass(
-      'notable-empty--size-compact',
-    );
+    expect(screen.getByTestId('empty')).toHaveClass('one-empty--size-compact');
 
     rerender(
       <Empty size="spacious" data-testid="empty">
@@ -105,9 +103,7 @@ describe('Empty', () => {
       </Empty>,
     );
 
-    expect(screen.getByTestId('empty')).toHaveClass(
-      'notable-empty--size-spacious',
-    );
+    expect(screen.getByTestId('empty')).toHaveClass('one-empty--size-spacious');
   });
 
   it('merges custom classes and forwards native attributes and refs', () => {
@@ -120,7 +116,7 @@ describe('Empty', () => {
     );
 
     const empty = screen.getByTestId('empty');
-    expect(empty).toHaveClass('notable-empty', 'custom');
+    expect(empty).toHaveClass('one-empty', 'custom');
     expect(empty).toHaveAttribute('id', 'empty-id');
     expect(ref.current).toBe(empty);
   });
@@ -145,7 +141,7 @@ describe('Empty.Header', () => {
     );
 
     const header = screen.getByTestId('header');
-    expect(header).toHaveClass('notable-empty__header', 'custom');
+    expect(header).toHaveClass('one-empty__header', 'custom');
     expect(header).toContainElement(screen.getByText('Header content'));
   });
 
@@ -154,7 +150,7 @@ describe('Empty.Header', () => {
 
     render(<Empty.Header ref={ref}>Header</Empty.Header>);
 
-    expect(ref.current).toHaveClass('notable-empty__header');
+    expect(ref.current).toHaveClass('one-empty__header');
   });
 });
 
@@ -170,8 +166,8 @@ describe('Empty.Media', () => {
     );
 
     const media = screen.getByTestId('media');
-    expect(media).toHaveClass('notable-empty__media');
-    expect(media).not.toHaveClass('notable-empty__media--variant-icon');
+    expect(media).toHaveClass('one-empty__media');
+    expect(media).not.toHaveClass('one-empty__media--variant-icon');
     expect(
       screen.getByRole('img', { name: 'Team illustration' }),
     ).toBeInTheDocument();
@@ -185,7 +181,7 @@ describe('Empty.Media', () => {
     );
 
     expect(screen.getByTestId('media')).toHaveClass(
-      'notable-empty__media--variant-icon',
+      'one-empty__media--variant-icon',
     );
   });
 
@@ -209,7 +205,7 @@ describe('Empty.Title', () => {
       level: 3,
       name: 'No results',
     });
-    expect(title).toHaveClass('notable-empty__title');
+    expect(title).toHaveClass('one-empty__title');
   });
 
   it('renders the heading level selected with as', () => {
@@ -250,7 +246,7 @@ describe('Empty.Description', () => {
     );
 
     const description = screen.getByText('First tip').closest('div');
-    expect(description).toHaveClass('notable-empty__description');
+    expect(description).toHaveClass('one-empty__description');
   });
 
   it('supports inline links that remain independently accessible', () => {
@@ -276,7 +272,7 @@ describe('Empty.Content', () => {
       </Empty.Content>,
     );
 
-    expect(screen.getByTestId('content')).toHaveClass('notable-empty__content');
+    expect(screen.getByTestId('content')).toHaveClass('one-empty__content');
     expect(
       screen.getAllByRole('button').map((button) => button.textContent),
     ).toEqual(['Create', 'Import']);
@@ -299,6 +295,6 @@ describe('Empty.Content', () => {
 
     render(<Empty.Content ref={ref}>Actions</Empty.Content>);
 
-    expect(ref.current).toHaveClass('notable-empty__content');
+    expect(ref.current).toHaveClass('one-empty__content');
   });
 });

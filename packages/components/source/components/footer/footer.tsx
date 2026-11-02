@@ -58,8 +58,8 @@ const FooterRoot = forwardRef<HTMLElement, FooterProps>(function Footer(
   ref,
 ) {
   const classes = [
-    'notable-footer',
-    transparent && 'notable-footer--transparent',
+    'one-footer',
+    transparent && 'one-footer--transparent',
     className,
   ]
     .filter(Boolean)
@@ -74,7 +74,7 @@ const FooterRoot = forwardRef<HTMLElement, FooterProps>(function Footer(
 
 const FooterContent = forwardRef<HTMLDivElement, FooterContentProps>(
   function FooterContent({ children, className, ...props }, ref) {
-    const classes = ['notable-footer__content', className]
+    const classes = ['one-footer__content', className]
       .filter(Boolean)
       .join(' ');
 
@@ -88,9 +88,7 @@ const FooterContent = forwardRef<HTMLDivElement, FooterContentProps>(
 
 const FooterBrand = forwardRef<HTMLDivElement, FooterBrandProps>(
   function FooterBrand({ children, className, ...props }, ref) {
-    const classes = ['notable-footer__brand', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-footer__brand', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
@@ -102,7 +100,7 @@ const FooterBrand = forwardRef<HTMLDivElement, FooterBrandProps>(
 
 const FooterSection = forwardRef<HTMLDivElement, FooterSectionProps>(
   function FooterSection({ children, className, ...props }, ref) {
-    const classes = ['notable-footer__section', className]
+    const classes = ['one-footer__section', className]
       .filter(Boolean)
       .join(' ');
 
@@ -120,7 +118,7 @@ const FooterHeading = forwardRef<HTMLElement, FooterHeadingProps>(
     ref,
   ) {
     const Component = Element as ElementType;
-    const classes = ['notable-footer__heading', className]
+    const classes = ['one-footer__heading', className]
       .filter(Boolean)
       .join(' ');
 
@@ -134,9 +132,7 @@ const FooterHeading = forwardRef<HTMLElement, FooterHeadingProps>(
 
 const FooterBottom = forwardRef<HTMLDivElement, FooterBottomProps>(
   function FooterBottom({ children, className, ...props }, ref) {
-    const classes = ['notable-footer__bottom', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-footer__bottom', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>

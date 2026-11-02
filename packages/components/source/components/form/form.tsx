@@ -18,7 +18,7 @@ export const Form = forwardRef<HTMLFormElement, TFormProps>(function Form(
     <form
       {...props}
       ref={ref}
-      className={joinClassNames('notable-form', className)}
+      className={joinClassNames('one-form', className)}
     />
   );
 });

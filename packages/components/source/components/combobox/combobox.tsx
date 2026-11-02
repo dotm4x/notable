@@ -1,5 +1,5 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
-import { ChevronDown, X } from 'lucide-react';
+import { Check, ChevronDown, X } from '@one/icons';
 import {
   Fragment,
   forwardRef,
@@ -50,7 +50,7 @@ export type ComboboxInputProps = Omit<
   children?: ReactNode;
 };
 
-/** Base UI props with `className` narrowed to a string, since Notable composes class names directly. */
+/** Base UI props with `className` narrowed to a string, since One composes class names directly. */
 type WithStringClassName<TProps extends { className?: unknown }> = Omit<
   TProps,
   'className'
@@ -193,7 +193,7 @@ const ComboboxTrigger = forwardRef<HTMLButtonElement, ComboboxTriggerProps>(
     return (
       <BaseCombobox.Trigger
         ref={ref}
-        className={joinClassNames('notable-combobox__trigger', className)}
+        className={joinClassNames('one-combobox__trigger', className)}
         aria-label={props['aria-label'] ?? 'Show options'}
         {...props}
       >
@@ -208,7 +208,7 @@ const ComboboxClear = forwardRef<HTMLButtonElement, ComboboxClearProps>(
     return (
       <BaseCombobox.Clear
         ref={ref}
-        className={joinClassNames('notable-combobox__clear', className)}
+        className={joinClassNames('one-combobox__clear', className)}
         aria-label={props['aria-label'] ?? 'Clear selection'}
         {...props}
       >
@@ -238,12 +238,12 @@ const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
           align={align}
           sideOffset={sideOffset}
           alignOffset={alignOffset}
-          className="notable-combobox__positioner"
+          className="one-combobox__positioner"
         >
           <BaseCombobox.Popup
             ref={ref}
             className={joinClassNames(
-              'notable-combobox__popup notable-floating-surface',
+              'one-combobox__popup one-floating-surface',
               className,
             )}
             {...props}
@@ -258,13 +258,18 @@ const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
 );
 
 const ComboboxItem = forwardRef<HTMLDivElement, ComboboxItemProps>(
-  function ComboboxItem({ className, ...props }, ref) {
+  function ComboboxItem({ className, children, ...props }, ref) {
     return (
       <BaseCombobox.Item
         ref={ref}
-        className={joinClassNames('notable-combobox__item', className)}
+        className={joinClassNames('one-combobox__item', className)}
         {...props}
-      />
+      >
+        <span className="one-combobox__item-text">{children}</span>
+        <BaseCombobox.ItemIndicator className="one-combobox__item-indicator">
+          <Check size={16} aria-hidden="true" />
+        </BaseCombobox.ItemIndicator>
+      </BaseCombobox.Item>
     );
   },
 );
@@ -282,7 +287,7 @@ const ComboboxList = forwardRef<HTMLDivElement, ComboboxListProps>(
     return (
       <BaseCombobox.List
         ref={ref}
-        className={joinClassNames('notable-combobox__list', className)}
+        className={joinClassNames('one-combobox__list', className)}
         {...props}
       >
         {(entry: ComboboxOption | ComboboxOptionGroup, index: number) =>
@@ -290,9 +295,9 @@ const ComboboxList = forwardRef<HTMLDivElement, ComboboxListProps>(
             <BaseCombobox.Group
               key={entry.label}
               items={entry.items}
-              className="notable-combobox__group"
+              className="one-combobox__group"
             >
-              <BaseCombobox.GroupLabel className="notable-combobox__group-label">
+              <BaseCombobox.GroupLabel className="one-combobox__group-label">
                 {entry.label}
               </BaseCombobox.GroupLabel>
               <BaseCombobox.Collection>
@@ -317,7 +322,7 @@ const ComboboxEmpty = forwardRef<HTMLDivElement, ComboboxEmptyProps>(
     return (
       <BaseCombobox.Empty
         ref={ref}
-        className={joinClassNames('notable-combobox__empty', className)}
+        className={joinClassNames('one-combobox__empty', className)}
         {...props}
       />
     );
@@ -329,7 +334,7 @@ const ComboboxGroup = forwardRef<HTMLDivElement, ComboboxGroupProps>(
     return (
       <BaseCombobox.Group
         ref={ref}
-        className={joinClassNames('notable-combobox__group', className)}
+        className={joinClassNames('one-combobox__group', className)}
         {...props}
       />
     );
@@ -341,7 +346,7 @@ const ComboboxGroupLabel = forwardRef<HTMLDivElement, ComboboxGroupLabelProps>(
     return (
       <BaseCombobox.GroupLabel
         ref={ref}
-        className={joinClassNames('notable-combobox__group-label', className)}
+        className={joinClassNames('one-combobox__group-label', className)}
         {...props}
       />
     );
@@ -353,7 +358,7 @@ const ComboboxSeparator = forwardRef<HTMLDivElement, ComboboxSeparatorProps>(
     return (
       <BaseCombobox.Separator
         ref={ref}
-        className={joinClassNames('notable-combobox__separator', className)}
+        className={joinClassNames('one-combobox__separator', className)}
         {...props}
       />
     );

@@ -1,6 +1,6 @@
 # Choice
 
-A choice lets the user select one value from a set of mutually exclusive options. Choosing one option means the others are not chosen. Choice is the most common primitive in Notable. It can be presented as a list that opens from a trigger or as a group of options shown together; the value retains the same meaning in either presentation.
+A choice lets the user select one value from a set of mutually exclusive options. Choosing one option means the others are not chosen. Choice is the most common primitive in One. It can be presented as a list that opens from a trigger or as a group of options shown together; the value retains the same meaning in either presentation.
 
 ## What a choice is
 

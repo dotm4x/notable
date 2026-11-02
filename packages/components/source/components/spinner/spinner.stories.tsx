@@ -50,7 +50,7 @@ export const Sizes: Story = {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--notable-spacing-6)',
+        gap: 'var(--one-spacing-6)',
       }}
     >
       <Spinner size="small" />
@@ -73,22 +73,22 @@ export const Colors: Story = {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--notable-spacing-6)',
+        gap: 'var(--one-spacing-6)',
       }}
     >
-      <span style={{ color: 'var(--notable-color-info)' }}>
+      <span style={{ color: 'var(--one-color-info)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: 'var(--notable-color-danger)' }}>
+      <span style={{ color: 'var(--one-color-danger)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: 'var(--notable-color-success)' }}>
+      <span style={{ color: 'var(--one-color-success)' }}>
         <Spinner />
       </span>
 
-      <span style={{ color: 'var(--notable-color-text)' }}>
+      <span style={{ color: 'var(--one-color-text)' }}>
         <Spinner />
       </span>
     </div>
@@ -108,9 +108,9 @@ export const Text: Story = {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 'var(--notable-spacing-2)',
-        color: 'var(--notable-color-text)',
-        fontFamily: 'var(--notable-font-family)',
+        gap: 'var(--one-spacing-2)',
+        color: 'var(--one-color-text)',
+        fontFamily: 'var(--one-font-family)',
       }}
     >
       <Spinner size="small" />

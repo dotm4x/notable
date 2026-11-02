@@ -41,7 +41,7 @@ function renderHighlightList(): {
     '[data-testid="container"]',
   );
   const highlight = container.querySelector<HTMLElement>(
-    '.notable-animated-highlight',
+    '.one-animated-highlight',
   );
   const first = container.querySelector<HTMLElement>('[data-testid="first"]');
   const second = container.querySelector<HTMLElement>('[data-testid="second"]');

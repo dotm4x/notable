@@ -1,4 +1,4 @@
-import { Bold, Italic, Underline } from 'lucide-react';
+import { Bold, Italic, Underline } from '@one/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ToggleGroup } from './toggle-group.js';
 

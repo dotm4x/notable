@@ -27,7 +27,7 @@
 
 .site-hero p {
   max-width: 56ch;
-  margin: var(--notable-spacing-4) auto 0;
-  color: var(--notable-color-text-muted);
-  font-size: clamp(1.125rem, 2vw, var(--notable-font-size-xl));
+  margin: var(--one-spacing-4) auto 0;
+  color: var(--one-color-text-muted);
+  font-size: clamp(1.125rem, 2vw, var(--one-font-size-xl));
 }

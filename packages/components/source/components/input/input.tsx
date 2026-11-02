@@ -76,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       <Field.Box>
         {leadingIcon && (
           <span
-            className="notable-field__icon"
+            className="one-field__icon"
             aria-hidden={leadingIconInteractive ? undefined : true}
           >
             {leadingIcon}
@@ -93,7 +93,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         />
         {trailingIcon && (
           <span
-            className="notable-field__icon"
+            className="one-field__icon"
             aria-hidden={trailingIconInteractive ? undefined : true}
           >
             {trailingIcon}

@@ -24,9 +24,9 @@ describe('Skeleton', () => {
     // Assert
     expect(skeleton.tagName).toBe('SPAN');
     expect(skeleton).toHaveClass(
-      'notable-skeleton',
-      'notable-skeleton--rectangular',
-      'notable-skeleton--shimmer',
+      'one-skeleton',
+      'one-skeleton--rectangular',
+      'one-skeleton--shimmer',
     );
     expect(skeleton).toHaveAttribute('aria-hidden', 'true');
   });
@@ -73,10 +73,10 @@ describe('Skeleton', () => {
     expect(skeleton.style.height).toBe('20px');
   });
 
-  it('maps a Notable radius token to its radius variable', () => {
+  it('maps a One radius token to its radius variable', () => {
     const skeleton = renderSkeleton({ radius: 'lg' });
 
-    expect(skeleton.style.borderRadius).toBe('var(--notable-radius-lg)');
+    expect(skeleton.style.borderRadius).toBe('var(--one-radius-lg)');
   });
 
   it('treats a numeric radius as pixels', () => {
@@ -96,7 +96,7 @@ describe('Skeleton', () => {
     (variant) => {
       const skeleton = renderSkeleton({ variant });
 
-      expect(skeleton).toHaveClass(`notable-skeleton--${variant}`);
+      expect(skeleton).toHaveClass(`one-skeleton--${variant}`);
     },
   );
 
@@ -135,23 +135,23 @@ describe('Skeleton', () => {
   it('uses shimmer as the default animation', () => {
     const skeleton = renderSkeleton();
 
-    expect(skeleton).toHaveClass('notable-skeleton--shimmer');
-    expect(skeleton).not.toHaveClass('notable-skeleton--pulse');
+    expect(skeleton).toHaveClass('one-skeleton--shimmer');
+    expect(skeleton).not.toHaveClass('one-skeleton--pulse');
   });
 
   it('supports the pulse animation', () => {
     const skeleton = renderSkeleton({ animation: 'pulse' });
 
-    expect(skeleton).toHaveClass('notable-skeleton--pulse');
-    expect(skeleton).not.toHaveClass('notable-skeleton--shimmer');
+    expect(skeleton).toHaveClass('one-skeleton--pulse');
+    expect(skeleton).not.toHaveClass('one-skeleton--shimmer');
   });
 
   it('supports disabling the animation', () => {
     const skeleton = renderSkeleton({ animation: 'none' });
 
-    expect(skeleton).toHaveClass('notable-skeleton--none');
-    expect(skeleton).not.toHaveClass('notable-skeleton--shimmer');
-    expect(skeleton).not.toHaveClass('notable-skeleton--pulse');
+    expect(skeleton).toHaveClass('one-skeleton--none');
+    expect(skeleton).not.toHaveClass('one-skeleton--shimmer');
+    expect(skeleton).not.toHaveClass('one-skeleton--pulse');
   });
 
   it('forwards a custom class and native attributes', () => {
@@ -161,7 +161,7 @@ describe('Skeleton', () => {
       title: 'Loading profile',
     });
 
-    expect(skeleton).toHaveClass('notable-skeleton', 'avatar-placeholder');
+    expect(skeleton).toHaveClass('one-skeleton', 'avatar-placeholder');
     expect(skeleton).toHaveAttribute('id', 'profile-skeleton');
     expect(skeleton).toHaveAttribute('title', 'Loading profile');
   });
@@ -177,14 +177,14 @@ describe('Skeleton', () => {
     (animation) => {
       const skeleton = renderSkeleton({ animation });
 
-      expect(skeleton).toHaveClass('notable-skeleton--spotlight');
+      expect(skeleton).toHaveClass('one-skeleton--spotlight');
     },
   );
 
   it('omits the hover spotlight when animation is none', () => {
     const skeleton = renderSkeleton({ animation: 'none' });
 
-    expect(skeleton).not.toHaveClass('notable-skeleton--spotlight');
+    expect(skeleton).not.toHaveClass('one-skeleton--spotlight');
   });
 
   it('publishes the pointer position as CSS variables on move', () => {
@@ -193,10 +193,10 @@ describe('Skeleton', () => {
     fireEvent.pointerMove(skeleton, { clientX: 30, clientY: 12 });
 
     expect(
-      skeleton.style.getPropertyValue('--notable-skeleton-pointer-x'),
+      skeleton.style.getPropertyValue('--one-skeleton-pointer-x'),
     ).not.toBe('');
     expect(
-      skeleton.style.getPropertyValue('--notable-skeleton-pointer-y'),
+      skeleton.style.getPropertyValue('--one-skeleton-pointer-y'),
     ).not.toBe('');
   });
 

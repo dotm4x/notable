@@ -1,14 +1,14 @@
-.notable-toggle-group {
+.one-toggle-group {
   display: inline-flex;
   align-items: center;
-  gap: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
 }
 
-.notable-toggle-group[data-orientation='vertical'] {
+.one-toggle-group[data-orientation='vertical'] {
   flex-direction: column;
   align-items: stretch;
 }
 
-.notable-toggle-group__item {
+.one-toggle-group__item {
   flex: 0 0 auto;
 }

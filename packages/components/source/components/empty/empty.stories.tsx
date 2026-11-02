@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import {
-  FolderOpen,
-  Inbox,
-  Plus,
-  SearchX,
-  Upload,
-  UserPlus,
-} from 'lucide-react';
+import { FolderOpen, Inbox, Plus, SearchX, Upload, UserPlus } from '@one/icons';
 import { Avatar } from '../avatar/avatar.js';
 import { AvatarGroup } from '../avatar/avatar-group.js';
 import { Button } from '../button/button.js';

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Archive, FilePlus, Settings } from 'lucide-react';
+import { Archive, FilePlus, Settings } from '@one/icons';
 import { useState, type ReactNode } from 'react';
 import { Button } from '../button/button.js';
 import { Command, type CommandGroup, type CommandItem } from './command.js';

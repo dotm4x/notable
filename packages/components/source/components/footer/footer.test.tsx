@@ -11,7 +11,7 @@ describe('Footer', () => {
 
     const footer = screen.getByTestId('footer');
     expect(footer.tagName).toBe('FOOTER');
-    expect(footer).toHaveClass('notable-footer');
+    expect(footer).toHaveClass('one-footer');
   });
 
   it('exposes a contentinfo landmark when used at the page level', () => {
@@ -39,7 +39,7 @@ describe('Footer', () => {
     expect(ref.current).toBe(screen.getByRole('contentinfo'));
     expect(ref.current).toHaveAttribute('id', 'site-footer');
     expect(ref.current).toHaveAccessibleName('Site');
-    expect(ref.current).toHaveClass('notable-footer', 'custom');
+    expect(ref.current).toHaveClass('one-footer', 'custom');
   });
 
   it('composes brand, navigation sections, and bottom content', () => {
@@ -166,13 +166,13 @@ describe('Footer', () => {
     );
 
     expect(contentRef.current).toHaveClass(
-      'notable-footer__content',
+      'one-footer__content',
       'content-extra',
     );
-    expect(brandRef.current).toHaveClass('notable-footer__brand');
-    expect(sectionRef.current).toHaveClass('notable-footer__section');
-    expect(headingRef.current).toHaveClass('notable-footer__heading');
-    expect(bottomRef.current).toHaveClass('notable-footer__bottom');
+    expect(brandRef.current).toHaveClass('one-footer__brand');
+    expect(sectionRef.current).toHaveClass('one-footer__section');
+    expect(headingRef.current).toHaveClass('one-footer__heading');
+    expect(bottomRef.current).toHaveClass('one-footer__bottom');
   });
 
   it('is exported from the public entry point', () => {

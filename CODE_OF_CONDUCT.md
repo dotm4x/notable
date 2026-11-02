@@ -2,9 +2,9 @@
 
 ## Our Pledge
 
-Notable is built around the idea that thoughtful software can be expressive, accessible, and welcoming. We want the Notable community to be a friendly place for everyone who participates in the project, regardless of their background, identity, experience level, or point of view.
+One is built around the idea that thoughtful software can be expressive, accessible, and welcoming. We want the One community to be a friendly place for everyone who participates in the project, regardless of their background, identity, experience level, or point of view.
 
-As contributors and maintainers, we pledge to make participation in the Notable community a respectful experience for everyone, free from harassment, intimidation, and discrimination.
+As contributors and maintainers, we pledge to make participation in the One community a respectful experience for everyone, free from harassment, intimidation, and discrimination.
 
 ## Our Standards
 
@@ -33,12 +33,12 @@ Disagreement is a normal part of building software. It is not an excuse for disr
 
 ## Scope
 
-This Code of Conduct applies to all spaces where the Notable community interacts, including:
+This Code of Conduct applies to all spaces where the One community interacts, including:
 
 - GitHub repositories, issues, pull requests, and discussions.
 - Code reviews and project-related communication.
-- Community spaces or events when someone is representing Notable.
-- Other spaces where conduct related to Notable has a meaningful impact on community members.
+- Community spaces or events when someone is representing One.
+- Other spaces where conduct related to One has a meaningful impact on community members.
 
 It applies equally to maintainers, contributors, and other participants.
 
@@ -50,7 +50,7 @@ Maintainers should explain moderation decisions when practical, handle reports w
 
 ## Reporting
 
-If you experience or witness behavior that violates this Code of Conduct, report it privately to the Notable maintainers.
+If you experience or witness behavior that violates this Code of Conduct, report it privately to the One maintainers.
 
 You can contact the maintainers through the contact method listed in the repository profile or project documentation. Please include, if possible:
 

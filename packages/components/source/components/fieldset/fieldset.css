@@ -1,24 +1,24 @@
-.notable-fieldset {
+.one-fieldset {
   display: flex;
   flex-direction: column;
-  gap: var(--notable-spacing-3);
+  gap: var(--one-spacing-3);
   min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
-  color: var(--notable-color-text);
-  font-family: var(--notable-font-family);
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
 }
 
-.notable-fieldset__legend {
+.one-fieldset__legend {
   width: 100%;
   margin: 0;
   padding: 0;
-  font-size: var(--notable-font-size-sm);
-  font-weight: var(--notable-font-weight-semibold);
-  line-height: var(--notable-line-height-normal);
+  font-size: var(--one-font-size-sm);
+  font-weight: var(--one-font-weight-semibold);
+  line-height: var(--one-line-height-normal);
 }
 
-.notable-fieldset[data-disabled] .notable-fieldset__legend {
-  color: var(--notable-color-on-disabled);
+.one-fieldset[data-disabled] .one-fieldset__legend {
+  color: var(--one-color-on-disabled);
 }

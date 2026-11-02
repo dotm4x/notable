@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Header, NavigationMenu } from '@notable/components';
+import { Button, Header, NavigationMenu } from '@one/components';
 import { Moon, Sun } from 'lucide-react';
 import { useState } from 'react';
 import './header.css';
@@ -18,7 +18,7 @@ export function SiteHeader() {
   return (
     <Header className="site-header" mode="dynamic">
       <a className="site-header__brand" href="#overview">
-        Notable
+        One
       </a>
       <div className="site-header__navigation">
         <NavigationMenu aria-label="Primary navigation">
@@ -39,10 +39,10 @@ export function SiteHeader() {
         <div className="site-header__actions">
           <Button asChild variant="ghost" size="icon-large">
             <a
-              href="https://github.com/dotm4x/notable"
+              href="https://github.com/dotm4x/one"
               target="_blank"
               rel="noreferrer"
-              aria-label="Notable on GitHub"
+              aria-label="One on GitHub"
             >
               <SiGithub size={20} />
             </a>

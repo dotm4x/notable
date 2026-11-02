@@ -23,7 +23,7 @@ export type AvatarGroupProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 type AvatarGroupStyle = CSSProperties & {
-  '--notable-avatar-group-overlap': string;
+  '--one-avatar-group-overlap': string;
 };
 
 /**
@@ -50,12 +50,12 @@ export function AvatarGroup({
   const overlap = Number.isFinite(spacing) ? Math.max(0, spacing) : 8;
   const style: AvatarGroupStyle = {
     ...props.style,
-    '--notable-avatar-group-overlap': `${overlap}px`,
+    '--one-avatar-group-overlap': `${overlap}px`,
   };
   const classes = [
-    'notable-avatar-group',
-    `notable-avatar-group--${size}`,
-    `notable-avatar-group--${orientation}`,
+    'one-avatar-group',
+    `one-avatar-group--${size}`,
+    `one-avatar-group--${orientation}`,
     className,
   ]
     .filter(Boolean)
@@ -64,14 +64,14 @@ export function AvatarGroup({
   return (
     <div {...props} className={classes} style={style}>
       {visibleItems.map((item, index) => (
-        <div className="notable-avatar-group__item" key={itemKey(item, index)}>
+        <div className="one-avatar-group__item" key={itemKey(item, index)}>
           {item}
         </div>
       ))}
       {hiddenCount > 0 && (
-        <div className="notable-avatar-group__item">
+        <div className="one-avatar-group__item">
           <span
-            className="notable-avatar-group__overflow"
+            className="one-avatar-group__overflow"
             role="img"
             aria-label={`${hiddenCount} more ${hiddenCount === 1 ? 'avatar' : 'avatars'}`}
           >

@@ -1,6 +1,6 @@
 # Security Policy
 
-Notable takes the security of its packages, applications, and consumers seriously. This policy outlines how security vulnerabilities are handled and how to responsibly disclose them.
+One takes the security of its packages, applications, and consumers seriously. This policy outlines how security vulnerabilities are handled and how to responsibly disclose them.
 
 ---
 
@@ -16,10 +16,10 @@ If you discover a vulnerability in an older or unsupported build that also appli
 
 **Please do not report security vulnerabilities through public GitHub issues, pull requests, or discussions.**
 
-If you believe you have found a security vulnerability in Notable, report it privately using one of the following methods:
+If you believe you have found a security vulnerability in One, report it privately using one of the following methods:
 
 1. **GitHub Private Vulnerability Reporting (Recommended):**  
-   Navigate to the [Security Advisories tab](https://github.com/dotm4x/notable/security/advisories) of the repository and click **"Report a vulnerability"**.
+   Navigate to the [Security Advisories tab](https://github.com/dotm4x/one/security/advisories) of the repository and click **"Report a vulnerability"**.
 
 2. **Direct Contact:**  
    If GitHub private reporting is unavailable, email the maintainer at [`max@stonebogus.com`](mailto:max@stonebogus.com) with the subject line prefixed by `[Security]`.
@@ -49,7 +49,7 @@ When a security vulnerability is reported:
 
 ## Security Best Practices
 
-Notable adheres to strict dependency and code hygiene principles:
+One adheres to strict dependency and code hygiene principles:
 
 - **Minimal Dependencies:** Keeping third-party runtime dependencies to a minimum to reduce supply-chain attack surfaces.
 - **Automated Verification:** Continuous security and dependency policy checks in CI.

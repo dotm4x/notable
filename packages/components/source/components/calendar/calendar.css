@@ -2,58 +2,58 @@
    Calendar
    ========================================================================== */
 
-.notable-calendar {
+.one-calendar {
   display: flex;
   flex-direction: column;
-  gap: var(--notable-spacing-3);
+  gap: var(--one-spacing-3);
   min-width: 0;
-  color: var(--notable-color-text);
-  font-family: var(--notable-font-family);
-  font-size: var(--notable-font-size-sm);
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
+  font-size: var(--one-font-size-sm);
 }
 
 /* Header */
 
-.notable-calendar__header {
+.one-calendar__header {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--notable-spacing-2);
+  gap: var(--one-spacing-2);
 }
 
-.notable-calendar__title-container {
+.one-calendar__title-container {
   min-width: 0;
   justify-self: center;
 }
 
-.notable-calendar__title {
+.one-calendar__title {
   display: inline-block;
-  font-weight: var(--notable-font-weight-semibold);
+  font-weight: var(--one-font-weight-semibold);
   white-space: nowrap;
 }
 
-.notable-calendar__nav-icon {
-  width: var(--notable-spacing-4);
-  height: var(--notable-spacing-4);
+.one-calendar__nav-icon {
+  width: var(--one-spacing-4);
+  height: var(--one-spacing-4);
 }
 
 /* Viewport
    Padding keeps focus rings from being clipped while months slide. */
 
-.notable-calendar__viewport {
+.one-calendar__viewport {
   position: relative;
   overflow: hidden;
-  padding: var(--notable-spacing-1);
+  padding: var(--one-spacing-1);
 }
 
-.notable-calendar__month {
+.one-calendar__month {
   width: 100%;
 }
 
 /* Grid
    Fixed layout keeps every column the same width across months. */
 
-.notable-calendar__grid {
+.one-calendar__grid {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -61,24 +61,24 @@
 }
 
 /* Exiting months must not receive pointer input while they animate out. */
-.notable-calendar__month:not([data-active]) {
+.one-calendar__month:not([data-active]) {
   pointer-events: none;
 }
 
-.notable-calendar__weekday {
-  padding: 0 0 var(--notable-spacing-1);
-  color: var(--notable-color-text-muted);
-  font-size: var(--notable-font-size-xs);
-  font-weight: var(--notable-font-weight-medium);
+.one-calendar__weekday {
+  padding: 0 0 var(--one-spacing-1);
+  color: var(--one-color-text-muted);
+  font-size: var(--one-font-size-xs);
+  font-weight: var(--one-font-weight-medium);
   text-align: center;
 }
 
-.notable-calendar__weekday abbr {
+.one-calendar__weekday abbr {
   text-decoration: none;
   cursor: default;
 }
 
-.notable-calendar__cell {
+.one-calendar__cell {
   padding: 0;
   text-align: center;
 }
@@ -87,57 +87,57 @@
    Native buttons. Disabled days stay focusable (aria-disabled) so arrow-key
    navigation can pass over them. */
 
-.notable-calendar__day {
+.one-calendar__day {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: var(--notable-spacing-10);
+  max-width: var(--one-spacing-10);
   aspect-ratio: 1;
   margin: 0 auto;
   padding: 0;
   border: 1px solid transparent;
-  border-radius: var(--notable-radius-full);
+  border-radius: var(--one-radius-full);
   background: transparent;
   color: inherit;
   font: inherit;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
   transition:
-    background-color var(--notable-duration-fast) var(--notable-easing-standard),
-    color var(--notable-duration-fast) var(--notable-easing-standard),
-    transform var(--notable-duration-fast) var(--notable-easing-standard);
+    background-color var(--one-duration-fast) var(--one-easing-standard),
+    color var(--one-duration-fast) var(--one-easing-standard),
+    transform var(--one-duration-fast) var(--one-easing-standard);
 }
 
 /* Hover is drawn by the shared highlight so it can glide between days. */
-.notable-calendar__day:active {
-  background: var(--notable-color-surface-active);
+.one-calendar__day:active {
+  background: var(--one-color-surface-active);
   transform: scale(0.94);
 }
 
-.notable-calendar__day:focus-visible {
-  outline: var(--notable-border-width) solid var(--notable-color-focus);
+.one-calendar__day:focus-visible {
+  outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 1px;
 }
 
-.notable-calendar__day[data-outside] {
-  color: var(--notable-color-text-subtle);
+.one-calendar__day[data-outside] {
+  color: var(--one-color-text-subtle);
 }
 
-.notable-calendar__day[data-today] {
-  border-color: var(--notable-color-border-strong);
-  font-weight: var(--notable-font-weight-semibold);
+.one-calendar__day[data-today] {
+  border-color: var(--one-color-border-strong);
+  font-weight: var(--one-font-weight-semibold);
 }
 
-.notable-calendar__day[data-selected] {
+.one-calendar__day[data-selected] {
   border-color: transparent;
-  background: var(--notable-color-primary);
-  color: var(--notable-color-on-primary);
+  background: var(--one-color-primary);
+  color: var(--one-color-on-primary);
 }
 
-.notable-calendar__day[data-selected]:hover {
-  background: var(--notable-color-primary);
+.one-calendar__day[data-selected]:hover {
+  background: var(--one-color-primary);
   opacity: 0.9;
 }
 
@@ -145,94 +145,94 @@
    start or stop at the day's center, and the strips at the start and end of
    each week are rounded on their outer side, so the band reads as one shape
    that wraps per row. */
-.notable-calendar__cell {
+.one-calendar__cell {
   position: relative;
 }
 
-.notable-calendar__cell[data-in-range] {
-  --notable-calendar-range-color: color-mix(
+.one-calendar__cell[data-in-range] {
+  --one-calendar-range-color: color-mix(
     in srgb,
-    var(--notable-color-primary) 14%,
+    var(--one-color-primary) 14%,
     transparent
   );
 }
 
-.notable-calendar__cell[data-in-range][data-preview] {
-  --notable-calendar-range-color: color-mix(
+.one-calendar__cell[data-in-range][data-preview] {
+  --one-calendar-range-color: color-mix(
     in srgb,
-    var(--notable-color-primary) 7%,
+    var(--one-color-primary) 7%,
     transparent
   );
 }
 
-.notable-calendar__cell::before {
+.one-calendar__cell::before {
   content: '';
   position: absolute;
   inset-inline: 0;
   inset-block-start: 50%;
-  block-size: var(--notable-spacing-10);
+  block-size: var(--one-spacing-10);
   translate: 0 -50%;
-  background: var(--notable-calendar-range-color, transparent);
+  background: var(--one-calendar-range-color, transparent);
   opacity: 0;
   scale: 0.85 1;
   pointer-events: none;
   transition:
-    opacity var(--notable-duration-fast) var(--notable-easing-standard),
-    scale var(--notable-duration-fast) var(--notable-easing-standard),
-    background-color var(--notable-duration-fast) var(--notable-easing-standard);
+    opacity var(--one-duration-fast) var(--one-easing-standard),
+    scale var(--one-duration-fast) var(--one-easing-standard),
+    background-color var(--one-duration-fast) var(--one-easing-standard);
 }
 
-.notable-calendar__cell[data-in-range]::before {
+.one-calendar__cell[data-in-range]::before {
   opacity: 1;
   scale: 1 1;
 }
 
-.notable-calendar__cell[data-range-start]::before {
+.one-calendar__cell[data-range-start]::before {
   inset-inline-start: 50%;
 }
 
-.notable-calendar__cell[data-range-end]::before {
+.one-calendar__cell[data-range-end]::before {
   inset-inline-end: 50%;
 }
 
-.notable-calendar__cell[data-range-start][data-range-end]::before {
+.one-calendar__cell[data-range-start][data-range-end]::before {
   opacity: 0;
 }
 
-tr > .notable-calendar__cell:first-child[data-in-range]::before {
-  border-start-start-radius: var(--notable-radius-full);
-  border-end-start-radius: var(--notable-radius-full);
+tr > .one-calendar__cell:first-child[data-in-range]::before {
+  border-start-start-radius: var(--one-radius-full);
+  border-end-start-radius: var(--one-radius-full);
 }
 
-tr > .notable-calendar__cell:last-child[data-in-range]::before {
-  border-start-end-radius: var(--notable-radius-full);
-  border-end-end-radius: var(--notable-radius-full);
+tr > .one-calendar__cell:last-child[data-in-range]::before {
+  border-start-end-radius: var(--one-radius-full);
+  border-end-end-radius: var(--one-radius-full);
 }
 
 /* Preview endpoints are dimmed so the range looks provisional until committed. */
-.notable-calendar__day[data-selected][data-preview] {
+.one-calendar__day[data-selected][data-preview] {
   opacity: 0.6;
 }
 
 /* Disabled dates use strikethrough and dimmed text, so the state does not rely on color alone. */
-.notable-calendar__day[aria-disabled='true'] {
-  color: var(--notable-color-text-disabled);
+.one-calendar__day[aria-disabled='true'] {
+  color: var(--one-color-text-disabled);
   text-decoration: line-through;
   cursor: not-allowed;
 }
 
-.notable-calendar__day[aria-disabled='true']:hover,
-.notable-calendar__day[aria-disabled='true']:active {
+.one-calendar__day[aria-disabled='true']:hover,
+.one-calendar__day[aria-disabled='true']:active {
   background: transparent;
   transform: none;
 }
 
 /* Dim only the days so headers and the title keep their contrast. */
-.notable-calendar--disabled .notable-calendar__day {
+.one-calendar--disabled .one-calendar__day {
   opacity: 0.6;
 }
 
-.notable-calendar__sr-only {
+.one-calendar__sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -245,8 +245,8 @@ tr > .notable-calendar__cell:last-child[data-in-range]::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-calendar__day,
-  .notable-calendar__cell::before {
+  .one-calendar__day,
+  .one-calendar__cell::before {
     transition: none;
   }
 }

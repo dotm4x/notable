@@ -3,7 +3,7 @@
 When starting the dev server:
 
 ```bash
-pnpm --filter @notable/site dev
+pnpm --filter @one/site dev
 ```
 
 ## Documentation

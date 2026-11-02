@@ -138,7 +138,7 @@ function ControlledDrawer() {
 function FormDrawer() {
   const formId = useId();
   const [status, setStatus] = useState('No changes saved yet.');
-  const [projectName, setProjectName] = useState('Notable');
+  const [projectName, setProjectName] = useState('One');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -416,7 +416,7 @@ export const Custom: Story = {
           </Drawer.Description>
         </Drawer.Header>
         <div style={demoPanelStyle}>
-          <p style={{ margin: 0 }}>Project renamed to Notable.</p>
+          <p style={{ margin: 0 }}>Project renamed to One.</p>
           <p style={{ margin: 0 }}>Design tokens updated.</p>
           <p style={{ margin: 0 }}>Drawer component added.</p>
         </div>

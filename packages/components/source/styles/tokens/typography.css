@@ -1,24 +1,24 @@
 :root {
   /* Font family */
-  --notable-font-family: 'Geist Variable', sans-serif;
+  --one-font-family: 'Geist Variable', sans-serif;
 
   /* Font sizes */
-  --notable-font-size-xs: 0.75rem;
-  --notable-font-size-sm: 0.875rem;
-  --notable-font-size-md: 1rem;
-  --notable-font-size-lg: 1.125rem;
-  --notable-font-size-xl: 1.25rem;
-  --notable-font-size-2xl: 1.5rem;
-  --notable-font-size-3xl: 2rem;
+  --one-font-size-xs: 0.75rem;
+  --one-font-size-sm: 0.875rem;
+  --one-font-size-md: 1rem;
+  --one-font-size-lg: 1.125rem;
+  --one-font-size-xl: 1.25rem;
+  --one-font-size-2xl: 1.5rem;
+  --one-font-size-3xl: 2rem;
 
   /* Font weights */
-  --notable-font-weight-regular: 400;
-  --notable-font-weight-medium: 500;
-  --notable-font-weight-semibold: 600;
-  --notable-font-weight-bold: 700;
+  --one-font-weight-regular: 400;
+  --one-font-weight-medium: 500;
+  --one-font-weight-semibold: 600;
+  --one-font-weight-bold: 700;
 
   /* Line heights */
-  --notable-line-height-tight: 1.2;
-  --notable-line-height-normal: 1.5;
-  --notable-line-height-relaxed: 1.7;
+  --one-line-height-tight: 1.2;
+  --one-line-height-normal: 1.5;
+  --one-line-height-relaxed: 1.7;
 }

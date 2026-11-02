@@ -1,6 +1,6 @@
 # Values
 
-This page lists the concrete values behind Notable's foundations. Each category links back to its guideline, which explains when and why to use these values. Use the names here, not raw numbers, when designing.
+This page lists the concrete values behind One's foundations. Each category links back to its guideline, which explains when and why to use these values. Use the names here, not raw numbers, when designing.
 
 Pixel values assume a root size of 16 px.
 

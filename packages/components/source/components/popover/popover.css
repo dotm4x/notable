@@ -4,54 +4,54 @@
  * the scale and fade, live in `internal/styles/floating-surface.css`.
  * `z-index` has no shared layering token, so it is set locally.
  */
-.notable-popover {
+.one-popover {
   box-sizing: border-box;
   z-index: 50;
-  width: min(20rem, calc(100vw - var(--notable-spacing-8)));
-  max-height: calc(100dvh - var(--notable-spacing-8));
-  padding: var(--notable-spacing-4);
-  border: var(--notable-border-width) solid var(--notable-color-border);
+  width: min(20rem, calc(100vw - var(--one-spacing-8)));
+  max-height: calc(100dvh - var(--one-spacing-8));
+  padding: var(--one-spacing-4);
+  border: var(--one-border-width) solid var(--one-color-border);
   overflow: auto;
   overscroll-behavior: contain;
 }
 
-.notable-popover[data-side='top'][data-starting-style],
-.notable-popover[data-side='top'][data-ending-style] {
-  transform: translateY(var(--notable-spacing-2)) scale(0.96);
+.one-popover[data-side='top'][data-starting-style],
+.one-popover[data-side='top'][data-ending-style] {
+  transform: translateY(var(--one-spacing-2)) scale(0.96);
 }
 
-.notable-popover[data-side='bottom'][data-starting-style],
-.notable-popover[data-side='bottom'][data-ending-style] {
-  transform: translateY(calc(var(--notable-spacing-2) * -1)) scale(0.96);
+.one-popover[data-side='bottom'][data-starting-style],
+.one-popover[data-side='bottom'][data-ending-style] {
+  transform: translateY(calc(var(--one-spacing-2) * -1)) scale(0.96);
 }
 
-.notable-popover[data-side='left'][data-starting-style],
-.notable-popover[data-side='left'][data-ending-style] {
-  transform: translateX(var(--notable-spacing-2)) scale(0.96);
+.one-popover[data-side='left'][data-starting-style],
+.one-popover[data-side='left'][data-ending-style] {
+  transform: translateX(var(--one-spacing-2)) scale(0.96);
 }
 
-.notable-popover[data-side='right'][data-starting-style],
-.notable-popover[data-side='right'][data-ending-style] {
-  transform: translateX(calc(var(--notable-spacing-2) * -1)) scale(0.96);
+.one-popover[data-side='right'][data-starting-style],
+.one-popover[data-side='right'][data-ending-style] {
+  transform: translateX(calc(var(--one-spacing-2) * -1)) scale(0.96);
 }
 
-.notable-popover__header {
+.one-popover__header {
   display: flex;
   flex-direction: column;
-  gap: var(--notable-spacing-1);
+  gap: var(--one-spacing-1);
 }
 
-.notable-popover__title {
+.one-popover__title {
   margin: 0;
-  color: var(--notable-color-text);
-  font-size: var(--notable-font-size-md);
-  font-weight: var(--notable-font-weight-semibold);
-  line-height: var(--notable-line-height-tight);
+  color: var(--one-color-text);
+  font-size: var(--one-font-size-md);
+  font-weight: var(--one-font-weight-semibold);
+  line-height: var(--one-line-height-tight);
 }
 
-.notable-popover__description {
+.one-popover__description {
   margin: 0;
-  color: var(--notable-color-text-muted);
-  font-size: var(--notable-font-size-sm);
-  line-height: var(--notable-line-height-relaxed);
+  color: var(--one-color-text-muted);
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-relaxed);
 }

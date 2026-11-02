@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Check, CircleHelp } from 'lucide-react';
+import { Check, CircleHelp } from '@one/icons';
 import { describe, expect, it } from 'vitest';
 import { Badge } from './badge.js';
 import { Badge as PublicBadge } from '../../index.js';
@@ -9,9 +9,9 @@ describe('Badge', () => {
     render(<Badge>New</Badge>);
 
     expect(screen.getByText('New')).toHaveClass(
-      'notable-badge',
-      'notable-badge--default',
-      'notable-badge--medium',
+      'one-badge',
+      'one-badge--default',
+      'one-badge--medium',
     );
   });
 
@@ -26,13 +26,13 @@ describe('Badge', () => {
   ] as const)('supports the %s variant', (variant) => {
     render(<Badge variant={variant}>{variant}</Badge>);
 
-    expect(screen.getByText(variant)).toHaveClass(`notable-badge--${variant}`);
+    expect(screen.getByText(variant)).toHaveClass(`one-badge--${variant}`);
   });
 
   it.each(['small', 'medium'] as const)('supports the %s size', (size) => {
     render(<Badge size={size}>Label</Badge>);
 
-    expect(screen.getByText('Label')).toHaveClass(`notable-badge--${size}`);
+    expect(screen.getByText('Label')).toHaveClass(`one-badge--${size}`);
   });
 
   it('forwards custom classes, HTML attributes, and accessibility attributes', () => {
@@ -72,13 +72,13 @@ describe('Badge', () => {
     render(
       <Badge>
         <CircleHelp aria-hidden="true" />
-        <span className="notable-badge__sr-only">More information</span>
+        <span className="one-badge__sr-only">More information</span>
       </Badge>,
     );
 
     expect(screen.getByText('More information')).toBeInTheDocument();
     expect(screen.getByText('More information')).toHaveClass(
-      'notable-badge__sr-only',
+      'one-badge__sr-only',
     );
   });
 

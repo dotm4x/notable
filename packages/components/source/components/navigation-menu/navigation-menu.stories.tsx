@@ -118,9 +118,9 @@ export const Rich: Story = {
             <div
               style={{
                 display: 'grid',
-                gap: 'var(--notable-spacing-2)',
+                gap: 'var(--one-spacing-2)',
                 gridTemplateColumns: 'repeat(2, minmax(12rem, 1fr))',
-                padding: 'var(--notable-spacing-2)',
+                padding: 'var(--one-spacing-2)',
               }}
             >
               <NavigationMenu.Link href="/work/personal">
@@ -145,7 +145,7 @@ function ControlledNavigation() {
   const [value, setValue] = useState<string | null>(null);
 
   return (
-    <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
+    <div style={{ display: 'grid', gap: 'var(--one-spacing-4)' }}>
       <p>Open item: {value ?? 'none'}</p>
       <NavigationMenu aria-label="Main" value={value} onValueChange={setValue}>
         <NavigationMenu.List>
@@ -214,8 +214,8 @@ export const CustomDropdownContent: Story = {
             <div
               style={{
                 display: 'grid',
-                gap: 'var(--notable-spacing-1)',
-                padding: 'var(--notable-spacing-2)',
+                gap: 'var(--one-spacing-1)',
+                padding: 'var(--one-spacing-2)',
                 width: '18rem',
               }}
             >
@@ -248,12 +248,12 @@ export const CustomPanelContent: Story = {
             <div
               style={{
                 display: 'grid',
-                gap: 'var(--notable-spacing-3)',
-                padding: 'var(--notable-spacing-3)',
+                gap: 'var(--one-spacing-3)',
+                padding: 'var(--one-spacing-3)',
                 width: '20rem',
               }}
             >
-              <div style={{ display: 'grid', gap: 'var(--notable-spacing-1)' }}>
+              <div style={{ display: 'grid', gap: 'var(--one-spacing-1)' }}>
                 <strong>Signed in as Ada</strong>
                 <span>ada@example.com</span>
               </div>
@@ -285,9 +285,9 @@ export const GroupedColumns: Story = {
             <div
               style={{
                 display: 'grid',
-                gap: 'var(--notable-spacing-4)',
+                gap: 'var(--one-spacing-4)',
                 gridAutoFlow: 'column',
-                padding: 'var(--notable-spacing-2)',
+                padding: 'var(--one-spacing-2)',
               }}
             >
               <NavigationMenu.Group aria-label="Learn">
@@ -331,8 +331,8 @@ export const DifferentPanelDimensions: Story = {
             <div
               style={{
                 display: 'grid',
-                gap: 'var(--notable-spacing-1)',
-                padding: 'var(--notable-spacing-2)',
+                gap: 'var(--one-spacing-1)',
+                padding: 'var(--one-spacing-2)',
                 width: '22rem',
               }}
             >
@@ -350,9 +350,9 @@ export const DifferentPanelDimensions: Story = {
             <div
               style={{
                 display: 'grid',
-                gap: 'var(--notable-spacing-2)',
+                gap: 'var(--one-spacing-2)',
                 gridTemplateColumns: 'repeat(3, minmax(10rem, 1fr))',
-                padding: 'var(--notable-spacing-2)',
+                padding: 'var(--one-spacing-2)',
               }}
             >
               <NavigationMenu.Link href="/wide-a">Alpha</NavigationMenu.Link>
@@ -371,7 +371,7 @@ export const KeyboardNavigation: Story = {
     'aria-label': 'Main',
   },
   render: (args) => (
-    <div style={{ display: 'grid', gap: 'var(--notable-spacing-4)' }}>
+    <div style={{ display: 'grid', gap: 'var(--one-spacing-4)' }}>
       <p>
         Use Tab to reach a trigger, Enter or Space to open its panel, and the
         arrow keys to move between triggers and links.

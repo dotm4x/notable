@@ -1,6 +1,6 @@
 import { Drawer as BaseDrawer } from '@base-ui/react/drawer';
 import type { BaseUIEvent } from '@base-ui/react/types';
-import { X } from 'lucide-react';
+import { X } from '@one/icons';
 import {
   Children,
   cloneElement,
@@ -375,9 +375,9 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
     );
 
     const classes = [
-      'notable-drawer',
-      `notable-drawer--${side}`,
-      `notable-drawer--${size}`,
+      'one-drawer',
+      `one-drawer--${side}`,
+      `one-drawer--${size}`,
       className,
     ]
       .filter(Boolean)
@@ -394,7 +394,7 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
           <Button
             variant="ghost"
             size="icon"
-            className="notable-drawer__close-button"
+            className="one-drawer__close-button"
             aria-label="Close drawer"
           />
         }
@@ -405,22 +405,22 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
 
     return (
       <BaseDrawer.Portal>
-        <BaseDrawer.Backdrop className="notable-drawer__backdrop" />
-        <BaseDrawer.Viewport className="notable-drawer__viewport">
+        <BaseDrawer.Backdrop className="one-drawer__backdrop" />
+        <BaseDrawer.Viewport className="one-drawer__viewport">
           <BaseDrawer.Popup
             {...props}
             ref={setPopupElement}
             className={classes}
           >
             {headers}
-            <BaseDrawer.Content className="notable-drawer__body">
+            <BaseDrawer.Content className="one-drawer__body">
               {body}
             </BaseDrawer.Content>
             {footers}
             {headers.length > 0
               ? closeButton
               : closeButton && (
-                  <div className="notable-drawer__toolbar">{closeButton}</div>
+                  <div className="one-drawer__toolbar">{closeButton}</div>
                 )}
           </BaseDrawer.Popup>
         </BaseDrawer.Viewport>
@@ -448,9 +448,7 @@ function DrawerHeader({ className, ...props }: DrawerHeaderProps) {
   return (
     <div
       {...props}
-      className={['notable-drawer__header', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-drawer__header', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -462,7 +460,7 @@ function DrawerTitle({ className, ...props }: DrawerTitleProps) {
   return (
     <BaseDrawer.Title
       {...props}
-      className={['notable-drawer__title', className].filter(Boolean).join(' ')}
+      className={['one-drawer__title', className].filter(Boolean).join(' ')}
     />
   );
 }
@@ -474,7 +472,7 @@ function DrawerDescription({ className, ...props }: DrawerDescriptionProps) {
   return (
     <BaseDrawer.Description
       {...props}
-      className={['notable-drawer__description', className]
+      className={['one-drawer__description', className]
         .filter(Boolean)
         .join(' ')}
     />
@@ -485,9 +483,7 @@ function DrawerFooter({ className, ...props }: DrawerFooterProps) {
   return (
     <div
       {...props}
-      className={['notable-drawer__footer', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['one-drawer__footer', className].filter(Boolean).join(' ')}
     />
   );
 }

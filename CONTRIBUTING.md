@@ -1,6 +1,6 @@
-# Contributing to Notable
+# Contributing to One
 
-Thank you for your interest in contributing to Notable! Notable is an expressive, coherent, accessible design language and component system for digital experiences.
+Thank you for your interest in contributing to One! One is an expressive, coherent, accessible design language and component system for digital experiences.
 
 This guide outlines our core principles, development workflow, and coding standards to help you contribute effectively.
 
@@ -17,7 +17,7 @@ This guide outlines our core principles, development workflow, and coding standa
 
 ## 2. Repository Structure
 
-Notable is organized as a monorepo managed with `pnpm` workspaces:
+One is organized as a monorepo managed with `pnpm` workspaces:
 
 - **[`docs/guidelines/`](./docs/guidelines/):** Design language documentation (principles, foundations, patterns, and component guidelines).
 - **[`packages/components/`](./packages/components/):** The core React component library.
@@ -37,15 +37,15 @@ Notable is organized as a monorepo managed with `pnpm` workspaces:
 
 ```bash
 # Clone the repository
-git clone https://github.com/dotm4x/notable.git
-cd notable
+git clone https://github.com/dotm4x/one.git
+cd one
 
 # Install dependencies across all workspaces
 pnpm install
 
 # Run component library build / development
-pnpm --filter @notable/components build
-pnpm --filter @notable/sandbox dev
+pnpm --filter @one/components build
+pnpm --filter @one/sandbox dev
 ```
 
 ---
@@ -75,7 +75,7 @@ pnpm build
 
 ## 5. Commit Conventions
 
-Notable follows the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+One follows the [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
 ### Format
 

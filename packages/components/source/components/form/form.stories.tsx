@@ -108,7 +108,7 @@ export const Reset: Story = {
     <Form>
       <Input label="Email" name="email" defaultValue="ana@example.com" />
       <Checkbox name="consent" label="I agree" />
-      <div style={{ display: 'flex', gap: 'var(--notable-spacing-2)' }}>
+      <div style={{ display: 'flex', gap: 'var(--one-spacing-2)' }}>
         <Button type="submit">Save</Button>
         <Button type="reset">Reset</Button>
       </div>

@@ -61,9 +61,9 @@ const EmptyRoot = forwardRef<HTMLDivElement, TEmptyRootProps>(function Empty(
   ref,
 ) {
   const classes = [
-    'notable-empty',
-    variant !== 'default' && `notable-empty--variant-${variant}`,
-    size !== 'default' && `notable-empty--size-${size}`,
+    'one-empty',
+    variant !== 'default' && `one-empty--variant-${variant}`,
+    size !== 'default' && `one-empty--size-${size}`,
     className,
   ]
     .filter(Boolean)
@@ -79,9 +79,7 @@ const EmptyRoot = forwardRef<HTMLDivElement, TEmptyRootProps>(function Empty(
 /** Groups the media, title, and description of an empty state. */
 const EmptyHeader = forwardRef<HTMLDivElement, TEmptyHeaderProps>(
   function EmptyHeader({ children, className, ...props }, ref) {
-    const classes = ['notable-empty__header', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-empty__header', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>
@@ -98,8 +96,8 @@ const EmptyMedia = forwardRef<HTMLDivElement, TEmptyMediaProps>(
     ref,
   ) {
     const classes = [
-      'notable-empty__media',
-      variant === 'icon' && 'notable-empty__media--variant-icon',
+      'one-empty__media',
+      variant === 'icon' && 'one-empty__media--variant-icon',
       className,
     ]
       .filter(Boolean)
@@ -120,9 +118,7 @@ const EmptyTitle = forwardRef<HTMLElement, TEmptyTitleProps>(
     ref,
   ) {
     const Component = Element as ElementType;
-    const classes = ['notable-empty__title', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-empty__title', className].filter(Boolean).join(' ');
 
     return (
       <Component ref={ref} className={classes} {...props}>
@@ -139,7 +135,7 @@ const EmptyDescription = forwardRef<HTMLElement, TEmptyDescriptionProps>(
     ref,
   ) {
     const Component = Element as ElementType;
-    const classes = ['notable-empty__description', className]
+    const classes = ['one-empty__description', className]
       .filter(Boolean)
       .join(' ');
 
@@ -154,9 +150,7 @@ const EmptyDescription = forwardRef<HTMLElement, TEmptyDescriptionProps>(
 /** Renders the actions and supplementary content of an empty state. */
 const EmptyContent = forwardRef<HTMLDivElement, TEmptyContentProps>(
   function EmptyContent({ children, className, ...props }, ref) {
-    const classes = ['notable-empty__content', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-empty__content', className].filter(Boolean).join(' ');
 
     return (
       <div ref={ref} className={classes} {...props}>

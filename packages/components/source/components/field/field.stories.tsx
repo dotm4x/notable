@@ -9,7 +9,7 @@ const meta = {
   component: Field.Root,
   tags: ['autodocs'],
   args: {
-    className: 'notable-story-field',
+    className: 'one-story-field',
   },
   render: (args) => (
     <Field.Root {...args}>

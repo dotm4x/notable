@@ -204,9 +204,9 @@ export function AutoSize({
     <div
       ref={setContainer}
       data-axis={axis}
-      className={['notable-auto-size', className].filter(Boolean).join(' ')}
+      className={['one-auto-size', className].filter(Boolean).join(' ')}
     >
-      <div ref={contentRef} className="notable-auto-size__content">
+      <div ref={contentRef} className="one-auto-size__content">
         {children}
       </div>
     </div>

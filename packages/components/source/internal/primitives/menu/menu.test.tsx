@@ -321,12 +321,12 @@ describe('Menu primitive', () => {
       const checkbox = await screen.findByRole('menuitemcheckbox', {
         name: 'Show hidden',
       });
-      const indicator = checkbox.querySelector('.notable-menu__item-indicator');
+      const indicator = checkbox.querySelector('.one-menu__item-indicator');
 
       await userEvent.click(checkbox);
 
       expect(indicator).toHaveAttribute('data-unchecked');
-      expect(checkbox.querySelector('.notable-menu__item-indicator')).toBe(
+      expect(checkbox.querySelector('.one-menu__item-indicator')).toBe(
         indicator,
       );
     });

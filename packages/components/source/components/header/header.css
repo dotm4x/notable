@@ -1,80 +1,74 @@
-.notable-header {
-  --notable-header-inset: var(--notable-spacing-3);
+.one-header {
+  --one-header-inset: var(--one-spacing-3);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--notable-spacing-4);
+  gap: var(--one-spacing-4);
   box-sizing: border-box;
-  padding-inline: var(--notable-spacing-4);
-  padding-block: var(--notable-spacing-3);
-  background: var(--notable-color-surface);
-  border-block-end: 1px solid var(--notable-color-border-subtle);
+  padding-inline: var(--one-spacing-4);
+  padding-block: var(--one-spacing-3);
+  background: var(--one-color-surface);
+  border-block-end: 1px solid var(--one-color-border-subtle);
 }
 
-.notable-header--fixed,
-.notable-header--dynamic {
+.one-header--fixed,
+.one-header--dynamic {
   position: sticky;
   inset-block-start: 0;
   z-index: 10;
-  padding-block-start: calc(
-    var(--notable-spacing-3) + env(safe-area-inset-top)
-  );
+  padding-block-start: calc(var(--one-spacing-3) + env(safe-area-inset-top));
 }
 
-.notable-header--dynamic {
+.one-header--dynamic {
   transition-property:
     transform, margin-inline, border-radius, background-color, box-shadow,
     border-block-end-color, backdrop-filter;
-  transition-duration: var(--notable-duration-enter);
-  transition-timing-function: var(--notable-easing-emphasized-decelerate);
+  transition-duration: var(--one-duration-enter);
+  transition-timing-function: var(--one-easing-emphasized-decelerate);
 }
 
-.notable-header--attached {
+.one-header--attached {
   background: transparent;
   border-block-end-color: transparent;
 }
 
-.notable-header--floating,
-.notable-header--hidden {
-  --notable-header-gutter: clamp(
-    var(--notable-spacing-2),
-    2vw,
-    var(--notable-spacing-6)
-  );
+.one-header--floating,
+.one-header--hidden {
+  --one-header-gutter: clamp(var(--one-spacing-2), 2vw, var(--one-spacing-6));
 
-  margin-inline: var(--notable-header-gutter);
-  border-radius: var(--notable-radius-lg);
+  margin-inline: var(--one-header-gutter);
+  border-radius: var(--one-radius-lg);
   border-block-end-color: transparent;
   background: color-mix(
     in srgb,
-    var(--notable-color-surface-floating) 80%,
+    var(--one-color-surface-floating) 80%,
     transparent
   );
-  box-shadow: var(--notable-shadow-sm);
-  transform: translateY(var(--notable-header-inset));
+  box-shadow: var(--one-shadow-sm);
+  transform: translateY(var(--one-header-inset));
 }
 
-.notable-header--floating {
-  backdrop-filter: blur(var(--notable-blur-medium));
+.one-header--floating {
+  backdrop-filter: blur(var(--one-blur-medium));
 }
 
-.notable-header--hidden {
+.one-header--hidden {
   transform: translateY(
-    calc(-100% - var(--notable-header-inset) - var(--notable-spacing-4))
+    calc(-100% - var(--one-header-inset) - var(--one-spacing-4))
   );
-  transition-duration: var(--notable-duration-exit);
-  transition-timing-function: var(--notable-easing-emphasized-accelerate);
+  transition-duration: var(--one-duration-exit);
+  transition-timing-function: var(--one-easing-emphasized-accelerate);
 }
 
 @supports not (backdrop-filter: blur(1px)) {
-  .notable-header--floating {
-    background: var(--notable-color-surface-floating);
+  .one-header--floating {
+    background: var(--one-color-surface-floating);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .notable-header--dynamic {
+  .one-header--dynamic {
     transition: none;
   }
 }

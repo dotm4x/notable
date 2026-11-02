@@ -32,9 +32,7 @@ const CollapsibleRoot = forwardRef<HTMLDivElement, CollapsibleProps>(
     { className, open, defaultOpen, onOpenChange, disabled = false, ...props },
     ref,
   ) {
-    const classes = ['notable-collapsible', className]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-collapsible', className].filter(Boolean).join(' ');
 
     return (
       <BaseCollapsible.Root
@@ -54,7 +52,7 @@ const CollapsibleTrigger = forwardRef<
   HTMLButtonElement,
   CollapsibleTriggerProps
 >(function CollapsibleTrigger({ className, type = 'button', ...props }, ref) {
-  const classes = ['notable-collapsible__trigger', className]
+  const classes = ['one-collapsible__trigger', className]
     .filter(Boolean)
     .join(' ');
 
@@ -70,15 +68,12 @@ const CollapsibleTrigger = forwardRef<
 
 const CollapsibleContent = forwardRef<HTMLDivElement, CollapsibleContentProps>(
   function CollapsibleContent({ className, children, ...props }, ref) {
-    const classes = ['notable-collapsible__content-inner', className]
+    const classes = ['one-collapsible__content-inner', className]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <BaseCollapsible.Panel
-        className="notable-collapsible__content"
-        keepMounted
-      >
+      <BaseCollapsible.Panel className="one-collapsible__content" keepMounted>
         <div {...props} ref={ref} className={classes}>
           {children}
         </div>

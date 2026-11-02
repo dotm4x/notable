@@ -33,9 +33,9 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const classes = [
-    'notable-badge',
-    `notable-badge--${variant}`,
-    `notable-badge--${size}`,
+    'one-badge',
+    `one-badge--${variant}`,
+    `one-badge--${size}`,
     className,
   ]
     .filter(Boolean)

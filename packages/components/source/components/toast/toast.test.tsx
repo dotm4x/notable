@@ -65,8 +65,8 @@ describe('Toast', () => {
 
       fireEvent.click(screen.getByRole('button', { name: 'Show variant' }));
       const notification = await screen.findByText(variant);
-      expect(notification.closest('.notable-toast')).toHaveClass(
-        `notable-toast--${variant}`,
+      expect(notification.closest('.one-toast')).toHaveClass(
+        `one-toast--${variant}`,
       );
     },
   );
@@ -76,10 +76,10 @@ describe('Toast', () => {
     const id = toast.loading('Uploading files...');
 
     const loadingText = await screen.findByText('Uploading files...');
-    const loadingToast = loadingText.closest('.notable-toast');
+    const loadingToast = loadingText.closest('.one-toast');
     toast.update(id, { title: 'Upload complete', variant: 'success' });
     const updatedTitle = await screen.findByText('Upload complete');
-    expect(updatedTitle.closest('.notable-toast')).toBe(loadingToast);
+    expect(updatedTitle.closest('.one-toast')).toBe(loadingToast);
 
     toast.dismiss(id);
     await waitFor(() =>
@@ -126,7 +126,7 @@ describe('Toast', () => {
     expect(await screen.findByText('Newer notification')).toBeInTheDocument();
     await waitFor(() =>
       expect(
-        screen.getByText('Older notification').closest('.notable-toast'),
+        screen.getByText('Older notification').closest('.one-toast'),
       ).toHaveAttribute('data-limited'),
     );
   });
@@ -143,13 +143,13 @@ describe('Toast', () => {
 
     controller.toast('First toast');
     const first = (await screen.findByText('First toast')).closest(
-      '.notable-toast',
+      '.one-toast',
     );
     expect(first).toHaveStyle('--toast-index: 0');
 
     fireEvent.click(screen.getByRole('button', { name: 'Add toast' }));
     const second = (await screen.findByText('Second toast')).closest(
-      '.notable-toast',
+      '.one-toast',
     );
     await waitFor(() => expect(first).toHaveStyle('--toast-index: 1'));
     expect(second).toHaveStyle('--toast-index: 0');
