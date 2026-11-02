@@ -45,6 +45,9 @@ jobs:
       - name: Build icons
         run: pnpm --filter @one/icons build
 
+      - name: Build components
+        run: pnpm --filter @one/components build
+
       - name: Typecheck
         run: pnpm typecheck
 
