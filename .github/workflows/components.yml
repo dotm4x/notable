@@ -7,14 +7,14 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
-      - '.github/workflows/react.yml'
+      - '.github/workflows/components.yml'
   pull_request:
     paths:
       - 'packages/components/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
-      - '.github/workflows/react.yml'
+      - '.github/workflows/components.yml'
 
 permissions:
   contents: read
