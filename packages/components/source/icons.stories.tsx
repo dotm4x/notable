@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import * as IconModule from '@one/icons';
 import { Button } from './components/button/button.js';
+import { ControlGroup } from './components/control-group/control-group.js';
 import { Input } from './components/input/input.js';
 import { Select } from './components/select/select.js';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -69,31 +70,33 @@ function IconsPreviewer() {
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', padding: 16 }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
-        <Input
-          type="search"
-          aria-label="Search icons"
-          placeholder="Search icons..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          style={{ minWidth: 220 }}
-        />
-        <Select.Root value={category} onValueChange={(v) => setCategory(v ?? 'all')}>
-          <Select.Trigger aria-label="Category" style={{ minWidth: 160 }}>
-            <Select.Value />
-            <Select.Icon />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.List>
-              {categories.map((c) => (
-                <Select.Item key={c} value={c}>
-                  {c}
-                </Select.Item>
-              ))}
-            </Select.List>
-          </Select.Content>
-        </Select.Root>
-        <span style={{ alignSelf: 'center', fontSize: 12, color: '#666' }}>
+      <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+        <ControlGroup>
+          <Input
+            type="search"
+            aria-label="Search icons"
+            placeholder="Search icons..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            style={{ minWidth: 220 }}
+          />
+          <Select.Root value={category} onValueChange={(v) => setCategory(v ?? 'all')}>
+            <Select.Trigger aria-label="Category" style={{ minWidth: 160 }}>
+              <Select.Value />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.List>
+                {categories.map((c) => (
+                  <Select.Item key={c} value={c}>
+                    {c}
+                  </Select.Item>
+                ))}
+              </Select.List>
+            </Select.Content>
+          </Select.Root>
+        </ControlGroup>
+        <span style={{ fontSize: 12, color: '#666' }}>
           {filtered.length} / {iconEntries.length}
         </span>
       </div>
