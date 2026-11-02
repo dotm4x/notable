@@ -12,12 +12,19 @@ type TIconEntry = {
   category: string;
 };
 
-const metadataModules = (import.meta as any).glob(
-  '../../icons/source/icons/svg/*/icon.json',
-  {
-    eager: true,
-  },
-) as Record<
+const metadataModules = (
+  import.meta as unknown as {
+    glob: (
+      pattern: string,
+      options: { eager: true },
+    ) => Record<
+      string,
+      { default?: { categories?: string[] } } & { categories?: string[] }
+    >;
+  }
+).glob('../../icons/source/icons/svg/*/icon.json', {
+  eager: true,
+}) as Record<
   string,
   { default?: { categories?: string[] } } & { categories?: string[] }
 >;
