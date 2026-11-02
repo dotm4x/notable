@@ -23,7 +23,11 @@ for (const [path, mod] of Object.entries(metadataModules)) {
 }
 
 const iconEntries: TIconEntry[] = Object.entries(IconModule)
-  .filter(([name, value]) => typeof value === 'function' && name !== 'Icon' && name !== 'createIcon')
+  .filter(([name, value]) => {
+    if (name === 'Icon' || name === 'createIcon') return false;
+    if (!value || typeof value !== 'object') return false;
+    return true;
+  })
   .map(([name, Component]) => ({
     name,
     Component: Component as TIconEntry['Component'],
