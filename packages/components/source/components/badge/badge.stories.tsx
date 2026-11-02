@@ -1,6 +1,5 @@
 import {
-  AlertCircle,
-  Check,
+  TriangleAlert,  Check,
   CircleHelp,
   Clock,
   Info,
@@ -115,8 +114,7 @@ export const Icons: Story = {
         Pending
       </Badge>
       <Badge variant="danger">
-        <AlertCircle aria-hidden="true" />
-        Needs attention
+        <TriangleAlert aria-hidden="true" />        Needs attention
       </Badge>
       <Badge variant="info">
         <Info aria-hidden="true" />
