@@ -1,6 +1,6 @@
 # One
 
-**One for the web.**
+**One design for the web.**
 
 A unified design system bringing together a cohesive design language, expressive components, and carefully crafted icons. Everything is designed to work together, helping you build consistent, accessible, and beautiful interfaces.
 
