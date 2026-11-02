@@ -2,24 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "file-video",
   "description": "Video file icon for media clips and recordings.",
-  "keywords": [
-    "file",
-    "video",
-    "movie",
-    "media",
-    "clip"
-  ],
-  "categories": [
-    "files",
-    "media"
-  ],
-  "aliases": [
-    "video-file",
-    "movie"
-  ],
-  "useCases": [
-    "video file",
-    "clip",
-    "recording"
-  ]
+  "keywords": ["file", "video", "movie", "media", "clip"],
+  "categories": ["files", "media"],
+  "aliases": ["video-file", "movie"],
+  "useCases": ["video file", "clip", "recording"]
 }

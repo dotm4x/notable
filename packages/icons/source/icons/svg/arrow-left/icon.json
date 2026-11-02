@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "arrow-left",
   "description": "arrow-left icon.",
-  "keywords": [
-    "arrow-left"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["arrow-left"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "arrow-left icon usage"
-  ],
+  "useCases": ["arrow-left icon usage"],
   "contributors": []
 }

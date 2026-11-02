@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "arrow-up",
   "description": "arrow-up icon.",
-  "keywords": [
-    "arrow-up"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["arrow-up"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "arrow-up icon usage"
-  ],
+  "useCases": ["arrow-up icon usage"],
   "contributors": []
 }

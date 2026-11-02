@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "minimize",
   "description": "minimize icon.",
-  "keywords": [
-    "minimize"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["minimize"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "minimize icon usage"
-  ],
+  "useCases": ["minimize icon usage"],
   "contributors": []
 }

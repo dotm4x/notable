@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "bold",
   "description": "bold icon.",
-  "keywords": [
-    "bold"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["bold"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "bold icon usage"
-  ],
+  "useCases": ["bold icon usage"],
   "contributors": []
 }

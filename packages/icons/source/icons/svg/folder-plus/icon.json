@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "folder-plus",
   "description": "folder-plus icon.",
-  "keywords": [
-    "folder-plus"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["folder-plus"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "folder-plus icon usage"
-  ],
+  "useCases": ["folder-plus icon usage"],
   "contributors": []
 }

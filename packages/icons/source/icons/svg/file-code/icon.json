@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "file-code",
   "description": "file-code icon.",
-  "keywords": [
-    "file-code"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["file-code"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "file-code icon usage"
-  ],
+  "useCases": ["file-code icon usage"],
   "contributors": []
 }

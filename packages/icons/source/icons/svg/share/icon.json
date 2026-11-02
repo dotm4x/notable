@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "share",
   "description": "share icon.",
-  "keywords": [
-    "share"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["share"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "share icon usage"
-  ],
+  "useCases": ["share icon usage"],
   "contributors": []
 }

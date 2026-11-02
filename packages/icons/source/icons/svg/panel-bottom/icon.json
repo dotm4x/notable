@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "panel-bottom",
   "description": "panel-bottom icon.",
-  "keywords": [
-    "panel-bottom"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["panel-bottom"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "panel-bottom icon usage"
-  ],
+  "useCases": ["panel-bottom icon usage"],
   "contributors": []
 }

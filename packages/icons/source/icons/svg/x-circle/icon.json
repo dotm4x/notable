@@ -2,25 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "x-circle",
   "description": "Circular close icon for errors and removal.",
-  "keywords": [
-    "x",
-    "circle",
-    "close",
-    "error",
-    "remove",
-    "cancel"
-  ],
-  "categories": [
-    "actions",
-    "status"
-  ],
-  "aliases": [
-    "close-circle",
-    "error"
-  ],
-  "useCases": [
-    "error state",
-    "close",
-    "remove"
-  ]
+  "keywords": ["x", "circle", "close", "error", "remove", "cancel"],
+  "categories": ["actions", "status"],
+  "aliases": ["close-circle", "error"],
+  "useCases": ["error state", "close", "remove"]
 }

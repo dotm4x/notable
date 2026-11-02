@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "external-link",
   "description": "external-link icon.",
-  "keywords": [
-    "external-link"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["external-link"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "external-link icon usage"
-  ],
+  "useCases": ["external-link icon usage"],
   "contributors": []
 }

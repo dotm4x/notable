@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "box",
   "description": "box icon.",
-  "keywords": [
-    "box"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["box"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "box icon usage"
-  ],
+  "useCases": ["box icon usage"],
   "contributors": []
 }

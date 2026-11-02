@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "maximize",
   "description": "maximize icon.",
-  "keywords": [
-    "maximize"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["maximize"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "maximize icon usage"
-  ],
+  "useCases": ["maximize icon usage"],
   "contributors": []
 }

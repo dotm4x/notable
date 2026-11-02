@@ -2,25 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "ellipsis",
   "description": "Ellipsis icon for overflow menus and additional options.",
-  "keywords": [
-    "ellipsis",
-    "more",
-    "menu",
-    "options",
-    "overflow"
-  ],
-  "categories": [
-    "ui",
-    "navigation"
-  ],
-  "aliases": [
-    "more",
-    "dots",
-    "kebab"
-  ],
-  "useCases": [
-    "overflow menu",
-    "more actions",
-    "truncation"
-  ]
+  "keywords": ["ellipsis", "more", "menu", "options", "overflow"],
+  "categories": ["ui", "navigation"],
+  "aliases": ["more", "dots", "kebab"],
+  "useCases": ["overflow menu", "more actions", "truncation"]
 }

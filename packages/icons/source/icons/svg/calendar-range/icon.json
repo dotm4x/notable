@@ -2,23 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "calendar-range",
   "description": "Calendar with range selection for date ranges and periods.",
-  "keywords": [
-    "calendar",
-    "range",
-    "period",
-    "date range",
-    "range picker"
-  ],
-  "categories": [
-    "time",
-    "planning"
-  ],
-  "aliases": [
-    "date-range"
-  ],
-  "useCases": [
-    "date range selection",
-    "booking periods",
-    "reports"
-  ]
+  "keywords": ["calendar", "range", "period", "date range", "range picker"],
+  "categories": ["time", "planning"],
+  "aliases": ["date-range"],
+  "useCases": ["date range selection", "booking periods", "reports"]
 }

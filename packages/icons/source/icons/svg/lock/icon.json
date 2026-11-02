@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "lock",
   "description": "lock icon.",
-  "keywords": [
-    "lock"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["lock"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "lock icon usage"
-  ],
+  "useCases": ["lock icon usage"],
   "contributors": []
 }

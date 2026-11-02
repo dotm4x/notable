@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "check-check",
   "description": "check-check icon.",
-  "keywords": [
-    "check-check"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["check-check"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "check-check icon usage"
-  ],
+  "useCases": ["check-check icon usage"],
   "contributors": []
 }

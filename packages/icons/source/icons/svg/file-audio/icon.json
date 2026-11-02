@@ -2,25 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "file-audio",
   "description": "Audio file icon for sound and music attachments.",
-  "keywords": [
-    "file",
-    "audio",
-    "sound",
-    "music",
-    "mp3",
-    "media"
-  ],
-  "categories": [
-    "files",
-    "media"
-  ],
-  "aliases": [
-    "audio-file",
-    "music-file"
-  ],
-  "useCases": [
-    "audio file",
-    "podcast",
-    "sound clip"
-  ]
+  "keywords": ["file", "audio", "sound", "music", "mp3", "media"],
+  "categories": ["files", "media"],
+  "aliases": ["audio-file", "music-file"],
+  "useCases": ["audio file", "podcast", "sound clip"]
 }

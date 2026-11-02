@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "circle-plus",
   "description": "circle-plus icon.",
-  "keywords": [
-    "circle-plus"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["circle-plus"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "circle-plus icon usage"
-  ],
+  "useCases": ["circle-plus icon usage"],
   "contributors": []
 }

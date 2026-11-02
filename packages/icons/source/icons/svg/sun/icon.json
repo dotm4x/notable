@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "sun",
   "description": "sun icon.",
-  "keywords": [
-    "sun"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["sun"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "sun icon usage"
-  ],
+  "useCases": ["sun icon usage"],
   "contributors": []
 }

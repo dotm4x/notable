@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "italic",
   "description": "italic icon.",
-  "keywords": [
-    "italic"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["italic"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "italic icon usage"
-  ],
+  "useCases": ["italic icon usage"],
   "contributors": []
 }

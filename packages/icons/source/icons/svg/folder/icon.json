@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "folder",
   "description": "folder icon.",
-  "keywords": [
-    "folder"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["folder"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "folder icon usage"
-  ],
+  "useCases": ["folder icon usage"],
   "contributors": []
 }

@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "settings",
   "description": "settings icon.",
-  "keywords": [
-    "settings"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["settings"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "settings icon usage"
-  ],
+  "useCases": ["settings icon usage"],
   "contributors": []
 }

@@ -2,24 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "bell",
   "description": "Bell icon representing notifications, alerts, and reminders.",
-  "keywords": [
-    "bell",
-    "notification",
-    "alert",
-    "ring",
-    "reminder"
-  ],
-  "categories": [
-    "communication",
-    "ui"
-  ],
-  "aliases": [
-    "notification",
-    "alert-bell"
-  ],
-  "useCases": [
-    "notification badge",
-    "alerts",
-    "reminders"
-  ]
+  "keywords": ["bell", "notification", "alert", "ring", "reminder"],
+  "categories": ["communication", "ui"],
+  "aliases": ["notification", "alert-bell"],
+  "useCases": ["notification badge", "alerts", "reminders"]
 }

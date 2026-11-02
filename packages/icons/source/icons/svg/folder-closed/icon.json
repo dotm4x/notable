@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "folder-closed",
   "description": "folder-closed icon.",
-  "keywords": [
-    "folder-closed"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["folder-closed"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "folder-closed icon usage"
-  ],
+  "useCases": ["folder-closed icon usage"],
   "contributors": []
 }

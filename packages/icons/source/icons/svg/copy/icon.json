@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "copy",
   "description": "copy icon.",
-  "keywords": [
-    "copy"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["copy"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "copy icon usage"
-  ],
+  "useCases": ["copy icon usage"],
   "contributors": []
 }

@@ -2,24 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "chevrons-right",
   "description": "Double right chevron for skipping to the last item or page.",
-  "keywords": [
-    "chevrons",
-    "right",
-    "last",
-    "skip",
-    "next"
-  ],
-  "categories": [
-    "navigation",
-    "ui"
-  ],
-  "aliases": [
-    "double-arrow-right",
-    "last"
-  ],
-  "useCases": [
-    "go to last page",
-    "skip forward",
-    "pagination"
-  ]
+  "keywords": ["chevrons", "right", "last", "skip", "next"],
+  "categories": ["navigation", "ui"],
+  "aliases": ["double-arrow-right", "last"],
+  "useCases": ["go to last page", "skip forward", "pagination"]
 }

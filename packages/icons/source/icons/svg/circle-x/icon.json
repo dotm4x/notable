@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "circle-x",
   "description": "circle-x icon.",
-  "keywords": [
-    "circle-x"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["circle-x"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "circle-x icon usage"
-  ],
+  "useCases": ["circle-x icon usage"],
   "contributors": []
 }

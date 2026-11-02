@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "grip",
   "description": "grip icon.",
-  "keywords": [
-    "grip"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["grip"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "grip icon usage"
-  ],
+  "useCases": ["grip icon usage"],
   "contributors": []
 }

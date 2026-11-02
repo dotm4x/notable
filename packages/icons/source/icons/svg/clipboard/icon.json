@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "clipboard",
   "description": "clipboard icon.",
-  "keywords": [
-    "clipboard"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["clipboard"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "clipboard icon usage"
-  ],
+  "useCases": ["clipboard icon usage"],
   "contributors": []
 }

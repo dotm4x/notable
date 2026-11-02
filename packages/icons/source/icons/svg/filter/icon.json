@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "filter",
   "description": "filter icon.",
-  "keywords": [
-    "filter"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["filter"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "filter icon usage"
-  ],
+  "useCases": ["filter icon usage"],
   "contributors": []
 }

@@ -2,25 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "laptop",
   "description": "Laptop icon for devices and computers.",
-  "keywords": [
-    "laptop",
-    "computer",
-    "device",
-    "screen"
-  ],
-  "categories": [
-    "devices",
-    "ui"
-  ],
+  "keywords": ["laptop", "computer", "device", "screen"],
+  "categories": ["devices", "ui"],
   "tags": [],
-  "aliases": [
-    "computer",
-    "notebook"
-  ],
-  "useCases": [
-    "device selector",
-    "hardware",
-    "responsive preview"
-  ],
+  "aliases": ["computer", "notebook"],
+  "useCases": ["device selector", "hardware", "responsive preview"],
   "contributors": []
 }

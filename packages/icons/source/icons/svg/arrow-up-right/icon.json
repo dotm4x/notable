@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "arrow-up-right",
   "description": "arrow-up-right icon.",
-  "keywords": [
-    "arrow-up-right"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["arrow-up-right"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "arrow-up-right icon usage"
-  ],
+  "useCases": ["arrow-up-right icon usage"],
   "contributors": []
 }

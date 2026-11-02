@@ -12,16 +12,24 @@ type TIconEntry = {
   category: string;
 };
 
-const metadataModules = (import.meta as any).glob('../../icons/source/icons/svg/*/icon.json', {
-  eager: true,
-}) as Record<string, { default?: { categories?: string[] } } & { categories?: string[] }>;
+const metadataModules = (import.meta as any).glob(
+  '../../icons/source/icons/svg/*/icon.json',
+  {
+    eager: true,
+  },
+) as Record<
+  string,
+  { default?: { categories?: string[] } } & { categories?: string[] }
+>;
 
 const categoryByName = new Map<string, string>();
 for (const [path, mod] of Object.entries(metadataModules)) {
   const match = path.match(/svg\/([^/]+)\/icon\.json$/);
   if (!match) continue;
   const name = match[1];
-  const data = (mod as { default?: { categories?: string[] } }).default ?? (mod as { categories?: string[] });
+  const data =
+    (mod as { default?: { categories?: string[] } }).default ??
+    (mod as { categories?: string[] });
   const category = data?.categories?.[0] ?? 'ui';
   categoryByName.set(name, category);
 }
@@ -35,7 +43,12 @@ const iconEntries: TIconEntry[] = Object.entries(IconModule)
   .map(([name, Component]) => ({
     name,
     Component: Component as TIconEntry['Component'],
-    category: categoryByName.get(name.replace(/([A-Z])/g, (m, c, i) => (i ? '-' : '') + c.toLowerCase()).replace(/^-/, '')) ?? 'ui',
+    category:
+      categoryByName.get(
+        name
+          .replace(/([A-Z])/g, (m, c, i) => (i ? '-' : '') + c.toLowerCase())
+          .replace(/^-/, ''),
+      ) ?? 'ui',
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -45,7 +58,10 @@ function IconsPreviewer() {
   const [copied, setCopied] = useState<string | null>(null);
 
   const categories = useMemo(
-    () => ['all', ...Array.from(new Set(iconEntries.map((e) => e.category))).sort()],
+    () => [
+      'all',
+      ...Array.from(new Set(iconEntries.map((e) => e.category))).sort(),
+    ],
     [],
   );
 
@@ -54,7 +70,10 @@ function IconsPreviewer() {
     return iconEntries.filter((entry) => {
       if (category !== 'all' && entry.category !== category) return false;
       if (!q) return true;
-      return entry.name.toLowerCase().includes(q) || entry.category.toLowerCase().includes(q);
+      return (
+        entry.name.toLowerCase().includes(q) ||
+        entry.category.toLowerCase().includes(q)
+      );
     });
   }, [query, category]);
 
@@ -70,8 +89,19 @@ function IconsPreviewer() {
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', padding: 16 }}>
-      <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-        <Select.Root value={category} onValueChange={(v) => setCategory(v ?? 'all')}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 12,
+          marginBottom: 16,
+          flexWrap: 'wrap',
+          alignItems: 'center',
+        }}
+      >
+        <Select.Root
+          value={category}
+          onValueChange={(v) => setCategory(v ?? 'all')}
+        >
           <ControlGroup>
             <Input
               type="search"
@@ -121,11 +151,22 @@ function IconsPreviewer() {
               gap: 4,
               height: 'auto',
               padding: 8,
-              background: copied === name ? 'var(--one-surface-raised, #f0f9ff)' : undefined,
+              background:
+                copied === name
+                  ? 'var(--one-surface-raised, #f0f9ff)'
+                  : undefined,
             }}
           >
             <Component size={20} />
-            <span style={{ fontSize: 10, wordBreak: 'break-all', textAlign: 'center' }}>{name}</span>
+            <span
+              style={{
+                fontSize: 10,
+                wordBreak: 'break-all',
+                textAlign: 'center',
+              }}
+            >
+              {name}
+            </span>
           </Button>
         ))}
       </div>

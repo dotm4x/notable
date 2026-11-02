@@ -2,24 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "file",
   "description": "Generic file icon for documents and attachments.",
-  "keywords": [
-    "file",
-    "document",
-    "page",
-    "paper",
-    "blank"
-  ],
-  "categories": [
-    "files",
-    "content"
-  ],
-  "aliases": [
-    "document",
-    "page"
-  ],
-  "useCases": [
-    "file item",
-    "document",
-    "attachment"
-  ]
+  "keywords": ["file", "document", "page", "paper", "blank"],
+  "categories": ["files", "content"],
+  "aliases": ["document", "page"],
+  "useCases": ["file item", "document", "attachment"]
 }

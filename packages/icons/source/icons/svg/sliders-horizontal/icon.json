@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "sliders-horizontal",
   "description": "sliders-horizontal icon.",
-  "keywords": [
-    "sliders-horizontal"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["sliders-horizontal"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "sliders-horizontal icon usage"
-  ],
+  "useCases": ["sliders-horizontal icon usage"],
   "contributors": []
 }

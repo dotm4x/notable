@@ -2,25 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "plus",
   "description": "Plus icon for adding, creating, or increasing.",
-  "keywords": [
-    "plus",
-    "add",
-    "create",
-    "new",
-    "increase"
-  ],
-  "categories": [
-    "actions",
-    "ui"
-  ],
-  "aliases": [
-    "add",
-    "create",
-    "new"
-  ],
-  "useCases": [
-    "add item",
-    "create new",
-    "increment"
-  ]
+  "keywords": ["plus", "add", "create", "new", "increase"],
+  "categories": ["actions", "ui"],
+  "aliases": ["add", "create", "new"],
+  "useCases": ["add item", "create new", "increment"]
 }

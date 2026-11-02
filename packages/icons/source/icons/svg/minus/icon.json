@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "minus",
   "description": "minus icon.",
-  "keywords": [
-    "minus"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["minus"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "minus icon usage"
-  ],
+  "useCases": ["minus icon usage"],
   "contributors": []
 }

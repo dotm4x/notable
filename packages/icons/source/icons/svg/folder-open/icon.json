@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "folder-open",
   "description": "folder-open icon.",
-  "keywords": [
-    "folder-open"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["folder-open"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "folder-open icon usage"
-  ],
+  "useCases": ["folder-open icon usage"],
   "contributors": []
 }

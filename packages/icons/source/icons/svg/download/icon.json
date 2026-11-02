@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "download",
   "description": "download icon.",
-  "keywords": [
-    "download"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["download"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "download icon usage"
-  ],
+  "useCases": ["download icon usage"],
   "contributors": []
 }

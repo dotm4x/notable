@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "user-plus",
   "description": "user-plus icon.",
-  "keywords": [
-    "user-plus"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["user-plus"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "user-plus icon usage"
-  ],
+  "useCases": ["user-plus icon usage"],
   "contributors": []
 }

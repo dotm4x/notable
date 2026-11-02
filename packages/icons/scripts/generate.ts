@@ -164,7 +164,13 @@ function generateComponent(
   const nodeLiteral = nodes
     .map(([tag, attrs]) => {
       const attrEntries = Object.entries(attrs)
-        .map(([key, value]) => `      ${key}: ${JSON.stringify(value)},`)
+        .map(([key, value]) => {
+          const formatted =
+            typeof value === 'string'
+              ? `'${value.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`
+              : JSON.stringify(value);
+          return `      ${key}: ${formatted},`;
+        })
         .join('\n');
       return `  [\n    '${tag}',\n    {\n${attrEntries}\n    },\n  ],`;
     })

@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "layout-grid",
   "description": "layout-grid icon.",
-  "keywords": [
-    "layout-grid"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["layout-grid"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "layout-grid icon usage"
-  ],
+  "useCases": ["layout-grid icon usage"],
   "contributors": []
 }

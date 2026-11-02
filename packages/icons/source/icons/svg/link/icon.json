@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "link",
   "description": "link icon.",
-  "keywords": [
-    "link"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["link"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "link icon usage"
-  ],
+  "useCases": ["link icon usage"],
   "contributors": []
 }

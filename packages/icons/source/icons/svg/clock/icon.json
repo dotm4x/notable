@@ -2,25 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "clock",
   "description": "Clock icon for time, duration, and deadlines.",
-  "keywords": [
-    "clock",
-    "time",
-    "hour",
-    "minute",
-    "schedule",
-    "duration"
-  ],
-  "categories": [
-    "time",
-    "status"
-  ],
-  "aliases": [
-    "time",
-    "hourglass"
-  ],
-  "useCases": [
-    "time display",
-    "duration",
-    "deadline"
-  ]
+  "keywords": ["clock", "time", "hour", "minute", "schedule", "duration"],
+  "categories": ["time", "status"],
+  "aliases": ["time", "hourglass"],
+  "useCases": ["time display", "duration", "deadline"]
 }

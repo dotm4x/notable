@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "music",
   "description": "music icon.",
-  "keywords": [
-    "music"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["music"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "music icon usage"
-  ],
+  "useCases": ["music icon usage"],
   "contributors": []
 }

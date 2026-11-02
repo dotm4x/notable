@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "panel-right",
   "description": "panel-right icon.",
-  "keywords": [
-    "panel-right"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["panel-right"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "panel-right icon usage"
-  ],
+  "useCases": ["panel-right icon usage"],
   "contributors": []
 }

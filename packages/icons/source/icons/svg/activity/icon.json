@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "activity",
   "description": "activity icon.",
-  "keywords": [
-    "activity"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["activity"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "activity icon usage"
-  ],
+  "useCases": ["activity icon usage"],
   "contributors": []
 }

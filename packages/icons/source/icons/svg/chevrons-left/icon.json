@@ -2,24 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "chevrons-left",
   "description": "Double left chevron for skipping to the first item or page.",
-  "keywords": [
-    "chevrons",
-    "left",
-    "first",
-    "skip",
-    "previous"
-  ],
-  "categories": [
-    "navigation",
-    "ui"
-  ],
-  "aliases": [
-    "double-arrow-left",
-    "first"
-  ],
-  "useCases": [
-    "go to first page",
-    "skip back",
-    "pagination"
-  ]
+  "keywords": ["chevrons", "left", "first", "skip", "previous"],
+  "categories": ["navigation", "ui"],
+  "aliases": ["double-arrow-left", "first"],
+  "useCases": ["go to first page", "skip back", "pagination"]
 }

@@ -2,16 +2,10 @@
   "$schema": "../../metadata.schema.json",
   "name": "image",
   "description": "image icon.",
-  "keywords": [
-    "image"
-  ],
-  "categories": [
-    "ui"
-  ],
+  "keywords": ["image"],
+  "categories": ["ui"],
   "tags": [],
   "aliases": [],
-  "useCases": [
-    "image icon usage"
-  ],
+  "useCases": ["image icon usage"],
   "contributors": []
 }

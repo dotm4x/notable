@@ -2,26 +2,8 @@
   "$schema": "../../metadata.schema.json",
   "name": "check",
   "description": "Checkmark indicating success, confirmation, or completion.",
-  "keywords": [
-    "check",
-    "tick",
-    "confirm",
-    "done",
-    "success",
-    "yes"
-  ],
-  "categories": [
-    "status",
-    "ui"
-  ],
-  "aliases": [
-    "tick",
-    "done",
-    "success"
-  ],
-  "useCases": [
-    "success state",
-    "checkbox",
-    "confirmation"
-  ]
+  "keywords": ["check", "tick", "confirm", "done", "success", "yes"],
+  "categories": ["status", "ui"],
+  "aliases": ["tick", "done", "success"],
+  "useCases": ["success state", "checkbox", "confirmation"]
 }
