@@ -1,5 +1,7 @@
 export * from './internal/helpers/create-icon.js';
 export * from './internal/primitives/icon.js';
+export * from './icons/sparkles/index.js';
+export * from './icons/alert-circle/index.js';
 export * from './icons/user-plus/index.js';
 export * from './icons/search-x/index.js';
 export * from './icons/inbox/index.js';

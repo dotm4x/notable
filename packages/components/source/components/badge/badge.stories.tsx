@@ -2,7 +2,7 @@ import {
   AlertCircle,
   Check,
   CircleHelp,
-  Clock3,
+  Clock,
   Info,
   Sparkles,
 } from '@notable/icons';
@@ -111,7 +111,7 @@ export const Icons: Story = {
         Complete
       </Badge>
       <Badge variant="warning">
-        <Clock3 aria-hidden="true" />
+        <Clock aria-hidden="true" />
         Pending
       </Badge>
       <Badge variant="danger">
