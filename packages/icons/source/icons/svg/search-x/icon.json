@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "search-x",
+  "description": "search-x icon.",
+  "keywords": [
+    "search-x"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "search-x icon usage"
+  ],
+  "contributors": []
+}

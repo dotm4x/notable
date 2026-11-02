@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle-ellipsis",
+  "description": "circle-ellipsis icon.",
+  "keywords": [
+    "circle-ellipsis"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "circle-ellipsis icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "square-pen",
+  "description": "square-pen icon.",
+  "keywords": [
+    "square-pen"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "square-pen icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "at-sign",
+  "description": "at-sign icon.",
+  "keywords": [
+    "at-sign"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "at-sign icon usage"
+  ],
+  "contributors": []
+}

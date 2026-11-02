@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "archive",
+  "description": "archive icon.",
+  "keywords": [
+    "archive"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "archive icon usage"
+  ],
+  "contributors": []
+}

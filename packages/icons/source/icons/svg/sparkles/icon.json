@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "sparkles",
+  "description": "sparkles icon.",
+  "keywords": [
+    "sparkles"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "sparkles icon usage"
+  ],
+  "contributors": []
+}

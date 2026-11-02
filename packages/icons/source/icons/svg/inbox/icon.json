@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "inbox",
+  "description": "inbox icon.",
+  "keywords": [
+    "inbox"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "inbox icon usage"
+  ],
+  "contributors": []
+}

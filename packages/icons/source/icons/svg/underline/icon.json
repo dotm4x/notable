@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "underline",
+  "description": "underline icon.",
+  "keywords": [
+    "underline"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "underline icon usage"
+  ],
+  "contributors": []
+}

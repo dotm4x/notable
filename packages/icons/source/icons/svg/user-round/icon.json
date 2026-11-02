@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "user-round",
+  "description": "user-round icon.",
+  "keywords": [
+    "user-round"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "user-round icon usage"
+  ],
+  "contributors": []
+}

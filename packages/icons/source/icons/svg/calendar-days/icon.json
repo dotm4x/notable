@@ -1,0 +1,27 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "calendar-days",
+  "description": "Calendar with day grid for date selection and scheduling.",
+  "keywords": [
+    "calendar",
+    "days",
+    "date",
+    "schedule",
+    "grid"
+  ],
+  "categories": [
+    "time",
+    "planning"
+  ],
+  "tags": [],
+  "aliases": [
+    "calendar-grid",
+    "date-picker"
+  ],
+  "useCases": [
+    "date picker",
+    "event scheduling",
+    "calendar view"
+  ],
+  "contributors": []
+}

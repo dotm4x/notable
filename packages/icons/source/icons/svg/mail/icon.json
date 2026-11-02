@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "mail",
+  "description": "mail icon.",
+  "keywords": [
+    "mail"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "mail icon usage"
+  ],
+  "contributors": []
+}

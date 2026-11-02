@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "moon",
+  "description": "moon icon.",
+  "keywords": [
+    "moon"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "moon icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle-help",
+  "description": "circle-help icon.",
+  "keywords": [
+    "circle-help"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "circle-help icon usage"
+  ],
+  "contributors": []
+}

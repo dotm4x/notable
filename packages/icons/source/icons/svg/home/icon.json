@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "home",
+  "description": "home icon.",
+  "keywords": [
+    "home"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "home icon usage"
+  ],
+  "contributors": []
+}
