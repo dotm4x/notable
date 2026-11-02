@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
 import * as IconModule from '@one/icons';
+import { Button } from './components/button/button.js';
+import { Input } from './components/input/input.js';
+import { Select } from './components/select/select.js';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type TIconEntry = {
@@ -67,21 +70,29 @@ function IconsPreviewer() {
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', padding: 16 }}>
       <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
-        <input
+        <Input
           type="search"
           aria-label="Search icons"
           placeholder="Search icons..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          style={{ padding: '6px 8px', minWidth: 220 }}
+          style={{ minWidth: 220 }}
         />
-        <select aria-label="Category" value={category} onChange={(e) => setCategory(e.target.value)} style={{ padding: '6px 8px' }}>
-          {categories.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
+        <Select.Root value={category} onValueChange={(v) => setCategory(v ?? 'all')}>
+          <Select.Trigger aria-label="Category" style={{ minWidth: 160 }}>
+            <Select.Value />
+            <Select.Icon />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.List>
+              {categories.map((c) => (
+                <Select.Item key={c} value={c}>
+                  {c}
+                </Select.Item>
+              ))}
+            </Select.List>
+          </Select.Content>
+        </Select.Root>
         <span style={{ alignSelf: 'center', fontSize: 12, color: '#666' }}>
           {filtered.length} / {iconEntries.length}
         </span>
@@ -94,9 +105,10 @@ function IconsPreviewer() {
         }}
       >
         {filtered.map(({ name, Component, category: cat }) => (
-          <button
+          <Button
             key={name}
-            type="button"
+            variant="ghost"
+            size="small"
             onClick={() => handleCopy(name)}
             title={`${name} (${cat})`}
             style={{
@@ -104,16 +116,14 @@ function IconsPreviewer() {
               flexDirection: 'column',
               alignItems: 'center',
               gap: 4,
+              height: 'auto',
               padding: 8,
-              border: '1px solid #e5e5e5',
-              background: copied === name ? '#f0f9ff' : '#fff',
-              cursor: 'pointer',
-              font: 'inherit',
+              background: copied === name ? 'var(--one-surface-raised, #f0f9ff)' : undefined,
             }}
           >
             <Component size={20} />
             <span style={{ fontSize: 10, wordBreak: 'break-all', textAlign: 'center' }}>{name}</span>
-          </button>
+          </Button>
         ))}
       </div>
     </div>
