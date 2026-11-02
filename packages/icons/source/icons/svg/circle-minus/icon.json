@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle-minus",
+  "description": "circle-minus icon.",
+  "keywords": [
+    "circle-minus"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "circle-minus icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "video",
+  "description": "video icon.",
+  "keywords": [
+    "video"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "video icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "check-circle",
+  "description": "check-circle icon.",
+  "keywords": [
+    "check-circle"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "check-circle icon usage"
+  ],
+  "contributors": []
+}

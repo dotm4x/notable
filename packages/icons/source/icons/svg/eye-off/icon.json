@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "eye-off",
+  "description": "eye-off icon.",
+  "keywords": [
+    "eye-off"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "eye-off icon usage"
+  ],
+  "contributors": []
+}

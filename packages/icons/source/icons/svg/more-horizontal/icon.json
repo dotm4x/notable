@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "more-horizontal",
+  "description": "more-horizontal icon.",
+  "keywords": [
+    "more-horizontal"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "more-horizontal icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "rotate-ccw",
+  "description": "rotate-ccw icon.",
+  "keywords": [
+    "rotate-ccw"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "rotate-ccw icon usage"
+  ],
+  "contributors": []
+}

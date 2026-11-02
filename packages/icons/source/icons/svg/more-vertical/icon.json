@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "more-vertical",
+  "description": "more-vertical icon.",
+  "keywords": [
+    "more-vertical"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "more-vertical icon usage"
+  ],
+  "contributors": []
+}

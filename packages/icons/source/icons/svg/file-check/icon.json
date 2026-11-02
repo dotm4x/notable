@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-check",
+  "description": "file-check icon.",
+  "keywords": [
+    "file-check"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "file-check icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "trash",
+  "description": "trash icon.",
+  "keywords": [
+    "trash"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "trash icon usage"
+  ],
+  "contributors": []
+}

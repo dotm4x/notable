@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "lock-open",
+  "description": "lock-open icon.",
+  "keywords": [
+    "lock-open"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "lock-open icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "clipboard",
+  "description": "clipboard icon.",
+  "keywords": [
+    "clipboard"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "clipboard icon usage"
+  ],
+  "contributors": []
+}

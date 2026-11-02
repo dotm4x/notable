@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "edit",
+  "description": "edit icon.",
+  "keywords": [
+    "edit"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "edit icon usage"
+  ],
+  "contributors": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "arrow-down",
+  "description": "arrow-down icon.",
+  "keywords": [
+    "arrow-down"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "arrow-down icon usage"
+  ],
+  "contributors": []
+}

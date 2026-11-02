@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "star",
+  "description": "star icon.",
+  "keywords": [
+    "star"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "star icon usage"
+  ],
+  "contributors": []
+}

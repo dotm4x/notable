@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "heart",
+  "description": "heart icon.",
+  "keywords": [
+    "heart"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "heart icon usage"
+  ],
+  "contributors": []
+}

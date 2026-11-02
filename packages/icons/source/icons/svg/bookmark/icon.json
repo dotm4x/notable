@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "bookmark",
+  "description": "bookmark icon.",
+  "keywords": [
+    "bookmark"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "bookmark icon usage"
+  ],
+  "contributors": []
+}

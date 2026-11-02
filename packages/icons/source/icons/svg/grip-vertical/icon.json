@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "grip-vertical",
+  "description": "grip-vertical icon.",
+  "keywords": [
+    "grip-vertical"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "grip-vertical icon usage"
+  ],
+  "contributors": []
+}

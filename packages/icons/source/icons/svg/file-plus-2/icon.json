@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-plus-2",
+  "description": "file-plus-2 icon.",
+  "keywords": [
+    "file-plus-2"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "file-plus-2 icon usage"
+  ],
+  "contributors": []
+}

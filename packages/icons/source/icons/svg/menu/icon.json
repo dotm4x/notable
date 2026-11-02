@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "menu",
+  "description": "menu icon.",
+  "keywords": [
+    "menu"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "menu icon usage"
+  ],
+  "contributors": []
+}

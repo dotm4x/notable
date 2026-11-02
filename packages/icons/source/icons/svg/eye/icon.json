@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "eye",
+  "description": "eye icon.",
+  "keywords": [
+    "eye"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "eye icon usage"
+  ],
+  "contributors": []
+}

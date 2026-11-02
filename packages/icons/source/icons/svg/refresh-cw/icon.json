@@ -1,0 +1,17 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "refresh-cw",
+  "description": "refresh-cw icon.",
+  "keywords": [
+    "refresh-cw"
+  ],
+  "categories": [
+    "ui"
+  ],
+  "tags": [],
+  "aliases": [],
+  "useCases": [
+    "refresh-cw icon usage"
+  ],
+  "contributors": []
+}
