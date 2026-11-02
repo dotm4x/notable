@@ -9,10 +9,10 @@ export default function Page() {
       <SiteHeader />
       <main className="site-main">
         <section className="site-hero" aria-labelledby="hero-heading">
-          <h1 id="hero-heading">The Foundation for modern interfaces</h1>
+          <h1 id="hero-heading">One design for the web.</h1>
           <p>
-            Expressive, accessible components with thoughtful details and a
-            cohesive design language.
+            A cohesive design language, expressive components, and carefully
+            crafted icons. Everything works together.
           </p>
           <HeroActions />
         </section>
