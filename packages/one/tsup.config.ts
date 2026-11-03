@@ -11,4 +11,5 @@ export default defineConfig({
   clean: true,
   external: ['react'],
   outDir: 'dist',
+  onSuccess: 'cat dist/components/index.css >> dist/index.css',
 });
