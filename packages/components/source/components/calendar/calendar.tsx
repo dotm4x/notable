@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from '@one/icons';
+import { ChevronLeft, ChevronRight } from '../../icons';
 import {
   AnimatePresence,
   motion,

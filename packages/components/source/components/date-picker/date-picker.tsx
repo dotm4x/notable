@@ -1,4 +1,4 @@
-import { Calendar as CalendarIcon } from '@one/icons';
+import { Calendar as CalendarIcon } from '../../icons';
 import {
   forwardRef,
   useId,

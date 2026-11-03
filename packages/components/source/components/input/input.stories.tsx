@@ -1,4 +1,4 @@
-import { AtSign, Search, X } from '@one/icons';
+import { AtSign, Search, X } from '../../icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Button } from '../button/button.js';

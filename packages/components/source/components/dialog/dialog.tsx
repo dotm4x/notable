@@ -1,6 +1,6 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
 import type { BaseUIEvent } from '@base-ui/react/types';
-import { X } from '@one/icons';
+import { X } from '../../icons';
 import {
   cloneElement,
   createContext,

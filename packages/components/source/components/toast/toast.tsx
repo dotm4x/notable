@@ -1,6 +1,6 @@
 import { Toast as BaseToast } from '@base-ui/react/toast';
 import type { ToastManager } from '@base-ui/react/toast';
-import { Bell, Check, Info, TriangleAlert, X, XCircle } from '@one/icons';
+import { Bell, Check, Info, TriangleAlert, X, XCircle } from '../../icons';
 import type { ReactNode } from 'react';
 import './toast.css';
 

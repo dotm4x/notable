@@ -1,4 +1,4 @@
-import { Clock as ClockIcon } from '@one/icons';
+import { Clock as ClockIcon } from '../../icons';
 import {
   forwardRef,
   useId,

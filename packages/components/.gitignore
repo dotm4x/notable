@@ -1,0 +1,5 @@
+source/icons/components/
+source/icons/generated.ts
+dist
+storybook-static
+node_modules

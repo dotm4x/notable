@@ -1,5 +1,5 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
-import { Check, ChevronDown, X } from '@one/icons';
+import { Check, ChevronDown, X } from '../../icons';
 import {
   Fragment,
   forwardRef,

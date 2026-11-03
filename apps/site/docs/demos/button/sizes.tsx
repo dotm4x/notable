@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@one/components';
+import { Button } from '@dotm4x/one';
 
 /** Demonstrates available Button sizes. */
 export function ButtonSizesDemo() {

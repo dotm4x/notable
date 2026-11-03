@@ -44,7 +44,7 @@ cd one
 pnpm install
 
 # Run component library build / development
-pnpm --filter @one/components build
+pnpm --filter @dotm4x/one build
 pnpm --filter @one/sandbox dev
 ```
 

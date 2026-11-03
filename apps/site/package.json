@@ -16,8 +16,7 @@
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.15.1",
-    "@one/components": "workspace:*",
-    "@one/icons": "workspace:*",
+    "@dotm4x/one": "workspace:*",
     "next": "^15.1.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"

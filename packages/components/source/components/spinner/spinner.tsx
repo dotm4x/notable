@@ -1,4 +1,4 @@
-import { LoaderCircle } from '@one/icons';
+import { LoaderCircle } from '../../icons';
 import type { HTMLAttributes } from 'react';
 import './spinner.css';
 

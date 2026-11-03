@@ -15,7 +15,7 @@ import {
   Plus,
   Upload,
   X,
-} from '@one/icons';
+} from '../../icons';
 import {
   createContext,
   forwardRef,

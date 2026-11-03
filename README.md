@@ -56,7 +56,7 @@ Located in [`packages/icons`](./packages/icons).
 Install the packages you need using your preferred package manager:
 
 ```sh
-npm install @one/components @one/icons
+npm install @dotm4x/one
 ```
 
 ## Guidelines

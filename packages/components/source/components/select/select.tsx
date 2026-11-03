@@ -1,5 +1,5 @@
 import { Select as BaseSelect } from '@base-ui/react/select';
-import { Check, ChevronDown } from '@one/icons';
+import { Check, ChevronDown } from '../../icons';
 import { AutoSize } from '../../internal/primitives/auto-size/auto-size.js';
 import {
   Children,

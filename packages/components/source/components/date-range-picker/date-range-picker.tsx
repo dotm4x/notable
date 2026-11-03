@@ -1,4 +1,4 @@
-import { CalendarRange, X } from '@one/icons';
+import { CalendarRange, X } from '../../icons';
 import {
   forwardRef,
   useId,

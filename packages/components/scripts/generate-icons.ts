@@ -270,13 +270,10 @@ function main(): void {
     writeFileIfChanged(join(componentDir, 'index.ts'), item.indexContent);
   }
 
-  const generatedBarrel = join(packageRoot, 'source', 'generated.ts');
+  const generatedBarrel = join(packageRoot, 'source', 'icons', 'generated.ts');
   const barrelContent =
     prepared
-      .map(
-        (item) =>
-          `export * from './icons/components/${item.iconName}/index.js';`,
-      )
+      .map((item) => `export * from './components/${item.iconName}/index.js';`)
       .sort()
       .join('\n') + '\n';
   writeFileIfChanged(generatedBarrel, barrelContent);

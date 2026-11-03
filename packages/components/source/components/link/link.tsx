@@ -1,5 +1,5 @@
 import { forwardRef, type AnchorHTMLAttributes } from 'react';
-import { ArrowRight } from '@one/icons';
+import { ArrowRight } from '../../icons';
 import './link.css';
 
 /** Props for {@link Link}. Accepts all native anchor attributes. */

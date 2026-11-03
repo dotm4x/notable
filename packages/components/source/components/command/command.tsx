@@ -1,5 +1,5 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete';
-import { Search } from '@one/icons';
+import { Search } from '../../icons';
 import {
   createContext,
   forwardRef,

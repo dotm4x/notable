@@ -1,4 +1,4 @@
-import { CircleHelp, UserRound } from '@one/icons';
+import { CircleHelp, UserRound } from '../../icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Avatar } from './avatar.js';
 

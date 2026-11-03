@@ -1,11 +1,11 @@
-# @one/components
+# @dotm4x/one
 
 A collection of expressive, thoughtfully crafted components built for React around the One design language.
 
 ## Installation
 
 ```sh
-npm install @one/components
+npm install @dotm4x/one
 ```
 
 React and React DOM 18 or 19 are required as peer dependencies.
@@ -13,11 +13,16 @@ React and React DOM 18 or 19 are required as peer dependencies.
 ## Usage
 
 ```tsx
-import { Button } from '@one/components';
-import '@one/components/styles.css';
+import { Button } from '@dotm4x/one';
+import { Plus } from '@dotm4x/one/icons';
+import '@dotm4x/one/styles.css';
 
 export function Example() {
-  return <Button>Get started</Button>;
+  return (
+    <Button>
+      <Plus /> Get started
+    </Button>
+  );
 }
 ```
 

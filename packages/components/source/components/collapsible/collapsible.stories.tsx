@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChevronDown, Minus, Plus } from '@one/icons';
+import { ChevronDown, Minus, Plus } from '../../icons';
 import { Collapsible } from './collapsible.js';
 
 const meta = {

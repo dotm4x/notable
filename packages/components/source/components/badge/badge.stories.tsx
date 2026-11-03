@@ -5,7 +5,7 @@ import {
   Clock,
   Info,
   Sparkles,
-} from '@one/icons';
+} from '../../icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge, type BadgeVariant } from './badge.js';
 

@@ -1,6 +1,6 @@
 import { useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
-import { ChevronDown } from '@one/icons';
+import { ChevronDown } from '../../icons';
 import './accordion.css';
 
 type AccordionBaseProps = {

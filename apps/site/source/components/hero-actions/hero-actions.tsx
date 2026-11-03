@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@one/components';
+import { Button } from '@dotm4x/one';
 import './hero-actions.css';
 
 export function HeroActions() {

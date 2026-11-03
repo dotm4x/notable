@@ -1,5 +1,5 @@
 {
-  "name": "@one/components",
+  "name": "@dotm4x/one",
   "version": "0.1.0",
   "description": "A collection of thoughtfully crafted, expressive React components for the web.",
   "license": "MIT",
@@ -35,6 +35,16 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./icons": {
+      "import": {
+        "types": "./dist/icons/index.d.ts",
+        "default": "./dist/icons/index.js"
+      },
+      "require": {
+        "types": "./dist/icons/index.d.cts",
+        "default": "./dist/icons/index.cjs"
+      }
+    },
     "./styles.css": "./dist/index.css"
   },
   "files": [
@@ -50,7 +60,8 @@
     "test:storybook": "vitest run --project=storybook",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "prebuild": "pnpm --filter @one/icons build"
+    "generate:icons": "node --experimental-strip-types scripts/generate-icons.ts",
+    "prebuild": "node -e \"const fs=require('node:fs'); fs.rmSync('source/icons/components', { recursive: true, force: true }); fs.rmSync('source/icons/generated.ts', { force: true });\" && npm run generate:icons"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
@@ -65,6 +76,8 @@
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.8",
     "@types/node": "^24.19.2",
+    "ajv": "^8.20.0",
+    "fast-xml-parser": "^5.11.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
@@ -82,7 +95,6 @@
   "dependencies": {
     "@base-ui/react": "^1.9.0",
     "@fontsource-variable/geist": "^5.3.0",
-    "motion": "^14.6.0",
-    "@one/icons": "workspace:*"
+    "motion": "^14.6.0"
   }
 }

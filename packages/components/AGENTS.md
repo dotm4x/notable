@@ -483,9 +483,9 @@ Rules:
 
 ## 8. Icons
 
-**Use `@one/icons` for all interface icons.**
+**Use `@dotm4x/one/icons` for all interface icons.**
 
-- Import icons from the existing `@one/icons` package.
+- Import icons from the existing `@dotm4x/one/icons` package.
 - Do not introduce additional icon libraries.
 - Do not substitute emoji, Unicode symbols, arbitrary text characters, or handcrafted icon glyphs for interface icons.
 - Use consistent icon sizing, alignment, stroke treatment, and spacing.
@@ -979,7 +979,7 @@ The public API should describe One, not reveal how One happens to be implemented
 - Inspect existing dependencies before introducing a new one.
 - Prefer existing dependencies when they adequately satisfy the requirement.
 - Use Base UI for justified complex interactions, not simple presentational elements.
-- Use `@one/icons` for all interface icons.
+- Use `@dotm4x/one/icons` for all interface icons.
 - Use the existing Motion, testing, and Storybook infrastructure where appropriate.
 - Keep runtime and development dependencies correctly classified.
 - Preserve required React peer dependency constraints.

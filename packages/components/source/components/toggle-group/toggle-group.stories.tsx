@@ -1,4 +1,4 @@
-import { Bold, Italic, Underline } from '@one/icons';
+import { Bold, Italic, Underline } from '../../icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ToggleGroup } from './toggle-group.js';
 

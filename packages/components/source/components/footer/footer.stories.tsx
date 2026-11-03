@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Mail } from '@one/icons';
+import { Mail } from '../../icons';
 import { Button } from '../button/button.js';
 import { Link } from '../link/link.js';
 import { Footer } from './footer.js';

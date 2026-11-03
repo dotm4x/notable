@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Info } from '@one/icons';
+import { Info } from '../../icons';
 import { useState } from 'react';
 import { Button } from '../button/button.js';
 import { Input } from '../input/input.js';

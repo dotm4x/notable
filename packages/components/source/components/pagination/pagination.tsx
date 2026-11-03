@@ -10,7 +10,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from '@one/icons';
+} from '../../icons';
 import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import { getPaginationRange } from './pagination-range.js';
 import './pagination.css';

@@ -8,7 +8,7 @@ import {
   Settings,
   SquarePen,
   UserRound,
-} from '@one/icons';
+} from '../../icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Avatar } from '../avatar/avatar.js';

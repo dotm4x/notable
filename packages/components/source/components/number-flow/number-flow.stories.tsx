@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Minus, Plus } from '@one/icons';
+import { Minus, Plus } from '../../icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../button/button.js';
 import { NumberFlow } from './number-flow.js';

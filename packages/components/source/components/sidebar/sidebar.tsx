@@ -21,7 +21,7 @@ import {
   type ReactNode,
   type RefAttributes,
 } from 'react';
-import { ChevronDown, PanelLeft } from '@one/icons';
+import { ChevronDown, PanelLeft } from '../../icons';
 import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js';
 import { Button, type ButtonProps } from '../button/button.js';
 import { Collapsible } from '../collapsible/collapsible.js';

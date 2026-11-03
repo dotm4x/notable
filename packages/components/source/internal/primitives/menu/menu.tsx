@@ -1,6 +1,6 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu';
 import { Menu as BaseMenu } from '@base-ui/react/menu';
-import { Check, ChevronRight, Circle } from '@one/icons';
+import { Check, ChevronRight, Circle } from '../../../icons';
 import {
   createContext,
   forwardRef,

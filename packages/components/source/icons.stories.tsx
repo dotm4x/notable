@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import * as IconModule from '@one/icons';
+import * as IconModule from './icons';
 import { Button } from './components/button/button.js';
 import { ControlGroup } from './components/control-group/control-group.js';
 import { Input } from './components/input/input.js';

@@ -1,4 +1,4 @@
-import { Folder, Home } from '@one/icons';
+import { Folder, Home } from '../../icons';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
