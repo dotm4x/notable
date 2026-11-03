@@ -2,7 +2,7 @@ import { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Empty } from './empty.js';
-import { Empty as PublicEmpty } from '../../index.js';
+import { Empty as PublicEmpty } from '../../components/index.js';
 
 describe('Empty', () => {
   it('renders a div with the empty class by default', () => {

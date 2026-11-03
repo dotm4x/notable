@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Avatar } from './avatar.js';
 import { AvatarGroup } from './avatar-group.js';
-import { AvatarGroup as PublicAvatarGroup } from '../../index.js';
+import { AvatarGroup as PublicAvatarGroup } from '../../components/index.js';
 
 const avatars = ['Max', 'Alex', 'Sam', 'Taylor'].map((name) => (
   <Avatar key={name} data-testid={`avatar-${name}`}>

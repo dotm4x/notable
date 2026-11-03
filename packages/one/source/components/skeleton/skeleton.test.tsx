@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { Skeleton } from './skeleton.js';
-import { Skeleton as PublicSkeleton } from '../../index.js';
+import { Skeleton as PublicSkeleton } from '../../components/index.js';
 
 function renderSkeleton(
   props: Parameters<typeof Skeleton>[0] = {},

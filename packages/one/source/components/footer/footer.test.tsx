@@ -3,7 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Footer } from './footer.js';
 import { Link } from '../link/link.js';
-import { Footer as PublicFooter } from '../../index.js';
+import { Footer as PublicFooter } from '../../components/index.js';
 
 describe('Footer', () => {
   it('renders a footer element with the footer class', () => {

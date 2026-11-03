@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { createToastController, toast, ToastProvider } from './toast.js';
-import { toast as PublicToast } from '../../index.js';
+import { toast as PublicToast } from '../../components/index.js';
 
 describe('Toast', () => {
   it('names each viewport by its position so independent regions stay distinct', () => {

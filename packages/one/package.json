@@ -35,6 +35,16 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./components": {
+      "import": {
+        "types": "./dist/components/index.d.ts",
+        "default": "./dist/components/index.js"
+      },
+      "require": {
+        "types": "./dist/components/index.d.cts",
+        "default": "./dist/components/index.cjs"
+      }
+    },
     "./icons": {
       "import": {
         "types": "./dist/icons/index.d.ts",

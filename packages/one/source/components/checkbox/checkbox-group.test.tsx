@@ -7,7 +7,7 @@ import { CheckboxGroup } from './checkbox-group.js';
 import {
   Checkbox as PublicCheckbox,
   CheckboxGroup as PublicCheckboxGroup,
-} from '../../index.js';
+} from '../../components/index.js';
 
 function NotificationGroup(props: {
   defaultValue?: readonly string[];

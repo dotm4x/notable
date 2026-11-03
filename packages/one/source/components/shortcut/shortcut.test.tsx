@@ -2,7 +2,7 @@ import { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Shortcut, type ShortcutProps } from './shortcut.js';
-import { Shortcut as PublicShortcut } from '../../index.js';
+import { Shortcut as PublicShortcut } from '../../components/index.js';
 
 describe('Shortcut', () => {
   it('renders its children in a semantic kbd element', () => {

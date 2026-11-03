@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { CircleHelp } from '../../icons';
 import { describe, expect, it, vi } from 'vitest';
 import { Avatar } from './avatar.js';
-import { Avatar as PublicAvatar } from '../../index.js';
+import { Avatar as PublicAvatar } from '../../components/index.js';
 
 describe('Avatar', () => {
   it('renders a default fallback icon', () => {

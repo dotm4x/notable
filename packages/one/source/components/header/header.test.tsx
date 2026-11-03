@@ -2,7 +2,7 @@ import { createRef, type ReactNode } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Header } from './header.js';
-import { Header as PublicHeader } from '../../index.js';
+import { Header as PublicHeader } from '../../components/index.js';
 
 function scrollTo(y: number) {
   act(() => {

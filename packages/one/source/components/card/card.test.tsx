@@ -2,7 +2,7 @@ import { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Card } from './card.js';
-import { Card as PublicCard } from '../../index.js';
+import { Card as PublicCard } from '../../components/index.js';
 
 describe('Card', () => {
   it('renders a div with the card class by default', () => {

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Check, CircleHelp } from '../../icons';
 import { describe, expect, it } from 'vitest';
 import { Badge } from './badge.js';
-import { Badge as PublicBadge } from '../../index.js';
+import { Badge as PublicBadge } from '../../components/index.js';
 
 describe('Badge', () => {
   it('defaults to the default variant and medium size', () => {

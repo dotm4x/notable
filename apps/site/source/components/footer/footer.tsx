@@ -1,6 +1,6 @@
 'use client';
 
-import { Footer, Link } from '@dotm4x/one';
+import { Footer, Link } from '@dotm4x/one/components';
 import './footer.css';
 
 export function SiteFooter() {

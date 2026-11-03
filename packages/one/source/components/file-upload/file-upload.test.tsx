@@ -13,7 +13,7 @@ import {
   type TFileUploadMode,
   type TFileUploadRejection,
 } from './file-upload.js';
-import { FileUpload as PublicFileUpload } from '../../index.js';
+import { FileUpload as PublicFileUpload } from '../../components/index.js';
 
 const MODES: TFileUploadMode[] = ['dropzone', 'compact', 'inline', 'media'];
 

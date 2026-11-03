@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import { ToggleGroup } from '../../index.js';
+import { ToggleGroup } from '../../components/index.js';
 
 describe('ToggleGroup', () => {
   it('animates group items on press', async () => {

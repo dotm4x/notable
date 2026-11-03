@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Progress, type ProgressSize } from './progress.js';
-import { Progress as PublicProgress } from '../../index.js';
+import { Progress as PublicProgress } from '../../components/index.js';
 
 function renderProgress(
   props: Parameters<typeof Progress>[0] = {},

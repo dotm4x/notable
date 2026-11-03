@@ -1,6 +1,10 @@
 # @dotm4x/one
 
-A collection of expressive, thoughtfully crafted components built for React around the One design language.
+**One design for the web.**
+
+A unified design system bringing together a cohesive design language, expressive React components, and carefully crafted icons. Everything is designed to work together, helping you build consistent, accessible, and beautiful interfaces.
+
+One is more than a component library. It provides foundations, principles, patterns, and tools for creating thoughtful web experiences.
 
 ## Installation
 
@@ -13,7 +17,7 @@ React and React DOM 18 or 19 are required as peer dependencies.
 ## Usage
 
 ```tsx
-import { Button } from '@dotm4x/one';
+import { Button } from '@dotm4x/one/components';
 import { Plus } from '@dotm4x/one/icons';
 import '@dotm4x/one/styles.css';
 
@@ -26,6 +30,23 @@ export function Example() {
 }
 ```
 
+## What's included
+
+- **Components** — Accessible, customizable React components with thoughtful defaults, expressive visuals, and purposeful interactions, available through the `@dotm4x/one/components` subpath (and the package root).
+- **Icons** — A collection of consistent icons available through the `@dotm4x/one/icons` subpath.
+- **Styles** — Shared design tokens and component styles via `@dotm4x/one/styles.css`.
+
+## Design language
+
+One is built around four dimensions:
+
+- **Foundations** — Color, typography, spacing, shape, elevation, focus, and motion.
+- **Principles** — The ideas and values that guide design decisions.
+- **Patterns** — Shared approaches to interaction, selection, loading, and interface states.
+- **Components** — Consistent visual and behavioral building blocks.
+
+Explore the full design guidelines in the repository for foundations, principles, patterns, and conventions.
+
 ## License
 
-This project is licensed under the MIT License, see the [LICENSE](LICENSE) for more information.
+One is available under the [MIT License](./LICENSE).

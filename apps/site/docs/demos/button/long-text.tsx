@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@dotm4x/one';
+import { Button } from '@dotm4x/one/components';
 
 /** Demonstrates Button with longer label. */
 export function ButtonLongTextDemo() {

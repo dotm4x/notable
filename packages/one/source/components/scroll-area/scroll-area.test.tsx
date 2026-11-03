@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createRef } from 'react';
 import { ScrollArea } from './scroll-area.js';
-import { ScrollArea as PublicScrollArea } from '../../index.js';
+import { ScrollArea as PublicScrollArea } from '../../components/index.js';
 
 function mockOverflow({
   scrollHeight,

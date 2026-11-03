@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { NumberFlow } from './number-flow.js';
-import { NumberFlow as PublicNumberFlow } from '../../index.js';
+import { NumberFlow as PublicNumberFlow } from '../../components/index.js';
 
 function getDigitValues(container: HTMLElement): number[] {
   return Array.from(

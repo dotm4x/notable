@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Spinner } from './spinner.js';
-import { Spinner as PublicSpinner } from '../../index.js';
+import { Spinner as PublicSpinner } from '../../components/index.js';
 
 describe('Spinner', () => {
   it('renders a status with the default accessible label and size', () => {

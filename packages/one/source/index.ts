@@ -1,3 +1,3 @@
 import './styles/index.css';
 
-export * from './components/index.js';
+export {};

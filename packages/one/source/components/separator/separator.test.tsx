@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Separator } from './separator.js';
-import { Separator as PublicSeparator } from '../../index.js';
+import { Separator as PublicSeparator } from '../../components/index.js';
 
 function renderSeparator(
   props: Parameters<typeof Separator>[0] = {},

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { animate as motionAnimate } from 'motion/react';
 import { Tabs } from './tabs.js';
-import { Tabs as PublicTabs } from '../../index.js';
+import { Tabs as PublicTabs } from '../../components/index.js';
 
 vi.mock('motion/react', async (importOriginal) => {
   const actual = await importOriginal<typeof import('motion/react')>();

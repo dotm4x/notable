@@ -4,7 +4,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { Slider } from './slider.js';
-import { Slider as PublicSlider } from '../../index.js';
+import { Slider as PublicSlider } from '../../components/index.js';
 
 const sliderStylesheet = readFileSync(
   path.join(import.meta.dirname, 'slider.css'),

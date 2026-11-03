@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Header, NavigationMenu } from '@dotm4x/one';
+import { Button, Header, NavigationMenu } from '@dotm4x/one/components';
 import { Moon, Sun } from '@dotm4x/one/icons';
 import { useState } from 'react';
 import './header.css';

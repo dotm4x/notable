@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Spinner } from '@dotm4x/one';
+import { Button, Spinner } from '@dotm4x/one/components';
 
 /** Demonstrates loading state Buttons. */
 export function ButtonLoadingDemo() {
