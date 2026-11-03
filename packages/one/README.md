@@ -32,7 +32,7 @@ export function Example() {
 
 ## What's included
 
-- **Components** — Accessible, customizable React components with thoughtful defaults, expressive visuals, and purposeful interactions, available through the `@dotm4x/one/components` subpath (and the package root).
+- **Components** — Accessible, customizable React components with thoughtful defaults, expressive visuals, and purposeful interactions, available through the `@dotm4x/one/components` subpath.
 - **Icons** — A collection of consistent icons available through the `@dotm4x/one/icons` subpath.
 - **Styles** — Shared design tokens and component styles via `@dotm4x/one/styles.css`.
 
