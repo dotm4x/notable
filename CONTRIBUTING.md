@@ -20,7 +20,7 @@ This guide outlines our core principles, development workflow, and coding standa
 One is organized as a monorepo managed with `pnpm` workspaces:
 
 - **[`docs/guidelines/`](./docs/guidelines/):** Design language documentation (principles, foundations, patterns, and component guidelines).
-- **[`packages/components/`](./packages/components/):** The core React component library.
+- **[`packages/one/`](./packages/one/):** The core React component library.
 - **[`apps/site/`](./apps/site/):** Next.js documentation and marketing site.
 - **[`apps/docs/`](./apps/docs/):** Astro documentation site.
 

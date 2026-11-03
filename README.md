@@ -41,7 +41,7 @@ It is built around four dimensions:
 
 It provides accessible, customizable components with thoughtful defaults, expressive visuals, and purposeful interactions.
 
-Located in [`packages/components`](./packages/components).
+Located in [`packages/one`](./packages/one).
 
 ## Icons
 

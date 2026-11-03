@@ -204,7 +204,7 @@ importers:
     dependencies:
       '@dotm4x/one':
         specifier: workspace:*
-        version: link:../../packages/components
+        version: link:../../packages/one
       '@icons-pack/react-simple-icons':
         specifier: ^13.15.1
         version: 13.15.1(react@19.3.1)
@@ -228,7 +228,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/components:
+  packages/one:
     dependencies:
       '@base-ui/react':
         specifier: ^1.9.0

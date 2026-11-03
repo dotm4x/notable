@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dotm4x/one.git",
-    "directory": "packages/components"
+    "directory": "packages/one"
   },
   "homepage": "https://github.com/dotm4x/one#readme",
   "bugs": {

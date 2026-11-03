@@ -8,7 +8,7 @@
 
 **Tech Stack:** CSS custom properties, pnpm, Vitest, TypeScript, tsup.
 
-**Spec:** `docs/guidelines/foundations/{values,colors,spacing,shape,typography,focus}.md`; `packages/components/AGENTS.md` §6.
+**Spec:** `docs/guidelines/foundations/{values,colors,spacing,shape,typography,focus}.md`; `packages/one/AGENTS.md` §6.
 
 ## Global Constraints
 
@@ -33,26 +33,26 @@
 
 **Files:**
 
-- Modify `packages/components/source/components/accordion/accordion.css`
-- Modify `packages/components/source/components/breadcrumb/breadcrumb.css`
-- Modify `packages/components/source/components/button/button.css`
-- Modify `packages/components/source/components/calendar/calendar.css`
-- Modify `packages/components/source/components/checkbox/checkbox.css`
-- Modify `packages/components/source/components/collapsible/collapsible.css`
-- Modify `packages/components/source/components/combobox/combobox.css`
-- Modify `packages/components/source/components/file-upload/file-upload.css`
-- Modify `packages/components/source/components/link/link.css`
-- Modify `packages/components/source/components/navigation-menu/navigation-menu.css`
-- Modify `packages/components/source/components/pagination/pagination.css`
-- Modify `packages/components/source/components/radio-group/radio-group.css`
-- Modify `packages/components/source/components/scroll-area/scroll-area.css`
-- Modify `packages/components/source/components/segmented-control/segmented-control.css`
-- Modify `packages/components/source/components/slider/slider.css`
-- Modify `packages/components/source/components/switch/switch.css`
-- Modify `packages/components/source/components/tabs/tabs.css`
-- Modify `packages/components/source/components/toast/toast.css`
-- Modify `packages/components/source/components/toggle/toggle.css`
-- Modify `packages/components/source/internal/primitives/menu/menu.css`
+- Modify `packages/one/source/components/accordion/accordion.css`
+- Modify `packages/one/source/components/breadcrumb/breadcrumb.css`
+- Modify `packages/one/source/components/button/button.css`
+- Modify `packages/one/source/components/calendar/calendar.css`
+- Modify `packages/one/source/components/checkbox/checkbox.css`
+- Modify `packages/one/source/components/collapsible/collapsible.css`
+- Modify `packages/one/source/components/combobox/combobox.css`
+- Modify `packages/one/source/components/file-upload/file-upload.css`
+- Modify `packages/one/source/components/link/link.css`
+- Modify `packages/one/source/components/navigation-menu/navigation-menu.css`
+- Modify `packages/one/source/components/pagination/pagination.css`
+- Modify `packages/one/source/components/radio-group/radio-group.css`
+- Modify `packages/one/source/components/scroll-area/scroll-area.css`
+- Modify `packages/one/source/components/segmented-control/segmented-control.css`
+- Modify `packages/one/source/components/slider/slider.css`
+- Modify `packages/one/source/components/switch/switch.css`
+- Modify `packages/one/source/components/tabs/tabs.css`
+- Modify `packages/one/source/components/toast/toast.css`
+- Modify `packages/one/source/components/toggle/toggle.css`
+- Modify `packages/one/source/internal/primitives/menu/menu.css`
 
 - [x] Run a static scan and confirm the focus-outline literals and radio indicator's 2px border are present.
 - [x] Replace focus and border widths with `var(--one-border-width)`; use it for the Slider/Tabs 2px stroke dimensions and Segmented Control's inner-radius subtraction too. Leave outline offsets unchanged because they describe placement, not stroke width.
@@ -62,26 +62,26 @@
 
 **Files:**
 
-- Modify `packages/components/source/components/accordion/accordion.css`
-- Modify `packages/components/source/components/avatar/avatar.css`
-- Modify `packages/components/source/components/avatar/avatar-group.css`
-- Modify `packages/components/source/components/button/button.css`
-- Modify `packages/components/source/components/calendar/calendar.css`
-- Modify `packages/components/source/components/checkbox/checkbox.css`
-- Modify `packages/components/source/components/empty/empty.css`
-- Modify `packages/components/source/components/pagination/pagination.css`
-- Modify `packages/components/source/components/progress/progress.css`
-- Modify `packages/components/source/components/radio-group/radio-group.css`
-- Modify `packages/components/source/components/segmented-control/segmented-control.css`
-- Modify `packages/components/source/components/shortcut/shortcut.css`
-- Modify `packages/components/source/components/skeleton/skeleton.css`
-- Modify `packages/components/source/components/slider/slider.css`
-- Modify `packages/components/source/components/switch/switch.css`
-- Modify `packages/components/source/components/tabs/tabs.css`
-- Modify `packages/components/source/components/time-picker/time-picker.css`
-- Modify `packages/components/source/components/toggle/toggle.css`
-- Modify `packages/components/source/components/tooltip/tooltip.css`
-- Modify `packages/components/source/internal/primitives/menu/menu.css`
+- Modify `packages/one/source/components/accordion/accordion.css`
+- Modify `packages/one/source/components/avatar/avatar.css`
+- Modify `packages/one/source/components/avatar/avatar-group.css`
+- Modify `packages/one/source/components/button/button.css`
+- Modify `packages/one/source/components/calendar/calendar.css`
+- Modify `packages/one/source/components/checkbox/checkbox.css`
+- Modify `packages/one/source/components/empty/empty.css`
+- Modify `packages/one/source/components/pagination/pagination.css`
+- Modify `packages/one/source/components/progress/progress.css`
+- Modify `packages/one/source/components/radio-group/radio-group.css`
+- Modify `packages/one/source/components/segmented-control/segmented-control.css`
+- Modify `packages/one/source/components/shortcut/shortcut.css`
+- Modify `packages/one/source/components/skeleton/skeleton.css`
+- Modify `packages/one/source/components/slider/slider.css`
+- Modify `packages/one/source/components/switch/switch.css`
+- Modify `packages/one/source/components/tabs/tabs.css`
+- Modify `packages/one/source/components/time-picker/time-picker.css`
+- Modify `packages/one/source/components/toggle/toggle.css`
+- Modify `packages/one/source/components/tooltip/tooltip.css`
+- Modify `packages/one/source/internal/primitives/menu/menu.css`
 
 - [x] Run a static scan to record exact literals matching the existing spacing scale in layout, size, and component custom-property declarations.
 - [x] Replace those exact matches with their `--one-spacing-*` token; leave non-scale values and text-relative values unchanged.
@@ -91,9 +91,9 @@
 
 **Files:**
 
-- Modify `packages/components/source/components/breadcrumb/breadcrumb.css`
-- Modify `packages/components/source/components/link/link.css`
-- Modify `packages/components/source/components/scroll-area/scroll-area.css`
+- Modify `packages/one/source/components/breadcrumb/breadcrumb.css`
+- Modify `packages/one/source/components/link/link.css`
+- Modify `packages/one/source/components/scroll-area/scroll-area.css`
 
 - [x] Confirm the breadcrumb's 500 weight matches `--one-font-weight-medium` and the scroll masks' `#000` matches the invariant `--one-black` primitive.
 - [x] Replace those literals with the corresponding existing tokens; use `--one-radius-xs` for the Link's 2px radius, which is outside the documented radius family.
