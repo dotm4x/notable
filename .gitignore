@@ -5,3 +5,7 @@ storybook-static
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
 __pycache__
+
+# Next.js
+.next
+apps/site/tmp/
