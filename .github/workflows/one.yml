@@ -1,27 +1,27 @@
-name: React Components
+name: One
 
 on:
   push:
     paths:
-      - 'packages/components/**'
+      - 'packages/one/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
-      - '.github/workflows/components.yml'
+      - '.github/workflows/one.yml'
   pull_request:
     paths:
-      - 'packages/components/**'
+      - 'packages/one/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
-      - '.github/workflows/components.yml'
+      - '.github/workflows/one.yml'
 
 permissions:
   contents: read
 
 jobs:
   validate:
-    name: Validate React components
+    name: Validate One
     runs-on: ubuntu-latest
 
     steps:
