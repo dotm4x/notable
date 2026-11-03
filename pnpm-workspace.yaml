@@ -1,7 +1,6 @@
 packages:
   - apps/*
-  - packages/components
-  - packages/icons
+  - packages/one
 
 allowBuilds:
   esbuild: true

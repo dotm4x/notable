@@ -1,7 +1,7 @@
 'use client';
 
-import { Plus } from '@one/icons';
-import { Button } from '@one/components';
+import { Plus } from '@dotm4x/one/icons';
+import { Button } from '@dotm4x/one/components';
 
 /** Demonstrates Button with leading icon. */
 export function ButtonWithIconDemo() {

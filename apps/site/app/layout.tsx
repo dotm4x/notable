@@ -1,4 +1,4 @@
-import '@one/components/styles.css';
+import '@dotm4x/one/styles.css';
 import '../source/styles/index.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';

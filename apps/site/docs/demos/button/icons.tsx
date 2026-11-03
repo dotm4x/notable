@@ -1,7 +1,7 @@
 'use client';
 
-import { CircleEllipsis, Plus, Search } from '@one/icons';
-import { Button } from '@one/components';
+import { CircleEllipsis, Plus, Search } from '@dotm4x/one/icons';
+import { Button } from '@dotm4x/one/components';
 
 /** Demonstrates icon-only Button sizes and variants. */
 export function ButtonIconsDemo() {

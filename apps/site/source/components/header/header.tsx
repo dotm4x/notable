@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Header, NavigationMenu } from '@one/components';
-import { Moon, Sun } from '@one/icons';
+import { Button, Header, NavigationMenu } from '@dotm4x/one/components';
+import { Moon, Sun } from '@dotm4x/one/icons';
 import { useState } from 'react';
 import './header.css';
 import { SiGithub } from '@icons-pack/react-simple-icons';
