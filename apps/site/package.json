@@ -17,7 +17,7 @@
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.15.1",
     "@one/components": "workspace:*",
-    "lucide-react": "^1.61.0",
+    "@one/icons": "workspace:*",
     "next": "^15.1.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"

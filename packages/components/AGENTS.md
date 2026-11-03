@@ -483,9 +483,9 @@ Rules:
 
 ## 8. Icons
 
-**Use `lucide-react` for all interface icons.**
+**Use `@one/icons` for all interface icons.**
 
-- Import icons from the existing `lucide-react` dependency.
+- Import icons from the existing `@one/icons` package.
 - Do not introduce additional icon libraries.
 - Do not substitute emoji, Unicode symbols, arbitrary text characters, or handcrafted icon glyphs for interface icons.
 - Use consistent icon sizing, alignment, stroke treatment, and spacing.
@@ -493,7 +493,7 @@ Rules:
 - Keep icons decorative when they add no information of their own.
 - Ensure icon-only interactive controls have an accessible name through an appropriate label or accessible text.
 - Do not use an icon as the sole accessible name when it has no meaningful text alternative.
-- Prefer existing Lucide icons over custom SVGs when a suitable icon exists.
+- Prefer existing One icons over custom SVGs when a suitable icon exists.
 - Keep icon selection appropriate to the meaning and context of the control.
 
 An icon should communicate the intended action or meaning clearly. Do not add icons merely for decoration when they reduce clarity or consistency.
@@ -888,7 +888,7 @@ Choose stories that demonstrate the public contract clearly and reveal meaningfu
 - Use autodocs where supported and consistent with the installed configuration.
 - Keep component metadata and story examples synchronized with the public API.
 - Use real component implementations rather than duplicating component logic in stories.
-- Reuse existing One components, design tokens, and Lucide icons.
+- Reuse existing One components, design tokens, and One icons.
 - Avoid emoji and arbitrary placeholder glyphs when an appropriate icon is available.
 
 ### Story naming and documentation standards
@@ -979,7 +979,7 @@ The public API should describe One, not reveal how One happens to be implemented
 - Inspect existing dependencies before introducing a new one.
 - Prefer existing dependencies when they adequately satisfy the requirement.
 - Use Base UI for justified complex interactions, not simple presentational elements.
-- Use `lucide-react` for all interface icons.
+- Use `@one/icons` for all interface icons.
 - Use the existing Motion, testing, and Storybook infrastructure where appropriate.
 - Keep runtime and development dependencies correctly classified.
 - Preserve required React peer dependency constraints.

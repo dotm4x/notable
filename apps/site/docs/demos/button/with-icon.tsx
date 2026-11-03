@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus } from 'lucide-react';
+import { Plus } from '@one/icons';
 import { Button } from '@one/components';
 
 /** Demonstrates Button with leading icon. */
