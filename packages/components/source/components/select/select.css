@@ -32,7 +32,7 @@
 .one-select__trigger:focus-visible {
   outline: none;
   border-color: var(--one-color-focus);
-  box-shadow: 0 0 0 4px var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
 }
 
 .one-select__trigger[data-disabled] {

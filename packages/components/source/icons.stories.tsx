@@ -133,7 +133,7 @@ function IconsPreviewer() {
             </Select.List>
           </Select.Content>
         </Select.Root>
-        <span style={{ fontSize: 12, color: '#666' }}>
+        <span style={{ fontSize: 12, color: 'var(--one-color-text-muted)' }}>
           {filtered.length} / {iconEntries.length}
         </span>
       </div>
@@ -159,9 +159,7 @@ function IconsPreviewer() {
               height: 'auto',
               padding: 8,
               background:
-                copied === name
-                  ? 'var(--one-surface-raised, #f0f9ff)'
-                  : undefined,
+                copied === name ? 'var(--one-color-surface-raised)' : undefined,
             }}
           >
             <Component size={20} />

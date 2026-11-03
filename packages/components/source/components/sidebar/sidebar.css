@@ -453,8 +453,8 @@
 @keyframes one-sidebar-submenu-enter {
   from {
     opacity: 0;
-    filter: blur(4px);
-    transform: translateX(8px);
+    filter: blur(var(--one-blur-subtle));
+    transform: translateX(var(--one-spacing-2));
   }
 
   to {

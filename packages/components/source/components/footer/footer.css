@@ -73,5 +73,5 @@
 .one-footer .one-link__text {
   color: var(--one-color-text);
   text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-underline-offset: var(--one-spacing-1);
 }

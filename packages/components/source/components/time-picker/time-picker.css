@@ -37,7 +37,7 @@
 .one-time-picker__trigger:focus-visible {
   outline: none;
   border-color: var(--one-color-focus);
-  box-shadow: 0 0 0 4px var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
 }
 
 /* Matches the open popup so the trigger reads as the active control. */
@@ -173,7 +173,7 @@
 }
 
 .one-time-picker__option:has(.one-time-picker__input:focus-visible) {
-  box-shadow: 0 0 0 4px var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
 }
 
 .one-time-picker__option[data-disabled] {

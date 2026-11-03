@@ -166,7 +166,7 @@
 .one-slider__thumb:has(input:focus-visible) {
   outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
 }
 
 @media (hover: hover) {

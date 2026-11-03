@@ -94,7 +94,7 @@
 .one-switch__input:focus-visible + .one-switch__track {
   outline: var(--one-border-width) solid var(--one-color-focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
 }
 
 .one-switch-field[data-invalid] .one-switch__track {
