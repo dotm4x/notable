@@ -1,6 +1,8 @@
 import {
   forwardRef,
   createElement,
+  cloneElement,
+  isValidElement,
   type ComponentPropsWithoutRef,
 } from 'react';
 
@@ -51,8 +53,18 @@ const Icon = forwardRef<SVGSVGElement, IIconProps>(
         ...rest,
       },
       [
-        ...iconNode.map(([tag, attrs]) => createElement(tag, attrs)),
-        ...(Array.isArray(children) ? children : children ? [children] : []),
+        ...iconNode.map(([tag, attrs], index) =>
+          createElement(tag, { ...attrs, key: index }),
+        ),
+        ...(Array.isArray(children)
+          ? children.map((child, index) =>
+              isValidElement(child)
+                ? cloneElement(child, { key: child.key ?? index })
+                : child,
+            )
+          : children
+            ? [children]
+            : []),
       ],
     );
   },
