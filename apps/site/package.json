@@ -9,7 +9,9 @@
     "node": ">=22.23.4"
   },
   "scripts": {
+    "predev": "pnpm --filter @dotm4x/one build",
     "dev": "next dev",
+    "prebuild": "pnpm --filter @dotm4x/one build",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"

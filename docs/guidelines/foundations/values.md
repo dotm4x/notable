@@ -153,9 +153,9 @@ Pixel values assume a root size of 16 px.
 
 ### Typeface
 
-| Token  | Value                             |
-| ------ | --------------------------------- |
-| Family | Geist, with a sans-serif fallback |
+| Token  | Value                              |
+| ------ | ---------------------------------- |
+| Family | Outfit, with a sans-serif fallback |
 
 ### Sizes
 
