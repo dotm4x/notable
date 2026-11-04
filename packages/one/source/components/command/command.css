@@ -44,7 +44,7 @@
   display: flex;
   align-items: center;
   gap: var(--one-spacing-3);
-  min-height: 2.25rem;
+  min-height: var(--one-item-height);
   padding: var(--one-spacing-2) var(--one-spacing-3);
   border-radius: var(--one-radius-md);
   font-size: var(--one-font-size-md);

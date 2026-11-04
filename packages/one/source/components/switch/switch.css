@@ -1,11 +1,11 @@
 .one-switch-field {
-  --one-switch-width: var(--one-spacing-10);
-  --one-switch-height: var(--one-spacing-6);
-  --one-switch-padding: 3px;
-  --one-switch-thumb-size: 0.875rem;
-  --one-switch-travel: calc(
-    var(--one-switch-width) - var(--one-switch-thumb-size) - 2 *
-      (var(--one-border-width) + var(--one-switch-padding))
+  --_switch-width: var(--one-spacing-10);
+  --_switch-height: var(--one-spacing-6);
+  --_switch-padding: 3px;
+  --_switch-thumb-size: 0.875rem;
+  --_switch-travel: calc(
+    var(--_switch-width) - var(--_switch-thumb-size) - 2 *
+      (var(--one-border-width) + var(--_switch-padding))
   );
 
   display: inline-flex;
@@ -28,8 +28,8 @@
   position: relative;
   display: inline-flex;
   flex: 0 0 auto;
-  width: var(--one-switch-width);
-  height: var(--one-switch-height);
+  width: var(--_switch-width);
+  height: var(--_switch-height);
   touch-action: pan-y;
 }
 
@@ -50,7 +50,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: var(--one-switch-padding);
+  padding: var(--_switch-padding);
   border: var(--one-border-width) solid transparent;
   border-radius: var(--one-radius-full);
   background: var(--one-color-border-strong);
@@ -60,8 +60,8 @@
 }
 
 .one-switch__thumb {
-  width: var(--one-switch-thumb-size);
-  height: var(--one-switch-thumb-size);
+  width: var(--_switch-thumb-size);
+  height: var(--_switch-thumb-size);
   flex: 0 0 auto;
   border-radius: var(--one-radius-full);
   background: var(--one-color-surface);
@@ -76,25 +76,25 @@
 .one-switch__control[data-dragging] .one-switch__track {
   background: color-mix(
     in srgb,
-    var(--one-color-border-strong) calc(100% - var(--one-switch-drag-progress)),
-    var(--one-color-primary) var(--one-switch-drag-progress)
+    var(--one-color-border-strong) calc(100% - var(--_switch-drag-progress)),
+    var(--one-color-primary) var(--_switch-drag-progress)
   );
   transition: none;
 }
 
 .one-switch__input:checked + .one-switch__track .one-switch__thumb {
-  transform: translateX(var(--one-switch-travel));
+  transform: translateX(var(--_switch-travel));
 }
 
 .one-switch__control[data-dragging] .one-switch__track .one-switch__thumb {
-  transform: translateX(var(--one-switch-drag-offset, 0));
+  transform: translateX(var(--_switch-drag-offset, 0));
   transition: none;
 }
 
 .one-switch__input:focus-visible + .one-switch__track {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-switch-field[data-invalid] .one-switch__track {
@@ -126,7 +126,7 @@
 
 .one-switch__description,
 .one-switch__error {
-  padding-left: calc(var(--one-switch-width) + var(--one-spacing-3));
+  padding-left: calc(var(--_switch-width) + var(--one-spacing-3));
   font-size: var(--one-font-size-xs);
   line-height: var(--one-line-height-normal);
 }

@@ -13,7 +13,7 @@ function getDigitValues(container: HTMLElement): number[] {
 function getStripOffsets(container: HTMLElement): string[] {
   return Array.from(
     container.querySelectorAll<HTMLElement>('.one-number-flow__strip'),
-    (strip) => strip.style.getPropertyValue('--one-number-flow-digit'),
+    (strip) => strip.style.getPropertyValue('--_number-flow-digit'),
   );
 }
 
@@ -53,7 +53,7 @@ describe('NumberFlow', () => {
     // Assert
     expect(getRoot(container)).toHaveClass('one-number-flow');
     expect(
-      getRoot(container).style.getPropertyValue('--one-number-flow-duration'),
+      getRoot(container).style.getPropertyValue('--_number-flow-duration'),
     ).toBe('');
   });
 
@@ -249,7 +249,7 @@ describe('NumberFlow', () => {
     const root = getRoot(container);
 
     // Assert
-    expect(root.style.getPropertyValue('--one-number-flow-duration')).toBe(
+    expect(root.style.getPropertyValue('--_number-flow-duration')).toBe(
       '300ms',
     );
   });

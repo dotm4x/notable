@@ -5,7 +5,7 @@
   justify-content: center;
   gap: var(--one-spacing-2);
 
-  min-height: var(--one-spacing-10);
+  min-height: var(--one-control-size-medium);
   padding: var(--one-spacing-2) var(--one-spacing-4);
 
   border: var(--one-border-width) solid transparent;
@@ -32,8 +32,8 @@
 }
 
 .one-toggle:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-toggle:disabled,
@@ -66,13 +66,13 @@
 }
 
 .one-toggle--small {
-  min-height: var(--one-spacing-8);
+  min-height: var(--one-control-size-small);
   padding: var(--one-spacing-1) var(--one-spacing-3);
   font-size: var(--one-font-size-xs);
 }
 
 .one-toggle--large {
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   padding: var(--one-spacing-3) var(--one-spacing-6);
   font-size: var(--one-font-size-md);
 }

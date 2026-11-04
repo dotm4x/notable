@@ -11,7 +11,7 @@
   align-items: center;
   gap: var(--one-spacing-2);
   width: 100%;
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   padding: 0 var(--one-spacing-3);
   border: var(--one-border-width) solid var(--one-color-border-strong);
   border-radius: var(--one-radius-lg);
@@ -32,7 +32,7 @@
 .one-select__trigger:focus-visible {
   outline: none;
   border-color: var(--one-color-focus);
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-select__trigger[data-disabled] {
@@ -89,7 +89,7 @@
 }
 
 .one-select__positioner {
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
 }
 
 .one-select__popup {
@@ -101,7 +101,7 @@
   max-height: min(20rem, var(--available-height));
   overflow: hidden;
   padding: var(--one-spacing-1);
-  border: 1px solid var(--one-color-border-subtle);
+  border: var(--one-border-width-subtle) solid var(--one-color-border-subtle);
 }
 
 .one-select__list {
@@ -122,7 +122,7 @@
   display: flex;
   align-items: center;
   gap: var(--one-spacing-2);
-  min-height: 2.25rem;
+  min-height: var(--one-item-height);
   padding: var(--one-spacing-2) var(--one-spacing-3);
   border-radius: var(--one-radius-md);
   color: var(--one-color-text);

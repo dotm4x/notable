@@ -1,5 +1,5 @@
 .one-header {
-  --one-header-inset: var(--one-spacing-3);
+  --_header-inset: var(--one-spacing-3);
 
   display: flex;
   align-items: center;
@@ -9,14 +9,15 @@
   padding-inline: var(--one-spacing-4);
   padding-block: var(--one-spacing-3);
   background: var(--one-color-surface);
-  border-block-end: 1px solid var(--one-color-border-subtle);
+  border-block-end: var(--one-border-width-subtle) solid
+    var(--one-color-border-subtle);
 }
 
 .one-header--fixed,
 .one-header--dynamic {
   position: sticky;
   inset-block-start: 0;
-  z-index: 10;
+  z-index: var(--one-layer-sticky);
   padding-block-start: calc(var(--one-spacing-3) + env(safe-area-inset-top));
 }
 
@@ -35,9 +36,9 @@
 
 .one-header--floating,
 .one-header--hidden {
-  --one-header-gutter: clamp(var(--one-spacing-2), 2vw, var(--one-spacing-6));
+  --_header-gutter: clamp(var(--one-spacing-2), 2vw, var(--one-spacing-6));
 
-  margin-inline: var(--one-header-gutter);
+  margin-inline: var(--_header-gutter);
   border-radius: var(--one-radius-lg);
   border-block-end-color: transparent;
   background: color-mix(
@@ -46,7 +47,7 @@
     transparent
   );
   box-shadow: var(--one-shadow-sm);
-  transform: translateY(var(--one-header-inset));
+  transform: translateY(var(--_header-inset));
 }
 
 .one-header--floating {
@@ -55,7 +56,7 @@
 
 .one-header--hidden {
   transform: translateY(
-    calc(-100% - var(--one-header-inset) - var(--one-spacing-4))
+    calc(-100% - var(--_header-inset) - var(--one-spacing-4))
   );
   transition-duration: var(--one-duration-exit);
   transition-timing-function: var(--one-easing-emphasized-accelerate);

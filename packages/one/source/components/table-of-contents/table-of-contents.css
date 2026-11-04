@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  min-height: 44px;
+  min-height: var(--one-control-size-large);
   padding: var(--one-spacing-2) var(--one-spacing-3);
   border-radius: var(--one-radius-sm);
   color: var(--one-color-text-muted);
@@ -67,8 +67,8 @@
 }
 
 .one-table-of-contents__link:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-table-of-contents__indicator {

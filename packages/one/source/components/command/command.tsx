@@ -415,7 +415,7 @@ const CommandItemPart = forwardRef<HTMLDivElement, CommandItemProps>(
           </span>
         )}
         <span className="one-command__item-text">
-          <span className="one-command__item-label">{item.label}</span>
+          {item.label}
           {item.description && (
             <span className="one-command__item-description">
               {item.description}

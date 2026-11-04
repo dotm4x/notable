@@ -123,7 +123,7 @@ function NumberFlowDigit({
   glyphs: readonly string[];
 }) {
   const style: CSSProperties & TCssCustomProperties = {
-    '--one-number-flow-digit': String(digit),
+    '--_number-flow-digit': String(digit),
   };
 
   return (
@@ -172,7 +172,7 @@ export function NumberFlow({
 
   const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   if (duration !== undefined) {
-    inlineStyle['--one-number-flow-duration'] = `${duration}ms`;
+    inlineStyle['--_number-flow-duration'] = `${duration}ms`;
   }
 
   return (

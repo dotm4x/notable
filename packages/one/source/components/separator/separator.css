@@ -5,14 +5,14 @@
 .one-separator {
   flex: 0 0 auto;
   align-self: stretch;
-  background: var(--one-separator-color, var(--one-color-border));
+  background: var(--_separator-color, var(--one-color-border));
 }
 
 .one-separator--horizontal {
-  block-size: var(--one-separator-thickness, var(--one-border-width));
+  block-size: var(--_separator-thickness, var(--one-border-width));
 }
 
 .one-separator--vertical {
   block-size: 100%;
-  inline-size: var(--one-separator-thickness, var(--one-border-width));
+  inline-size: var(--_separator-thickness, var(--one-border-width));
 }

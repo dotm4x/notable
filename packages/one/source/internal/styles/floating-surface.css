@@ -7,9 +7,9 @@
   font-family: var(--one-font-family);
   transition:
     opacity var(--one-duration-base)
-      var(--one-floating-surface-easing, var(--one-easing-standard)),
+      var(--_floating-surface-easing, var(--one-easing-standard)),
     transform var(--one-duration-base)
-      var(--one-floating-surface-easing, var(--one-easing-standard));
+      var(--_floating-surface-easing, var(--one-easing-standard));
 }
 
 .one-floating-surface[data-starting-style],

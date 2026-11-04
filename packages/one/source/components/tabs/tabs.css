@@ -11,7 +11,7 @@
   box-sizing: border-box;
   width: max-content;
   max-width: 100%;
-  min-height: var(--one-spacing-10);
+  min-height: var(--one-control-size-medium);
   border-block-end: var(--one-border-width) solid var(--one-color-border-subtle);
   overflow-x: auto;
   touch-action: pan-y;
@@ -57,8 +57,8 @@
 
 .one-tabs__trigger:focus-visible {
   z-index: 2;
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: -2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset-inset);
 }
 
 .one-tabs__trigger:disabled,
@@ -128,7 +128,7 @@
 
 .one-tabs[data-orientation='vertical'] .one-tabs__trigger {
   justify-content: flex-start;
-  min-height: var(--one-spacing-10);
+  min-height: var(--one-control-size-medium);
   padding-inline: var(--one-spacing-3) var(--one-spacing-4);
   border-radius: var(--one-radius-sm) 0 0 var(--one-radius-sm);
   text-align: start;

@@ -11,8 +11,8 @@ describe('Empty', () => {
     const empty = screen.getByTestId('empty');
     expect(empty.tagName).toBe('DIV');
     expect(empty).toHaveClass('one-empty');
-    expect(empty).not.toHaveClass('one-empty--variant-outline');
-    expect(empty).not.toHaveClass('one-empty--size-compact');
+    expect(empty).not.toHaveClass('one-empty--outline');
+    expect(empty).not.toHaveClass('one-empty--compact');
   });
 
   it('exposes every compound member on the root at runtime', () => {
@@ -73,9 +73,7 @@ describe('Empty', () => {
       </Empty>,
     );
 
-    expect(screen.getByTestId('empty')).toHaveClass(
-      'one-empty--variant-outline',
-    );
+    expect(screen.getByTestId('empty')).toHaveClass('one-empty--outline');
 
     rerender(
       <Empty variant="surface" data-testid="empty">
@@ -83,9 +81,7 @@ describe('Empty', () => {
       </Empty>,
     );
 
-    expect(screen.getByTestId('empty')).toHaveClass(
-      'one-empty--variant-surface',
-    );
+    expect(screen.getByTestId('empty')).toHaveClass('one-empty--surface');
   });
 
   it('applies the compact and spacious size modifiers', () => {
@@ -95,7 +91,7 @@ describe('Empty', () => {
       </Empty>,
     );
 
-    expect(screen.getByTestId('empty')).toHaveClass('one-empty--size-compact');
+    expect(screen.getByTestId('empty')).toHaveClass('one-empty--compact');
 
     rerender(
       <Empty size="spacious" data-testid="empty">
@@ -103,7 +99,7 @@ describe('Empty', () => {
       </Empty>,
     );
 
-    expect(screen.getByTestId('empty')).toHaveClass('one-empty--size-spacious');
+    expect(screen.getByTestId('empty')).toHaveClass('one-empty--spacious');
   });
 
   it('merges custom classes and forwards native attributes and refs', () => {
@@ -167,7 +163,7 @@ describe('Empty.Media', () => {
 
     const media = screen.getByTestId('media');
     expect(media).toHaveClass('one-empty__media');
-    expect(media).not.toHaveClass('one-empty__media--variant-icon');
+    expect(media).not.toHaveClass('one-empty__media--icon');
     expect(
       screen.getByRole('img', { name: 'Team illustration' }),
     ).toBeInTheDocument();
@@ -180,9 +176,7 @@ describe('Empty.Media', () => {
       </Empty.Media>,
     );
 
-    expect(screen.getByTestId('media')).toHaveClass(
-      'one-empty__media--variant-icon',
-    );
+    expect(screen.getByTestId('media')).toHaveClass('one-empty__media--icon');
   });
 
   it('keeps decorative icons out of the accessibility tree', () => {

@@ -1,11 +1,11 @@
 .one-card {
-  --one-card-padding: var(--one-spacing-6);
+  --_card-padding: var(--one-spacing-6);
 
   display: flex;
   flex-direction: column;
   gap: var(--one-spacing-4);
   box-sizing: border-box;
-  padding: var(--one-card-padding);
+  padding: var(--_card-padding);
   border: var(--one-border-width) solid var(--one-color-border-subtle);
   border-radius: var(--one-radius-lg);
   background-color: var(--one-color-surface);
@@ -14,7 +14,7 @@
 }
 
 .one-card--padding-none {
-  --one-card-padding: 0;
+  --_card-padding: 0;
 
   overflow: hidden;
 }

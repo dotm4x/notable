@@ -192,12 +192,12 @@ describe('Skeleton', () => {
 
     fireEvent.pointerMove(skeleton, { clientX: 30, clientY: 12 });
 
-    expect(
-      skeleton.style.getPropertyValue('--one-skeleton-pointer-x'),
-    ).not.toBe('');
-    expect(
-      skeleton.style.getPropertyValue('--one-skeleton-pointer-y'),
-    ).not.toBe('');
+    expect(skeleton.style.getPropertyValue('--_skeleton-pointer-x')).not.toBe(
+      '',
+    );
+    expect(skeleton.style.getPropertyValue('--_skeleton-pointer-y')).not.toBe(
+      '',
+    );
   });
 
   it('calls a consumer onPointerMove handler alongside the spotlight update', () => {

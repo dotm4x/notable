@@ -71,8 +71,8 @@
 
 .one-navigation-menu__trigger:focus-visible,
 .one-navigation-menu__link:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-navigation-menu__trigger:disabled,
@@ -93,7 +93,7 @@
 }
 
 .one-navigation-menu__positioner {
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   transition:
     top var(--one-duration-enter) var(--one-easing-spring),
     left var(--one-duration-enter) var(--one-easing-spring),

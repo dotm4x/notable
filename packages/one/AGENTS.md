@@ -329,6 +329,15 @@ Preserve the actual responsibilities of these files and follow the existing impo
 
 If a token is genuinely missing, add it to the appropriate token file rather than silently hardcoding the value in component styles.
 
+### Component-internal custom properties
+
+Component stylesheets sometimes need their own custom properties for values that are derived from component state or props. These properties are private implementation details, not design tokens.
+
+- Prefix every component-internal custom property with `--_`, such as `--_sidebar-width` or `--_progress-value`.
+- Declare them in the component stylesheet or pass them through an inline style from the component, never in `source/styles/tokens/`.
+- Do not treat a `--_` property as a public customization API. If a value must be customizable by consumers, define an intentional public prop instead.
+- Keep custom properties provided by a primitive, such as Base UI's `--toast-index`, unchanged and adapt them to the `--_` namespace when needed.
+
 ### Token organization
 
 Keep token categories clearly separated. Preserve existing file boundaries and expand them only when necessary.

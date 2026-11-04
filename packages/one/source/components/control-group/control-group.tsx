@@ -80,7 +80,7 @@ function ControlGroupSeparator({
     <Separator
       {...props}
       orientation={resolvedOrientation}
-      className={joinClassNames('one-control-group__separator', className)}
+      className={className}
     />
   );
 }

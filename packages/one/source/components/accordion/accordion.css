@@ -55,8 +55,8 @@
 }
 
 .one-accordion__trigger:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-accordion__trigger:disabled {

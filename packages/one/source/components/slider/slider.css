@@ -97,7 +97,7 @@
   position: absolute;
   z-index: 1;
   inset-block-start: 50%;
-  inset-inline-start: var(--one-slider-mark-position);
+  inset-inline-start: var(--_slider-mark-position);
   width: var(--one-border-width);
   height: var(--one-spacing-2);
   border-radius: var(--one-radius-full);
@@ -140,7 +140,7 @@
 .one-slider--vertical .one-slider__mark {
   inset-block-start: auto;
   inset-inline-start: 50%;
-  bottom: var(--one-slider-mark-position);
+  bottom: var(--_slider-mark-position);
   width: var(--one-spacing-2);
   height: var(--one-border-width);
   translate: -50% 50%;
@@ -164,9 +164,9 @@
 }
 
 .one-slider__thumb:has(input:focus-visible) {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 @media (hover: hover) {

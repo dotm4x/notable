@@ -5,7 +5,7 @@
   justify-content: center;
   gap: var(--one-spacing-2);
 
-  min-height: var(--one-spacing-10);
+  min-height: var(--one-control-size-medium);
   padding: var(--one-spacing-2) var(--one-spacing-4);
 
   border: var(--one-border-width) solid transparent;
@@ -30,8 +30,8 @@
 }
 
 .one-button:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-button:disabled,
@@ -145,43 +145,43 @@
 /* Sizes */
 
 .one-button--small {
-  min-height: var(--one-spacing-8);
+  min-height: var(--one-control-size-small);
   padding: var(--one-spacing-1) var(--one-spacing-3);
   font-size: var(--one-font-size-xs);
 }
 
 .one-button--medium {
-  min-height: var(--one-spacing-10);
+  min-height: var(--one-control-size-medium);
   padding: var(--one-spacing-2) var(--one-spacing-4);
 }
 
 .one-button--large {
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   padding: var(--one-spacing-3) var(--one-spacing-6);
 }
 
 /* Icon sizes */
 
 .one-button--icon {
-  width: var(--one-spacing-10);
-  min-width: var(--one-spacing-10);
-  min-height: var(--one-spacing-10);
+  width: var(--one-control-size-medium);
+  min-width: var(--one-control-size-medium);
+  min-height: var(--one-control-size-medium);
   padding: 0;
   aspect-ratio: 1;
 }
 
 .one-button--icon-small {
-  width: var(--one-spacing-8);
-  min-width: var(--one-spacing-8);
-  min-height: var(--one-spacing-8);
+  width: var(--one-control-size-small);
+  min-width: var(--one-control-size-small);
+  min-height: var(--one-control-size-small);
   padding: 0;
   aspect-ratio: 1;
 }
 
 .one-button--icon-large {
-  width: 2.75rem;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
+  width: var(--one-control-size-large);
+  min-width: var(--one-control-size-large);
+  min-height: var(--one-control-size-large);
   padding: 0;
   aspect-ratio: 1;
 }

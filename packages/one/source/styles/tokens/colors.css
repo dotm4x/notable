@@ -17,6 +17,12 @@
   --one-black: #000000;
 }
 
+/* Theme-independent roles */
+
+:root {
+  --one-color-mask: var(--one-black);
+}
+
 /* Light theme */
 
 :root,

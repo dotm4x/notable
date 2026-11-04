@@ -25,9 +25,8 @@
 .one-number-flow__strip {
   display: block;
   text-align: center;
-  transform: translate3d(0, calc(var(--one-number-flow-digit, 0) * -10%), 0);
-  transition: transform
-    var(--one-number-flow-duration, var(--one-duration-base))
+  transform: translate3d(0, calc(var(--_number-flow-digit, 0) * -10%), 0);
+  transition: transform var(--_number-flow-duration, var(--one-duration-base))
     var(--one-easing-spring);
 }
 

@@ -76,11 +76,11 @@ export function Separator({
   const inlineStyle: CSSProperties & TCssCustomProperties = { ...style };
   const resolvedThickness = resolveThickness(thickness);
   if (resolvedThickness !== undefined) {
-    inlineStyle['--one-separator-thickness'] = resolvedThickness;
+    inlineStyle['--_separator-thickness'] = resolvedThickness;
   }
   const resolvedColor = resolveColor(color);
   if (resolvedColor !== undefined) {
-    inlineStyle['--one-separator-color'] = resolvedColor;
+    inlineStyle['--_separator-color'] = resolvedColor;
   }
 
   const classes = ['one-separator', `one-separator--${orientation}`, className]

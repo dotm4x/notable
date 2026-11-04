@@ -685,7 +685,6 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           <Button
             variant="ghost"
             size="icon"
-            className="one-calendar__nav"
             aria-label="Previous month"
             disabled={disabled || !canGoPrevious}
             onClick={() => shiftMonth(-1)}
@@ -707,7 +706,6 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           <Button
             variant="ghost"
             size="icon"
-            className="one-calendar__nav"
             aria-label="Next month"
             disabled={disabled || !canGoNext}
             onClick={() => shiftMonth(1)}

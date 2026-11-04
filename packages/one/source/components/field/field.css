@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   gap: var(--one-spacing-2);
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   padding: 0 var(--one-spacing-3);
   border: var(--one-border-width) solid var(--one-color-border-strong);
   border-radius: var(--one-radius-lg);
@@ -32,7 +32,7 @@
 
 .one-field__box:focus-within {
   border-color: var(--one-color-focus);
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-field__control {
@@ -95,7 +95,7 @@
 }
 
 .one-field[data-invalid] .one-field__box:focus-within {
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-danger-border);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-danger-border);
 }
 
 .one-field[data-invalid] .one-field__icon {

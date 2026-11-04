@@ -10,7 +10,7 @@ Each color has a job. Designs should use the role, not a specific color value.
 
 - **Surface** holds the page, containers, popups, and emphasis areas.
 - **Text** appears in a primary and a secondary strength. Secondary text supports, and never replaces, primary information.
-- **Accent** marks the main action and the active indicator.
+- **Primary** marks the main action and the active indicator. It is the only accent in the system.
 - **Status** colors (danger, success, warning, and information) signal the outcome of an action or the condition of an item. They always appear with text or an icon.
 - **Highlight** is a neutral surface that marks the option under the pointer or keyboard.
 

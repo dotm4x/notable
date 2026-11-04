@@ -16,9 +16,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   { arrow = false, className, children, ...props },
   ref,
 ) {
-  const classes = ['one-link', arrow && 'one-link--arrow', className]
-    .filter(Boolean)
-    .join(' ');
+  const classes = ['one-link', className].filter(Boolean).join(' ');
 
   return (
     <a {...props} ref={ref} className={classes}>

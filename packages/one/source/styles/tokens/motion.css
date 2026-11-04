@@ -2,7 +2,7 @@
   /* Durations: fast for quick feedback on small properties (color, border,
      shadow, opacity); base for standard state changes; medium for mid-length
      motion; slow for long or looping motion. */
-  --one-duration-fast: 140ms;
+  --one-duration-fast: 120ms;
   --one-duration-base: 160ms;
   --one-duration-medium: 200ms;
   --one-duration-slow: 800ms;

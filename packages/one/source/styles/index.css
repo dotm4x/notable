@@ -1,6 +1,9 @@
 @import './fonts.css';
 @import './tokens/blur.css';
 @import './tokens/borders.css';
+@import './tokens/controls.css';
+@import './tokens/focus.css';
+@import './tokens/layers.css';
 @import './tokens/motion.css';
 @import './tokens/colors.css';
 @import './tokens/radii.css';

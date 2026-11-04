@@ -424,11 +424,11 @@ const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
       toggleSidebar,
     };
     const sidebarStyle: CSSProperties & TCssCustomProperties = {
-      '--one-sidebar-width': toCssLength(width),
-      '--one-sidebar-collapsed-width': toCssLength(collapsedWidth),
+      '--_sidebar-width': toCssLength(width),
+      '--_sidebar-collapsed-width': toCssLength(collapsedWidth),
     };
     const mobileDrawerStyle: CSSProperties & TCssCustomProperties = {
-      '--one-drawer-horizontal-size': toCssLength(mobileWidth),
+      '--_drawer-horizontal-size': toCssLength(mobileWidth),
     };
     const layoutChildren = Children.toArray(children);
     const sidebarChildren = layoutChildren.filter(
@@ -651,13 +651,7 @@ const SidebarItem = forwardRef<HTMLElement, TSidebarItemProps>(
       tooltip ??
       accessibleLabel ??
       (typeof children === 'string' ? children : undefined);
-    const classes = [
-      'one-sidebar__item',
-      active && 'one-sidebar__item--active',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    const classes = ['one-sidebar__item', className].filter(Boolean).join(' ');
 
     const handleClick = (event: MouseEvent<HTMLElement>) => {
       onClick?.(event);

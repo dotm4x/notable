@@ -77,7 +77,7 @@ describe('Separator', () => {
   it('applies a numeric thickness as pixels', () => {
     const separator = renderSeparator({ thickness: 4 });
 
-    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+    expect(separator.style.getPropertyValue('--_separator-thickness')).toBe(
       '4px',
     );
   });
@@ -85,7 +85,7 @@ describe('Separator', () => {
   it('passes a string thickness through as CSS', () => {
     const separator = renderSeparator({ thickness: '0.25rem' });
 
-    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+    expect(separator.style.getPropertyValue('--_separator-thickness')).toBe(
       '0.25rem',
     );
   });
@@ -93,9 +93,7 @@ describe('Separator', () => {
   it('leaves thickness to the stylesheet default when not provided', () => {
     const separator = renderSeparator();
 
-    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
-      '',
-    );
+    expect(separator.style.getPropertyValue('--_separator-thickness')).toBe('');
   });
 
   it.each([
@@ -107,7 +105,7 @@ describe('Separator', () => {
     (color, expected) => {
       const separator = renderSeparator({ color });
 
-      expect(separator.style.getPropertyValue('--one-separator-color')).toBe(
+      expect(separator.style.getPropertyValue('--_separator-color')).toBe(
         expected,
       );
     },
@@ -118,7 +116,7 @@ describe('Separator', () => {
       color: 'var(--one-color-primary)',
     });
 
-    expect(separator.style.getPropertyValue('--one-separator-color')).toBe(
+    expect(separator.style.getPropertyValue('--_separator-color')).toBe(
       'var(--one-color-primary)',
     );
     expect(separator).not.toHaveAttribute('color');
@@ -143,7 +141,7 @@ describe('Separator', () => {
     });
 
     expect(separator.style.marginBlock).toBe('1rem');
-    expect(separator.style.getPropertyValue('--one-separator-thickness')).toBe(
+    expect(separator.style.getPropertyValue('--_separator-thickness')).toBe(
       '2px',
     );
   });

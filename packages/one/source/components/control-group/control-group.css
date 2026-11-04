@@ -119,7 +119,7 @@
 .one-control-group__text {
   display: inline-flex;
   align-items: center;
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   padding-inline: var(--one-spacing-3);
   border: var(--one-border-width) solid var(--one-color-border-strong);
   background: var(--one-color-surface-sunken);

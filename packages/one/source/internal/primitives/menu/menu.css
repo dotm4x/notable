@@ -1,5 +1,5 @@
 .one-menu__positioner {
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
 }
 
 .one-menu__popup {
@@ -13,7 +13,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: var(--one-spacing-1);
-  border: 1px solid var(--one-color-border-subtle);
+  border: var(--one-border-width-subtle) solid var(--one-color-border-subtle);
 }
 
 .one-menu__item {
@@ -38,8 +38,8 @@
 }
 
 .one-menu__item:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: -2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset-inset);
 }
 
 .one-menu__item--selectable {

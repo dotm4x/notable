@@ -1,7 +1,7 @@
 .one-scroll-area {
-  --one-scroll-area-fade-size: var(--one-spacing-6);
-  --one-scroll-area-edge-size: var(--one-scroll-area-fade-size);
-  --one-scroll-area-blur: var(--one-blur-subtle);
+  --_scroll-area-fade-size: var(--one-spacing-6);
+  --_scroll-area-edge-size: var(--_scroll-area-fade-size);
+  --_scroll-area-blur: var(--one-blur-subtle);
 
   position: relative;
   display: flex;
@@ -17,19 +17,19 @@
 }
 
 .one-scroll-area[data-overflow-y-start] {
-  --_fade-top: var(--one-scroll-area-edge-size);
+  --_fade-top: var(--_scroll-area-edge-size);
 }
 
 .one-scroll-area[data-overflow-y-end] {
-  --_fade-bottom: var(--one-scroll-area-edge-size);
+  --_fade-bottom: var(--_scroll-area-edge-size);
 }
 
 .one-scroll-area[data-overflow-x-start] {
-  --_fade-start: var(--one-scroll-area-edge-size);
+  --_fade-start: var(--_scroll-area-edge-size);
 }
 
 .one-scroll-area[data-overflow-x-end] {
-  --_fade-end: var(--one-scroll-area-edge-size);
+  --_fade-end: var(--_scroll-area-edge-size);
 }
 
 .one-scroll-area__viewport {
@@ -40,28 +40,28 @@
 }
 
 .one-scroll-area__viewport:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: -2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset-inset);
 }
 
 /*
- * Edge fades are built from alpha-only gradients. The opaque stop is a mask value, not a visible color,
- * so it does not need a theme token. Blur uses the same mask as its fallback when backdrop filters are unsupported.
+ * Edge fades are built from alpha-only gradients. The opaque stop uses the mask role, which is
+ * theme-independent. Blur uses the same mask as its fallback when backdrop filters are unsupported.
  */
 .one-scroll-area--fade .one-scroll-area__viewport,
 .one-scroll-area--blur .one-scroll-area__viewport {
   --_mask-vertical: linear-gradient(
     to bottom,
     transparent 0,
-    var(--one-black) var(--_fade-top),
-    var(--one-black) calc(100% - var(--_fade-bottom)),
+    var(--one-color-mask) var(--_fade-top),
+    var(--one-color-mask) calc(100% - var(--_fade-bottom)),
     transparent 100%
   );
   --_mask-horizontal: linear-gradient(
     to right,
     transparent 0,
-    var(--one-black) var(--_fade-start),
-    var(--one-black) calc(100% - var(--_fade-end)),
+    var(--one-color-mask) var(--_fade-start),
+    var(--one-color-mask) calc(100% - var(--_fade-end)),
     transparent 100%
   );
 
@@ -92,40 +92,56 @@
   position: absolute;
   z-index: 1;
   pointer-events: none;
-  backdrop-filter: blur(var(--one-scroll-area-blur));
-  -webkit-backdrop-filter: blur(var(--one-scroll-area-blur));
+  backdrop-filter: blur(var(--_scroll-area-blur));
+  -webkit-backdrop-filter: blur(var(--_scroll-area-blur));
 }
 
 .one-scroll-area__edge--top {
   inset-block: 0 auto;
   inset-inline: 0;
   height: var(--_fade-top);
-  mask-image: linear-gradient(to bottom, var(--one-black), transparent);
-  -webkit-mask-image: linear-gradient(to bottom, var(--one-black), transparent);
+  mask-image: linear-gradient(to bottom, var(--one-color-mask), transparent);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    var(--one-color-mask),
+    transparent
+  );
 }
 
 .one-scroll-area__edge--bottom {
   inset-block: auto 0;
   inset-inline: 0;
   height: var(--_fade-bottom);
-  mask-image: linear-gradient(to top, var(--one-black), transparent);
-  -webkit-mask-image: linear-gradient(to top, var(--one-black), transparent);
+  mask-image: linear-gradient(to top, var(--one-color-mask), transparent);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    var(--one-color-mask),
+    transparent
+  );
 }
 
 .one-scroll-area__edge--start {
   inset-block: 0;
   inset-inline: 0 auto;
   width: var(--_fade-start);
-  mask-image: linear-gradient(to right, var(--one-black), transparent);
-  -webkit-mask-image: linear-gradient(to right, var(--one-black), transparent);
+  mask-image: linear-gradient(to right, var(--one-color-mask), transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    var(--one-color-mask),
+    transparent
+  );
 }
 
 .one-scroll-area__edge--end {
   inset-block: 0;
   inset-inline: auto 0;
   width: var(--_fade-end);
-  mask-image: linear-gradient(to left, var(--one-black), transparent);
-  -webkit-mask-image: linear-gradient(to left, var(--one-black), transparent);
+  mask-image: linear-gradient(to left, var(--one-color-mask), transparent);
+  -webkit-mask-image: linear-gradient(
+    to left,
+    var(--one-color-mask),
+    transparent
+  );
 }
 
 .one-scroll-area--blur:has(:focus-visible) .one-scroll-area__edge {

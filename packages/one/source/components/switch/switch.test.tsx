@@ -197,19 +197,19 @@ describe('Switch', () => {
 
       fireEvent.pointerDown(toggle, { pointerId: 1, button: 0, clientX: 100 });
       fireEvent.pointerMove(toggle, { pointerId: 1, clientX: 108 });
-      expect(control.style.getPropertyValue('--one-switch-drag-offset')).toBe(
+      expect(control.style.getPropertyValue('--_switch-drag-offset')).toBe(
         '8px',
       );
-      expect(control.style.getPropertyValue('--one-switch-drag-progress')).toBe(
+      expect(control.style.getPropertyValue('--_switch-drag-progress')).toBe(
         `${(8 / TRAVEL) * 100}%`,
       );
       expect(control).toHaveAttribute('data-dragging');
 
       fireEvent.pointerMove(toggle, { pointerId: 1, clientX: 400 });
-      expect(control.style.getPropertyValue('--one-switch-drag-offset')).toBe(
+      expect(control.style.getPropertyValue('--_switch-drag-offset')).toBe(
         `${TRAVEL}px`,
       );
-      expect(control.style.getPropertyValue('--one-switch-drag-progress')).toBe(
+      expect(control.style.getPropertyValue('--_switch-drag-progress')).toBe(
         '100%',
       );
     });
@@ -225,10 +225,8 @@ describe('Switch', () => {
       expect(toggle).not.toBeChecked();
       expect(onChange).not.toHaveBeenCalled();
       expect(control).not.toHaveAttribute('data-dragging');
-      expect(control.style.getPropertyValue('--one-switch-drag-offset')).toBe(
-        '',
-      );
-      expect(control.style.getPropertyValue('--one-switch-drag-progress')).toBe(
+      expect(control.style.getPropertyValue('--_switch-drag-offset')).toBe('');
+      expect(control.style.getPropertyValue('--_switch-drag-progress')).toBe(
         '',
       );
     });

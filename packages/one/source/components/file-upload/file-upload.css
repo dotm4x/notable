@@ -1,5 +1,5 @@
 .one-file-upload {
-  --one-file-upload-tile-size: 6rem;
+  --_file-upload-tile-size: 6rem;
 
   display: flex;
   flex-direction: column;
@@ -48,8 +48,8 @@
 }
 
 .one-file-upload__dropzone:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-file-upload__icon {
@@ -180,7 +180,7 @@
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(var(--one-file-upload-tile-size), 1fr)
+    minmax(var(--_file-upload-tile-size), 1fr)
   );
 }
 
@@ -190,7 +190,7 @@
   align-items: stretch;
   gap: 0;
   width: 100%;
-  height: var(--one-file-upload-tile-size);
+  height: var(--_file-upload-tile-size);
   padding: 0;
   overflow: hidden;
 }
@@ -227,7 +227,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: var(--one-file-upload-tile-size);
+  height: var(--_file-upload-tile-size);
   box-sizing: border-box;
   border: var(--one-border-width) dashed var(--one-color-border-strong);
   border-radius: var(--one-radius-md);
@@ -242,8 +242,8 @@
 }
 
 .one-file-upload__add:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 /* States */

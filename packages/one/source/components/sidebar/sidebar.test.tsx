@@ -124,7 +124,7 @@ describe('Sidebar', () => {
 
     expect(screen.getByRole('navigation', { name: 'Sidebar' })).toHaveAttribute(
       'style',
-      expect.stringContaining('--one-sidebar-width: 18rem'),
+      expect.stringContaining('--_sidebar-width: 18rem'),
     );
     expect(
       screen.queryByRole('link', { name: 'Alpha' }),

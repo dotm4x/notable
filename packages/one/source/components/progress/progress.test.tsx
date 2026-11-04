@@ -60,23 +60,21 @@ describe('Progress', () => {
     expect(progress).not.toHaveClass('one-progress--indeterminate');
     expect(progress).toHaveAttribute('aria-valuenow', '40');
     expect(progress).toHaveAttribute('aria-valuemax', '100');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('40%');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('40%');
   });
 
   it('renders zero progress at the start of the track', () => {
     const progress = renderProgress({ value: 0 });
 
     expect(progress).toHaveAttribute('aria-valuenow', '0');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('0%');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('0%');
   });
 
   it('renders completed progress at the end of the track', () => {
     const progress = renderProgress({ value: 100 });
 
     expect(progress).toHaveAttribute('aria-valuenow', '100');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe(
-      '100%',
-    );
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('100%');
   });
 
   it.each([
@@ -95,7 +93,7 @@ describe('Progress', () => {
 
     expect(progress).toHaveAttribute('aria-valuemax', '4');
     expect(progress).toHaveAttribute('aria-valuenow', '3');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('75%');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('75%');
   });
 
   it('clamps values to a custom maximum', () => {
@@ -116,7 +114,7 @@ describe('Progress', () => {
     expect(progress).toHaveAttribute('aria-valuenow', '80');
     expect(
       progress instanceof HTMLElement
-        ? progress.style.getPropertyValue('--one-progress-value')
+        ? progress.style.getPropertyValue('--_progress-value')
         : undefined,
     ).toBe('80%');
   });
@@ -126,7 +124,7 @@ describe('Progress', () => {
 
     expect(progress).toHaveClass('one-progress--indeterminate');
     expect(progress).not.toHaveAttribute('aria-valuenow');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('');
   });
 
   it('treats NaN as indeterminate', () => {
@@ -146,7 +144,7 @@ describe('Progress', () => {
 
     expect(progress).toHaveAttribute('aria-valuemax', '100');
     expect(progress).toHaveAttribute('aria-valuenow', '50');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('50%');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('50%');
   });
 
   it.each<ProgressSize>(['small', 'medium', 'large'])(
@@ -161,7 +159,7 @@ describe('Progress', () => {
   it('applies a numeric thickness as pixels', () => {
     const progress = renderProgress({ thickness: 6 });
 
-    expect(progress.style.getPropertyValue('--one-progress-thickness')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-thickness')).toBe(
       '6px',
     );
   });
@@ -169,7 +167,7 @@ describe('Progress', () => {
   it('passes a string thickness through as CSS', () => {
     const progress = renderProgress({ thickness: '0.5rem' });
 
-    expect(progress.style.getPropertyValue('--one-progress-thickness')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-thickness')).toBe(
       '0.5rem',
     );
   });
@@ -177,7 +175,7 @@ describe('Progress', () => {
   it('maps color token names to the indicator color tokens', () => {
     const progress = renderProgress({ color: 'success' });
 
-    expect(progress.style.getPropertyValue('--one-progress-color')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-color')).toBe(
       'var(--one-color-success)',
     );
   });
@@ -185,7 +183,7 @@ describe('Progress', () => {
   it('passes a custom indicator color through as CSS', () => {
     const progress = renderProgress({ color: '#0ea5e9' });
 
-    expect(progress.style.getPropertyValue('--one-progress-color')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-color')).toBe(
       '#0ea5e9',
     );
   });
@@ -193,7 +191,7 @@ describe('Progress', () => {
   it('maps track color token names to the border tokens', () => {
     const progress = renderProgress({ trackColor: 'strong' });
 
-    expect(progress.style.getPropertyValue('--one-progress-track-color')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-track-color')).toBe(
       'var(--one-color-border-strong)',
     );
   });
@@ -239,7 +237,7 @@ describe('Progress', () => {
 
     expect(progress).toHaveClass('one-progress', 'upload-progress');
     expect(progress.style.marginBlockStart).toBe('8px');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('10%');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('10%');
   });
 
   it('forwards supported HTML attributes and accessible names', () => {
@@ -351,7 +349,7 @@ describe('Progress circular variant', () => {
     expect(progress).toHaveClass('one-progress--indeterminate');
     expect(progress).toHaveAttribute('role', 'progressbar');
     expect(progress).not.toHaveAttribute('aria-valuenow');
-    expect(progress.style.getPropertyValue('--one-progress-value')).toBe('');
+    expect(progress.style.getPropertyValue('--_progress-value')).toBe('');
     expect(arc.getAttribute('style')).toBeNull();
   });
 
@@ -373,9 +371,7 @@ describe('Progress circular variant', () => {
       const progress = renderProgress({ variant: 'circular', size });
 
       expect(progress).toHaveClass(`one-progress--${size}`);
-      expect(progress.style.getPropertyValue('--one-progress-diameter')).toBe(
-        '',
-      );
+      expect(progress.style.getPropertyValue('--_progress-diameter')).toBe('');
     },
   );
 
@@ -383,7 +379,7 @@ describe('Progress circular variant', () => {
     const progress = renderProgress({ variant: 'circular', size: 64 });
 
     expect(progress).not.toHaveClass('one-progress--medium');
-    expect(progress.style.getPropertyValue('--one-progress-diameter')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-diameter')).toBe(
       '64px',
     );
   });
@@ -391,7 +387,7 @@ describe('Progress circular variant', () => {
   it('passes a string size through as the ring diameter', () => {
     const progress = renderProgress({ variant: 'circular', size: '4rem' });
 
-    expect(progress.style.getPropertyValue('--one-progress-diameter')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-diameter')).toBe(
       '4rem',
     );
   });
@@ -399,7 +395,7 @@ describe('Progress circular variant', () => {
   it('applies a numeric thickness as the ring stroke width in pixels', () => {
     const progress = renderProgress({ variant: 'circular', thickness: 8 });
 
-    expect(progress.style.getPropertyValue('--one-progress-thickness')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-thickness')).toBe(
       '8px',
     );
   });
@@ -411,10 +407,10 @@ describe('Progress circular variant', () => {
       trackColor: 'strong',
     });
 
-    expect(progress.style.getPropertyValue('--one-progress-color')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-color')).toBe(
       'var(--one-color-danger)',
     );
-    expect(progress.style.getPropertyValue('--one-progress-track-color')).toBe(
+    expect(progress.style.getPropertyValue('--_progress-track-color')).toBe(
       'var(--one-color-border-strong)',
     );
   });

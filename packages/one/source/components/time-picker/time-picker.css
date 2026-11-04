@@ -11,7 +11,7 @@
   gap: var(--one-spacing-2);
   box-sizing: border-box;
   width: 100%;
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   margin: 0;
   padding: 0 var(--one-spacing-3);
   border: var(--one-border-width) solid var(--one-color-border-strong);
@@ -37,7 +37,7 @@
 .one-time-picker__trigger:focus-visible {
   outline: none;
   border-color: var(--one-color-focus);
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 /* Matches the open popup so the trigger reads as the active control. */
@@ -144,7 +144,7 @@
   align-items: center;
   justify-content: center;
   min-width: var(--one-spacing-12);
-  min-height: 2.25rem;
+  min-height: var(--one-item-height);
   padding: 0 var(--one-spacing-3);
   border-radius: var(--one-radius-md);
   color: var(--one-color-text);
@@ -173,7 +173,7 @@
 }
 
 .one-time-picker__option:has(.one-time-picker__input:focus-visible) {
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-time-picker__option[data-disabled] {

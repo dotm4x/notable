@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .one-skeleton {
-  --one-skeleton-highlight: color-mix(
+  --_skeleton-highlight: color-mix(
     in srgb,
     var(--one-color-surface) 70%,
     transparent
@@ -20,7 +20,7 @@
 
 [data-theme='dark'] .one-skeleton {
   background: var(--one-color-surface-hover);
-  --one-skeleton-highlight: color-mix(
+  --_skeleton-highlight: color-mix(
     in srgb,
     var(--one-color-text) 10%,
     transparent
@@ -56,7 +56,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--one-skeleton-highlight) 50%,
+    var(--_skeleton-highlight) 50%,
     transparent 100%
   );
   transform: translateX(-100%);
@@ -69,14 +69,14 @@
 .one-skeleton--spotlight::before {
   content: '';
   position: absolute;
-  left: var(--one-skeleton-pointer-x, 50%);
-  top: var(--one-skeleton-pointer-y, 50%);
+  left: var(--_skeleton-pointer-x, 50%);
+  top: var(--_skeleton-pointer-y, 50%);
   width: 12rem;
   aspect-ratio: 1;
   border-radius: var(--one-radius-full);
   background: radial-gradient(
     closest-side,
-    var(--one-skeleton-highlight),
+    var(--_skeleton-highlight),
     transparent
   );
   translate: -50% -50%;

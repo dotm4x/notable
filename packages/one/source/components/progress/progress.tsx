@@ -238,22 +238,22 @@ export function Progress({
   }
   const resolvedDiameter = isCircular ? resolveDiameter(size) : undefined;
   if (resolvedDiameter !== undefined) {
-    inlineStyle['--one-progress-diameter'] = resolvedDiameter;
+    inlineStyle['--_progress-diameter'] = resolvedDiameter;
   }
   const resolvedThickness = resolveThickness(thickness);
   if (resolvedThickness !== undefined) {
-    inlineStyle['--one-progress-thickness'] = resolvedThickness;
+    inlineStyle['--_progress-thickness'] = resolvedThickness;
   }
   const resolvedColor = resolveColor(color);
   if (resolvedColor !== undefined) {
-    inlineStyle['--one-progress-color'] = resolvedColor;
+    inlineStyle['--_progress-color'] = resolvedColor;
   }
   const resolvedTrackColor = resolveTrackColor(trackColor);
   if (resolvedTrackColor !== undefined) {
-    inlineStyle['--one-progress-track-color'] = resolvedTrackColor;
+    inlineStyle['--_progress-track-color'] = resolvedTrackColor;
   }
   if (percentage !== undefined) {
-    inlineStyle['--one-progress-value'] = `${percentage}%`;
+    inlineStyle['--_progress-value'] = `${percentage}%`;
   }
 
   const classes = [

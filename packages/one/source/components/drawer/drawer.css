@@ -7,23 +7,23 @@
  * so the edge that stays anchored never lifts off the viewport.
  * A CSS transition uses the timing of the style it animates toward. The enter
  * timing therefore lives on the resting state, and the exit timing lives on
- * `data-ending-style`. `z-index` has no shared layering token, so it is set locally.
+ * `data-ending-style`.
  */
 .one-drawer__viewport {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   /* Lets clicks pass through to the backdrop. The popup opts back in. */
   pointer-events: none;
 }
 
 .one-drawer {
-  --one-drawer-horizontal-size: 28rem;
-  --one-drawer-vertical-size: 60dvh;
-  --one-drawer-exit-duration: var(--one-duration-exit);
+  --_drawer-horizontal-size: 28rem;
+  --_drawer-vertical-size: 60dvh;
+  --_drawer-exit-duration: var(--one-duration-exit);
 
   position: fixed;
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -68,8 +68,7 @@
   bottom: 0;
   width: min(
     calc(
-      var(--one-drawer-horizontal-size) +
-        max(0px, var(--one-drawer-stretch, 0px))
+      var(--_drawer-horizontal-size) + max(0px, var(--_drawer-stretch, 0px))
     ),
     100%
   );
@@ -78,7 +77,7 @@
 .one-drawer--right {
   right: 0;
   translate: max(0px, var(--drawer-swipe-movement-x, 0px)) 0;
-  --one-drawer-stretch: calc(-1 * var(--drawer-swipe-movement-x, 0px));
+  --_drawer-stretch: calc(-1 * var(--drawer-swipe-movement-x, 0px));
   border-top-left-radius: var(--one-radius-xl);
   border-bottom-left-radius: var(--one-radius-xl);
 }
@@ -86,7 +85,7 @@
 .one-drawer--left {
   left: 0;
   translate: min(0px, var(--drawer-swipe-movement-x, 0px)) 0;
-  --one-drawer-stretch: var(--drawer-swipe-movement-x, 0px);
+  --_drawer-stretch: var(--drawer-swipe-movement-x, 0px);
   border-top-right-radius: var(--one-radius-xl);
   border-bottom-right-radius: var(--one-radius-xl);
 }
@@ -96,9 +95,7 @@
   left: 0;
   right: 0;
   height: min(
-    calc(
-      var(--one-drawer-vertical-size) + max(0px, var(--one-drawer-stretch, 0px))
-    ),
+    calc(var(--_drawer-vertical-size) + max(0px, var(--_drawer-stretch, 0px))),
     100%
   );
 }
@@ -106,7 +103,7 @@
 .one-drawer--top {
   top: 0;
   translate: 0 min(0px, var(--drawer-swipe-movement-y, 0px));
-  --one-drawer-stretch: var(--drawer-swipe-movement-y, 0px);
+  --_drawer-stretch: var(--drawer-swipe-movement-y, 0px);
   border-bottom-left-radius: var(--one-radius-xl);
   border-bottom-right-radius: var(--one-radius-xl);
 }
@@ -114,7 +111,7 @@
 .one-drawer--bottom {
   bottom: 0;
   translate: 0 max(0px, var(--drawer-swipe-movement-y, 0px));
-  --one-drawer-stretch: calc(-1 * var(--drawer-swipe-movement-y, 0px));
+  --_drawer-stretch: calc(-1 * var(--drawer-swipe-movement-y, 0px));
   border-top-left-radius: var(--one-radius-xl);
   border-top-right-radius: var(--one-radius-xl);
 }
@@ -155,7 +152,7 @@
  * abrupt or sluggish.
  */
 .one-drawer[data-swipe-dismiss] {
-  --one-drawer-exit-duration: min(
+  --_drawer-exit-duration: min(
     var(--one-duration-exit),
     max(
       var(--one-duration-minimum),
@@ -166,7 +163,7 @@
 
 .one-drawer[data-ending-style] {
   transition:
-    transform var(--one-drawer-exit-duration)
+    transform var(--_drawer-exit-duration)
       var(--one-easing-emphasized-accelerate),
     scale var(--one-duration-exit) var(--one-easing-emphasized-accelerate);
   pointer-events: none;
@@ -178,24 +175,24 @@
 }
 
 .one-drawer--small {
-  --one-drawer-horizontal-size: 20rem;
-  --one-drawer-vertical-size: 40dvh;
+  --_drawer-horizontal-size: 20rem;
+  --_drawer-vertical-size: 40dvh;
 }
 
 .one-drawer--medium {
-  --one-drawer-horizontal-size: 28rem;
-  --one-drawer-vertical-size: 60dvh;
+  --_drawer-horizontal-size: 28rem;
+  --_drawer-vertical-size: 60dvh;
 }
 
 .one-drawer--large {
-  --one-drawer-horizontal-size: 40rem;
-  --one-drawer-vertical-size: 80dvh;
+  --_drawer-horizontal-size: 40rem;
+  --_drawer-vertical-size: 80dvh;
 }
 
 .one-drawer__backdrop {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   background-color: var(--one-color-overlay);
   backdrop-filter: blur(var(--one-blur-subtle));
   /* Tracks the swipe progress Base UI reports, so the backdrop fades with the panel. */
@@ -313,7 +310,7 @@
  */
 @media (prefers-reduced-motion: reduce) {
   .one-drawer {
-    --one-drawer-exit-duration: var(--one-duration-fast);
+    --_drawer-exit-duration: var(--one-duration-fast);
     transition:
       opacity var(--one-duration-fast) var(--one-easing-standard),
       transform var(--one-duration-fast) var(--one-easing-standard),
@@ -324,7 +321,7 @@
   }
 
   .one-drawer[data-swipe-dismiss] {
-    --one-drawer-exit-duration: var(--one-duration-fast);
+    --_drawer-exit-duration: var(--one-duration-fast);
   }
 
   .one-drawer[data-starting-style] {

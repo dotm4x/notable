@@ -1,0 +1,6 @@
+:root {
+  --one-focus-width: 2px;
+  --one-focus-offset: 2px;
+  --one-focus-offset-inset: -2px;
+  --one-focus-ring-width: 4px;
+}

@@ -106,6 +106,32 @@ Pixel values assume a root size of 16 px.
 | Token                | Width |
 | -------------------- | ----- |
 | Default border width | 2 px  |
+| Subtle border width  | 1 px  |
+
+## Focus
+
+| Token              | Value |
+| ------------------ | ----- |
+| Focus width        | 2 px  |
+| Focus offset       | 2 px  |
+| Inset focus offset | -2 px |
+| Focus ring width   | 4 px  |
+
+## Controls
+
+### Sizes
+
+| Token  | Size  |
+| ------ | ----- |
+| Small  | 32 px |
+| Medium | 40 px |
+| Large  | 44 px |
+
+### Item height
+
+| Token | Height |
+| ----- | ------ |
+| Item  | 36 px  |
 
 ## Shadows
 
@@ -125,13 +151,22 @@ Pixel values assume a root size of 16 px.
 | Strong  | 16 px  |
 | Intense | 24 px  |
 
+## Layering
+
+| Token   | Value |
+| ------- | ----- |
+| Sticky  | 10    |
+| Overlay | 50    |
+| Toast   | 100   |
+| Tooltip | 1000  |
+
 ## Motion
 
 ### Durations
 
 | Token   | Duration |
 | ------- | -------- |
-| Fast    | 140 ms   |
+| Fast    | 120 ms   |
 | Base    | 160 ms   |
 | Medium  | 200 ms   |
 | Slow    | 800 ms   |

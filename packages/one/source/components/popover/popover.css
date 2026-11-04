@@ -2,11 +2,10 @@
  * The popup starts and ends offset toward its trigger, based on `data-side`,
  * so it appears to grow out of the anchor. The shared surface styles, including
  * the scale and fade, live in `internal/styles/floating-surface.css`.
- * `z-index` has no shared layering token, so it is set locally.
  */
 .one-popover {
   box-sizing: border-box;
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   width: min(20rem, calc(100vw - var(--one-spacing-8)));
   max-height: calc(100dvh - var(--one-spacing-8));
   padding: var(--one-spacing-4);

@@ -8,11 +8,19 @@ See [Values](./values.md#radius) for the radius scale and [Values](./values.md#b
 
 Corners follow a consistent scale. Larger containers and popups use a larger radius, and small controls use a smaller one. Corners scale with the size of the element, so a small control never looks like a miniature container.
 
-Nested elements should use a smaller radius than the element that contains them. This keeps curves concentric, so the inner shape looks like it belongs inside the outer one rather than fighting it.
+Nested elements should use a smaller radius than the element that contains them. This keeps curves concentric, so the inner shape looks like it belongs inside the outer one rather than fighting it. Derive the inner radius by subtracting the space between the two edges from the outer radius, including padding and border width:
+
+```css
+border-radius: calc(var(--one-radius-lg) - var(--one-spacing-1));
+```
+
+Choosing an unrelated smaller radius leaves a visible gap or a lopsided curve instead of a concentric one.
 
 ## Borders
 
 Borders define an edge that the surface change alone cannot. Use a light border when a surface needs definition against its background. Do not add a border where a change in surface already separates the content.
+
+Two border widths are available. Use the subtle hairline for separators and nested edges, and the default width for control and container edges. The width should match the role of the edge, not the size of the element.
 
 ## Full rounding
 

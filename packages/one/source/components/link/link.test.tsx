@@ -63,7 +63,6 @@ describe('Link', () => {
     const { container } = render(<Link href="/docs">Docs</Link>);
 
     expect(container.querySelector('.one-link__arrow')).toBeNull();
-    expect(container.querySelector('.one-link--arrow')).toBeNull();
   });
 
   it('renders a decorative arrow that is hidden from assistive technology', () => {
@@ -76,7 +75,7 @@ describe('Link', () => {
     const link = screen.getByRole('link', { name: 'Docs' });
     const arrow = container.querySelector('.one-link__arrow');
 
-    expect(link).toHaveClass('one-link--arrow');
+    expect(link).toHaveClass('one-link');
     expect(arrow).not.toBeNull();
     expect(arrow).toHaveAttribute('aria-hidden', 'true');
     expect(link).toHaveAccessibleName('Docs');

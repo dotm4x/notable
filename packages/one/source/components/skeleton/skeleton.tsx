@@ -64,11 +64,11 @@ export function Skeleton({
     onPointerMove?.(event);
     // The spotlight is positioned with CSS variables so pointer moves never re-render.
     event.currentTarget.style.setProperty(
-      '--one-skeleton-pointer-x',
+      '--_skeleton-pointer-x',
       `${event.nativeEvent.offsetX}px`,
     );
     event.currentTarget.style.setProperty(
-      '--one-skeleton-pointer-y',
+      '--_skeleton-pointer-y',
       `${event.nativeEvent.offsetY}px`,
     );
   };

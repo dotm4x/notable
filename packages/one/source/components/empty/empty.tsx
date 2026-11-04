@@ -62,8 +62,8 @@ const EmptyRoot = forwardRef<HTMLDivElement, TEmptyRootProps>(function Empty(
 ) {
   const classes = [
     'one-empty',
-    variant !== 'default' && `one-empty--variant-${variant}`,
-    size !== 'default' && `one-empty--size-${size}`,
+    variant !== 'default' && `one-empty--${variant}`,
+    size !== 'default' && `one-empty--${size}`,
     className,
   ]
     .filter(Boolean)
@@ -97,7 +97,7 @@ const EmptyMedia = forwardRef<HTMLDivElement, TEmptyMediaProps>(
   ) {
     const classes = [
       'one-empty__media',
-      variant === 'icon' && 'one-empty__media--variant-icon',
+      variant === 'icon' && 'one-empty__media--icon',
       className,
     ]
       .filter(Boolean)

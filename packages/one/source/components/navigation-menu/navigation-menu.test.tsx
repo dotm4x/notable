@@ -220,7 +220,7 @@ describe('NavigationMenu', () => {
     expect(
       screen
         .getByRole('navigation', { name: 'Main' })
-        .querySelector('.one-navigation-menu__highlight'),
+        .querySelector('[data-highlighted]'),
     ).not.toBeInTheDocument();
   });
 
@@ -397,9 +397,7 @@ describe('NavigationMenu', () => {
     await user.click(screen.getByRole('button', { name: 'Resources' }));
 
     const group = await screen.findByRole('group', { name: 'Learn' });
-    expect(
-      group.querySelector('.one-navigation-menu__highlight'),
-    ).not.toBeInTheDocument();
+    expect(group.querySelector('[data-highlighted]')).not.toBeInTheDocument();
   });
 
   it('does not render background highlights on grouped links', async () => {

@@ -97,7 +97,7 @@
   aspect-ratio: 1;
   margin: 0 auto;
   padding: 0;
-  border: 1px solid transparent;
+  border: var(--one-border-width-subtle) solid transparent;
   border-radius: var(--one-radius-full);
   background: transparent;
   color: inherit;
@@ -117,8 +117,8 @@
 }
 
 .one-calendar__day:focus-visible {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 1px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 .one-calendar__day[data-outside] {
@@ -150,7 +150,7 @@
 }
 
 .one-calendar__cell[data-in-range] {
-  --one-calendar-range-color: color-mix(
+  --_calendar-range-color: color-mix(
     in srgb,
     var(--one-color-primary) 14%,
     transparent
@@ -158,7 +158,7 @@
 }
 
 .one-calendar__cell[data-in-range][data-preview] {
-  --one-calendar-range-color: color-mix(
+  --_calendar-range-color: color-mix(
     in srgb,
     var(--one-color-primary) 7%,
     transparent
@@ -172,7 +172,7 @@
   inset-block-start: 50%;
   block-size: var(--one-spacing-10);
   translate: 0 -50%;
-  background: var(--one-calendar-range-color, transparent);
+  background: var(--_calendar-range-color, transparent);
   opacity: 0;
   scale: 0.85 1;
   pointer-events: none;

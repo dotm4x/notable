@@ -274,7 +274,7 @@ export const CustomStyling: Story = {
       <Dialog.Content
         style={
           {
-            '--one-dialog-width': '40rem',
+            '--_dialog-width': '40rem',
             backgroundColor: 'var(--one-color-primary)',
             color: 'var(--one-color-on-primary)',
           } as CSSProperties

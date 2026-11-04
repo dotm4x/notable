@@ -7,24 +7,24 @@
   display: block;
   inline-size: 100%;
   min-inline-size: 0;
-  block-size: var(--one-progress-thickness);
+  block-size: var(--_progress-thickness);
   overflow: hidden;
   border-radius: var(--one-radius-full);
-  background: var(--one-progress-track-color, var(--one-color-border));
+  background: var(--_progress-track-color, var(--one-color-border));
 }
 
 /* Linear sizes */
 
 .one-progress--linear.one-progress--small {
-  --one-progress-thickness: var(--one-spacing-1);
+  --_progress-thickness: var(--one-spacing-1);
 }
 
 .one-progress--linear.one-progress--medium {
-  --one-progress-thickness: var(--one-spacing-2);
+  --_progress-thickness: var(--one-spacing-2);
 }
 
 .one-progress--linear.one-progress--large {
-  --one-progress-thickness: var(--one-spacing-3);
+  --_progress-thickness: var(--one-spacing-3);
 }
 
 /* Linear indicator */
@@ -35,8 +35,8 @@
   inset-inline-start: 0;
   inline-size: 100%;
   border-radius: inherit;
-  background: var(--one-progress-color, var(--one-color-primary));
-  transform: translateX(calc(var(--one-progress-value, 0%) - 100%));
+  background: var(--_progress-color, var(--one-color-primary));
+  transform: translateX(calc(var(--_progress-value, 0%) - 100%));
   transition: transform var(--one-duration-slow) var(--one-easing-standard);
 }
 
@@ -73,18 +73,18 @@
    ========================================================================== */
 
 .one-progress--circular {
-  --one-progress-diameter: var(--one-spacing-6);
-  --one-progress-thickness: var(--one-spacing-1);
-  --one-progress-radius: calc(
-    (var(--one-progress-diameter) - var(--one-progress-thickness)) / 2
+  --_progress-diameter: var(--one-spacing-6);
+  --_progress-thickness: var(--one-spacing-1);
+  --_progress-radius: calc(
+    (var(--_progress-diameter) - var(--_progress-thickness)) / 2
   );
 
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: var(--one-progress-diameter);
-  block-size: var(--one-progress-diameter);
+  inline-size: var(--_progress-diameter);
+  block-size: var(--_progress-diameter);
   max-inline-size: 100%;
   flex-shrink: 0;
   overflow: visible;
@@ -97,18 +97,18 @@
 /* Circular sizes */
 
 .one-progress--circular.one-progress--small {
-  --one-progress-diameter: var(--one-spacing-4);
-  --one-progress-thickness: 3px;
+  --_progress-diameter: var(--one-spacing-4);
+  --_progress-thickness: 3px;
 }
 
 .one-progress--circular.one-progress--medium {
-  --one-progress-diameter: var(--one-spacing-6);
-  --one-progress-thickness: var(--one-spacing-1);
+  --_progress-diameter: var(--one-spacing-6);
+  --_progress-thickness: var(--one-spacing-1);
 }
 
 .one-progress--circular.one-progress--large {
-  --one-progress-diameter: var(--one-spacing-8);
-  --one-progress-thickness: var(--one-spacing-1);
+  --_progress-diameter: var(--one-spacing-8);
+  --_progress-thickness: var(--one-spacing-1);
 }
 
 /* Circular SVG */
@@ -124,24 +124,24 @@
 
 .one-progress__track,
 .one-progress__arc {
-  cx: calc(var(--one-progress-diameter) / 2);
-  cy: calc(var(--one-progress-diameter) / 2);
-  r: var(--one-progress-radius);
+  cx: calc(var(--_progress-diameter) / 2);
+  cy: calc(var(--_progress-diameter) / 2);
+  r: var(--_progress-radius);
   fill: none;
-  stroke-width: var(--one-progress-thickness);
+  stroke-width: var(--_progress-thickness);
 }
 
 .one-progress__track {
-  stroke: var(--one-progress-track-color, var(--one-color-border));
+  stroke: var(--_progress-track-color, var(--one-color-border));
 }
 
 /* Determinate circular progress */
 
 .one-progress__arc {
-  stroke: var(--one-progress-color, var(--one-color-primary));
+  stroke: var(--_progress-color, var(--one-color-primary));
   stroke-linecap: round;
   stroke-dasharray: 100;
-  stroke-dashoffset: calc(100 - var(--one-progress-percent, 0));
+  stroke-dashoffset: calc(100 - var(--_progress-percent, 0));
   transform: rotate(-90deg);
   transform-origin: center;
   transition: stroke-dashoffset var(--one-duration-slow)

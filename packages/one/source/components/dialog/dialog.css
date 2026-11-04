@@ -2,18 +2,17 @@
  * Base UI keeps the popup mounted until its transitions finish. It marks the
  * enter and exit start states with `data-starting-style` and `data-ending-style`,
  * so the transitions below run in every browser without keyframes.
- * `z-index` has no shared layering token, so it is set locally.
  */
 .one-dialog {
-  --one-dialog-width: 32rem;
+  --_dialog-width: 32rem;
 
   position: fixed;
   inset-block-start: 50%;
   inset-inline-start: 50%;
   translate: -50% -50%;
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   box-sizing: border-box;
-  width: min(var(--one-dialog-width), calc(100vw - var(--one-spacing-8)));
+  width: min(var(--_dialog-width), calc(100vw - var(--one-spacing-8)));
   max-height: calc(100dvh - var(--one-spacing-8));
   margin: 0;
   padding: 0;
@@ -39,7 +38,7 @@
 .one-dialog__backdrop {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--one-layer-overlay);
   background-color: var(--one-color-overlay);
   backdrop-filter: blur(var(--one-blur-subtle));
   transition:
@@ -54,15 +53,15 @@
 }
 
 .one-dialog--small {
-  --one-dialog-width: 24rem;
+  --_dialog-width: 24rem;
 }
 
 .one-dialog--medium {
-  --one-dialog-width: 32rem;
+  --_dialog-width: 32rem;
 }
 
 .one-dialog--large {
-  --one-dialog-width: 48rem;
+  --_dialog-width: 48rem;
 }
 
 .one-dialog__body {

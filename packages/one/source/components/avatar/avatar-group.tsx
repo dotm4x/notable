@@ -23,7 +23,7 @@ export type AvatarGroupProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 type AvatarGroupStyle = CSSProperties & {
-  '--one-avatar-group-overlap': string;
+  '--_avatar-group-overlap': string;
 };
 
 /**
@@ -50,7 +50,7 @@ export function AvatarGroup({
   const overlap = Number.isFinite(spacing) ? Math.max(0, spacing) : 8;
   const style: AvatarGroupStyle = {
     ...props.style,
-    '--one-avatar-group-overlap': `${overlap}px`,
+    '--_avatar-group-overlap': `${overlap}px`,
   };
   const classes = [
     'one-avatar-group',

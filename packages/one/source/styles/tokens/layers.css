@@ -1,0 +1,6 @@
+:root {
+  --one-layer-sticky: 10;
+  --one-layer-overlay: 50;
+  --one-layer-toast: 100;
+  --one-layer-tooltip: 1000;
+}

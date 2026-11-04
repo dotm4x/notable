@@ -364,9 +364,7 @@ describe('ScrollArea', () => {
 
       // Assert
       expect(
-        getRoot(container).style.getPropertyValue(
-          '--one-scroll-area-fade-size',
-        ),
+        getRoot(container).style.getPropertyValue('--_scroll-area-fade-size'),
       ).toBe('2rem');
     });
 
@@ -381,7 +379,7 @@ describe('ScrollArea', () => {
       // Assert
       const root = getRoot(container);
       expect(root.style.maxHeight).toBe('200px');
-      expect(root.style.getPropertyValue('--one-scroll-area-fade-size')).toBe(
+      expect(root.style.getPropertyValue('--_scroll-area-fade-size')).toBe(
         '16px',
       );
     });
@@ -508,9 +506,7 @@ describe('ScrollArea', () => {
 
       // Assert
       expect(
-        getRoot(container).style.getPropertyValue(
-          '--one-scroll-area-edge-size',
-        ),
+        getRoot(container).style.getPropertyValue('--_scroll-area-edge-size'),
       ).toBe('2rem');
     });
 
@@ -529,7 +525,7 @@ describe('ScrollArea', () => {
       // Assert
       const root = getRoot(container);
       expect(root.style.maxHeight).toBe('200px');
-      expect(root.style.getPropertyValue('--one-scroll-area-edge-size')).toBe(
+      expect(root.style.getPropertyValue('--_scroll-area-edge-size')).toBe(
         '16px',
       );
     });

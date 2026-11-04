@@ -46,19 +46,19 @@
 }
 
 .one-segmented-control--small {
-  min-height: var(--one-spacing-8);
+  min-height: var(--one-control-size-small);
   padding: 2px;
   font-size: var(--one-font-size-xs);
 }
 
 .one-segmented-control--medium {
-  min-height: var(--one-spacing-10);
+  min-height: var(--one-control-size-medium);
   padding: 3px;
   font-size: var(--one-font-size-sm);
 }
 
 .one-segmented-control--large {
-  min-height: 2.875rem;
+  min-height: var(--one-control-size-large);
   padding: var(--one-spacing-1);
   font-size: var(--one-font-size-md);
 }
@@ -157,9 +157,9 @@
 }
 
 .one-segmented-control__input:focus-visible ~ .one-segmented-control__content {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-segmented-control__icon {

@@ -39,7 +39,7 @@ export type ScrollAreaProps = Omit<
    */
   edgeEffect?: ScrollAreaEdgeEffect;
   /**
-   * Length of the edge effect, such as `"24px"`. Defaults to `--one-scroll-area-fade-size`.
+   * Length of the edge effect, such as `"24px"`. Defaults to `24px`.
    * Takes precedence over the deprecated `fadeSize`.
    */
   edgeEffectSize?: string;
@@ -115,10 +115,10 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       ...style,
       ...(fadeSize === undefined
         ? {}
-        : { '--one-scroll-area-fade-size': fadeSize }),
+        : { '--_scroll-area-fade-size': fadeSize }),
       ...(edgeEffectSize === undefined
         ? {}
-        : { '--one-scroll-area-edge-size': edgeEffectSize }),
+        : { '--_scroll-area-edge-size': edgeEffectSize }),
     } as CSSProperties;
 
     // Base UI sets `overflow: scroll` inline. Clip the unused axis so only the chosen directions scroll.

@@ -90,9 +90,9 @@
 }
 
 .one-checkbox__input:focus-visible + .one-checkbox__indicator {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-checkbox__input:disabled + .one-checkbox__indicator {

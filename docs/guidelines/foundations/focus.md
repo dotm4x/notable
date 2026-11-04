@@ -18,6 +18,8 @@ Focus must be clearly visible against its surroundings. It should appear when th
 
 The focus treatment is a ring or outline placed outside the element, with a clear offset from its edge. The same treatment should appear across the interface, so a user learns it once. Focus must never be removed without a replacement.
 
+See [Values](./values.md#focus) for the focus width, offset, and ring width.
+
 ## Containers
 
 Focus must not be clipped by the container that holds the element. When a focused element sits at the edge of a scrolling or bordered container, its focus treatment should still be fully visible.

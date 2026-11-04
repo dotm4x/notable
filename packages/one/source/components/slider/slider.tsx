@@ -323,7 +323,7 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
                 aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
                 style={
                   {
-                    '--one-slider-mark-position': `${max === min ? 50 : ((mark.value - min) / (max - min)) * 100}%`,
+                    '--_slider-mark-position': `${max === min ? 50 : ((mark.value - min) / (max - min)) * 100}%`,
                   } as CSSProperties
                 }
               >
@@ -449,7 +449,7 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
                 aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
                 style={
                   {
-                    '--one-slider-mark-position': `${((mark.value - min) / (max - min)) * 100}%`,
+                    '--_slider-mark-position': `${((mark.value - min) / (max - min)) * 100}%`,
                   } as CSSProperties
                 }
               >

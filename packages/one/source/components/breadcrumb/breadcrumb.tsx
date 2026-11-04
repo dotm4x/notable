@@ -102,7 +102,7 @@ function BreadcrumbDropdown({ label, items }: BreadcrumbDropdownProps) {
           <ChevronDown size={14} aria-hidden="true" />
         </button>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content className="one-breadcrumb__menu" align="start">
+      <DropdownMenu.Content align="start">
         {items.map((item) => (
           <BreadcrumbMenuLink key={item.href} href={item.href}>
             {item.label}
@@ -169,7 +169,7 @@ function BreadcrumbCollapsed({ entries }: { entries: ReactNode[] }) {
           <Ellipsis size={16} aria-hidden="true" />
         </button>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content className="one-breadcrumb__menu" align="start">
+      <DropdownMenu.Content align="start">
         {entries.map(renderHiddenEntry)}
       </DropdownMenu.Content>
     </DropdownMenu.Root>

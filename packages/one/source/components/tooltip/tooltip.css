@@ -4,7 +4,7 @@
 }
 
 .one-tooltip__content {
-  z-index: 1000;
+  z-index: var(--one-layer-tooltip);
   width: max-content;
   max-width: min(16rem, calc(100vw - var(--one-spacing-8)));
   max-height: calc(100vh - var(--one-spacing-4));

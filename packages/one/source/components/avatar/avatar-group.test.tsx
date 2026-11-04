@@ -27,7 +27,7 @@ describe('AvatarGroup', () => {
 
     expect(screen.getByTestId('group')).toHaveClass('one-avatar-group--large');
     expect(screen.getByTestId('group')).toHaveStyle(
-      '--one-avatar-group-overlap: 12px',
+      '--_avatar-group-overlap: 12px',
     );
     expect(screen.getByTestId('avatar-Max')).toHaveClass('one-avatar--medium');
   });
@@ -40,7 +40,7 @@ describe('AvatarGroup', () => {
     );
 
     expect(screen.getByTestId('group')).toHaveStyle(
-      '--one-avatar-group-overlap: 0px',
+      '--_avatar-group-overlap: 0px',
     );
   });
 
@@ -60,7 +60,7 @@ describe('AvatarGroup', () => {
         'one-avatar-group__item',
       );
       expect(screen.getByTestId('group')).toHaveStyle(
-        '--one-avatar-group-overlap: 10px',
+        '--_avatar-group-overlap: 10px',
       );
     },
   );

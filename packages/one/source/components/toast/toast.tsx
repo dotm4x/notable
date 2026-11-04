@@ -316,7 +316,7 @@ export function ToastProvider({
       {children}
       <BaseToast.Portal>
         <BaseToast.Viewport
-          className={`one-toast-viewport one-toast-viewport--${position}`}
+          className={`one-toast__viewport one-toast__viewport--${position}`}
           aria-label={`Notifications ${position.replace(/-/g, ' ')}`}
         >
           <ToastList />

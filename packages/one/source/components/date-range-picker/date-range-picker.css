@@ -19,7 +19,7 @@
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  min-height: 2.75rem;
+  min-height: var(--one-control-size-large);
   margin: 0;
   padding: 0 var(--one-spacing-3);
   border: var(--one-border-width) solid var(--one-color-border-strong);
@@ -45,7 +45,7 @@
 .one-date-range-picker__trigger:focus-visible {
   outline: none;
   border-color: var(--one-color-focus);
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 /* Matches the open calendar so the trigger reads as the active control. */
@@ -110,8 +110,8 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--one-control-size-large);
+  height: var(--one-control-size-large);
   margin: 0;
   padding: 0;
   border: none;
@@ -131,7 +131,7 @@
 
 .one-date-range-picker__clear:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 var(--one-spacing-1) var(--one-color-focus-ring);
+  box-shadow: 0 0 0 var(--one-focus-ring-width) var(--one-color-focus-ring);
 }
 
 .one-date-range-picker__clear > :where(svg) {

@@ -23,6 +23,8 @@ A shadow signals that something floats. Reserve it for floating content. Contain
 
 Floating content must appear above the content it belongs to, regardless of where it sits in the document. Users should never have to work out which of two overlapping items is on top.
 
+Stacking levels are shared across the interface. Popups, dialogs, and drawers share the overlay level so that a popup opened from a dialog still appears above it. Toasts sit above overlays, and tooltips sit above everything. See [Values](./values.md#layering).
+
 ## Temporary content
 
 Floating content is temporary. It appears in response to an action and goes away when the user completes or cancels that action. Its entrance and exit should match its temporary role. See [Popups](../patterns/popups.md).

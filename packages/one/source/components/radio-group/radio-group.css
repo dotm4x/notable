@@ -40,18 +40,18 @@
 /* Sizes */
 
 .one-radio-group--small {
-  --one-radio-group-control-size: 0.875rem;
-  --one-radio-group-dot-size: 0.375rem;
+  --_radio-group-control-size: 0.875rem;
+  --_radio-group-dot-size: 0.375rem;
 }
 
 .one-radio-group--medium {
-  --one-radio-group-control-size: var(--one-spacing-4);
-  --one-radio-group-dot-size: var(--one-spacing-2);
+  --_radio-group-control-size: var(--one-spacing-4);
+  --_radio-group-dot-size: var(--one-spacing-2);
 }
 
 .one-radio-group--large {
-  --one-radio-group-control-size: var(--one-spacing-5);
-  --one-radio-group-dot-size: 0.625rem;
+  --_radio-group-control-size: var(--one-spacing-5);
+  --_radio-group-dot-size: 0.625rem;
 }
 
 .one-radio-group--small .one-radio-group__text {
@@ -103,8 +103,8 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: var(--one-radio-group-control-size);
-  height: var(--one-radio-group-control-size);
+  width: var(--_radio-group-control-size);
+  height: var(--_radio-group-control-size);
   aspect-ratio: 1;
   box-sizing: border-box;
 }
@@ -140,8 +140,8 @@
 
 .one-radio-group__indicator::after {
   content: '';
-  width: var(--one-radio-group-dot-size);
-  height: var(--one-radio-group-dot-size);
+  width: var(--_radio-group-dot-size);
+  height: var(--_radio-group-dot-size);
   flex: 0 0 auto;
   border-radius: var(--one-radius-full);
   background: var(--one-color-primary);
@@ -174,8 +174,8 @@
 /* Keyboard focus */
 
 .one-radio-group__input:focus-visible + .one-radio-group__indicator {
-  outline: var(--one-border-width) solid var(--one-color-focus);
-  outline-offset: 2px;
+  outline: var(--one-focus-width) solid var(--one-color-focus);
+  outline-offset: var(--one-focus-offset);
 }
 
 /* Option text */
@@ -185,9 +185,7 @@
 }
 
 .one-radio-group__item-description {
-  padding-left: calc(
-    var(--one-radio-group-control-size) + var(--one-spacing-2)
-  );
+  padding-left: calc(var(--_radio-group-control-size) + var(--one-spacing-2));
   color: var(--one-color-text-muted);
   font-size: var(--one-font-size-xs);
   line-height: var(--one-line-height-normal);
