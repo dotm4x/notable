@@ -1,4 +1,5 @@
 import { type ComponentProps, forwardRef } from 'react';
+import { joinClassNames } from '../../internal/helpers/join-class-names.js';
 import './form.css';
 
 export type TFormProps = Omit<ComponentProps<'form'>, 'className'> & {
@@ -22,7 +23,3 @@ export const Form = forwardRef<HTMLFormElement, TFormProps>(function Form(
     />
   );
 });
-
-function joinClassNames(...classNames: (string | undefined)[]) {
-  return classNames.filter(Boolean).join(' ');
-}

@@ -183,6 +183,35 @@ Rules:
 - Never edit `dist/`, `storybook-static/`, generated declarations, or other generated outputs directly.
 - Do not modify `node_modules/` or generated dependency files.
 
+### Component internals
+
+A component starts as the four conventional root files. When it has genuinely separable responsibilities, move them into component-private subfolders. These folders belong to the component, not to `source/internal/`.
+
+```text
+source/components/sidebar/
+├── sidebar.tsx              # public API, compound assembly, and re-exports
+├── sidebar.css
+├── sidebar.test.tsx
+├── sidebar.stories.tsx
+├── types.ts                 # shared prop and context types (optional)
+├── context.ts               # React context and its read hook (optional)
+├── helpers/                 # pure functions and module-level constants
+├── hooks/                   # stateful React behavior
+└── parts/                   # subcomponents grouped by domain
+```
+
+Rules:
+
+- Keep the public entry, stylesheet, tests, and stories at the component root.
+- Do not create `source/internal/` entries for component-specific parts. `source/internal/` is for cross-component infrastructure only.
+- A utility that is genuinely shared by several components may live in `source/internal/helpers/`; do not duplicate it inside each component.
+- Split only along a real responsibility boundary: context, stateful behavior, pure logic, or a distinct group of subcomponents. Do not split by line count alone.
+- Group related subcomponents in one part file by domain. Do not create one file per small presentational element.
+- Do not add `index.ts` barrels inside `helpers/`, `hooks/`, or `parts/`. Import each file directly.
+- Keep public prop types in `types.ts` when the parts need them, and re-export them from the public entry. This avoids import cycles between the entry and its parts.
+- Keep the public entry responsible for the compound `Object.assign` and for re-exporting public types. Internal files are never exported from `components/index.ts`.
+- Keep component CSS in one file at the root unless a split preserves cascade order and has a clear domain boundary.
+
 ### Shared code
 
 Use `source/helpers/` for reusable, implementation-level helper functions and hooks that have a clear shared purpose.

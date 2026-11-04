@@ -4,145 +4,19 @@ import {
   useCallback,
   useId,
   useState,
-  type ComponentPropsWithoutRef,
   type CSSProperties,
-  type ReactNode,
 } from 'react';
+import {
+  getMarkPercentage,
+  getSliderMarks,
+  hasMarkLabel,
+  isMarkActive,
+} from './helpers/marks.js';
+import { joinClassNames } from '../../internal/helpers/join-class-names.js';
+import type { TSliderProps, TSliderValue } from './types.js';
 import './slider.css';
 
-/** A numeric value or multiple values for a multi-thumb slider. */
-export type TSliderValue = number | readonly number[];
-
-/** A decorative tick on the slider track. Marks do not change step behavior. */
-export type TSliderMark = number | { value: number; label?: ReactNode };
-
-/** Props for a single-value or range slider. */
-export type TSliderProps = Omit<
-  ComponentPropsWithoutRef<'div'>,
-  | 'aria-orientation'
-  | 'aria-valuemax'
-  | 'aria-valuemin'
-  | 'aria-valuenow'
-  | 'children'
-  | 'defaultValue'
-  | 'onChange'
-> & {
-  /** Helper text associated with the slider for assistive technologies. */
-  description?: ReactNode;
-  /** Value selected initially when the slider is uncontrolled. */
-  defaultValue?: TSliderValue;
-  /** Disables interaction with the slider. Defaults to `false`. */
-  disabled?: boolean;
-  /** Message associated with an invalid slider. */
-  error?: ReactNode;
-  /** Options used to format numeric values with `Intl.NumberFormat`. */
-  format?: Intl.NumberFormatOptions;
-  /** Form identifier when the slider is submitted. */
-  form?: string;
-  /** Returns a display and accessible value string for each numeric value. */
-  formatValue?: (value: number) => string;
-  /** Visible label associated with the slider. */
-  label?: ReactNode;
-  /** Maximum allowed value. Defaults to `100`. */
-  max?: number;
-  /** Minimum allowed value. Defaults to `0`. */
-  min?: number;
-  /** Minimum distance between range thumbs, in steps. Defaults to `0`. */
-  minStepsBetweenValues?: number;
-  /** Visible marks. A numeric mark is displayed without a label. */
-  marks?: readonly TSliderMark[];
-  /** Adds marks at this interval, including the minimum and maximum. */
-  markInterval?: number;
-  /** Form name used when the slider is submitted. */
-  name?: string;
-  /** Called with the new numeric value or range when the slider changes. */
-  onValueChange?: (value: TSliderValue) => void;
-  /** Called when the value is committed after an interaction. */
-  onValueCommitted?: (value: TSliderValue) => void;
-  /** Horizontal by default; vertical sliders are supported. */
-  orientation?: 'horizontal' | 'vertical';
-  /** Disables interaction without removing the current value from forms. */
-  readOnly?: boolean;
-  /** Marks the slider as required for assistive technology. */
-  required?: boolean;
-  /** Distance between selectable values. Defaults to `1`. */
-  step?: number;
-  /** Displays the current value beside the label. Defaults to `false`. */
-  showValue?: boolean;
-  /** Thumb labels, in value order, for range sliders. */
-  thumbLabels?: readonly string[];
-  /** How thumbs align at the endpoints. Defaults to `center`. */
-  thumbAlignment?: 'center' | 'edge' | 'edge-client-only';
-  /** How range thumbs behave when they collide. Defaults to `push`. */
-  thumbCollisionBehavior?: 'push' | 'swap' | 'none';
-  /** Locale passed to `Intl.NumberFormat`. */
-  locale?: Intl.LocalesArgument;
-  /** Larger keyboard increment. Defaults to `10`. */
-  largeStep?: number;
-  /** Marks the slider as invalid even when no error is displayed. */
-  invalid?: boolean;
-  /** Current value when the slider is controlled. */
-  value?: TSliderValue;
-};
-
-function joinClassNames(...classNames: (string | undefined)[]): string {
-  return classNames.filter(Boolean).join(' ');
-}
-
-function hasMarkLabel(label: ReactNode): boolean {
-  return label !== undefined && label !== null && typeof label !== 'boolean';
-}
-
-function getSliderMarks(
-  marks: readonly TSliderMark[],
-  markInterval: number | undefined,
-  min: number,
-  max: number,
-): { value: number; label?: ReactNode }[] {
-  const resolvedMarks = new Map<number, { value: number; label?: ReactNode }>();
-
-  marks.forEach((mark) => {
-    const value = typeof mark === 'number' ? mark : mark.value;
-
-    if (!Number.isFinite(value) || value < min || value > max) {
-      throw new RangeError(
-        'Slider marks must be finite values within min and max.',
-      );
-    }
-
-    resolvedMarks.set(value, {
-      value,
-      ...(typeof mark === 'number' ? {} : { label: mark.label }),
-    });
-  });
-
-  if (markInterval !== undefined) {
-    if (!Number.isFinite(markInterval) || markInterval <= 0) {
-      throw new RangeError(
-        'Slider markInterval must be a finite positive number.',
-      );
-    }
-
-    const markCount = Math.floor((max - min) / markInterval);
-
-    // shortcut: interval-generated marks are capped at 501, raise only if dense tracks are required.
-    if (markCount > 500) {
-      throw new RangeError(
-        'Slider markInterval cannot create more than 501 marks.',
-      );
-    }
-
-    for (let index = 0; index <= markCount; index += 1) {
-      const value = Number((min + index * markInterval).toPrecision(12));
-      resolvedMarks.set(value, resolvedMarks.get(value) ?? { value });
-    }
-    resolvedMarks.set(max, resolvedMarks.get(max) ?? { value: max });
-  }
-
-  return [...resolvedMarks.values()].sort(
-    (first, second) => first.value - second.value,
-  );
-}
+export type { TSliderMark, TSliderProps, TSliderValue } from './types.js';
 
 /**
  * Renders an accessible, single-value or range slider. Base UI manages value
@@ -323,7 +197,7 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
                 aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
                 style={
                   {
-                    '--_slider-mark-position': `${max === min ? 50 : ((mark.value - min) / (max - min)) * 100}%`,
+                    '--_slider-mark-position': `${getMarkPercentage(mark.value, min, max)}%`,
                   } as CSSProperties
                 }
               >
@@ -435,30 +309,26 @@ export const Slider = forwardRef<HTMLDivElement, TSliderProps>(function Slider(
       <BaseSlider.Control className="one-slider__control">
         <BaseSlider.Track className="one-slider__track">
           <BaseSlider.Indicator className="one-slider__indicator" />
-          {resolvedMarks.map((mark) => {
-            const isActive = isRange
-              ? mark.value >= Math.min(...currentValues) &&
-                mark.value <= Math.max(...currentValues)
-              : mark.value <= (currentValues[0] ?? min);
-
-            return (
-              <span
-                key={mark.value}
-                className="one-slider__mark"
-                data-active={isActive || undefined}
-                aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
-                style={
-                  {
-                    '--_slider-mark-position': `${((mark.value - min) / (max - min)) * 100}%`,
-                  } as CSSProperties
-                }
-              >
-                {hasMarkLabel(mark.label) && (
-                  <span className="one-slider__mark-label">{mark.label}</span>
-                )}
-              </span>
-            );
-          })}
+          {resolvedMarks.map((mark) => (
+            <span
+              key={mark.value}
+              className="one-slider__mark"
+              data-active={
+                isMarkActive(mark.value, currentValues, isRange, min) ||
+                undefined
+              }
+              aria-hidden={hasMarkLabel(mark.label) ? undefined : true}
+              style={
+                {
+                  '--_slider-mark-position': `${getMarkPercentage(mark.value, min, max)}%`,
+                } as CSSProperties
+              }
+            >
+              {hasMarkLabel(mark.label) && (
+                <span className="one-slider__mark-label">{mark.label}</span>
+              )}
+            </span>
+          ))}
           {currentValues.map((_, index) => (
             <BaseSlider.Thumb
               key={index}

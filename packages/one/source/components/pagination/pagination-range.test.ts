@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   getPaginationRange,
   type TPaginationRangeItem,
-} from './pagination-range.js';
+} from './helpers/range.js';
 
 function labels(items: TPaginationRangeItem[]) {
   return items.map((item) => (item.type === 'page' ? item.page : '…'));

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from '../checkbox/checkbox.js';
-import { CheckboxGroup } from '../checkbox/checkbox-group.js';
+import { CheckboxGroup } from '../checkbox-group/checkbox-group.js';
 import { Field } from '../field/field.js';
 import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';
 import { Fieldset } from './fieldset.js';

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { FormEvent } from 'react';
 import { Button } from '../button/button.js';
 import { Checkbox } from '../checkbox/checkbox.js';
-import { CheckboxGroup } from '../checkbox/checkbox-group.js';
+import { CheckboxGroup } from '../checkbox-group/checkbox-group.js';
 import { Fieldset } from '../fieldset/fieldset.js';
 import { Input } from '../input/input.js';
 import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';

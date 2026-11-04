@@ -8,7 +8,7 @@ import {
   UserPlus,
 } from '../../icons';
 import { Avatar } from '../avatar/avatar.js';
-import { AvatarGroup } from '../avatar/avatar-group.js';
+import { AvatarGroup } from '../avatar-group/avatar-group.js';
 import { Button } from '../button/button.js';
 import { Card } from '../card/card.js';
 import { Input } from '../input/input.js';

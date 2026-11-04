@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createRef, type FormEvent } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { Button } from '../button/button.js';
-import { CheckboxGroup } from '../checkbox/checkbox-group.js';
+import { CheckboxGroup } from '../checkbox-group/checkbox-group.js';
 import { Field } from '../field/field.js';
 import { Input } from '../input/input.js';
 import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';

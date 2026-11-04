@@ -1,152 +1,27 @@
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import {
-  forwardRef,
-  type ElementType,
-  type HTMLAttributes,
-  type ReactNode,
-} from 'react';
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardRoot,
+  CardTitle,
+} from './parts/sections.js';
+import type { CardProps } from './types.js';
 import './card.css';
 
-/** Padding applied to the card's root container. */
-export type CardPadding = 'default' | 'none';
+export type {
+  CardContentProps,
+  CardDescriptionProps,
+  CardFooterProps,
+  CardHeaderProps,
+  CardPadding,
+  CardProps,
+  CardTitleProps,
+} from './types.js';
 
-/** Props for {@link Card}, in addition to native `div` attributes. */
-export type CardProps = HTMLAttributes<HTMLElement> & {
-  /** Content of the card. */
-  children?: ReactNode;
-  /** Semantic element to render. Defaults to `div`. */
-  as?: 'div' | 'section' | 'article';
-  /**
-   * Inner padding. Use `none` when content, such as a ScrollArea, should
-   * sit flush with the card edges.
-   */
-  padding?: CardPadding;
-};
-
-/** Props for {@link CardHeader}, in addition to native `div` attributes. */
-export type CardHeaderProps = HTMLAttributes<HTMLDivElement> & {
-  /** Header content, usually a title and description. */
-  children?: ReactNode;
-};
-
-/** Props for {@link CardTitle}, in addition to native heading attributes. */
-export type CardTitleProps = HTMLAttributes<HTMLElement> & {
-  /** Title text. */
-  children?: ReactNode;
-  /** Element to render. Defaults to `h3`. */
-  as?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
-};
-
-/** Props for {@link CardDescription}, in addition to native attributes. */
-export type CardDescriptionProps = HTMLAttributes<HTMLElement> & {
-  /** Description text. */
-  children?: ReactNode;
-  /** Element to render. Defaults to `p`. */
-  as?: 'p' | 'div';
-};
-
-/** Props for {@link CardContent}, in addition to native `div` attributes. */
-export type CardContentProps = HTMLAttributes<HTMLDivElement> & {
-  /** Main content of the card. */
-  children?: ReactNode;
-};
-
-/** Props for {@link CardFooter}, in addition to native `div` attributes. */
-export type CardFooterProps = HTMLAttributes<HTMLDivElement> & {
-  /** Footer content, usually actions. */
-  children?: ReactNode;
-};
-
-/** Renders the card's root container. Compound parts are attached below. */
-const CardRoot = forwardRef<HTMLElement, CardProps>(function Card(
-  { as: Element = 'div', children, className, padding = 'default', ...props },
-  ref,
-) {
-  const Component = Element as ElementType;
-  const classes = [
-    'one-card',
-    padding === 'none' && 'one-card--padding-none',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <Component ref={ref} className={classes} {...props}>
-      {children}
-    </Component>
-  );
-});
-
-const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
-  function CardHeader({ children, className, ...props }, ref) {
-    const classes = ['one-card__header', className].filter(Boolean).join(' ');
-
-    return (
-      <div ref={ref} className={classes} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-const CardTitle = forwardRef<HTMLElement, CardTitleProps>(function CardTitle(
-  { as: Element = 'h3', children, className, ...props },
-  ref,
-) {
-  const Component = Element as ElementType;
-  const classes = ['one-card__title', className].filter(Boolean).join(' ');
-
-  return (
-    <Component ref={ref} className={classes} {...props}>
-      {children}
-    </Component>
-  );
-});
-
-const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(
-  function CardDescription(
-    { as: Element = 'p', children, className, ...props },
-    ref,
-  ) {
-    const Component = Element as ElementType;
-    const classes = ['one-card__description', className]
-      .filter(Boolean)
-      .join(' ');
-
-    return (
-      <Component ref={ref} className={classes} {...props}>
-        {children}
-      </Component>
-    );
-  },
-);
-
-const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
-  function CardContent({ children, className, ...props }, ref) {
-    const classes = ['one-card__content', className].filter(Boolean).join(' ');
-
-    return (
-      <div ref={ref} className={classes} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
-  function CardFooter({ children, className, ...props }, ref) {
-    const classes = ['one-card__footer', className].filter(Boolean).join(' ');
-
-    return (
-      <div ref={ref} className={classes} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-export interface CardComponent extends React.ForwardRefExoticComponent<
-  CardProps & React.RefAttributes<HTMLElement>
+export interface CardComponent extends ForwardRefExoticComponent<
+  CardProps & RefAttributes<HTMLElement>
 > {
   /** Renders the header region of a card. */
   Header: typeof CardHeader;

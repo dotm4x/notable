@@ -6,7 +6,7 @@ import {
   matchesAccept,
   mightAcceptDraggedType,
   resolveFileSelection,
-} from './file-upload-validation.js';
+} from './helpers/validation.js';
 
 function createFile(
   name: string,

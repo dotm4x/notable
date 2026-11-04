@@ -1,167 +1,29 @@
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import {
-  forwardRef,
-  type ElementType,
-  type HTMLAttributes,
-  type ReactNode,
-} from 'react';
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyRoot,
+  EmptyTitle,
+} from './parts/sections.js';
+import type { TEmptyRootProps } from './types.js';
 import './empty.css';
 
-/** Visual presentation of the empty state container. */
-export type TEmptyVariant = 'default' | 'outline' | 'surface';
+export type {
+  TEmptyContentProps,
+  TEmptyDescriptionProps,
+  TEmptyHeaderProps,
+  TEmptyMediaProps,
+  TEmptyMediaVariant,
+  TEmptyRootProps,
+  TEmptySize,
+  TEmptyTitleProps,
+  TEmptyVariant,
+} from './types.js';
 
-/** Density of the empty state container. */
-export type TEmptySize = 'compact' | 'default' | 'spacious';
-
-/** Media presentation. `icon` wraps an icon in a restrained container. */
-export type TEmptyMediaVariant = 'default' | 'icon';
-
-export type TEmptyRootProps = HTMLAttributes<HTMLDivElement> & {
-  /** Content of the empty state, usually a header and content region. */
-  children?: ReactNode;
-  /** Visual presentation. Defaults to `default`, which is borderless. */
-  variant?: TEmptyVariant;
-  /** Density of the layout. Defaults to `default`. */
-  size?: TEmptySize;
-};
-
-export type TEmptyHeaderProps = HTMLAttributes<HTMLDivElement> & {
-  /** Media, title, and description. */
-  children?: ReactNode;
-};
-
-export type TEmptyMediaProps = HTMLAttributes<HTMLDivElement> & {
-  /** Icon or custom visual content, such as an illustration or avatar. */
-  children?: ReactNode;
-  /** Use `icon` for an icon inside a restrained container. */
-  variant?: TEmptyMediaVariant;
-};
-
-export type TEmptyTitleProps = HTMLAttributes<HTMLElement> & {
-  /** Title text. */
-  children?: ReactNode;
-  /** Heading element to render. Defaults to `h3`. */
-  as?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
-};
-
-export type TEmptyDescriptionProps = HTMLAttributes<HTMLElement> & {
-  /** Description content. Inline links are supported. */
-  children?: ReactNode;
-  /** Element to render. Defaults to `p`. Use `div` for block content. */
-  as?: 'p' | 'div';
-};
-
-export type TEmptyContentProps = HTMLAttributes<HTMLDivElement> & {
-  /** Actions or supplementary content. */
-  children?: ReactNode;
-};
-
-/** Renders the root container of the empty state. Compound parts are attached below. */
-const EmptyRoot = forwardRef<HTMLDivElement, TEmptyRootProps>(function Empty(
-  { children, className, variant = 'default', size = 'default', ...props },
-  ref,
-) {
-  const classes = [
-    'one-empty',
-    variant !== 'default' && `one-empty--${variant}`,
-    size !== 'default' && `one-empty--${size}`,
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <div ref={ref} className={classes} {...props}>
-      {children}
-    </div>
-  );
-});
-
-/** Groups the media, title, and description of an empty state. */
-const EmptyHeader = forwardRef<HTMLDivElement, TEmptyHeaderProps>(
-  function EmptyHeader({ children, className, ...props }, ref) {
-    const classes = ['one-empty__header', className].filter(Boolean).join(' ');
-
-    return (
-      <div ref={ref} className={classes} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-/** Renders the visual above the title. Use `variant="icon"` for icons. */
-const EmptyMedia = forwardRef<HTMLDivElement, TEmptyMediaProps>(
-  function EmptyMedia(
-    { children, className, variant = 'default', ...props },
-    ref,
-  ) {
-    const classes = [
-      'one-empty__media',
-      variant === 'icon' && 'one-empty__media--icon',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    return (
-      <div ref={ref} className={classes} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-/** Renders the title of an empty state. Defaults to an `h3` heading. */
-const EmptyTitle = forwardRef<HTMLElement, TEmptyTitleProps>(
-  function EmptyTitle(
-    { as: Element = 'h3', children, className, ...props },
-    ref,
-  ) {
-    const Component = Element as ElementType;
-    const classes = ['one-empty__title', className].filter(Boolean).join(' ');
-
-    return (
-      <Component ref={ref} className={classes} {...props}>
-        {children}
-      </Component>
-    );
-  },
-);
-
-/** Renders the muted description of an empty state. */
-const EmptyDescription = forwardRef<HTMLElement, TEmptyDescriptionProps>(
-  function EmptyDescription(
-    { as: Element = 'p', children, className, ...props },
-    ref,
-  ) {
-    const Component = Element as ElementType;
-    const classes = ['one-empty__description', className]
-      .filter(Boolean)
-      .join(' ');
-
-    return (
-      <Component ref={ref} className={classes} {...props}>
-        {children}
-      </Component>
-    );
-  },
-);
-
-/** Renders the actions and supplementary content of an empty state. */
-const EmptyContent = forwardRef<HTMLDivElement, TEmptyContentProps>(
-  function EmptyContent({ children, className, ...props }, ref) {
-    const classes = ['one-empty__content', className].filter(Boolean).join(' ');
-
-    return (
-      <div ref={ref} className={classes} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
-
-export interface EmptyComponent extends React.ForwardRefExoticComponent<
-  TEmptyRootProps & React.RefAttributes<HTMLDivElement>
+export interface EmptyComponent extends ForwardRefExoticComponent<
+  TEmptyRootProps & RefAttributes<HTMLDivElement>
 > {
   /** Renders the region that groups media, title, and description. */
   Header: typeof EmptyHeader;

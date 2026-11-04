@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { describe, expect, it } from 'vitest';
 import { Checkbox } from '../checkbox/checkbox.js';
-import { CheckboxGroup } from '../checkbox/checkbox-group.js';
+import { CheckboxGroup } from '../checkbox-group/checkbox-group.js';
 import { Field } from '../field/field.js';
 import { Input } from '../input/input.js';
 import { RadioGroup, RadioGroupItem } from '../radio-group/radio-group.js';
