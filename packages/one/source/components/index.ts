@@ -20,6 +20,7 @@ export * from './data-table/index.js';
 export * from './date-picker/index.js';
 export * from './date-range-picker/index.js';
 export * from './dialog/index.js';
+export * from './disclosure/index.js';
 export * from './drawer/index.js';
 export * from './dropdown-menu/index.js';
 export * from './empty/index.js';

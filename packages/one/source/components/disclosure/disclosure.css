@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Disclosure
+   ========================================================================== */
+
+.one-disclosure {
+  min-width: 0;
+}
+
+/* Trigger
+   Mirrors the accordion row so every disclosure in One looks the same. The
+   doubled class keeps these overrides above the neutral collapsible trigger. */
+
+.one-disclosure .one-disclosure__trigger {
+  justify-content: space-between;
+  gap: var(--one-spacing-3);
+  padding-block: var(--one-spacing-2);
+  font-size: var(--one-font-size-sm);
+}
+
+.one-disclosure .one-disclosure__trigger:hover:not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.one-disclosure__title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.one-disclosure__chevron {
+  flex: 0 0 auto;
+  width: var(--one-spacing-4);
+  height: var(--one-spacing-4);
+  color: var(--one-color-text-muted);
+  transition: transform var(--one-duration-base) var(--one-easing-standard);
+}
+
+.one-disclosure .one-disclosure__trigger:disabled .one-disclosure__chevron {
+  color: var(--one-color-text-disabled);
+}
+
+.one-disclosure__trigger[data-panel-open] .one-disclosure__chevron {
+  transform: rotate(180deg);
+}
+
+.one-disclosure__content {
+  padding-block-start: var(--one-spacing-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .one-disclosure__chevron {
+    transition: none;
+  }
+}

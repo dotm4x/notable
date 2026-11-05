@@ -32,7 +32,7 @@ export function Example() {
 
 ## What's included
 
-- **Components** — Accessible, customizable React components with thoughtful defaults, expressive visuals, and purposeful interactions, available through the `@dotm4x/one/components` subpath. This includes Callout, CopyButton, Pager, Table, DataTable, Tree, and CodeBlock, plus a syntax highlighter.
+- **Components** — Accessible, customizable React components with thoughtful defaults, expressive visuals, and purposeful interactions, available through the `@dotm4x/one/components` subpath. This includes Callout, CopyButton, Disclosure, Pager, Table, DataTable, Tree, and CodeBlock, plus a syntax highlighter.
 - **Icons** — A collection of consistent icons available through the `@dotm4x/one/icons` subpath.
 - **Styles** — Shared design tokens and component styles via `@dotm4x/one/styles.css`.
 

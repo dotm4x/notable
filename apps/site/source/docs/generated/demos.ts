@@ -8,6 +8,7 @@ import * as demo_components_callout from '../../../docs/components/callout/demos
 import * as demo_components_code_block from '../../../docs/components/code-block/demos';
 import * as demo_components_copy_button from '../../../docs/components/copy-button/demos';
 import * as demo_components_data_table from '../../../docs/components/data-table/demos';
+import * as demo_components_disclosure from '../../../docs/components/disclosure/demos';
 import * as demo_components_pager from '../../../docs/components/pager/demos';
 import * as demo_components_table from '../../../docs/components/table/demos';
 import * as demo_components_tree from '../../../docs/components/tree/demos';
@@ -18,6 +19,7 @@ export const demoModules: Record<string, Record<string, ComponentType>> = {
   'components/code-block': demo_components_code_block,
   'components/copy-button': demo_components_copy_button,
   'components/data-table': demo_components_data_table,
+  'components/disclosure': demo_components_disclosure,
   'components/pager': demo_components_pager,
   'components/table': demo_components_table,
   'components/tree': demo_components_tree,

@@ -1,0 +1,64 @@
+---
+title: Disclosure
+description: Reveals secondary content from a labeled, expandable row.
+order: 110
+---
+
+## Usage
+
+```tsx
+import { Disclosure } from '@dotm4x/one/components';
+
+<Disclosure title="Shipping details">
+  <p>Ships within two business days.</p>
+</Disclosure>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" layout="start" />
+
+### Open by default
+
+<Demo name="openByDefault" layout="start" />
+
+### With a code block
+
+<Demo name="withCode" layout="start" />
+
+## API reference
+
+### Disclosure
+
+| Prop           | Type                      | Default | Description                                |
+| -------------- | ------------------------- | ------- | ------------------------------------------ |
+| `title`        | `ReactNode`               | —       | Visible label of the trigger.              |
+| `children`     | `ReactNode`               | —       | Content revealed when the section is open. |
+| `open`         | `boolean`                 | —       | Expanded state in controlled mode.         |
+| `defaultOpen`  | `boolean`                 | `false` | Expanded state in uncontrolled mode.       |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the next expanded state.       |
+| `disabled`     | `boolean`                 | `false` | Prevents the trigger from toggling.        |
+
+## When to use it
+
+- Use `Disclosure` for one independent section of secondary content, such as raw
+  markup, advanced options, or metadata.
+- Use `Accordion` for a set of related sections where one or several may be open.
+- Use `Collapsible` when the trigger needs a custom design; `Disclosure` is the
+  ready-made row built on top of it.
+
+## Accessibility
+
+<Callout title="Native disclosure semantics">
+  The trigger is a button that reports `aria-expanded` and controls the panel,
+  so it works with a keyboard, screen readers, and without JavaScript running
+  the animation.
+</Callout>
+
+- The chevron is decorative and hidden from assistive technology. The `title`
+  provides the accessible name.
+- Do not put interactive content inside the trigger; place it in the revealed
+  panel.
+- Closed content stays out of view but mounted, which keeps its state.
