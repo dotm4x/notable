@@ -25,25 +25,27 @@
   border-radius: 0;
 }
 
+/* A select renders a visually hidden input for form submission after its
+   trigger, so position-based selectors match controls that are no longer
+   adjacent. Overlap every control that is not the first one instead. */
+
 .one-control-group[data-orientation='horizontal']
-  > :is(.one-button, .one-select__trigger, .one-field, .one-control-group__text)
-  + :is(
+  > :is(
     .one-button,
     .one-select__trigger,
     .one-field,
     .one-control-group__text
-  ) {
+  ):not(:first-child) {
   margin-inline-start: calc(0px - var(--one-border-width));
 }
 
 .one-control-group[data-orientation='vertical']
-  > :is(.one-button, .one-select__trigger, .one-field, .one-control-group__text)
-  + :is(
+  > :is(
     .one-button,
     .one-select__trigger,
     .one-field,
     .one-control-group__text
-  ) {
+  ):not(:first-child) {
   margin-block-start: calc(0px - var(--one-border-width));
 }
 
@@ -86,9 +88,27 @@
 }
 
 .one-control-group[data-orientation='horizontal']
-  > :is(.one-button, .one-select__trigger, .one-control-group__text):last-child,
+  > :is(.one-button, .one-select__trigger, .one-control-group__text):not(
+    :has(
+      ~ :is(
+        .one-button,
+        .one-select__trigger,
+        .one-field,
+        .one-control-group__text
+      )
+    )
+  ),
 .one-control-group[data-orientation='horizontal']
-  > .one-field:last-child
+  > .one-field:not(
+    :has(
+      ~ :is(
+        .one-button,
+        .one-select__trigger,
+        .one-field,
+        .one-control-group__text
+      )
+    )
+  )
   .one-field__box {
   border-start-end-radius: var(--one-radius-lg);
   border-end-end-radius: var(--one-radius-lg);
@@ -108,9 +128,27 @@
 }
 
 .one-control-group[data-orientation='vertical']
-  > :is(.one-button, .one-select__trigger, .one-control-group__text):last-child,
+  > :is(.one-button, .one-select__trigger, .one-control-group__text):not(
+    :has(
+      ~ :is(
+        .one-button,
+        .one-select__trigger,
+        .one-field,
+        .one-control-group__text
+      )
+    )
+  ),
 .one-control-group[data-orientation='vertical']
-  > .one-field:last-child
+  > .one-field:not(
+    :has(
+      ~ :is(
+        .one-button,
+        .one-select__trigger,
+        .one-field,
+        .one-control-group__text
+      )
+    )
+  )
   .one-field__box {
   border-end-start-radius: var(--one-radius-lg);
   border-end-end-radius: var(--one-radius-lg);

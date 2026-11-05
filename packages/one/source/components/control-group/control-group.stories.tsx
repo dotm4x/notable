@@ -130,6 +130,43 @@ export const SelectComposition: Story = {
   },
 };
 
+export const FieldAndSelectComposition: Story = {
+  render: () => (
+    <ControlGroup aria-label="Search and filter">
+      <Input aria-label="Search notes" placeholder="Search notes" />
+      <Select.Root defaultValue="all">
+        <Select.Trigger aria-label="Category">
+          <Select.Value placeholder="Category" />
+          <Select.Icon />
+        </Select.Trigger>
+        <Select.Content>
+          <Select.List>
+            <Select.Item value="all">All notes</Select.Item>
+            <Select.Item value="shared">Shared</Select.Item>
+            <Select.Item value="private">Private</Select.Item>
+          </Select.List>
+        </Select.Content>
+      </Select.Root>
+    </ControlGroup>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox', { name: 'Search notes' });
+    const inputBox = input.closest<HTMLElement>('.one-field__box');
+    const selectTrigger = canvas.getByRole('combobox', { name: 'Category' });
+
+    if (!inputBox) {
+      throw new Error('Input field box was not rendered.');
+    }
+
+    // The select renders a hidden input after its trigger, which must not stop
+    // the trigger from closing the group on the trailing edge.
+    expect(getComputedStyle(selectTrigger).borderTopRightRadius).toBe(
+      getComputedStyle(inputBox).borderTopLeftRadius,
+    );
+  },
+};
+
 export const SplitButton: Story = {
   render: () => (
     <ControlGroup aria-label="Save actions">
