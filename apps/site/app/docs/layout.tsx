@@ -7,7 +7,7 @@ import '../../source/styles/docs.css';
 export const metadata: Metadata = {
   title: {
     default: 'Documentation',
-    template: '%s — One',
+    template: '%s · One',
   },
   description: 'Design language, components, and usage guidance for One.',
 };

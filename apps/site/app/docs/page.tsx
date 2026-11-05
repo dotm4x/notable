@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: `${doc.title} — One`,
+    title: `${doc.title} · One`,
     description: doc.description,
   };
 }
