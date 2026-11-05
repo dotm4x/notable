@@ -359,7 +359,7 @@ describe('Tabs', () => {
     expect(autoSize).toHaveClass('one-auto-size');
     expect(autoSize).toHaveAttribute('data-axis', 'vertical');
     expect(autoSize).toContainElement(
-      container.querySelector('.one-tabs__list'),
+      container.querySelector<HTMLElement>('.one-tabs__list'),
     );
   });
 
