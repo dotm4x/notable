@@ -188,9 +188,10 @@ Pixel values assume a root size of 16 px.
 
 ### Typeface
 
-| Token  | Value                              |
-| ------ | ---------------------------------- |
-| Family | Outfit, with a sans-serif fallback |
+| Token  | Value                                                             |
+| ------ | ----------------------------------------------------------------- |
+| Family | Outfit, with a sans-serif fallback                                |
+| Mono   | ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace |
 
 ### Sizes
 

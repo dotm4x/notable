@@ -1,0 +1,99 @@
+---
+title: DataTable
+description: A data table with sorting, filtering, pagination, visibility, and selection.
+order: 70
+---
+
+## Installation
+
+`DataTable` lives in a separate entry point so the core package does not require
+TanStack Table. Install both packages:
+
+```bash
+pnpm add @dotm4x/one @tanstack/react-table
+```
+
+```tsx
+import { DataTable, DataTableColumnHeader } from '@dotm4x/one/data-table';
+```
+
+## Usage
+
+```tsx
+import type { ColumnDef } from '@tanstack/react-table';
+import {
+  DataTable,
+  DataTableColumnHeader,
+  type DataTableFeatures,
+} from '@dotm4x/one/data-table';
+
+const columns: ColumnDef<DataTableFeatures, Payment>[] = [
+  {
+    accessorKey: 'email',
+    filterFn: 'includesString',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Email" />
+    ),
+    sortFn: 'text',
+  },
+];
+
+<DataTable
+  columns={columns}
+  data={payments}
+  enableRowSelection
+  filterColumn="email"
+/>;
+```
+
+## Examples
+
+### Sorting, filtering, pagination, and selection
+
+<Demo name="default" />
+
+### Row actions
+
+<Demo name="rowActions" />
+
+### Empty state
+
+<Demo name="empty" />
+
+## API reference
+
+### DataTable
+
+| Prop                     | Type                                    | Default                    | Description                              |
+| ------------------------ | --------------------------------------- | -------------------------- | ---------------------------------------- |
+| `columns`                | `ColumnDef<DataTableFeatures, TData>[]` | —                          | TanStack column definitions.             |
+| `data`                   | `TData[]`                               | —                          | Rows rendered by the table.              |
+| `filterColumn`           | `string`                                | —                          | Column used by the default filter input. |
+| `filterPlaceholder`      | `string`                                | `Filter…`                  | Filter placeholder and accessible name.  |
+| `enableRowSelection`     | `boolean`                               | `false`                    | Adds a checkbox column.                  |
+| `enableColumnVisibility` | `boolean`                               | `true`                     | Shows the column visibility menu.        |
+| `enablePagination`       | `boolean`                               | `true`                     | Shows pagination controls.               |
+| `pageSize`               | `number`                                | `10`                       | Initial page size.                       |
+| `pageSizeOptions`        | `number[]`                              | `[10, 20, 25, 30, 40, 50]` | Available page sizes.                    |
+| `emptyState`             | `ReactNode`                             | —                          | Replaces the default empty state.        |
+| `toolbar`                | `(table) => ReactNode`                  | —                          | Replaces the default toolbar.            |
+
+### DataTableColumnHeader
+
+| Prop     | Type     | Description                               |
+| -------- | -------- | ----------------------------------------- |
+| `column` | `Column` | Column whose sorting state is controlled. |
+| `title`  | `string` | Visible header label.                     |
+
+### Other exports
+
+- `DataTablePagination` for a custom layout.
+- `DataTableViewOptions` for a custom toolbar.
+- `dataTableFeatures` when you need the feature object directly.
+
+## Accessibility
+
+The table uses native table semantics. `DataTableColumnHeader` toggles sorting
+through a button, and the header cell exposes `aria-sort`. The selection column
+uses native checkboxes. Filtering has a visible label through its placeholder
+and an accessible name, and the empty state is announced in the table.

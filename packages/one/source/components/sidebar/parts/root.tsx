@@ -1,8 +1,9 @@
 import { Children, forwardRef, isValidElement, useRef } from 'react';
 import { AnimatedHighlight } from '../../../internal/primitives/animated-highlight/animated-highlight.js';
+import { useHighlightTarget } from '../../../internal/primitives/animated-highlight/use-highlight-target.js';
 import { Drawer } from '../../drawer/drawer.js';
 import { SidebarContext } from '../context.js';
-import { useSidebarHighlight } from '../hooks/use-sidebar-highlight.js';
+import { sidebarHighlightSelector } from '../helpers/highlight.js';
 import { useSidebarRoot } from '../hooks/use-sidebar-root.js';
 import type { TSidebarInsetProps, TSidebarRootProps } from '../types.js';
 
@@ -63,7 +64,11 @@ export const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(
       handlePointerLeave,
       handleFocusCapture,
       handleBlurCapture,
-    } = useSidebarHighlight({ animateOnHover, sidebarRef });
+    } = useHighlightTarget({
+      enabled: animateOnHover,
+      containerRef: sidebarRef,
+      selector: sidebarHighlightSelector,
+    });
 
     const context = {
       open: isOpen,

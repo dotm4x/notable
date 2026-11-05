@@ -19,6 +19,7 @@ import {
 import { SidebarRail, SidebarTrigger } from './parts/controls.js';
 import { SidebarInsetElement, SidebarRoot } from './parts/root.js';
 import { SidebarSubmenu, SidebarSubmenuItem } from './parts/submenu.js';
+import { SidebarTree } from './parts/tree.js';
 import type { TSidebarRootProps } from './types.js';
 import './sidebar.css';
 
@@ -41,6 +42,7 @@ export type {
   TSidebarRootProps,
   TSidebarSubmenuItemProps,
   TSidebarSubmenuProps,
+  TSidebarTreeProps,
   TSidebarTriggerProps,
 } from './types.js';
 
@@ -75,6 +77,8 @@ export interface SidebarComponent extends ForwardRefExoticComponent<
   MenuBadge: typeof SidebarMenuBadge;
   /** Renders a collapsible nested navigation group. */
   Submenu: typeof SidebarSubmenu;
+  /** Renders a data-driven navigation tree with sidebar-aware collapsing. */
+  Tree: typeof SidebarTree;
   /** Renders a nested link or action. */
   SubmenuItem: typeof SidebarSubmenuItem;
   /** Pins utility or account content below the scrollable navigation. */
@@ -107,6 +111,7 @@ export const Sidebar: SidebarComponent = Object.assign(SidebarRoot, {
   MenuBadge: SidebarMenuBadge,
   Submenu: SidebarSubmenu,
   SubmenuItem: SidebarSubmenuItem,
+  Tree: SidebarTree,
   Footer: SidebarFooter,
   Trigger: SidebarTrigger,
   Rail: SidebarRail,

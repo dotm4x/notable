@@ -1,0 +1,77 @@
+---
+title: Installation
+description: Install the package, import the styles, and render your first component.
+order: 10
+icon: download
+---
+
+One is distributed as a single package with separate entry points for
+components, icons, styles, and optional data table and highlighting support.
+
+## Install the package
+
+<PackageManagerTabs
+  pnpm="pnpm add @dotm4x/one"
+  npm="npm install @dotm4x/one"
+  yarn="yarn add @dotm4x/one"
+  bun="bun add @dotm4x/one"
+/>
+
+React and React DOM 18 or 19 are required as peer dependencies.
+
+## Import the styles
+
+Import the shared styles once in your application entry point:
+
+```tsx
+import '@dotm4x/one/styles.css';
+```
+
+This includes the design tokens, component styles, and the font used by the
+system.
+
+## Render a component
+
+```tsx
+import { Button } from '@dotm4x/one/components';
+
+export function Example() {
+  return <Button>Click me</Button>;
+}
+```
+
+## Import icons
+
+Icons are available from a separate entry point:
+
+```tsx
+import { Button } from '@dotm4x/one/components';
+import { Plus } from '@dotm4x/one/icons';
+
+export function AddButton() {
+  return (
+    <Button>
+      <Plus aria-hidden="true" />
+      Add item
+    </Button>
+  );
+}
+```
+
+## Package structure
+
+| Entry point                          | Contents                          |
+| ------------------------------------ | --------------------------------- |
+| `@dotm4x/one/components`             | React components and their APIs.  |
+| `@dotm4x/one/icons`                  | The icon set as React components. |
+| `@dotm4x/one/styles.css`             | Design tokens and shared styles.  |
+| `@dotm4x/one/data-table`             | TanStack-powered data table.      |
+| `@dotm4x/one/code-block/highlighter` | Optional Shiki highlighter.       |
+
+`DataTable` and the CodeBlock highlighter are optional entry points. Install
+the matching peer dependency only when you use them:
+
+```bash
+pnpm add @tanstack/react-table
+pnpm add shiki
+```

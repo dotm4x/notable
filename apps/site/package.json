@@ -9,21 +9,37 @@
     "node": ">=22.23.4"
   },
   "scripts": {
-    "predev": "pnpm --filter @dotm4x/one build",
+    "predev": "pnpm --filter @dotm4x/one build && node scripts/generate-docs.mjs",
     "dev": "next dev",
-    "prebuild": "pnpm --filter @dotm4x/one build",
+    "prebuild": "pnpm --filter @dotm4x/one build && node scripts/generate-docs.mjs",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "pretypecheck": "node scripts/generate-docs.mjs",
+    "typecheck": "tsc --noEmit",
+    "generate:docs": "node scripts/generate-docs.mjs"
   },
   "dependencies": {
-    "@icons-pack/react-simple-icons": "^13.15.1",
     "@dotm4x/one": "workspace:*",
+    "@icons-pack/react-simple-icons": "^13.15.1",
+    "@tanstack/react-table": "^9.3.1",
+    "github-slugger": "^2.0.0",
+    "gray-matter": "^4.0.3",
+    "mdast-util-to-string": "^4.0.0",
     "next": "^15.1.0",
+    "next-mdx-remote": "^6.0.0",
+    "next-themes": "^0.4.6",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx": "^3.1.1",
+    "remark-parse": "^11.0.0",
+    "shiki": "^4.6.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.2.0"
   },
   "devDependencies": {
+    "@types/mdx": "^2.0.14",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^5.9.3"

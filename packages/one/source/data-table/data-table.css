@@ -1,0 +1,103 @@
+.one-data-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--one-spacing-4);
+  width: 100%;
+  min-width: 0;
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
+}
+
+.one-data-table__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--one-spacing-3);
+}
+
+.one-data-table__filter {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+
+.one-data-table__view-options {
+  margin-inline-start: auto;
+}
+
+.one-data-table__column-title {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--one-control-size-small);
+  font-weight: var(--one-font-weight-semibold);
+}
+
+.one-data-table__sort-button {
+  margin-inline-start: calc(-1 * var(--one-spacing-2));
+  font-weight: var(--one-font-weight-semibold);
+}
+
+.one-data-table__sort-icons {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 0.75rem;
+  height: 1rem;
+  color: var(--one-color-text-subtle);
+  line-height: 1;
+}
+
+.one-data-table__sort-icons > svg {
+  display: block;
+  flex: none;
+}
+
+.one-data-table__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--one-spacing-3);
+}
+
+.one-data-table__selection,
+.one-data-table__page-info,
+.one-data-table__page-size {
+  color: var(--one-color-text-muted);
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-normal);
+}
+
+.one-data-table__pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--one-spacing-4);
+}
+
+.one-data-table__page-size {
+  display: flex;
+  align-items: center;
+  gap: var(--one-spacing-2);
+  white-space: nowrap;
+}
+
+.one-data-table__page-size .one-select__trigger {
+  min-width: 4.5rem;
+}
+
+.one-data-table__pagination .one-pagination {
+  margin: 0;
+}
+
+@media (max-width: 48rem) {
+  .one-data-table__pagination {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .one-data-table__pagination-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

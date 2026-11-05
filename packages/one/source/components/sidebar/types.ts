@@ -6,6 +6,7 @@ import type {
   ReactNode,
 } from 'react';
 import type { ButtonProps } from '../button/button.js';
+import type { TTreeProps } from '../tree/types.js';
 
 /** Props for `Sidebar.Root`, including layout and expansion controls. */
 export type TSidebarRootProps = HTMLAttributes<HTMLDivElement> & {
@@ -130,6 +131,9 @@ export type TSidebarSubmenuProps = Omit<
 
 /** Props for a nested navigation item. */
 export type TSidebarSubmenuItemProps = TSidebarItemProps;
+
+/** Props for `Sidebar.Tree`, which inherits the sidebar's collapsed state. */
+export type TSidebarTreeProps = Omit<TTreeProps, 'compact'>;
 
 /** Props for the sidebar's pinned footer. */
 export type TSidebarFooterProps = HTMLAttributes<HTMLDivElement>;

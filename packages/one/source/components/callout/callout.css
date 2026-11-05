@@ -1,0 +1,92 @@
+.one-callout {
+  --_callout-accent: var(--one-color-info);
+  --_callout-background: var(--one-color-info-subtle);
+  --_callout-border: var(--one-color-info-border);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--one-spacing-3);
+  box-sizing: border-box;
+  padding: var(--one-spacing-3) var(--one-spacing-4);
+  border: var(--one-border-width-subtle) solid var(--_callout-border);
+  border-inline-start: var(--one-border-width) solid var(--_callout-accent);
+  border-radius: var(--one-radius-md);
+  background-color: var(--_callout-background);
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-relaxed);
+}
+
+.one-callout[data-tone='success'] {
+  --_callout-accent: var(--one-color-success);
+  --_callout-background: var(--one-color-success-subtle);
+  --_callout-border: var(--one-color-success-border);
+}
+
+.one-callout[data-tone='warning'] {
+  --_callout-accent: var(--one-color-warning);
+  --_callout-background: var(--one-color-warning-subtle);
+  --_callout-border: var(--one-color-warning-border);
+}
+
+.one-callout[data-tone='danger'] {
+  --_callout-accent: var(--one-color-danger);
+  --_callout-background: var(--one-color-danger-subtle);
+  --_callout-border: var(--one-color-danger-border);
+}
+
+.one-callout__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: 0.1em;
+  color: var(--_callout-accent);
+}
+
+.one-callout__icon > svg {
+  width: var(--one-spacing-5);
+  height: var(--one-spacing-5);
+}
+
+.one-callout__content {
+  display: flex;
+  flex: 1 1 12rem;
+  flex-direction: column;
+  gap: var(--one-spacing-1);
+  min-width: 0;
+}
+
+.one-callout__title {
+  margin: 0;
+  color: var(--one-color-text);
+  font-size: inherit;
+  font-weight: var(--one-font-weight-semibold);
+  line-height: var(--one-line-height-tight);
+}
+
+.one-callout__content > :where(p, ul, ol) {
+  margin: 0;
+}
+
+.one-callout__content > :where(ul, ol) {
+  padding-inline-start: var(--one-spacing-5);
+}
+
+.one-callout__actions {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--one-spacing-2);
+  margin-inline-start: auto;
+}
+
+@media (max-width: 40rem) {
+  .one-callout__actions {
+    flex-basis: 100%;
+    margin-inline-start: calc(var(--one-spacing-5) + var(--one-spacing-3));
+  }
+}

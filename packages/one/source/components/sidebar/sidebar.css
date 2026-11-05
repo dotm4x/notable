@@ -228,6 +228,12 @@
   background: transparent;
 }
 
+.one-sidebar[data-animate-on-hover='true']
+  .one-tree__row:hover:not(:disabled):not([aria-disabled='true']) {
+  background: transparent;
+  color: var(--one-color-text);
+}
+
 .one-sidebar__item:focus-visible,
 .one-sidebar__submenu-trigger:focus-visible,
 .one-sidebar__menu-action:focus-visible,
@@ -368,7 +374,7 @@
 .one-sidebar__submenu-content {
   margin-inline-start: var(--one-spacing-3);
   border-inline-start: var(--one-border-width) solid
-    var(--one-color-border-subtle);
+    var(--one-color-border-strong);
   transition:
     opacity var(--_sidebar-label-duration) var(--_sidebar-label-easing)
       var(--_sidebar-label-duration),

@@ -1,0 +1,80 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+order: 10
+---
+
+## Installation
+
+```bash
+pnpm add @dotm4x/one
+```
+
+Import the styles once in your app:
+
+```tsx
+import '@dotm4x/one/styles.css';
+```
+
+## Usage
+
+```tsx
+import { Button } from '@dotm4x/one/components';
+
+export function Example() {
+  return <Button>Click me</Button>;
+}
+```
+
+## Examples
+
+### Variants
+
+<Demo name="variants" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### With icon
+
+<Demo name="withIcon" />
+
+### Icons
+
+<Demo name="icons" />
+
+### Loading
+
+<Demo name="loading" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+### Long text
+
+<Demo name="longText" />
+
+## API reference
+
+### Button
+
+| Prop       | Type                                                                       | Default     | Description                               |
+| ---------- | -------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
+| `variant`  | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger'`             | `'primary'` | Visual appearance.                        |
+| `size`     | `'small' \| 'medium' \| 'large' \| 'icon' \| 'icon-small' \| 'icon-large'` | `'medium'`  | Button size.                              |
+| `disabled` | `boolean`                                                                  | `false`     | Disables interaction.                     |
+| `asChild`  | `boolean`                                                                  | `false`     | Renders child element with button styles. |
+| `children` | `ReactNode`                                                                | —           | Button content.                           |
+
+## Accessibility
+
+<Callout title="Accessible button names">
+  Use an accessible name for icon-only buttons via `aria-label`. Set
+  `aria-busy="true"` and disable the button while loading.
+</Callout>
+
+- Buttons default to `type="button"` to avoid accidental form submission.
+- Disabled buttons use the native `disabled` attribute and are removed from the
+  tab order. Do not hide essential information behind a disabled control.

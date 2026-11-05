@@ -10,6 +10,11 @@ Patterns describe interaction behaviors that recur across many components. They 
 - [Drag](./drag.md): pressing and moving along a group to choose a value, with its commitment, cancellation, and alternatives.
 - [Popups](./popups.md): floating content that appears in response to an action.
 - [Loading](./loading.md): placeholders and loading feedback.
+- [Data display](./data-display.md): tables, alignment, sorting, filtering, and selection.
+- [Code](./code.md): reading, copying, and presenting code.
+- [Messages](./messages.md): persistent inline feedback and its tones.
+- [Sequential navigation](./sequential-navigation.md): moving between neighboring destinations.
+- [Hierarchy](./hierarchy.md): nested destinations, disclosure, and the current path.
 
 ## Relationship to the other categories
 

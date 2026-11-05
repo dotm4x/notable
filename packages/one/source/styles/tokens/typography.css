@@ -1,6 +1,8 @@
 :root {
   /* Font family */
   --one-font-family: 'Outfit Variable', sans-serif;
+  --one-font-family-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Font sizes */
   --one-font-size-xs: 0.75rem;

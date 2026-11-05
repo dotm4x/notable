@@ -1,0 +1,50 @@
+---
+title: CopyButton
+description: Copies text to the clipboard and confirms the action in place.
+order: 40
+---
+
+## Installation
+
+```tsx
+import { CopyButton } from '@dotm4x/one/components';
+```
+
+## Usage
+
+```tsx
+<CopyButton value="pnpm add @dotm4x/one" />
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Icon only
+
+<Demo name="iconOnly" />
+
+## API reference
+
+| Prop          | Type                       | Default    | Description                           |
+| ------------- | -------------------------- | ---------- | ------------------------------------- |
+| `value`       | `string`                   | —          | Text copied to the clipboard.         |
+| `label`       | `string`                   | `'Copy'`   | Label before copying.                 |
+| `copiedLabel` | `string`                   | `'Copied'` | Label after copying.                  |
+| `timeout`     | `number`                   | `1600`     | Copied state duration in ms.          |
+| `showLabel`   | `boolean`                  | `true`     | Shows the text label beside the icon. |
+| `icon`        | `ReactNode`                | copy icon  | Icon before copying.                  |
+| `copiedIcon`  | `ReactNode`                | check icon | Icon after copying.                   |
+| `onCopy`      | `(value: string) => void`  | —          | Called after a successful copy.       |
+| `onError`     | `(error: unknown) => void` | —          | Called when copying fails.            |
+
+It also accepts the props of `Button`, including `variant`, `size`, and
+`disabled`.
+
+## Accessibility
+
+The visible label changes to `Copied` and a polite live region announces the
+result. Icon-only buttons keep an accessible name. Clipboard writes fall back to
+a temporary textarea when the Clipboard API is unavailable.

@@ -1,0 +1,102 @@
+---
+title: Tree
+description: Displays a hierarchical navigation tree with animated disclosure branches.
+order: 90
+---
+
+## Installation
+
+```tsx
+import { Tree } from '@dotm4x/one/components';
+```
+
+## Usage
+
+```tsx
+import { Tree } from '@dotm4x/one/components';
+import { Box, Home } from '@dotm4x/one/icons';
+
+const items = [
+  { id: 'home', label: 'Home', href: '/', icon: <Home /> },
+  {
+    id: 'components',
+    label: 'Components',
+    icon: <Box />,
+    children: [
+      { id: 'overview', label: 'Overview', href: '/components' },
+      { id: 'button', label: 'Button', href: '/components/button' },
+    ],
+  },
+];
+
+<Tree activeId="button" aria-label="Contents" items={items} />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Active destination
+
+<Demo name="active" />
+
+### Deep hierarchy
+
+<Demo name="deep" />
+
+## API reference
+
+### Tree
+
+| Prop                   | Type                       | Default | Description                                        |
+| ---------------------- | -------------------------- | ------- | -------------------------------------------------- |
+| `items`                | `TreeNode[]`               | —       | Top-level nodes.                                   |
+| `activeId`             | `string`                   | —       | Current destination, matched against node id.      |
+| `expandedIds`          | `string[]`                 | —       | Expanded branch ids in controlled mode.            |
+| `defaultExpandedIds`   | `string[]`                 | —       | Initial expanded branch ids.                       |
+| `onExpandedChange`     | `(ids: string[]) => void`  | —       | Called when a branch expands or collapses.         |
+| `autoExpandActive`     | `boolean`                  | `true`  | Expands the ancestors of `activeId`.               |
+| `compact`              | `boolean`                  | `false` | Renders icon-only rows and hides children.         |
+| `onNavigate`           | `(node: TreeNode) => void` | —       | Called when a link is activated.                   |
+| `onAction`             | `(node: TreeNode) => void` | —       | Called for a leaf without an href.                 |
+| `onCompactBranchClick` | `() => void`               | —       | Called when a branch is activated in compact mode. |
+
+### TreeNode
+
+| Property    | Type         | Description                                              |
+| ----------- | ------------ | -------------------------------------------------------- |
+| `id`        | `string`     | Unique, stable identifier.                               |
+| `label`     | `ReactNode`  | Visible label.                                           |
+| `href`      | `string`     | Destination for a native link.                           |
+| `icon`      | `ReactNode`  | Icon displayed before the label.                         |
+| `children`  | `TreeNode[]` | Makes the node a disclosure branch.                      |
+| `disabled`  | `boolean`    | Prevents interaction.                                    |
+| `textValue` | `string`     | Plain text for typeahead when the label is not a string. |
+
+## Accessibility
+
+The tree uses native list navigation: branches are buttons with `aria-expanded`,
+and destinations are native links with `aria-current="page"` when active. Only
+one row participates in the tab order; arrow keys move between visible rows,
+`Home` and `End` jump to the ends, `ArrowRight` expands or enters a branch,
+`ArrowLeft` collapses or returns to the parent, and printable characters search
+by label.
+
+Expansion uses the shared `Collapsible` animation, the chevron rotates, and
+children enter with a staggered fade. All transitions respect
+`prefers-reduced-motion`.
+
+Rows share an animated highlight surface that follows hover and focus.
+`Sidebar.Tree` defers to the sidebar's own highlight instead of adding a second
+one.
+
+## Sidebar integration
+
+Use `Sidebar.Tree` inside `Sidebar.Content` when the tree should inherit the
+sidebar's collapsed state, mobile drawer, tooltips, and hover highlight:
+
+```tsx
+<Sidebar.Tree activeId={pathname} aria-label="Contents" items={items} />
+```

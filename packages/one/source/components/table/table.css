@@ -1,0 +1,100 @@
+.one-table__scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  border: var(--one-border-width-subtle) solid var(--one-color-border-subtle);
+  border-radius: var(--one-radius-lg);
+  background-color: var(--one-color-surface);
+}
+
+.one-table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  color: var(--one-color-text);
+  font-family: var(--one-font-family);
+  font-size: var(--one-font-size-sm);
+  line-height: var(--one-line-height-normal);
+}
+
+.one-table__caption {
+  caption-side: bottom;
+  padding: var(--one-spacing-3) var(--one-spacing-4);
+  color: var(--one-color-text-muted);
+  font-size: var(--one-font-size-xs);
+  text-align: start;
+}
+
+.one-table__header {
+  background-color: var(--one-color-surface-sunken);
+}
+
+.one-table__head {
+  padding: var(--one-spacing-3) var(--one-spacing-4);
+  border-block-end: var(--one-border-width-subtle) solid var(--one-color-border);
+  color: var(--one-color-text-muted);
+  font-weight: var(--one-font-weight-semibold);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.one-table__body .one-table__row:not(:last-child) .one-table__cell {
+  border-block-end: var(--one-border-width-subtle) solid
+    var(--one-color-border-subtle);
+}
+
+.one-table__row {
+  transition: background-color var(--one-duration-fast)
+    var(--one-easing-standard);
+}
+
+.one-table__body .one-table__row:hover {
+  background-color: var(--one-color-surface-hover);
+}
+
+.one-table__row[data-state='selected'] {
+  background-color: var(--one-color-surface-highlight);
+}
+
+.one-table__cell {
+  padding: var(--one-spacing-3) var(--one-spacing-4);
+  vertical-align: middle;
+  text-align: start;
+}
+
+.one-table__head--center,
+.one-table__cell--center {
+  text-align: center;
+}
+
+.one-table__head--end,
+.one-table__cell--end {
+  text-align: end;
+}
+
+.one-table__cell--end {
+  font-variant-numeric: tabular-nums;
+}
+
+.one-table__footer {
+  background-color: var(--one-color-surface-sunken);
+  font-weight: var(--one-font-weight-medium);
+}
+
+.one-table__footer .one-table__cell {
+  border-block-start: var(--one-border-width-subtle) solid
+    var(--one-color-border);
+}
+
+@media (max-width: 40rem) {
+  .one-table__head,
+  .one-table__cell {
+    padding-inline: var(--one-spacing-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .one-table__row {
+    transition: none;
+  }
+}

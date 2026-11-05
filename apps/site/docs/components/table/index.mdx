@@ -1,0 +1,73 @@
+---
+title: Table
+description: Renders a semantic table inside a horizontal scroll container.
+order: 60
+---
+
+## Installation
+
+```tsx
+import { Table } from '@dotm4x/one/components';
+```
+
+## Usage
+
+```tsx
+<Table>
+  <Table.Caption>Recent payments</Table.Caption>
+  <Table.Header>
+    <Table.Row>
+      <Table.Head>Email</Table.Head>
+      <Table.Head align="end">Amount</Table.Head>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>ken99@example.com</Table.Cell>
+      <Table.Cell align="end">$316.00</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sortable headers
+
+<Demo name="sortable" />
+
+### Selected rows
+
+<Demo name="selected" />
+
+## API reference
+
+### Table
+
+`Table` renders a native table inside a horizontally scrollable container. It
+accepts native table attributes plus `containerClassName`.
+
+### Table parts
+
+| Part            | Element   | Notable props              |
+| --------------- | --------- | -------------------------- |
+| `Table.Caption` | `caption` | Native caption attributes. |
+| `Table.Header`  | `thead`   | Native section attributes. |
+| `Table.Body`    | `tbody`   | Native section attributes. |
+| `Table.Footer`  | `tfoot`   | Native section attributes. |
+| `Table.Row`     | `tr`      | `selected` marks the row.  |
+| `Table.Head`    | `th`      | `scope`, `sort`, `align`.  |
+| `Table.Cell`    | `td`      | `align`.                   |
+
+`Table.Head` defaults to `scope="col"` and maps `sort` to `aria-sort`. Use
+`align="end"` for comparable numbers.
+
+## Accessibility
+
+Always provide a caption or an accessible name for the table. Sortable headers
+must expose `aria-sort`, and the visual sort indicator must not be the only
+signal. The scroll container keeps wide tables usable on narrow screens.

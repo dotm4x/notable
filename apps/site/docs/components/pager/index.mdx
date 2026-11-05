@@ -1,0 +1,53 @@
+---
+title: Pager
+description: Links to the previous and next destinations in a sequence.
+order: 50
+---
+
+## Installation
+
+```tsx
+import { Pager } from '@dotm4x/one/components';
+```
+
+## Usage
+
+```tsx
+<Pager
+  previous={{ href: '/docs/installation', label: 'Installation' }}
+  next={{ href: '/docs/components', label: 'Components' }}
+/>
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Previous only
+
+<Demo name="previousOnly" />
+
+## API reference
+
+| Prop            | Type        | Default        | Description                       |
+| --------------- | ----------- | -------------- | --------------------------------- |
+| `previous`      | `PagerItem` | —              | Previous destination.             |
+| `next`          | `PagerItem` | —              | Next destination.                 |
+| `previousLabel` | `string`    | `'Previous'`   | Direction label before the title. |
+| `nextLabel`     | `string`    | `'Next'`       | Direction label before the title. |
+| `label`         | `string`    | `'Pagination'` | Accessible name of the landmark.  |
+
+### PagerItem
+
+| Property | Type     | Description         |
+| -------- | -------- | ------------------- |
+| `href`   | `string` | Destination URL.    |
+| `label`  | `string` | Visible page title. |
+
+## Accessibility
+
+Each link includes its direction and destination in the accessible name, such
+as “Previous: Installation”. If one side is omitted, the remaining link keeps
+the full column.

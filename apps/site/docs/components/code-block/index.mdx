@@ -1,0 +1,92 @@
+---
+title: CodeBlock
+description: Displays code, terminal output, and diffs with optional header and copy action.
+order: 80
+---
+
+## Installation
+
+```tsx
+import { CodeBlock } from '@dotm4x/one/components';
+```
+
+Syntax highlighting is optional and lives in a separate entry point:
+
+```tsx
+import { useHighlightedCode } from '@dotm4x/one/code-block/highlighter';
+```
+
+It requires `shiki` as an optional peer dependency.
+
+## Usage
+
+```tsx
+<CodeBlock>
+  <CodeBlock.Header>
+    <CodeBlock.Title>app/api/health/route.ts</CodeBlock.Title>
+    <CodeBlock.Actions>
+      <CodeBlock.CopyButton value={code} />
+    </CodeBlock.Actions>
+  </CodeBlock.Header>
+  <CodeBlock.Content lineNumbers>{code}</CodeBlock.Content>
+</CodeBlock>
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Line numbers
+
+<Demo name="lineNumbers" />
+
+### Diff and highlighted lines
+
+<Demo name="diff" />
+
+### Tabs
+
+<Demo name="withTabs" />
+
+### Syntax highlighting
+
+<Demo name="highlighted" />
+
+## API reference
+
+### CodeBlock
+
+| Prop      | Type                         | Default     | Description        |
+| --------- | ---------------------------- | ----------- | ------------------ |
+| `variant` | `'default' \| 'destructive'` | `'default'` | Tone of the block. |
+| `size`    | `'default' \| 'sm'`          | `'default'` | Density.           |
+
+### CodeBlock parts
+
+| Part                   | Element      | Notable props                                    |
+| ---------------------- | ------------ | ------------------------------------------------ |
+| `CodeBlock.Header`     | `div`        | Native attributes.                               |
+| `CodeBlock.Title`      | `div`        | `as`, native attributes.                         |
+| `CodeBlock.Actions`    | `div`        | Floating when a direct child of `CodeBlock`.     |
+| `CodeBlock.CopyButton` | `CopyButton` | All `CopyButton` props.                          |
+| `CodeBlock.Content`    | `pre`        | `wrap`, `lineNumbers`, `startLine`, `tabIndex`.  |
+| `CodeBlock.Line`       | `span`       | `variant`: default, added, removed, highlighted. |
+| `CodeBlock.Footer`     | `div`        | Native attributes.                               |
+
+### useHighlightedCode
+
+```ts
+const lines = useHighlightedCode(code, 'tsx');
+```
+
+Returns one React node list per line. Until the first pass finishes, and for
+unknown languages, it returns plain lines.
+
+## Accessibility
+
+The code surface is focusable and scrollable by keyboard. Code is always
+rendered left to right, even on RTL pages. Line numbers and diff markers are
+decorative and excluded from copied text. The copy action has an accessible name
+and announces its result.

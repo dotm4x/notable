@@ -30,6 +30,13 @@ A control's label should match the control's size. A small control uses a small 
 
 Numbers that are compared or stacked should align. Use the same width for digits where alignment matters, such as counters and tables.
 
+## Code
+
+Code uses a monospace family so characters align between lines. It always reads
+left to right, even when the surrounding interface is right to left. Code type is
+not smaller than the minimum readable size for its context, and its decoration
+such as line numbers stays out of the copied text.
+
 ## Principle
 
 Type should be the clearest route into the content. A reader should understand the structure of a page from its type before they read the words.

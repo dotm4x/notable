@@ -1,0 +1,64 @@
+---
+title: Callout
+description: Displays a persistent inline message with a semantic tone.
+order: 30
+---
+
+## Installation
+
+The component is part of `@dotm4x/one/components`:
+
+```tsx
+import { Callout } from '@dotm4x/one/components';
+```
+
+## Usage
+
+```tsx
+<Callout tone="warning">
+  <Callout.Icon>
+    <TriangleAlert aria-hidden="true" />
+  </Callout.Icon>
+  <Callout.Content>
+    <Callout.Title>Review required</Callout.Title>
+    <p>Check the settings before continuing.</p>
+  </Callout.Content>
+</Callout>
+```
+
+## Examples
+
+### Tones
+
+<Demo name="tones" />
+
+### With actions
+
+<Demo name="actions" />
+
+## API reference
+
+### Callout
+
+| Prop       | Type                                           | Default  | Description               |
+| ---------- | ---------------------------------------------- | -------- | ------------------------- |
+| `tone`     | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Semantic tone.            |
+| `role`     | `'note' \| 'status' \| 'alert'`                | `'note'` | Accessible role.          |
+| `children` | `ReactNode`                                    | —        | Callout parts or content. |
+
+### Callout.Icon
+
+| Prop       | Type        | Default | Description                   |
+| ---------- | ----------- | ------- | ----------------------------- |
+| `children` | `ReactNode` | —       | Decorative icon for the tone. |
+
+### Callout.Content, Callout.Title, Callout.Actions
+
+They accept native attributes and render a content column, a title, and an
+actions region. `Callout.Title` defaults to a paragraph and supports `as`.
+
+## Accessibility
+
+Use `role="note"` for persistent guidance. Reserve `role="alert"` for urgent
+messages that should interrupt assistive technology, and do not use a callout
+for transient feedback. Use `Toast` for that.
