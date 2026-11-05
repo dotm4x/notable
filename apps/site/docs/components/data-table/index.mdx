@@ -65,18 +65,41 @@ const columns: ColumnDef<DataTableFeatures, Payment>[] = [
 | `emptyState`             | `ReactNode`                             | —                          | Replaces the default empty state.        |
 | `toolbar`                | `(table) => ReactNode`                  | —                          | Replaces the default toolbar.            |
 
-### DataTableColumnHeader
+### DataTable.ColumnHeader
+
+Exported as `DataTableColumnHeader`. It renders a header cell whose button
+toggles sorting and updates `aria-sort`.
 
 | Prop     | Type     | Description                               |
 | -------- | -------- | ----------------------------------------- |
 | `column` | `Column` | Column whose sorting state is controlled. |
 | `title`  | `string` | Visible header label.                     |
 
-### Other exports
+### DataTable.ViewOptions
 
-- `DataTablePagination` for a custom layout.
-- `DataTableViewOptions` for a custom toolbar.
-- `dataTableFeatures` when you need the feature object directly.
+Exported as `DataTableViewOptions`.
+
+| Prop        | Type                                   | Default  | Description                              |
+| ----------- | -------------------------------------- | -------- | ---------------------------------------- |
+| `table`     | `ReactTable<DataTableFeatures, TData>` | —        | Table instance created by `DataTable`.   |
+| `label`     | `string`                               | `'View'` | Trigger label.                           |
+| `className` | `string`                               | —        | Additional class for the trigger button. |
+
+### DataTable.Pagination
+
+Exported as `DataTablePagination`.
+
+| Prop              | Type                                   | Default                    | Description                            |
+| ----------------- | -------------------------------------- | -------------------------- | -------------------------------------- |
+| `table`           | `ReactTable<DataTableFeatures, TData>` | —                          | Table instance created by `DataTable`. |
+| `pageSizeOptions` | `number[]`                             | `[10, 20, 25, 30, 40, 50]` | Page sizes offered by the control.     |
+
+### DataTable.features
+
+Exported as `dataTableFeatures`.
+
+The TanStack feature object. Pass it to the table helpers when you build a
+custom toolbar, header, or pagination control.
 
 ## Accessibility
 

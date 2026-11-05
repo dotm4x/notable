@@ -24,20 +24,24 @@ import { CopyButton } from '@dotm4x/one/components';
 
 ## API reference
 
-| Prop          | Type                       | Default    | Description                           |
-| ------------- | -------------------------- | ---------- | ------------------------------------- |
-| `value`       | `string`                   | —          | Text copied to the clipboard.         |
-| `label`       | `string`                   | `'Copy'`   | Label before copying.                 |
-| `copiedLabel` | `string`                   | `'Copied'` | Label after copying.                  |
-| `timeout`     | `number`                   | `1600`     | Copied state duration in ms.          |
-| `showLabel`   | `boolean`                  | `true`     | Shows the text label beside the icon. |
-| `icon`        | `ReactNode`                | copy icon  | Icon before copying.                  |
-| `copiedIcon`  | `ReactNode`                | check icon | Icon after copying.                   |
-| `onCopy`      | `(value: string) => void`  | —          | Called after a successful copy.       |
-| `onError`     | `(error: unknown) => void` | —          | Called when copying fails.            |
+### CopyButton
 
-It also accepts the props of `Button`, including `variant`, `size`, and
-`disabled`.
+| Prop          | Type                              | Default    | Description                           |
+| ------------- | --------------------------------- | ---------- | ------------------------------------- |
+| `value`       | `string`                          | —          | Text copied to the clipboard.         |
+| `label`       | `string`                          | `'Copy'`   | Label before copying.                 |
+| `copiedLabel` | `string`                          | `'Copied'` | Label after copying.                  |
+| `timeout`     | `number`                          | `1600`     | Copied state duration in ms.          |
+| `showLabel`   | `boolean`                         | `true`     | Shows the text label beside the icon. |
+| `icon`        | `ReactNode`                       | copy icon  | Icon before copying.                  |
+| `copiedIcon`  | `ReactNode`                       | check icon | Icon after copying.                   |
+| `size`        | `ButtonSize`                      | `'small'`  | Button size.                          |
+| `variant`     | `ButtonVariant`                   | `'ghost'`  | Button variant.                       |
+| `type`        | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type.                   |
+| `onCopy`      | `(value: string) => void`         | —          | Called after a successful copy.       |
+| `onError`     | `(error: unknown) => void`        | —          | Called when copying fails.            |
+
+It also accepts the remaining `Button` props and native button attributes.
 
 ## Accessibility
 

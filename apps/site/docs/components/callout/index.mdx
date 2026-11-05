@@ -41,16 +41,30 @@ import { TriangleAlert } from '@dotm4x/one/icons';
 | `role`     | `'note' \| 'status' \| 'alert'`                | `'note'` | Accessible role.          |
 | `children` | `ReactNode`                                    | —        | Callout parts or content. |
 
+`Callout` also accepts native `div` attributes.
+
 ### Callout.Icon
 
-| Prop       | Type        | Default | Description                   |
-| ---------- | ----------- | ------- | ----------------------------- |
-| `children` | `ReactNode` | —       | Decorative icon for the tone. |
+Renders the tone icon in a `span` hidden from assistive technology. It has no
+props of its own and forwards native `span` attributes.
 
-### Callout.Content, Callout.Title, Callout.Actions
+### Callout.Content
 
-They accept native attributes and render a content column, a title, and an
-actions region. `Callout.Title` defaults to a paragraph and supports `as`.
+Renders the content column. It has no props of its own and forwards native `div`
+attributes.
+
+### Callout.Title
+
+| Prop | Type                                   | Default | Description        |
+| ---- | -------------------------------------- | ------- | ------------------ |
+| `as` | `'p' \| 'div' \| 'h2' \| 'h3' \| 'h4'` | `'p'`   | Element to render. |
+
+It forwards native `HTMLElement` attributes.
+
+### Callout.Actions
+
+Renders the actions region. It has no props of its own and forwards native `div`
+attributes.
 
 ## Accessibility
 

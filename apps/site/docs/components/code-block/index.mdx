@@ -51,19 +51,63 @@ import { CodeBlock } from '@dotm4x/one/components';
 | `variant` | `'default' \| 'destructive'` | `'default'` | Tone of the block. |
 | `size`    | `'default' \| 'sm'`          | `'default'` | Density.           |
 
-### CodeBlock parts
+It also accepts native `div` attributes.
 
-| Part                   | Element      | Notable props                                    |
-| ---------------------- | ------------ | ------------------------------------------------ |
-| `CodeBlock.Header`     | `div`        | Native attributes.                               |
-| `CodeBlock.Title`      | `div`        | `as`, native attributes.                         |
-| `CodeBlock.Actions`    | `div`        | Floating when a direct child of `CodeBlock`.     |
-| `CodeBlock.CopyButton` | `CopyButton` | All `CopyButton` props.                          |
-| `CodeBlock.Content`    | `pre`        | `wrap`, `lineNumbers`, `startLine`, `tabIndex`.  |
-| `CodeBlock.Line`       | `span`       | `variant`: default, added, removed, highlighted. |
-| `CodeBlock.Footer`     | `div`        | Native attributes.                               |
+### CodeBlock.Header
 
-### useHighlightedCode
+Renders the row above the content. It has no props of its own and forwards
+native `div` attributes.
+
+### CodeBlock.Title
+
+| Prop | Type                                             | Default | Description        |
+| ---- | ------------------------------------------------ | ------- | ------------------ |
+| `as` | `'div' \| 'span' \| 'p' \| 'h2' \| 'h3' \| 'h4'` | `'div'` | Element to render. |
+
+It forwards native `HTMLElement` attributes.
+
+### CodeBlock.Actions
+
+Floats over the block when it is a direct child of `CodeBlock`. It has no props
+of its own and forwards native `div` attributes.
+
+### CodeBlock.CopyButton
+
+| Prop        | Type            | Default   | Description                           |
+| ----------- | --------------- | --------- | ------------------------------------- |
+| `showLabel` | `boolean`       | `false`   | Shows the text label beside the icon. |
+| `size`      | `ButtonSize`    | `'small'` | Button size.                          |
+| `variant`   | `ButtonVariant` | `'ghost'` | Button variant.                       |
+
+It accepts every `CopyButton` prop, including `value`, `label`, and `timeout`.
+
+### CodeBlock.Content
+
+| Prop          | Type                  | Default | Description                                         |
+| ------------- | --------------------- | ------- | --------------------------------------------------- |
+| `children`    | `ReactNode \| string` | —       | Code string or a list of `CodeBlock.Line` elements. |
+| `wrap`        | `boolean`             | `false` | Wraps long lines instead of scrolling.              |
+| `lineNumbers` | `boolean`             | `false` | Numbers each line when `children` is a string.      |
+| `startLine`   | `number`              | `1`     | Number of the first line.                           |
+| `tabIndex`    | `number`              | `0`     | Makes the content focusable for keyboard scrolling. |
+
+It renders a left-to-right `pre` and forwards the remaining native `pre`
+attributes.
+
+### CodeBlock.Line
+
+| Prop      | Type                                                 | Default     | Description          |
+| --------- | ---------------------------------------------------- | ----------- | -------------------- |
+| `variant` | `'default' \| 'added' \| 'removed' \| 'highlighted'` | `'default'` | Meaning of the line. |
+
+It renders a `span` and forwards native `span` attributes.
+
+### CodeBlock.Footer
+
+Renders the slot below the content, such as a Show more action. It has no props
+of its own and forwards native `div` attributes.
+
+### CodeBlock.useHighlightedCode
 
 `useHighlightedCode` adds syntax highlighting and is exported from the components entry point.
 

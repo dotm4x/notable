@@ -44,23 +44,59 @@ import { Table } from '@dotm4x/one/components';
 
 ### Table
 
-`Table` renders a native table inside a horizontally scrollable container. It
-accepts native table attributes plus `containerClassName`.
+| Prop                 | Type     | Default | Description                                |
+| -------------------- | -------- | ------- | ------------------------------------------ |
+| `containerClassName` | `string` | —       | Additional class for the scroll container. |
 
-### Table parts
+It renders a native `table` inside a horizontally scrollable container and
+forwards native table attributes.
 
-| Part            | Element   | Notable props              |
-| --------------- | --------- | -------------------------- |
-| `Table.Caption` | `caption` | Native caption attributes. |
-| `Table.Header`  | `thead`   | Native section attributes. |
-| `Table.Body`    | `tbody`   | Native section attributes. |
-| `Table.Footer`  | `tfoot`   | Native section attributes. |
-| `Table.Row`     | `tr`      | `selected` marks the row.  |
-| `Table.Head`    | `th`      | `scope`, `sort`, `align`.  |
-| `Table.Cell`    | `td`      | `align`.                   |
+### Table.Caption
 
-`Table.Head` defaults to `scope="col"` and maps `sort` to `aria-sort`. Use
-`align="end"` for comparable numbers.
+Renders a `caption`, announced as the table description. It has no props of its
+own and forwards native caption attributes.
+
+### Table.Header
+
+Renders a `thead`. It has no props of its own and forwards native section
+attributes.
+
+### Table.Body
+
+Renders a `tbody`. It has no props of its own and forwards native section
+attributes.
+
+### Table.Footer
+
+Renders a `tfoot`. It has no props of its own and forwards native section
+attributes.
+
+### Table.Row
+
+| Prop       | Type      | Default | Description                |
+| ---------- | --------- | ------- | -------------------------- |
+| `selected` | `boolean` | `false` | Marks the row as selected. |
+
+It renders a `tr` with `data-state="selected"` when selected and forwards native
+row attributes.
+
+### Table.Head
+
+| Prop    | Type                                    | Default   | Description                        |
+| ------- | --------------------------------------- | --------- | ---------------------------------- |
+| `align` | `'start' \| 'center' \| 'end'`          | `'start'` | Horizontal alignment.              |
+| `sort`  | `'ascending' \| 'descending' \| 'none'` | —         | Sort state, mapped to `aria-sort`. |
+
+It defaults to `scope="col"` and forwards the remaining native header cell
+attributes. Use `align="end"` for comparable numbers.
+
+### Table.Cell
+
+| Prop    | Type                           | Default   | Description           |
+| ------- | ------------------------------ | --------- | --------------------- |
+| `align` | `'start' \| 'center' \| 'end'` | `'start'` | Horizontal alignment. |
+
+It renders a `td` and forwards the remaining native cell attributes.
 
 ## Accessibility
 

@@ -27,6 +27,8 @@ import { Pager } from '@dotm4x/one/components';
 
 ## API reference
 
+### Pager
+
 | Prop            | Type        | Default        | Description                       |
 | --------------- | ----------- | -------------- | --------------------------------- |
 | `previous`      | `PagerItem` | —              | Previous destination.             |
@@ -35,7 +37,12 @@ import { Pager } from '@dotm4x/one/components';
 | `nextLabel`     | `string`    | `'Next'`       | Direction label before the title. |
 | `label`         | `string`    | `'Pagination'` | Accessible name of the landmark.  |
 
-### PagerItem
+It renders a `nav` landmark and forwards native `HTMLElement` attributes. It
+returns nothing when both destinations are omitted.
+
+### Pager.Item
+
+Exported as `PagerItem`.
 
 | Property | Type     | Description         |
 | -------- | -------- | ------------------- |
