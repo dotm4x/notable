@@ -1,7 +1,11 @@
 'use client';
 
-import { CodeBlock, CopyButton, Tabs } from '@dotm4x/one/components';
-import { useHighlightedCode } from '@dotm4x/one/code-block/highlighter';
+import {
+  CodeBlock,
+  CopyButton,
+  Tabs,
+  useHighlightedCode,
+} from '@dotm4x/one/components';
 import type { ReactNode } from 'react';
 
 export type DemoLayout = 'center' | 'start';

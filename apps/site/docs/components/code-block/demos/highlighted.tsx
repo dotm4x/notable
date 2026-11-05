@@ -1,7 +1,6 @@
 'use client';
 
-import { CodeBlock } from '@dotm4x/one/components';
-import { useHighlightedCode } from '@dotm4x/one/code-block/highlighter';
+import { CodeBlock, useHighlightedCode } from '@dotm4x/one/components';
 
 const code = `export function greet(name: string) {
   return \`Hello, \${name}!\`;

@@ -208,9 +208,6 @@ importers:
       '@icons-pack/react-simple-icons':
         specifier: ^13.15.1
         version: 13.15.1(react@19.3.1)
-      '@tanstack/react-table':
-        specifier: ^9.3.1
-        version: 9.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
@@ -247,9 +244,6 @@ importers:
       remark-parse:
         specifier: ^11.0.0
         version: 11.0.0(supports-color@7.2.0)
-      shiki:
-        specifier: ^4.6.0
-        version: 4.6.0
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -278,9 +272,15 @@ importers:
       '@fontsource-variable/outfit':
         specifier: ^5.3.0
         version: 5.3.0
+      '@tanstack/react-table':
+        specifier: ^9.3.1
+        version: 9.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       motion:
         specifier: ^14.6.0
         version: 14.6.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      shiki:
+        specifier: ^4.6.0
+        version: 4.6.0
     devDependencies:
       '@storybook/addon-a11y':
         specifier: ^10.6.3
@@ -294,9 +294,6 @@ importers:
       '@storybook/react-vite':
         specifier: ^10.6.3
         version: 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.65.0)(storybook@10.6.3(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.1))(supports-color@7.2.0)(typescript@5.9.3)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.1))
-      '@tanstack/react-table':
-        specifier: ^9.3.1
-        version: 9.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@testing-library/jest-dom':
         specifier: ^7.0.1
         version: 7.0.1(@testing-library/dom@10.4.2)(vitest@5.0.5)
@@ -342,9 +339,6 @@ importers:
       react-dom:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
-      shiki:
-        specifier: ^4.6.0
-        version: 4.6.0
       storybook:
         specifier: ^10.6.3
         version: 10.6.3(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.1)

@@ -1,11 +1,11 @@
 'use client';
 
-import type { ColumnDef } from '@tanstack/react-table';
 import {
   DataTable,
   DataTableColumnHeader,
+  type ColumnDef,
   type DataTableFeatures,
-} from '@dotm4x/one/data-table';
+} from '@dotm4x/one/components';
 
 interface Payment {
   id: string;

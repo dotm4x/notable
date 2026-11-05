@@ -1,9 +1,9 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import type { ReactElement } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MoreHorizontal } from '../icons/index.js';
-import { Button } from '../components/button/button.js';
-import { DropdownMenu } from '../components/dropdown-menu/dropdown-menu.js';
+import { MoreHorizontal } from '../../icons/index.js';
+import { Button } from '../button/button.js';
+import { DropdownMenu } from '../dropdown-menu/dropdown-menu.js';
 import { DataTable } from './data-table.js';
 import { DataTableColumnHeader } from './data-table-column-header.js';
 import type { DataTableFeatures } from './features.js';

@@ -10,10 +10,10 @@ import {
   useTable,
 } from '@tanstack/react-table';
 import { useState } from 'react';
-import { Checkbox } from '../components/checkbox/checkbox.js';
-import { Empty } from '../components/empty/empty.js';
-import { Input } from '../components/input/input.js';
-import { Table } from '../components/table/table.js';
+import { Checkbox } from '../checkbox/checkbox.js';
+import { Empty } from '../empty/empty.js';
+import { Input } from '../input/input.js';
+import { Table } from '../table/table.js';
 import { DataTablePagination } from './data-table-pagination.js';
 import { DataTableViewOptions } from './data-table-view-options.js';
 import { dataTableFeatures, type DataTableFeatures } from './features.js';

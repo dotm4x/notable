@@ -6,6 +6,12 @@ export { DataTablePagination } from './data-table-pagination.js';
 export { DataTableViewOptions } from './data-table-view-options.js';
 export { dataTableFeatures, type DataTableFeatures } from './features.js';
 export type {
+  Column,
+  ColumnDef,
+  ReactTable,
+  RowData,
+} from '@tanstack/react-table';
+export type {
   TDataTableColumnHeaderProps,
   TDataTablePaginationProps,
   TDataTableProps,

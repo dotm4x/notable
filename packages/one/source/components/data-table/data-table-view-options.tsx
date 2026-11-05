@@ -1,9 +1,9 @@
 'use client';
 
 import type { RowData } from '@tanstack/react-table';
-import { Settings } from '../icons/index.js';
-import { Button } from '../components/button/button.js';
-import { DropdownMenu } from '../components/dropdown-menu/dropdown-menu.js';
+import { Settings } from '../../icons/index.js';
+import { Button } from '../button/button.js';
+import { DropdownMenu } from '../dropdown-menu/dropdown-menu.js';
 import type { TDataTableViewOptionsProps } from './types.js';
 
 /** Menu that toggles the visibility of hideable columns. */

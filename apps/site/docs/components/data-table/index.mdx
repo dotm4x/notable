@@ -6,26 +6,21 @@ order: 70
 
 ## Installation
 
-`DataTable` lives in a separate entry point so the core package does not require
-TanStack Table. Install both packages:
-
-```bash
-pnpm add @dotm4x/one @tanstack/react-table
-```
+`DataTable` is part of the components entry point:
 
 ```tsx
-import { DataTable, DataTableColumnHeader } from '@dotm4x/one/data-table';
+import { DataTable, DataTableColumnHeader } from '@dotm4x/one/components';
 ```
 
 ## Usage
 
 ```tsx
-import type { ColumnDef } from '@tanstack/react-table';
 import {
   DataTable,
   DataTableColumnHeader,
+  type ColumnDef,
   type DataTableFeatures,
-} from '@dotm4x/one/data-table';
+} from '@dotm4x/one/components';
 
 const columns: ColumnDef<DataTableFeatures, Payment>[] = [
   {

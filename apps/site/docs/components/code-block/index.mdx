@@ -7,16 +7,11 @@ order: 80
 ## Installation
 
 ```tsx
-import { CodeBlock } from '@dotm4x/one/components';
+import { CodeBlock, useHighlightedCode } from '@dotm4x/one/components';
 ```
 
-Syntax highlighting is optional and lives in a separate entry point:
-
-```tsx
-import { useHighlightedCode } from '@dotm4x/one/code-block/highlighter';
-```
-
-It requires `shiki` as an optional peer dependency.
+`useHighlightedCode` adds syntax highlighting and is included in the components
+entry point.
 
 ## Usage
 

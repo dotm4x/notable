@@ -1,8 +1,8 @@
 'use client';
 
 import type { RowData } from '@tanstack/react-table';
-import { ArrowDown, ArrowUp } from '../icons/index.js';
-import { Button } from '../components/button/button.js';
+import { ArrowDown, ArrowUp } from '../../icons/index.js';
+import { Button } from '../button/button.js';
 import type { TDataTableColumnHeaderProps } from './types.js';
 
 /** Renders a sortable column header with the current direction. */

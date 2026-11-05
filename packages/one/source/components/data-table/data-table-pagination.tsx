@@ -2,8 +2,8 @@
 
 import type { RowData } from '@tanstack/react-table';
 import { useId } from 'react';
-import { Pagination } from '../components/pagination/pagination.js';
-import { Select } from '../components/select/select.js';
+import { Pagination } from '../pagination/pagination.js';
+import { Select } from '../select/select.js';
 import type { TDataTablePaginationProps } from './types.js';
 
 const DEFAULT_PAGE_SIZES = [10, 20, 25, 30, 40, 50];

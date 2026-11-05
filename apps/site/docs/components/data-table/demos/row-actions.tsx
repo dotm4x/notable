@@ -1,13 +1,15 @@
 'use client';
 
-import type { ColumnDef } from '@tanstack/react-table';
-import { Badge, Button, DropdownMenu } from '@dotm4x/one/components';
-import { MoreHorizontal } from '@dotm4x/one/icons';
 import {
+  Badge,
+  Button,
   DataTable,
   DataTableColumnHeader,
+  DropdownMenu,
+  type ColumnDef,
   type DataTableFeatures,
-} from '@dotm4x/one/data-table';
+} from '@dotm4x/one/components';
+import { MoreHorizontal } from '@dotm4x/one/icons';
 
 interface Payment {
   id: string;

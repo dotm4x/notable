@@ -49,8 +49,8 @@ export interface CodeBlockComponent extends ForwardRefExoticComponent<
 
 /**
  * Displays code, terminal output, and diffs with an optional header, line
- * numbers, copy action, and line states. Syntax highlighting is provided
- * separately by `@dotm4x/one/code-block/highlighter`.
+ * numbers, copy action, and line states. Syntax highlighting is available
+ * through `useHighlightedCode` from the same entry point.
  */
 export const CodeBlock: CodeBlockComponent = Object.assign(CodeBlockRoot, {
   Actions: CodeBlockActions,

@@ -16,6 +16,7 @@ export * from './command/index.js';
 export * from './context-menu/index.js';
 export * from './control-group/index.js';
 export * from './copy-button/index.js';
+export * from './data-table/index.js';
 export * from './date-picker/index.js';
 export * from './date-range-picker/index.js';
 export * from './dialog/index.js';

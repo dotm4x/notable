@@ -5,8 +5,8 @@ order: 10
 icon: download
 ---
 
-One is distributed as a single package with separate entry points for
-components, icons, styles, and optional data table and highlighting support.
+One is distributed as a single package with entry points for components,
+icons, and styles.
 
 ## Install the package
 
@@ -60,18 +60,8 @@ export function AddButton() {
 
 ## Package structure
 
-| Entry point                          | Contents                          |
-| ------------------------------------ | --------------------------------- |
-| `@dotm4x/one/components`             | React components and their APIs.  |
-| `@dotm4x/one/icons`                  | The icon set as React components. |
-| `@dotm4x/one/styles.css`             | Design tokens and shared styles.  |
-| `@dotm4x/one/data-table`             | TanStack-powered data table.      |
-| `@dotm4x/one/code-block/highlighter` | Optional Shiki highlighter.       |
-
-`DataTable` and the CodeBlock highlighter are optional entry points. Install
-the matching peer dependency only when you use them:
-
-```bash
-pnpm add @tanstack/react-table
-pnpm add shiki
-```
+| Entry point              | Contents                                            |
+| ------------------------ | --------------------------------------------------- |
+| `@dotm4x/one/components` | React components, the data table, and highlighting. |
+| `@dotm4x/one/icons`      | The icon set as React components.                   |
+| `@dotm4x/one/styles.css` | Design tokens and shared styles.                    |
