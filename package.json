@@ -23,7 +23,7 @@
   "packageManager": "pnpm@12.9.1",
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm --filter @one/sandbox dev",
+    "dev": "pnpm --filter @one/site dev",
     "lint": "eslint .",
     "typecheck": "pnpm -r typecheck",
     "format": "prettier --write .",
