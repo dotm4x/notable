@@ -2,6 +2,8 @@ export { DocsBreadcrumbs } from './docs-breadcrumbs';
 export { DocsCallout } from './docs-callout';
 export { DocsCodeBlock } from './docs-code-block';
 export { DocsHeader } from './docs-header';
+export { DocsIconDetail } from './docs-icon-detail';
+export { DocsIconGallery } from './docs-icon-gallery';
 export { DocsPageList } from './docs-page-list';
 export { DocsPager } from './docs-pager';
 export { DocsShell } from './docs-shell';

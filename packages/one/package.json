@@ -71,7 +71,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "generate:icons": "node --experimental-strip-types scripts/generate-icons.ts",
-    "prebuild": "node -e \"const fs=require('node:fs'); fs.rmSync('source/icons/components', { recursive: true, force: true }); fs.rmSync('source/icons/generated.ts', { force: true });\" && npm run generate:icons"
+    "prebuild": "node -e \"const fs=require('node:fs'); fs.rmSync('source/icons/components', { recursive: true, force: true }); fs.rmSync('source/icons/generated.ts', { force: true }); fs.rmSync('source/icons/metadata.generated.ts', { force: true });\" && npm run generate:icons"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

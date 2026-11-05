@@ -7,7 +7,12 @@ import {
   type ReactNode,
   type TableHTMLAttributes,
 } from 'react';
-import { DocsCallout, DocsCodeBlock, DocsPageList } from '../components/docs';
+import {
+  DocsCallout,
+  DocsCodeBlock,
+  DocsIconGallery,
+  DocsPageList,
+} from '../components/docs';
 import type { MDXComponents } from 'mdx/types';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
@@ -58,6 +63,7 @@ function createComponents(
   return {
     Callout: DocsCallout,
     Demo: DemoForPage,
+    IconGallery: DocsIconGallery,
     PackageManagerTabs,
     PageList: PageListForPage,
     pre: FencedCode,

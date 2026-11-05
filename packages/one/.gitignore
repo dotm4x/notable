@@ -1,5 +1,6 @@
 source/icons/components/
 source/icons/generated.ts
+source/icons/metadata.generated.ts
 dist
 storybook-static
 node_modules

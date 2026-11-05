@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ComponentType } from 'react';
 import * as IconModule from './icons';
+import { iconMetadata } from './icons/metadata.generated.js';
 import { Button } from './components/button/button.js';
 import { ControlGroup } from './components/control-group/control-group.js';
 import { Input } from './components/input/input.js';
@@ -8,56 +9,39 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type TIconEntry = {
   name: string;
-  Component: (props: Record<string, unknown>) => React.ReactNode;
+  Component: ComponentType<{ size?: number }>;
   category: string;
+  searchText: string;
 };
 
-const metadataModules = (
-  import.meta as unknown as {
-    glob: (
-      pattern: string,
-      options: { eager: true },
-    ) => Record<
-      string,
-      { default?: { categories?: string[] } } & { categories?: string[] }
-    >;
-  }
-).glob('../../icons/source/icons/svg/*/icon.json', {
-  eager: true,
-}) as Record<
+const iconComponents = IconModule as unknown as Record<
   string,
-  { default?: { categories?: string[] } } & { categories?: string[] }
+  TIconEntry['Component'] | undefined
 >;
 
-const categoryByName = new Map<string, string>();
-for (const [path, mod] of Object.entries(metadataModules)) {
-  const match = path.match(/svg\/([^/]+)\/icon\.json$/);
-  if (!match) continue;
-  const name = match[1];
-  const data =
-    (mod as { default?: { categories?: string[] } }).default ??
-    (mod as { categories?: string[] });
-  const category = data?.categories?.[0] ?? 'ui';
-  categoryByName.set(name, category);
-}
-
-const iconEntries: TIconEntry[] = Object.entries(IconModule)
-  .filter(([name, value]) => {
-    if (name === 'Icon' || name === 'createIcon') return false;
-    if (!value || typeof value !== 'object') return false;
-    return true;
+const iconEntries: TIconEntry[] = iconMetadata
+  .flatMap((icon) => {
+    const Component = iconComponents[icon.component];
+    if (!Component) return [];
+    const category = icon.categories[0] ?? 'ui';
+    return [
+      {
+        name: icon.name,
+        Component,
+        category,
+        searchText: [
+          icon.name,
+          icon.component,
+          category,
+          ...icon.keywords,
+          ...icon.aliases,
+        ]
+          .join(' ')
+          .toLowerCase(),
+      },
+    ];
   })
-  .map(([name, Component]) => ({
-    name,
-    Component: Component as TIconEntry['Component'],
-    category:
-      categoryByName.get(
-        name
-          .replace(/([A-Z])/g, (m, c, i) => (i ? '-' : '') + c.toLowerCase())
-          .replace(/^-/, ''),
-      ) ?? 'ui',
-  }))
-  .sort((a, b) => a.name.localeCompare(b.name));
+  .sort((first, second) => first.name.localeCompare(second.name));
 
 function IconsPreviewer() {
   const [query, setQuery] = useState('');
@@ -77,10 +61,7 @@ function IconsPreviewer() {
     return iconEntries.filter((entry) => {
       if (category !== 'all' && entry.category !== category) return false;
       if (!q) return true;
-      return (
-        entry.name.toLowerCase().includes(q) ||
-        entry.category.toLowerCase().includes(q)
-      );
+      return entry.searchText.includes(q);
     });
   }, [query, category]);
 

@@ -49,7 +49,7 @@ Located in [`packages/one`](./packages/one).
 
 Each icon follows a consistent visual style, making it easy to create interfaces that feel cohesive.
 
-Located in [`packages/icons`](./packages/icons).
+Import them from the `@dotm4x/one/icons` entry point. Located in [`packages/one`](./packages/one).
 
 ## Installation
 

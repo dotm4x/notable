@@ -155,7 +155,9 @@ Shared code:
 Icons:
 
 - `source/icons/svg/` and `metadata.schema.json` are the source of truth.
-- `source/icons/components/` and `source/icons/generated.ts` are generated and gitignored. Never edit them. Run `pnpm --filter @dotm4x/one generate:icons`; `prebuild` also regenerates them.
+- `source/icons/components/`, `source/icons/generated.ts`, and `source/icons/metadata.generated.ts` are generated and gitignored. Never edit them. Run `pnpm --filter @dotm4x/one generate:icons`; `prebuild` also regenerates them.
+- `source/icons/types.ts` defines the hand-written metadata contract exported by the generated registry.
+- `createIcon` returns an `IIconComponent` that exposes `iconNode`, so tools can preview or serialize an icon without duplicating its data.
 
 ## 4. Naming
 
@@ -376,7 +378,7 @@ The entries built by `tsup` are:
 
 - `source/index.ts`: imports the shared stylesheet. It does not re-export components.
 - `source/components/index.ts`: public components and their types, published as `@dotm4x/one/components`.
-- `source/icons/index.ts`: icons, published as `@dotm4x/one/icons`.
+- `source/icons/index.ts`: icons and their metadata, published as `@dotm4x/one/icons`.
 - `dist/index.css`: the combined stylesheet, published as `@dotm4x/one/styles.css`. `tsup` appends the component CSS in its `onSuccess` step.
 
 Rules:

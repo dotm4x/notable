@@ -1,0 +1,71 @@
+---
+title: Icons
+description: A consistent set of interface icons for the One design language.
+order: 15
+icon: sparkles
+---
+
+Icons are simple, single-color pictograms drawn on a shared 24 × 24 grid. They inherit the surrounding text color and size, so they stay consistent with the components around them.
+
+## Usage
+
+```tsx
+import { Button } from '@dotm4x/one/components';
+import { Plus } from '@dotm4x/one/icons';
+
+export function AddItem() {
+  return (
+    <Button>
+      <Plus aria-hidden="true" />
+      Add item
+    </Button>
+  );
+}
+```
+
+## Sizing and stroke
+
+Icons render at `24` by default. Adjust `size`, `color`, and `strokeWidth` through props; `absoluteStrokeWidth` keeps the stroke visually consistent when the icon is scaled.
+
+```tsx
+import { Plus } from '@dotm4x/one/icons';
+
+<Plus size={16} />;
+<Plus color="currentColor" strokeWidth={1.5} />;
+<Plus size={32} absoluteStrokeWidth />;
+```
+
+Prefer inheriting `currentColor` and the surrounding text size over fixed colors, so icons adapt to themes and states.
+
+## Browse icons
+
+Select an icon to open its detail page with copy actions, size, stroke, and color controls.
+
+<IconGallery />
+
+## Metadata
+
+Every icon ships with descriptive metadata so tools can build pickers and search without reading the source files:
+
+```tsx
+import { iconMetadata, iconMetadataByName } from '@dotm4x/one/icons';
+
+const icon = iconMetadataByName['arrow-right'];
+
+const navigationIcons = iconMetadata.filter((entry) =>
+  entry.categories.includes('navigation'),
+);
+```
+
+Each entry exposes `name`, `component`, `description`, `keywords`, `categories`, `tags`, `aliases`, `useCases`, and `contributors`.
+
+## Accessibility
+
+<Callout title="Label icon-only controls">
+  Decorative icons must be hidden with `aria-hidden="true"`. An icon that
+  conveys meaning needs an accessible name, and an icon-only control needs
+  `aria-label`.
+</Callout>
+
+- Never rely on an icon alone to communicate state; pair it with text or a shape change.
+- Icons inherit `currentColor`, so they meet the contrast of the surrounding text.

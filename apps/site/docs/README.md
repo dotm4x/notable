@@ -27,6 +27,8 @@ docs/
 - `docs/index.mdx` renders at `/docs`.
 - A folder with an `index.mdx` is both a page and a navigation section.
 - Adding `icons/`, `foundations/`, or `patterns/` requires no renderer changes.
+- Icon detail pages live at `/docs/icons/<icon>` and are generated from
+  `@dotm4x/one/icons` metadata by `app/docs/icons/[name]/page.tsx`, not from MDX.
 
 ## Page frontmatter
 
@@ -40,8 +42,8 @@ order: 10
 
 - `title` and `description` are required for a useful sidebar and metadata.
 - `order` controls position among siblings. Use gaps of ten.
-- `icon` optionally selects a sidebar icon (`home`, `download`, `box`; other
-  values fall back to a document icon).
+- `icon` optionally selects a sidebar icon (`home`, `download`, `box`,
+  `sparkles`; other values fall back to a document icon).
 - `status: draft` hides the page in production.
 - `sidebar: false` keeps the page out of the navigation.
 

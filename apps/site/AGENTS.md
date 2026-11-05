@@ -23,7 +23,7 @@ apps/site/
 ├── app/                 # App Router routes
 │   ├── page.tsx         # marketing home
 │   ├── components/      # redirect to /docs/components
-│   └── docs/            # /docs, /docs/[...slug], shared layout
+│   └── docs/            # /docs, /docs/[...slug], /docs/icons/[name], shared layout
 ├── docs/                # MDX content; folder = URL
 ├── source/
 │   ├── components/      # site UI, including the docs adapters
@@ -39,6 +39,7 @@ The docs engine (`source/docs/`):
 - `toc.ts`: table of contents from headings.
 - `mdx.tsx`: binds MDX primitives and renders a page.
 - `demo.tsx` and `demo-frame.tsx`: resolve a demo and render the Preview and Code tabs.
+- `icon-catalog.ts`: joins package icon metadata with components for the icon catalog and detail pages.
 - `generated/demos.ts`: generated demo registry, committed to the repository.
 
 ## 3. Documentation content
@@ -61,6 +62,7 @@ The docs engine (`source/docs/`):
   - `<PageList />`
   - `<Callout title="...">`
   - `<PackageManagerTabs />`
+  - `<IconGallery />`
 - Fenced code blocks render through the package `CodeBlock` with client-side Shiki. Do not add another highlighter.
 
 ### Demos
@@ -85,7 +87,7 @@ The docs engine (`source/docs/`):
 ## 4. Server and client boundaries
 
 - Docs engine modules that read content import `server-only` (`content.ts`, `mdx.tsx`, `demo.tsx`). Never import them from client components.
-- The docs UI adapters are client components: `DocsShell`, `DocsSidebar`, `DocsHeader`, `DocsToc`, `DocsBreadcrumbs`, `DocsCallout`, `DocsPageList`, `DocsPager`, and `DocsCodeBlock`.
+- The docs UI adapters are client components: `DocsShell`, `DocsSidebar`, `DocsHeader`, `DocsToc`, `DocsBreadcrumbs`, `DocsCallout`, `DocsPageList`, `DocsPager`, `DocsCodeBlock`, and `DocsIconGallery`.
 - The package ships without `"use client"` directives. Render One components inside client components, and do not import the components barrel from a server component.
 - `next-themes` controls the `data-theme` attribute. The theme toggle lives in `source/components/theme-toggle`.
 
