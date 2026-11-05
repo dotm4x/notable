@@ -4,6 +4,10 @@
   font-family: var(--one-font-family);
 }
 
+.one-tabs__container {
+  min-width: 0;
+}
+
 .one-tabs__list {
   position: relative;
   display: inline-flex;
@@ -93,20 +97,31 @@
   display: none;
 }
 
-/* Panels share one grid cell so the outgoing and incoming panel overlap
-   without shifting layout; the cell is as tall as the tallest visible panel. */
-.one-tabs {
+/* Panels share one grid cell so the outgoing and incoming panel overlap.
+   The cell follows the active panel, and the exiting panel leaves the flow so
+   the auto-size container can animate towards the incoming panel's height. */
+.one-tabs__container > .one-auto-size__content {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
 }
 
-.one-tabs > .one-tabs__content {
+.one-tabs__container > .one-auto-size__content > .one-tabs__content {
   grid-column: 1;
   grid-row: 2;
 }
 
-.one-tabs[data-orientation='vertical'] {
-  display: grid;
+.one-tabs__container
+  > .one-auto-size__content
+  > .one-tabs__content[data-exiting] {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+}
+
+.one-tabs[data-orientation='vertical']
+  > .one-tabs__container
+  > .one-auto-size__content {
   grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
   align-items: start;
   gap: var(--one-spacing-4);
@@ -148,14 +163,19 @@
   inset-inline-end: 0;
 }
 
-.one-tabs[data-orientation='vertical'] > .one-tabs__content {
+.one-tabs[data-orientation='vertical']
+  > .one-tabs__container
+  > .one-auto-size__content
+  > .one-tabs__content {
   grid-column: 2;
   grid-row: 1;
   padding-block-start: var(--one-spacing-2);
 }
 
 @media (max-width: 40rem) {
-  .one-tabs[data-orientation='vertical'] {
+  .one-tabs[data-orientation='vertical']
+    > .one-tabs__container
+    > .one-auto-size__content {
     grid-template-columns: minmax(0, 36%) minmax(0, 1fr);
     gap: var(--one-spacing-2);
   }

@@ -112,6 +112,7 @@ export const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
         // Base UI hides a panel as soon as it deselects; hold it visible (and
         // inert) until the exit animation completes.
         hidden={!isActive && isExited}
+        data-exiting={!isActive && !isExited ? '' : undefined}
         className={['one-tabs__content', className].filter(Boolean).join(' ')}
       />
     );

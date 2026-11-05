@@ -120,6 +120,38 @@ export const Lengths: Story = {
   ),
 };
 
+export const PanelHeights: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The panel area resizes smoothly when the selected panel has a different height.',
+      },
+    },
+  },
+  render: () => (
+    <Tabs defaultValue="summary">
+      <Tabs.List aria-label="Panel heights">
+        <Tabs.Trigger value="summary">Summary</Tabs.Trigger>
+        <Tabs.Trigger value="details">Details</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="summary">A single line of content.</Tabs.Content>
+      <Tabs.Content value="details">
+        <article style={{ maxWidth: '32rem' }}>
+          <p>
+            Select between the tabs to see the panel area follow the height of
+            the panel that becomes visible.
+          </p>
+          <p>
+            The change glides instead of jumping, and it applies immediately
+            when the operating system requests reduced motion.
+          </p>
+        </article>
+      </Tabs.Content>
+    </Tabs>
+  ),
+};
+
 export const Controlled: Story = {
   parameters: {
     docs: {

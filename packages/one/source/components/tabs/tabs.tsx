@@ -1,6 +1,7 @@
 import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { Tabs as BaseTabs } from '@base-ui/react/tabs';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
+import { AutoSize } from '../../internal/primitives/auto-size/auto-size.js';
 import { TabsPanelContext } from './context.js';
 import { TabsContent } from './parts/content.js';
 import { TabsList } from './parts/list.js';
@@ -18,6 +19,7 @@ export type {
 
 const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   {
+    children,
     className,
     defaultValue,
     onValueChange,
@@ -54,7 +56,11 @@ const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
           setUncontrolledValue(nextValue);
           onValueChange?.(nextValue);
         }}
-      />
+      >
+        <AutoSize axis="vertical" className="one-tabs__container">
+          {children}
+        </AutoSize>
+      </BaseTabs.Root>
     </TabsPanelContext.Provider>
   );
 });

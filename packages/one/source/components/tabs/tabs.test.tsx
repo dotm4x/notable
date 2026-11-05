@@ -348,6 +348,21 @@ describe('Tabs', () => {
     );
   });
 
+  it('wraps the tab contents in a vertical auto-size container', () => {
+    // Arrange, Act
+    const { container } = render(<BasicTabs />);
+
+    // Assert
+    const tabs = container.querySelector('.one-tabs');
+    const autoSize = tabs?.querySelector('.one-tabs__container');
+    expect(container.firstElementChild).toBe(tabs);
+    expect(autoSize).toHaveClass('one-auto-size');
+    expect(autoSize).toHaveAttribute('data-axis', 'vertical');
+    expect(autoSize).toContainElement(
+      container.querySelector('.one-tabs__list'),
+    );
+  });
+
   it('applies the vertical layout and indicator axis to the tab list', () => {
     const { container } = render(
       <Tabs defaultValue="settings" orientation="vertical">
@@ -586,9 +601,11 @@ describe('Tabs controlled state integration', () => {
       expect(panelOf('Panel A')).not.toHaveAttribute('hidden');
       expect(panelOf('Panel A')).toHaveAttribute('inert');
       expect(panelOf('Panel A')).toHaveAttribute('tabindex', '-1');
+      expect(panelOf('Panel A')).toHaveAttribute('data-exiting');
       await waitFor(() => {
         expect(panelOf('Panel A')).toHaveAttribute('hidden');
       });
+      expect(panelOf('Panel A')).not.toHaveAttribute('data-exiting');
     });
 
     it.each(['horizontal', 'vertical'] as const)(
