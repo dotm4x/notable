@@ -22,7 +22,8 @@ One is organized as a monorepo managed with `pnpm` workspaces:
 - **[`docs/guidelines/`](./docs/guidelines/):** Design language documentation (principles, foundations, patterns, and component guidelines).
 - **[`packages/one/`](./packages/one/):** The core React component library.
 - **[`apps/site/`](./apps/site/):** Next.js documentation and marketing site.
-- **[`apps/docs/`](./apps/docs/):** Astro documentation site.
+
+Coding-agent instructions live in `AGENTS.md` files: the repository root, [`docs/guidelines/`](./docs/guidelines/AGENTS.md), [`packages/one/`](./packages/one/AGENTS.md), and [`apps/site/`](./apps/site/AGENTS.md).
 
 ---
 
@@ -43,9 +44,11 @@ cd one
 # Install dependencies across all workspaces
 pnpm install
 
-# Run component library build / development
+# Build the component library
 pnpm --filter @dotm4x/one build
-pnpm --filter @one/sandbox dev
+
+# Start the documentation site (rebuilds the library and demo registry first)
+pnpm --filter @one/site dev
 ```
 
 ---
@@ -104,8 +107,8 @@ type(scope): description
 
 - `feat(button): add loading state`
 - `fix(dialog): restore focus on close`
-- `refactor(site): reset to clean Next.js starter template`
-- `docs(agents): disallow blank lines and co-author trailers`
+- `refactor(tokens): extract focus ring values`
+- `docs(agents): split instructions by repository area`
 
 ---
 
