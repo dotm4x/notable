@@ -85,18 +85,6 @@
   inset-inline-end: 0;
 }
 
-.one-table-of-contents--right
-  .one-table-of-contents__item
-  > .one-table-of-contents__list {
-  margin-inline-start: 0;
-  margin-inline-end: var(--one-spacing-3);
-  padding-inline-start: 0;
-  padding-inline-end: var(--one-spacing-2);
-  border-inline-start: none;
-  border-inline-end: var(--one-border-width) solid
-    var(--one-color-border-subtle);
-}
-
 .one-table-of-contents__item > .one-table-of-contents__list {
   margin-inline-start: var(--one-spacing-3);
   padding-inline-start: var(--one-spacing-2);
