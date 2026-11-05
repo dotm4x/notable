@@ -1,0 +1,130 @@
+---
+title: Command
+description: Presents a searchable list of commands, inline or as a modal palette.
+order: 150
+---
+
+## Usage
+
+```tsx
+import { Command, type CommandItem } from '@dotm4x/one/components';
+import { FilePlus, Settings } from '@dotm4x/one/icons';
+
+const commands: CommandItem[] = [
+  {
+    value: 'new-note',
+    label: 'New note',
+    icon: <FilePlus size={16} />,
+    shortcut: ['Mod', 'N'],
+  },
+  { value: 'settings', label: 'Open settings', icon: <Settings size={16} /> },
+];
+
+<Command items={commands}>
+  <Command.Input />
+  <Command.List />
+  <Command.Empty />
+</Command>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Grouped commands
+
+<Demo name="grouped" />
+
+### Modal palette
+
+<Demo name="dialog" />
+
+## API reference
+
+### Command
+
+| Prop           | Type                                                | Default | Description                                                  |
+| -------------- | --------------------------------------------------- | ------- | ------------------------------------------------------------ |
+| `items`        | `readonly CommandItem[] \| readonly CommandGroup[]` | —       | Flat commands or groups of commands.                         |
+| `filter`       | `(item: CommandItem, query: string) => boolean`     | —       | Replaces the default filter, which matches every query term. |
+| `children`     | `ReactNode`                                         | —       | Palette parts; defaults to input, list, and empty state.     |
+| `onItemSelect` | `() => void`                                        | —       | Called when a command is chosen, before its own `onSelect`.  |
+
+Without `children`, it renders `Command.Input`, `Command.List`, and
+`Command.Empty` for you.
+
+### Command.Dialog
+
+| Prop           | Type                                                | Default             | Description                                              |
+| -------------- | --------------------------------------------------- | ------------------- | -------------------------------------------------------- |
+| `items`        | `readonly CommandItem[] \| readonly CommandGroup[]` | —                   | Flat commands or groups of commands.                     |
+| `filter`       | `(item: CommandItem, query: string) => boolean`     | —                   | Replaces the default filter.                             |
+| `children`     | `ReactNode`                                         | —                   | Palette parts; defaults to input, list, and empty state. |
+| `open`         | `boolean`                                           | —                   | Controlled open state.                                   |
+| `defaultOpen`  | `boolean`                                           | `false`             | Initial open state when uncontrolled.                    |
+| `onOpenChange` | `(open: boolean) => void`                           | —                   | Called with the requested open state.                    |
+| `shortcut`     | `string \| null`                                    | `'Mod+K'`           | Shortcut that toggles the palette; `null` disables it.   |
+| `label`        | `string`                                            | `'Command palette'` | Accessible name of the palette.                          |
+| `size`         | `'small' \| 'medium' \| 'large'`                    | `'medium'`          | Width of the palette.                                    |
+
+Choosing a command closes the palette before its `onSelect` runs.
+
+### Command.Input
+
+| Prop                     | Type      | Default | Description                                                    |
+| ------------------------ | --------- | ------- | -------------------------------------------------------------- |
+| `leadingIconInteractive` | `boolean` | `false` | Prevents assistive technology from hiding the leading content. |
+
+It renders through `Input` and forwards the remaining native input attributes.
+`aria-label` and `placeholder` default to `Search commands`.
+
+### Command.List
+
+| Prop       | Type                                              | Default | Description                                    |
+| ---------- | ------------------------------------------------- | ------- | ---------------------------------------------- |
+| `children` | `(item: CommandItem, index: number) => ReactNode` | —       | Renders each item; defaults to `Command.Item`. |
+
+It renders the Base UI list and forwards its remaining props.
+
+### Command.Item
+
+| Prop   | Type          | Default | Description                    |
+| ------ | ------------- | ------- | ------------------------------ |
+| `item` | `CommandItem` | —       | Command rendered by this item. |
+
+It forwards the remaining native `div` attributes except `children` and
+`onClick`.
+
+### Command.Empty
+
+Renders a `div` for the state shown when no command matches the query, with
+`No results found` as the default content. It has no props of its own and
+forwards native `div` attributes.
+
+### Command.Group
+
+Renders the container for a group of commands and forwards the Base UI group
+props.
+
+### Command.GroupLabel
+
+Renders the heading of a command group and forwards the Base UI group label
+props.
+
+### Command.Separator
+
+Renders a line between commands or groups and forwards the Base UI separator
+props.
+
+## Accessibility
+
+- The search field is named `Search commands` and uses the same text as its
+  placeholder unless `aria-label` or `placeholder` overrides it.
+- The list is named `Commands`, and the empty state announces
+  `No results found`.
+- Command icons are hidden from assistive technology; labels and shortcut keys
+  carry the meaning.
+- `Command.Dialog` renders a modal dialog named by `label` and toggles with
+  `Mod+K` unless `shortcut` is `null`.

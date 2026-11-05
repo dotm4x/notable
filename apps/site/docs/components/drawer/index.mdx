@@ -1,0 +1,97 @@
+---
+title: Drawer
+description: Opens a modal panel that slides in from an edge of the viewport.
+order: 240
+---
+
+## Usage
+
+```tsx
+import { Button, Drawer } from '@dotm4x/one/components';
+
+<Drawer side="right">
+  <Drawer.Trigger>
+    <Button>Open settings</Button>
+  </Drawer.Trigger>
+  <Drawer.Content>
+    <Drawer.Header>
+      <Drawer.Title>Project settings</Drawer.Title>
+      <Drawer.Description>Review access for this project.</Drawer.Description>
+    </Drawer.Header>
+    <Drawer.Footer>
+      <Drawer.Close>Done</Drawer.Close>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sides
+
+<Demo name="sides" />
+
+### Form
+
+<Demo name="form" />
+
+## API reference
+
+### Drawer
+
+| Prop           | Type                                     | Default   | Description                                                  |
+| -------------- | ---------------------------------------- | --------- | ------------------------------------------------------------ |
+| `open`         | `boolean`                                | —         | Open state in controlled mode.                               |
+| `defaultOpen`  | `boolean`                                | `false`   | Open state in uncontrolled mode.                             |
+| `onOpenChange` | `(open: boolean) => void`                | —         | Called with the requested open state.                        |
+| `side`         | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Edge of the viewport the drawer slides in from.              |
+| `children`     | `ReactNode`                              | —         | Drawer parts, such as `Drawer.Trigger` and `Drawer.Content`. |
+
+### Drawer.Trigger
+
+| Prop       | Type        | Default | Description                                                                     |
+| ---------- | ----------- | ------- | ------------------------------------------------------------------------------- |
+| `children` | `ReactNode` | —       | A single element that opens the drawer. Other content is wrapped in a `Button`. |
+
+The element keeps its own attributes and `onClick`.
+
+### Drawer.Content
+
+| Prop                   | Type                             | Default    | Description                                                              |
+| ---------------------- | -------------------------------- | ---------- | ------------------------------------------------------------------------ |
+| `size`                 | `'small' \| 'medium' \| 'large'` | `'medium'` | Sets the width of side drawers and the height of top and bottom drawers. |
+| `showCloseButton`      | `boolean`                        | `true`     | Shows a close button.                                                    |
+| `closeOnBackdropClick` | `boolean`                        | `true`     | Closes the drawer when the backdrop is clicked.                          |
+
+It renders the drawer surface and its backdrop in a portal and forwards native `div` attributes. `Drawer.Header` and `Drawer.Footer` children stay outside the scroll container wherever you place them.
+
+### Drawer.Header
+
+Renders the header row as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Drawer.Title
+
+Renders the drawer title as a heading element. It has no props of its own and forwards native heading attributes.
+
+### Drawer.Description
+
+Renders the drawer description as a paragraph. It has no props of its own and forwards native paragraph attributes.
+
+### Drawer.Footer
+
+Renders the action row as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Drawer.Close
+
+Renders a `Button` with `type="button"` that uses the `outline` variant unless you pass one. It accepts every `Button` prop, including `variant` and `size`, and closes the drawer when activated.
+
+## Accessibility
+
+- The trigger reports `aria-haspopup="dialog"` and its expanded state.
+- `Drawer.Title` names the drawer and `Drawer.Description` describes it. The drawer drops the description reference when the part is absent.
+- Focus moves into the drawer when it opens, `Tab` stays inside it, and focus returns to the trigger when it closes.
+- Nested drawers stack above the one before them, and `Escape` closes only the topmost drawer.

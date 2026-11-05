@@ -1,0 +1,101 @@
+---
+title: Toast
+description: Queues short notifications in a corner viewport with variants, actions, and promise states.
+order: 560
+---
+
+## Usage
+
+```tsx
+import { Button, ToastProvider, toast } from '@dotm4x/one/components';
+
+<ToastProvider>
+  <Button onClick={() => toast.success('Changes saved.')}>Save changes</Button>
+</ToastProvider>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### With an action
+
+<Demo name="action" />
+
+## API reference
+
+### Toast
+
+The package exports no `Toast` component. The namespace covers
+`ToastProvider`, the `toast` API, its `ToastOptions`, and
+`createToastController`.
+
+### Toast.Provider
+
+Exported as `ToastProvider`. It renders the notification viewport beside
+`children` and must wrap every trigger that raises a toast.
+
+| Prop              | Type                                                                                              | Default            | Description                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------ |
+| `children`        | `ReactNode`                                                                                       | —                  | Application content the viewport renders beside. |
+| `position`        | `'top-left' \| 'top-center' \| 'top-right' \| 'bottom-left' \| 'bottom-center' \| 'bottom-right'` | `'bottom-right'`   | Corner that holds the viewport.                  |
+| `defaultDuration` | `number`                                                                                          | `5000`             | Milliseconds before a toast dismisses itself.    |
+| `maxToasts`       | `number`                                                                                          | `5`                | Maximum simultaneous toasts.                     |
+| `controller`      | `ToastController`                                                                                 | default controller | Queue that the provider renders.                 |
+
+### Toast.api
+
+Exported as `toast`. The default `ToastApi` instance, created by
+`createToastController()`. Every method returns the toast id and accepts either
+a plain string, used as the description, or a `ToastOptions` object.
+
+| Method    | Signature                                                                                               | Description                                               |
+| --------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `toast`   | `(message: string \| ToastOptions) => string`                                                           | Queues a default notification.                            |
+| `success` | `(message: string \| ToastOptions) => string`                                                           | Queues a success notification.                            |
+| `error`   | `(message: string \| ToastOptions) => string`                                                           | Queues an error notification.                             |
+| `warning` | `(message: string \| ToastOptions) => string`                                                           | Queues a warning notification.                            |
+| `info`    | `(message: string \| ToastOptions) => string`                                                           | Queues an info notification.                              |
+| `loading` | `(message: string \| ToastOptions) => string`                                                           | Queues a notification that never dismisses itself.        |
+| `custom`  | `(render: (id: string) => ReactNode, options?: Omit<ToastOptions, 'title' \| 'description'>) => string` | Queues a notification with custom content.                |
+| `promise` | `<TValue>(promise: Promise<TValue>, messages: ToastPromiseMessages<TValue>) => Promise<TValue>`         | Tracks a promise through loading, success, and error.     |
+| `update`  | `(id: string, options: Partial<ToastOptions>) => void`                                                  | Updates an existing toast.                                |
+| `dismiss` | `(id?: string) => void`                                                                                 | Dismisses one toast, or every toast when no id is passed. |
+
+### Toast.options
+
+Exported as `ToastOptions`. The object form accepted by every `toast` method.
+
+| Property      | Type                                                       | Description                                     |
+| ------------- | ---------------------------------------------------------- | ----------------------------------------------- |
+| `title`       | `ReactNode`                                                | Bold heading rendered above the description.    |
+| `description` | `ReactNode`                                                | Body text of the notification.                  |
+| `variant`     | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | Tone and default icon.                          |
+| `duration`    | `number`                                                   | Milliseconds before the toast dismisses itself. |
+| `icon`        | `ReactNode \| null`                                        | Replaces the default icon; `null` removes it.   |
+| `action`      | `ToastAction`                                              | Action button, shaped as `{ label, onClick }`.  |
+| `id`          | `string`                                                   | Identifier used by `update` and `dismiss`.      |
+| `className`   | `string`                                                   | Additional class for the toast element.         |
+
+### Toast.createController
+
+Exported as `createToastController`. Returns an independent `ToastController`
+that owns its own `toast` API and queue. Pass it to `ToastProvider` as
+`controller` so the provider renders that queue instead of the default one.
+
+## Accessibility
+
+- The viewport is a `region` with `aria-live="polite"` and `aria-atomic="false"`,
+  named after its position, such as `Notifications bottom right`.
+- Each toast is rendered as a dialog labelled by its title, and its close button
+  is named `Dismiss notification`.
+- Notification text is announced politely rather than interrupting the current
+  task, and the viewport never covers the page with a blocking layer.
+- Icons are `aria-hidden="true"`, so the variant is conveyed by the text as well
+  as the color.

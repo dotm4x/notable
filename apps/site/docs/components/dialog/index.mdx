@@ -1,0 +1,100 @@
+---
+title: Dialog
+description: Opens a modal dialog with a title, description, and footer actions.
+order: 220
+---
+
+## Usage
+
+```tsx
+import { Button, Dialog } from '@dotm4x/one/components';
+
+<Dialog>
+  <Dialog.Trigger>
+    <Button>Share project</Button>
+  </Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Share project</Dialog.Title>
+      <Dialog.Description>
+        Anyone with the link can view this project.
+      </Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Footer>
+      <Dialog.Close>Done</Dialog.Close>
+    </Dialog.Footer>
+  </Dialog.Content>
+</Dialog>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Confirmation
+
+<Demo name="confirmation" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+## API reference
+
+### Dialog
+
+| Prop           | Type                      | Default | Description                                                  |
+| -------------- | ------------------------- | ------- | ------------------------------------------------------------ |
+| `open`         | `boolean`                 | —       | Open state in controlled mode.                               |
+| `defaultOpen`  | `boolean`                 | `false` | Open state in uncontrolled mode.                             |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested open state.                        |
+| `children`     | `ReactNode`               | —       | Dialog parts, such as `Dialog.Trigger` and `Dialog.Content`. |
+
+Omit `open` to let the dialog manage its own state.
+
+### Dialog.Trigger
+
+| Prop       | Type        | Default | Description                                                                     |
+| ---------- | ----------- | ------- | ------------------------------------------------------------------------------- |
+| `children` | `ReactNode` | —       | A single element that opens the dialog. Other content is wrapped in a `Button`. |
+
+The element keeps its own attributes and `onClick`.
+
+### Dialog.Content
+
+| Prop                   | Type                             | Default    | Description                                     |
+| ---------------------- | -------------------------------- | ---------- | ----------------------------------------------- |
+| `size`                 | `'small' \| 'medium' \| 'large'` | `'medium'` | Width of the dialog.                            |
+| `showCloseButton`      | `boolean`                        | `true`     | Shows a close button in the top-right corner.   |
+| `closeOnBackdropClick` | `boolean`                        | `true`     | Closes the dialog when the backdrop is clicked. |
+
+It renders the popup and its backdrop in a portal and forwards native `div` attributes.
+
+### Dialog.Header
+
+Renders the header row as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Dialog.Title
+
+Renders the dialog title as a heading element. It has no props of its own and forwards native heading attributes.
+
+### Dialog.Description
+
+Renders the dialog description as a paragraph. It has no props of its own and forwards native paragraph attributes.
+
+### Dialog.Footer
+
+Renders the action row as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Dialog.Close
+
+Renders a `Button` with `type="button"` that uses the `outline` variant unless you pass one. It accepts every `Button` prop, including `variant` and `size`, and closes the dialog when activated.
+
+## Accessibility
+
+- The trigger reports `aria-haspopup="dialog"` and its expanded state.
+- `Dialog.Title` provides the accessible name and `Dialog.Description` the accessible description. The dialog drops the description reference when no description is rendered.
+- Focus moves into the dialog when it opens, returns to the trigger when it closes, and `Escape` always closes it, even with `closeOnBackdropClick={false}`.
+- The built-in close button is labeled `Close dialog`, and its icon is hidden from assistive technology.

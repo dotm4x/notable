@@ -1,0 +1,269 @@
+---
+title: Sidebar
+description: Composes a collapsible navigation layout with grouped menus and an inset area.
+order: 470
+---
+
+## Usage
+
+```tsx
+import { Sidebar } from '@dotm4x/one/components';
+import { Box, Home, Settings } from '@dotm4x/one/icons';
+
+<Sidebar.Root label="Workspace">
+  <Sidebar.Header>
+    <Sidebar.Brand icon={<Box aria-hidden="true" />}>Acme</Sidebar.Brand>
+  </Sidebar.Header>
+  <Sidebar.Content>
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>Workspace</Sidebar.GroupLabel>
+      <Sidebar.GroupContent>
+        <Sidebar.Menu>
+          <Sidebar.MenuItem>
+            <Sidebar.Item
+              href="#overview"
+              icon={<Home aria-hidden="true" />}
+              active
+            >
+              Overview
+            </Sidebar.Item>
+          </Sidebar.MenuItem>
+        </Sidebar.Menu>
+      </Sidebar.GroupContent>
+    </Sidebar.Group>
+  </Sidebar.Content>
+  <Sidebar.Footer>
+    <Sidebar.Menu>
+      <Sidebar.MenuItem>
+        <Sidebar.Item href="#settings" icon={<Settings aria-hidden="true" />}>
+          Settings
+        </Sidebar.Item>
+      </Sidebar.MenuItem>
+    </Sidebar.Menu>
+    <Sidebar.Trigger />
+  </Sidebar.Footer>
+  <Sidebar.Inset>
+    <main>Page content</main>
+  </Sidebar.Inset>
+</Sidebar.Root>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Collapsed
+
+<Demo name="collapsed" />
+
+### Navigation tree
+
+<Demo name="tree" />
+
+## API reference
+
+### Sidebar
+
+| Prop               | Type                      | Default     | Description                                                            |
+| ------------------ | ------------------------- | ----------- | ---------------------------------------------------------------------- |
+| `open`             | `boolean`                 | —           | Desktop expansion when controlled. Mobile drawer state stays internal. |
+| `defaultOpen`      | `boolean`                 | `true`      | Initial expanded state when uncontrolled.                              |
+| `onOpenChange`     | `(open: boolean) => void` | —           | Called whenever desktop expansion is requested to change.              |
+| `width`            | `number \| string`        | `'16rem'`   | Expanded desktop width.                                                |
+| `collapsedWidth`   | `number \| string`        | `'3rem'`    | Icon-only desktop width.                                               |
+| `mobileWidth`      | `number \| string`        | `'18rem'`   | Mobile drawer width.                                                   |
+| `keyboardShortcut` | `string \| false`         | `'b'`       | Modifier shortcut key. `false` disables the shortcut.                  |
+| `animateOnHover`   | `boolean`                 | `true`      | Shares one sliding highlight surface for menu and submenu hover.       |
+| `label`            | `string`                  | `'Sidebar'` | Accessible name of the navigation landmark.                            |
+| `children`         | `ReactNode`               | —           | Sidebar sections and an optional direct `Sidebar.Inset` child.         |
+
+It renders the layout wrapper as a `div` and forwards the remaining native `div`
+attributes. Every `Sidebar.*` part must be a descendant of the root, which
+provides their state.
+
+### Sidebar.Root
+
+The root component is also attached as `Sidebar.Root`. It is the same component
+as `Sidebar` and accepts the props listed for `Sidebar`.
+
+### Sidebar.Header
+
+Renders the pinned header as a `div` and forwards native `div` attributes.
+
+### Sidebar.Brand
+
+| Prop       | Type        | Default | Description                                                 |
+| ---------- | ----------- | ------- | ----------------------------------------------------------- |
+| `icon`     | `ReactNode` | —       | Mark shown beside the brand name, and alone when collapsed. |
+| `children` | `ReactNode` | —       | Brand name, hidden in icon-only mode.                       |
+
+It renders a `div` and forwards the remaining native `div` attributes. The icon
+is hidden from assistive technology.
+
+### Sidebar.Content
+
+Renders the scrollable region for groups as a `div` and forwards native `div`
+attributes.
+
+### Sidebar.Group
+
+Renders a `section` that groups related navigation items and forwards native
+section attributes.
+
+### Sidebar.GroupLabel
+
+Renders an `h2` heading for the group and forwards native heading attributes.
+
+### Sidebar.GroupAction
+
+| Prop         | Type     | Default | Description                            |
+| ------------ | -------- | ------- | -------------------------------------- |
+| `aria-label` | `string` | —       | Accessible name describing the action. |
+
+It renders an icon-only `button` with the ghost variant and forwards the
+remaining `Button` props, except `variant` and `size`.
+
+### Sidebar.GroupContent
+
+Renders the region that holds the group's navigation elements as a `div` and
+forwards native `div` attributes.
+
+### Sidebar.Menu
+
+Renders a `ul` list of sidebar entries and forwards native `ul` attributes.
+
+### Sidebar.MenuItem
+
+Renders an `li` item inside `Sidebar.Menu` and forwards native `li` attributes.
+
+### Sidebar.Item
+
+| Prop       | Type                                   | Default    | Description                                                       |
+| ---------- | -------------------------------------- | ---------- | ----------------------------------------------------------------- |
+| `href`     | `string`                               | —          | Renders a native anchor. Omit it to render an action button.      |
+| `icon`     | `ReactNode`                            | —          | Mark displayed before the label.                                  |
+| `active`   | `boolean`                              | `false`    | Marks the current destination with `aria-current="page"`.         |
+| `tooltip`  | `string`                               | —          | Custom tooltip used in icon-only mode.                            |
+| `label`    | `string`                               | —          | Accessible label for non-text children and the collapsed tooltip. |
+| `disabled` | `boolean`                              | `false`    | Prevents activation.                                              |
+| `target`   | `string`                               | —          | Link target when `href` is provided.                              |
+| `rel`      | `string`                               | —          | Link relationship when `href` is provided.                        |
+| `type`     | `'button' \| 'submit' \| 'reset'`      | `'button'` | Button type when `href` is omitted.                               |
+| `onClick`  | `React.MouseEventHandler<HTMLElement>` | —          | Called when the item is activated.                                |
+| `children` | `ReactNode`                            | —          | Visible label content.                                            |
+
+It renders an `a` when `href` is set and a `button` otherwise, and forwards the
+remaining native attributes. A string label is used as the tooltip text in
+icon-only mode; `label` is required when the children are not plain text.
+
+### Sidebar.MenuAction
+
+| Prop         | Type     | Default | Description                            |
+| ------------ | -------- | ------- | -------------------------------------- |
+| `aria-label` | `string` | —       | Accessible name describing the action. |
+
+It renders an icon-only `button` beside a menu item and forwards the remaining
+`Button` props, except `variant` and `size`.
+
+### Sidebar.MenuBadge
+
+Renders a `span` for a count or status beside a menu item and forwards native
+`span` attributes.
+
+### Sidebar.Submenu
+
+| Prop           | Type                      | Default | Description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `label`        | `string`                  | —       | Visible label and accessible name of the disclosure.     |
+| `icon`         | `ReactNode`               | —       | Mark displayed before the label.                         |
+| `open`         | `boolean`                 | —       | Expanded state when controlled.                          |
+| `defaultOpen`  | `boolean`                 | `false` | Initial expanded state when uncontrolled.                |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called whenever the nested state is requested to change. |
+| `children`     | `ReactNode`               | —       | Nested `Sidebar.SubmenuItem` elements.                   |
+
+It renders a `div` from `Collapsible.Root` and forwards the remaining native
+`div` attributes. Activating it while the sidebar is collapsed expands the
+sidebar instead of opening the submenu.
+
+### Sidebar.SubmenuItem
+
+Renders an `li` around `Sidebar.Item` and accepts the same props as
+`Sidebar.Item`.
+
+### Sidebar.Tree
+
+| Prop                 | Type                       | Default | Description                                         |
+| -------------------- | -------------------------- | ------- | --------------------------------------------------- |
+| `items`              | `TreeNode[]`               | —       | Top-level nodes.                                    |
+| `activeId`           | `string`                   | —       | Current destination, matched against node id.       |
+| `expandedIds`        | `string[]`                 | —       | Expanded branch ids in controlled mode.             |
+| `defaultExpandedIds` | `string[]`                 | —       | Initial expanded branch ids in uncontrolled mode.   |
+| `onExpandedChange`   | `(ids: string[]) => void`  | —       | Called when a branch expands or collapses.          |
+| `autoExpandActive`   | `boolean`                  | `true`  | Expands the ancestors of `activeId`.                |
+| `onNavigate`         | `(node: TreeNode) => void` | —       | Called when a link destination is activated.        |
+| `onAction`           | `(node: TreeNode) => void` | —       | Called when an action leaf without an href is used. |
+
+It renders the `Tree` `ul`, inherits `compact` from the sidebar's collapsed
+state, closes the mobile drawer on navigation, and expands the sidebar when a
+branch is clicked while collapsed. It forwards the remaining native `ul`
+attributes.
+
+### Sidebar.Footer
+
+Renders the pinned footer as a `div` and forwards native `div` attributes.
+
+### Sidebar.Trigger
+
+| Prop         | Type                                         | Default | Description                                           |
+| ------------ | -------------------------------------------- | ------- | ----------------------------------------------------- |
+| `aria-label` | `string`                                     | —       | Accessible name override; defaults to the next state. |
+| `onClick`    | `React.MouseEventHandler<HTMLButtonElement>` | —       | Called after the trigger is activated.                |
+| `children`   | `ReactNode`                                  | —       | Custom content, replacing the default panel icon.     |
+| `className`  | `string`                                     | —       | Additional class for the button.                      |
+| `disabled`   | `boolean`                                    | —       | Disables the button.                                  |
+| `id`         | `string`                                     | —       | Identifier of the button.                             |
+| `title`      | `string`                                     | —       | Advisory tooltip text.                                |
+| `type`       | `'button' \| 'submit' \| 'reset'`            | —       | Button type.                                          |
+
+It renders a `button` and toggles desktop expansion or opens and closes the
+mobile drawer.
+
+### Sidebar.Rail
+
+| Prop         | Type                                         | Default            | Description                         |
+| ------------ | -------------------------------------------- | ------------------ | ----------------------------------- |
+| `aria-label` | `string`                                     | `'Toggle sidebar'` | Accessible name of the rail.        |
+| `onClick`    | `React.MouseEventHandler<HTMLButtonElement>` | —                  | Called after the rail is activated. |
+| `className`  | `string`                                     | —                  | Additional class for the button.    |
+| `disabled`   | `boolean`                                    | —                  | Disables the button.                |
+| `id`         | `string`                                     | —                  | Identifier of the button.           |
+| `title`      | `string`                                     | —                  | Advisory tooltip text.              |
+| `type`       | `'button' \| 'submit' \| 'reset'`            | —                  | Button type.                        |
+
+It renders a narrow `button` at the sidebar's inner edge and toggles the same
+state as `Sidebar.Trigger`.
+
+### Sidebar.Inset
+
+Renders the page content area beside the sidebar as a `div` and forwards native
+`div` attributes.
+
+## Accessibility
+
+`Sidebar.Root` renders a `nav` landmark named by `label`, which defaults to
+"Sidebar". Place only navigation content inside it.
+
+`Sidebar.Trigger` and `Sidebar.Rail` expose `aria-expanded` and `aria-controls`
+pointing at the sidebar, and the trigger's default name describes the next
+state, such as "Collapse sidebar".
+
+`Sidebar.Item` sets `aria-current="page"` when active and hides its icon from
+assistive technology. Pass `label` when the children are not plain text so the
+item keeps an accessible name in icon-only mode.
+
+`Sidebar.Submenu` links its disclosure button to the nested list with
+`aria-expanded` and `aria-controls`. The modifier shortcut, `Mod+B` by default,
+is ignored while focus is inside an editable control and can be disabled with
+`keyboardShortcut={false}`.

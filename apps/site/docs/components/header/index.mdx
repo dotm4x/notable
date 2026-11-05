@@ -1,0 +1,55 @@
+---
+title: Header
+description: Renders a page header with normal, fixed, or scroll-aware positioning.
+order: 320
+---
+
+## Usage
+
+```tsx
+import { Button, Header } from '@dotm4x/one/components';
+
+<Header mode="dynamic">
+  <strong>Acme Studio</strong>
+  <Button variant="secondary">Sign in</Button>
+</Header>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Fixed positioning
+
+<Demo name="fixed" />
+
+### Dynamic positioning
+
+<Demo name="dynamic" />
+
+### With navigation
+
+<Demo name="withNavigation" />
+
+## API reference
+
+### Header
+
+| Prop       | Type                               | Default    | Description                                                                                  |
+| ---------- | ---------------------------------- | ---------- | -------------------------------------------------------------------------------------------- |
+| `mode`     | `'normal' \| 'fixed' \| 'dynamic'` | `'normal'` | Stays in the flow, sticks to the top of the scroll container, or reacts to scroll direction. |
+| `children` | `ReactNode`                        | —          | Logo, navigation, actions, or any other header content.                                      |
+
+It renders a native `header` element and forwards native `HTMLElement`
+attributes. Layout and content come entirely from `children`.
+
+## Accessibility
+
+- The root is a native `header` element, so it provides the page banner landmark
+  unless it is nested inside another sectioning element.
+- A `dynamic` header that is out of view sets `inert`, so it cannot be focused
+  or reached by assistive technology while hidden.
+- Hiding pauses while focus is inside the header, so a keyboard user is not
+  scrolled away from the control they are using.

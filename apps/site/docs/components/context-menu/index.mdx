@@ -1,0 +1,144 @@
+---
+title: ContextMenu
+description: Opens an action menu at the pointer when a region is right clicked or long pressed.
+order: 160
+---
+
+## Usage
+
+```tsx
+import { ContextMenu } from '@dotm4x/one/components';
+
+<ContextMenu>
+  <ContextMenu.Trigger>
+    <p>Right click this note</p>
+  </ContextMenu.Trigger>
+  <ContextMenu.Content>
+    <ContextMenu.Item>Rename</ContextMenu.Item>
+    <ContextMenu.Item>Duplicate</ContextMenu.Item>
+    <ContextMenu.Separator />
+    <ContextMenu.Item>Archive</ContextMenu.Item>
+  </ContextMenu.Content>
+</ContextMenu>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Checkbox and radio items
+
+<Demo name="checkboxRadio" />
+
+### Submenu
+
+<Demo name="submenu" />
+
+## API reference
+
+### ContextMenu
+
+| Prop           | Type                      | Default | Description                                          |
+| -------------- | ------------------------- | ------- | ---------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Controlled open state.                               |
+| `defaultOpen`  | `boolean`                 | `false` | Initial open state when uncontrolled.                |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested open state.                |
+| `children`     | `ReactNode`               | —       | A `ContextMenu.Trigger` and a `ContextMenu.Content`. |
+
+### ContextMenu.Root
+
+The same component as `ContextMenu`, with the same props, so the root can be
+named explicitly next to the trigger and content parts.
+
+### ContextMenu.Trigger
+
+Renders a `div` that opens the menu on right click or long press, and forwards
+native `div` attributes.
+
+### ContextMenu.Content
+
+Renders the menu popup at the pointer and forwards native `div` attributes.
+
+### ContextMenu.Item
+
+| Prop       | Type      | Default | Description                                      |
+| ---------- | --------- | ------- | ------------------------------------------------ |
+| `disabled` | `boolean` | —       | Disables the item; keyboard navigation skips it. |
+
+It renders a menu item that closes the menu when activated and forwards native
+`div` attributes.
+
+### ContextMenu.CheckboxItem
+
+| Prop              | Type                         | Default | Description                                      |
+| ----------------- | ---------------------------- | ------- | ------------------------------------------------ |
+| `checked`         | `boolean`                    | —       | Controlled checked state.                        |
+| `defaultChecked`  | `boolean`                    | `false` | Initial checked state when uncontrolled.         |
+| `onCheckedChange` | `(checked: boolean) => void` | —       | Called with the new checked state.               |
+| `disabled`        | `boolean`                    | —       | Disables the item; keyboard navigation skips it. |
+
+Activating it keeps the menu open so several options can be toggled. It
+forwards native `div` attributes.
+
+### ContextMenu.RadioGroup
+
+| Prop            | Type                      | Default | Description                            |
+| --------------- | ------------------------- | ------- | -------------------------------------- |
+| `value`         | `string`                  | —       | Controlled value of the selected item. |
+| `defaultValue`  | `string`                  | —       | Initial value when uncontrolled.       |
+| `onValueChange` | `(value: string) => void` | —       | Called with the newly selected value.  |
+
+It renders a `div` and forwards native `div` attributes.
+
+### ContextMenu.RadioItem
+
+| Prop       | Type      | Default | Description                                      |
+| ---------- | --------- | ------- | ------------------------------------------------ |
+| `value`    | `string`  | —       | Value this item represents in its radio group.   |
+| `disabled` | `boolean` | —       | Disables the item; keyboard navigation skips it. |
+
+Selecting it keeps the menu open and shows a dot. It forwards native `div`
+attributes.
+
+### ContextMenu.Group
+
+Renders a `div` that groups related items and forwards native `div` attributes.
+
+### ContextMenu.GroupLabel
+
+Renders a `div` that labels its group and forwards native `div` attributes.
+
+### ContextMenu.Separator
+
+Renders a `div` that draws a line between items or groups and forwards native
+`div` attributes.
+
+### ContextMenu.Submenu
+
+| Prop           | Type                      | Default | Description                                                 |
+| -------------- | ------------------------- | ------- | ----------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Controlled open state of the submenu.                       |
+| `defaultOpen`  | `boolean`                 | `false` | Initial open state when uncontrolled.                       |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested open state.                       |
+| `children`     | `ReactNode`               | —       | A `ContextMenu.SubmenuTrigger` and a `ContextMenu.Content`. |
+
+### ContextMenu.SubmenuTrigger
+
+| Prop       | Type      | Default | Description                        |
+| ---------- | --------- | ------- | ---------------------------------- |
+| `disabled` | `boolean` | —       | Prevents the submenu from opening. |
+
+It is styled as an item, shows a chevron, and forwards native `div` attributes.
+Hovering it or pressing `ArrowRight` opens the submenu.
+
+## Accessibility
+
+- Items expose the `menuitem` role. Checkbox items use `menuitemcheckbox` with
+  `aria-checked`, and radio items use `menuitemradio`.
+- `Escape` closes the menu, and arrow keys move between items.
+- Disabled items keep their place in the menu but are skipped by keyboard
+  navigation.
+- The trigger region opens the menu on right click or long press, and the menu
+  opens at the pointer.

@@ -1,0 +1,149 @@
+---
+title: DropdownMenu
+description: Opens an action menu from a trigger, with groups, submenus, and selectable items.
+order: 250
+---
+
+## Usage
+
+```tsx
+import { Button, DropdownMenu } from '@dotm4x/one/components';
+
+<DropdownMenu>
+  <DropdownMenu.Trigger>
+    <Button variant="secondary">Actions</Button>
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Item>Rename</DropdownMenu.Item>
+    <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item>Archive</DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Groups
+
+<Demo name="groups" />
+
+### Selection
+
+<Demo name="selection" />
+
+### Submenu
+
+<Demo name="submenu" />
+
+## API reference
+
+### DropdownMenu
+
+| Prop           | Type                      | Default | Description                                                            |
+| -------------- | ------------------------- | ------- | ---------------------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Open state in controlled mode.                                         |
+| `defaultOpen`  | `boolean`                 | `false` | Open state in uncontrolled mode.                                       |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested open state.                                  |
+| `children`     | `ReactNode`               | —       | Menu parts, such as `DropdownMenu.Trigger` and `DropdownMenu.Content`. |
+
+### DropdownMenu.Root
+
+Exported as `DropdownMenuRoot`. It is the same component as `DropdownMenu` and accepts the same props.
+
+### DropdownMenu.Trigger
+
+| Prop       | Type        | Default | Description                                                                   |
+| ---------- | ----------- | ------- | ----------------------------------------------------------------------------- |
+| `children` | `ReactNode` | —       | A single element that opens the menu. Other content is wrapped in a `Button`. |
+
+The element keeps its own attributes and `onClick`.
+
+### DropdownMenu.Content
+
+| Prop          | Type                                     | Default | Description                                                  |
+| ------------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | —       | Side of the trigger where the menu appears.                  |
+| `align`       | `'start' \| 'center' \| 'end'`           | —       | Alignment along the chosen side.                             |
+| `sideOffset`  | `number`                                 | —       | Distance in pixels between the trigger and the menu.         |
+| `alignOffset` | `number`                                 | —       | Distance in pixels to shift the menu along the aligned edge. |
+
+Without these props the popup opens below the trigger, aligned to its start, with a four pixel offset. It renders a `div` and forwards the remaining native `div` attributes.
+
+### DropdownMenu.Item
+
+| Prop       | Type      | Default | Description                                                           |
+| ---------- | --------- | ------- | --------------------------------------------------------------------- |
+| `disabled` | `boolean` | —       | Disables the item. Disabled items are skipped by keyboard navigation. |
+
+It renders a `div` and forwards the remaining native `div` attributes. Activating an item closes the menu.
+
+### DropdownMenu.CheckboxItem
+
+| Prop              | Type                         | Default | Description                                                           |
+| ----------------- | ---------------------------- | ------- | --------------------------------------------------------------------- |
+| `checked`         | `boolean`                    | —       | Checked state in controlled mode.                                     |
+| `defaultChecked`  | `boolean`                    | —       | Checked state in uncontrolled mode.                                   |
+| `onCheckedChange` | `(checked: boolean) => void` | —       | Called with the new checked state.                                    |
+| `disabled`        | `boolean`                    | —       | Disables the item. Disabled items are skipped by keyboard navigation. |
+
+It shows a check mark when checked, renders a `div`, and keeps the menu open when activated so several options can be toggled in a row.
+
+### DropdownMenu.RadioGroup
+
+| Prop            | Type                      | Default | Description                           |
+| --------------- | ------------------------- | ------- | ------------------------------------- |
+| `value`         | `string`                  | —       | Value of the selected radio item.     |
+| `defaultValue`  | `string`                  | —       | Initial value when uncontrolled.      |
+| `onValueChange` | `(value: string) => void` | —       | Called with the newly selected value. |
+
+It renders a `div` and forwards the remaining native `div` attributes.
+
+### DropdownMenu.RadioItem
+
+| Prop       | Type      | Default | Description                                                           |
+| ---------- | --------- | ------- | --------------------------------------------------------------------- |
+| `value`    | `string`  | —       | Value this item represents within its `DropdownMenu.RadioGroup`.      |
+| `disabled` | `boolean` | —       | Disables the item. Disabled items are skipped by keyboard navigation. |
+
+It shows a dot when selected and keeps the menu open when activated.
+
+### DropdownMenu.Group
+
+Renders a `div` that groups related menu items. It has no props of its own and forwards native `div` attributes.
+
+### DropdownMenu.GroupLabel
+
+Renders the label of a menu group as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### DropdownMenu.Separator
+
+Renders a line separator as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### DropdownMenu.Submenu
+
+| Prop           | Type                      | Default | Description                                                   |
+| -------------- | ------------------------- | ------- | ------------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Open state in controlled mode.                                |
+| `defaultOpen`  | `boolean`                 | `false` | Open state in uncontrolled mode.                              |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested open state.                         |
+| `children`     | `ReactNode`               | —       | A `DropdownMenu.SubmenuTrigger` and a `DropdownMenu.Content`. |
+
+### DropdownMenu.SubmenuTrigger
+
+| Prop       | Type      | Default | Description                                           |
+| ---------- | --------- | ------- | ----------------------------------------------------- |
+| `disabled` | `boolean` | —       | Disables the trigger so its submenu cannot be opened. |
+
+It is styled as an item, shows a chevron, and opens its submenu on hover or with `ArrowRight`.
+
+## Accessibility
+
+- Items, checkbox items, and radio items are exposed as menu items, and disabled items are skipped by keyboard navigation.
+- Checkbox and radio items report their state through `aria-checked`. Their check, dot, and chevron indicators are hidden from assistive technology.
+- Activating a plain item closes the menu, while checkbox and radio items keep it open so several options can be changed in a row.
+- The submenu opens on hover or with `ArrowRight`, so every nested action is reachable from the keyboard.

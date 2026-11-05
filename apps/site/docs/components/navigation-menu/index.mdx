@@ -1,0 +1,111 @@
+---
+title: NavigationMenu
+description: Provides accessible site navigation with optional dropdown panels.
+order: 350
+---
+
+## Usage
+
+```tsx
+import { NavigationMenu } from '@dotm4x/one/components';
+
+<NavigationMenu aria-label="Main">
+  <NavigationMenu.List>
+    <NavigationMenu.Item value="product">
+      <NavigationMenu.Trigger>Product</NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        <NavigationMenu.Link href="/editor" closeOnClick>
+          Editor
+        </NavigationMenu.Link>
+        <NavigationMenu.Link href="/sync" closeOnClick>
+          Sync
+        </NavigationMenu.Link>
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+    <NavigationMenu.Item>
+      <NavigationMenu.Link href="/pricing">Pricing</NavigationMenu.Link>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+</NavigationMenu>;
+```
+
+## Examples
+
+### Direct links
+
+<Demo name="default" />
+
+### Dropdown panel
+
+<Demo name="dropdown" />
+
+### Grouped columns
+
+<Demo name="grouped" />
+
+## API reference
+
+### NavigationMenu
+
+| Prop            | Type                              | Default | Description                                                   |
+| --------------- | --------------------------------- | ------- | ------------------------------------------------------------- |
+| `value`         | `string \| null`                  | —       | Identifier of the open item when controlled.                  |
+| `defaultValue`  | `string \| null`                  | `null`  | Initially open item when uncontrolled.                        |
+| `onValueChange` | `(value: string \| null) => void` | —       | Called with the identifier of the item that opened or closed. |
+| `delay`         | `number`                          | `50`    | Milliseconds before an item opens on hover.                   |
+| `closeDelay`    | `number`                          | `50`    | Milliseconds before a hovered item closes.                    |
+| `children`      | `ReactNode`                       | —       | Navigation list, items, and links.                            |
+
+It renders a native `nav` element and forwards native `HTMLElement` attributes.
+The root also renders the single shared panel popup, so items only supply their
+own content.
+
+### NavigationMenu.List
+
+Renders the `ul` that holds the items. It has no props of its own and forwards
+native `ul` attributes.
+
+### NavigationMenu.Item
+
+| Prop    | Type     | Default   | Description                                                |
+| ------- | -------- | --------- | ---------------------------------------------------------- |
+| `value` | `string` | generated | Identifier used by `value` and `defaultValue` on the root. |
+
+It renders an `li` and forwards the remaining native list item attributes.
+
+### NavigationMenu.Trigger
+
+Renders the `button` that opens its item's panel, appends a decorative chevron,
+and forwards native button attributes. Use `disabled` to keep an item visible
+without opening anything.
+
+### NavigationMenu.Content
+
+Renders the `div` panel shown while its item is open and forwards native `div`
+attributes. The panel is placed in the popup rendered by the root.
+
+### NavigationMenu.Group
+
+Renders a `div` with `role="group"` that groups links inside a panel, and
+forwards native `div` attributes. Give it an `aria-label` when the grouping needs
+a name.
+
+### NavigationMenu.Link
+
+| Prop           | Type      | Default | Description                                          |
+| -------------- | --------- | ------- | ---------------------------------------------------- |
+| `active`       | `boolean` | `false` | Marks the link as the current page.                  |
+| `closeOnClick` | `boolean` | `false` | Closes any open dropdown when the link is activated. |
+
+It renders a native `a` and forwards native anchor attributes.
+
+## Accessibility
+
+- The root is a `nav` landmark; give it an `aria-label` when the page contains
+  more than one navigation landmark.
+- A trigger is a button that reports `aria-expanded` and points at its panel with
+  `aria-controls`.
+- Arrow keys move focus between triggers, Escape closes the open panel, and focus
+  returns to the trigger that opened it.
+- The active link exposes `aria-current="page"`, so the current destination is
+  not conveyed by styling alone.

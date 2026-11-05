@@ -1,0 +1,53 @@
+---
+title: Toggle
+description: Renders an independently controlled two-state button that reports its pressed state.
+order: 570
+---
+
+## Usage
+
+```tsx
+import { Toggle } from '@dotm4x/one/components';
+
+<Toggle defaultPressed>Bold</Toggle>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Icon only
+
+<Demo name="iconOnly" />
+
+## API reference
+
+### Toggle
+
+| Prop              | Type                             | Default     | Description                                           |
+| ----------------- | -------------------------------- | ----------- | ----------------------------------------------------- |
+| `children`        | `ReactNode`                      | —           | Content of the toggle. Icon-only toggles need a name. |
+| `value`           | `string`                         | —           | Value used for this toggle inside a toggle group.     |
+| `pressed`         | `boolean`                        | —           | Pressed state in controlled mode.                     |
+| `defaultPressed`  | `boolean`                        | —           | Initial pressed state in uncontrolled mode.           |
+| `onPressedChange` | `(pressed: boolean) => void`     | —           | Called when the pressed state changes.                |
+| `variant`         | `'default' \| 'outline'`         | `'default'` | Visual appearance.                                    |
+| `size`            | `'small' \| 'medium' \| 'large'` | `'medium'`  | Visual size.                                          |
+
+It renders a `button` with `type="button"` and forwards the remaining native
+button attributes.
+
+## Accessibility
+
+- The pressed state is exposed through `aria-pressed` on a native button, so
+  keyboard and assistive input report on or off without extra ARIA.
+- An icon-only toggle needs an accessible name, for example through
+  `aria-label`, because the icon itself carries no text.
+- The press animation is skipped when the toggle is disabled or when reduced
+  motion is requested.

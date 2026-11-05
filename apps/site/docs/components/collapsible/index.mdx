@@ -1,0 +1,71 @@
+---
+title: Collapsible
+description: Shows and hides one section of content from a trigger.
+order: 130
+---
+
+## Usage
+
+```tsx
+import { Collapsible } from '@dotm4x/one/components';
+
+<Collapsible>
+  <Collapsible.Trigger>Shipping details</Collapsible.Trigger>
+  <Collapsible.Content>
+    <p>Ships within two business days.</p>
+  </Collapsible.Content>
+</Collapsible>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Controlled
+
+<Demo name="controlled" />
+
+### With an icon
+
+<Demo name="withIcon" />
+
+## API reference
+
+### Collapsible
+
+| Prop           | Type                      | Default | Description                                               |
+| -------------- | ------------------------- | ------- | --------------------------------------------------------- |
+| `children`     | `ReactNode`               | —       | Trigger and content of the collapsible.                   |
+| `open`         | `boolean`                 | —       | Expanded state for controlled use.                        |
+| `defaultOpen`  | `boolean`                 | `false` | Expanded state when uncontrolled.                         |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the new expanded state.                       |
+| `disabled`     | `boolean`                 | `false` | Prevents the trigger from opening or closing the content. |
+
+It renders a `div` and forwards native `div` attributes.
+
+### Collapsible.Root
+
+The same component as `Collapsible`, with the same props, so the root can be
+named explicitly next to the trigger and content parts.
+
+### Collapsible.Trigger
+
+Renders a `button` whose `type` defaults to `button`, and forwards native
+button attributes.
+
+### Collapsible.Content
+
+Renders a `div` around the revealed content. It has no props of its own and
+forwards native `div` attributes.
+
+## Accessibility
+
+- The trigger is a native button that reports `aria-expanded` and points at the
+  panel through `aria-controls`.
+- Trigger and panel receive generated ids, so several collapsibles on a page stay
+  independent of each other.
+- The panel stays mounted while it is closed, which keeps the state of its
+  content.
+- `disabled` only blocks the trigger; the content itself is unchanged.

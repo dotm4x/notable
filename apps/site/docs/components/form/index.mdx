@@ -1,0 +1,48 @@
+---
+title: Form
+description: Groups fields and submission controls on a native form element.
+order: 310
+---
+
+## Usage
+
+```tsx
+import { Button, Form, Input } from '@dotm4x/one/components';
+
+<Form>
+  <Input label="Email address" name="email" type="email" required />
+  <Button type="submit">Subscribe</Button>
+</Form>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Submit handling
+
+<Demo name="submit" />
+
+### Grouped fields
+
+<Demo name="grouped" />
+
+## API reference
+
+### Form
+
+It renders a native `form` and forwards native form attributes, merging
+`className` with the component class. Validation, submission, and reset use the
+browser's default behavior, and events such as `onSubmit` are not intercepted.
+
+## Accessibility
+
+- Enter in a text field submits the form natively, and `required` fields block
+  submission with the browser's own validation message.
+- Give the submit action `type="submit"`; One buttons default to `type="button"`
+  and do not submit a form on their own.
+- Handle `onSubmit` and call `preventDefault` when the form must not navigate.
+- A `form` is exposed as a landmark only when it has an accessible name, so add
+  `aria-label` or `aria-labelledby` when the page contains more than one.

@@ -1,0 +1,53 @@
+---
+title: Switch
+description: Renders a native checkbox with switch semantics, an optional label, description, and error.
+order: 510
+---
+
+## Usage
+
+```tsx
+import { Switch } from '@dotm4x/one/components';
+
+<Switch label="Email notifications" defaultChecked />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With a description
+
+<Demo name="description" />
+
+### Validation error
+
+<Demo name="validation" />
+
+## API reference
+
+### Switch
+
+| Prop          | Type        | Default | Description                                                      |
+| ------------- | ----------- | ------- | ---------------------------------------------------------------- |
+| `description` | `ReactNode` | —       | Helper text associated with the switch for assistive technology. |
+| `error`       | `ReactNode` | —       | Error message associated with the switch and announced politely. |
+| `invalid`     | `boolean`   | `false` | Marks the switch as invalid even when no error is displayed.     |
+| `label`       | `ReactNode` | —       | Visible label associated with the switch.                        |
+
+It renders a native `input` with `role="switch"` and forwards the remaining
+native input attributes, together with its ref.
+
+## Accessibility
+
+- The input is a native checkbox exposed with `role="switch"`, so `Space`
+  toggles it and its checked state is reported as on or off.
+- The label is associated through `htmlFor`, and clicking anywhere on the label
+  toggles the switch.
+- `description` and `error` are linked with `aria-describedby`. The error is
+  rendered in a polite live region.
+- `invalid`, `error`, or an explicit `aria-invalid` marks the input invalid
+  through `aria-invalid`, and a visible error is referenced by
+  `aria-errormessage`. The track and thumb are decorative.

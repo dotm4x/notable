@@ -1,0 +1,64 @@
+---
+title: TimePicker
+description: Selects a time of day from a popup of hour, minute, and optional period choices.
+order: 550
+---
+
+## Usage
+
+```tsx
+import { TimePicker } from '@dotm4x/one/components';
+
+<TimePicker aria-label="Start time" defaultValue="09:30" />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Twelve-hour format
+
+<Demo name="twelveHour" />
+
+### Minute step and range
+
+<Demo name="minuteStep" />
+
+## API reference
+
+### TimePicker
+
+| Prop            | Type                      | Default           | Description                                                                |
+| --------------- | ------------------------- | ----------------- | -------------------------------------------------------------------------- |
+| `value`         | `string \| null`          | —                 | Selected time as `HH:mm` in controlled mode. `null` shows the placeholder. |
+| `defaultValue`  | `string \| null`          | `null`            | Selected time as `HH:mm` in uncontrolled mode.                             |
+| `onValueChange` | `(time: string) => void`  | —                 | Called with the new time as `HH:mm` when the selection changes.            |
+| `open`          | `boolean`                 | —                 | Open state of the popup in controlled mode.                                |
+| `defaultOpen`   | `boolean`                 | `false`           | Initial open state in uncontrolled mode.                                   |
+| `onOpenChange`  | `(open: boolean) => void` | —                 | Called with the requested open state.                                      |
+| `disabled`      | `boolean`                 | `false`           | Disables the trigger and prevents the popup from opening.                  |
+| `readOnly`      | `boolean`                 | `false`           | Shows the selected time without allowing a change.                         |
+| `placeholder`   | `string`                  | `'Select a time'` | Text shown when no time is selected.                                       |
+| `format`        | `'12h' \| '24h'`          | `'24h'`           | Hour display. `12h` adds an AM/PM column.                                  |
+| `minuteStep`    | `number`                  | `1`               | Minute increment offered in the popup. Must be a whole number dividing 60. |
+| `minTime`       | `string`                  | —                 | Earliest selectable time as `HH:mm`, inclusive.                            |
+| `maxTime`       | `string`                  | —                 | Latest selectable time as `HH:mm`, inclusive.                              |
+| `locale`        | `string`                  | runtime locale    | BCP 47 locale used for the AM and PM labels.                               |
+
+It renders a native `button` trigger and forwards the remaining native button
+attributes. Values are always `HH:mm` 24-hour strings, whatever `format`
+displays.
+
+## Accessibility
+
+- The trigger is a native button. Its accessible name combines `aria-label` or
+  `aria-labelledby` with the visible value, so the current time is announced.
+- The popup is a dialog labelled `Choose time`, with hour, minute, and AM/PM
+  groups exposed as fieldsets with legends.
+- Each choice is a native radio input, so grouped arrow-key navigation and
+  screen reader state come from the platform. `Escape` or an outside press
+  closes the popup.
+- `disabled` removes the trigger from interaction, while `readOnly` keeps it
+  focusable and simply prevents the popup from opening.

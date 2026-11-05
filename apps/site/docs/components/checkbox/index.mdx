@@ -1,0 +1,55 @@
+---
+title: Checkbox
+description: Lets people toggle a single option, with an optional label and description.
+order: 100
+---
+
+## Usage
+
+```tsx
+import { Checkbox } from '@dotm4x/one/components';
+
+<Checkbox
+  label="Email updates"
+  description="Receive occasional updates about your account."
+/>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### States
+
+<Demo name="states" />
+
+### With a description
+
+<Demo name="description" />
+
+## API reference
+
+### Checkbox
+
+| Prop            | Type        | Default | Description                                                          |
+| --------------- | ----------- | ------- | -------------------------------------------------------------------- |
+| `description`   | `ReactNode` | —       | Helper text associated with the checkbox for assistive technologies. |
+| `indeterminate` | `boolean`   | `false` | Enables the native indeterminate state.                              |
+| `label`         | `ReactNode` | —       | Visible label associated with the checkbox.                          |
+
+It renders a native `input` with `type="checkbox"`, forwards native input
+attributes except `type` and `aria-checked`, and forwards its ref to that input.
+
+## Accessibility
+
+The label is associated with the input through the wrapping `label` element, so
+the visible text provides the accessible name.
+
+When `description` is set, it is linked with `aria-describedby` and merged with
+any `aria-describedby` you pass.
+
+The indeterminate state uses the native input property, which browsers expose as
+mixed; `aria-checked` is intentionally unsupported. The indicator graphic is
+hidden from assistive technology.

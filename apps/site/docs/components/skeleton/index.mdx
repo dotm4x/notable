@@ -1,0 +1,57 @@
+---
+title: Skeleton
+description: Renders a decorative placeholder for content that is still loading.
+order: 480
+---
+
+## Usage
+
+```tsx
+import { Skeleton } from '@dotm4x/one/components';
+
+<div style={{ display: 'grid', gap: '0.5rem' }}>
+  <Skeleton variant="circular" height={40} />
+  <Skeleton variant="text" width="70%" />
+  <Skeleton variant="text" width="45%" />
+</div>;
+```
+
+## Examples
+
+### Card placeholder
+
+<Demo name="default" />
+
+### Text lines
+
+<Demo name="text" />
+
+### Shapes
+
+<Demo name="variants" />
+
+## API reference
+
+### Skeleton
+
+| Prop        | Type                                                                          | Default         | Description                                                                                         |
+| ----------- | ----------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------- |
+| `className` | `string`                                                                      | —               | Additional class for the placeholder element.                                                       |
+| `animation` | `'shimmer' \| 'pulse' \| 'none'`                                              | `'shimmer'`     | Placeholder animation. Both animations stop for reduced motion.                                     |
+| `radius`    | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full' \| number \| string` | —               | Border radius. A token maps to its radius, a number is pixels, and any other string is used as CSS. |
+| `height`    | `number \| string`                                                            | —               | Placeholder height. A number is pixels.                                                             |
+| `width`     | `number \| string`                                                            | —               | Placeholder width. A number is pixels.                                                              |
+| `variant`   | `'text' \| 'circular' \| 'rectangular'`                                       | `'rectangular'` | Basic shape. A circular placeholder reuses its height as width when only one dimension is set.      |
+
+It renders a `span` and forwards the remaining native `span` attributes.
+
+## Accessibility
+
+The placeholder is `aria-hidden="true"` and is not focusable, so it never
+appears in the accessibility tree.
+
+Announce the loading state on a surrounding container, for example with
+`aria-busy` and a status message, since the placeholder itself carries no text.
+
+Both animations stop when the user prefers reduced motion, and several
+placeholders can be composed to match the layout of the content that follows.

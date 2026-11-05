@@ -3,24 +3,126 @@
 
 import type { ComponentType } from 'react';
 
+import * as demo_components_accordion from '../../../docs/components/accordion/demos';
+import * as demo_components_avatar from '../../../docs/components/avatar/demos';
+import * as demo_components_avatar_group from '../../../docs/components/avatar-group/demos';
+import * as demo_components_badge from '../../../docs/components/badge/demos';
+import * as demo_components_breadcrumb from '../../../docs/components/breadcrumb/demos';
 import * as demo_components_button from '../../../docs/components/button/demos';
+import * as demo_components_calendar from '../../../docs/components/calendar/demos';
 import * as demo_components_callout from '../../../docs/components/callout/demos';
+import * as demo_components_card from '../../../docs/components/card/demos';
+import * as demo_components_checkbox from '../../../docs/components/checkbox/demos';
+import * as demo_components_checkbox_group from '../../../docs/components/checkbox-group/demos';
 import * as demo_components_code_block from '../../../docs/components/code-block/demos';
+import * as demo_components_collapsible from '../../../docs/components/collapsible/demos';
+import * as demo_components_combobox from '../../../docs/components/combobox/demos';
+import * as demo_components_command from '../../../docs/components/command/demos';
+import * as demo_components_context_menu from '../../../docs/components/context-menu/demos';
+import * as demo_components_control_group from '../../../docs/components/control-group/demos';
 import * as demo_components_copy_button from '../../../docs/components/copy-button/demos';
 import * as demo_components_data_table from '../../../docs/components/data-table/demos';
+import * as demo_components_date_picker from '../../../docs/components/date-picker/demos';
+import * as demo_components_date_range_picker from '../../../docs/components/date-range-picker/demos';
+import * as demo_components_dialog from '../../../docs/components/dialog/demos';
 import * as demo_components_disclosure from '../../../docs/components/disclosure/demos';
+import * as demo_components_drawer from '../../../docs/components/drawer/demos';
+import * as demo_components_dropdown_menu from '../../../docs/components/dropdown-menu/demos';
+import * as demo_components_empty from '../../../docs/components/empty/demos';
+import * as demo_components_field from '../../../docs/components/field/demos';
+import * as demo_components_fieldset from '../../../docs/components/fieldset/demos';
+import * as demo_components_file_upload from '../../../docs/components/file-upload/demos';
+import * as demo_components_footer from '../../../docs/components/footer/demos';
+import * as demo_components_form from '../../../docs/components/form/demos';
+import * as demo_components_header from '../../../docs/components/header/demos';
+import * as demo_components_input from '../../../docs/components/input/demos';
+import * as demo_components_link from '../../../docs/components/link/demos';
+import * as demo_components_navigation_menu from '../../../docs/components/navigation-menu/demos';
+import * as demo_components_number_flow from '../../../docs/components/number-flow/demos';
 import * as demo_components_pager from '../../../docs/components/pager/demos';
+import * as demo_components_pagination from '../../../docs/components/pagination/demos';
+import * as demo_components_popover from '../../../docs/components/popover/demos';
+import * as demo_components_progress from '../../../docs/components/progress/demos';
+import * as demo_components_radio_group from '../../../docs/components/radio-group/demos';
+import * as demo_components_scroll_area from '../../../docs/components/scroll-area/demos';
+import * as demo_components_segmented_control from '../../../docs/components/segmented-control/demos';
+import * as demo_components_select from '../../../docs/components/select/demos';
+import * as demo_components_separator from '../../../docs/components/separator/demos';
+import * as demo_components_shortcut from '../../../docs/components/shortcut/demos';
+import * as demo_components_sidebar from '../../../docs/components/sidebar/demos';
+import * as demo_components_skeleton from '../../../docs/components/skeleton/demos';
+import * as demo_components_slider from '../../../docs/components/slider/demos';
+import * as demo_components_spinner from '../../../docs/components/spinner/demos';
+import * as demo_components_switch from '../../../docs/components/switch/demos';
 import * as demo_components_table from '../../../docs/components/table/demos';
+import * as demo_components_table_of_contents from '../../../docs/components/table-of-contents/demos';
+import * as demo_components_tabs from '../../../docs/components/tabs/demos';
+import * as demo_components_time_picker from '../../../docs/components/time-picker/demos';
+import * as demo_components_toast from '../../../docs/components/toast/demos';
+import * as demo_components_toggle from '../../../docs/components/toggle/demos';
+import * as demo_components_toggle_group from '../../../docs/components/toggle-group/demos';
+import * as demo_components_tooltip from '../../../docs/components/tooltip/demos';
 import * as demo_components_tree from '../../../docs/components/tree/demos';
 
 export const demoModules: Record<string, Record<string, ComponentType>> = {
+  'components/accordion': demo_components_accordion,
+  'components/avatar': demo_components_avatar,
+  'components/avatar-group': demo_components_avatar_group,
+  'components/badge': demo_components_badge,
+  'components/breadcrumb': demo_components_breadcrumb,
   'components/button': demo_components_button,
+  'components/calendar': demo_components_calendar,
   'components/callout': demo_components_callout,
+  'components/card': demo_components_card,
+  'components/checkbox': demo_components_checkbox,
+  'components/checkbox-group': demo_components_checkbox_group,
   'components/code-block': demo_components_code_block,
+  'components/collapsible': demo_components_collapsible,
+  'components/combobox': demo_components_combobox,
+  'components/command': demo_components_command,
+  'components/context-menu': demo_components_context_menu,
+  'components/control-group': demo_components_control_group,
   'components/copy-button': demo_components_copy_button,
   'components/data-table': demo_components_data_table,
+  'components/date-picker': demo_components_date_picker,
+  'components/date-range-picker': demo_components_date_range_picker,
+  'components/dialog': demo_components_dialog,
   'components/disclosure': demo_components_disclosure,
+  'components/drawer': demo_components_drawer,
+  'components/dropdown-menu': demo_components_dropdown_menu,
+  'components/empty': demo_components_empty,
+  'components/field': demo_components_field,
+  'components/fieldset': demo_components_fieldset,
+  'components/file-upload': demo_components_file_upload,
+  'components/footer': demo_components_footer,
+  'components/form': demo_components_form,
+  'components/header': demo_components_header,
+  'components/input': demo_components_input,
+  'components/link': demo_components_link,
+  'components/navigation-menu': demo_components_navigation_menu,
+  'components/number-flow': demo_components_number_flow,
   'components/pager': demo_components_pager,
+  'components/pagination': demo_components_pagination,
+  'components/popover': demo_components_popover,
+  'components/progress': demo_components_progress,
+  'components/radio-group': demo_components_radio_group,
+  'components/scroll-area': demo_components_scroll_area,
+  'components/segmented-control': demo_components_segmented_control,
+  'components/select': demo_components_select,
+  'components/separator': demo_components_separator,
+  'components/shortcut': demo_components_shortcut,
+  'components/sidebar': demo_components_sidebar,
+  'components/skeleton': demo_components_skeleton,
+  'components/slider': demo_components_slider,
+  'components/spinner': demo_components_spinner,
+  'components/switch': demo_components_switch,
   'components/table': demo_components_table,
+  'components/table-of-contents': demo_components_table_of_contents,
+  'components/tabs': demo_components_tabs,
+  'components/time-picker': demo_components_time_picker,
+  'components/toast': demo_components_toast,
+  'components/toggle': demo_components_toggle,
+  'components/toggle-group': demo_components_toggle_group,
+  'components/tooltip': demo_components_tooltip,
   'components/tree': demo_components_tree,
 };

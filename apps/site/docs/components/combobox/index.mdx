@@ -1,0 +1,135 @@
+---
+title: Combobox
+description: Combines a text input with a filtered list for choosing one option.
+order: 140
+---
+
+## Usage
+
+```tsx
+import { Combobox, type ComboboxOption } from '@dotm4x/one/components';
+
+const fruit: ComboboxOption[] = [
+  { value: 'apple', label: 'Apple' },
+  { value: 'banana', label: 'Banana' },
+];
+
+<Combobox items={fruit}>
+  <Combobox.Input label="Fruit" placeholder="Search fruit" />
+  <Combobox.Content>
+    <Combobox.List />
+  </Combobox.Content>
+</Combobox>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Grouped options
+
+<Demo name="grouped" />
+
+### Clear and trigger controls
+
+<Demo name="withClear" />
+
+## API reference
+
+### Combobox
+
+| Prop            | Type                                                          | Default | Description                                             |
+| --------------- | ------------------------------------------------------------- | ------- | ------------------------------------------------------- |
+| `items`         | `readonly ComboboxOption[] \| readonly ComboboxOptionGroup[]` | —       | Flat options or groups of options to search and choose. |
+| `value`         | `string \| null`                                              | —       | Selected option value.                                  |
+| `defaultValue`  | `string \| null`                                              | —       | Selected value when uncontrolled.                       |
+| `onValueChange` | `(value: string \| null) => void`                             | —       | Called with the new selected value.                     |
+| `open`          | `boolean`                                                     | —       | Controlled open state of the popup.                     |
+| `defaultOpen`   | `boolean`                                                     | —       | Initial open state when uncontrolled.                   |
+| `onOpenChange`  | `(open: boolean) => void`                                     | —       | Called with the requested open state.                   |
+| `disabled`      | `boolean`                                                     | —       | Prevents interaction with the combobox.                 |
+| `readOnly`      | `boolean`                                                     | —       | Keeps the value readable without allowing edits.        |
+| `required`      | `boolean`                                                     | —       | Marks the field as required for native form submission. |
+| `name`          | `string`                                                      | —       | Form field name.                                        |
+| `children`      | `ReactNode`                                                   | —       | Input and popup parts.                                  |
+
+### Combobox.Input
+
+| Prop                      | Type        | Default | Description                                                         |
+| ------------------------- | ----------- | ------- | ------------------------------------------------------------------- |
+| `description`             | `ReactNode` | —       | Helper text associated with the input.                              |
+| `error`                   | `ReactNode` | —       | Error message associated with the input.                            |
+| `invalid`                 | `boolean`   | `false` | Marks the input as invalid.                                         |
+| `label`                   | `ReactNode` | —       | Visible label associated with the input.                            |
+| `leadingIcon`             | `ReactNode` | —       | Content displayed before the value.                                 |
+| `leadingIconInteractive`  | `boolean`   | `false` | Prevents assistive technology from hiding the leading content.      |
+| `trailingIconInteractive` | `boolean`   | `false` | Prevents assistive technology from hiding the trailing content.     |
+| `children`                | `ReactNode` | —       | Trailing controls, such as `Combobox.Clear` and `Combobox.Trigger`. |
+
+It renders through `Input` and forwards the remaining native input attributes.
+
+### Combobox.Trigger
+
+Renders a `button` with a chevron by default and forwards the Base UI trigger
+props. Its `aria-label` defaults to `Show options`.
+
+### Combobox.Clear
+
+Renders a `button` with a close icon and forwards the Base UI clear props. Its
+`aria-label` defaults to `Clear selection`.
+
+### Combobox.Content
+
+| Prop          | Type                                     | Default    | Description                           |
+| ------------- | ---------------------------------------- | ---------- | ------------------------------------- |
+| `side`        | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Side of the input to place the popup. |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'start'`  | Alignment against the input.          |
+| `sideOffset`  | `number`                                 | `4`        | Distance from the input in pixels.    |
+| `alignOffset` | `number`                                 | —          | Shift along the alignment axis.       |
+
+It portals a positioned popup and forwards native `div` attributes.
+
+### Combobox.List
+
+| Prop       | Type                                                   | Default | Description                                    |
+| ---------- | ------------------------------------------------------ | ------- | ---------------------------------------------- |
+| `children` | `(option: ComboboxOption, index: number) => ReactNode` | —       | Renders each option; defaults to a plain item. |
+
+It renders the Base UI list and forwards its remaining props.
+
+### Combobox.Item
+
+Renders a selectable option with a check indicator for the selected value, and
+forwards the Base UI item props.
+
+### Combobox.Empty
+
+Renders a `div` for the state shown when no options match the query, and
+forwards native `div` attributes.
+
+### Combobox.Group
+
+Renders the container for a group of options and forwards the Base UI group
+props.
+
+### Combobox.GroupLabel
+
+Renders the heading of an option group and forwards the Base UI group label
+props.
+
+### Combobox.Separator
+
+Renders a line between options or groups and forwards the Base UI separator
+props.
+
+## Accessibility
+
+- The input follows the combobox pattern and points at the highlighted option
+  with `aria-activedescendant` while the list is open.
+- `label`, `description`, and `error` are wired to the input through the `Input`
+  field markup, so the visible label is the accessible name.
+- The trigger and clear buttons keep accessible names: `Show options` and
+  `Clear selection` unless `aria-label` overrides them.
+- Options marked `disabled` stay in the list but cannot be selected.

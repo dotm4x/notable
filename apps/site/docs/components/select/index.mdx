@@ -1,0 +1,135 @@
+---
+title: Select
+description: Lets a person pick a single value from a disclosure list of options.
+order: 440
+---
+
+## Usage
+
+```tsx
+import { Select } from '@dotm4x/one/components';
+
+<Select defaultValue="weekly">
+  <Select.Label>Digest frequency</Select.Label>
+  <Select.Trigger>
+    <Select.Value placeholder="Choose a frequency" />
+    <Select.Icon />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.List>
+      <Select.Item value="daily">Daily</Select.Item>
+      <Select.Item value="weekly">Weekly</Select.Item>
+      <Select.Item value="monthly">Monthly</Select.Item>
+    </Select.List>
+  </Select.Content>
+</Select>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Grouped options
+
+<Demo name="groups" />
+
+### Controlled value
+
+<Demo name="controlled" />
+
+## API reference
+
+### Select
+
+| Prop            | Type                              | Default | Description                                   |
+| --------------- | --------------------------------- | ------- | --------------------------------------------- |
+| `value`         | `string \| null`                  | —       | Selected value. Pass `null` for no selection. |
+| `defaultValue`  | `string \| null`                  | —       | Value selected initially when uncontrolled.   |
+| `onValueChange` | `(value: string \| null) => void` | —       | Called with the newly selected value.         |
+| `open`          | `boolean`                         | —       | Popup visibility when controlled.             |
+| `defaultOpen`   | `boolean`                         | —       | Popup visibility when uncontrolled.           |
+| `onOpenChange`  | `(open: boolean) => void`         | —       | Called when the popup opens or closes.        |
+| `disabled`      | `boolean`                         | —       | Prevents interaction.                         |
+| `readOnly`      | `boolean`                         | —       | Keeps the value readable but unchanged.       |
+| `required`      | `boolean`                         | —       | Marks the field as required in a form.        |
+| `name`          | `string`                          | —       | Field name used when submitted with a form.   |
+| `children`      | `ReactNode`                       | —       | Select parts, with options declared as items. |
+
+The root renders no element of its own. It resolves the label of each
+`Select.Item` child so the current value is displayed while the popup is closed.
+
+### Select.Root
+
+The root component is also attached as `Select.Root`. It is the same component
+as `Select` and accepts the props listed for `Select`.
+
+### Select.Label
+
+Renders the label that names the select and forwards native `div` attributes.
+
+### Select.Trigger
+
+Renders the `button` that opens the popup and forwards native `button`
+attributes.
+
+### Select.Value
+
+Renders a `span` that displays the current selection and forwards native `span`
+attributes. It also accepts the Base UI value attributes, such as the text shown
+when nothing is selected.
+
+### Select.Icon
+
+Renders a `span` that holds the chevron and forwards native `span` attributes.
+It renders a `ChevronDown` icon when no children are given.
+
+### Select.Content
+
+| Prop          | Type                                     | Default    | Description                             |
+| ------------- | ---------------------------------------- | ---------- | --------------------------------------- |
+| `side`        | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Side of the trigger to place the popup. |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'start'`  | Alignment along that side.              |
+| `sideOffset`  | `number`                                 | `4`        | Distance from the trigger in pixels.    |
+| `alignOffset` | `number`                                 | —          | Offset along the alignment axis.        |
+
+It renders the popup in a portal and forwards the remaining native `div`
+attributes.
+
+### Select.List
+
+Renders the list container inside the popup and forwards native `div`
+attributes.
+
+### Select.Item
+
+Renders a selectable option. It requires a `value`, shows a check indicator for
+the selected option, and forwards the remaining Base UI item attributes such as
+`disabled`.
+
+### Select.Group
+
+Groups related options. It renders a `div` and forwards native `div` attributes.
+
+### Select.GroupLabel
+
+Renders the heading of an option group as a `div` and forwards native `div`
+attributes.
+
+### Select.Separator
+
+Renders a line between options or groups as a `div` and forwards native `div`
+attributes.
+
+## Accessibility
+
+`Select.Label` gives the trigger its accessible name, and the trigger exposes the
+combobox role with its expanded state while the popup is open.
+
+Each `Select.Item` keeps the option role, and the selected option is announced
+through Base UI state attributes; the check indicator itself is `aria-hidden`.
+
+The popup renders in a portal and returns focus to the trigger when it closes.
+End moves the highlight to the last enabled option, which Base UI does not
+handle on its own.

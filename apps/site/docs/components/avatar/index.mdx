@@ -1,0 +1,68 @@
+---
+title: Avatar
+description: Displays a person's image with initials, an icon, or custom content until it loads.
+order: 20
+---
+
+## Usage
+
+```tsx
+import { Avatar } from '@dotm4x/one/components';
+
+<Avatar size="medium">
+  <Avatar.Image src="/avatars/max-perez.jpg" alt="Max Perez" />
+  <Avatar.Fallback>MP</Avatar.Fallback>
+</Avatar>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With an image
+
+<Demo name="withImage" />
+
+### With an icon
+
+<Demo name="withIcon" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+## API reference
+
+### Avatar
+
+| Prop       | Type                                              | Default    | Description                                 |
+| ---------- | ------------------------------------------------- | ---------- | ------------------------------------------- |
+| `size`     | `'small' \| 'medium' \| 'large' \| 'extra-large'` | `'medium'` | Size inherited by the image and fallback.   |
+| `children` | `ReactNode`                                       | —          | `Avatar.Image`, `Avatar.Fallback`, or both. |
+
+It renders a `span` and forwards native `span` attributes. When no
+`Avatar.Fallback` is provided, it renders a built-in icon fallback hidden from
+assistive technology.
+
+### Avatar.Image
+
+Renders a native `img` that appears after it loads and forwards native image
+attributes. It renders nothing when both `src` and `srcSet` are omitted.
+
+### Avatar.Fallback
+
+Renders a `span` with fallback content and forwards native `span` attributes.
+It is hidden while the current image has loaded.
+
+## Accessibility
+
+Always pass `alt` to `Avatar.Image`. The image is hidden until it loads, and the
+fallback stays visible when the image is missing or fails.
+
+The built-in icon fallback is hidden from assistive technology, so it adds no
+noise when it replaces a named image.
+
+Mark decorative icons inside `Avatar.Fallback` with `aria-hidden`. Initials
+alone are announced as text, so keep them short and unambiguous.

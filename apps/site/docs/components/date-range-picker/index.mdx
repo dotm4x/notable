@@ -1,0 +1,76 @@
+---
+title: DateRangePicker
+description: Selects a start and end date from a calendar shown in a popover.
+order: 210
+---
+
+## Usage
+
+```tsx
+import { DateRangePicker } from '@dotm4x/one/components';
+
+<DateRangePicker
+  aria-label="Stay dates"
+  locale="en-US"
+  onValueChange={(range) => console.log(range.start, range.end)}
+/>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Selected range
+
+<Demo name="selection" />
+
+### Clearable
+
+<Demo name="clearable" />
+
+## API reference
+
+### DateRangePicker
+
+| Prop             | Type                              | Default                      | Description                                                  |
+| ---------------- | --------------------------------- | ---------------------------- | ------------------------------------------------------------ |
+| `value`          | `DateRange`                       | —                            | Selected range for controlled use.                           |
+| `defaultValue`   | `DateRange`                       | `{ start: null, end: null }` | Selected range when uncontrolled.                            |
+| `onValueChange`  | `(range: DateRange) => void`      | —                            | Called each time a range is completed or cleared.            |
+| `open`           | `boolean`                         | —                            | Controlled open state of the calendar popup.                 |
+| `defaultOpen`    | `boolean`                         | `false`                      | Initial open state when uncontrolled.                        |
+| `onOpenChange`   | `(open: boolean) => void`         | —                            | Called with the requested open state.                        |
+| `disabled`       | `boolean`                         | `false`                      | Disables the trigger so the calendar cannot open.            |
+| `readOnly`       | `boolean`                         | `false`                      | Shows the selected range without allowing a change.          |
+| `clearable`      | `boolean`                         | `false`                      | Shows a button that clears the selected range.               |
+| `minDate`        | `Date`                            | —                            | Earliest selectable date; only its calendar day is used.     |
+| `maxDate`        | `Date`                            | —                            | Latest selectable date; only its calendar day is used.       |
+| `isDateDisabled` | `(date: Date) => boolean`         | —                            | Returns `true` for dates that cannot be selected or spanned. |
+| `placeholder`    | `string`                          | `'Select a date range'`      | Text shown when no range is selected.                        |
+| `locale`         | `string`                          | runtime locale               | BCP 47 locale used to format the dates and the calendar.     |
+| `weekStartsOn`   | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | —                            | First day of the week, from `0` (Sunday) to `6` (Saturday).  |
+| `formatDate`     | `(date: Date) => string`          | —                            | Formats each date in the trigger.                            |
+
+It renders a `button` trigger and forwards the remaining native button
+attributes.
+
+### DateRangePicker.Range
+
+Exported as `DateRange`. Either bound stays `null` while it is not chosen.
+
+| Property | Type           | Description             |
+| -------- | -------------- | ----------------------- |
+| `start`  | `Date \| null` | First day of the range. |
+| `end`    | `Date \| null` | Last day of the range.  |
+
+## Accessibility
+
+- The trigger's accessible name includes the visible value, so `aria-label` or
+  `aria-labelledby` is combined with the formatted range or placeholder.
+- The popup is labelled `Choose date range`, and the trigger reports its state
+  with `aria-expanded`.
+- The calendar icon is decorative and hidden from assistive technology.
+- The clear button is labelled `Clear date range` and only renders when
+  `clearable` is set, the picker is interactive, and a range is selected.

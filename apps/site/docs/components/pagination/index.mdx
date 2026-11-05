@@ -1,0 +1,107 @@
+---
+title: Pagination
+description: Provides page navigation for a controlled page.
+order: 380
+---
+
+## Usage
+
+```tsx
+import { Pagination } from '@dotm4x/one/components';
+
+<Pagination page={page} pageCount={24} onPageChange={setPage} />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### First and last controls
+
+<Demo name="firstLast" />
+
+### Composed layout
+
+<Demo name="composed" />
+
+### Small size
+
+<Demo name="small" />
+
+## API reference
+
+### Pagination
+
+| Prop            | Type                     | Default    | Description                                              |
+| --------------- | ------------------------ | ---------- | -------------------------------------------------------- |
+| `page`          | `number`                 | —          | Current page, counted from 1.                            |
+| `pageCount`     | `number`                 | —          | Total number of pages. Zero hides the page numbers.      |
+| `onPageChange`  | `(page: number) => void` | —          | Called with the requested page.                          |
+| `siblingCount`  | `number`                 | `1`        | Page numbers shown on each side of the current page.     |
+| `showFirstLast` | `boolean`                | `false`    | Adds first and last page controls to the default layout. |
+| `disabled`      | `boolean`                | `false`    | Prevents every page change.                              |
+| `size`          | `'small' \| 'medium'`    | `'medium'` | Size of the page controls.                               |
+| `children`      | `ReactNode`              | —          | Replaces the default layout with composed parts.         |
+
+It renders a `nav` landmark labeled "Pagination" and forwards native `HTMLElement`
+attributes; `aria-label` replaces the default label.
+
+### Pagination.Root
+
+Renders the navigation landmark itself and accepts the same props as
+`Pagination`. Use it when the composed layout reads better as `Pagination.Root`.
+
+### Pagination.First
+
+Renders a native `button` that jumps to the first page, disables itself while the
+first page is current, and forwards native button attributes. Its default
+`aria-label` is "Go to first page". `children` replaces the icon.
+
+### Pagination.Previous
+
+Renders a native `button` that moves one page back, disables itself on the first
+page, and forwards native button attributes. Its default `aria-label` is "Go to
+previous page". `children` replaces the icon.
+
+### Pagination.Items
+
+Renders the numbered page buttons and the ellipses for omitted pages inside a
+`div`, and forwards native `div` attributes. Each button is labeled "Page N", and
+the current page carries `aria-current="page"`.
+
+### Pagination.Next
+
+Renders a native `button` that moves one page forward, disables itself on the
+last page, and forwards native button attributes. Its default `aria-label` is
+"Go to next page". `children` replaces the icon.
+
+### Pagination.Last
+
+Renders a native `button` that jumps to the last page, disables itself while the
+last page is current, and forwards native button attributes. Its default
+`aria-label` is "Go to last page". `children` replaces the icon.
+
+### Pagination.getPaginationRange
+
+Exported as `getPaginationRange`. It returns the visible entries for a page count,
+centered on the current page, as `TPaginationRangeItem` values: a page number or
+an omitted gap.
+
+```ts
+const items = getPaginationRange(10, 42, 1);
+```
+
+A gap of a single page is shown as that page instead of an ellipsis.
+
+## Accessibility
+
+- The root is a `nav` landmark named "Pagination"; pass `aria-label` when a page
+  contains more than one pagination landmark.
+- The current page is marked with `aria-current="page"`, and the ellipses are
+  hidden from assistive technology.
+- Every control is a native button, so it is reachable and operable with the
+  keyboard, and it disables itself at the matching boundary.
+- `onPageChange` is never called for the current page or for an out-of-range page,
+  so disabled state and behavior agree.

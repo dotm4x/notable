@@ -1,0 +1,74 @@
+---
+title: Calendar
+description: Picks a single date from a navigable month grid.
+order: 70
+---
+
+## Usage
+
+```tsx
+import { Calendar } from '@dotm4x/one/components';
+
+<Calendar
+  defaultMonth={new Date(2025, 2, 1)}
+  defaultValue={new Date(2025, 2, 14)}
+  locale="en-US"
+/>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Selected date
+
+<Demo name="selection" />
+
+### Date limits
+
+<Demo name="limits" />
+
+### Range highlight
+
+<Demo name="range" />
+
+## API reference
+
+### Calendar
+
+| Prop             | Type                              | Default                                       | Description                                                         |
+| ---------------- | --------------------------------- | --------------------------------------------- | ------------------------------------------------------------------- |
+| `value`          | `Date \| null`                    | —                                             | Selected date in controlled mode. Omit for uncontrolled use.        |
+| `defaultValue`   | `Date \| null`                    | —                                             | Selected date in uncontrolled mode; starts with no selection.       |
+| `onValueChange`  | `(date: Date) => void`            | —                                             | Called with the newly selected date.                                |
+| `month`          | `Date`                            | —                                             | Visible month in controlled mode. Only its year and month are used. |
+| `defaultMonth`   | `Date`                            | Month of `defaultValue`, or the current month | Visible month in uncontrolled mode.                                 |
+| `onMonthChange`  | `(month: Date) => void`           | —                                             | Called with the first day of the newly visible month.               |
+| `minDate`        | `Date`                            | —                                             | Earliest selectable date.                                           |
+| `maxDate`        | `Date`                            | —                                             | Latest selectable date.                                             |
+| `disabled`       | `boolean`                         | `false`                                       | Prevents any interaction with the calendar.                         |
+| `isDateDisabled` | `(date: Date) => boolean`         | —                                             | Returns `true` for dates that cannot be selected.                   |
+| `weekStartsOn`   | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `0`                                           | First day of each week, where `0` is Sunday.                        |
+| `locale`         | `string`                          | The user's locale                             | BCP 47 locale for month, weekday, and date labels.                  |
+| `rangeStart`     | `Date \| null`                    | `null`                                        | First day of a range to highlight, independent of `value`.          |
+| `rangeEnd`       | `Date \| null`                    | `null`                                        | Last day of a range to highlight.                                   |
+
+It renders a `div` and forwards native `div` attributes. A forward ref points at
+that element.
+
+## Accessibility
+
+The month is a `table` with `role="grid"` labelled by the visible month title,
+and each day is a button with its full date as the accessible name. Today is
+marked with `aria-current="date"`.
+
+Only one day holds the tab stop. Arrow keys move by day or week, `Home` and
+`End` reach the ends of the week, and `PageUp` and `PageDown` move by month;
+holding `Shift` moves by year. Dates outside `minDate`, `maxDate`, or
+`isDateDisabled` are marked `aria-disabled` and cannot be selected.
+
+The month title is announced politely, and a hidden live region announces the
+selected date. A month that is leaving the view is hidden from assistive
+technology and removed from the tab order.

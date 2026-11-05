@@ -1,0 +1,77 @@
+---
+title: ToggleGroup
+description: Groups related toggle buttons with single or multiple selection and shared styling.
+order: 580
+---
+
+## Usage
+
+```tsx
+import { ToggleGroup } from '@dotm4x/one/components';
+import { Bold, Italic } from '@dotm4x/one/icons';
+
+<ToggleGroup type="single" aria-label="Text formatting" defaultValue="bold">
+  <ToggleGroup.Item value="bold">
+    <Bold aria-hidden="true" />
+    Bold
+  </ToggleGroup.Item>
+  <ToggleGroup.Item value="italic">
+    <Italic aria-hidden="true" />
+    Italic
+  </ToggleGroup.Item>
+</ToggleGroup>;
+```
+
+## Examples
+
+### Single selection
+
+<Demo name="default" />
+
+### Multiple selection
+
+<Demo name="multiple" />
+
+### Vertical layout
+
+<Demo name="vertical" />
+
+## API reference
+
+### ToggleGroup
+
+| Prop            | Type                                          | Default        | Description                               |
+| --------------- | --------------------------------------------- | -------------- | ----------------------------------------- |
+| `disabled`      | `boolean`                                     | `false`        | Disables every item in the group.         |
+| `orientation`   | `'horizontal' \| 'vertical'`                  | `'horizontal'` | Layout direction of the items.            |
+| `variant`       | `'default' \| 'outline'`                      | `'default'`    | Appearance inherited by each item.        |
+| `size`          | `'small' \| 'medium' \| 'large'`              | `'medium'`     | Size inherited by each item.              |
+| `type`          | `'single' \| 'multiple'`                      | —              | Selection mode.                           |
+| `value`         | `string \| null \| readonly string[]`         | —              | Selection in controlled mode.             |
+| `defaultValue`  | `string \| readonly string[]`                 | —              | Initial selection in uncontrolled mode.   |
+| `onValueChange` | `(value: string \| null \| string[]) => void` | —              | Called with the selection after a change. |
+
+With `type="single"` the value is a `string` or `null`, and `onValueChange`
+receives `string | null`. With `type="multiple"` the value is a list of strings,
+and `onValueChange` receives the complete `string[]`. It renders a `div` with
+`role="group"` and forwards native `div` attributes.
+
+### ToggleGroup.Item
+
+| Prop    | Type     | Default | Description                               |
+| ------- | -------- | ------- | ----------------------------------------- |
+| `value` | `string` | —       | Non-empty value represented by this item. |
+
+It renders a `Toggle` button that inherits the group's `variant` and `size`, and
+forwards the remaining native button attributes. Values must be non-empty
+strings.
+
+## Accessibility
+
+- The root is a `role="group"` container. Give it an accessible name with
+  `aria-label` or `aria-labelledby` so the purpose of the set is announced.
+- Each item is a button exposing `aria-pressed`, so the selection is available
+  without relying on the shared styling.
+- Arrow keys move focus between the items of the group and wrap at the ends.
+- `disabled` disables every item, and the inherited `variant` and `size` keep the
+  items visually consistent.

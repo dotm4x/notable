@@ -86,9 +86,10 @@ The docs engine (`source/docs/`):
   - `### Button` for the root component.
   - `### Component.Part` for every part attached to the component, such as `Table.Row` or `CodeBlock.CopyButton`.
   - `### Component.Symbol` for everything else the component exposes, such as `DataTable.ColumnHeader`, `DataTable.ViewOptions`, `Tree.Node`, or `CodeBlock.useHighlightedCode`.
+- When the component exports no root component, open the section with `### Component` anyway and state what the namespace contains, as `Field` and `Toast` do.
 - Use the dotted path even when the export is flat: `### DataTable.ColumnHeader` documents the `DataTableColumnHeader` export. Name the real export in the first sentence of the subsection so it stays searchable.
 - Parts are the symbols the component attaches to itself (`Object.assign`). A part without its own subsection is a documentation defect.
-- When a part declares props, list exactly those props in a `Prop | Type | Default | Description` table, in the order of its props type.
+- When a part declares props, list exactly those props in a `Prop | Type | Default | Description` table, in the order of its props type. Object and option shapes use `Property | Type | Description`, and API objects use `Method | Signature | Description`.
 - When a part only wraps a native element, write one sentence naming the element it renders and the native attribute type it forwards. Do not add an empty table.
 - Summarize inherited attributes in one sentence. Never enumerate them, and never document a prop the type does not declare.
 - Defaults must match the implementation destructuring, not the JSDoc prose.

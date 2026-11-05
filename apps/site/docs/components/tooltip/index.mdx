@@ -1,0 +1,55 @@
+---
+title: Tooltip
+description: Describes its trigger in a small popup that appears on hover or focus.
+order: 590
+---
+
+## Usage
+
+```tsx
+import { Button, Tooltip } from '@dotm4x/one/components';
+
+<Tooltip content="Copy the link to this page">
+  <Button variant="outline">Copy link</Button>
+</Tooltip>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Placement
+
+<Demo name="placement" />
+
+### Delay
+
+<Demo name="delay" />
+
+## API reference
+
+### Tooltip
+
+| Prop        | Type                                     | Default | Description                                                     |
+| ----------- | ---------------------------------------- | ------- | --------------------------------------------------------------- |
+| `children`  | `ReactElement`                           | —       | Single trigger element. Receives `aria-describedby`.            |
+| `className` | `string`                                 | —       | Additional class for the trigger wrapper.                       |
+| `content`   | `string`                                 | —       | Text displayed in the tooltip.                                  |
+| `delay`     | `number`                                 | `350`   | Delay before showing the tooltip, in milliseconds.              |
+| `disabled`  | `boolean`                                | `false` | Prevents the tooltip from being shown.                          |
+| `placement` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'` | Preferred side, flipped and shifted to fit within the viewport. |
+
+It wraps the trigger in a `span` and does not accept native attributes itself.
+
+## Accessibility
+
+- The popup has `role="tooltip"` and the trigger receives an `aria-describedby`
+  reference to it, appended to any value the trigger already declares.
+- The tooltip opens on hover and on keyboard focus, so the same hint is
+  available to pointer and keyboard users.
+- `disabled` stops the popup from rendering and leaves the trigger's existing
+  `aria-describedby` untouched.
+- The popup is portalled and positioned so it is not clipped, and the trigger
+  keeps focus while it is shown.

@@ -1,0 +1,47 @@
+---
+title: Spinner
+description: Shows an indeterminate loading indicator inside an accessible status element.
+order: 500
+---
+
+## Usage
+
+```tsx
+import { Spinner } from '@dotm4x/one/components';
+
+<Spinner label="Loading payments" />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### Custom label
+
+<Demo name="label" />
+
+## API reference
+
+### Spinner
+
+| Prop    | Type                             | Default     | Description                                            |
+| ------- | -------------------------------- | ----------- | ------------------------------------------------------ |
+| `label` | `string`                         | `'Loading'` | Accessible status name. `aria-label` takes precedence. |
+| `size`  | `'small' \| 'medium' \| 'large'` | `'medium'`  | Indicator size.                                        |
+
+It renders a `span` with `role="status"` and forwards native span attributes.
+
+## Accessibility
+
+- The element uses `role="status"`, so its name is announced as a polite status
+  update. `aria-label` overrides `label` when both are provided.
+- The rotating icon is `aria-hidden="true"`, so only the status name reaches
+  assistive technology.
+- Rotation stops under `prefers-reduced-motion: reduce`; the label carries the
+  loading meaning without motion.

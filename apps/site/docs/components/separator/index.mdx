@@ -1,0 +1,58 @@
+---
+title: Separator
+description: Divides content with a thin line that follows the border tokens.
+order: 450
+---
+
+## Usage
+
+```tsx
+import { Separator } from '@dotm4x/one/components';
+
+<section>
+  <h2>Billing</h2>
+  <Separator />
+  <p>Manage the payment method on file.</p>
+</section>;
+```
+
+## Examples
+
+### Horizontal
+
+<Demo name="default" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+### Thickness and color
+
+<Demo name="custom" />
+
+## API reference
+
+### Separator
+
+| Prop          | Type                                          | Default        | Description                                                                    |
+| ------------- | --------------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
+| `className`   | `string`                                      | —              | Additional class for the separator element.                                    |
+| `color`       | `'subtle' \| 'default' \| 'strong' \| string` | —              | Line color. Token names map to border tokens; any other string is used as CSS. |
+| `decorative`  | `boolean`                                     | `false`        | Removes the separator from the accessibility tree.                             |
+| `orientation` | `'horizontal' \| 'vertical'`                  | `'horizontal'` | Orientation of the line.                                                       |
+| `thickness`   | `number \| string`                            | —              | Line thickness. A number is pixels; any other string is used as CSS.           |
+
+It renders a `div` and forwards the remaining native `div` attributes. The line
+stretches across its container on the cross axis, so a vertical separator needs
+a container with a height.
+
+## Accessibility
+
+Decorative separators set `role="none"`, so they are removed from the
+accessibility tree and only carry visual meaning.
+
+Semantic separators expose `role="separator"` with `aria-orientation` matching
+`orientation`, so assistive technology can announce the structure of the page.
+
+A separator has no accessible name. Use headings or landmarks when the divide
+carries structure rather than decoration.

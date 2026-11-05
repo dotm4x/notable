@@ -1,0 +1,62 @@
+---
+title: Fieldset
+description: Groups related form controls under a shared legend.
+order: 280
+---
+
+## Usage
+
+```tsx
+import { Field, Fieldset } from '@dotm4x/one/components';
+
+<Fieldset>
+  <Fieldset.Legend>Contact</Fieldset.Legend>
+  <Field.Root>
+    <Field.Label>Email</Field.Label>
+    <Field.Box>
+      <Field.Control type="email" />
+    </Field.Box>
+  </Field.Root>
+  <Field.Root>
+    <Field.Label>Phone</Field.Label>
+    <Field.Box>
+      <Field.Control type="tel" />
+    </Field.Box>
+  </Field.Root>
+</Fieldset>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Checkbox group
+
+<Demo name="checkboxGroup" />
+
+### Radio group
+
+<Demo name="radioGroup" />
+
+## API reference
+
+### Fieldset
+
+Renders a native `fieldset` and forwards the native `fieldset` attributes, merging `className`.
+
+### Fieldset.Root
+
+Exported as `FieldsetRoot`. It is the same component as `Fieldset` and accepts the same props.
+
+### Fieldset.Legend
+
+Renders a native `legend` that names the enclosing fieldset and forwards native `legend` attributes.
+
+## Accessibility
+
+- The `fieldset` and its `legend` expose the group with an accessible name, so controls inside are announced as part of `Contact` or whichever legend you provide.
+- A `disabled` fieldset disables every nested control, while a single control can still be disabled on its own.
+- Nested fieldsets and the checkbox and radio groups inside them become their own named groups.
+- Keep the legend as the first child so the group name is read before its controls.

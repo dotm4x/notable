@@ -1,0 +1,95 @@
+---
+title: Card
+description: Groups related content on a non-interactive surface with optional header, content, and footer regions.
+order: 90
+---
+
+## Usage
+
+```tsx
+import { Button, Card } from '@dotm4x/one/components';
+
+<Card>
+  <Card.Header>
+    <Card.Title>Project settings</Card.Title>
+    <Card.Description>
+      Manage how this project is shared and built.
+    </Card.Description>
+  </Card.Header>
+  <Card.Content>
+    Visibility is set to private for all collaborators.
+  </Card.Content>
+  <Card.Footer>
+    <Button variant="secondary" size="small">
+      Cancel
+    </Button>
+  </Card.Footer>
+</Card>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Content only
+
+<Demo name="contentOnly" />
+
+### Flush padding
+
+<Demo name="flush" />
+
+## API reference
+
+### Card
+
+| Prop       | Type                              | Default     | Description                       |
+| ---------- | --------------------------------- | ----------- | --------------------------------- |
+| `children` | `ReactNode`                       | —           | Content of the card.              |
+| `as`       | `'div' \| 'section' \| 'article'` | `'div'`     | Semantic element to render.       |
+| `padding`  | `'default' \| 'none'`             | `'default'` | Inner padding; `none` sits flush. |
+
+It forwards native `HTMLElement` attributes and a ref to the rendered element.
+
+### Card.Header
+
+Renders the header region as a `div` and forwards native `div` attributes.
+
+### Card.Title
+
+| Prop       | Type                                                   | Default | Description        |
+| ---------- | ------------------------------------------------------ | ------- | ------------------ |
+| `children` | `ReactNode`                                            | —       | Title text.        |
+| `as`       | `'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'p' \| 'div'` | `'h3'`  | Element to render. |
+
+It forwards native `HTMLElement` attributes.
+
+### Card.Description
+
+| Prop       | Type           | Default | Description        |
+| ---------- | -------------- | ------- | ------------------ |
+| `children` | `ReactNode`    | —       | Description text.  |
+| `as`       | `'p' \| 'div'` | `'p'`   | Element to render. |
+
+It forwards native `HTMLElement` attributes.
+
+### Card.Content
+
+Renders the main region as a `div` and forwards native `div` attributes.
+
+### Card.Footer
+
+Renders the footer region as a `div` and forwards native `div` attributes.
+
+## Accessibility
+
+`Card.Title` renders an `h3` by default. Choose `as` so the heading level fits
+the surrounding page order.
+
+The card surface is not interactive; place buttons and links inside its
+regions rather than on the container itself.
+
+Use `as` to match the container to the content: `article` for a self-contained
+item and `section` for a grouping of related content.

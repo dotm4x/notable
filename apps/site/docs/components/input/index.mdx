@@ -1,0 +1,66 @@
+---
+title: Input
+description: Renders a native input with an optional label, description, error, and adornments.
+order: 330
+---
+
+## Usage
+
+```tsx
+import { Input } from '@dotm4x/one/components';
+
+<Input
+  label="Email address"
+  name="email"
+  type="email"
+  description="We will only use this to contact you."
+/>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Leading and trailing icons
+
+<Demo name="icons" />
+
+### Clearable search
+
+<Demo name="clearable" />
+
+### Error state
+
+<Demo name="invalid" />
+
+## API reference
+
+### Input
+
+| Prop                      | Type        | Default | Description                                                     |
+| ------------------------- | ----------- | ------- | --------------------------------------------------------------- |
+| `description`             | `ReactNode` | —       | Helper text associated with the input.                          |
+| `error`                   | `ReactNode` | —       | Error message associated with the input; also marks it invalid. |
+| `invalid`                 | `boolean`   | `false` | Marks the input as invalid even when no error is displayed.     |
+| `label`                   | `ReactNode` | —       | Visible label associated with the native input.                 |
+| `leadingIcon`             | `ReactNode` | —       | Content displayed before the value.                             |
+| `leadingIconInteractive`  | `boolean`   | `false` | Keeps the leading adornment visible to assistive technology.    |
+| `trailingIcon`            | `ReactNode` | —       | Content displayed after the value.                              |
+| `trailingIconInteractive` | `boolean`   | `false` | Keeps the trailing adornment visible to assistive technology.   |
+
+It renders a native `input` and forwards the remaining native input attributes,
+including `id`, `value`, `name`, and event handlers. When `id` is omitted, one is
+generated to connect the label, description, and error.
+
+## Accessibility
+
+- The visible label is associated with the input; when no label is rendered, pass
+  `aria-label` or `aria-labelledby`.
+- `description` and `error` are wired through `aria-describedby` and
+  `aria-errormessage`, and an error or `invalid` sets `aria-invalid`.
+- The error message is announced politely when it appears.
+- Adornments are hidden from assistive technology unless
+  `leadingIconInteractive` or `trailingIconInteractive` is set, which is required
+  for an interactive trailing control such as a clear button.

@@ -1,0 +1,71 @@
+---
+title: Field
+description: Lays out a form control with its label, description, and error message.
+order: 270
+---
+
+## Usage
+
+```tsx
+import { Field } from '@dotm4x/one/components';
+
+<Field.Root>
+  <Field.Label>Email address</Field.Label>
+  <Field.Box>
+    <Field.Control type="email" placeholder="you@example.com" />
+  </Field.Box>
+  <Field.Description>We will only use this to contact you.</Field.Description>
+</Field.Root>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Invalid
+
+<Demo name="invalid" />
+
+### Custom control
+
+<Demo name="customControl" />
+
+## API reference
+
+### Field
+
+A namespace object rather than a component: it exposes the parts below and
+has no props of its own.
+
+### Field.Root
+
+Renders the field container that connects the label, control, description, and error. It accepts every Base UI `Field.Root` prop together with native `div` attributes.
+
+### Field.Label
+
+Renders the control's label as a `label` element and accepts every Base UI `Field.Label` prop together with native `label` attributes. The label is associated with the control inside the field.
+
+### Field.Box
+
+Renders a `span` that wraps the control. It has no props of its own and forwards native `span` attributes.
+
+### Field.Control
+
+Renders the field control as an `input` and accepts every Base UI `Field.Control` prop together with native `input` attributes. Pass `render` to use another control, such as a `textarea`.
+
+### Field.Description
+
+Renders the description that assistive technology announces with the control. It accepts every Base UI `Field.Description` prop together with native element attributes.
+
+### Field.Error
+
+Renders the validation message for the field. It accepts every Base UI `Field.Error` prop, so `match` decides when the message is shown alongside the invalid state.
+
+## Accessibility
+
+- The label is associated with the control inside the field, so the accessible name comes from `Field.Label` and `Field.Control` needs no separate `aria-label`.
+- An invalid field marks the control with `aria-invalid` and the container with `data-invalid`.
+- `Field.Description` and a matched `Field.Error` become the control's accessible description.
+- Pass `disabled` to `Field.Root` to disable the control instead of setting it only on the input.

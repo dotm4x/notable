@@ -1,0 +1,51 @@
+---
+title: Link
+description: Renders a native anchor with an animated underline and an optional arrow.
+order: 340
+---
+
+## Usage
+
+```tsx
+import { Link } from '@dotm4x/one/components';
+
+<Link href="/docs/getting-started">Read the documentation</Link>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With arrow
+
+<Demo name="arrow" />
+
+### Inline in text
+
+<Demo name="inline" />
+
+### External destination
+
+<Demo name="external" />
+
+## API reference
+
+### Link
+
+| Prop    | Type      | Default | Description                             |
+| ------- | --------- | ------- | --------------------------------------- |
+| `arrow` | `boolean` | `false` | Shows a trailing arrow after the label. |
+
+It renders a native `a` and forwards native anchor attributes. It performs no
+routing, so client-side navigation needs an anchor-compatible router component.
+
+## Accessibility
+
+- The label is the accessible name. The arrow is `aria-hidden` and
+  `focusable="false"`, so it is never announced or focused.
+- The anchor is reachable and activatable with the keyboard by default.
+- Focus is shown with a visible outline that responds to `:focus-visible`.
+- Opening a new tab with `target="_blank"` is not announced; make the destination
+  clear in the link text.

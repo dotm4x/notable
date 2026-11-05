@@ -1,0 +1,51 @@
+---
+title: NumberFlow
+description: Displays a number that rolls digit by digit when its value changes.
+order: 360
+---
+
+## Usage
+
+```tsx
+import { NumberFlow } from '@dotm4x/one/components';
+
+<NumberFlow value={1284} />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Interactive value
+
+<Demo name="interactive" />
+
+### Currency format
+
+<Demo name="currency" />
+
+## API reference
+
+### NumberFlow
+
+| Prop        | Type                       | Default | Description                                                                |
+| ----------- | -------------------------- | ------- | -------------------------------------------------------------------------- |
+| `value`     | `number`                   | —       | Number to display. Changes animate digit by digit.                         |
+| `format`    | `Intl.NumberFormatOptions` | —       | Options passed to `Intl.NumberFormat`, such as currency style.             |
+| `locale`    | `string`                   | —       | BCP 47 locale for grouping and numerals; defaults to the platform locale.  |
+| `duration`  | `number`                   | —       | Transition duration in milliseconds; defaults to the base motion duration. |
+| `className` | `string`                   | —       | Additional class for the root element.                                     |
+
+It renders a `span` and forwards the remaining native span attributes.
+
+## Accessibility
+
+- The formatted value is exposed once as text for assistive technology, and the
+  animated digits are `aria-hidden`, so intermediate frames are never announced.
+- There is no live region, so a value that changes without user interaction is not
+  announced; notify the reader elsewhere when the change matters.
+- Grouping, decimal separators, currency, and percent signs are rendered as static
+  text and are part of the exposed value.
+- Users who prefer reduced motion get the new value immediately.

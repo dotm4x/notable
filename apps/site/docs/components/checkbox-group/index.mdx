@@ -1,0 +1,68 @@
+---
+title: CheckboxGroup
+description: Collects related checkbox options under one group label and shared state.
+order: 110
+---
+
+## Usage
+
+```tsx
+import { CheckboxGroup } from '@dotm4x/one/components';
+
+<CheckboxGroup label="Notifications" defaultValue={['email']}>
+  <CheckboxGroup.Item value="email" label="Email notifications" />
+  <CheckboxGroup.Item value="push" label="Push notifications" />
+</CheckboxGroup>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Controlled selection
+
+<Demo name="controlled" />
+
+### Group and option descriptions
+
+<Demo name="withDescription" />
+
+## API reference
+
+### CheckboxGroup
+
+| Prop            | Type                        | Default | Description                                               |
+| --------------- | --------------------------- | ------- | --------------------------------------------------------- |
+| `label`         | `ReactNode`                 | —       | Visible group label, rendered as the fieldset legend.     |
+| `description`   | `ReactNode`                 | —       | Helper text associated with the group.                    |
+| `defaultValue`  | `readonly string[]`         | —       | Values selected initially when the group is uncontrolled. |
+| `value`         | `readonly string[]`         | —       | Selected values when the group is controlled.             |
+| `onValueChange` | `(value: string[]) => void` | —       | Called with the complete list of selected values.         |
+| `disabled`      | `boolean`                   | `false` | Disables every option in the group.                       |
+
+It renders a `fieldset` and forwards native fieldset attributes except
+`defaultValue`, `onChange`, and `value`.
+
+### CheckboxGroup.Item
+
+| Prop          | Type        | Default | Description                                            |
+| ------------- | ----------- | ------- | ------------------------------------------------------ |
+| `description` | `ReactNode` | —       | Helper text associated with the option.                |
+| `label`       | `ReactNode` | —       | Visible label associated with the option.              |
+| `value`       | `string`    | —       | Value added to the group selection when it is checked. |
+
+It renders through `Checkbox` and forwards the remaining native input attributes
+to the checkbox input.
+
+## Accessibility
+
+- The group renders a `fieldset` whose `legend` carries the `label`, so assistive
+  technology announces the group name before its options.
+- The group `description` is linked to the fieldset through `aria-describedby`,
+  together with any value the consumer passes.
+- `disabled` is set on the native fieldset, which disables every option it
+  contains.
+- Each option is a labeled native checkbox, so it keeps its tab stop and toggles
+  with Space.

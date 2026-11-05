@@ -1,0 +1,68 @@
+---
+title: ScrollArea
+description: Contains overflowing content in a region that scrolls natively.
+order: 420
+---
+
+## Usage
+
+```tsx
+import { ScrollArea } from '@dotm4x/one/components';
+
+<ScrollArea
+  scrollbar="vertical"
+  style={{ height: '16rem', width: '20rem' }}
+  aria-label="Recent activity"
+>
+  <ul>
+    <li>Ada Lovelace commented on the release notes.</li>
+    <li>Grace Hopper merged the navigation refactor.</li>
+  </ul>
+</ScrollArea>;
+```
+
+## Examples
+
+### Custom scrollbar
+
+<Demo name="default" />
+
+### Horizontal scrolling
+
+<Demo name="horizontal" />
+
+### Edge effect
+
+<Demo name="edgeEffect" />
+
+## API reference
+
+### ScrollArea
+
+| Prop             | Type                                                                                | Default      | Description                                                                                   |
+| ---------------- | ----------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `orientation`    | `'vertical' \| 'horizontal' \| 'both'`                                              | `'vertical'` | Axes that can scroll. The other axis is clipped.                                              |
+| `scrollbar`      | `'none' \| 'vertical' \| 'horizontal' \| 'both' \| 'auto' \| 'visible' \| 'hidden'` | `'none'`     | Custom scrollbar orientations. `visible` shows both enabled axes and `hidden` matches `none`. |
+| `edgeEffect`     | `'none' \| 'fade' \| 'blur'`                                                        | `'none'`     | Indicator on sides with hidden content. Takes precedence over `fadeEdges`.                    |
+| `edgeEffectSize` | `string`                                                                            | `'1.5rem'`   | Length of the edge effect, such as `'24px'`. Takes precedence over `fadeSize`.                |
+| `fadeEdges`      | `boolean`                                                                           | `false`      | Deprecated. Use `edgeEffect="fade"`.                                                          |
+| `fadeSize`       | `string`                                                                            | —            | Deprecated. Use `edgeEffectSize`.                                                             |
+| `className`      | `string`                                                                            | —            | Applied to the root wrapper.                                                                  |
+| `style`          | `CSSProperties`                                                                     | —            | Applied to the root wrapper.                                                                  |
+| `children`       | `ReactNode`                                                                         | —            | Scrollable content.                                                                           |
+
+`className` and `style` apply to the root wrapper. Every other native attribute
+and the ref are forwarded to the viewport, which becomes keyboard-focusable when
+the content overflows.
+
+## Accessibility
+
+The viewport is the focusable element, so arrow keys, Page Up, Page Down, Home,
+and End scroll the region without extra key handling.
+
+Scrolling stays native. The custom scrollbars are visual affordances and never
+replace wheel, touch, trackpad, or keyboard scrolling.
+
+Nested controls keep their own focus behavior, and focusing one scrolls it into
+view. The region needs an accessible name, for example with `aria-label`, when
+its surrounding content does not already name it.

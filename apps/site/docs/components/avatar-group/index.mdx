@@ -1,0 +1,71 @@
+---
+title: AvatarGroup
+description: Stacks avatars with overlap and summarizes the ones that do not fit.
+order: 30
+---
+
+## Usage
+
+```tsx
+import { Avatar, AvatarGroup } from '@dotm4x/one/components';
+
+<AvatarGroup max={3}>
+  <Avatar>
+    <Avatar.Fallback>MP</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Fallback>AL</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Fallback>SR</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Fallback>TC</Avatar.Fallback>
+  </Avatar>
+</AvatarGroup>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Overflow indicator
+
+<Demo name="overflow" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+### Custom overlap
+
+<Demo name="spacing" />
+
+## API reference
+
+### AvatarGroup
+
+| Prop          | Type                                              | Default        | Description                                                      |
+| ------------- | ------------------------------------------------- | -------------- | ---------------------------------------------------------------- |
+| `children`    | `ReactNode`                                       | —              | Avatars or other content arranged in the group.                  |
+| `size`        | `'small' \| 'medium' \| 'large' \| 'extra-large'` | `'medium'`     | Size inherited by child avatars.                                 |
+| `max`         | `number`                                          | —              | Maximum number of visible avatars. Non-positive values hide all. |
+| `spacing`     | `number`                                          | `8`            | Overlap between adjacent items, in pixels.                       |
+| `orientation` | `'horizontal' \| 'vertical'`                      | `'horizontal'` | Overlap direction.                                               |
+| `overflow`    | `ReactNode`                                       | —              | Content that replaces the hidden-items `+N` indicator.           |
+
+It renders a `div` and forwards native `div` attributes. The overflow indicator
+is not counted in the `max` limit.
+
+## Accessibility
+
+The overflow indicator exposes an accessible name such as “3 more avatars”,
+and its visible `+N` text is hidden from assistive technology.
+
+The group renders plain `div` elements, so it adds no list semantics. Each
+avatar keeps its own image `alt` or fallback text.
+
+When avatars in the group are links, give each link a descriptive
+`aria-label` instead of relying on its initials.

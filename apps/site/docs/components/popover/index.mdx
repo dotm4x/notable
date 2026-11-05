@@ -1,0 +1,103 @@
+---
+title: Popover
+description: Shows non-modal content anchored to a trigger element.
+order: 390
+---
+
+## Usage
+
+```tsx
+import { Button, Popover } from '@dotm4x/one/components';
+
+<Popover>
+  <Popover.Trigger>
+    <Button>Open filters</Button>
+  </Popover.Trigger>
+  <Popover.Content>
+    <Popover.Header>
+      <Popover.Title>Filters</Popover.Title>
+      <Popover.Description>
+        Choose which projects appear in this list.
+      </Popover.Description>
+    </Popover.Header>
+  </Popover.Content>
+</Popover>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With a close action
+
+<Demo name="close" />
+
+### Placement
+
+<Demo name="placement" />
+
+## API reference
+
+### Popover
+
+| Prop           | Type                      | Default | Description                                     |
+| -------------- | ------------------------- | ------- | ----------------------------------------------- |
+| `open`         | `boolean`                 | —       | Controlled open state.                          |
+| `defaultOpen`  | `boolean`                 | `false` | Initial open state when uncontrolled.           |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested open state.           |
+| `children`     | `ReactNode`               | —       | Popover parts, such as `Trigger` and `Content`. |
+
+It renders no element of its own; it owns the open state and provides the
+non-modal popover context for its parts.
+
+### Popover.Trigger
+
+| Prop       | Type        | Default | Description                                                                                  |
+| ---------- | ----------- | ------- | -------------------------------------------------------------------------------------------- |
+| `children` | `ReactNode` | —       | A single element that toggles the popover. Other content is wrapped in a `Button`. Required. |
+
+### Popover.Content
+
+| Prop          | Type                                     | Default    | Description                                           |
+| ------------- | ---------------------------------------- | ---------- | ----------------------------------------------------- |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Side of the trigger where the popup appears.          |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment of the popup along the chosen side.         |
+| `sideOffset`  | `number`                                 | `8`        | Distance in pixels between the trigger and the popup. |
+| `alignOffset` | `number`                                 | `0`        | Shift in pixels along the aligned edge.               |
+
+It renders the popup in a portal and forwards the remaining native `div`
+attributes.
+
+### Popover.Header
+
+Renders the header `div` at the top of the popover. It has no props of its own
+and forwards native `div` attributes.
+
+### Popover.Title
+
+Renders the title of the popover and forwards native heading attributes. Title
+provides the accessible name of the popup.
+
+### Popover.Description
+
+Renders the description of the popover and forwards native paragraph attributes.
+Description provides the accessible description of the popup.
+
+### Popover.Close
+
+Renders a `Button` that closes the popover and forwards the remaining `Button`
+props. It defaults to `variant="outline"` and always renders with
+`type="button"`.
+
+## Accessibility
+
+- The popup is exposed as a `dialog` named by `Popover.Title` and described by
+  `Popover.Description`.
+- The trigger reports `aria-expanded` and stays the reference the popup is
+  anchored to.
+- The popover is non-modal: focus is not trapped, and Escape or a press outside
+  closes it.
+- Focus moves into the popup when it contains interactive content, so a keyboard
+  user reaches the content without tabbing through the page.

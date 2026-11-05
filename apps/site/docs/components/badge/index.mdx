@@ -1,0 +1,53 @@
+---
+title: Badge
+description: Displays a compact, non-interactive label for a status or category.
+order: 40
+---
+
+## Usage
+
+```tsx
+import { Badge } from '@dotm4x/one/components';
+
+<Badge variant="success">Published</Badge>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### With an icon
+
+<Demo name="withIcon" />
+
+## API reference
+
+### Badge
+
+| Prop       | Type                                                                                    | Default     | Description           |
+| ---------- | --------------------------------------------------------------------------------------- | ----------- | --------------------- |
+| `children` | `ReactNode`                                                                             | —           | Text, icons, or both. |
+| `variant`  | `'default' \| 'secondary' \| 'outline' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'default'` | Visual appearance.    |
+| `size`     | `'small' \| 'medium'`                                                                   | `'medium'`  | Size.                 |
+
+It renders a `span` and forwards native `span` attributes.
+
+## Accessibility
+
+A badge is not interactive. Use a `Button` when the label triggers an action.
+
+Variant tone must never be the only signal. Keep the text descriptive so the
+meaning survives without color.
+
+An icon-only badge needs a text alternative, such as visually hidden text
+beside an icon marked `aria-hidden`.

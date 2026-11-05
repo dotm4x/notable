@@ -1,0 +1,102 @@
+---
+title: Slider
+description: Selects a single value or a range by dragging a thumb along a track.
+order: 490
+---
+
+## Usage
+
+```tsx
+import { Slider } from '@dotm4x/one/components';
+
+<Slider
+  label="Volume"
+  defaultValue={45}
+  showValue
+  onValueChange={(value) => setVolume(Number(value))}
+/>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Range
+
+<Demo name="range" />
+
+### Marks
+
+<Demo name="marks" />
+
+## API reference
+
+### Slider
+
+| Prop                     | Type                                           | Default        | Description                                                     |
+| ------------------------ | ---------------------------------------------- | -------------- | --------------------------------------------------------------- |
+| `description`            | `ReactNode`                                    | —              | Helper text associated with the slider.                         |
+| `defaultValue`           | `number \| readonly number[]`                  | —              | Value selected initially when uncontrolled.                     |
+| `disabled`               | `boolean`                                      | `false`        | Disables interaction with the slider.                           |
+| `error`                  | `ReactNode`                                    | —              | Message associated with an invalid slider.                      |
+| `format`                 | `Intl.NumberFormatOptions`                     | —              | Options used to format numeric values.                          |
+| `form`                   | `string`                                       | —              | Form identifier when the slider is submitted.                   |
+| `formatValue`            | `(value: number) => string`                    | —              | Returns a display and accessible value string for each value.   |
+| `label`                  | `ReactNode`                                    | —              | Visible label associated with the slider.                       |
+| `max`                    | `number`                                       | `100`          | Maximum allowed value.                                          |
+| `min`                    | `number`                                       | `0`            | Minimum allowed value.                                          |
+| `minStepsBetweenValues`  | `number`                                       | —              | Minimum distance between range thumbs, in steps.                |
+| `marks`                  | `readonly TSliderMark[]`                       | `[]`           | Visible marks. A numeric mark is displayed without a label.     |
+| `markInterval`           | `number`                                       | —              | Adds marks at this interval, including the minimum and maximum. |
+| `name`                   | `string`                                       | —              | Form name used when the slider is submitted.                    |
+| `onValueChange`          | `(value: number \| readonly number[]) => void` | —              | Called with the new value or range.                             |
+| `onValueCommitted`       | `(value: number \| readonly number[]) => void` | —              | Called when the value is committed after an interaction.        |
+| `orientation`            | `'horizontal' \| 'vertical'`                   | `'horizontal'` | Orientation of the track.                                       |
+| `readOnly`               | `boolean`                                      | `false`        | Disables interaction without removing the value from forms.     |
+| `required`               | `boolean`                                      | `false`        | Marks the slider as required for assistive technology.          |
+| `step`                   | `number`                                       | `1`            | Distance between selectable values.                             |
+| `showValue`              | `boolean`                                      | `false`        | Displays the current value beside the label.                    |
+| `thumbLabels`            | `readonly string[]`                            | —              | Thumb labels, in value order, for range sliders.                |
+| `thumbAlignment`         | `'center' \| 'edge' \| 'edge-client-only'`     | `'center'`     | How thumbs align at the endpoints.                              |
+| `thumbCollisionBehavior` | `'push' \| 'swap' \| 'none'`                   | `'push'`       | How range thumbs behave when they collide.                      |
+| `locale`                 | `Intl.LocalesArgument`                         | —              | Locale passed to `Intl.NumberFormat`.                           |
+| `largeStep`              | `number`                                       | —              | Larger keyboard increment.                                      |
+| `invalid`                | `boolean`                                      | `false`        | Marks the slider as invalid even without a visible error.       |
+| `value`                  | `number \| readonly number[]`                  | —              | Current value when the slider is controlled.                    |
+
+It renders a `div` and forwards the remaining native `div` attributes. A range
+needs at least two values, `min` must not exceed `max`, and `step` must be a
+positive number; invalid combinations throw a `RangeError`.
+
+### Slider.Mark
+
+Exported as `TSliderMark`. A mark is either a number or an object with a
+`value` and an optional label.
+
+| Property | Type        | Description                        |
+| -------- | ----------- | ---------------------------------- |
+| `value`  | `number`    | Position of the mark on the track. |
+| `label`  | `ReactNode` | Optional visible label.            |
+
+### Slider.Value
+
+Exported as `TSliderValue`.
+
+A single number for a single-thumb slider, or an array of numbers for a range
+slider.
+
+## Accessibility
+
+Each thumb exposes the slider role with `aria-valuemin`, `aria-valuemax`, and
+`aria-valuenow`, and `aria-valuetext` carries the formatted or custom value
+string. A slider where `min` equals `max` renders a static thumb with
+`aria-disabled="true"`.
+
+`label` names the slider through `aria-labelledby`, and `description` and `error`
+are both linked with `aria-describedby`. An error or `invalid` sets
+`aria-invalid` on the thumbs and on their native range inputs.
+
+`readOnly` and `required` are forwarded to the native range inputs, and
+`thumbLabels` gives each range thumb a distinct accessible name.

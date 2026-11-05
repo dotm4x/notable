@@ -1,0 +1,85 @@
+---
+title: Accordion
+description: Reveals related sections from labeled rows, one at a time or independently.
+order: 10
+---
+
+## Usage
+
+```tsx
+import { Accordion } from '@dotm4x/one/components';
+
+<Accordion type="single" defaultValue="shipping">
+  <Accordion.Item value="shipping" title="Shipping">
+    Orders ship within two business days and include tracking details.
+  </Accordion.Item>
+  <Accordion.Item value="returns" title="Returns">
+    Unused items can be returned within thirty days of delivery.
+  </Accordion.Item>
+</Accordion>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Multiple sections
+
+<Demo name="multiple" />
+
+### Expanded by default
+
+<Demo name="expanded" />
+
+### Disabled items
+
+<Demo name="disabled" />
+
+## API reference
+
+### Accordion
+
+| Prop            | Type                                                                                           | Default | Description                                              |
+| --------------- | ---------------------------------------------------------------------------------------------- | ------- | -------------------------------------------------------- |
+| `children`      | `ReactNode`                                                                                    | —       | Accordion items.                                         |
+| `className`     | `string`                                                                                       | —       | Additional class for the root element.                   |
+| `disabled`      | `boolean`                                                                                      | `false` | Disables every item.                                     |
+| `type`          | `'single' \| 'multiple'`                                                                       | —       | Whether one item or any number of items can be expanded. |
+| `value`         | `string \| null` in single mode, `string[]` in multiple mode                                   | —       | Expanded items in controlled mode.                       |
+| `defaultValue`  | `string \| null` in single mode, `string[]` in multiple mode                                   | —       | Expanded items in uncontrolled mode.                     |
+| `onValueChange` | `(value: string \| null) => void` in single mode, `(value: string[]) => void` in multiple mode | —       | Called with the expanded values after each change.       |
+
+It renders a `div` and forwards no attributes beyond these props.
+
+### Accordion.Root
+
+The same root component as `Accordion`, attached for explicit composition. It
+accepts the props listed above.
+
+### Accordion.Item
+
+| Prop        | Type        | Default | Description                                 |
+| ----------- | ----------- | ------- | ------------------------------------------- |
+| `children`  | `ReactNode` | —       | Content shown when the item is expanded.    |
+| `className` | `string`    | —       | Additional class for the item element.      |
+| `disabled`  | `boolean`   | `false` | Prevents the item from being toggled.       |
+| `title`     | `ReactNode` | —       | Trigger label.                              |
+| `value`     | `string`    | —       | Stable identifier used for expansion state. |
+
+It renders a heading with a trigger button and a panel that stays mounted.
+
+## Accessibility
+
+The trigger is a native button that reports `aria-expanded` and controls its
+panel; the panel is exposed as a `group`.
+
+Arrow keys move focus between the accordion's own triggers and wrap at the
+ends; `Home` and `End` move to the first and last trigger. Triggers of disabled
+items are skipped, and nested accordions are excluded from the sequence.
+
+The chevron is decorative and hidden from assistive technology; the `title`
+provides the accessible name of each trigger.
+
+Collapsed panels stay mounted and hidden, so their content keeps its state.

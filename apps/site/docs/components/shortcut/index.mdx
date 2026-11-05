@@ -1,0 +1,41 @@
+---
+title: Shortcut
+description: Renders a single keyboard key in a compact badge.
+order: 460
+---
+
+## Usage
+
+```tsx
+import { Shortcut } from '@dotm4x/one/components';
+
+<p>
+  Press <Shortcut>Enter</Shortcut> to send the message.
+</p>;
+```
+
+## Examples
+
+### Single key
+
+<Demo name="default" />
+
+### Key combination
+
+<Demo name="combination" />
+
+## API reference
+
+### Shortcut
+
+Renders a `kbd` element, where `children` is the key label, and forwards native
+`kbd` attributes.
+
+## Accessibility
+
+`Shortcut` renders a native `kbd` element, so assistive technology announces the
+content as keyboard input rather than as plain text.
+
+Compose several elements in order for a multi-key shortcut, and keep the visible
+keys in the same order a person presses them. Each label is read as written, so
+spell out modifier names instead of relying on symbols alone.

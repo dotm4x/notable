@@ -1,0 +1,84 @@
+---
+title: Tabs
+description: Switches between related panels while keeping each panel's state mounted.
+order: 540
+---
+
+## Usage
+
+```tsx
+import { Tabs } from '@dotm4x/one/components';
+
+<Tabs defaultValue="overview">
+  <Tabs.List aria-label="Account settings">
+    <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+    <Tabs.Trigger value="billing">Billing</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="overview">Manage your profile details.</Tabs.Content>
+  <Tabs.Content value="billing">
+    Review invoices and payment methods.
+  </Tabs.Content>
+</Tabs>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Vertical orientation
+
+<Demo name="vertical" />
+
+### Disabled trigger
+
+<Demo name="disabledTrigger" />
+
+## API reference
+
+### Tabs
+
+| Prop            | Type                              | Default        | Description                                           |
+| --------------- | --------------------------------- | -------------- | ----------------------------------------------------- |
+| `value`         | `string \| null`                  | —              | Selected tab in controlled mode. `null` selects none. |
+| `defaultValue`  | `string \| null`                  | —              | Initial selected tab in uncontrolled mode.            |
+| `onValueChange` | `(value: string \| null) => void` | —              | Called when the selected tab changes.                 |
+| `orientation`   | `'horizontal' \| 'vertical'`      | `'horizontal'` | Tab list orientation.                                 |
+
+It renders a container `div` that animates to the height of the active panel and
+forwards the remaining native `div` attributes.
+
+### Tabs.List
+
+Renders the `tablist` container. It has no props of its own and forwards native
+`div` attributes. Give it an accessible name, such as `aria-label`.
+
+### Tabs.Trigger
+
+| Prop    | Type     | Default | Description                           |
+| ------- | -------- | ------- | ------------------------------------- |
+| `value` | `string` | —       | Value of the panel the tab activates. |
+
+It renders a `button` with `type="button"` and forwards the remaining native
+button attributes.
+
+### Tabs.Content
+
+| Prop    | Type     | Default | Description                             |
+| ------- | -------- | ------- | --------------------------------------- |
+| `value` | `string` | —       | Value of the tab that shows this panel. |
+
+It renders a `div` panel and forwards native `div` attributes. Inactive panels
+stay mounted but hidden, so their state survives a tab change.
+
+## Accessibility
+
+- The list is a `tablist`, and each trigger is a `tab` button exposing
+  `aria-selected` and `aria-controls` for its panel.
+- Arrow keys move focus between triggers, and `Enter` or `Space` activates the
+  focused tab.
+- Every panel is a `tabpanel` tied to its trigger. Inactive panels stay mounted
+  but hidden, which keeps their content out of the tab order.
+- Each panel is animated into place, and the movement is skipped when reduced
+  motion is requested.

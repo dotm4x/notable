@@ -1,0 +1,80 @@
+---
+title: RadioGroup
+description: Lets a person choose exactly one option from a small set.
+order: 410
+---
+
+## Usage
+
+```tsx
+import { RadioGroup, RadioGroupItem } from '@dotm4x/one/components';
+
+<RadioGroup label="Notification frequency" defaultValue="daily">
+  <RadioGroupItem value="instant" label="Instant" />
+  <RadioGroupItem value="daily" label="Daily digest" />
+  <RadioGroupItem value="weekly" label="Weekly summary" />
+</RadioGroup>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Horizontal layout
+
+<Demo name="horizontal" />
+
+### Option descriptions
+
+<Demo name="withDescriptions" />
+
+### Disabled group
+
+<Demo name="disabled" />
+
+## API reference
+
+### RadioGroup
+
+| Prop            | Type                             | Default      | Description                                  |
+| --------------- | -------------------------------- | ------------ | -------------------------------------------- |
+| `name`          | `string`                         | —            | Shared form name. Generated when omitted.    |
+| `label`         | `ReactNode`                      | —            | Visible group label, rendered as the legend. |
+| `description`   | `ReactNode`                      | —            | Helper text associated with the group.       |
+| `defaultValue`  | `string`                         | —            | Value selected initially when uncontrolled.  |
+| `value`         | `string`                         | —            | Selected value when controlled.              |
+| `onValueChange` | `(value: string) => void`        | —            | Called with the newly selected value.        |
+| `disabled`      | `boolean`                        | `false`      | Disables every option in the group.          |
+| `required`      | `boolean`                        | `false`      | Requires one option before form submission.  |
+| `orientation`   | `'horizontal' \| 'vertical'`     | `'vertical'` | Layout direction of the options.             |
+| `size`          | `'small' \| 'medium' \| 'large'` | `'medium'`   | Visual size of the options.                  |
+
+It renders a `fieldset` and forwards the remaining native fieldset attributes.
+
+### RadioGroup.Item
+
+Also exported as `RadioGroupItem`.
+
+| Prop          | Type        | Default | Description                                  |
+| ------------- | ----------- | ------- | -------------------------------------------- |
+| `value`       | `string`    | —       | Value submitted with the form when selected. |
+| `label`       | `ReactNode` | —       | Visible label associated with the option.    |
+| `description` | `ReactNode` | —       | Helper text associated with the option.      |
+
+It renders a native `input type="radio"` and forwards the remaining native input
+attributes. The `disabled` prop disables a single option.
+
+## Accessibility
+
+The group renders a `fieldset` and uses `label` as its `legend`. `description`
+is linked through `aria-describedby` on the fieldset and on each option
+description.
+
+Options are native radio inputs that share one name, so arrow keys move the
+selection between them. Home and End focus and select the first and last enabled
+option.
+
+`disabled` disables every option, and `required` is applied to each radio for
+native form validation.

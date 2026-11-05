@@ -1,0 +1,80 @@
+---
+title: Breadcrumb
+description: Shows the location of the current page as an ordered trail from the root.
+order: 50
+---
+
+## Usage
+
+```tsx
+import { Breadcrumb } from '@dotm4x/one/components';
+
+<Breadcrumb>
+  <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+  <Breadcrumb.Item href="/settings">Settings</Breadcrumb.Item>
+  <Breadcrumb.Item current>Profile</Breadcrumb.Item>
+</Breadcrumb>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Collapsed trail
+
+<Demo name="collapsed" />
+
+### Dropdown level
+
+<Demo name="dropdown" />
+
+### Custom separator
+
+<Demo name="separator" />
+
+## API reference
+
+### Breadcrumb
+
+| Prop              | Type        | Default               | Description                                                                                               |
+| ----------------- | ----------- | --------------------- | --------------------------------------------------------------------------------------------------------- |
+| `separator`       | `ReactNode` | A `ChevronRight` icon | Content shown between items, hidden from assistive technology.                                            |
+| `maxVisibleItems` | `number`    | —                     | Item budget that collapses the middle entries. Values below 3 are treated as 3. Omit to show every entry. |
+| `children`        | `ReactNode` | —                     | Items and dropdowns, ordered from the root.                                                               |
+
+It renders a `nav` landmark with `aria-label="Breadcrumb"` that contains an
+ordered list, and forwards native `nav` attributes.
+
+### Breadcrumb.Item
+
+| Prop       | Type        | Default | Description                                                |
+| ---------- | ----------- | ------- | ---------------------------------------------------------- |
+| `href`     | `string`    | —       | Destination of the item. Items without one render as text. |
+| `current`  | `boolean`   | —       | Marks the item as the current page and renders it as text. |
+| `children` | `ReactNode` | —       | Visible label.                                             |
+
+It renders an `a` when `href` is set, a `span` with `aria-current="page"` when
+`current` is set, and a plain `span` otherwise.
+
+### Breadcrumb.Dropdown
+
+| Prop    | Type                                | Default | Description                      |
+| ------- | ----------------------------------- | ------- | -------------------------------- |
+| `label` | `ReactNode`                         | —       | Visible label of the trigger.    |
+| `items` | `readonly BreadcrumbDropdownItem[]` | —       | Destinations listed in the menu. |
+
+It renders a button that opens a dropdown menu of links.
+
+## Accessibility
+
+The trail is a `nav` landmark named “Breadcrumb” that wraps an ordered list, so
+the position of each entry is exposed.
+
+Separators are hidden from assistive technology, and the current entry is a
+`span` with `aria-current="page"` rather than a link.
+
+When entries collapse, the ellipsis trigger is a button named “Show hidden
+breadcrumb items”. Hidden entries without a destination become disabled menu
+items instead of links.

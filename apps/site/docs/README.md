@@ -42,6 +42,7 @@ order: 10
 
 - `title` and `description` are required for a useful sidebar and metadata.
 - `order` controls position among siblings. Use gaps of ten.
+- Component pages are ordered alphabetically by component name.
 - `icon` optionally selects a sidebar icon (`home`, `download`, `box`,
   `sparkles`; other values fall back to a document icon).
 - `status: draft` hides the page in production.

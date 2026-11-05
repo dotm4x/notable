@@ -1,0 +1,84 @@
+---
+title: TableOfContents
+description: Builds a section navigation landmark that tracks the active section while the page scrolls.
+order: 530
+---
+
+## Usage
+
+```tsx
+import { TableOfContents } from '@dotm4x/one/components';
+
+<TableOfContents side="right">
+  <TableOfContents.Header>On this page</TableOfContents.Header>
+  <TableOfContents.List>
+    <TableOfContents.Item href="#installation" label="Installation" />
+    <TableOfContents.Item href="#usage" label="Usage" />
+  </TableOfContents.List>
+</TableOfContents>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Right side
+
+<Demo name="rightSide" />
+
+### Nested sections
+
+<Demo name="nested" />
+
+## API reference
+
+### TableOfContents
+
+| Prop   | Type                | Default  | Description                               |
+| ------ | ------------------- | -------- | ----------------------------------------- |
+| `side` | `'left' \| 'right'` | `'left'` | Side on which the table of contents sits. |
+
+It renders a `nav` landmark and forwards native `HTMLElement` attributes.
+`aria-label` defaults to `On this page` unless `aria-labelledby` is provided.
+
+### TableOfContents.Root
+
+Exported as the same component as `TableOfContents`. It accepts the same `side`
+prop and renders the `nav` landmark, for explicit composition inside a tree of
+parts.
+
+### TableOfContents.Header
+
+Renders the visible heading as an `h2`. It has no props of its own and forwards
+native heading attributes.
+
+### TableOfContents.List
+
+Renders a `ul` of section links. It has no props of its own and forwards native
+list attributes. Nest it inside an item to describe sub-sections.
+
+### TableOfContents.Item
+
+| Prop       | Type        | Default | Description                             |
+| ---------- | ----------- | ------- | --------------------------------------- |
+| `href`     | `string`    | —       | Fragment URL of the linked section.     |
+| `label`    | `ReactNode` | —       | Visible label for the section link.     |
+| `children` | `ReactNode` | —       | Optional nested `TableOfContents.List`. |
+
+It renders an `li` containing a native anchor and forwards the remaining anchor
+attributes. Selecting a link scrolls to the section and updates the URL hash
+without reloading the page.
+
+## Accessibility
+
+- The component is a `nav` landmark named `On this page`, or by the `aria-label`
+  or `aria-labelledby` you pass, and every entry is a native anchor.
+- The active entry sets `aria-current="location"`, so the current section is
+  conveyed without relying on the animated indicator.
+- Links are plain fragment URLs and still navigate when JavaScript is
+  unavailable. Click handling intercepts same-page navigation, pushes the hash,
+  and uses instant scrolling when reduced motion is requested.
+- Active tracking uses an intersection observer over the linked sections, and a
+  manual selection stays active for a moment instead of being overridden.

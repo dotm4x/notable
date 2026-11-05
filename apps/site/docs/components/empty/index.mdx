@@ -1,0 +1,100 @@
+---
+title: Empty
+description: Renders a placeholder for a region that has no content yet.
+order: 260
+---
+
+## Usage
+
+```tsx
+import { Empty } from '@dotm4x/one/components';
+import { FolderOpen } from '@dotm4x/one/icons';
+
+<Empty>
+  <Empty.Header>
+    <Empty.Media variant="icon">
+      <FolderOpen aria-hidden="true" />
+    </Empty.Media>
+    <Empty.Title>No projects yet</Empty.Title>
+    <Empty.Description>
+      Create your first project to see it appear here.
+    </Empty.Description>
+  </Empty.Header>
+</Empty>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Action
+
+<Demo name="action" />
+
+### Variants
+
+<Demo name="variants" />
+
+## API reference
+
+### Empty
+
+| Prop       | Type                                   | Default     | Description                                |
+| ---------- | -------------------------------------- | ----------- | ------------------------------------------ |
+| `children` | `ReactNode`                            | —           | Content, usually an `Empty.Header` region. |
+| `variant`  | `'default' \| 'outline' \| 'surface'`  | `'default'` | Visual presentation.                       |
+| `size`     | `'compact' \| 'default' \| 'spacious'` | `'default'` | Density of the layout.                     |
+
+It renders a `div` and forwards the remaining native `div` attributes.
+
+### Empty.Header
+
+| Prop       | Type        | Default | Description                    |
+| ---------- | ----------- | ------- | ------------------------------ |
+| `children` | `ReactNode` | —       | Media, title, and description. |
+
+It renders a `div` and forwards the remaining native `div` attributes.
+
+### Empty.Media
+
+| Prop       | Type                  | Default     | Description                                                       |
+| ---------- | --------------------- | ----------- | ----------------------------------------------------------------- |
+| `children` | `ReactNode`           | —           | Icon or custom visual content, such as an illustration or avatar. |
+| `variant`  | `'default' \| 'icon'` | `'default'` | Use `icon` for an icon inside a restrained container.             |
+
+It renders a `div` and forwards the remaining native `div` attributes.
+
+### Empty.Title
+
+| Prop       | Type                                                   | Default | Description                |
+| ---------- | ------------------------------------------------------ | ------- | -------------------------- |
+| `children` | `ReactNode`                                            | —       | Title text.                |
+| `as`       | `'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'p' \| 'div'` | `'h3'`  | Heading element to render. |
+
+It forwards native `HTMLElement` attributes.
+
+### Empty.Description
+
+| Prop       | Type           | Default | Description                                      |
+| ---------- | -------------- | ------- | ------------------------------------------------ |
+| `children` | `ReactNode`    | —       | Description content. Inline links are supported. |
+| `as`       | `'p' \| 'div'` | `'p'`   | Element to render. Use `div` for block content.  |
+
+It forwards native `HTMLElement` attributes.
+
+### Empty.Content
+
+| Prop       | Type        | Default | Description                       |
+| ---------- | ----------- | ------- | --------------------------------- |
+| `children` | `ReactNode` | —       | Actions or supplementary content. |
+
+It renders a `div` and forwards the remaining native `div` attributes.
+
+## Accessibility
+
+- `Empty.Title` renders a real heading, so pick `as` to keep the page outline sequential. It defaults to `h3`.
+- `Empty.Description` renders a paragraph that supports inline links. Use `as="div"` when the description needs block content.
+- `Empty.Media` is a plain container: hide decorative graphics from assistive technology and give meaningful illustrations an accessible name.
+- Place buttons and other actions in `Empty.Content` so the region keeps a predictable reading order.

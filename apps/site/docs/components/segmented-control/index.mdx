@@ -1,0 +1,77 @@
+---
+title: SegmentedControl
+description: Presents a small set of exclusive options as joined segments.
+order: 430
+---
+
+## Usage
+
+```tsx
+import { SegmentedControl } from '@dotm4x/one/components';
+
+<SegmentedControl
+  label="Reporting period"
+  defaultValue="week"
+  options={[
+    { label: 'Day', value: 'day' },
+    { label: 'Week', value: 'week' },
+    { label: 'Month', value: 'month' },
+  ]}
+/>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Options with icons
+
+<Demo name="withIcons" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+## API reference
+
+### SegmentedControl
+
+| Prop           | Type                                        | Default    | Description                                     |
+| -------------- | ------------------------------------------- | ---------- | ----------------------------------------------- |
+| `options`      | `readonly SegmentedControlOption<TValue>[]` | —          | Options displayed in the group.                 |
+| `value`        | `TValue`                                    | —          | Selected value in controlled mode.              |
+| `defaultValue` | `TValue`                                    | —          | Initial value in uncontrolled mode.             |
+| `onChange`     | `(value: TValue) => void`                   | —          | Called with the selected value.                 |
+| `disabled`     | `boolean`                                   | `false`    | Disables all options.                           |
+| `size`         | `'small' \| 'medium' \| 'large'`            | `'medium'` | Visual size.                                    |
+| `name`         | `string`                                    | —          | Name shared by the native radio inputs.         |
+| `label`        | `ReactNode`                                 | —          | Visible group label rendered above the control. |
+
+It renders a `div` with `role="radiogroup"` and forwards the remaining native
+`div` attributes.
+
+### SegmentedControl.Option
+
+Exported as `SegmentedControlOption`.
+
+| Property     | Type        | Description                             |
+| ------------ | ----------- | --------------------------------------- |
+| `label`      | `ReactNode` | Visible label content.                  |
+| `value`      | `string`    | Unique value for this option.           |
+| `disabled`   | `boolean`   | Whether this option is disabled.        |
+| `icon`       | `ReactNode` | Optional icon displayed with the label. |
+| `aria-label` | `string`    | Optional accessible name.               |
+
+## Accessibility
+
+The control renders a `radiogroup`. The `label` prop becomes its accessible name
+through `aria-labelledby`, and `aria-label` or `aria-labelledby` can name it
+directly.
+
+Each option is a native radio input inside a label, so arrow keys move the
+selection and Home or End select the first or last enabled option.
+
+A disabled control sets `aria-disabled` on the group and disables every input,
+and the moving selection indicator is hidden with `aria-hidden`.

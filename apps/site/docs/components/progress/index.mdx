@@ -1,0 +1,61 @@
+---
+title: Progress
+description: Displays determinate or indeterminate progress as a bar or a ring.
+order: 400
+---
+
+## Usage
+
+```tsx
+import { Progress } from '@dotm4x/one/components';
+
+<Progress aria-label="Upload progress" value={64} />;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Indeterminate
+
+<Demo name="indeterminate" />
+
+### Colors and thickness
+
+<Demo name="appearance" />
+
+### Circular
+
+<Demo name="circular" />
+
+## API reference
+
+### Progress
+
+| Prop         | Type                                                                          | Default    | Description                                                                                    |
+| ------------ | ----------------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| `value`      | `number`                                                                      | —          | Current progress. Omit it for indeterminate progress; values are clamped to `0` through `max`. |
+| `max`        | `number`                                                                      | `100`      | Value that represents completion.                                                              |
+| `thickness`  | `number \| string`                                                            | —          | Bar height, or the ring stroke width for the circular variant. A number is pixels.             |
+| `color`      | `'primary' \| 'success' \| 'danger' \| string`                                | —          | Indicator color token name or any CSS color. Defaults to the primary color.                    |
+| `trackColor` | `'subtle' \| 'default' \| 'strong' \| string`                                 | —          | Track color token name or any CSS color. Defaults to the standard border color.                |
+| `animation`  | `'smooth' \| 'none'`                                                          | `'smooth'` | Animates changes and indeterminate movement.                                                   |
+| `variant`    | `'linear' \| 'circular'`                                                      | `'linear'` | Visual shape of the indicator.                                                                 |
+| `size`       | `'small' \| 'medium' \| 'large' \| number \| string`                          | `'medium'` | Track thickness preset for the bar, or the ring diameter for the circular variant.             |
+| `radius`     | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full' \| number \| string` | —          | Track corner radius. Defaults to a pill shape. Not available on the circular variant.          |
+| `className`  | `string`                                                                      | —          | Additional class for the progress element.                                                     |
+
+It renders a `div` with `role="progressbar"`, `aria-valuemin`, `aria-valuemax`, and
+`aria-valuenow`, and forwards the remaining native `div` attributes.
+
+## Accessibility
+
+- `role="progressbar"` reports `aria-valuemin="0"` and `aria-valuemax` from `max`.
+- `aria-valuenow` is present only when `value` is provided, so indeterminate
+  progress exposes no completion value.
+- The circular ring's SVG is `aria-hidden` and the linear indicator is an empty
+  `div`, so the value is announced once by the progressbar.
+- Always provide an accessible name with `aria-label` or `aria-labelledby`.
+- Users who prefer reduced motion get an immediate change with no movement.

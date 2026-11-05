@@ -1,0 +1,91 @@
+---
+title: Footer
+description: Renders a page footer with brand, navigation sections, and a closing row.
+order: 300
+---
+
+## Usage
+
+```tsx
+import { Footer, Link } from '@dotm4x/one/components';
+
+<Footer>
+  <Footer.Content>
+    <Footer.Brand>
+      <strong>Acme Studio</strong>
+      <p>Tools for designers who ship.</p>
+    </Footer.Brand>
+    <Footer.Section>
+      <Footer.Heading>Product</Footer.Heading>
+      <ul>
+        <li>
+          <Link href="/features">Features</Link>
+        </li>
+        <li>
+          <Link href="/pricing">Pricing</Link>
+        </li>
+      </ul>
+    </Footer.Section>
+  </Footer.Content>
+  <Footer.Bottom>
+    <span>© 2025 Acme Studio</span>
+  </Footer.Bottom>
+</Footer>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Full
+
+<Demo name="full" />
+
+### Transparent
+
+<Demo name="transparent" />
+
+## API reference
+
+### Footer
+
+| Prop          | Type        | Default | Description                                                   |
+| ------------- | ----------- | ------- | ------------------------------------------------------------- |
+| `transparent` | `boolean`   | `false` | Renders the footer without a background.                      |
+| `children`    | `ReactNode` | —       | Footer content, usually `Footer.Content` and `Footer.Bottom`. |
+
+It renders a `footer` element and forwards the remaining native `footer` attributes.
+
+### Footer.Content
+
+Renders the grid holding the brand and navigation sections as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Footer.Brand
+
+Renders the brand region as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Footer.Section
+
+Renders a navigation group as a `div`. It has no props of its own and forwards native `div` attributes.
+
+### Footer.Heading
+
+| Prop       | Type                                                   | Default | Description                                   |
+| ---------- | ------------------------------------------------------ | ------- | --------------------------------------------- |
+| `children` | `ReactNode`                                            | —       | Heading text.                                 |
+| `as`       | `'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'p' \| 'div'` | `'h2'`  | Element to render, chosen to fit the outline. |
+
+It forwards native `HTMLElement` attributes.
+
+### Footer.Bottom
+
+Renders the closing row as a `div`. It has no props of its own and forwards native `div` attributes.
+
+## Accessibility
+
+- The root renders a `footer` element, exposed as the `contentinfo` landmark.
+- `Footer.Heading` renders a real heading and defaults to `h2`. Choose `as` so the footer outline follows the page.
+- Links inside the footer are native anchors, so they stay reachable by keyboard and are announced with their destination.
+- Place the footer at the top level of the page so it maps to the `contentinfo` landmark, and label it when more than one footer is present.

@@ -1,0 +1,153 @@
+---
+title: FileUpload
+description: Selects and lists files through a dropzone, picker button, or compact row.
+order: 290
+---
+
+## Usage
+
+```tsx
+import { FileUpload } from '@dotm4x/one/components';
+import { useState } from 'react';
+
+const [files, setFiles] = useState<File[]>([]);
+
+<FileUpload
+  accept="image/*,.pdf"
+  multiple
+  value={files}
+  onFilesChange={setFiles}
+>
+  <FileUpload.Dropzone />
+  <FileUpload.List>
+    {files.map((file) => (
+      <FileUpload.Item key={`${file.name}-${file.size}`} file={file}>
+        <FileUpload.Preview />
+        <FileUpload.Name />
+        <FileUpload.Size />
+        <FileUpload.Remove />
+      </FileUpload.Item>
+    ))}
+  </FileUpload.List>
+  <FileUpload.Rejections />
+</FileUpload>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Inline
+
+<Demo name="inline" />
+
+### Media
+
+<Demo name="media" />
+
+### Custom dropzone
+
+<Demo name="custom" />
+
+## API reference
+
+### FileUpload
+
+| Prop              | Type                                             | Default      | Description                                                                |
+| ----------------- | ------------------------------------------------ | ------------ | -------------------------------------------------------------------------- |
+| `mode`            | `'dropzone' \| 'compact' \| 'inline' \| 'media'` | `'dropzone'` | Presentation mode. Behavior is identical across modes.                     |
+| `accept`          | `string`                                         | —            | Accepted MIME types, wildcards (`image/*`), and extensions (`.pdf`).       |
+| `multiple`        | `boolean`                                        | `false`      | Allows selecting more than one file.                                       |
+| `maxFiles`        | `number`                                         | —            | Maximum number of files when `multiple` is set.                            |
+| `minFileSize`     | `number`                                         | —            | Minimum file size in bytes.                                                |
+| `maxFileSize`     | `number`                                         | —            | Maximum file size in bytes.                                                |
+| `value`           | `File[]`                                         | —            | Selected files for controlled usage.                                       |
+| `defaultValue`    | `File[]`                                         | —            | Initially selected files for uncontrolled usage.                           |
+| `onFilesChange`   | `(files: File[]) => void`                        | —            | Called with the complete next selection whenever it changes.               |
+| `onFilesRejected` | `(rejections: TFileUploadRejection[]) => void`   | —            | Called with the rejected files and their reasons.                          |
+| `disabled`        | `boolean`                                        | `false`      | Prevents selection and removal.                                            |
+| `readOnly`        | `boolean`                                        | `false`      | Prevents selection and removal while keeping the files visible.            |
+| `required`        | `boolean`                                        | `false`      | Marks the native input as required.                                        |
+| `invalid`         | `boolean`                                        | `false`      | Marks the component as invalid for styling. Pair it with an error message. |
+| `name`            | `string`                                         | —            | Name of the native file input, used in form submission.                    |
+| `id`              | `string`                                         | —            | Id of the native file input.                                               |
+
+It renders a `div` and forwards native `div` attributes, except the drag and change handlers it manages itself.
+
+### FileUpload.Dropzone
+
+Renders the drop zone as a `div`, opens the picker when it is clicked outside an interactive child, and forwards native `div` attributes except `onClick`. With no children it renders `FileUpload.Icon`, `FileUpload.Title`, the constraint summary, and `FileUpload.Trigger`.
+
+### FileUpload.Icon
+
+Renders the leading visual in a `span` hidden from assistive technology and forwards native `span` attributes. With no children it renders an upload icon.
+
+### FileUpload.Title
+
+Renders the drop zone title in a `div` and forwards native `div` attributes.
+
+### FileUpload.Description
+
+Renders the drop zone description in a `div` and forwards native `div` attributes.
+
+### FileUpload.Helper
+
+Renders supplementary help text in a `div` and forwards native `div` attributes.
+
+### FileUpload.Trigger
+
+Renders a `Button` that opens the picker and accepts every `Button` prop. The label defaults to `Browse files`; in `inline` mode it defaults to a paperclip icon labeled `Attach files`, with the `ghost` variant.
+
+### FileUpload.List
+
+Renders a `ul` and forwards native `ul` attributes. In `media` mode it appends a tile that opens the picker, labeled `Add file`, `Replace file`, or `Add files`.
+
+### FileUpload.Item
+
+| Prop   | Type   | Default | Description                        |
+| ------ | ------ | ------- | ---------------------------------- |
+| `file` | `File` | —       | The selected file this item shows. |
+
+It renders an animated `li` and forwards the remaining native `li` and motion attributes. Without children it renders `FileUpload.Preview`, `FileUpload.Name`, `FileUpload.Size`, and `FileUpload.Remove`.
+
+### FileUpload.Preview
+
+Renders the file preview in a `span` hidden from assistive technology: a thumbnail for images, a type icon otherwise. It forwards native `span` attributes.
+
+### FileUpload.Name
+
+Renders the file name in a `span` whose `title` carries the full name and forwards native `span` attributes.
+
+### FileUpload.Size
+
+Renders the formatted file size in a `span` and forwards native `span` attributes.
+
+### FileUpload.Remove
+
+Renders a `Button` labeled `Remove <file name>` that removes the file, and accepts every `Button` prop.
+
+### FileUpload.Clear
+
+Renders a `Button` labeled `Clear all` that removes every selected file, and accepts every `Button` prop. It is disabled while no file is selected.
+
+### FileUpload.Rejections
+
+Renders a `div` with a summary announced through `role="status"` and a list of each rejected file and its reason. It forwards native `div` attributes.
+
+### FileUpload.Rejection
+
+Exported as `TFileUploadRejection`.
+
+| Property | Type                                                                                             | Description                      |
+| -------- | ------------------------------------------------------------------------------------------------ | -------------------------------- |
+| `file`   | `File`                                                                                           | The file that failed validation. |
+| `code`   | `'invalid-type' \| 'file-too-large' \| 'file-too-small' \| 'duplicate-file' \| 'too-many-files'` | Reason the file was rejected.    |
+
+## Accessibility
+
+- The native file input is hidden from assistive technology and removed from the tab order. `FileUpload.Trigger` opens the picker instead.
+- `FileUpload.Trigger` and `FileUpload.Clear` carry text labels, and `FileUpload.Remove` names the file it removes.
+- `FileUpload.Icon` and `FileUpload.Preview` are hidden from assistive technology, so the file name carries the meaning.
+- `FileUpload.Rejections` announces its summary through a `role="status"` region and lists each rejected file with its reason.

@@ -1,0 +1,80 @@
+---
+title: ControlGroup
+description: Joins related actions and controls into one visually connected group.
+order: 170
+---
+
+## Usage
+
+```tsx
+import { Button, ControlGroup } from '@dotm4x/one/components';
+
+<ControlGroup aria-label="Text formatting">
+  <Button variant="outline">Bold</Button>
+  <Button variant="outline">Italic</Button>
+  <ControlGroup.Separator />
+  <Button variant="outline">Underline</Button>
+</ControlGroup>;
+```
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+### With separators
+
+<Demo name="withSeparator" />
+
+### With supporting text
+
+<Demo name="withText" />
+
+## API reference
+
+### ControlGroup
+
+| Prop          | Type                         | Default        | Description       |
+| ------------- | ---------------------------- | -------------- | ----------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction. |
+
+It renders a `div` with `role="group"` and forwards native `div` attributes
+except `role`.
+
+### ControlGroup.Separator
+
+| Prop          | Type                                          | Default | Description                                                      |
+| ------------- | --------------------------------------------- | ------- | ---------------------------------------------------------------- |
+| `className`   | `string`                                      | —       | Additional class for the separator element.                      |
+| `color`       | `'subtle' \| 'default' \| 'strong' \| string` | —       | Line color, from a One token or any CSS color string.            |
+| `decorative`  | `boolean`                                     | `false` | Removes the separator from the accessibility tree.               |
+| `orientation` | `'horizontal' \| 'vertical'`                  | —       | Line direction; defaults to the axis perpendicular to the group. |
+| `thickness`   | `number \| string`                            | —       | Line thickness; a number is treated as pixels.                   |
+
+It renders a `Separator` and forwards its remaining props.
+
+### ControlGroup.Text
+
+| Prop     | Type                                                         | Default | Description                                      |
+| -------- | ------------------------------------------------------------ | ------- | ------------------------------------------------ |
+| `render` | `ReactElement<{ className?: string; children?: ReactNode }>` | —       | Element to render instead of the default `span`. |
+
+It renders a `span` when `render` is omitted and forwards native `span`
+attributes.
+
+## Accessibility
+
+- The root is a `div` with `role="group"`, so give it an accessible name with
+  `aria-label` or `aria-labelledby`.
+- The orientation is exposed as `data-orientation` on the root, and each
+  separator keeps `role="separator"` with `aria-orientation` on the
+  perpendicular axis.
+- Separators are semantic by default; pass `decorative` to remove one from the
+  accessibility tree.
+- `ControlGroup.Text` renders text beside the controls; use `render` to turn it
+  into a `label` associated with an adjacent input.
