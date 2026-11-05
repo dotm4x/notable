@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 export const metadata: Metadata = {
   title: 'One',
   description: 'Design language and component system',
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

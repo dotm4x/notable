@@ -4,11 +4,19 @@
 }
 
 .site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--one-spacing-2);
   color: var(--one-color-text);
   font-size: var(--one-font-size-lg);
   font-weight: var(--one-font-weight-semibold);
   text-decoration: none;
   white-space: nowrap;
+}
+
+.site-header__logo {
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .site-header__brand:focus-visible {

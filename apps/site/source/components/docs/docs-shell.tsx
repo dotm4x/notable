@@ -24,14 +24,6 @@ export function DocsShell({ tree, children }: DocsShellProps) {
       label="Documentation"
       width="17rem"
     >
-      <Sidebar.Header>
-        <a className="docs-brand" href="/docs">
-          <Sidebar.Brand icon={<span className="docs-brand__mark">O</span>}>
-            One
-          </Sidebar.Brand>
-        </a>
-        <span className="docs-brand__tagline">Design language</span>
-      </Sidebar.Header>
       <Sidebar.Content>
         <DocsSidebar pathname={pathname} root={tree} />
       </Sidebar.Content>
