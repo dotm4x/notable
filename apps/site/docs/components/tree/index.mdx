@@ -4,12 +4,6 @@ description: Displays a hierarchical navigation tree with animated disclosure br
 order: 90
 ---
 
-## Installation
-
-```tsx
-import { Tree } from '@dotm4x/one/components';
-```
-
 ## Usage
 
 ```tsx
@@ -30,6 +24,17 @@ const items = [
 ];
 
 <Tree activeId="button" aria-label="Contents" items={items} />;
+```
+
+### Inside a sidebar
+
+Use `Sidebar.Tree` inside `Sidebar.Content` to inherit the sidebar's collapsed
+state, mobile drawer, tooltips, and hover highlight:
+
+```tsx
+import { Sidebar } from '@dotm4x/one/components';
+
+<Sidebar.Tree activeId={pathname} aria-label="Contents" items={items} />;
 ```
 
 ## Examples
@@ -91,12 +96,3 @@ children enter with a staggered fade. All transitions respect
 Rows share an animated highlight surface that follows hover and focus.
 `Sidebar.Tree` defers to the sidebar's own highlight instead of adding a second
 one.
-
-## Sidebar integration
-
-Use `Sidebar.Tree` inside `Sidebar.Content` when the tree should inherit the
-sidebar's collapsed state, mobile drawer, tooltips, and hover highlight:
-
-```tsx
-<Sidebar.Tree activeId={pathname} aria-label="Contents" items={items} />
-```

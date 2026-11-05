@@ -4,18 +4,11 @@ description: Displays code, terminal output, and diffs with optional header and 
 order: 80
 ---
 
-## Installation
-
-```tsx
-import { CodeBlock, useHighlightedCode } from '@dotm4x/one/components';
-```
-
-`useHighlightedCode` adds syntax highlighting and is included in the components
-entry point.
-
 ## Usage
 
 ```tsx
+import { CodeBlock } from '@dotm4x/one/components';
+
 <CodeBlock>
   <CodeBlock.Header>
     <CodeBlock.Title>app/api/health/route.ts</CodeBlock.Title>
@@ -24,7 +17,7 @@ entry point.
     </CodeBlock.Actions>
   </CodeBlock.Header>
   <CodeBlock.Content lineNumbers>{code}</CodeBlock.Content>
-</CodeBlock>
+</CodeBlock>;
 ```
 
 ## Examples
@@ -71,6 +64,8 @@ entry point.
 | `CodeBlock.Footer`     | `div`        | Native attributes.                               |
 
 ### useHighlightedCode
+
+`useHighlightedCode` adds syntax highlighting and is exported from the components entry point.
 
 ```ts
 const lines = useHighlightedCode(code, 'tsx');

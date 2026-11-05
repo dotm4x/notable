@@ -4,17 +4,12 @@ description: Displays a persistent inline message with a semantic tone.
 order: 30
 ---
 
-## Installation
-
-The component is part of `@dotm4x/one/components`:
-
-```tsx
-import { Callout } from '@dotm4x/one/components';
-```
-
 ## Usage
 
 ```tsx
+import { Callout } from '@dotm4x/one/components';
+import { TriangleAlert } from '@dotm4x/one/icons';
+
 <Callout tone="warning">
   <Callout.Icon>
     <TriangleAlert aria-hidden="true" />
@@ -23,7 +18,7 @@ import { Callout } from '@dotm4x/one/components';
     <Callout.Title>Review required</Callout.Title>
     <p>Check the settings before continuing.</p>
   </Callout.Content>
-</Callout>
+</Callout>;
 ```
 
 ## Examples
@@ -32,7 +27,7 @@ import { Callout } from '@dotm4x/one/components';
 
 <Demo name="tones" />
 
-### With actions
+### Actions
 
 <Demo name="actions" />
 
