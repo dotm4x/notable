@@ -334,8 +334,6 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
     [focusRow, getVisibleRows, onKeyDown],
   );
 
-  const reserveIconSpace = items.some((item) => item.icon);
-
   const context = useMemo<TTreeContextValue>(
     () => ({
       activeId,
@@ -390,12 +388,7 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
           onKeyDown={handleKeyDown}
         >
           {items.map((node) => (
-            <TreeItem
-              key={node.id}
-              level={1}
-              node={node}
-              reserveIconSpace={reserveIconSpace}
-            />
+            <TreeItem key={node.id} level={1} node={node} />
           ))}
         </ul>
       </div>

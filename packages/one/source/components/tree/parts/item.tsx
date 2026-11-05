@@ -11,11 +11,9 @@ import type { TreeNode } from '../types.js';
 function RowContent({
   branch,
   node,
-  reserveIconSpace,
 }: {
   branch: boolean;
   node: TreeNode;
-  reserveIconSpace: boolean;
 }): ReactNode {
   return (
     <>
@@ -23,8 +21,6 @@ function RowContent({
         <span aria-hidden="true" className="one-tree__icon">
           {node.icon}
         </span>
-      ) : reserveIconSpace ? (
-        <span aria-hidden="true" className="one-tree__icon" />
       ) : null}
       <span className="one-tree__label">{node.label}</span>
       {branch ? (
@@ -57,15 +53,10 @@ function MaybeTooltip({
 export interface TreeItemProps {
   node: TreeNode;
   level: number;
-  reserveIconSpace?: boolean;
 }
 
 /** Renders one navigation tree node and, recursively, its children. */
-export function TreeItem({
-  node,
-  level,
-  reserveIconSpace = false,
-}: TreeItemProps) {
+export function TreeItem({ node, level }: TreeItemProps) {
   const {
     activeId,
     compact,
@@ -80,7 +71,6 @@ export function TreeItem({
   const contentId = useId();
 
   const branch = Boolean(node.children && node.children.length > 0);
-  const childrenReserveIconSpace = node.children?.some((child) => child.icon);
   const isExpanded = expanded.has(node.id);
   const active = activeId === node.id;
   const text = getNodeText(node) || node.id;
@@ -115,7 +105,7 @@ export function TreeItem({
         }}
         type="button"
       >
-        <RowContent branch node={node} reserveIconSpace={reserveIconSpace} />
+        <RowContent branch node={node} />
       </button>
     );
 
@@ -135,12 +125,7 @@ export function TreeItem({
           >
             <ul className="one-tree__group" hidden={compact || undefined}>
               {node.children?.map((child) => (
-                <TreeItem
-                  key={child.id}
-                  level={level + 1}
-                  node={child}
-                  reserveIconSpace={childrenReserveIconSpace}
-                />
+                <TreeItem key={child.id} level={level + 1} node={child} />
               ))}
             </ul>
           </Collapsible.Content>
@@ -149,13 +134,7 @@ export function TreeItem({
     );
   }
 
-  const content = (
-    <RowContent
-      branch={false}
-      node={node}
-      reserveIconSpace={reserveIconSpace}
-    />
-  );
+  const content = <RowContent branch={false} node={node} />;
 
   if (node.href) {
     const row = (

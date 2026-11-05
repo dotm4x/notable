@@ -177,7 +177,7 @@ describe('Tree', () => {
     expect(branch).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('reserves icon space when siblings have icons', () => {
+  it('omits the icon slot when a node has no icon', () => {
     render(
       <Tree
         aria-label="Contents"
@@ -194,7 +194,8 @@ describe('Tree', () => {
     );
 
     const row = screen.getByRole('link', { name: 'Without icon' });
-    expect(row.querySelector('.one-tree__icon')).toBeEmptyDOMElement();
+    expect(row.querySelector('.one-tree__icon')).toBeNull();
+    expect(row.firstElementChild).toHaveClass('one-tree__label');
   });
 
   it('supports default expanded ids', () => {
