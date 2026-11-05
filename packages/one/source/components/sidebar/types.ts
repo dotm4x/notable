@@ -132,8 +132,14 @@ export type TSidebarSubmenuProps = Omit<
 /** Props for a nested navigation item. */
 export type TSidebarSubmenuItemProps = TSidebarItemProps;
 
-/** Props for `Sidebar.Tree`, which inherits the sidebar's collapsed state. */
-export type TSidebarTreeProps = Omit<TTreeProps, 'compact'>;
+/**
+ * Props for `Sidebar.Tree`, which inherits the sidebar's collapsed state and
+ * handles compact branch clicks itself.
+ */
+export type TSidebarTreeProps = Omit<
+  TTreeProps,
+  'compact' | 'onCompactBranchClick'
+>;
 
 /** Props for the sidebar's pinned footer. */
 export type TSidebarFooterProps = HTMLAttributes<HTMLDivElement>;
